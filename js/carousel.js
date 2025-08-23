@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🚀 Desplazamiento automático
   setInterval(() => {
     console.log(items.length);
+    const slideWidth = items[0].offsetWidth;
     const maxIndex = track.children.length - Math.floor(track.parentElement.offsetWidth / slideWidth);
     currentIndex = (currentIndex < items.length) ? currentIndex + 1 : 0;
     showItem(currentIndex);
