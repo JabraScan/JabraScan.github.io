@@ -33,6 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🚀 Desplazamiento automático
   setInterval(() => {
     console.log(items.length);
+    if (items.length === 0) {
+      console.warn("No hay elementos en el carrusel");
+      return;
+    }
     const slideWidth = items[0].offsetWidth;
     const maxIndex = track.children.length - Math.floor(track.parentElement.offsetWidth / slideWidth);
     currentIndex = (currentIndex < items.length) ? currentIndex + 1 : 0;
