@@ -8,7 +8,7 @@ fetch('../obras.xml')
 
     obras.forEach(obra => {
       const nombreobra = obra.querySelector("nombreobra").textContent;
-      const Claseimagen = obra.querySelector("Claseimagen").textContent;
+      const imagen = obra.querySelector("imagen").textContent;
       const valoracion = obra.querySelector("valoracion").textContent;
       const tipoobra = obra.querySelector("tipoobra").textContent;
       const Categoria = obra.querySelector("Categoria").textContent;
@@ -16,7 +16,7 @@ fetch('../obras.xml')
       const item = document.createElement("div");
       item.className = "carousel-item";
       item.innerHTML = `
-        <img class="${Claseimagen}" alt="${nombreobra}">
+        <img src="${imagen}" alt="${nombreobra}">
         <div class="carousel-info-overlay">
           <div class="carousel-info-title">${nombreobra}</div>
           <div class="carousel-info-row">
