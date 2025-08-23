@@ -68,6 +68,10 @@ main {
   font-size: 1.4em;
   margin: 0 0 0.5em 0;
 }
+.book-info h3 {
+  font-size: 1.2em;
+  margin: 0 0 0.5em 0;
+}
 .book-author{
   color: #666;
   font-size: 1em;
