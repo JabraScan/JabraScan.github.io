@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 🚀 Desplazamiento automático
   setInterval(() => {
-    items = Array.from(document.querySelectorAll('.carousel-item'));
+    let items = Array.from(document.querySelectorAll('.carousel-item'));
     console.log(items.length);
     if (items.length === 0) {
       console.warn("No hay elementos en el carrusel");
