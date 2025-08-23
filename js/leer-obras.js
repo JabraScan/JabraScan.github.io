@@ -7,9 +7,6 @@ fetch('obras.xml')
     const obras = data.querySelectorAll("obra");
     const carouselContainer = document.querySelector(".carousel-track");
     const booklistContainer = document.querySelector(".book-list");
-	  console.log(carouselContainer);
-	  console.log(booklistContainer);
-	  console.log(obras);
 	  
     obras.forEach(obra => {
       const clave = obra.querySelector("clave").textContent;
@@ -34,7 +31,7 @@ fetch('obras.xml')
 	          </div>
 	        </div>
 	      `;
-	carouselContainer.appendChild(itemCarousel);
+      carouselContainer.appendChild(itemCarousel);
       const itemBook = document.createElement("article");
 	      itemBook.className = "book-card";
 	      itemBook.innerHTML = `
@@ -47,8 +44,7 @@ fetch('obras.xml')
 		            <p class="book-sinopsis">Sinopsis: ${sinopsis}</p>
 		          </div>
 	      `;
-	booklistContainer.appendChild(itemBook);
-
+      booklistContainer.appendChild(itemBook);
     });
   })
   .catch(err => console.error("Error al cargar el XML:", err));
