@@ -17,6 +17,7 @@ fetch('obras.xml')
       const valoracion = obra.querySelector("valoracion").textContent;
       const tipoobra = obra.querySelector("tipoobra").textContent;
       const Categoria = obra.querySelector("categoria").textContent;
+      const indice = 0;
 
       const itemCarousel = document.createElement("div");
 	      itemCarousel.className = "carousel-item";
@@ -32,6 +33,10 @@ fetch('obras.xml')
 	        </div>
 	      `;
       carouselContainer.appendChild(itemCarousel);
+      // Actualizar lógica de navegación
+      const slideWidth = slides[0].offsetWidth + 20;
+        carouselContainer.style.transform = `translateX(-${slideWidth * indice++}px)`;
+		
       const itemBook = document.createElement("article");
 	      itemBook.className = "book-card";
 	      itemBook.innerHTML = `
