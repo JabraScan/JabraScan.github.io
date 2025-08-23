@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
 
   function showItem(index) {
+    let items = Array.from(document.querySelectorAll('.carousel-item'));
     if (items.length === 0) {
       console.warn("No hay elementos en el carrusel show");
       return;
