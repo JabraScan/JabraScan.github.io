@@ -6,7 +6,10 @@ fetch('obras.xml')
     const obras = data.querySelectorAll("obra");
     const carouselContainer = document.getElementById("carousel-track");
     const booklistContainer = document.getElementById("book-list");
-
+	  console.log(carouselContainer);
+	  console.log(booklistContainer);
+	  console.log(obras);
+	  
     obras.forEach(obra => {
       const clave = obra.querySelector("clave").textContent;
       const nombreobra = obra.querySelector("nombreobra").textContent;
@@ -18,7 +21,7 @@ fetch('obras.xml')
       const Categoria = obra.querySelector("categoria").textContent;
 
       const itemCarousel = document.createElement("div");
-	      itemCarousel.className = "carousel-itemCarousel";
+	      itemCarousel.className = "carousel-item";
 	      itemCarousel.innerHTML = `
 	        <img src="${imagen}" alt="${nombreobra}">
 	        <div class="carousel-info-overlay">
