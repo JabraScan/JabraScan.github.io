@@ -7,7 +7,7 @@
     <valoracion>9.5</valoracion>
     <tipoobra>Novela Web</tipoobra>
     <categoria>Fantasía, Acción, Harem, Comedia, Aventura, Cultivo, Realidad Virtual</categoria>
-    <imagen>cultiva</imagen>
+    <imagen>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6U5_NJdJVjnhs8XAZnORzHk79lNuk8yMCPA&s</imagen>
   </obra>
   <obra>
     <clave>CallateDragonaMalvadaNoQuieroTenerMasHijosContigo</clave>
@@ -17,6 +17,6 @@
     <valoracion>9.0</valoracion>
     <tipoobra>Novela Web</tipoobra>
     <categoria>Drama, Romance, Acción, Comedia, Fantasía, Aventura, Ecchi, sobrenatural, Magia</categoria>
-    <imagen>dragona</imagen>
+    <imagen>https://i.redd.it/ptr96fgyz80e1.jpeg</imagen>
   </obra>
 </obras>
