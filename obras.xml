@@ -23,13 +23,24 @@
   </obra>
   <obra>
     <clave>DualCultivation</clave>
-    <nombreobra>DualCultivation</nombreobra>
+    <nombreobra>Dual Cultivation</nombreobra>
     <autor>MyLittleBrother</autor>
     <sinopsis>Su Yang es un poderoso Cultivador Dual que fue encarcelado después de ofender al Emperador Celestial. ¿Su crimen? Cometió adulterio con la esposa del Dios de la Luna, secuestró a la hermana menor del Rey Dragón, sedujo a la Diosa Divina e incluso probó la fruta prohibida que es la amada hija del Emperador Celestial. Dentro de la prisión, Su Yang conoce a un anciano misterioso que le ofrece la oportunidad de salir de este lugar, pero ese método requiere que experimente la reencarnación. En su nueva vida, Su Yang jura reunirse con sus parejas y abrazarlas una vez más, mientras encuentra otras nuevas en el camino.</sinopsis>
     <valoracion>9.0</valoracion>
     <tipoobra>Novela Web</tipoobra>
     <categoria>Romance, Acción, Venganza, Harem, Fantasía, Cultivo</categoria>
     <imagen>../img/DualCultivation.webp</imagen>
+    <fechaCreacion>24/08/2025</fechaCreacion>
+  </obra>
+  <obra>
+    <clave>LaLeyendaDeLaEspadaDelNorte</clave>
+    <nombreobra>La Leyenda de la Espada del Norte</nombreobra>
+    <autor>Woo-Gak</autor>
+    <sinopsis>Durante décadas, los valientes guerreros del Ejército del Norte lucharon para mantener el mundo a salvo del malvado Silent Night. Pero cuando el líder de la cuarta generación, Jin Kwan-Ho, es acusado de colusión con el enemigo, se ve obligado a disolver la secta y suicidarse para proteger a su hijo, Jin Mu-Won. Sin familiares ni aliados, Mu-Won lleva una vida aburrida bajo estrecha vigilancia... hasta que un ataque sorpresa de Silent Night le da la oportunidad de escapar a las montañas. Allí, el joven guerrero se entrena para dominar las técnicas de lucha de sus predecesores, antes de que la misteriosa desaparición de un ser querido lo lleve de vuelta al continente. ¡Sigue a Jin Mu-Won mientras se embarca en un viaje para vengar la muerte de su padre y derrotar a los villanos que amenazan con sumir al mundo en la oscuridad!</sinopsis>
+    <valoracion>9.0</valoracion>
+    <tipoobra>Novela Web</tipoobra>
+    <categoria>Accion, Fantasia, Aventura, Artes Marciales, Recuentos de Vida</categoria>
+    <imagen>../img/LaLeyendaDeLaEspadaDelNorte.webp</imagen>
     <fechaCreacion>24/08/2025</fechaCreacion>
   </obra>
 </obras>
