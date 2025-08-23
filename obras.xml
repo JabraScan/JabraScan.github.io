@@ -1,15 +1,5 @@
 <obras>
   <obra>
-    <clave>CultivationOnline</clave>
-    <nombreobra>Cultivation Online</nombreobra>
-    <autor>MyLittleBrother</autor>
-    <sinopsis>Yuan nació con una enfermedad incurable que le dejó ciego a una edad temprana y lisiado unos años después, dejando inútil todo lo que tenía por debajo de la cabeza. Considerado irremediable y sin esperanza, sus padres se dieron rápidamente por vencidos y el mundo lo ignoró. En este mundo oscuro e inmóvil, su hermana pequeña se convirtió en su única razón para vivir. Observa cómo este joven alcanza la cúspide como genio en Cultivation Online, el más reciente VRMMORPG, convirtiéndose en una figura legendaria en ambos mundos.</sinopsis>
-    <valoracion>9.5</valoracion>
-    <tipoobra>Novela Web</tipoobra>
-    <categoria>Fantasía, Acción, Harem, Comedia, Aventura, Cultivo, Realidad Virtual</categoria>
-    <imagen>../img/CultivationOnline.jpg</imagen>
-  </obra>
-  <obra>
     <clave>CallateDragonaMalvadaNoQuieroTenerMasHijosContigo</clave>
     <nombreobra>¡Callate, dragon malvado! No quiero tener mas hijos contigo.</nombreobra>
     <autor>闭嘴恶龙我不想再跟你生孩子了</autor>
@@ -18,5 +8,28 @@
     <tipoobra>Novela Web</tipoobra>
     <categoria>Drama, Romance, Acción, Comedia, Fantasía, Aventura, Ecchi, sobrenatural, Magia</categoria>
     <imagen>../img/CallateDragonaMalvada.webp</imagen>
+    <fechaCreacion>24/08/2025</fechaCreacion>
+  </obra>
+  <obra>
+    <clave>CultivationOnline</clave>
+    <nombreobra>Cultivation Online</nombreobra>
+    <autor>MyLittleBrother</autor>
+    <sinopsis>Yuan nació con una enfermedad incurable que le dejó ciego a una edad temprana y lisiado unos años después, dejando inútil todo lo que tenía por debajo de la cabeza. Considerado irremediable y sin esperanza, sus padres se dieron rápidamente por vencidos y el mundo lo ignoró. En este mundo oscuro e inmóvil, su hermana pequeña se convirtió en su única razón para vivir. Observa cómo este joven alcanza la cúspide como genio en Cultivation Online, el más reciente VRMMORPG, convirtiéndose en una figura legendaria en ambos mundos.</sinopsis>
+    <valoracion>9.5</valoracion>
+    <tipoobra>Novela Web</tipoobra>
+    <categoria>Fantasía, Acción, Harem, Comedia, Aventura, Cultivo, Realidad Virtual</categoria>
+    <imagen>../img/CultivationOnline.jpg</imagen>
+    <fechaCreacion>24/08/2025</fechaCreacion>
+  </obra>
+  <obra>
+    <clave>DualCultivation</clave>
+    <nombreobra>DualCultivation</nombreobra>
+    <autor>MyLittleBrother</autor>
+    <sinopsis>Su Yang es un poderoso Cultivador Dual que fue encarcelado después de ofender al Emperador Celestial. ¿Su crimen? Cometió adulterio con la esposa del Dios de la Luna, secuestró a la hermana menor del Rey Dragón, sedujo a la Diosa Divina e incluso probó la fruta prohibida que es la amada hija del Emperador Celestial. Dentro de la prisión, Su Yang conoce a un anciano misterioso que le ofrece la oportunidad de salir de este lugar, pero ese método requiere que experimente la reencarnación. En su nueva vida, Su Yang jura reunirse con sus parejas y abrazarlas una vez más, mientras encuentra otras nuevas en el camino.</sinopsis>
+    <valoracion>9.0</valoracion>
+    <tipoobra>Novela Web</tipoobra>
+    <categoria>Romance, Acción, Venganza, Harem, Fantasía, Cultivo</categoria>
+    <imagen>../img/DualCultivation.webp</imagen>
+    <fechaCreacion>24/08/2025</fechaCreacion>
   </obra>
 </obras>
