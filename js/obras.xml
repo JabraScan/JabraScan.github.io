@@ -7,7 +7,7 @@
     <valoracion>9.5</valoracion>
     <tipoobra>Novela Web</tipoobra>
     <categoria>Fantasía, Acción, Harem, Comedia, Aventura, Cultivo, Realidad Virtual</categoria>
-    <imagen>item1</imagen>
+    <imagen>../img/CultivationOnline.jpg</imagen>
   </obra>
   <obra>
     <clave>CallateDragonaMalvadaNoQuieroTenerMasHijosContigo</clave>
