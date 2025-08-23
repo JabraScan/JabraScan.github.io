@@ -47,5 +47,5 @@ document.addEventListener("DOMContentLoaded", () => {
     const maxIndex = track.children.length - Math.floor(track.parentElement.offsetWidth / slideWidth);
     currentIndex = (currentIndex < items.length) ? currentIndex + 1 : 0;
     showItem(currentIndex);
-  }, 3000); // Cambia cada 3 segundos
+  }, 5000); // Cambia cada 3 segundos
 });
