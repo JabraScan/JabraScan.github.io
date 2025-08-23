@@ -71,6 +71,7 @@ main {
 .book-info h3 {
   font-size: 1.2em;
   margin: 0 0 0.5em 0;
+  color: cadetblue;
 }
 .book-author{
   color: #666;
