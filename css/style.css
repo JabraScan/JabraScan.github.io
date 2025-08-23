@@ -163,21 +163,31 @@ img.CallateDragonMalvado {
 }
 
 .carousel-item {
-  display: flex;
-  align-items: center;
-  gap: 20px; /* espacio entre imagen y texto */
-  padding: 10px;
+  min-width: 100%;
+  position: relative;
 }
 
 .carousel-item img {
-  width: 200px; /* ajusta según tu diseño */
-  height: auto;
-  border-radius: 8px;
+  width: 20%;
+  height: 340px;
   object-fit: cover;
+  display: block;
+  border-radius: 18px;
 }
 
 .carousel-info-overlay {
-  flex: 1; /* ocupa el espacio restante */
+  position: absolute;
+  top: 0:
+  bottom: 0;
+  left: 340px;
+  right: 0;
+  background: linear-gradient(0deg, rgba(20,33,61,0.95) 70%, rgba(20,33,61,0.4) 100%);
+  color: #fff;
+  padding: 1.2em 1.5em 1em 1.5em;
+  border-radius: 0 0 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
 }
 
 .carousel-info-title {
