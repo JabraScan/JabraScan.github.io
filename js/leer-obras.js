@@ -43,7 +43,7 @@ fetch('obras.xml')
 		          <div class="book-info">
 		            <h2>${nombreobra}</h2>
 		            <p class="book-author"><div class="book-author-title">Autor:</div><div class="book-author-name">${autor}</div></p>
-		            <p class="book-sinopsis">Sinopsis: ${sinopsis}
+		            <p class="book-sinopsis"><b>Sinopsis:</b></br> ${sinopsis}
 		            	<span class="tooltip-text">${sinopsis}</span>
 		            </p>
 		          </div>
