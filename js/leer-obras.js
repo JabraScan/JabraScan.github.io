@@ -5,8 +5,8 @@ fetch('obras.xml')
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
   .then(data => {
     const obras = data.querySelectorAll("obra");
-    const carouselContainer = document.getElementById("carousel-track");
-    const booklistContainer = document.getElementById("book-list");
+    const carouselContainer = document.querySelector("carousel-track");
+    const booklistContainer = document.querySelector("book-list");
 	  console.log(carouselContainer);
 	  console.log(booklistContainer);
 	  console.log(obras);
