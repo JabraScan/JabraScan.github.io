@@ -1,4 +1,5 @@
-// leer-obras.js
+document.addEventListener("DOMContentLoaded", function () {
+	// leer-obras.js
 fetch('obras.xml')
   .then(response => response.text())
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
@@ -51,3 +52,4 @@ fetch('obras.xml')
     });
   })
   .catch(err => console.error("Error al cargar el XML:", err));
+}
