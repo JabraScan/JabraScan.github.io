@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
 
   function showItem(index) {
+    if (items.length === 0) {
+      console.warn("No hay elementos en el carrusel show");
+      return;
+    }
     if (index < 0) index = items.length - 1;
     if (index >= items.length) index = 0;
     currentIndex = index;
