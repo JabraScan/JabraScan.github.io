@@ -52,4 +52,4 @@ fetch('obras.xml')
     });
   })
   .catch(err => console.error("Error al cargar el XML:", err));
-}
+});
