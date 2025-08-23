@@ -33,9 +33,6 @@ fetch('obras.xml')
 	        </div>
 	      `;
       carouselContainer.appendChild(itemCarousel);
-      // Actualizar lógica de navegación
-      const slideWidth = slides[0].offsetWidth + 20;
-        carouselContainer.style.transform = `translateX(-${slideWidth * indice++}px)`;
 		
       const itemBook = document.createElement("article");
 	      itemBook.className = "book-card";
