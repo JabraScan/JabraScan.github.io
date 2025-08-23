@@ -1,5 +1,5 @@
 // leer-obras.js
-fetch('books/obras.xml')
+fetch('../obras.xml')
   .then(response => response.text())
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
   .then(data => {
