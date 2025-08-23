@@ -1,0 +1,22 @@
+<obras>
+  <obra>
+    <clave>CultivationOnline</clave>
+    <nombreobra>Cultivation Online</nombreobra>
+    <autor>MyLittleBrother</autor>
+    <sinopsis>Yuan nació con una enfermedad incurable que le dejó ciego a una edad temprana y lisiado unos años después, dejando inútil todo lo que tenía por debajo de la cabeza. Considerado irremediable y sin esperanza, sus padres se dieron rápidamente por vencidos y el mundo lo ignoró. En este mundo oscuro e inmóvil, su hermana pequeña se convirtió en su única razón para vivir. Observa cómo este joven alcanza la cúspide como genio en Cultivation Online, el más reciente VRMMORPG, convirtiéndose en una figura legendaria en ambos mundos.</sinopsis>
+    <valoracion>9.5</valoracion>
+    <tipoobra>Novela Web</tipoobra>
+    <categoria>Fantasía, Acción, Harem, Comedia, Aventura, Cultivo, Realidad Virtual</categoria>
+    <imagen>../img/CultivationOnline.jpg</imagen>
+  </obra>
+  <obra>
+    <clave>CallateDragonaMalvadaNoQuieroTenerMasHijosContigo</clave>
+    <nombreobra>¡Callate, dragon malvado! No quiero tener mas hijos contigo.</nombreobra>
+    <autor>闭嘴恶龙我不想再跟你生孩子了</autor>
+    <sinopsis>Después de ser derrotado y capturado, el héroe asesino de dragones, Leon, se convirtió en prisionero de la Emperatriz Dragón Plateado. Con la resolución de una muerte segura, León inesperadamente dio vuelta la situación y embarazó con éxito a la emperatriz cuando estaba a punto de morir. Pensó que esto sería suficiente para dejar a la emperatriz vivir con vergüenza por el resto de su vida y también cumplió con su deber como cazador de dragones. Sin embargo, dos años después, cuando León abrió los ojos, encontró a una pequeña niña dragón con cola acostada a su lado</sinopsis>
+    <valoracion>9.0</valoracion>
+    <tipoobra>Novela Web</tipoobra>
+    <categoria>Drama, Romance, Acción, Comedia, Fantasía, Aventura, Ecchi, sobrenatural, Magia</categoria>
+    <imagen>../img/CallateDragonaMalvada.webp</imagen>
+  </obra>
+</obras>
