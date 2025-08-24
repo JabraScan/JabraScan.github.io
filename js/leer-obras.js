@@ -36,7 +36,7 @@ fetch('obras.xml')
       carouselContainer.appendChild(itemCarousel);
 		
       const itemBook = document.createElement("article");
-	      itemBook.className = "book-card libro-item";
+	      itemBook.className = "book-card-main libro-item";
 		  itemBook.onclick = () => onLibroClick(obra.querySelector("clave").textContent.trim());
 	      itemBook.innerHTML = `
 				  <p class="clave">${clave}</p>
