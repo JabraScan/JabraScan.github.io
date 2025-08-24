@@ -7,7 +7,7 @@
     <valoracion>9.0</valoracion>
     <tipoobra>Novela Web</tipoobra>
     <categoria>Drama, Romance, Acción, Comedia, Fantasía, Aventura, Ecchi, sobrenatural, Magia</categoria>
-    <imagen>../img/CallateDragonaMalvada.webp</imagen>
+    <imagen>CallateDragonaMalvada.webp</imagen>
     <fechaCreacion>24/08/2025</fechaCreacion>
   </obra>
   <obra>
@@ -18,7 +18,7 @@
     <valoracion>9.5</valoracion>
     <tipoobra>Novela Web</tipoobra>
     <categoria>Fantasía, Acción, Harem, Comedia, Aventura, Cultivo, Realidad Virtual</categoria>
-    <imagen>../img/CultivationOnline.jpg</imagen>
+    <imagen>CultivationOnline.jpg</imagen>
     <fechaCreacion>24/08/2025</fechaCreacion>
   </obra>
   <obra>
@@ -40,7 +40,7 @@
     <valoracion>9.0</valoracion>
     <tipoobra>Novela Web</tipoobra>
     <categoria>Accion, Fantasia, Aventura, Artes Marciales, Recuentos de Vida</categoria>
-    <imagen>../img/LaLeyendaDeLaEspadaDelNorte.webp</imagen>
+    <imagen>LaLeyendaDeLaEspadaDelNorte.webp</imagen>
     <fechaCreacion>24/08/2025</fechaCreacion>
   </obra>
 </obras>
