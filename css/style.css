@@ -34,6 +34,9 @@ main {
   margin: 2em auto;
   padding: 0 1em;
 }
+.clave {
+  display: none;
+}
 .book-list {
   display: flex;
   flex-wrap: wrap;
