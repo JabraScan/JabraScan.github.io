@@ -15,9 +15,9 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 // Ajusta el selector al formato de tu XML
                 const obra = Array.from(data.getElementsByTagName('obra'))
-                    .find(obra => obra.getAttribute('clave') === libroId);
+                    .find(obra => obra.querySelector('clave').textContent.trim() === libroId);
                 if (!obra) {
-                    document.body.innerHTML = '<p>Libro no encontrado.</p>';
+                    document.body.innerHTML = '<p>Obra no encontrada.</p>';
                     return;
                 }
     console.log(obra);
