@@ -41,7 +41,7 @@ fetch('obras.xml')
 	      itemBook.innerHTML = `
 				  <p class="clave">${clave}</p>
 		          <img src="../img/${imagen}" alt="${nombreobra}" loading="lazy"/>
-		          <div class="book-info">
+		          <div class="book-info-main">
 		            <h3>${nombreobra}</h3>
 					<div class="book-author-title">Autor:</div>
 					<div class="book-author-name">${autor}</div>
