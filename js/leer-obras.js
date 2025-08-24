@@ -35,7 +35,8 @@ fetch('obras.xml')
       carouselContainer.appendChild(itemCarousel);
 		
       const itemBook = document.createElement("article");
-	      itemBook.className = "book-card";
+	      itemBook.className = "book-card libro-item";
+		  itemBook.onclick = () => onLibroClick(${clave});
 	      itemBook.innerHTML = `
 		        <a href="books/${clave}/index.html">
 		          <img src="${imagen}" alt="${nombreobra}" loading="lazy"/>
@@ -54,4 +55,11 @@ fetch('obras.xml')
     });
   })
   .catch(err => console.error("Error al cargar el XML:", err));
+
+	function onLibroClick(libroId) {
+	    // Guarda el ID o nombre del libro seleccionado (ajusta según tu XML)
+	    localStorage.setItem('libroSeleccionado', libroId);
+	    // Redirige a la ficha
+	    window.location.href = 'books/libro-ficha.html';
+	}
 });
