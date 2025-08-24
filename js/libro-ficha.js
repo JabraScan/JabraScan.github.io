@@ -30,17 +30,17 @@ console.log(libro);
       const tipoobra = obra.querySelector("tipoobra").textContent;
       const Categoria = obra.querySelector("categoria").textContent;
 
-        document.getElementById('imagen-obra').textContent = '../${imagen}';
-        document.getElementById('nombre-obra').textContent = nombreobra;
+        document.querySelector(".book-header").innerHTML = `<i class="fa-solid fa-book"></i> ${nombreobra.toUpperCase()}`;
+        document.getElementById('imagen-obra').textContent = '../../img/${imagen}';
+        document.getElementById('nombre-obra').innerHTML =  `
+                    ${nombreobra}
+                    <span class="book-author">por <b id="nombre-autor">${autor}</b></span>
+                    `;
         document.getElementById('nombre-autor').textContent = autor;
         document.getElementById('sinopsis-obra').textContent = sinopsis;
-        document.getElementById('imagen-obra').textContent = '<i class="fa-solid fa-tags"></i>' ;
-          /*
-          <span><i class="fa-solid fa-tags"></i> Cultivation</span>
-          <span><i class="fa-solid fa-heart"></i> Romance</span>
-          <span><i class="fa-solid fa-dragon"></i> Fantasía</span>
-          */    
-            const DataBook = document.getElementById('book-links');
+        document.querySelector(".book-genres").innerHTML =`<span><i class="fa-solid fa-tags"></i>${Categoria}</span>`;
+            
+        const DataBook = document.getElementById('book-links');
             const itemDataBook = document.createElement("div");
                 itemDataBook.innerHTML =  `
                     <span><i class="fa-solid fa-globe"></i> ${tipoobra}</span>
