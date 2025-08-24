@@ -90,6 +90,13 @@ body {
   font-size: 0.75em;
   color: #4e4e4e;
 }
+.book-info,
+.book-synopsis,
+.book-buttons {
+  display: block;
+  width: 100%;
+  margin-bottom: 1.2em;
+}
 .book-buttons button {
   margin-right: 0.5em;
   padding: 0.45em 1.2em;
