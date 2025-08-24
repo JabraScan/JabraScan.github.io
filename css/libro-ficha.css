@@ -1,0 +1,225 @@
+body {
+  background: #f5f7fa;
+}
+.book-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px #0001;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.book-header {
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #f8b400;
+  font-size: 1.1em;
+}
+.book-main {
+  display: flex;
+  gap: 2rem;
+}
+.book-image img {
+  width: 150px;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px #0002;
+  display: block;
+  margin-bottom: 0.7em;
+}
+.book-genres, .book-links {
+  margin-top: 0.3em;
+  font-size: 0.95em;
+}
+.book-genres span, .book-links a {
+  display: block;
+  color: #444;
+  margin-bottom: 0.2em;
+  text-decoration: none;
+}
+.book-links a:hover { color: #f8b400; }
+.book-info {
+  flex: 1;
+}
+.book-info h2 {
+  margin: 0 0 0.2em 0;
+  font-size: 1.5em;
+}
+.book-author {
+  font-size: 0.9em;
+  color: #888;
+  margin-left: 0.8em;
+}
+.book-rating {
+  margin: 0.5em 0 1em 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+.stars {
+  color: #f8b400;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+}
+.rating-value, .rating-votes {
+  color: #888;
+  font-size: 0.97em;
+}
+.rate-btns button {
+  background: none;
+  border: none;
+  color: #bbb;
+  font-size: 1em;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0 0.1em;
+}
+.rate-btns button.rated,
+.rate-btns button:hover {
+  color: #f8b400;
+}
+.book-synopsis {
+  margin-bottom: 1em;
+}
+.book-buttons button {
+  margin-right: 0.5em;
+  padding: 0.45em 1.2em;
+  border: none;
+  border-radius: 4px;
+  background: #f8b400;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background 0.2s;
+}
+.book-buttons button:hover {
+  background: #f39800;
+}
+.book-latest-chapters, .book-chapters-list {
+  margin-top: 2em;
+}
+.book-latest-chapters h3, .book-chapters-list h3 {
+  font-size: 1.1em;
+  color: #333;
+  margin-bottom: 0.5em;
+}
+.book-latest-chapters .chapter-columns,
+.book-chapters-list .chapter-columns {
+  display: flex;
+  gap: 2rem;
+}
+.book-latest-chapters ul,
+.book-chapters-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.7em 0;
+}
+.book-latest-chapters li,
+.book-chapters-list li {
+  padding: 0.3em 0;
+  border-bottom: 1px solid #eee;
+  font-size: 1em;
+}
+.book-chapters-list .chapter-columns li {
+  border-bottom: 1px dotted #eee;
+  padding: 0.2em 0;
+}
+.pagination {
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-end;
+  align-items: center;
+}
+.pagination button {
+  padding: 0.3em 0.8em;
+  background: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.pagination button:disabled {
+  background: #ddd;
+  color: #bbb;
+  cursor: not-allowed;
+}
+.pagination span {
+  margin: 0 0.5em;
+  font-weight: bold;
+  color: #555;
+}
+
+/* TABLET: Menos espacio, columnas apiladas si pantalla < 900px */
+@media (max-width: 900px) {
+  .book-card {
+    max-width: 98vw;
+    padding: 1rem;
+  }
+  .book-main { gap: 1rem; }
+  .book-header { font-size: 1em; }
+}
+
+/* MOVIL: Todo apilado, botones grandes, fuentes más legibles */
+@media (max-width: 600px) {
+  .book-card {
+    margin: 0.5rem;
+    padding: 0.8rem 0.3rem;
+    max-width: 100vw;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .book-main {
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: center;
+  }
+  .book-image img {
+    width: 120px;
+    height: 170px;
+  }
+  .book-info h2 {
+    font-size: 1.1em;
+  }
+  .book-author {
+    font-size: 0.8em;
+  }
+  .book-latest-chapters .chapter-columns,
+  .book-chapters-list .chapter-columns {
+    flex-direction: column;
+    gap: 0;
+  }
+  .book-latest-chapters ul,
+  .book-chapters-list ul {
+    margin-bottom: 0.5em;
+  }
+  .book-buttons button {
+    font-size: 1em;
+    width: 98%;
+    margin: 0.2em 0;
+    padding: 0.7em 0;
+    display: block;
+  }
+  .pagination {
+    justify-content: center;
+    font-size: 0.98em;
+    gap: 0.2em;
+  }
+}
+
+/* Opcional: para pantallas de tablet pequeñas (700px o menos) */
+@media (max-width: 700px) and (min-width: 601px) {
+  .book-main {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .book-latest-chapters .chapter-columns,
+  .book-chapters-list .chapter-columns {
+    flex-direction: column;
+    gap: 0;
+  }
+}
