@@ -20,9 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.body.innerHTML = '<p>Obra no encontrada.</p>';
                     return;
                 }
-    console.log(obra);
-    
-          
           const clave = obra.querySelector("clave").textContent.trim();
           const nombreobra = obra.querySelector("nombreobra").textContent.trim();
           const autor = obra.querySelector("autor").textContent.trim();
@@ -40,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 headerDataBook.innerHTML = `
                     <i class="fa-solid fa-book"></i> ${nombreobra.toUpperCase()}
 	              `;
-            DataBook.prepend(headerDataBook);
 
             const mainDataBook = document.createElement("div");
                 mainDataBook.className = "book-main";
@@ -71,6 +67,8 @@ document.addEventListener("DOMContentLoaded", function () {
                       </div>
 	              `;
             DataBook.prepend(mainDataBook);
+            DataBook.prepend(headerDataBook);
+
                             /*
 							<div class="book-rating" id="book-rating">
                               <span class="stars" data-rating="4.5">
