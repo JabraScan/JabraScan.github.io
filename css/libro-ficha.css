@@ -43,6 +43,11 @@ body {
   margin-bottom: 0.2em;
   text-decoration: none;
 }
+.book-info-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 .book-links a:hover { color: #f8b400; }
 .book-info {
   flex: 1;
