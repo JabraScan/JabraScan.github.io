@@ -30,7 +30,7 @@ console.log(libro);
       const tipoobra = obra.querySelector("tipoobra").textContent;
       const Categoria = obra.querySelector("categoria").textContent;
 
-        document.getElementById('imagen-obra').textContent = ${imagen};
+        document.getElementById('imagen-obra').textContent = '../${imagen}';
         document.getElementById('nombre-obra').textContent = ${nombreobra};
         document.getElementById('nombre-autor').textContent = ${autor};
         document.getElementById('sinopsis-obra').textContent = ${sinopsis};
