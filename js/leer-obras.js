@@ -22,7 +22,7 @@ fetch('obras.xml')
       const itemCarousel = document.createElement("div");
 	      itemCarousel.className = "carousel-item";
 	      itemCarousel.innerHTML = `
-	        <img src="${imagen}" alt="${nombreobra}">
+	        <img src="../img/${imagen}" alt="${nombreobra}">
 	        <div class="carousel-info-overlay">
 	          <div class="carousel-info-title">${nombreobra}</div>
 	          <div class="carousel-info-row">		   		
@@ -39,7 +39,7 @@ fetch('obras.xml')
 	      itemBook.className = "book-card libro-item";
 		  itemBook.onclick = () => onLibroClick(clave);
 	      itemBook.innerHTML = `
-		          <img src="${imagen}" alt="${nombreobra}" loading="lazy"/>
+		          <img src="../img/${imagen}" alt="${nombreobra}" loading="lazy"/>
 		          <div class="book-info">
 		            <h3>${nombreobra}</h3>
 		            <p class="book-author"><div class="book-author-title">Autor:</div><div class="book-author-name">${autor}</div></p>
