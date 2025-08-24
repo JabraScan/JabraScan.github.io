@@ -13,13 +13,13 @@ console.log(libroId);
         .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
         .then(data => {
             // Ajusta el selector al formato de tu XML
-            const libro = Array.from(data.getElementsByTagName('libro'))
-                .find(libro => libro.getAttribute('clave') === libroId);
+            const obra = Array.from(data.getElementsByTagName('obra'))
+                .find(obra => obra.getAttribute('clave') === libroId);
             if (!libro) {
                 document.body.innerHTML = '<p>Libro no encontrado.</p>';
                 return;
             }
-console.log(libro);
+console.log(obra);
 
       
       const clave = obra.querySelector("clave").textContent.trim();
