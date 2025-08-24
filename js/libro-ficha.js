@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const headerDataBook = document.createElement("div");
                 headerDataBook.className = "book-header";
                 headerDataBook.innerHTML = `
-                    <i class="fa-solid fa-book"></i> ${nombreobra.toUpperCase()}</div>
+                    <i class="fa-solid fa-book"></i> ${nombreobra.toUpperCase()}
 	              `;
             DataBook.appendChild(headerDataBook);
 
@@ -58,7 +58,8 @@ document.addEventListener("DOMContentLoaded", function () {
                       </div>
                       <div class="book-info">
                             <h2 id="nombre-obra">${nombreobra}</h2>
-                            <!--<div class="book-rating" id="book-rating">
+                            <!--
+							<div class="book-rating" id="book-rating">
                               <span class="stars" data-rating="4.5">
                                   <i class="fa-solid fa-star"></i>
                                   <i class="fa-solid fa-star"></i>
@@ -74,7 +75,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <button class="rate-star" data-value="3"><i class="fa-solid fa-star"></i></button>
                                 <button class="rate-star" data-value="4"><i class="fa-solid fa-star"></i></button>
                                 <button class="rate-star" data-value="5"><i class="fa-solid fa-star"></i></button>
-                              </span>-->>
+                              </span>
+							  -->>
                             </div>
                             <div class="book-synopsis">
                               <b><i class="fa-solid fa-info-circle"></i> Sinopsis:</b>
