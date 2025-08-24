@@ -44,12 +44,12 @@ fetch('obras.xml')
 		          <div class="book-info-main">
 		            <h3>${nombreobra}</h3>
 					<div class="book-author-title">Autor:</div>
-					<div class="book-author-name">${autor}</div>
+					<!--<div class="book-author-name">${autor}</div>
 		            <p class="book-sinopsis tooltip">
 			  			<b>Sinopsis:</b>
 						<span class="tooltip-text">${sinopsis}</span>
 		            	</br> ${sinopsis}
-		            </p>
+		            </p>-->
 		          </div>
 	      `;
       booklistContainer.appendChild(itemBook);
