@@ -60,7 +60,7 @@ main {
   border-radius: 12px;
   overflow: hidden;
   max-width: 40%;
-  max-height: 300px;
+  max-height: 150px;
   box-shadow: 0 2px 10px #0001;
   transition: transform 0.15s;
   text-decoration: none;
