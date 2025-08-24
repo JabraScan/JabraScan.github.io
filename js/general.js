@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
           return response.text();
         })
         .then(data => {
-          document.getElementById('main').innerHTML = data; // Cargar el contenido en el div
+          document.querySelector('main').innerHTML = data; // Cargar el contenido en el div
         })
         .catch(err => console.error('Error:', err));
     });
