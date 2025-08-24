@@ -21,14 +21,14 @@ window.addEventListener('DOMContentLoaded', function () {
 console.log(libro);
 
       
-      const clave = obra.querySelector("clave").textContent;
-      const nombreobra = obra.querySelector("nombreobra").textContent;
-      const autor = obra.querySelector("autor").textContent;
-      const sinopsis = obra.querySelector("sinopsis").textContent;
-      const imagen = obra.querySelector("imagen").textContent;
-      const valoracion = obra.querySelector("valoracion").textContent;
-      const tipoobra = obra.querySelector("tipoobra").textContent;
-      const Categoria = obra.querySelector("categoria").textContent;
+      const clave = obra.querySelector("clave").textContent.trim();
+      const nombreobra = obra.querySelector("nombreobra").textContent.trim();
+      const autor = obra.querySelector("autor").textContent.trim();
+      const sinopsis = obra.querySelector("sinopsis").textContent.trim();
+      const imagen = obra.querySelector("imagen").textContent.trim();
+      const valoracion = obra.querySelector("valoracion").textContent.trim();
+      const tipoobra = obra.querySelector("tipoobra").textContent.trim();
+      const Categoria = obra.querySelector("categoria").textContent.trim();
 
         document.querySelector(".book-header").innerHTML = `<i class="fa-solid fa-book"></i> ${nombreobra.toUpperCase()}`;
         document.getElementById('imagen-obra').textContent = '../../img/${imagen}';
