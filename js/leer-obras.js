@@ -63,6 +63,7 @@ fetch('obras.xml')
 	    // Redirige a la ficha
 	    //window.location.href = 'books/libro-ficha.html';
 		      // Usar fetch para cargar el contenido de disclaimer.html
+	console.log("obras");
       fetch('books/libro-ficha.html')
         .then(response => {
           if (!response.ok) {
