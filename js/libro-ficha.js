@@ -31,9 +31,9 @@ console.log(libro);
       const Categoria = obra.querySelector("categoria").textContent;
 
         document.getElementById('imagen-obra').textContent = '../${imagen}';
-        document.getElementById('nombre-obra').textContent = ${nombreobra};
-        document.getElementById('nombre-autor').textContent = ${autor};
-        document.getElementById('sinopsis-obra').textContent = ${sinopsis};
+        document.getElementById('nombre-obra').textContent = nombreobra;
+        document.getElementById('nombre-autor').textContent = autor;
+        document.getElementById('sinopsis-obra').textContent = sinopsis;
         document.getElementById('imagen-obra').textContent = '<i class="fa-solid fa-tags"></i>' ;
           /*
           <span><i class="fa-solid fa-tags"></i> Cultivation</span>
