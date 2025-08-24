@@ -37,7 +37,7 @@ fetch('obras.xml')
 		
       const itemBook = document.createElement("article");
 	      itemBook.className = "book-card libro-item";
-		  itemBook.onclick = () => onLibroClick(${clave});
+		  itemBook.onclick = () => onLibroClick(clave);
 	      itemBook.innerHTML = `
 		          <img src="${imagen}" alt="${nombreobra}" loading="lazy"/>
 		          <div class="book-info">
@@ -50,7 +50,6 @@ fetch('obras.xml')
 		            </p>
 		          </div>
 	      `;
-    	  itemBook.onclick = () => onLibroClick(${clave}); // Suponiendo que 'id' es único
       booklistContainer.appendChild(itemBook);
     });
   })
