@@ -1,6 +1,7 @@
 //document.addEventListener("DOMContentLoaded", function () {
 //    window.addEventListener('DOMContentLoaded', function () {
-        const libroId = localStorage.getItem('libroSeleccionado');
+function cargarlibro(libroId) { 
+        //const libroId = localStorage.getItem('libroSeleccionado');
     console.log(libroId);
         if (!libroId) {
             // Manejar error
@@ -120,7 +121,7 @@
     // Datos de ejemplo
     const chapters = Array.from({length: 80}, (_, i) => `Capítulo ${i+1}: Título del capítulo`);
     const latestChaptersCount = 6;
-    
+}
     // -------- ESTRELLAS Y VALORACIÓN --------
     function renderStars(el, rating) {
       let stars = '';
