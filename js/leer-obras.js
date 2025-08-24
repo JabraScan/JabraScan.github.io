@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		  const ubicacion = obra.querySelector("ubicacion").textContent.trim();
 	
 		  const categoriaIndiv = Categoria.split(",").map(item => item.trim());
-			const categoriaObj = '';
+			let categoriaObj = '';
 			categoriaIndiv.forEach(item => {
 			  categoriaObj += '<span class="etiqueta">${item}</span>'; // Imprime cada item en la consola
 			  // Puedes hacer lo que necesites con cada 'item' aquí
