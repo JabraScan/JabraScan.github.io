@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function showItem(index) {
     let items = Array.from(document.querySelectorAll('.carousel-item'));
     if (items.length === 0) {
-      console.warn("No hay elementos en el carrusel show");
       return;
     }
     if (index < 0) index = items.length - 1;
@@ -36,11 +35,15 @@ document.addEventListener("DOMContentLoaded", () => {
   showItem(0);
 
   // 🚀 Desplazamiento automático
-  setInterval(() => {
+  // Inicializa el intervalo fuera del setInterval
+  let intervalId;
+  
+  // Ejecuta el setInterval y guarda la referencia
+  intervalId = setInterval(() => {
     let items = Array.from(document.querySelectorAll('.carousel-item'));
-    console.log(items.length);
     if (items.length === 0) {
-      console.warn("No hay elementos en el carrusel");
+        console.warn("No hay elementos en el carrusel");
+      clearInterval(intervalId); // Detener el intervalo
       return;
     }
     const slideWidth = items[0].offsetWidth;
