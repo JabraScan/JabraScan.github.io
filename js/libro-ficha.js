@@ -52,9 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
                           <a href="#"><i class="fa-solid fa-clock"></i> ${estado}</a>
                         </div>
                       </div>
-                      <div class="book-info">
-                            <h2 id="nombre-obra">${nombreobra}</h2>
-
+					  <div class="book-info-container">
+                      		<div class="book-info">
+                            	<h2 id="nombre-obra">${nombreobra}</h2>
                             </div>
                             <div class="book-synopsis">
                               <b><i class="fa-solid fa-info-circle"></i> Sinopsis:</b>
