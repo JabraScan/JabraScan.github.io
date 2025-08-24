@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ficha de Libro - Dual Cultivation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/libro-ficha.css">
+</head>
+<body>
+  <div class="book-card">
+    <div class="book-header">
+      <i class="fa-solid fa-book"></i> DUAL CULTIVATION
+    </div>
+    <div class="book-main">
+      <div class="book-image">
+        <img src="imagen-obra" alt="Dual Cultivation"/>
+        <div class="book-genres">
+          <span><i class="fa-solid fa-tags"></i> Cultivation</span>
+          <span><i class="fa-solid fa-heart"></i> Romance</span>
+          <span><i class="fa-solid fa-dragon"></i> Fantasía</span>
+        </div>
+        <div class="book-links">
+          <a href="#"><i class="fa-solid fa-globe"></i> Web</a>
+          <a href="#"><i class="fa-solid fa-book"></i> Divine Novel</a>
+        </div>
+      </div>
+      <div class="book-info">
+        <h2 id="nombre-obra">
+          DUAL CULTIVATION
+          <span class="book-author">por <b id="nombre-autor">MythCultivation</b></span>
+        </h2>
+        <div class="book-rating" id="book-rating">
+          <span class="stars" data-rating="4.5"></span>
+          <span class="rating-value">4.5/5</span>
+          <span class="rating-votes">(345 votos)</span>
+          <span class="rate-btns">
+            <button class="rate-star" data-value="1"><i class="fa-solid fa-star"></i></button>
+            <button class="rate-star" data-value="2"><i class="fa-solid fa-star"></i></button>
+            <button class="rate-star" data-value="3"><i class="fa-solid fa-star"></i></button>
+            <button class="rate-star" data-value="4"><i class="fa-solid fa-star"></i></button>
+            <button class="rate-star" data-value="5"><i class="fa-solid fa-star"></i></button>
+          </span>
+        </div>
+        <div class="book-synopsis">
+          <b><i class="fa-solid fa-info-circle"></i> Sinopsis:</b>
+          <p id="sinopsis-obra">
+            Su Yang fue sentenciado a prisión dentro del Bimari Retribution Cliff, donde sólo los criminales más peligrosos eran enviados...
+          </p>
+        </div>
+        <div class="book-buttons">
+          <!--<button class="library"><i class="fa-solid fa-heart"></i> En biblioteca</button>-->
+          <button class="chapter-list"><i class="fa-solid fa-list"></i> Lista de capítulos</button>
+          <button class="read-first"><i class="fa-solid fa-play"></i> Empezar a leer</button>
+        </div>
+      </div>
+    </div>
+    <div class="book-latest-chapters">
+      <h3><i class="fa-solid fa-clock"></i> Últimos capítulos</h3>
+      <div class="chapter-columns" id="latest-chapters-columns">
+        <!-- Se rellena por JS -->
+      </div>
+    </div>
+    <div class="book-chapters-list">
+      <h3><i class="fa-solid fa-list-ol"></i> Lista de capítulos</h3>
+      <div class="chapter-columns" id="chapter-columns">
+        <!-- Se rellena por JS -->
+      </div>
+      <div class="pagination" id="pagination">
+        <!-- Se rellena por JS -->
+      </div>
+    </div>
+  </div>
+  <script src="js/libro-ficha.js"></script>
+</body>
+</html>
