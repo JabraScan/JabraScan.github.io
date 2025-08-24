@@ -13,17 +13,48 @@ window.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             // Ajusta el selector al formato de tu XML
             const libro = Array.from(data.getElementsByTagName('libro'))
-                .find(libro => libro.getAttribute('id') === libroId);
-
+                .find(libro => libro.getAttribute('clave') === libroId);
             if (!libro) {
                 document.body.innerHTML = '<p>Libro no encontrado.</p>';
                 return;
             }
+console.log(libro);
 
-            // Ejemplo de rellenar campos
-            document.getElementById('titulo-libro').textContent = libro.getElementsByTagName('titulo')[0].textContent;
-            document.getElementById('autor-libro').textContent = libro.getElementsByTagName('autor')[0].textContent;
+      
+      const clave = obra.querySelector("clave").textContent;
+      const nombreobra = obra.querySelector("nombreobra").textContent;
+      const autor = obra.querySelector("autor").textContent;
+      const sinopsis = obra.querySelector("sinopsis").textContent;
+      const imagen = obra.querySelector("imagen").textContent;
+      const valoracion = obra.querySelector("valoracion").textContent;
+      const tipoobra = obra.querySelector("tipoobra").textContent;
+      const Categoria = obra.querySelector("categoria").textContent;
+
+        document.getElementById('imagen-obra').textContent = ${imagen};
+        document.getElementById('nombre-obra').textContent = ${nombreobra};
+        document.getElementById('nombre-autor').textContent = ${autor};
+        document.getElementById('sinopsis-obra').textContent = ${sinopsis};
+        document.getElementById('imagen-obra').textContent = '<i class="fa-solid fa-tags"></i>' ;
+          /*
+          <span><i class="fa-solid fa-tags"></i> Cultivation</span>
+          <span><i class="fa-solid fa-heart"></i> Romance</span>
+          <span><i class="fa-solid fa-dragon"></i> Fantasía</span>
+          */    
+            const DataBook = document.getElementById('book-links');
+            const itemDataBook = document.createElement("div");
+                itemDataBook.innerHTML =  `
+                    <span><i class="fa-solid fa-globe"></i> ${tipoobra}</span>
+                    <span>
+                    <i class="fa-solid fa-book"></i> Divine Novel</a>${tipoobra}
+                    `;
+            DataBook.appendChild(itemDataBook);
+            /*
+            document.getElementById('imagen-obra').textContent = libro.getElementsByTagName('imagen')[0].textContent;
+            document.getElementById('nombre-obra').textContent = libro.getElementsByTagName('nombreobra')[0].textContent;
+            document.getElementById('nombre-autor').textContent = libro.getElementsByTagName('titulo')[0].textContent;
+            document.getElementById('sinopsis-obra').textContent = libro.getElementsByTagName('autor')[0].textContent;
             // ...otros campos
+            */
         });
 });
 // Datos de ejemplo
