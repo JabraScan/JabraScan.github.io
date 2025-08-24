@@ -9,6 +9,8 @@
     <categoria>Drama, Romance, Acción, Comedia, Fantasía, Aventura, Ecchi, sobrenatural, Magia</categoria>
     <imagen>CallateDragonaMalvada.webp</imagen>
     <fechaCreacion>24/08/2025</fechaCreacion>
+    <ubicacion>Novela China</ubicacion>
+    <estado>OnGoing</estado>
   </obra>
   <obra>
     <clave>CultivationOnline</clave>
@@ -29,8 +31,10 @@
     <valoracion>9.0</valoracion>
     <tipoobra>Novela Web</tipoobra>
     <categoria>Romance, Acción, Venganza, Harem, Fantasía, Cultivo</categoria>
-    <imagen>../img/DualCultivation.webp</imagen>
+    <imagen>DualCultivation.webp</imagen>
     <fechaCreacion>24/08/2025</fechaCreacion>
+    <ubicacion>Novela China</ubicacion>
+    <estado>OnGoing</estado>
   </obra>
   <obra>
     <clave>LaLeyendaDeLaEspadaDelNorte</clave>
@@ -42,5 +46,7 @@
     <categoria>Accion, Fantasia, Aventura, Artes Marciales, Recuentos de Vida</categoria>
     <imagen>LaLeyendaDeLaEspadaDelNorte.webp</imagen>
     <fechaCreacion>24/08/2025</fechaCreacion>
+    <ubicacion>Novela Coreana</ubicacion>
+    <estado>OnGoing</estado>
   </obra>
 </obras>
