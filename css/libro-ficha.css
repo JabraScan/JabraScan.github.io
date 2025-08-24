@@ -87,6 +87,8 @@ body {
 }
 .book-synopsis {
   margin-bottom: 1em;
+  font-size: 0.75em;
+  color: #4e4e4e;
 }
 .book-buttons button {
   margin-right: 0.5em;
