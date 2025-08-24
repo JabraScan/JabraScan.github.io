@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Evento para abrir el disclaimer en el main
     document.getElementById('disclaimer-link').addEventListener('click', function (e) {
       e.preventDefault();
+      console.log("general");
       // Usar fetch para cargar el contenido de disclaimer.html
       fetch('disclaimer.html')
         .then(response => {
