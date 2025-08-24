@@ -20,6 +20,10 @@ body {
   display: flex;
   gap: 2rem;
 }
+.book-image {
+  font-size: 0.75em;
+  color: #4e4e4e;
+}
 .book-image img {
   width: 150px;
   height: 210px;
