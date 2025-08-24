@@ -81,20 +81,25 @@ main {
   object-fit: cover;
   display: block;
 }
-.book-info .book-info-main{
+.book-info {
   padding: 1em;
+}
+.book-info-main {
+  padding: 0.8em;
 }
 .book-info h2 .book-info-main h2{
   font-size: 1.4em;
   margin: 0 0 0.5em 0;
 }
-.book-info h3 book-info-main h3{
+.book-info h3 {
   font-size: 1.2em;
   margin: 0 0 0.5em 0;
   color: cadetblue;
 }
-.book-info-main {
-  display : flex;
+.book-info-main h3{
+  font-size: 0.78em;
+  margin: 0 0 0.5em 0;
+  color: cadetblue;
 }
 .book-author{
   color: #666;
