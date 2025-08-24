@@ -75,13 +75,17 @@ fetch('obras.xml')
 				// Cargar el contenido en <main>
                 const mainElement = document.querySelector('main');
                 mainElement.innerHTML = data;
-                // Ejecutar scripts dentro del nuevo contenido
-                const scripts = mainElement.querySelectorAll('script');
-                scripts.forEach(script => {
-                    const newScript = document.createElement('script');
-                    newScript.text = script.innerHTML; // Copiar el contenido del script
-                    document.body.appendChild(newScript); // Añadir el script al body
-                });
+	 			// Ejecutar scripts dentro del nuevo contenido
+	            const scripts = mainElement.querySelectorAll('script');
+	            scripts.forEach(script => {
+	                const newScript = document.createElement('script');
+	                newScript.textContent = script.textContent; // Usa textContent para el contenido
+	                // Copia los atributos del script original (como src, si los tiene)
+	                Array.from(script.attributes).forEach(attr => {
+	                    newScript.setAttribute(attr.name, attr.value);
+	                });
+	                document.body.appendChild(newScript); // Añade al body para que se ejecute
+	            });
         })
         .catch(err => console.error('Error:', err));
 		 //document.getElementById('main').innerHTML = 'books/libro-ficha.html';
