@@ -1,5 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
-    window.addEventListener('DOMContentLoaded', function () {
+//document.addEventListener("DOMContentLoaded", function () {
+//    window.addEventListener('DOMContentLoaded', function () {
         const libroId = localStorage.getItem('libroSeleccionado');
     console.log(libroId);
         if (!libroId) {
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // ...otros campos
                 */
             });
-    });
+//    });
     // Datos de ejemplo
     const chapters = Array.from({length: 80}, (_, i) => `Capítulo ${i+1}: Título del capítulo`);
     const latestChaptersCount = 6;
@@ -212,4 +212,4 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector('.library').onclick = () => {
       alert('Añadido a tu biblioteca (implementa tu lógica).');
     };
-});
+//});
