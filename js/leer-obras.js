@@ -75,6 +75,8 @@ fetch('obras.xml')
 				// Cargar el contenido en <main>
                 const mainElement = document.querySelector('main');
                 mainElement.innerHTML = data;
+				cargarlibro(libroId);
+	 			/*
 	 			// Ejecutar scripts dentro del nuevo contenido
 	            const scripts = mainElement.querySelectorAll('script');
 	            scripts.forEach(script => {
@@ -86,6 +88,7 @@ fetch('obras.xml')
 	                });
 	                document.body.appendChild(newScript); // Añade al body para que se ejecute
 	            });
+			 	*/
         })
         .catch(err => console.error('Error:', err));
 		 //document.getElementById('main').innerHTML = 'books/libro-ficha.html';
