@@ -54,27 +54,40 @@ main {
   transition: transform 0.15s;
   text-decoration: none;
 }
-.book-card:hover {
+.book-card-main {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 40%;
+  box-shadow: 0 2px 10px #0001;
+  transition: transform 0.15s;
+  text-decoration: none;
+}
+.book-card:hover .book-card-main:hover{
   transform: translateY(-5px) scale(1.03);
   box-shadow: 0 8px 24px #0002;
 }
-.book-card img {
+.book-card img .book-card-main img {
   width: 100%;
   height: 220px;
   object-fit: cover;
   display: block;
 }
-.book-info {
+.book-info .book-info-main{
   padding: 1em;
 }
-.book-info h2 {
+.book-info h2 .book-info-main h2{
   font-size: 1.4em;
   margin: 0 0 0.5em 0;
 }
-.book-info h3 {
+.book-info h3 book-info-main h3{
   font-size: 1.2em;
   margin: 0 0 0.5em 0;
   color: cadetblue;
+}
+.book-info-main {
+  display : flex;
 }
 .book-author{
   color: #666;
