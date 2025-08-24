@@ -25,7 +25,8 @@ fetch('obras.xml')
 	        <img src="${imagen}" alt="${nombreobra}">
 	        <div class="carousel-info-overlay">
 	          <div class="carousel-info-title">${nombreobra}</div>
-	          <div class="carousel-info-row">
+	          <div class="carousel-info-row">		   		
+	            <span class="carousel-info-label">${clave}</span>
 	            <span class="carousel-info-label">Valoración:</span> ${valoracion}
 	            <span class="carousel-info-label">Tipo:</span> ${tipoobra}
 	            <span class="carousel-info-label">Categoría:</span> ${Categoria}
@@ -38,9 +39,7 @@ fetch('obras.xml')
 	      itemBook.className = "book-card libro-item";
 		  itemBook.onclick = () => onLibroClick(${clave});
 	      itemBook.innerHTML = `
-		        <a href="books/${clave}/index.html">
 		          <img src="${imagen}" alt="${nombreobra}" loading="lazy"/>
-		        </a>
 		          <div class="book-info">
 		            <h3>${nombreobra}</h3>
 		            <p class="book-author"><div class="book-author-title">Autor:</div><div class="book-author-name">${autor}</div></p>
@@ -51,6 +50,7 @@ fetch('obras.xml')
 		            </p>
 		          </div>
 	      `;
+    	  itemBook.onclick = () => onLibroClick(${clave}); // Suponiendo que 'id' es único
       booklistContainer.appendChild(itemBook);
     });
   })
