@@ -92,13 +92,8 @@ main {
   font-size: 1.4em;
   margin: 0 0 0.5em 0;
 }
-.book-info h3 {
+.book-info h3 .book-info-main h3{
   font-size: 1.2em;
-  margin: 0 0 0.5em 0;
-  color: cadetblue;
-}
-.book-info-main h3{
-  font-size: 0.8em;
   margin: 0 0 0.5em 0;
   color: cadetblue;
 }
