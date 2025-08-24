@@ -1,5 +1,6 @@
 window.addEventListener('DOMContentLoaded', function () {
     const libroId = localStorage.getItem('libroSeleccionado');
+console.log(libroId);
     if (!libroId) {
         // Manejar error
         document.body.innerHTML = '<p>No se encontró el libro seleccionado.</p>';
