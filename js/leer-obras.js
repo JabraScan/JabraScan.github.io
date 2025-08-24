@@ -37,7 +37,7 @@ fetch('obras.xml')
 		
       const itemBook = document.createElement("article");
 	      itemBook.className = "book-card libro-item";
-		  itemBook.onclick = () => onLibroClick(clave);
+		  itemBook.onclick = () => onLibroClick(obra.querySelector("clave").textContent.trim());
 	      itemBook.innerHTML = `
 				  <p class="clave">${clave}</p>
 		          <img src="../img/${imagen}" alt="${nombreobra}" loading="lazy"/>
