@@ -72,40 +72,28 @@ document.addEventListener("DOMContentLoaded", function () {
 	  })
 	  .catch(err => console.error("Error al cargar el XML:", err));
 	
+
+});
+
 		function onLibroClick(libroId) {
 		    // Guarda el ID o nombre del libro seleccionado (ajusta según tu XML)
 		    localStorage.setItem('libroSeleccionado', libroId);
 		    // Redirige a la ficha
 		    //window.location.href = 'books/libro-ficha.html';
-			      // Usar fetch para cargar el contenido de disclaimer.html
-		console.log("obras");
-	      fetch('books/libro-ficha.html')
-	        .then(response => {
-	          if (!response.ok) {
-	            throw new Error('Error al cargar el archivo: ' + response.statusText);
-	          }
-	          return response.text();
-	        })
-	        .then(data => {
-					// Cargar el contenido en <main>
-	                const mainElement = document.querySelector('main');
-	                mainElement.innerHTML = data;
-					cargarlibro(libroId);
-		 			/*
-		 			// Ejecutar scripts dentro del nuevo contenido
-		            const scripts = mainElement.querySelectorAll('script');
-		            scripts.forEach(script => {
-		                const newScript = document.createElement('script');
-		                newScript.textContent = script.textContent; // Usa textContent para el contenido
-		                // Copia los atributos del script original (como src, si los tiene)
-		                Array.from(script.attributes).forEach(attr => {
-		                    newScript.setAttribute(attr.name, attr.value);
-		                });
-		                document.body.appendChild(newScript); // Añade al body para que se ejecute
-		            });
-				 	*/
-	        })
-	        .catch(err => console.error('Error:', err));
-			 //document.getElementById('main').innerHTML = 'books/libro-ficha.html';
+			// Usar fetch para cargar el contenido de disclaimer.html
+			console.log("obras");
+			fetch('books/libro-ficha.html')
+				.then(response => {
+				if (!response.ok) {
+					throw new Error('Error al cargar el archivo: ' + response.statusText);
+				}
+				return response.text();
+				})
+				.then(data => {
+						// Cargar el contenido en <main>
+						const mainElement = document.querySelector('main');
+						mainElement.innerHTML = data;
+						cargarlibro(libroId);
+				})
+				.catch(err => console.error('Error:', err));
 		}
-});
