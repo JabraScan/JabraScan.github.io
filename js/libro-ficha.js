@@ -72,6 +72,7 @@ function cargarlibro(libroId) {
             	});
 //    });
 }
+/*
     // Datos de ejemplo
     const chapters = Array.from({length: 80}, (_, i) => `Capítulo ${i+1}: Título del capítulo`);
     const latestChaptersCount = 6;
@@ -165,5 +166,5 @@ function cargarlibro(libroId) {
     };
     document.querySelector('.library').onclick = () => {
       alert('Añadido a tu biblioteca (implementa tu lógica).');
-    };
+    };*/
 //});
