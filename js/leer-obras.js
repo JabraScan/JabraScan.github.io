@@ -61,6 +61,7 @@ fetch('obras.xml')
 	    // Guarda el ID o nombre del libro seleccionado (ajusta según tu XML)
 	    localStorage.setItem('libroSeleccionado', libroId);
 	    // Redirige a la ficha
-	    window.location.href = 'books/libro-ficha.html';
+	    //window.location.href = 'books/libro-ficha.html';
+		 document.getElementById('main').innerHTML = 'books/libro-ficha.html';
 	}
 });
