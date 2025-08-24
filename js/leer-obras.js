@@ -50,6 +50,7 @@ fetch('obras.xml')
 		            </p>
 		          </div>
 	      `;
+		console.log(itemBook);
       booklistContainer.appendChild(itemBook);
     });
   })
