@@ -16,7 +16,10 @@ fetch('obras.xml')
       const imagen = obra.querySelector("imagen").textContent.trim();
       const valoracion = obra.querySelector("valoracion").textContent.trim();
       const tipoobra = obra.querySelector("tipoobra").textContent.trim();
-      const Categoria = obra.querySelector("categoria").textContent.trim();
+	  const Categoria = obra.querySelector("categoria").textContent.trim();
+	  const estado = obra.querySelector("estado").textContent.trim();
+	  const ubicacion = obra.querySelector("ubicacion").textContent.trim();
+
       const indice = 0;
 
       const itemCarousel = document.createElement("div");
@@ -25,12 +28,15 @@ fetch('obras.xml')
 	        <img src="../img/${imagen}" alt="${nombreobra}">
 	        <div class="carousel-info-overlay">
 	          <div class="carousel-info-title">${nombreobra}</div>
-	          <div class="carousel-info-row">		   		
-	            <span class="carousel-info-label">${clave}</span>
-	            <span class="carousel-info-label">Valoración:</span> ${valoracion}
+	          <div class="carousel-info-row">
+	            <span class="carousel-info-label clave">${clave}</span>
+	            <!--<span class="carousel-info-label">Valoración:</span> ${valoracion}-->
 	            <span class="carousel-info-label">Tipo:</span> ${tipoobra}
-	            <span class="carousel-info-label">Categoría:</span> ${Categoria}
+	            <span class="carousel-info-label">Estado:</span> ${estado}
 	          </div>
+	          <div class="carousel-info-row">
+	            <span class="carousel-info-label">Categoría:</span> ${Categoria}
+		   	  </div>
 	        </div>
 	      `;
       carouselContainer.appendChild(itemCarousel);
