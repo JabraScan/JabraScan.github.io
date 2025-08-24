@@ -43,7 +43,8 @@ fetch('obras.xml')
 		          <img src="../img/${imagen}" alt="${nombreobra}" loading="lazy"/>
 		          <div class="book-info">
 		            <h3>${nombreobra}</h3>
-		            <p class="book-author"><div class="book-author-title">Autor:</div><div class="book-author-name">${autor}</div></p>
+					<div class="book-author-title">Autor:</div>
+					<div class="book-author-name">${autor}</div>
 		            <p class="book-sinopsis tooltip">
 			  			<b>Sinopsis:</b>
 						<span class="tooltip-text">${sinopsis}</span>
