@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 headerDataBook.innerHTML = `
                     <i class="fa-solid fa-book"></i> ${nombreobra.toUpperCase()}
 	              `;
-            DataBook.appendChild(headerDataBook);
+            DataBook.prepend(headerDataBook);
 
             const mainDataBook = document.createElement("div");
                 mainDataBook.className = "book-main";
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="book-links">
                           <a href="#"><i class="fa-solid fa-book"></i> ${tipoobra}</a>
                           <a href="#"><i class="fa-solid fa-globe"></i> ${ubicacion}</a>
-                          <a href="#"><i class="fa-solid fa-time"></i> ${estado}</a>
+                          <a href="#"><i class="fa-solid fa-clock"></i> ${estado}</a>
                         </div>
                       </div>
                       <div class="book-info">
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             </div>
                       </div>
 	              `;
-            DataBook.appendChild(mainDataBook);
+            DataBook.prepend(mainDataBook);
                             /*
 							<div class="book-rating" id="book-rating">
                               <span class="stars" data-rating="4.5">
