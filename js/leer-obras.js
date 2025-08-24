@@ -20,6 +20,12 @@ fetch('obras.xml')
 	  const estado = obra.querySelector("estado").textContent.trim();
 	  const ubicacion = obra.querySelector("ubicacion").textContent.trim();
 
+	  const categoriaIndiv = Categoria.split(",").map(item => item.trim());
+		const categoriaObj = '';
+		categoriaIndiv.forEach(item => {
+		  categoriaObj += '<span class="etiqueta">${item}</span>'; // Imprime cada item en la consola
+		  // Puedes hacer lo que necesites con cada 'item' aquí
+		});
       const indice = 0;
 
       const itemCarousel = document.createElement("div");
@@ -35,7 +41,7 @@ fetch('obras.xml')
 	            <span class="carousel-info-label">Estado:</span> ${estado}
 	          </div>
 	          <div class="carousel-info-row">
-	            <span class="carousel-info-label">Categoría:</span> ${Categoria}
+	            ${categoriaObj}
 		   	  </div>
 	        </div>
 	      `;
