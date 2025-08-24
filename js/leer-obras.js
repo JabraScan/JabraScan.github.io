@@ -62,6 +62,18 @@ fetch('obras.xml')
 	    localStorage.setItem('libroSeleccionado', libroId);
 	    // Redirige a la ficha
 	    //window.location.href = 'books/libro-ficha.html';
-		 document.getElementById('main').innerHTML = 'books/libro-ficha.html';
+		      // Usar fetch para cargar el contenido de disclaimer.html
+      fetch('books/libro-ficha.html')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error al cargar el archivo: ' + response.statusText);
+          }
+          return response.text();
+        })
+        .then(data => {
+          document.getElementById('main').innerHTML = data; // Cargar el contenido en el div
+        })
+        .catch(err => console.error('Error:', err));
+		 //document.getElementById('main').innerHTML = 'books/libro-ficha.html';
 	}
 });
