@@ -72,7 +72,16 @@ fetch('obras.xml')
           return response.text();
         })
         .then(data => {
-          document.querySelector('main').innerHTML = data; // Cargar el contenido en el div
+				// Cargar el contenido en <main>
+                const mainElement = document.querySelector('main');
+                mainElement.innerHTML = data;
+                // Ejecutar scripts dentro del nuevo contenido
+                const scripts = mainElement.querySelectorAll('script');
+                scripts.forEach(script => {
+                    const newScript = document.createElement('script');
+                    newScript.text = script.innerHTML; // Copiar el contenido del script
+                    document.body.appendChild(newScript); // Añadir el script al body
+                });
         })
         .catch(err => console.error('Error:', err));
 		 //document.getElementById('main').innerHTML = 'books/libro-ficha.html';
