@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		  const categoriaIndiv = Categoria.split(",").map(item => item.trim());
 			let categoriaObj = '';
 			categoriaIndiv.forEach(item => {
-			  categoriaObj += '<span class="etiqueta">${item}</span>'; // Imprime cada item en la consola
+			  categoriaObj += '<span class="etiqueta">' + item + '</span>'; // Imprime cada item en la consola
 			  // Puedes hacer lo que necesites con cada 'item' aquí
 			});
 	      const indice = 0;
