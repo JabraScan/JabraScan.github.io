@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const estado = obra.querySelector("estado").textContent.trim();
           const ubicacion = obra.querySelector("ubicacion").textContent.trim();
 
-          const DataBook = document.getElementById('book-datainfo');
+          const DataBook = document.querySelector('.book-datainfo');
             const headerDataBook = document.createElement("div");
                 headerDataBook.className = "book-header";
                 headerDataBook.innerHTML = `
