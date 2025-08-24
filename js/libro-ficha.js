@@ -1,3 +1,31 @@
+window.addEventListener('DOMContentLoaded', function () {
+    const libroId = localStorage.getItem('libroSeleccionado');
+    if (!libroId) {
+        // Manejar error
+        document.body.innerHTML = '<p>No se encontró el libro seleccionado.</p>';
+        return;
+    }
+
+    // Cargar el XML y buscar el libro por ID
+    fetch('../obras.xml')
+        .then(response => response.text())
+        .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+        .then(data => {
+            // Ajusta el selector al formato de tu XML
+            const libro = Array.from(data.getElementsByTagName('libro'))
+                .find(libro => libro.getAttribute('id') === libroId);
+
+            if (!libro) {
+                document.body.innerHTML = '<p>Libro no encontrado.</p>';
+                return;
+            }
+
+            // Ejemplo de rellenar campos
+            document.getElementById('titulo-libro').textContent = libro.getElementsByTagName('titulo')[0].textContent;
+            document.getElementById('autor-libro').textContent = libro.getElementsByTagName('autor')[0].textContent;
+            // ...otros campos
+        });
+});
 // Datos de ejemplo
 const chapters = Array.from({length: 80}, (_, i) => `Capítulo ${i+1}: Título del capítulo`);
 const latestChaptersCount = 6;
