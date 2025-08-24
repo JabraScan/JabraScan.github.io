@@ -58,7 +58,6 @@ fetch('obras.xml')
   .catch(err => console.error("Error al cargar el XML:", err));
 
 	function onLibroClick(libroId) {
-		console.log(libroId);
 	    // Guarda el ID o nombre del libro seleccionado (ajusta según tu XML)
 	    localStorage.setItem('libroSeleccionado', libroId);
 	    // Redirige a la ficha
