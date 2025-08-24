@@ -41,6 +41,9 @@ fetch('obras.xml')
 	            <span class="carousel-info-label">Estado:</span> ${estado}
 	          </div>
 	          <div class="carousel-info-row">
+		   		<span class="carousel-info-label">Categoría:</span>
+	          </div>
+	          <div class="carousel-info-row">
 	            ${categoriaObj}
 		   	  </div>
 	        </div>
