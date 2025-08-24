@@ -15,7 +15,7 @@ console.log(libroId);
             // Ajusta el selector al formato de tu XML
             const obra = Array.from(data.getElementsByTagName('obra'))
                 .find(obra => obra.getAttribute('clave') === libroId);
-            if (!libro) {
+            if (!obra) {
                 document.body.innerHTML = '<p>Libro no encontrado.</p>';
                 return;
             }
