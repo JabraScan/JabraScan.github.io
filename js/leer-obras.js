@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			  // Puedes hacer lo que necesites con cada 'item' aquí
 			});
 		  if (contenido18 === "adulto") {
-			  const indicadoradulto = '<div class="adulto">+18</div>';
+			  const indicadoradulto = `<div class="adulto">+18</div>`;
 		  } else {
 			  const indicadoradulto = "<div/>";
 		  }
