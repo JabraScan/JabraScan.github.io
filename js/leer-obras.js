@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    obras.forEach(obra => {
 	      const clave = obra.querySelector("clave").textContent.trim();
 	      const nombreobra = obra.querySelector("nombreobra").textContent.trim();
+	      const nombreobra2 = obra.querySelector("nombreobra2").textContent.trim();
 	      const autor = obra.querySelector("autor").textContent.trim();
 	      const sinopsis = obra.querySelector("sinopsis").textContent.trim();
 	      const imagen = obra.querySelector("imagen").textContent.trim();
@@ -26,7 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
 		  const ubicacion = obra.querySelector("ubicacion").textContent.trim();
 		  const traduccion = obra.querySelector("traductor").textContent.trim();
 		  const contenido18 = obra.querySelector("adulto").textContent.trim();
-	
+		  const bannerOpcional = obra.querySelector("bannerOpcional").textContent.trim();
+		  const observaciones = obra.querySelector("observaciones").textContent.trim();
+		  const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
+			
 		  const categoriaIndiv = Categoria.split(",").map(item => item.trim());
 			let categoriaObj = '';
 			categoriaIndiv.forEach(item => {
