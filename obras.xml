@@ -12,6 +12,7 @@
     <ubicacion>Novela China</ubicacion>
     <estado>Activo</estado>
     <traductor>Tavo</traductor>
+    <adulto>no</adulto
   </obra>
   <obra>
     <clave>CultivationOnline</clave>
@@ -26,6 +27,7 @@
     <ubicacion>Novela China</ubicacion>
     <estado>Activo</estado>
     <traductor>Jabracadabra</traductor>
+    <adulto>no</adulto
   </obra>
   <obra>
     <clave>DualCultivation</clave>
@@ -40,6 +42,7 @@
     <ubicacion>Novela China</ubicacion>
     <estado>Activo</estado>
     <traductor>Jabracadabra</traductor>
+    <adulto>si</adulto
   </obra>
   <obra>
     <clave>LaLeyendaDeLaEspadaDelNorte</clave>
@@ -54,6 +57,22 @@
     <ubicacion>Novela Coreana</ubicacion>
     <estado>Activo</estado>
     <traductor>Jabracadabra</traductor>
+    <adulto>no</adulto
+  </obra>
+  <obra>
+    <clave>PathtoDualCultivation</clave>
+    <nombreobra>Path to Dual Cultivation</nombreobra>
+    <autor>MyLittleBrother</autor>
+    <sinopsis>Bendecido por los cielos, Su Yang nació con una apariencia extraordinariamente hermosa, que podía convencer incluso a las bellezas más frías, y talentos de espada innatos, que harían que incluso el Emperador de la Espada se pusiera verde de envidia. Esta es la historia de cómo un prodigio de la espada terminó recorriendo el camino del Cultivo Dual, llegando a convertirse en el Cultivador Dual más poderoso bajo el cielo.</sinopsis>
+    <valoracion>9.0</valoracion>
+    <tipoobra>Novela Web</tipoobra>
+    <categoria>Acción, Aventura, cultivo, Fantasía, Harem, Romance</categoria>
+    <imagen>PathtoDualCultivation.webp</imagen>
+    <fechaCreacion>24/05/2025</fechaCreacion>
+    <ubicacion>Novela China</ubicacion>
+    <estado>Pausado</estado>
+    <traductor>Jabracadabra</traductor>
+    <adulto>no</adulto
   </obra>
   <obra>
     <clave>Suzume</clave>
@@ -68,5 +87,6 @@
     <ubicacion>Novela Japonesa</ubicacion>
     <estado>Finalizado</estado>
     <traductor>Jabracadabra</traductor>
+    <adulto>no</adulto
   </obra>
 </obras>
