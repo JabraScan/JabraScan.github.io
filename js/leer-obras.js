@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		  let OKAutor = '';
 		  if (aprobadaAutor === 'si') {
+			  console.log('aprobada');
 		  	let OKAutor =  `
 	 				<span>'Traducción aprobada por el autor'</span>
 	 				</br>
@@ -40,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	 				`;
 		  }
 			console.log(aprobadaAutor);
+			console.log(observaciones);
 			console.log(OKAutor);
 
 		  const categoriaIndiv = Categoria.split(",").map(item => item.trim());
