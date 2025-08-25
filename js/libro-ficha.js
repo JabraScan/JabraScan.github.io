@@ -195,8 +195,8 @@ function capitulos (obra) {
 }
 function obtenerCapitulos(clave) {
 	  try {
-		const response = await fetch('books.json');
-		const dataCapitulos = await response.json();
+		const response = fetch('books.json');
+		const dataCapitulos = response.json();
 	
 		if (!dataCapitulos[clave]) {
 		  console.error(`La clave "${clave}" no existe.`);
