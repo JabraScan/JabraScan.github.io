@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				  if (contenido18 === "adulto") {
 				    imagenContenedor.classList.add("adulto");
 				    const indicador = document.createElement("div");
-				    //indicador.classList.add("indicador-adulto");
+				    indicador.classList.add("indicador-adulto");
 				    indicador.textContent = "+18";
 				    imagenContenedor.appendChild(indicador);
 				  }
