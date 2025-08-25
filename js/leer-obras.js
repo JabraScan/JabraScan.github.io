@@ -37,13 +37,13 @@ document.addEventListener("DOMContentLoaded", function () {
 				  img.alt = nombreobra;
 				  imagenContenedor.appendChild(img);
 				
-				  /*if (contenido18 === "adulto") {
+				  if (contenido18 === "adulto") {
 				    imagenContenedor.classList.add("adulto");
 				    const indicador = document.createElement("div");
 				    //indicador.classList.add("indicador-adulto");
 				    indicador.textContent = "+18";
 				    imagenContenedor.appendChild(indicador);
-				  }*/
+				  }
 	      const indice = 0;
 	
 	      const itemCarousel = document.createElement("div");
