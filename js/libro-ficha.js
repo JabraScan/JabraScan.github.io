@@ -110,8 +110,6 @@ function cargarlibro(libroId) {
 									</div>
 							</div>
 						`;
-				console.log(mainDataBook);
-				console.log(imagenContenedor);
 					DataBook.prepend(mainDataBook);
 					DataBook.prepend(headerDataBook);
 					  const bookImageContainer = mainDataBook.querySelector(".book-image");
