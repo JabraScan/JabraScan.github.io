@@ -91,9 +91,11 @@ document.addEventListener("DOMContentLoaded", function () {
 			            </p>-->
 			          </div>
 		      `;
-			const imagenContenedorA = imagenContenedor.cloneNode(true);
-
-		  itemBook.prepend(imagenContenedorA);
+			// Clonar imagenContenedor
+			const imagenContenedorA = imagenContenedor.cloneNode(true); // Clona el contenedor de imagen
+			
+			// Prepend el contenedor de imagen al artículo
+			itemBook.prepend(imagenContenedorA);
 	      booklistContainer.appendChild(itemBook);
 	    });
 	  })
