@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		      itemCarousel.className = "carousel-item";
 		      itemCarousel.innerHTML = `
 		        <img class="${contenido18}" src="../img/${imagen}" alt="${nombreobra}">
+		  		<div class="adulto">+18</div>
 		        <div class="carousel-info-overlay">
 		          <div class="carousel-info-title">${nombreobra}</div>
 				  </br>
@@ -63,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		      itemBook.innerHTML = `
 					  <p class="clave">${clave}</p>
 			          <img class="${contenido18}" src="../img/${imagen}" alt="${nombreobra}" loading="lazy"/>
+			 		  <div class="adulto">+18</div>
 			          <div class="book-info-main">
 			            <h3>${nombreobra}</h3>
 						<div class="book-author-title">Autor:</div>
