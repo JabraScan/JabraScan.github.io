@@ -180,7 +180,6 @@ main {
 .chapter-list a {
   color: #14213d;
   text-decoration: none;
-  font-weight: bold;
   font-size: 1.07em;
   transition: color 0.2s;
 }
