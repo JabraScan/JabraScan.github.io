@@ -217,9 +217,8 @@ function obtenerCapitulos(clave) {
         return {
           NombreArchivo: item.NombreArchivo,
           Fecha: item.Fecha,
-          obra: partes[0]?.trim() || "",
-          numCapitulo: parseInt(partes[1]?.trim(), 10) || 0,
-          nombreCapitulo: partes[2]?.trim() || ""
+          numCapitulo: item.numCapitulo,
+          nombreCapitulo: item.nombreCapitulo
         };
       });
 
