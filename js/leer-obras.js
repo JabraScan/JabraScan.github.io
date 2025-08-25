@@ -92,7 +92,9 @@ document.addEventListener("DOMContentLoaded", function () {
 			            </p>-->
 			          </div>
 		      `;
-		  itemBook.prepend(imagenContenedor);
+			const imagenContenedorA = elementoExistente.cloneNode(imagenContenedor);
+
+		  itemBook.prepend(imagenContenedorA);
 	      booklistContainer.appendChild(itemBook);
 	    });
 	  })
