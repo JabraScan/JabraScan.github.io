@@ -21,6 +21,7 @@
   <obra>
     <clave>CultivationOnline</clave>
     <nombreobra>Cultivation Online</nombreobra>
+    <nombreobra2></nombreobra2>
     <autor>MyLittleBrother</autor>
     <sinopsis>Yuan nació con una enfermedad incurable que le dejó ciego a una edad temprana y lisiado unos años después, dejando inútil todo lo que tenía por debajo de la cabeza. Considerado irremediable y sin esperanza, sus padres se dieron rápidamente por vencidos y el mundo lo ignoró. En este mundo oscuro e inmóvil, su hermana pequeña se convirtió en su única razón para vivir. Observa cómo este joven alcanza la cúspide como genio en Cultivation Online, el más reciente VRMMORPG, convirtiéndose en una figura legendaria en ambos mundos.</sinopsis>
     <valoracion>9.5</valoracion>
@@ -34,10 +35,12 @@
     <adulto></adulto>
     <aprobadaAutor>no</aprobadaAutor>
     <observaciones></observaciones>
+    <bannerOpcional></bannerOpcional>
   </obra>
   <obra>
     <clave>DualCultivation</clave>
     <nombreobra>Dual Cultivation</nombreobra>
+    <nombreobra2></nombreobra2>
     <autor>MyLittleBrother</autor>
     <sinopsis>Su Yang es un poderoso Cultivador Dual que fue encarcelado después de ofender al Emperador Celestial. ¿Su crimen? Cometió adulterio con la esposa del Dios de la Luna, secuestró a la hermana menor del Rey Dragón, sedujo a la Diosa Divina e incluso probó la fruta prohibida que es la amada hija del Emperador Celestial. Dentro de la prisión, Su Yang conoce a un anciano misterioso que le ofrece la oportunidad de salir de este lugar, pero ese método requiere que experimente la reencarnación. En su nueva vida, Su Yang jura reunirse con sus parejas y abrazarlas una vez más, mientras encuentra otras nuevas en el camino.</sinopsis>
     <valoracion>9.0</valoracion>
@@ -51,10 +54,12 @@
     <adulto>adulto</adulto>
     <aprobadaAutor>no</aprobadaAutor>
     <observaciones></observaciones>
+    <bannerOpcional></bannerOpcional>
   </obra>
   <obra>
     <clave>LaLeyendaDeLaEspadaDelNorte</clave>
     <nombreobra>La Leyenda de la Espada del Norte</nombreobra>
+    <nombreobra2></nombreobra2>
     <autor>Woo-Gak</autor>
     <sinopsis>Durante décadas, los valientes guerreros del Ejército del Norte lucharon para mantener el mundo a salvo del malvado Silent Night. Pero cuando el líder de la cuarta generación, Jin Kwan-Ho, es acusado de colusión con el enemigo, se ve obligado a disolver la secta y suicidarse para proteger a su hijo, Jin Mu-Won. Sin familiares ni aliados, Mu-Won lleva una vida aburrida bajo estrecha vigilancia... hasta que un ataque sorpresa de Silent Night le da la oportunidad de escapar a las montañas. Allí, el joven guerrero se entrena para dominar las técnicas de lucha de sus predecesores, antes de que la misteriosa desaparición de un ser querido lo lleve de vuelta al continente. ¡Sigue a Jin Mu-Won mientras se embarca en un viaje para vengar la muerte de su padre y derrotar a los villanos que amenazan con sumir al mundo en la oscuridad!</sinopsis>
     <valoracion>9.0</valoracion>
@@ -68,10 +73,12 @@
     <adulto></adulto>
     <aprobadaAutor>no</aprobadaAutor>
     <observaciones></observaciones>
+    <bannerOpcional></bannerOpcional>
   </obra>
   <obra>
     <clave>PathtoDualCultivation</clave>
     <nombreobra>Path to Dual Cultivation</nombreobra>
+    <nombreobra2></nombreobra2>
     <autor>MyLittleBrother</autor>
     <sinopsis>Bendecido por los cielos, Su Yang nació con una apariencia extraordinariamente hermosa, que podía convencer incluso a las bellezas más frías, y talentos de espada innatos, que harían que incluso el Emperador de la Espada se pusiera verde de envidia. Esta es la historia de cómo un prodigio de la espada terminó recorriendo el camino del Cultivo Dual, llegando a convertirse en el Cultivador Dual más poderoso bajo el cielo.</sinopsis>
     <valoracion>9.0</valoracion>
@@ -85,10 +92,12 @@
     <adulto></adulto>
     <aprobadaAutor>no</aprobadaAutor>
     <observaciones></observaciones>
+    <bannerOpcional></bannerOpcional>
   </obra>
   <obra>
     <clave>Suzume</clave>
     <nombreobra>Suzume no Tojimari</nombreobra>
+    <nombreobra2></nombreobra2>
     <autor>Makoto Shinkai (新海 誠)</autor>
     <sinopsis>Una joven de 17 años llamada Suzume ayuda a un misterioso joven a cerrar las puertas de otro mundo, que están provocando desastres en todo Japón.</sinopsis>
     <valoracion>9.0</valoracion>
@@ -102,5 +111,6 @@
     <adulto></adulto>
     <aprobadaAutor>no</aprobadaAutor>
     <observaciones></observaciones>
+    <bannerOpcional></bannerOpcional>
   </obra>
 </obras>
