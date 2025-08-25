@@ -68,7 +68,7 @@ function cargarlibro(libroId) {
 						  }
 					const imgContenedorHhtml = imagenContenedor.innerHTML;
 					//Listado Capitulos
-						obtenerCapitulos(clave).then(listacapitulos => {
+/*						obtenerCapitulos(clave).then(listacapitulos => {
 						  // Aquí generamos las dos secciones
 						  const ultimosCapitulos = listacapitulos
 								  .filter(c => c.Fecha && c.Fecha.trim() !== "") // solo capítulos con fecha válida
@@ -156,7 +156,7 @@ function cargarlibro(libroId) {
 						    });
 						  });
 						});
-
+*/
 				//Generar la ficha del libro
 				const DataBook = document.querySelector('.book-card');
 					const headerDataBook = document.createElement("div");
@@ -200,7 +200,7 @@ function cargarlibro(libroId) {
 					DataBook.prepend(headerDataBook);
 					  const bookImageContainer = mainDataBook.querySelector(".book-image");
 					  bookImageContainer.insertBefore(imagenContenedor, bookImageContainer.firstChild);
-}
+}/*
 function obtenerCapitulos(clave) {
   return fetch('books.json')
     .then(response => response.json())
@@ -239,4 +239,4 @@ console.log(resultado);
       console.error("Error al cargar el archivo JSON:", error);
       return [];
     });
-}
+}*/
