@@ -68,7 +68,6 @@ function cargarlibro(libroId) {
 						  }
 					const imgContenedorHhtml = imagenContenedor.innerHTML;
 					//Listado Capitulos
-				/*
 						obtenerCapitulos(clave).then(listacapitulos => {
 						  // Aquí generamos las dos secciones
 						  const ultimosCapitulos = listacapitulos
@@ -157,8 +156,6 @@ function cargarlibro(libroId) {
 						    });
 						  });
 						});
-							
-*/
 
 				//Generar la ficha del libro
 				const DataBook = document.querySelector('.book-card');
@@ -209,7 +206,7 @@ function obtenerCapitulos(clave) {
     .then(response => response.json())
     .then(dataCapitulos => {
       if (!dataCapitulos[clave]) {
-        console.error(`La clave "${clave}" no existe.`);
+        console.error("Clave no encontrada.");
         return [];
       }
 
