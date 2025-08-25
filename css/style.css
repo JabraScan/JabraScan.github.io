@@ -313,3 +313,19 @@ footer {
     padding: 0.8em 0.8em 0.7em 0.8em;
   }
 }
+.Activo .activo {
+    color: lightseagreen;
+    font-weight: bold;
+}
+.Finalizado .finalizado {
+    color: prangered;
+    font-weight: bold;
+}
+.Cancelado .cancelado {
+    color: darkviolet;
+    font-weight: bold;
+}
+.Pausado .pausado .Hiatus .hiatus {
+    color: darkgray;
+    font-weight: bold;
+}
