@@ -104,13 +104,13 @@ stopReadingBtn.onclick = () => {
   speechSynthesis.cancel();
 };
 // Pausar lectura
-stopReadingBtn.onclick = () => {
+pauseReadingBtn.onclick = () => {
   if (speechSynthesis.speaking && !speechSynthesis.paused) {
     speechSynthesis.pause();
   }
 };
 // Reanudar lectura
-stopReadingBtn.onclick = () => {
+resumeReadingBtn.onclick = () => {
    if (speechSynthesis.paused) {
     speechSynthesis.resume();
   }
@@ -130,6 +130,7 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
+
 
 
 
