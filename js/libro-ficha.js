@@ -228,11 +228,17 @@ function obtenerCapitulos(clave) {
       });
 
       resultado.sort((a, b) => {
-        const fechaA = new Date(a.Fecha.split('-').reverse().join('-'));
-        const fechaB = new Date(b.Fecha.split('-').reverse().join('-'));
+        // Convertir la fecha de dd-mm-aaaa a un objeto Date
+        const [diaA, mesA, anioA] = a.Fecha.split('-');
+        const [diaB, mesB, anioB] = b.Fecha.split('-');
+        
+        const fechaA = new Date(`${anioA}-${mesA}-${diaA}`);
+        const fechaB = new Date(`${anioB}-${mesB}-${diaB}`);
+        
+        // Ordenar por fecha y luego por número de capítulo
         return fechaA - fechaB || a.numCapitulo - b.numCapitulo;
       });
-
+console.log(resultado);
       return resultado;
     })
     .catch(error => {
