@@ -76,6 +76,13 @@ toggleMode.onclick = () => {
   toggleMode.textContent = body.classList.contains("dark-mode") ? "☀️" : "🌙";
 };
 
+// Función para mostrar/ocultar botones Lectura
+function mostrarBotones({ play = false, pause = false, resume = false, stop = false }) {
+  startReadingBtn.style.display = play ? "inline-block" : "none";
+  pauseReadingBtn.style.display = pause ? "inline-block" : "none";
+  resumeReadingBtn.style.display = resume ? "inline-block" : "none";
+  stopReadingBtn.style.display = stop ? "inline-block" : "none";
+}
 // Lectura en voz alta
 readAloudBtn.onclick = () => {
   pdfDoc.getPage(pageNum).then(page => {
@@ -91,9 +98,14 @@ readAloudBtn.onclick = () => {
         utterance.rate = 0.95;   // velocidad (0.5 a 2)
         utterance.pitch = 1.1;   // tono (0 a 2)
         utterance.volume = 1;    // volumen (0 a 1)
+        mostrarBotones({ pause: true, stop: true });
       }
 
-      speechSynthesis.cancel();
+      utterance.onend = () => {
+        clearInterval(intervalo);
+        actualizarBarra(true);
+        mostrarBotones({ play: true });
+      };
       speechSynthesis.speak(utterance);
     });
   });
@@ -102,17 +114,20 @@ readAloudBtn.onclick = () => {
 // Detener lectura
 stopReadingBtn.onclick = () => {
   speechSynthesis.cancel();
+  mostrarBotones({ play: true });
 };
 // Pausar lectura
 pauseReadingBtn.onclick = () => {
   if (speechSynthesis.speaking && !speechSynthesis.paused) {
     speechSynthesis.pause();
+    mostrarBotones({ resume: true, stop: true });
   }
 };
 // Reanudar lectura
 resumeReadingBtn.onclick = () => {
    if (speechSynthesis.paused) {
-    speechSynthesis.resume();
+     speechSynthesis.resume();
+     mostrarBotones({ pause: true, stop: true });
   }
 };
 
@@ -130,6 +145,7 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
+
 
 
 
