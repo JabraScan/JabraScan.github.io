@@ -1,71 +1,46 @@
 {
   "CultivationOnline": [
-    {
-      "NombreArchivo": "Cultivation Online - 2060 - Esencia de Sangre del Fénix Primordial - [JabraScan].pdf",
-      "Fecha":"03-08-2025"
-    },
-    {
-      "NombreArchivo": "Cultivation Online - 2061 - Anguila Fundida del Infierno - [JabraScan].pdf",
-      "Fecha":"05-08-2025"
-    },
-    {
-      "NombreArchivo": "Cultivation Online - 2062 - Anguila Fundida del Infierno (2) - [JabraScan].pdf",
-      "Fecha":"10-08-2025"
-    },
-    {
-      "NombreArchivo": "Cultivation Online - 2086 - Enloquecido - [JabraScan].pdf",
-      "Fecha":"23-08-2025"
-    },
-    {
-      "NombreArchivo": "Cultivation Online - 2087 - Soy el Monarca Inmortal - [JabraScan].pdf",
-      "Fecha":"23-08-2025"
-    },
-    {
-      "NombreArchivo": "Cultivation Online - 2088 - Extracción de Sangre Prohibida - [JabraScan].pdf",
-      "Fecha":"23-08-2025"
-    }
+    { "Fecha":"03-08-2025", "NombreArchivo": "Cultivation Online - 2060 - Esencia de Sangre del Fénix Primordial - [JabraScan].pdf"},
+    { "Fecha":"05-08-2025", "NombreArchivo": "Cultivation Online - 2061 - Anguila Fundida del Infierno - [JabraScan].pdf" },
+    { "Fecha":"10-08-2025", "NombreArchivo": "Cultivation Online - 2062 - Anguila Fundida del Infierno (2) - [JabraScan].pdf"},
+    { "Fecha":"23-08-2025", "NombreArchivo": "Cultivation Online - 2086 - Enloquecido - [JabraScan].pdf"                   },
+    { "Fecha":"23-08-2025", "NombreArchivo": "Cultivation Online - 2087 - Soy el Monarca Inmortal - [JabraScan].pdf"       },
+    { "Fecha":"23-08-2025", "NombreArchivo": "Cultivation Online - 2088 - Extracción de Sangre Prohibida - [JabraScan].pdf"}
   ],
   "DualCultivation": [
-    {
-      "NombreArchivo": "DualCultivation - 708 - Formación Atrapadora - [JabraScan].pdf",
-      "Fecha":"14-07-2025"
-    }
+    { "Fecha":"14-07-2025", "NombreArchivo": "DualCultivation - 708 - Formación Atrapadora - [JabraScan].pdf"}
   ],
-
   "PathtoDualCultivation": [
-    { "NombreArchivo": "Path to Dual Cultivation - 1 - Su Yang - [JabraScan].pdf", "Fecha": "24-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 2 - El Primer Amor - [JabraScan].pdf", "Fecha": "24-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 3 - Técnicas Básicas de Espada - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 4 - Camino de Espada Perfecto - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 5 - Camino de Cultivación Dual - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 6 - Secta de la Espada Fugaz - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 7 - La Espada Fugaz - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 8 - Viaje a la Secta de la Espada Fugaz - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 9 - La Examen de Ingreso - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 10 - Descalificado - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 11 - Evaluación de - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 12 - Examen de la Espada - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 13 - La Espada de la Secta - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 14 - Dolor Intenso - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 15 - Cultivación Dual - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 16 - La Espada del Tirano - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 17 - El Vacío - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 18 - Percepciones del Vacío del Tirano de la Espada - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 19 - Secta de la Espada Principal - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 20 - Aún No Está Terminando - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 21 - El Culmen de los Talentos de la Espada - [JabraScan].pdf", "Fecha": "25-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 22 - Valle de la Devoción Eterna (1) - [JabraScan].pdf", "Fecha": "28-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 23 - Valle de la Devoción Eterna (2) - [JabraScan].pdf", "Fecha": "28-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 24 - La Confrontación con el Espada Fugaz - [JabraScan].pdf", "Fecha": "28-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 25 - El Encuentro con Xue Zhen - [JabraScan].pdf", "Fecha": "28-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 26 - La Decisión de Su Yang - [JabraScan].pdf", "Fecha": "28-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 27 - Bai Yufeng - [JabraScan].pdf", "Fecha": "28-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 28 - La Combinación Perfecta - [JabraScan].pdf", "Fecha": "28-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 31 - Quemando los Cielos - [JabraScan].pdf", "Fecha": "28-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 32 - Impurezas - [JabraScan].pdf", "Fecha": "28-05-2025" },
-    { "NombreArchivo": "Path to Dual Cultivation - 33 - La Vida Como un Discípulo Ordinario - [JabraScan].pdf", "Fecha": "28-05-2025" }
+    { "Fecha": "24-05-2025", "NombreArchivo": "Path to Dual Cultivation - 1 - Su Yang - [JabraScan].pdf"                            },
+    { "Fecha": "24-05-2025", "NombreArchivo": "Path to Dual Cultivation - 2 - El Primer Amor - [JabraScan].pdf"                     },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 3 - Técnicas Básicas de Espada - [JabraScan].pdf"         },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 4 - Camino de Espada Perfecto - [JabraScan].pdf"          },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 5 - Camino de Cultivación Dual - [JabraScan].pdf"         },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 6 - Secta de la Espada Fugaz - [JabraScan].pdf"           },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 7 - La Espada Fugaz - [JabraScan].pdf"                    },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 8 - Viaje a la Secta de la Espada Fugaz - [JabraScan].pdf" },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 9 - La Examen de Ingreso - [JabraScan].pdf"               },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 10 - Descalificado - [JabraScan].pdf"                     },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 11 - Evaluación de - [JabraScan].pdf"                     },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 12 - Examen de la Espada - [JabraScan].pdf"               },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 13 - La Espada de la Secta - [JabraScan].pdf"             },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 14 - Dolor Intenso - [JabraScan].pdf"                     },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 15 - Cultivación Dual - [JabraScan].pdf"                  }, 
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 16 - La Espada del Tirano - [JabraScan].pdf"              }, 
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 17 - El Vacío - [JabraScan].pdf"                          },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 18 - Percepciones del Vacío del Tirano de la Espada - [JabraScan].pdf"  },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 19 - Secta de la Espada Principal - [JabraScan].pdf"      },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 20 - Aún No Está Terminando - [JabraScan].pdf"            },
+    { "Fecha": "25-05-2025", "NombreArchivo": "Path to Dual Cultivation - 21 - El Culmen de los Talentos de la Espada - [JabraScan].pdf"  },
+    { "Fecha": "28-05-2025", "NombreArchivo": "Path to Dual Cultivation - 22 - Valle de la Devoción Eterna (1) - [JabraScan].pdf"   },
+    { "Fecha": "28-05-2025", "NombreArchivo": "Path to Dual Cultivation - 23 - Valle de la Devoción Eterna (2) - [JabraScan].pdf"   },
+    { "Fecha": "28-05-2025", "NombreArchivo": "Path to Dual Cultivation - 24 - La Confrontación con el Espada Fugaz - [JabraScan].pdf" },
+    { "Fecha": "28-05-2025", "NombreArchivo": "Path to Dual Cultivation - 25 - El Encuentro con Xue Zhen - [JabraScan].pdf"         },
+    { "Fecha": "28-05-2025", "NombreArchivo": "Path to Dual Cultivation - 26 - La Decisión de Su Yang - [JabraScan].pdf"            },
+    { "Fecha": "28-05-2025", "NombreArchivo": "Path to Dual Cultivation - 27 - Bai Yufeng - [JabraScan].pdf"                        },
+    { "Fecha": "28-05-2025", "NombreArchivo": "Path to Dual Cultivation - 28 - La Combinación Perfecta - [JabraScan].pdf"           },
+    { "Fecha": "28-05-2025", "NombreArchivo": "Path to Dual Cultivation - 31 - Quemando los Cielos - [JabraScan].pdf"               },
+    { "Fecha": "28-05-2025", "NombreArchivo": "Path to Dual Cultivation - 32 - Impurezas - [JabraScan].pdf"                         },
+    { "Fecha": "28-05-2025", "NombreArchivo": "Path to Dual Cultivation - 33 - La Vida Como un Discípulo Ordinario - [JabraScan].pdf" }
   ]
-
 }
-
-
