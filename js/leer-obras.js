@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		  const estado = obra.querySelector("estado").textContent.trim();
 		  const ubicacion = obra.querySelector("ubicacion").textContent.trim();
 		  const traduccion = obra.querySelector("traductor").textContent.trim();
+		  const contenido18 = obra.querySelector("adulto").textContent.trim();
 	
 		  const categoriaIndiv = Categoria.split(",").map(item => item.trim());
 			let categoriaObj = '';
@@ -32,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	      const itemCarousel = document.createElement("div");
 		      itemCarousel.className = "carousel-item";
 		      itemCarousel.innerHTML = `
-		        <img src="../img/${imagen}" alt="${nombreobra}">
+		        <img class="${contenido18}" src="../img/${imagen}" alt="${nombreobra}">
 		        <div class="carousel-info-overlay">
 		          <div class="carousel-info-title">${nombreobra}</div>
 				  </br>
@@ -61,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			  itemBook.onclick = () => onLibroClick(obra.querySelector("clave").textContent.trim());
 		      itemBook.innerHTML = `
 					  <p class="clave">${clave}</p>
-			          <img src="../img/${imagen}" alt="${nombreobra}" loading="lazy"/>
+			          <img class="${contenido18}" src="../img/${imagen}" alt="${nombreobra}" loading="lazy"/>
 			          <div class="book-info-main">
 			            <h3>${nombreobra}</h3>
 						<div class="book-author-title">Autor:</div>
