@@ -2,7 +2,8 @@
   <obra>
     <clave>CallateDragonaMalvadaNoQuieroTenerMasHijosContigo</clave>
     <nombreobra>¡Callate, dragon malvado! No quiero tener mas hijos contigo.</nombreobra>
-    <autor>闭嘴恶龙我不想再跟你生孩子了</autor>
+    <nombreobra2>闭嘴恶龙我不想再跟你生孩子了</nombreobra2>
+    <autor>奶昔尾尾酱</autor>
     <sinopsis>Después de ser derrotado y capturado, el héroe asesino de dragones, Leon, se convirtió en prisionero de la Emperatriz Dragón Plateado. Con la resolución de una muerte segura, León inesperadamente dio vuelta la situación y embarazó con éxito a la emperatriz cuando estaba a punto de morir. Pensó que esto sería suficiente para dejar a la emperatriz vivir con vergüenza por el resto de su vida y también cumplió con su deber como cazador de dragones. Sin embargo, dos años después, cuando León abrió los ojos, encontró a una pequeña niña dragón con cola acostada a su lado</sinopsis>
     <valoracion>9.0</valoracion>
     <tipoobra>Novela Web</tipoobra>
@@ -13,7 +14,9 @@
     <estado>Activo</estado>
     <traductor>Tavo</traductor>
     <adulto></adulto>
-    <observaciones>Traduccion aprobada por el autor</observaciones>
+    <aprobadaAutor>si</aprobadaAutor>
+    <observaciones>Discord oficial <a href="https://discord.gg/Mk2qb65AxA">https://discord.gg/Mk2qb65AxA</a></observaciones>
+    <bannerOpcional>discord_oficial_jabrascan.jpg</bannerOpcional>
   </obra>
   <obra>
     <clave>CultivationOnline</clave>
@@ -29,6 +32,7 @@
     <estado>Activo</estado>
     <traductor>Jabracadabra</traductor>
     <adulto></adulto>
+    <aprobadaAutor>no</aprobadaAutor>
     <observaciones></observaciones>
   </obra>
   <obra>
@@ -45,6 +49,7 @@
     <estado>Activo</estado>
     <traductor>Jabracadabra</traductor>
     <adulto>adulto</adulto>
+    <aprobadaAutor>no</aprobadaAutor>
     <observaciones></observaciones>
   </obra>
   <obra>
@@ -61,6 +66,7 @@
     <estado>Activo</estado>
     <traductor>Jabracadabra</traductor>
     <adulto></adulto>
+    <aprobadaAutor>no</aprobadaAutor>
     <observaciones></observaciones>
   </obra>
   <obra>
@@ -77,6 +83,7 @@
     <estado>Pausado</estado>
     <traductor>Jabracadabra</traductor>
     <adulto></adulto>
+    <aprobadaAutor>no</aprobadaAutor>
     <observaciones></observaciones>
   </obra>
   <obra>
@@ -93,6 +100,7 @@
     <estado>Finalizado</estado>
     <traductor>Jabracadabra</traductor>
     <adulto></adulto>
+    <aprobadaAutor>no</aprobadaAutor>
     <observaciones></observaciones>
   </obra>
 </obras>
