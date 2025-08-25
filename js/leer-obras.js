@@ -28,13 +28,22 @@ document.addEventListener("DOMContentLoaded", function () {
 			  categoriaObj += '<span class="etiqueta">' + item + '</span>'; // Imprime cada item en la consola
 			  // Puedes hacer lo que necesites con cada 'item' aquí
 			});
+		  if (contenido18 === "adulto") {
+			  const claseadulto = "adulto";
+			  const indicadoradulto = '<div class="adulto">+18</div>';
+		  } else {
+			  const claseadulto = "";
+			  const indicadoradulto = "";
+		  }
 	      const indice = 0;
 	
 	      const itemCarousel = document.createElement("div");
 		      itemCarousel.className = "carousel-item";
 		      itemCarousel.innerHTML = `
-		        <img class="${contenido18}" src="../img/${imagen}" alt="${nombreobra}">
-		  		<div class="adulto">+18</div>
+				<div class="imagen-contenedor ${claseadulto}">
+		        	<img src="../img/${imagen}" alt="${nombreobra}">
+		  			${indicadoradulto}
+				</div>
 		        <div class="carousel-info-overlay">
 		          <div class="carousel-info-title">${nombreobra}</div>
 				  </br>
