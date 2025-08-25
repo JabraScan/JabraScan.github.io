@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		  const Categoria = obra.querySelector("categoria").textContent.trim();
 		  const estado = obra.querySelector("estado").textContent.trim();
 		  const ubicacion = obra.querySelector("ubicacion").textContent.trim();
+		  const traduccion = obra.querySelector("traductor").textContent.trim();
 	
 		  const categoriaIndiv = Categoria.split(",").map(item => item.trim());
 			let categoriaObj = '';
@@ -38,8 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
 		          <div class="carousel-info-row">
 		            <span class="carousel-info-label clave">${clave}</span>
 		            <!--<span class="carousel-info-label">Valoración:</span> <span>${valoracion}</span>-->
+		            <span class="carousel-info-label">Autor:</span> <span>${autor}</span>
 		            <span class="carousel-info-label">Tipo:</span> <span>${tipoobra}</span>
 		            <span class="carousel-info-label">Estado:</span> <span>${estado}</span>
+		            <span class="carousel-info-label">Traducción:</span> <span>${traduccion}</span>
 		          </div>
 		          <div class="carousel-info-row">
 			   		<span class="carousel-info-label">Categoría:</span>
