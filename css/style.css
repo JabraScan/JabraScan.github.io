@@ -229,7 +229,7 @@ footer {
   margin: 0;
 }
 
-.carousel-info-row .carousel-info-row-tags{
+.carousel-info-row .carousel-info-row-tags {
   display: flex;
   gap: 1.6em;
   font-size: 1.08em;
@@ -237,6 +237,9 @@ footer {
 }
 .carousel-info-row-tags {
   gap: 0.6em;
+  display: flex;
+  font-size: 1.08em;
+  flex-wrap: wrap;
 }
 .carousel-info-row span {
   padding: 10px 0 0 0;
