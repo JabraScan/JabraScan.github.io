@@ -75,7 +75,7 @@ toggleMode.onclick = () => {
 };
 
 // Lectura en voz alta
-readAloudBtn.onclick = () => {
+readAloud.onclick = () => {
   pdfDoc.getPage(pageNum).then(page => {
     page.getTextContent().then(textContent => {
       const text = textContent.items.map(item => item.str).join(' ');
@@ -128,6 +128,7 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
+
 
 
 
