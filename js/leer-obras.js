@@ -29,20 +29,17 @@ document.addEventListener("DOMContentLoaded", function () {
 		  const contenido18 = obra.querySelector("adulto").textContent.trim();
 		  const bannerOpcional = obra.querySelector("bannerOpcional").textContent.trim();
 		  const observaciones = obra.querySelector("observaciones").textContent.trim();
+		  const discord = obra.querySelector("discord").textContent.trim();
 		  const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
 
-			console.log(aprobadaAutor);
-			console.log(observaciones);
-			
 		  let OKAutor = '';
 		  if (aprobadaAutor === 'si') {
 		  	OKAutor =  `
 	 				<span class="carousel-info-label">'Traducción aprobada por el autor'</span>
 	 				</br>
-	  				<span>${observaciones}</span>
+	  				<span>Discord Oficial : <a href="${discord}">${discord}</a></span>
 	 				`;
 		  }
-			console.log(OKAutor);
 
 		  const categoriaIndiv = Categoria.split(",").map(item => item.trim());
 			let categoriaObj = '';
