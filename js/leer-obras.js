@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		  itemCarousel.prepend(imagenContenedor);
 	      carouselContainer.appendChild(itemCarousel);
 
-		  //const imgContenedorHhtml = imagenContenedor.innerHTML;
+		  const imgContenedorHhtml = imagenContenedor.innerHTML;
 	      const itemBook = document.createElement("article");
 		      itemBook.className = "book-card-main libro-item";
 			  itemBook.onclick = () => onLibroClick(obra.querySelector("clave").textContent.trim());
