@@ -197,57 +197,6 @@ function cargarlibro(libroId) {
 					DataBook.prepend(headerDataBook);
 					  const bookImageContainer = mainDataBook.querySelector(".book-image");
 					  bookImageContainer.insertBefore(imagenContenedor, bookImageContainer.firstChild);
-/*
-				    // -------- CAPÍTULOS RECIENTES EN 2 COLUMNAS --------
-				    const latestChapters = chapters.slice(-latestChaptersCount).reverse();
-				    const halfLatest = Math.ceil(latestChapters.length / 2);
-				    const col1Latest = latestChapters.slice(0, halfLatest);
-				    const col2Latest = latestChapters.slice(halfLatest);
-				    
-				    document.getElementById('latest-chapters-columns').innerHTML = `
-				      <ul>${col1Latest.map(chap => `<li>${chap}</li>`).join('')}</ul>
-				      <ul>${col2Latest.map(chap => `<li>${chap}</li>`).join('')}</ul>
-				    `;
-				    
-				    // -------- LISTA COMPLETA & PAGINACIÓN --------
-				    const chaptersPerPage = 30;
-				    let currentPage = 1;
-				    const totalPages = Math.ceil(chapters.length/chaptersPerPage);
-				    
-				    function renderChapters(page) {
-				      const start = (page-1)*chaptersPerPage;
-				      const list = chapters.slice(start, start+chaptersPerPage);
-				      // Divide en 2 columnas
-				      const half = Math.ceil(list.length/2);
-				      let col1 = list.slice(0, half);
-				      let col2 = list.slice(half);
-				      document.getElementById('chapter-columns').innerHTML = `
-				        <ul>${col1.map(c=>`<li>${c}</li>`).join('')}</ul>
-				        <ul>${col2.map(c=>`<li>${c}</li>`).join('')}</ul>
-				      `;
-				      document.getElementById('pagination').innerHTML = `
-				        <button ${page==1?'disabled':''} onclick="changePage(1)">Primera</button>
-				        <button ${page==1?'disabled':''} onclick="changePage(${page-1})">Anterior</button>
-				        <span>Pág ${page}/${totalPages}</span>
-				        <button ${page==totalPages?'disabled':''} onclick="changePage(${page+1})">Siguiente</button>
-				        <button ${page==totalPages?'disabled':''} onclick="changePage(${totalPages})">Última</button>
-				      `;
-				    }
-				    window.changePage = function(p){ if(p<1||p>totalPages)return; currentPage=p; renderChapters(p);}
-				    renderChapters(currentPage);
-				    
-				    // --------- BOTONES (puedes poner tus rutas reales) ---------
-				    document.querySelector('.chapter-list').onclick = () => {
-				      document.querySelector('.book-chapters-list').scrollIntoView({behavior:'smooth'});
-				    };
-				    document.querySelector('.read-first').onclick = () => {
-				      alert('Ir a leer el primer capítulo (implementa tu enlace).');
-				    };
-				    document.querySelector('.library').onclick = () => {
-				      alert('Añadido a tu biblioteca (implementa tu lógica).');
-				    };*/
-            	});
-//    });
 }
 function obtenerCapitulos(clave) {
   return fetch('books.json')
