@@ -21,19 +21,57 @@ function cargarlibro(libroId) {
                     document.body.innerHTML = '<p>Obra no encontrada.</p>';
                     return;
                 }
-				const clave = obra.querySelector("clave").textContent.trim();
-				const nombreobra = obra.querySelector("nombreobra").textContent.trim();
-				const autor = obra.querySelector("autor").textContent.trim();
-				const sinopsis = obra.querySelector("sinopsis").textContent.trim();
-				const imagen = obra.querySelector("imagen").textContent.trim();
-				const valoracion = obra.querySelector("valoracion").textContent.trim();
-				const tipoobra = obra.querySelector("tipoobra").textContent.trim();
-				const Categoria = obra.querySelector("categoria").textContent.trim();
-				const estado = obra.querySelector("estado").textContent.trim();
-				const ubicacion = obra.querySelector("ubicacion").textContent.trim();
+		      const clave = obra.querySelector("clave").textContent.trim();
+		      const nombreobra = obra.querySelector("nombreobra").textContent.trim();
+		      const nombreobra2 = obra.querySelector("nombreobra2").textContent.trim();
+		      const autor = obra.querySelector("autor").textContent.trim();
+		      const sinopsis = obra.querySelector("sinopsis").textContent.trim();
+		      const imagen = obra.querySelector("imagen").textContent.trim();
+		      const valoracion = obra.querySelector("valoracion").textContent.trim();
+		      const tipoobra = obra.querySelector("tipoobra").textContent.trim();
+			  const Categoria = obra.querySelector("categoria").textContent.trim();
+			  const estado = obra.querySelector("estado").textContent.trim();
+			  const ubicacion = obra.querySelector("ubicacion").textContent.trim();
+			  const traduccion = obra.querySelector("traductor").textContent.trim();
+			  const contenido18 = obra.querySelector("adulto").textContent.trim();
+			  const bannerOpcional = obra.querySelector("bannerOpcional").textContent.trim();
+			  const observaciones = obra.querySelector("observaciones").textContent.trim();
+			  const discord = obra.querySelector("discord").textContent.trim();
+			  const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
 
-				capitulos(clave);
-
+				  let OKAutor = '';
+				  if (aprobadaAutor === 'si') {
+				  	OKAutor =  `
+			 				<span class="carousel-info-label">'Traducción aprobada por el autor'</span>
+			 				</br>
+			  				<span>Discord Oficial : <a href="${discord}" target="_blank">${discord}</a></span>
+			 				`;
+				  }
+		
+				  const categoriaIndiv = Categoria.split(",").map(item => item.trim());
+					let categoriaObj = '';
+					categoriaIndiv.forEach(item => {
+					  categoriaObj += '<span class="etiqueta">' + item + '</span>'; // Imprime cada item en la consola
+					  // Puedes hacer lo que necesites con cada 'item' aquí
+					});
+					//indicador +18
+				    const imagenContenedor = document.createElement("div");
+						  imagenContenedor.classList.add("imagen-contenedor");
+						
+						  const img = document.createElement("img");
+						  img.src = "../img/" + imagen;
+						  img.alt = nombreobra;
+						  imagenContenedor.appendChild(img);
+						
+						  if (contenido18 === "adulto") {
+						    imagenContenedor.classList.add("adulto");
+						    const indicador = document.createElement("div");
+						    indicador.classList.add("indicador-adulto");
+						    indicador.textContent = "+18";
+						    imagenContenedor.appendChild(indicador);
+						  }
+					const imgContenedorHhtml = imagenContenedor.innerHTML;
+			
 				const DataBook = document.querySelector('.book-card');
 					const headerDataBook = document.createElement("div");
 						headerDataBook.className = "book-header";
@@ -45,7 +83,8 @@ function cargarlibro(libroId) {
 						mainDataBook.className = "book-main";
 						mainDataBook.innerHTML = `
 							<div class="book-image">
-								<img src="../../img/${imagen}" alt="${nombreobra}"/>
+								<!--<img src="../../img/${imagen}" alt="${nombreobra}"/>-->
+								${imgContenedorHhtml}
 								<div class="book-genres">
 									<span><i class="fa-solid fa-tags"></i>${Categoria}</span>                
 								</div>
