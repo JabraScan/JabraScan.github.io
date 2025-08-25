@@ -15,6 +15,36 @@
   <p id="pdfCount">Número de PDFs: </p>
 
   <script>
+      const fs = require("fs");
+      const path = require("path");
+      
+      // Ruta a la carpeta 'books'
+      const booksDir = path.join(__dirname, "books");
+      
+      // Carpetas que quieres ignorar
+      const excluir = new Set(["css", "img", "js"]);
+      
+      const booksData = {};
+      
+      // Leer todas las carpetas dentro de 'books'
+      fs.readdirSync(booksDir).forEach(folder => {
+        const folderPath = path.join(booksDir, folder);
+        if (fs.statSync(folderPath).isDirectory() && !excluir.has(folder)) {
+          const pdfs = fs.readdirSync(folderPath).filter(file =>
+            file.toLowerCase().endsWith(".pdf")
+          );
+          booksData[folder] = pdfs;
+        }
+      });
+      
+      // Guardar el resultado en 'books.json'
+      fs.writeFileSync(
+        path.join(__dirname, "books.json"),
+        JSON.stringify(booksData, null, 2),
+        "utf-8"
+      );
+  </script>
+  <script>
     const folderSelect = document.getElementById("folderSelect");
     const pdfCount = document.getElementById("pdfCount");
 
