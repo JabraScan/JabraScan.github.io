@@ -11,6 +11,7 @@
     <fechaCreacion>24/08/2025</fechaCreacion>
     <ubicacion>Novela China</ubicacion>
     <estado>OnGoing</estado>
+    <traductor>Tavo</traductor>
   </obra>
   <obra>
     <clave>CultivationOnline</clave>
@@ -24,6 +25,7 @@
     <fechaCreacion>24/08/2025</fechaCreacion>
     <ubicacion>Novela China</ubicacion>
     <estado>OnGoing</estado>
+    <traductor>Jabracadabra</traductor>
   </obra>
   <obra>
     <clave>DualCultivation</clave>
@@ -37,6 +39,7 @@
     <fechaCreacion>24/08/2025</fechaCreacion>
     <ubicacion>Novela China</ubicacion>
     <estado>OnGoing</estado>
+    <traductor>Jabracadabra</traductor>
   </obra>
   <obra>
     <clave>LaLeyendaDeLaEspadaDelNorte</clave>
@@ -50,5 +53,6 @@
     <fechaCreacion>24/08/2025</fechaCreacion>
     <ubicacion>Novela Coreana</ubicacion>
     <estado>OnGoing</estado>
+    <traductor>Jabracadabra</traductor>
   </obra>
 </obras>
