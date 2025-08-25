@@ -34,12 +34,12 @@ document.addEventListener("DOMContentLoaded", function () {
 		        <img src="../img/${imagen}" alt="${nombreobra}">
 		        <div class="carousel-info-overlay">
 		          <div class="carousel-info-title">${nombreobra}</div>
-				  <div class="carousel-info-row"></div>
+				  </br>
 		          <div class="carousel-info-row">
 		            <span class="carousel-info-label clave">${clave}</span>
-		            <!--<span class="carousel-info-label">Valoración:</span> ${valoracion}-->
-		            <span class="carousel-info-label">Tipo:</span> ${tipoobra}
-		            <span class="carousel-info-label">Estado:</span> ${estado}
+		            <!--<span class="carousel-info-label">Valoración:</span> <span>${valoracion}</span>-->
+		            <span class="carousel-info-label">Tipo:</span> <span>${tipoobra}</span>
+		            <span class="carousel-info-label">Estado:</span> <span>${estado}</span>
 		          </div>
 		          <div class="carousel-info-row">
 			   		<span class="carousel-info-label">Categoría:</span>
