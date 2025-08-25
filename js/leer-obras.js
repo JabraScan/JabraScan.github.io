@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		  	OKAutor =  `
 	 				<span class="carousel-info-label">'Traducción aprobada por el autor'</span>
 	 				</br>
-	  				<span>Discord Oficial : <a href="${discord}">${discord}</a></span>
+	  				<span>Discord Oficial : <a href="${discord}" target="_blank">${discord}</a></span>
 	 				`;
 		  }
 
