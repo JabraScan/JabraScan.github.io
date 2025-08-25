@@ -31,14 +31,13 @@ document.addEventListener("DOMContentLoaded", function () {
 		  const observaciones = obra.querySelector("observaciones").textContent.trim();
 		  const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
 
+		  let OKAutor = '';
 		  if (aprobadaAutor === 'si') {
-		  	const OKAutor =  `
+		  	let OKAutor =  `
 	 				<span>'Traducción aprobada por el autor'</span>
 	 				</br>
 	  				<span>${observaciones}</span>
 	 				`;
-		  } else {
-			  const OKAutor = '';
 		  }
 
 		  const categoriaIndiv = Categoria.split(",").map(item => item.trim());
