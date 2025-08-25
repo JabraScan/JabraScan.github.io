@@ -71,7 +71,40 @@ function cargarlibro(libroId) {
 						    imagenContenedor.appendChild(indicador);
 						  }
 					const imgContenedorHhtml = imagenContenedor.innerHTML;
-			
+					//Listado Capitulos
+						// Suponiendo que tienes el JSON cargado en una variable llamada `data`
+						const data = require('./books.json'); // o usa fetch si estás en navegador
+						
+						// Verificamos que exista la clave
+						if (data[clave]) {
+						  const resultado = data[clave].map(item => {
+						    const partes = item.NombreArchivo.split(' - ');
+						    return {
+						      NombreArchivo: item.NombreArchivo,
+						      Fecha: item.Fecha,
+						      obra: partes[0]?.trim() || "",
+						      numCapitulo: parseInt(partes[1]?.trim(), 10) || 0,
+						      nombreCapitulo: partes[2]?.trim() || ""
+						    };
+						  });
+						
+						  // Ordenar por Fecha (dd-mm-yyyy) y luego por numCapitulo
+						  resultado.sort((a, b) => {
+						    const fechaA = new Date(a.Fecha.split('-').reverse().join('-'));
+						    const fechaB = new Date(b.Fecha.split('-').reverse().join('-'));
+						
+						    if (fechaA < fechaB) return -1;
+						    if (fechaA > fechaB) return 1;
+						
+						    return a.numCapitulo - b.numCapitulo;
+						  });
+						
+						  console.log(resultado);
+						} else {
+						  console.error(`La clave "${clave}" no existe en el archivo JSON.`);
+						}
+
+				//Generar la ficha del libro
 				const DataBook = document.querySelector('.book-card');
 					const headerDataBook = document.createElement("div");
 						headerDataBook.className = "book-header";
