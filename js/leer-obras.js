@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		  if (aprobadaAutor === 'si') {
 			  console.log('aprobada');
 		  	OKAutor =  `
-	 				<span>'Traducción aprobada por el autor'</span>
+	 				<span class="carousel-info-label">'Traducción aprobada por el autor'</span>
 	 				</br>
 	  				<span>${observaciones}</span>
 	 				`;
