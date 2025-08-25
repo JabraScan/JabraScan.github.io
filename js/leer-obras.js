@@ -109,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			            <h3>${nombreobra}</h3>
 						<div class="book-author-title">Autor:</div>
 						<div class="book-author-name">${autor}</div>
+	  					<div class="book-author-name">${estado}</div>
 			            <!--<p class="book-sinopsis tooltip">
 				  			<b>Sinopsis:</b>
 							<span class="tooltip-text">${sinopsis}</span>
