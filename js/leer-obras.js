@@ -40,9 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
 		            <span class="carousel-info-label clave">${clave}</span>
 		            <!--<span class="carousel-info-label">Valoración:</span> <span>${valoracion}</span>-->
 		            <span class="carousel-info-label">Autor:</span> <span>${autor}</span>
+		            <span class="carousel-info-label">Traducción:</span> <span>${traduccion}</span>
+		          </div>
+		          <div class="carousel-info-row">
 		            <span class="carousel-info-label">Tipo:</span> <span>${tipoobra}</span>
 		            <span class="carousel-info-label">Estado:</span> <span>${estado}</span>
-		            <span class="carousel-info-label">Traducción:</span> <span>${traduccion}</span>
 		          </div>
 		          <div class="carousel-info-row">
 			   		<span class="carousel-info-label">Categoría:</span>
