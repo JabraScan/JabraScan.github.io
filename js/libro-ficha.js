@@ -38,7 +38,7 @@ function cargarlibro(libroId) {
 			  const observaciones = obra.querySelector("observaciones").textContent.trim();
 			  const discord = obra.querySelector("discord").textContent.trim();
 			  const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
-
+				  //Aprobado por el autor
 				  let OKAutor = '';
 				  if (aprobadaAutor === 'si') {
 				  	OKAutor =  `
@@ -72,44 +72,44 @@ function cargarlibro(libroId) {
 						  }
 					const imgContenedorHhtml = imagenContenedor.innerHTML;
 					//Listado Capitulos
-						// Cargar el archivo JSON usando fetch
-						fetch('books.json')
-						  .then(response => response.json())
-						  .then(dataCapitulos => {
-						    if (!dataCapitulos[clave]) {
-						      console.error(`La clave "${clave}" no existe.`);
-						      return;
-						    }
-						
-						    // Procesar los datos
-						    const resultado = dataCapitulos[clave].map(item => {
-						      const partes = item.NombreArchivo.split(' - ');
-						      return {
-						        NombreArchivo: item.NombreArchivo,
-						        Fecha: item.Fecha,
-						        obra: partes[0]?.trim() || "",
-						        numCapitulo: parseInt(partes[1]?.trim(), 10) || 0,
-						        nombreCapitulo: partes[2]?.trim() || ""
-						      };
-						    });
-						
-						    // Ordenar por Fecha y luego por numCapitulo
-						    resultado.sort((a, b) => {
-						      const fechaA = new Date(a.Fecha.split('-').reverse().join('-'));
-						      const fechaB = new Date(b.Fecha.split('-').reverse().join('-'));
-						
-						      if (fechaA < fechaB) return -1;
-						      if (fechaA > fechaB) return 1;
-						
-						      return a.numCapitulo - b.numCapitulo;
-						    });
-						
-						    // Mostrar resultado
-						    console.log(resultado);
-						  })
-						  .catch(error => {
-						    console.error("Error al cargar el archivo JSON:", error);
-						  });
+              // Cargar el archivo JSON usando fetch
+              fetch('books.json')
+                .then(response => response.json())
+                .then(dataCapitulos => {
+                  if (!dataCapitulos[clave]) {
+                    console.error(`La clave "${clave}" no existe.`);
+                    return;
+                  }
+
+                  // Procesar los datos
+                  const resultado = dataCapitulos[clave].map(item => {
+                    const partes = item.NombreArchivo.split(' - ');
+                    return {
+                      NombreArchivo: item.NombreArchivo,
+                      Fecha: item.Fecha,
+                      obra: partes[0]?.trim() || "",
+                      numCapitulo: parseInt(partes[1]?.trim(), 10) || 0,
+                      nombreCapitulo: partes[2]?.trim() || ""
+                    };
+                  });
+
+                  // Ordenar por Fecha y luego por numCapitulo
+                  resultado.sort((a, b) => {
+                    const fechaA = new Date(a.Fecha.split('-').reverse().join('-'));
+                    const fechaB = new Date(b.Fecha.split('-').reverse().join('-'));
+
+                    if (fechaA < fechaB) return -1;
+                    if (fechaA > fechaB) return 1;
+
+                    return a.numCapitulo - b.numCapitulo;
+                  });
+
+                  // Mostrar resultado
+                  console.log(resultado);
+                })
+                .catch(error => {
+                  console.error("Error al cargar el archivo JSON:", error);
+                });
 
 
 				//Generar la ficha del libro
