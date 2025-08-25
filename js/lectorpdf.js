@@ -1,3 +1,16 @@
+const urlParams = new URLSearchParams(window.location.search);
+const pdfUrl = urlParams.get('pdf');
+
+if (pdfUrl) {
+  pdfjsLib.getDocument(pdfUrl).promise.then(doc => {
+    pdfDoc = doc;
+    pageNum = 1;
+    renderPage(pageNum);
+  });
+} else {
+  console.error("No se proporcionó ningún PDF en la URL.");
+}
+
 let pdfDoc = null;
 let pageNum = 1;
 const canvas = document.getElementById('pdfCanvas');
@@ -99,3 +112,4 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
+
