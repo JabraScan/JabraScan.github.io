@@ -96,8 +96,6 @@ function cargarlibro(libroId) {
 							<div class="book-info-container">
 									<div class="book-info">
 										<h2 id="nombre-obra">${nombreobra}</h2>
-									</div>
-									<div class="book-info">
 										<div><b>Autor: </b> ${autor}</div>
 		  								<div><b>Traducción: </b>${traduccion}</div>
   								 		${OKAutor}
