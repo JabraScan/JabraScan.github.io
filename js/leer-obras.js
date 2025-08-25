@@ -74,13 +74,13 @@ document.addEventListener("DOMContentLoaded", function () {
 		  itemCarousel.prepend(imagenContenedor);
 	      carouselContainer.appendChild(itemCarousel);
 
-		  const imgContenedorHhtml = imagenContenedor.innerHTML;
+		  //const imgContenedorHhtml = imagenContenedor.innerHTML;
 	      const itemBook = document.createElement("article");
 		      itemBook.className = "book-card-main libro-item";
 			  itemBook.onclick = () => onLibroClick(obra.querySelector("clave").textContent.trim());
 		      itemBook.innerHTML = `
 					  <p class="clave">${clave}</p>
-	   				  ${imgContenedorHhtml}
+	   				  <!--${imgContenedorHhtml}-->
 			          <!--<img src="../img/${imagen}" alt="${nombreobra}" loading="lazy"/>-->
 			          <div class="book-info-main">
 			            <h3>${nombreobra}</h3>
@@ -94,9 +94,9 @@ document.addEventListener("DOMContentLoaded", function () {
 			          </div>
 		      `;
 			// Clonar imagenContenedor
-			//const imagenContenedorA = imagenContenedor.cloneNode(true); // Clona el contenedor de imagen
+			const imagenContenedorA = imagenContenedor.cloneNode(true); // Clona el contenedor de imagen
 			// Prepend el contenedor de imagen al artículo
-			//itemBook.prepend(imagenContenedorA);
+			itemBook.prepend(imagenContenedorA);
 	      booklistContainer.appendChild(itemBook);
 	    });
 	  })
