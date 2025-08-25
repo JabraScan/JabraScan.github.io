@@ -79,8 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			  itemBook.onclick = () => onLibroClick(obra.querySelector("clave").textContent.trim());
 		      itemBook.innerHTML = `
 					  <p class="clave">${clave}</p>
-			          <img class="${contenido18}" src="../img/${imagen}" alt="${nombreobra}" loading="lazy"/>
-			 		  <div class="adulto">+18</div>
+			          <img src="../img/${imagen}" alt="${nombreobra}" loading="lazy"/>
 			          <div class="book-info-main">
 			            <h3>${nombreobra}</h3>
 						<div class="book-author-title">Autor:</div>
