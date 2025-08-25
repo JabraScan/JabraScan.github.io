@@ -271,45 +271,6 @@ function capitulos (obra) {
       console.error(error);
     });
 }
-function obtenerCapitulos(clave) {
-	  try {
-		const response = fetch('books.json');
-		const dataCapitulos = response.json();
-	
-		if (!dataCapitulos[clave]) {
-		  console.error(`La clave "${clave}" no existe.`);
-		  return [];
-		}
-	
-		const resultado = dataCapitulos[clave].map(item => {
-		  const partes = item.NombreArchivo.split(' - ');
-		  return {
-			NombreArchivo: item.NombreArchivo,
-			Fecha: item.Fecha,
-			obra: partes[0]?.trim() || "",
-			numCapitulo: parseInt(partes[1]?.trim(), 10) || 0,
-			nombreCapitulo: partes[2]?.trim() || ""
-		  };
-		});
-	
-		resultado.sort((a, b) => {
-		  const fechaA = new Date(a.Fecha.split('-').reverse().join('-'));
-		  const fechaB = new Date(b.Fecha.split('-').reverse().join('-'));
-	
-		  if (fechaA < fechaB) return -1;
-		  if (fechaA > fechaB) return 1;
-	
-		  return a.numCapitulo - b.numCapitulo;
-		});
-	
-		return resultado;
-	
-	  } catch (error) {
-		console.error("Error al cargar el archivo JSON:", error);
-		return [];
-	  }
-	}
-
 /*
     // Datos de ejemplo
     const chapters = Array.from({length: 80}, (_, i) => `Capítulo ${i+1}: Título del capítulo`);
