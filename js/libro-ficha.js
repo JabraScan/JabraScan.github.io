@@ -201,8 +201,6 @@ function cargarlibro(libroId) {
 					  bookImageContainer.insertBefore(imagenContenedor, bookImageContainer.firstChild);
 				});
 }
-
-/*
 function obtenerCapitulos(clave) {
   return fetch('books.json')
     .then(response => response.json())
@@ -241,4 +239,4 @@ console.log(resultado);
       console.error("Error al cargar el archivo JSON:", error);
       return [];
     });
-}*/
+}
