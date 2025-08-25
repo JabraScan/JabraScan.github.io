@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+	// Cargar el contenido en <main>
+	const mainElement = document.querySelector('footer');
+	let now = new Date();
+	let annCurso = now.getFullYear()
+	mainElement.innerHTML = `<p>&copy; ${now} JabraScan. No oficial, sin fines de lucro.</p>`;
 	// leer-obras.js
 	fetch('obras.xml')
 	  .then(response => response.text())
