@@ -28,20 +28,28 @@ document.addEventListener("DOMContentLoaded", function () {
 			  categoriaObj += '<span class="etiqueta">' + item + '</span>'; // Imprime cada item en la consola
 			  // Puedes hacer lo que necesites con cada 'item' aquí
 			});
-		  if (contenido18 === "adulto") {
-			  const indicadoradulto = `<div class="adulto">+18</div>`;
-		  } else {
-			  const indicadoradulto = "<div/>";
-		  }
+			//indicador +18
+		    const imagenContenedor = document.createElement("div");
+				  imagenContenedor.classList.add("imagen-contenedor");
+				
+				  const img = document.createElement("img");
+				  img.src = imagen;
+				  img.alt = nombreobra;
+				  imagenContenedor.appendChild(img);
+				
+				  if (contenido18 === "adulto") {
+				    imagenContenedor.classList.add("adulto");
+				    const indicador = document.createElement("div");
+				    //indicador.classList.add("indicador-adulto");
+				    indicador.textContent = "+18";
+				    imagenContenedor.appendChild(indicador);
+				  }
 	      const indice = 0;
 	
 	      const itemCarousel = document.createElement("div");
 		      itemCarousel.className = "carousel-item";
+		        	//<img src="../img/${imagen}" alt="${nombreobra}">
 		      itemCarousel.innerHTML = `
-				<div class="imagen-contenedor ${contenido18}">
-		        	<img src="../img/${imagen}" alt="${nombreobra}">
-		  			${indicadoradulto}
-				</div>
 		        <div class="carousel-info-overlay">
 		          <div class="carousel-info-title">${nombreobra}</div>
 				  </br>
@@ -63,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			   	  </div>
 		        </div>
 		      `;
+	      itemCarousel.appendChild(imagenContenedor);
 	      carouselContainer.appendChild(itemCarousel);
 			
 	      const itemBook = document.createElement("article");
