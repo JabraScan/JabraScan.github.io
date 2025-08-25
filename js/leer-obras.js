@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		  let OKAutor = '';
 		  if (aprobadaAutor === 'si') {
 			  console.log('aprobada');
-		  	let OKAutor =  `
+		  	OKAutor =  `
 	 				<span>'Traducción aprobada por el autor'</span>
 	 				</br>
 	  				<span>${observaciones}</span>
