@@ -72,6 +72,28 @@ function cargarlibro(libroId) {
             	});
 //    });
 }
+function capitulos (obra) {
+    async function contarPDFs(path = "") {
+      //const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+      const response = await fetch("books/" + obra);
+      const data = await response.json();
+
+      for (const item of data) {
+        if (item.type === "file" && item.name.toLowerCase().endsWith(".pdf")) {
+          pdfCount++;
+        } else if (item.type === "dir") {
+          await contarPDFs(item.path);
+        }
+      }
+    }
+
+    contarPDFs().then(() => {
+      document.getElementById("resultado").textContent = `Se encontraron ${pdfCount} archivos PDF en el repositorio.`;
+    }).catch(error => {
+      document.getElementById("resultado").textContent = "Error al acceder al repositorio.";
+      console.error(error);
+    });
+}
 /*
     // Datos de ejemplo
     const chapters = Array.from({length: 80}, (_, i) => `Capítulo ${i+1}: Título del capítulo`);
