@@ -38,7 +38,7 @@ function cargarlibro(libroId) {
 				  let OKAutor = '';
 				  if (aprobadaAutor === 'si') {
 				  	OKAutor =  `
-			 				<span class="carousel-info-label">'Traducción aprobada por el autor'</span>
+			 				<span class="carousel-info-label">Traducción aprobada por el autor</span>
 			 				</br>
 			  				<span>Discord Oficial : <a href="${discord}" target="_blank">${discord}</a></span>
 			 				`;
