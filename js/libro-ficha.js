@@ -84,7 +84,7 @@ function cargarlibro(libroId) {
 						  const ultimosHTML = ultimosCapitulos.map(cap => `
 						    <li>
 		  						<a href="${clave}/${cap.nombreArchivo}">
-								  <strong>${cap.nombreCapitulo} + '-' + ${cap.nombreCapitulo}</strong> 
+								  <strong>${cap.numCapitulo}: ${cap.nombreCapitulo}</strong>
 								  <span>(${cap.Fecha})</span>
 								</a>
 						    </li>
