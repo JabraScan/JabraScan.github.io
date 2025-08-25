@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		          </div>
 		          <div class="carousel-info-row">
 		            <span class="carousel-info-label">Tipo:</span> <span>${tipoobra}</span>
-		            <span class="carousel-info-label">Estado:</span> <span>${estado}</span>
+		            <span class="carousel-info-label">Estado:</span> <span class="${estado}">${estado}</span>
 		          </div>
 		          <div class="carousel-info-row">
 			   		<span class="carousel-info-label">Categoría:</span>
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			            <h3>${nombreobra}</h3>
 						<div class="book-author-title">Autor:</div>
 						<div class="book-author-name">${autor}</div>
-	  					<div class="book-author-name">${estado}</div>
+	  					<div class="book-author-name ${estado}">${estado}</div>
 			            <!--<p class="book-sinopsis tooltip">
 				  			<b>Sinopsis:</b>
 							<span class="tooltip-text">${sinopsis}</span>
