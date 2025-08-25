@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			   	  </div>
 		        </div>
 		      `;
-	      itemCarousel.appendChild(imagenContenedor);
+	      itemCarousel.prepend(imagenContenedor);
 	      carouselContainer.appendChild(itemCarousel);
 			
 	      const itemBook = document.createElement("article");
