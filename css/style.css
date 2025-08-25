@@ -59,7 +59,7 @@ main {
   display: none;
 }
 .etiqueta {
-  font-size: 1em;
+  font-size: 0.8em;
   border-radius: 50px;
   background: blue;
   color: white;
