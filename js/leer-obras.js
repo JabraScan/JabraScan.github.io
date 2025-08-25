@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				  imagenContenedor.classList.add("imagen-contenedor");
 				
 				  const img = document.createElement("img");
-				  img.src = imagen;
+				  img.src = "../img/" + imagen;
 				  img.alt = nombreobra;
 				  imagenContenedor.appendChild(img);
 				
