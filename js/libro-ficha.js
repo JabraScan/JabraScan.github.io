@@ -111,7 +111,7 @@ function cargarlibro(libroId) {
 						
 						    const capitulosHTML = pagina.map(cap => `
 						      <li>
-						        <strong>${cap.nombreCapitulo}</strong> 
+						        <span>${cap.numCapitulo}: ${cap.nombreCapitulo}</span>
 						        <span>(${cap.Fecha})</span>
 						      </li>
 						    `).join('');
@@ -139,7 +139,7 @@ function cargarlibro(libroId) {
 						  `;
 						
 						  // Añadir ambas secciones al final de la ficha
-						  const DataBook = document.querySelector('.book-card');
+						  const DataBook = document.querySelector('.book-card-caps');
 						  const seccionesHTML = document.createElement("div");
 						  seccionesHTML.className = "book-extra-sections";
 						  seccionesHTML.innerHTML = seccionUltimos + seccionPaginada;
@@ -157,7 +157,7 @@ function cargarlibro(libroId) {
 						  });
 						});
 				//Generar la ficha del libro
-				const DataBook = document.querySelector('.book-card');
+				const DataBook = document.querySelector('.book-card-caps');
 					const headerDataBook = document.createElement("div");
 						headerDataBook.className = "book-header";
 						headerDataBook.innerHTML = `
