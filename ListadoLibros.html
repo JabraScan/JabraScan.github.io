@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Contador de PDFs</title>
+</head>
+<body>
+  <h1>Contador de PDFs por Carpeta</h1>
+
+  <label for="folderSelect">Selecciona una carpeta:</label>
+  <select id="folderSelect">
+    <option value="">-- Selecciona --</option>
+  </select>
+
+  <p id="pdfCount">Número de PDFs: </p>
+
+  <script>
+    const folderSelect = document.getElementById("folderSelect");
+    const pdfCount = document.getElementById("pdfCount");
+
+    // Cargar el JSON desde GitHub Pages
+    fetch("https://jabrascan.github.io/books.json")
+      .then(response => response.json())
+      .then(data => {
+        // Rellenar el selector con las carpetas
+        Object.keys(data).forEach(folder => {
+          const option = document.createElement("option");
+          option.value = folder;
+          option.textContent = folder;
+          folderSelect.appendChild(option);
+        });
+
+        // Evento al seleccionar carpeta
+        folderSelect.addEventListener("change", () => {
+          const selectedFolder = folderSelect.value;
+          const files = data[selectedFolder] || [];
+          const pdfs = files.filter(file => file.toLowerCase().endsWith(".pdf"));
+          pdfCount.textContent = `Número de PDFs: ${pdfs.length}`;
+        });
+      })
+      .catch(error => {
+        console.error("Error al cargar el JSON:", error);
+        pdfCount.textContent = "No se pudo cargar el archivo.";
+      });
+  </script>
+</body>
+</html>
