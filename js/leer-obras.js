@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			            </p>-->
 			          </div>
 		      `;
-			const imagenContenedorA = elementoExistente.cloneNode(imagenContenedor);
+			const imagenContenedorA = imagenContenedor.cloneNode(true);
 
 		  itemBook.prepend(imagenContenedorA);
 	      booklistContainer.appendChild(itemBook);
