@@ -31,17 +31,17 @@ document.addEventListener("DOMContentLoaded", function () {
 		  const observaciones = obra.querySelector("observaciones").textContent.trim();
 		  const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
 
+			console.log(aprobadaAutor);
+			console.log(observaciones);
+			
 		  let OKAutor = '';
 		  if (aprobadaAutor === 'si') {
-			  console.log('aprobada');
 		  	OKAutor =  `
 	 				<span class="carousel-info-label">'Traducción aprobada por el autor'</span>
 	 				</br>
 	  				<span>${observaciones}</span>
 	 				`;
 		  }
-			console.log(aprobadaAutor);
-			console.log(observaciones);
 			console.log(OKAutor);
 
 		  const categoriaIndiv = Categoria.split(",").map(item => item.trim());
