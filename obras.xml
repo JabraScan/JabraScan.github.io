@@ -13,6 +13,7 @@
     <estado>Activo</estado>
     <traductor>Tavo</traductor>
     <adulto></adulto>
+    <observaciones>Traduccion aprobada por el autor</observaciones>
   </obra>
   <obra>
     <clave>CultivationOnline</clave>
@@ -28,6 +29,7 @@
     <estado>Activo</estado>
     <traductor>Jabracadabra</traductor>
     <adulto></adulto>
+    <observaciones></observaciones>
   </obra>
   <obra>
     <clave>DualCultivation</clave>
@@ -43,6 +45,7 @@
     <estado>Activo</estado>
     <traductor>Jabracadabra</traductor>
     <adulto>adulto</adulto>
+    <observaciones></observaciones>
   </obra>
   <obra>
     <clave>LaLeyendaDeLaEspadaDelNorte</clave>
@@ -58,6 +61,7 @@
     <estado>Activo</estado>
     <traductor>Jabracadabra</traductor>
     <adulto></adulto>
+    <observaciones></observaciones>
   </obra>
   <obra>
     <clave>PathtoDualCultivation</clave>
@@ -73,6 +77,7 @@
     <estado>Pausado</estado>
     <traductor>Jabracadabra</traductor>
     <adulto></adulto>
+    <observaciones></observaciones>
   </obra>
   <obra>
     <clave>Suzume</clave>
@@ -88,5 +93,6 @@
     <estado>Finalizado</estado>
     <traductor>Jabracadabra</traductor>
     <adulto></adulto>
+    <observaciones></observaciones>
   </obra>
 </obras>
