@@ -38,20 +38,24 @@ main {
   position: absolute;
   top: 10px; /* Ajusta la distancia desde la parte superior */
   right: 10px; /* Ajusta la distancia desde la derecha */
-  width: 60px; /* Ancho del círculo */
-  height: 60px; /* Alto del círculo */
+  width: 30px; /* Ancho del círculo */
+  height: 30px; /* Alto del círculo */
   border-radius: 50%; /* Hace que el div sea un círculo */
   border: 2px solid red; /* Borde rojo */
   background-color: white; /* Fondo blanco */
   color: red; /* Texto rojo */
-  font-size: 18px; /* Tamaño del texto */
+  font-size: 0.7em; /* Tamaño del texto */
   font-weight: bold;
   display: flex;
   justify-content: center; /* Centra el texto horizontalmente */
   align-items: center; /* Centra el texto verticalmente */
   box-sizing: border-box; /* Incluye el borde en el tamaño total */
 }
-.img:not(.adulto) .adulto {
+.imagen-contenedor {
+  position: relative; /* Establece el contexto de posicionamiento */
+  display: inline-block;
+}
+.imagen-contenedor:not(.adulto) .adulto {
   display: none;
 }
 .etiqueta {
