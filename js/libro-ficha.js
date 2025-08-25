@@ -72,7 +72,7 @@ function cargarlibro(libroId) {
 						  }
 					const imgContenedorHhtml = imagenContenedor.innerHTML;
 					//Listado Capitulos
-              			const listacapitulos = await obtenerCapitulos(clave);
+              			const listacapitulos = obtenerCapitulos(clave);
 							
 
 
@@ -193,7 +193,7 @@ function capitulos (obra) {
       console.error(error);
     });
 }
-async function obtenerCapitulos(clave) {
+function obtenerCapitulos(clave) {
 	  try {
 		const response = await fetch('books.json');
 		const dataCapitulos = await response.json();
