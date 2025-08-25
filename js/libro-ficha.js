@@ -68,6 +68,7 @@ function cargarlibro(libroId) {
 						  }
 					const imgContenedorHhtml = imagenContenedor.innerHTML;
 					//Listado Capitulos
+				/*
 						obtenerCapitulos(clave).then(listacapitulos => {
 						  // Aquí generamos las dos secciones
 						  const ultimosCapitulos = listacapitulos
@@ -157,7 +158,7 @@ function cargarlibro(libroId) {
 						  });
 						});
 							
-
+*/
 
 				//Generar la ficha del libro
 				const DataBook = document.querySelector('.book-card');
