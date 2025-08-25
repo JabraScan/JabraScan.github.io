@@ -30,7 +30,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		  const bannerOpcional = obra.querySelector("bannerOpcional").textContent.trim();
 		  const observaciones = obra.querySelector("observaciones").textContent.trim();
 		  const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
-			
+
+		  const OKAutor = aprobadaAutor === 'si' ? 'Traducción aprobada por el autor' : '';
+
 		  const categoriaIndiv = Categoria.split(",").map(item => item.trim());
 			let categoriaObj = '';
 			categoriaIndiv.forEach(item => {
@@ -76,6 +78,10 @@ document.addEventListener("DOMContentLoaded", function () {
 			   		<span class="carousel-info-label">Categoría:</span>
 		          </div>
 		          <div class="carousel-info-row-tags">
+		            ${categoriaObj}
+			   	  </div>
+		 		  </br>
+		          <div class="carousel-info-row">
 		            ${categoriaObj}
 			   	  </div>
 		        </div>
