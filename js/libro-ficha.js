@@ -73,11 +73,11 @@ function cargarlibro(libroId) {
 					const imgContenedorHhtml = imagenContenedor.innerHTML;
 					//Listado Capitulos
 						// Suponiendo que tienes el JSON cargado en una variable llamada `data`
-						const data = require('./books.json'); // o usa fetch si estás en navegador
+						const dataCapitulos = require('./books.json'); // o usa fetch si estás en navegador
 						
 						// Verificamos que exista la clave
-						if (data[clave]) {
-						  const resultado = data[clave].map(item => {
+						if (dataCapitulos[clave]) {
+						  const resultado = dataCapitulos[clave].map(item => {
 						    const partes = item.NombreArchivo.split(' - ');
 						    return {
 						      NombreArchivo: item.NombreArchivo,
