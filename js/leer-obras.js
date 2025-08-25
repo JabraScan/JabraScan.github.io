@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	
 	      const itemCarousel = document.createElement("div");
 		      itemCarousel.className = "carousel-item";
+			  itemCarousel.appendChild(imagenContenedor);
 		      itemCarousel.innerHTML = `
 		        <div class="carousel-info-overlay">
 		          <div class="carousel-info-title">${nombreobra}</div>
@@ -71,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			   	  </div>
 		        </div>
 		      `;
-	      itemCarousel.prepend(imagenContenedor);
+	      //itemCarousel.prepend(imagenContenedor);
 	      carouselContainer.appendChild(itemCarousel);
 			
 	      const itemBook = document.createElement("article");
