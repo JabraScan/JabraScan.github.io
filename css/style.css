@@ -34,7 +34,7 @@ main {
   margin: 2em auto;
   padding: 0 1em;
 }
-.adulto {
+.indicador-adulto {
   position: absolute;
   top: 10px; /* Ajusta la distancia desde la parte superior */
   right: 10px; /* Ajusta la distancia desde la derecha */
@@ -55,7 +55,7 @@ main {
   position: relative; /* Establece el contexto de posicionamiento */
   display: inline-block;
 }
-.imagen-contenedor:not(.adulto) .adulto {
+.imagen-contenedor:not(.adulto) .indicador-adulto {
   display: none;
 }
 .etiqueta {
