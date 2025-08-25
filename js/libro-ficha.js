@@ -72,7 +72,85 @@ function cargarlibro(libroId) {
 						  }
 					const imgContenedorHhtml = imagenContenedor.innerHTML;
 					//Listado Capitulos
-              			const listacapitulos = obtenerCapitulos(clave);
+						obtenerCapitulos(clave).then(listacapitulos => {
+						  // Aquí generamos las dos secciones
+						  const ultimosCapitulos = listacapitulos.slice(-5).reverse(); // Últimos 5
+						  const totalCapitulos = listacapitulos.length;
+						
+						  // Sección: Últimos capítulos
+						  const ultimosHTML = ultimosCapitulos.map(cap => `
+						    <li>
+						      <strong>${cap.nombreCapitulo}</strong> 
+						      <span>(${cap.Fecha})</span>
+						    </li>
+						  `).join('');
+						
+						  const seccionUltimos = `
+						    <div class="book-section">
+						      <h3><i class="fa-solid fa-clock-rotate-left"></i> Últimos capítulos</h3>
+						      <ul class="chapter-list">
+						        ${ultimosHTML}
+						      </ul>
+						    </div>
+						  `;
+						
+						  // Sección: Capítulos paginados
+						  const capitulosPorPagina = 10;
+						  const paginas = Math.ceil(totalCapitulos / capitulosPorPagina);
+						  let paginacionHTML = '';
+						
+						  for (let i = 0; i < paginas; i++) {
+						    const inicio = i * capitulosPorPagina;
+						    const fin = inicio + capitulosPorPagina;
+						    const pagina = listacapitulos.slice(inicio, fin);
+						
+						    const capitulosHTML = pagina.map(cap => `
+						      <li>
+						        <strong>${cap.nombreCapitulo}</strong> 
+						        <span>(${cap.Fecha})</span>
+						      </li>
+						    `).join('');
+						
+						    paginacionHTML += `
+						      <div class="chapter-page" data-pagina="${i + 1}" style="display: ${i === 0 ? 'block' : 'none'};">
+						        <h4>Página ${i + 1}</h4>
+						        <ul>${capitulosHTML}</ul>
+						      </div>
+						    `;
+						  }
+						
+						  const seccionPaginada = `
+						    <div class="book-section">
+						      <h3><i class="fa-solid fa-list-ol"></i> Todos los capítulos</h3>
+						      <div class="chapter-pagination">
+						        ${paginacionHTML}
+						        <div class="pagination-controls">
+						          ${Array.from({ length: paginas }, (_, i) => `
+						            <button class="pagina-btn" data-pagina="${i + 1}">${i + 1}</button>
+						          `).join('')}
+						        </div>
+						      </div>
+						    </div>
+						  `;
+						
+						  // Añadir ambas secciones al final de la ficha
+						  const DataBook = document.querySelector('.book-card');
+						  const seccionesHTML = document.createElement("div");
+						  seccionesHTML.className = "book-extra-sections";
+						  seccionesHTML.innerHTML = seccionUltimos + seccionPaginada;
+						  DataBook.appendChild(seccionesHTML);
+						
+						  // Activar paginación
+						  const botones = document.querySelectorAll('.pagina-btn');
+						  botones.forEach(btn => {
+						    btn.addEventListener('click', () => {
+						      const pagina = btn.getAttribute('data-pagina');
+						      document.querySelectorAll('.chapter-page').forEach(div => {
+						        div.style.display = div.getAttribute('data-pagina') === pagina ? 'block' : 'none';
+						      });
+						    });
+						  });
+						});
 							
 
 
