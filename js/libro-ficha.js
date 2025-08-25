@@ -32,6 +32,8 @@ function cargarlibro(libroId) {
 				const estado = obra.querySelector("estado").textContent.trim();
 				const ubicacion = obra.querySelector("ubicacion").textContent.trim();
 
+				capitulos(clave);
+
 				const DataBook = document.querySelector('.book-card');
 					const headerDataBook = document.createElement("div");
 						headerDataBook.className = "book-header";
