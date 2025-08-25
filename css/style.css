@@ -224,7 +224,7 @@ footer {
 }
 
 .carousel-item img {
-  width: 20%;
+  //width: 20%;
   height: 340px;
   object-fit: cover;
   //display: block;
