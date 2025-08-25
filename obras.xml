@@ -10,7 +10,7 @@
     <imagen>CallateDragonaMalvada.webp</imagen>
     <fechaCreacion>24/08/2025</fechaCreacion>
     <ubicacion>Novela China</ubicacion>
-    <estado>OnGoing</estado>
+    <estado>Activo</estado>
     <traductor>Tavo</traductor>
   </obra>
   <obra>
@@ -24,7 +24,7 @@
     <imagen>CultivationOnline.jpg</imagen>
     <fechaCreacion>24/08/2025</fechaCreacion>
     <ubicacion>Novela China</ubicacion>
-    <estado>OnGoing</estado>
+    <estado>Activo</estado>
     <traductor>Jabracadabra</traductor>
   </obra>
   <obra>
@@ -38,7 +38,7 @@
     <imagen>DualCultivation.webp</imagen>
     <fechaCreacion>24/08/2025</fechaCreacion>
     <ubicacion>Novela China</ubicacion>
-    <estado>OnGoing</estado>
+    <estado>Activo</estado>
     <traductor>Jabracadabra</traductor>
   </obra>
   <obra>
@@ -52,7 +52,21 @@
     <imagen>LaLeyendaDeLaEspadaDelNorte.webp</imagen>
     <fechaCreacion>24/08/2025</fechaCreacion>
     <ubicacion>Novela Coreana</ubicacion>
-    <estado>OnGoing</estado>
+    <estado>Activo</estado>
+    <traductor>Jabracadabra</traductor>
+  </obra>
+  <obra>
+    <clave>Suzume</clave>
+    <nombreobra>Suzume no Tojimari</nombreobra>
+    <autor>Makoto Shinkai (新海 誠)</autor>
+    <sinopsis>Una joven de 17 años llamada Suzume ayuda a un misterioso joven a cerrar las puertas de otro mundo, que están provocando desastres en todo Japón.</sinopsis>
+    <valoracion>9.0</valoracion>
+    <tipoobra>Novela Web</tipoobra>
+    <categoria>Aventura, Drama, Fantasía, Romance, Sobrenatural</categoria>
+    <imagen>Suzume.webp</imagen>
+    <fechaCreacion>23/07/2025</fechaCreacion>
+    <ubicacion>Novela Japonesa</ubicacion>
+    <estado>Finalizado</estado>
     <traductor>Jabracadabra</traductor>
   </obra>
 </obras>
