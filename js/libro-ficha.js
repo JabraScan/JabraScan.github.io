@@ -111,7 +111,7 @@ function cargarlibro(libroId) {
 						
 						    const capitulosHTML = pagina.map(cap => `
 						      <li>
-		  						<a href="lector.html?books/${clave}/${cap.NombreArchivo}">
+		  						<a href="lector.html?pdf=books/${clave}/${cap.NombreArchivo}">
 								  <span>${cap.numCapitulo}: ${cap.nombreCapitulo}</span>
 								  <span>(${cap.Fecha})</span>
 								</a>
