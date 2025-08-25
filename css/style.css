@@ -238,6 +238,9 @@ footer {
 .carousel-info-row-tags {
   gap: 0.6em;
 }
+.carousel-info-row span {
+  padding: 10px 0 0 0;
+}
 
 .carousel-info-label {
   font-weight: bold;
