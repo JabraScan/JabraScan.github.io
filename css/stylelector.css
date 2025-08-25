@@ -1,0 +1,56 @@
+/*
+body {
+  margin: 0;
+  font-family: sans-serif;
+  transition: background 0.3s, color 0.3s;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  background: #eee;
+  flex-wrap: wrap;
+}
+*/
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.controls select,
+.controls input,
+.controls button {
+  padding: 0.5em;
+  font-size: 1em;
+}
+
+.light-mode {
+  background: #fff;
+  color: #000;
+}
+
+.dark-mode {
+  background: #121212;
+  color: #eee;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+}
+
+canvas {
+  border: 1px solid #ccc;
+  margin-bottom: 1em;
+}
+
+.pdf-controls {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
