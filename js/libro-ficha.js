@@ -114,6 +114,7 @@ function cargarlibro(libroId) {
 						`;
 					  var sp2 = mainDataBook.querySelector(".book-genres");
 					  mainDataBook.insertBefore(imagenContenedor, sp2);
+				console.log(imagenContenedor);
 					DataBook.prepend(mainDataBook);
 					DataBook.prepend(headerDataBook);
 
