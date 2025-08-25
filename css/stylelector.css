@@ -36,6 +36,20 @@ header {
   background: #121212;
   color: #eee;
 }
+/* Canvas en modo claro */
+.light-mode canvas {
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+/* Canvas en modo oscuro */
+.dark-mode canvas {
+  background-color: #1e1e1e;
+  border: 1px solid #444;
+}
+.dark-mode canvas {
+  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(1.1);
+}
 
 main {
   display: flex;
@@ -54,3 +68,4 @@ canvas {
   gap: 1em;
   align-items: center;
 }
+
