@@ -111,8 +111,10 @@ function cargarlibro(libroId) {
 						
 						    const capitulosHTML = pagina.map(cap => `
 						      <li>
-						        <span>${cap.numCapitulo}: ${cap.nombreCapitulo}</span>
-						        <span>(${cap.Fecha})</span>
+		  						<a href="books/${clave}/${cap.NombreArchivo}">
+								  <span>${cap.numCapitulo}: ${cap.nombreCapitulo}</span>
+								  <span>(${cap.Fecha})</span>
+								</a>
 						      </li>
 						    `).join('');
 						
