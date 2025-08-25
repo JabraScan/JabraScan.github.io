@@ -113,7 +113,8 @@ function cargarlibro(libroId) {
 							</div>
 						`;
 					  var sp2 = mainDataBook.querySelector(".book-genres");
-					  mainDataBook.insertBefore(imagenContenedor, sp2);
+					  //mainDataBook.insertBefore(imagenContenedor, sp2);
+				console.log(mainDataBook);
 				console.log(imagenContenedor);
 					DataBook.prepend(mainDataBook);
 					DataBook.prepend(headerDataBook);
