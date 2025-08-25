@@ -39,6 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	  				<span>${observaciones}</span>
 	 				`;
 		  }
+			console.log(aprobadaAutor);
+			console.log(OKAutor);
 
 		  const categoriaIndiv = Categoria.split(",").map(item => item.trim());
 			let categoriaObj = '';
