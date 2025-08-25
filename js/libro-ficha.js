@@ -120,7 +120,7 @@ function cargarlibro(libroId) {
 						
 						    paginacionHTML += `
 						      <div class="chapter-page" data-pagina="${i + 1}" style="display: ${i === 0 ? 'block' : 'none'};">
-						        <h4>Página ${i + 1}</h4>
+						        <!--<h4>Página ${i + 1}</h4>-->
 						        <ul>${capitulosHTML}</ul>
 						      </div>
 						    `;
