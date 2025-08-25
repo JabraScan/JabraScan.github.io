@@ -148,18 +148,30 @@ body {
   padding: 0.2em 0;
 }
 .book-extra-sections {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; /* Espacio entre columnas */
+  display: block; /* Cambiamos de flex a block para una sola columna */
 }
+
 .book-section {
-  flex: 1 1 45%;
-  max-height: 400px; /* Ajusta según tu diseño */
-  overflow-y: auto;
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-height: none; /* Eliminamos la restricción de altura si no es necesaria */
+  overflow-y: visible;
   padding: 10px;
   border: 1px solid #ccc;
   box-sizing: border-box;
   background-color: #f9f9f9;
+}
+
+/* Aplica columnas al contenido interno */
+.book-section ul,
+.book-section .chapter-pagination {
+  column-count: 2; /* Divide en 2 columnas */
+  column-gap: 20px; /* Espacio entre columnas */
+}
+
+/* Opcional: mejora visual de los ítems en columnas */
+.book-section li {
+  break-inside: avoid; /* Evita que un ítem se divida entre columnas */
+  margin-bottom: 10px;
 }
 .pagination {
   display: flex;
