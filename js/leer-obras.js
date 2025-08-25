@@ -31,7 +31,15 @@ document.addEventListener("DOMContentLoaded", function () {
 		  const observaciones = obra.querySelector("observaciones").textContent.trim();
 		  const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
 
-		  const OKAutor = aprobadaAutor === 'si' ? 'Traducción aprobada por el autor' : '';
+		  if (aprobadaAutor === 'si') {
+		  	const OKAutor =  `
+	 				<span>'Traducción aprobada por el autor'</span>
+	 				</br>
+	  				<span>${observaciones}</span>
+	 				`;
+		  } else {
+			  const OKAutor = '';
+		  }
 
 		  const categoriaIndiv = Categoria.split(",").map(item => item.trim());
 			let categoriaObj = '';
@@ -82,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			   	  </div>
 		 		  </br>
 		          <div class="carousel-info-row">
-		            ${categoriaObj}
+		            ${OKAutor}
 			   	  </div>
 		        </div>
 		      `;
