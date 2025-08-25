@@ -19,7 +19,7 @@ const ctx = canvas.getContext('2d');
 const fontSelector = document.getElementById("fontSelector");
 const fontSizeSlider = document.getElementById("fontSizeSlider");
 const toggleMode = document.getElementById("toggleMode");
-const readAloudBtn = document.getElementById("readAloud");
+const startReadingBtn = document.getElementById("readAloud");
 const stopReadingBtn = document.getElementById("stopReading");
 const pauseReadingBtn = document.getElementById("pauseReading");
 const resumeReadingBtn = document.getElementById("resumeReading");
@@ -84,7 +84,7 @@ function mostrarBotones({ play = false, pause = false, resume = false, stop = fa
   stopReadingBtn.style.display = stop ? "inline-block" : "none";
 }
 // Lectura en voz alta
-readAloudBtn.onclick = () => {
+startReadingBtn.onclick = () => {
   pdfDoc.getPage(pageNum).then(page => {
     page.getTextContent().then(textContent => {
       const text = textContent.items.map(item => item.str).join(' ');
@@ -145,6 +145,7 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
+
 
 
 
