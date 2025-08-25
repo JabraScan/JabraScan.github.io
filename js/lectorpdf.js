@@ -1,5 +1,3 @@
-const url = 'archivo.pdf'; // Cambia esto por la ruta real de tu PDF
-
 let pdfDoc = null;
 let pageNum = 1;
 const canvas = document.getElementById('pdfCanvas');
@@ -12,12 +10,6 @@ const readAloudBtn = document.getElementById("readAloud");
 const stopReadingBtn = document.getElementById("stopReading");
 const pageInfo = document.getElementById("pageInfo");
 const body = document.body;
-
-// Cargar PDF
-pdfjsLib.getDocument(url).promise.then(doc => {
-  pdfDoc = doc;
-  renderPage(pageNum);
-});
 
 // Renderizar página
 function renderPage(num) {
@@ -92,3 +84,18 @@ readAloudBtn.onclick = () => {
 stopReadingBtn.onclick = () => {
   speechSynthesis.cancel();
 };
+
+// Cargar PDF desde enlace dinámico
+document.querySelectorAll('.pdf-link').forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault();
+    const newUrl = event.target.getAttribute('data-pdf');
+    if (newUrl) {
+      pdfjsLib.getDocument(newUrl).promise.then(doc => {
+        pdfDoc = doc;
+        pageNum = 1;
+        renderPage(pageNum);
+      });
+    }
+  });
+});
