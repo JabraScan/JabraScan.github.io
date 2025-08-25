@@ -249,7 +249,7 @@ function cargarlibro(libroId) {
             	});
 //    });
 }
-export function obtenerCapitulos(clave) {
+function obtenerCapitulos(clave) {
   return fetch('books.json')
     .then(response => response.json())
     .then(dataCapitulos => {
