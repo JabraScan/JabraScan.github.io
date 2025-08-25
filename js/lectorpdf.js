@@ -98,8 +98,20 @@ readAloudBtn.onclick = () => {
 };
 
 // Detener lectura
-stopReadingBtn.onclick = () => {
+stopReading.onclick = () => {
   speechSynthesis.cancel();
+};
+// Pausar lectura
+stopReading.onclick = () => {
+  if (speechSynthesis.speaking && !speechSynthesis.paused) {
+    speechSynthesis.pause();
+  }
+};
+// Reanudar lectura
+stopReading.onclick = () => {
+   if (speechSynthesis.paused) {
+    speechSynthesis.resume();
+  }
 };
 
 // Cargar PDF desde enlace dinámico
@@ -116,5 +128,6 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
+
 
 
