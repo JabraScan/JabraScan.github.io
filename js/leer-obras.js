@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	const footElement = document.querySelector('footer');
 	let now = new Date();
 	let annCurso = now.getFullYear()
-	footElement.innerHTML = `<p>&copy; ${now} JabraScan. No oficial, sin fines de lucro.</p>`;
+	footElement.innerHTML = `<p>&copy; ${annCurso} JabraScan. No oficial, sin fines de lucro.</p>`;
 	// leer-obras.js
 	fetch('obras.xml')
 	  .then(response => response.text())
