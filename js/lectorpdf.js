@@ -84,7 +84,11 @@ readAloudBtn.onclick = () => {
 
       const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith("es"));
       if (voices.length > 0) {
-        utterance.voice = voices[0];
+        //utterance.voice = voices[0];
+        utterance.voice = voices.find(v => v.name.includes("Google") || v.name.includes("Helena"));
+        utterance.rate = 0.95;   // velocidad (0.5 a 2)
+        utterance.pitch = 1.1;   // tono (0 a 2)
+        utterance.volume = 1;    // volumen (0 a 1)
       }
 
       speechSynthesis.cancel();
@@ -112,4 +116,5 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
+
 
