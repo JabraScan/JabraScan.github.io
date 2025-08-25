@@ -21,6 +21,8 @@ const fontSizeSlider = document.getElementById("fontSizeSlider");
 const toggleMode = document.getElementById("toggleMode");
 const readAloudBtn = document.getElementById("readAloud");
 const stopReadingBtn = document.getElementById("stopReading");
+const pauseReadingBtn = document.getElementById("pauseReading");
+const resumeReadingBtn = document.getElementById("resumeReading");
 const pageInfo = document.getElementById("pageInfo");
 const body = document.body;
 
@@ -58,14 +60,14 @@ document.getElementById("nextPage").onclick = () => {
 };
 
 // Cambiar fuente
-fontSelector.onchange = () => {
-  canvas.style.fontFamily = fontSelector.value;
-};
+//fontSelector.onchange = () => {
+//  canvas.style.fontFamily = fontSelector.value;
+//};
 
 // Cambiar tamaño de letra
-fontSizeSlider.oninput = () => {
-  canvas.style.fontSize = `${fontSizeSlider.value}px`;
-};
+//fontSizeSlider.oninput = () => {
+//  canvas.style.fontSize = `${fontSizeSlider.value}px`;
+//};
 
 // Modo diurno/nocturno
 toggleMode.onclick = () => {
@@ -75,7 +77,7 @@ toggleMode.onclick = () => {
 };
 
 // Lectura en voz alta
-readAloud.onclick = () => {
+readAloudBtn.onclick = () => {
   pdfDoc.getPage(pageNum).then(page => {
     page.getTextContent().then(textContent => {
       const text = textContent.items.map(item => item.str).join(' ');
@@ -98,17 +100,17 @@ readAloud.onclick = () => {
 };
 
 // Detener lectura
-stopReading.onclick = () => {
+stopReadingBtn.onclick = () => {
   speechSynthesis.cancel();
 };
 // Pausar lectura
-stopReading.onclick = () => {
+stopReadingBtn.onclick = () => {
   if (speechSynthesis.speaking && !speechSynthesis.paused) {
     speechSynthesis.pause();
   }
 };
 // Reanudar lectura
-stopReading.onclick = () => {
+stopReadingBtn.onclick = () => {
    if (speechSynthesis.paused) {
     speechSynthesis.resume();
   }
@@ -128,6 +130,7 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
+
 
 
 
