@@ -112,14 +112,12 @@ function cargarlibro(libroId) {
 									</div>
 							</div>
 						`;
-					  const bookImageContainer = mainDataBook.querySelector(".book-image");
-					  bookImageContainer.insertBefore(imagenContenedor, bookImageContainer.firstChild);
-					  //mainDataBook.insertBefore(imagenContenedor, sp2);
 				console.log(mainDataBook);
 				console.log(imagenContenedor);
 					DataBook.prepend(mainDataBook);
 					DataBook.prepend(headerDataBook);
-
+					  const bookImageContainer = mainDataBook.querySelector(".book-image");
+					  bookImageContainer.insertBefore(imagenContenedor, bookImageContainer.firstChild);
             	});
 //    });
 }
