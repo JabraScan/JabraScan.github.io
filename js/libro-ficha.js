@@ -83,7 +83,7 @@ function cargarlibro(libroId) {
 						  // Sección: Últimos capítulos
 						  const ultimosHTML = ultimosCapitulos.map(cap => `
 						    <li>
-		  						<a href="books/${clave}/${cap.NombreArchivo}">
+		  						<a href="#" data-pdf="books/${clave}/${cap.NombreArchivo}" class="pdf-link">
 								  <span>${cap.numCapitulo}: ${cap.nombreCapitulo}</span>
 								  <span>(${cap.Fecha})</span>
 								</a>
