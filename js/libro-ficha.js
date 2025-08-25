@@ -249,28 +249,40 @@ function cargarlibro(libroId) {
             	});
 //    });
 }
-function capitulos (obra) {
-    async function contarPDFs(path = "") {
-      //const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-      const response = await fetch("books/" + obra);
-      const data = await response.json();
-
-      for (const item of data) {
-        if (item.type === "file" && item.name.toLowerCase().endsWith(".pdf")) {
-          pdfCount++;
-        } else if (item.type === "dir") {
-          await contarPDFs(item.path);
-        }
+export function obtenerCapitulos(clave) {
+  return fetch('books.json')
+    .then(response => response.json())
+    .then(dataCapitulos => {
+      if (!dataCapitulos[clave]) {
+        console.error(`La clave "${clave}" no existe.`);
+        return [];
       }
-    }
 
-    contarPDFs().then(() => {
-      console.log(`Se encontraron ${pdfCount} archivos PDF en el repositorio.`);
-    }).catch(error => {
-      console.log("Error al acceder al repositorio.");
-      console.error(error);
+      const resultado = dataCapitulos[clave].map(item => {
+        const partes = item.NombreArchivo.split(' - ');
+        return {
+          NombreArchivo: item.NombreArchivo,
+          Fecha: item.Fecha,
+          obra: partes[0]?.trim() || "",
+          numCapitulo: parseInt(partes[1]?.trim(), 10) || 0,
+          nombreCapitulo: partes[2]?.trim() || ""
+        };
+      });
+
+      resultado.sort((a, b) => {
+        const fechaA = new Date(a.Fecha.split('-').reverse().join('-'));
+        const fechaB = new Date(b.Fecha.split('-').reverse().join('-'));
+        return fechaA - fechaB || a.numCapitulo - b.numCapitulo;
+      });
+
+      return resultado;
+    })
+    .catch(error => {
+      console.error("Error al cargar el archivo JSON:", error);
+      return [];
     });
 }
+
 /*
     // Datos de ejemplo
     const chapters = Array.from({length: 80}, (_, i) => `Capítulo ${i+1}: Título del capítulo`);
