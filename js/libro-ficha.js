@@ -98,9 +98,17 @@ function cargarlibro(libroId) {
 									<div class="book-info">
 										<h2 id="nombre-obra">${nombreobra}</h2>
 									</div>
+									<div class="book-info">
+										<div class="book-author-title">Autor:</div>
+										<div class="book-author-name">${autor}</div>
+		  								<span class="carousel-info-label">Traducción:</span> <span>${traduccion}</span>
+									</div>
+		 							<div class="book-info">
+										 ${OKAutor}
+									</div>
 									<div class="book-synopsis">
-									<b><i class="fa-solid fa-info-circle"></i> Sinopsis:</b>
-									<p id="sinopsis-obra">${sinopsis}</p>
+										<b><i class="fa-solid fa-info-circle"></i> Sinopsis:</b>
+										<p id="sinopsis-obra">${sinopsis}</p>
 									</div>
 									<div class="book-buttons">
 									<button class="chapter-list"><i class="fa-solid fa-list"></i> Lista de capítulos</button>
