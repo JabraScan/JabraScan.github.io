@@ -72,44 +72,8 @@ function cargarlibro(libroId) {
 						  }
 					const imgContenedorHhtml = imagenContenedor.innerHTML;
 					//Listado Capitulos
-              // Cargar el archivo JSON usando fetch
-              fetch('books.json')
-                .then(response => response.json())
-                .then(dataCapitulos => {
-                  if (!dataCapitulos[clave]) {
-                    console.error(`La clave "${clave}" no existe.`);
-                    return;
-                  }
-
-                  // Procesar los datos
-                  const resultado = dataCapitulos[clave].map(item => {
-                    const partes = item.NombreArchivo.split(' - ');
-                    return {
-                      NombreArchivo: item.NombreArchivo,
-                      Fecha: item.Fecha,
-                      obra: partes[0]?.trim() || "",
-                      numCapitulo: parseInt(partes[1]?.trim(), 10) || 0,
-                      nombreCapitulo: partes[2]?.trim() || ""
-                    };
-                  });
-
-                  // Ordenar por Fecha y luego por numCapitulo
-                  resultado.sort((a, b) => {
-                    const fechaA = new Date(a.Fecha.split('-').reverse().join('-'));
-                    const fechaB = new Date(b.Fecha.split('-').reverse().join('-'));
-
-                    if (fechaA < fechaB) return -1;
-                    if (fechaA > fechaB) return 1;
-
-                    return a.numCapitulo - b.numCapitulo;
-                  });
-
-                  // Mostrar resultado
-                  console.log(resultado);
-                })
-                .catch(error => {
-                  console.error("Error al cargar el archivo JSON:", error);
-                });
+              			const listacapitulos = await obtenerCapitulos(clave);
+							
 
 
 				//Generar la ficha del libro
@@ -155,6 +119,55 @@ function cargarlibro(libroId) {
 					DataBook.prepend(headerDataBook);
 					  const bookImageContainer = mainDataBook.querySelector(".book-image");
 					  bookImageContainer.insertBefore(imagenContenedor, bookImageContainer.firstChild);
+/*
+				    // -------- CAPÍTULOS RECIENTES EN 2 COLUMNAS --------
+				    const latestChapters = chapters.slice(-latestChaptersCount).reverse();
+				    const halfLatest = Math.ceil(latestChapters.length / 2);
+				    const col1Latest = latestChapters.slice(0, halfLatest);
+				    const col2Latest = latestChapters.slice(halfLatest);
+				    
+				    document.getElementById('latest-chapters-columns').innerHTML = `
+				      <ul>${col1Latest.map(chap => `<li>${chap}</li>`).join('')}</ul>
+				      <ul>${col2Latest.map(chap => `<li>${chap}</li>`).join('')}</ul>
+				    `;
+				    
+				    // -------- LISTA COMPLETA & PAGINACIÓN --------
+				    const chaptersPerPage = 30;
+				    let currentPage = 1;
+				    const totalPages = Math.ceil(chapters.length/chaptersPerPage);
+				    
+				    function renderChapters(page) {
+				      const start = (page-1)*chaptersPerPage;
+				      const list = chapters.slice(start, start+chaptersPerPage);
+				      // Divide en 2 columnas
+				      const half = Math.ceil(list.length/2);
+				      let col1 = list.slice(0, half);
+				      let col2 = list.slice(half);
+				      document.getElementById('chapter-columns').innerHTML = `
+				        <ul>${col1.map(c=>`<li>${c}</li>`).join('')}</ul>
+				        <ul>${col2.map(c=>`<li>${c}</li>`).join('')}</ul>
+				      `;
+				      document.getElementById('pagination').innerHTML = `
+				        <button ${page==1?'disabled':''} onclick="changePage(1)">Primera</button>
+				        <button ${page==1?'disabled':''} onclick="changePage(${page-1})">Anterior</button>
+				        <span>Pág ${page}/${totalPages}</span>
+				        <button ${page==totalPages?'disabled':''} onclick="changePage(${page+1})">Siguiente</button>
+				        <button ${page==totalPages?'disabled':''} onclick="changePage(${totalPages})">Última</button>
+				      `;
+				    }
+				    window.changePage = function(p){ if(p<1||p>totalPages)return; currentPage=p; renderChapters(p);}
+				    renderChapters(currentPage);
+				    
+				    // --------- BOTONES (puedes poner tus rutas reales) ---------
+				    document.querySelector('.chapter-list').onclick = () => {
+				      document.querySelector('.book-chapters-list').scrollIntoView({behavior:'smooth'});
+				    };
+				    document.querySelector('.read-first').onclick = () => {
+				      alert('Ir a leer el primer capítulo (implementa tu enlace).');
+				    };
+				    document.querySelector('.library').onclick = () => {
+				      alert('Añadido a tu biblioteca (implementa tu lógica).');
+				    };*/
             	});
 //    });
 }
@@ -180,6 +193,45 @@ function capitulos (obra) {
       console.error(error);
     });
 }
+async function obtenerCapitulos(clave) {
+	  try {
+		const response = await fetch('books.json');
+		const dataCapitulos = await response.json();
+	
+		if (!dataCapitulos[clave]) {
+		  console.error(`La clave "${clave}" no existe.`);
+		  return [];
+		}
+	
+		const resultado = dataCapitulos[clave].map(item => {
+		  const partes = item.NombreArchivo.split(' - ');
+		  return {
+			NombreArchivo: item.NombreArchivo,
+			Fecha: item.Fecha,
+			obra: partes[0]?.trim() || "",
+			numCapitulo: parseInt(partes[1]?.trim(), 10) || 0,
+			nombreCapitulo: partes[2]?.trim() || ""
+		  };
+		});
+	
+		resultado.sort((a, b) => {
+		  const fechaA = new Date(a.Fecha.split('-').reverse().join('-'));
+		  const fechaB = new Date(b.Fecha.split('-').reverse().join('-'));
+	
+		  if (fechaA < fechaB) return -1;
+		  if (fechaA > fechaB) return 1;
+	
+		  return a.numCapitulo - b.numCapitulo;
+		});
+	
+		return resultado;
+	
+	  } catch (error) {
+		console.error("Error al cargar el archivo JSON:", error);
+		return [];
+	  }
+	}
+
 /*
     // Datos de ejemplo
     const chapters = Array.from({length: 80}, (_, i) => `Capítulo ${i+1}: Título del capítulo`);
