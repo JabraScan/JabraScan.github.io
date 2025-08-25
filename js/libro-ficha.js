@@ -74,7 +74,14 @@ function cargarlibro(libroId) {
 					//Listado Capitulos
 						obtenerCapitulos(clave).then(listacapitulos => {
 						  // Aquí generamos las dos secciones
-						  const ultimosCapitulos = listacapitulos.slice(-5).reverse(); // Últimos 5
+						  const ultimosCapitulos = listacapitulos
+								  .filter(c => c.Fecha && c.Fecha.trim() !== "") // solo capítulos con fecha válida
+								  .sort((a, b) => {
+								    const fechaA = new Date(a.Fecha.split('-').reverse().join('-'));
+								    const fechaB = new Date(b.Fecha.split('-').reverse().join('-'));
+								    return fechaB - fechaA; // más recientes primero
+								  })
+								  .slice(0, 5); // últimos 5 capítulos
 						  const totalCapitulos = listacapitulos.length;
 						
 						  // Sección: Últimos capítulos
