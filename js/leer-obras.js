@@ -37,22 +37,22 @@ document.addEventListener("DOMContentLoaded", function () {
 				  img.alt = nombreobra;
 				  imagenContenedor.appendChild(img);
 				
-				  if (contenido18 === "adulto") {
+				  /*if (contenido18 === "adulto") {
 				    imagenContenedor.classList.add("adulto");
 				    const indicador = document.createElement("div");
 				    //indicador.classList.add("indicador-adulto");
 				    indicador.textContent = "+18";
 				    imagenContenedor.appendChild(indicador);
-				  }
+				  }*/
 	      const indice = 0;
 	
 	      const itemCarousel = document.createElement("div");
 		      itemCarousel.className = "carousel-item";
-		        	//<img src="../img/${imagen}" alt="${nombreobra}">
 		      itemCarousel.innerHTML = `
 		        <div class="carousel-info-overlay">
 		          <div class="carousel-info-title">${nombreobra}</div>
 				  </br>
+		          <!--<img src="../img/${imagen}" alt="${nombreobra}">-->
 		          <div class="carousel-info-row">
 		            <span class="carousel-info-label clave">${clave}</span>
 		            <!--<span class="carousel-info-label">Valoración:</span> <span>${valoracion}</span>-->
