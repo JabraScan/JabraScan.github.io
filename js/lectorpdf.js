@@ -31,6 +31,7 @@ function renderPage(num) {
   pdfDoc.getPage(num).then(page => {
     const scale = 1.5;
     const viewport = page.getViewport({ scale });
+    const viewport = page.getViewport({ scale });
 
     canvas.height = viewport.height;
     canvas.width = viewport.width;
@@ -45,7 +46,6 @@ function renderPage(num) {
     speechSynthesis.cancel(); // Detener lectura si se cambia de página
   });
 }
-
 // Navegación
 document.getElementById("prevPage").onclick = () => {
   if (pageNum <= 1) return;
@@ -74,6 +74,9 @@ toggleMode.onclick = () => {
   body.classList.toggle("dark-mode");
   body.classList.toggle("light-mode");
   toggleMode.textContent = body.classList.contains("dark-mode") ? "☀️" : "🌙";
+
+  const isDark = document.body.classList.contains("dark-mode");
+  localStorage.setItem("modoNocturno", isDark ? "true" : "false");
 };
 
 // Función para mostrar/ocultar botones Lectura
@@ -130,7 +133,18 @@ resumeReadingBtn.onclick = () => {
      mostrarBotones({ pause: true, stop: true });
   }
 };
+//Redibujar al cambiar tamaño de ventana
+window.addEventListener("resize", () => {
+  if (pdfDoc) renderPage(pageNum);
+});
+//Cuando se carga la página, revisa si el usuario tenía activado el modo nocturno:
+window.addEventListener("DOMContentLoaded", () => {
+  const modoNocturno = localStorage.getItem("modoNocturno");
 
+  if (modoNocturno === "true") {
+    document.body.classList.add("dark-mode");
+  }
+});
 // Cargar PDF desde enlace dinámico
 document.querySelectorAll('.pdf-link').forEach(link => {
   link.addEventListener('click', event => {
@@ -145,6 +159,7 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
+
 
 
 
