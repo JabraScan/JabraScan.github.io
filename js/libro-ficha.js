@@ -84,7 +84,6 @@ function cargarlibro(libroId) {
 						mainDataBook.innerHTML = `
 							<div class="book-image">
 								<!--<img src="../../img/${imagen}" alt="${nombreobra}"/>-->
-								${imgContenedorHhtml}
 								<div class="book-genres">
 									<span><i class="fa-solid fa-tags"></i>${Categoria}</span>                
 								</div>
@@ -99,12 +98,9 @@ function cargarlibro(libroId) {
 										<h2 id="nombre-obra">${nombreobra}</h2>
 									</div>
 									<div class="book-info">
-										<div class="book-author-title">Autor:</div>
-										<div class="book-author-name">${autor}</div>
-		  								<span class="carousel-info-label">Traducción:</span> <span>${traduccion}</span>
-									</div>
-		 							<div class="book-info">
-										 ${OKAutor}
+										<div><b>Autor: </b> ${autor}</div>
+		  								<div><b>Traducción: </b>${traduccion}</div>
+  								 		${OKAutor}
 									</div>
 									<div class="book-synopsis">
 										<b><i class="fa-solid fa-info-circle"></i> Sinopsis:</b>
@@ -116,8 +112,11 @@ function cargarlibro(libroId) {
 									</div>
 							</div>
 						`;
+					  var sp2 = mainDataBook.querySelector(".book-genres");
+					  mainDataBook.insertBefore(imagenContenedor, sp2);
 					DataBook.prepend(mainDataBook);
 					DataBook.prepend(headerDataBook);
+
             	});
 //    });
 }
