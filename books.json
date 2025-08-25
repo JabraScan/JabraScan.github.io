@@ -3,7 +3,7 @@
     { "Fecha":"03-08-2025", "NombreArchivo": "CultivationOnline-2060[JabraScan].pdf" , "numCapitulo":  "2060" , "nombreCapitulo" : "Esencia de Sangre del Fénix Primordial" },
     { "Fecha":"05-08-2025", "NombreArchivo": "CultivationOnline-2061[JabraScan].pdf" , "numCapitulo":  "2061" , "nombreCapitulo" : "Anguila Fundida del Infierno"           },
     { "Fecha":"10-08-2025", "NombreArchivo": "CultivationOnline-2062[JabraScan].pdf" , "numCapitulo":  "2062" , "nombreCapitulo" : "Anguila Fundida del Infierno (2)"       },
-    { "Fecha":"23-08-2025", "NombreArchivo": "CultivationOnline-2086[JabraScan].pdf" , "numCapitulo":  "2086" , "nombreCapitulo" : "Enloquecido - [JabraScan].pdf"          },
+    { "Fecha":"23-08-2025", "NombreArchivo": "CultivationOnline-2086[JabraScan].pdf" , "numCapitulo":  "2086" , "nombreCapitulo" : "Enloquecido"                            },
     { "Fecha":"23-08-2025", "NombreArchivo": "CultivationOnline-2087[JabraScan].pdf" , "numCapitulo":  "2087" , "nombreCapitulo" : "Soy el Monarca Inmortal"                },
     { "Fecha":"23-08-2025", "NombreArchivo": "CultivationOnline-2088[JabraScan].pdf" , "numCapitulo":  "2088" , "nombreCapitulo" : "Extracción de Sangre Prohibida "        }
   ],
@@ -29,8 +29,8 @@
     { "Fecha": "25-05-2025", "NombreArchivo": "PathtoDualCultivation-16[JabraScan].pdf" , "numCapitulo": "16", "nombreCapitulo" : "Constitución Celestial"                   }, 
     { "Fecha": "25-05-2025", "NombreArchivo": "PathtoDualCultivation-17[JabraScan].pdf" , "numCapitulo": "17", "nombreCapitulo" : "La Iluminación"                           },
     { "Fecha": "25-05-2025", "NombreArchivo": "PathtoDualCultivation-18[JabraScan].pdf" , "numCapitulo": "18", "nombreCapitulo" : "Percepciones del Vacío del Tirano de la Espada" },
-    { "Fecha": "25-05-2025", "NombreArchivo": "PathtoDualCultivation-19[JabraScan].pdf" , "numCapitulo": "19", "nombreCapitulo" : "Secta de la Espada Principal - [JabraScan].pdf" },
-    { "Fecha": "25-05-2025", "NombreArchivo": "PathtoDualCultivation-20[JabraScan].pdf" , "numCapitulo": "20", "nombreCapitulo" : "Aún No Está Terminando - [JabraScan].pdf" },
+    { "Fecha": "25-05-2025", "NombreArchivo": "PathtoDualCultivation-19[JabraScan].pdf" , "numCapitulo": "19", "nombreCapitulo" : "Secta de la Espada Principal"             },
+    { "Fecha": "25-05-2025", "NombreArchivo": "PathtoDualCultivation-20[JabraScan].pdf" , "numCapitulo": "20", "nombreCapitulo" : "Aún No Está Terminando"                   },
     { "Fecha": "25-05-2025", "NombreArchivo": "PathtoDualCultivation-21[JabraScan].pdf" , "numCapitulo": "21", "nombreCapitulo" : "El Culmen de los Talentos de la Espada"   },
     { "Fecha": "28-05-2025", "NombreArchivo": "PathtoDualCultivation-22[JabraScan].pdf" , "numCapitulo": "22", "nombreCapitulo" : "Valle de la Devoción Eterna (1)"          },
     { "Fecha": "28-05-2025", "NombreArchivo": "PathtoDualCultivation-23[JabraScan].pdf" , "numCapitulo": "23", "nombreCapitulo" : "Valle de la Devoción Eterna (2)"          },
@@ -44,5 +44,6 @@
     { "Fecha": "28-05-2025", "NombreArchivo": "PathtoDualCultivation-33[JabraScan].pdf" , "numCapitulo": "33", "nombreCapitulo" : "La Vida Como un Discípulo Ordinario"      }
   ]
 }
+
 
 
