@@ -88,9 +88,9 @@ function capitulos (obra) {
     }
 
     contarPDFs().then(() => {
-      document.getElementById("resultado").textContent = `Se encontraron ${pdfCount} archivos PDF en el repositorio.`;
+      console.log(`Se encontraron ${pdfCount} archivos PDF en el repositorio.`);
     }).catch(error => {
-      document.getElementById("resultado").textContent = "Error al acceder al repositorio.";
+      console.log("Error al acceder al repositorio.");
       console.error(error);
     });
 }
