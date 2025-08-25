@@ -29,18 +29,16 @@ document.addEventListener("DOMContentLoaded", function () {
 			  // Puedes hacer lo que necesites con cada 'item' aquí
 			});
 		  if (contenido18 === "adulto") {
-			  const claseadulto = "adulto";
 			  const indicadoradulto = '<div class="adulto">+18</div>';
 		  } else {
-			  const claseadulto = "";
-			  const indicadoradulto = "";
+			  const indicadoradulto = "<div/>";
 		  }
 	      const indice = 0;
 	
 	      const itemCarousel = document.createElement("div");
 		      itemCarousel.className = "carousel-item";
 		      itemCarousel.innerHTML = `
-				<div class="imagen-contenedor ${claseadulto}">
+				<div class="imagen-contenedor ${contenido18}">
 		        	<img src="../img/${imagen}" alt="${nombreobra}">
 		  			${indicadoradulto}
 				</div>
