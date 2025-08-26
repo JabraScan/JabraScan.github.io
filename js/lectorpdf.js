@@ -123,61 +123,62 @@
     
       // Cargar PDF desde enlace
       document.querySelectorAll(".pdf-link").forEach(link => {
-        link.addEventListener("click", event => {
-          event.preventDefault();
-    
-	  const clave = event.currentTarget.getAttribute("data-pdf-obra");
-	  const capitulo = event.currentTarget.getAttribute("data-pdf-capitulo");
-		let clave, capitulo, ultimaPagina;
+       	 link.addEventListener("click", event => {
+		          event.preventDefault();
+		    
+					const claveParam = event.currentTarget.getAttribute("data-pdf-obra");
+					const capituloParam = event.currentTarget.getAttribute("data-pdf-capitulo");
+					
+					let clave, capitulo, ultimaPagina;
+					
+					// Si vienen parámetros, los usamos y guardamos en localStorage
+					if (claveParam && capituloParam) {
+					    console.log("Abrir desde enlace");
+					    clave = claveParam;
+					    capitulo = capituloParam;
+					
+					    localStorage.setItem("ultimaObra", clave);
+					    localStorage.setItem("ultimoCapitulo", capitulo);
+					
+					} else {
+						// Si no vienen parámetros, cargamos desde localStorage
+			    		console.log("Abrir desde localStorage");
+							clave = localStorage.getItem("ultimaObra");
+			      			capitulo = localStorage.getItem("ultimoCapitulo");
+			      			ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
+					}
+		    
+		          fetch("books.json")
+		            .then(response => response.json())
+		            .then(books => {
+		              const cap = encodeURIComponent(books[clave]?.find(c => c.numCapitulo === capitulo));
+		              if (!cap) return;
+					//actualizar h1
+					const h1 = document.querySelector("header h1");
+					  h1.textContent = cap.tituloObra;
+					  //h1.onclick = () => onLibroClick(ultimaObra);
+		            //abrir archivo			
+						//seleccionar pagina activa
+		              const pdfPath = `books/${clave}/${cap.NombreArchivo}`;
 		
-		// Si vienen parámetros, los usamos y guardamos en localStorage
-		if (claveParam && capituloParam) {
-		    console.log("Abrir desde enlace");
-		    clave = claveParam;
-		    capitulo = capituloParam;
-		
-		    localStorage.setItem("ultimaObra", clave);
-		    localStorage.setItem("ultimoCapitulo", capitulo);
-		
-		} else {
-			// Si no vienen parámetros, cargamos desde localStorage
-    		console.log("Abrir desde localStorage");
-				clave = localStorage.getItem("ultimaObra");
-      			capitulo = localStorage.getItem("ultimoCapitulo");
-      			ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
-		}
-    
-          fetch("books.json")
-            .then(response => response.json())
-            .then(books => {
-              const cap = encodeURIComponent(books[clave]?.find(c => c.numCapitulo === capitulo));
-              if (!cap) return;
-			//actualizar h1
-			const h1 = document.querySelector("header h1");
-			  h1.textContent = cap.tituloObra;
-			  //h1.onclick = () => onLibroClick(ultimaObra);
-            //abrir archivo			
-				//seleccionar pagina activa
-              const pdfPath = `books/${clave}/${cap.NombreArchivo}`;
-
-				 if (ultimaObra && ultimoCapitulo) {
-					 //abrir archivo y seleccionar la pagina activa
-					jsLib.getDocument(pdfPath).promise.then(doc => {
-						pdfDoc = doc;
-						pageNum = !isNaN(ultimaPagina) ? ultimaPagina : 1;
-						renderPage(pageNum);
-		            });
-				 } else {				
-					//abrir archivo en la primera pagina
-					pdfjsLib.getDocument(pdfPath).promise.then(doc => {
-						pdfDoc = doc;
-						pageNum = 1;
-						renderPage(pageNum);
-					});
-				 }
-            })
-            .catch(error => console.error("Error al cargar el PDF:", error));
-        });
+						 if (ultimaObra && ultimoCapitulo) {
+							 //abrir archivo y seleccionar la pagina activa
+							jsLib.getDocument(pdfPath).promise.then(doc => {
+								pdfDoc = doc;
+								pageNum = !isNaN(ultimaPagina) ? ultimaPagina : 1;
+								renderPage(pageNum);
+				            });
+						 } else {				
+							//abrir archivo en la primera pagina
+							pdfjsLib.getDocument(pdfPath).promise.then(doc => {
+								pdfDoc = doc;
+								pageNum = 1;
+								renderPage(pageNum);
+							});
+						 }
+		            })
+		            .catch(error => console.error("Error al cargar el PDF:", error));
+        	});
       });
 
 	  /*
@@ -230,6 +231,7 @@ console.log("abrir automaticamente");
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
 
 
 
