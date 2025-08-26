@@ -171,6 +171,7 @@ document.querySelectorAll('.pdf-link').forEach(link => {
           console.warn(`El capítulo "${capitulo}" no se encontró en "${clave}".`);
           return;
         }
+      });
     
     const newUrl = 'books/clave/cap';
         console.log(newurl);
@@ -183,6 +184,7 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
+
 
 
 
