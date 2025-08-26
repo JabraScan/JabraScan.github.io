@@ -137,7 +137,12 @@
             .then(books => {
               const cap = books[clave]?.find(c => c.numCapitulo === capitulo);
               if (!cap) return;
-    
+			//actualizar h1
+			const h1 = document.querySelector("header h1");
+			  h1.textContent = cap.tituloObra;
+			  h1.onclick = () => onLibroClick(ultimaObra);
+				
+            //abrir archivo			
               const pdfPath = `books/${clave}/${cap.NombreArchivo}`;
               pdfjsLib.getDocument(pdfPath).promise.then(doc => {
                 pdfDoc = doc;
@@ -160,10 +165,10 @@
           .then(books => {
             const cap = books[ultimaObra]?.find(c => c.numCapitulo === ultimoCapitulo);
             if (!cap) return;
-        		//actualizar h1
-      			const h1 = document.querySelector("header h1");
-      			  h1.textContent = c.tituloObra;
-              h1.onclick = () => onLibroClick(clave);
+			//actualizar h1
+			const h1 = document.querySelector("header h1");
+			  h1.textContent = cap.tituloObra;
+			  h1.onclick = () => onLibroClick(ultimaObra);
             //abrir archivo
             const pdfPath = `books/${ultimaObra}/${cap.NombreArchivo}`;
             pdfjsLib.getDocument(pdfPath).promise.then(doc => {
@@ -184,16 +189,17 @@
 			// Usar fetch para cargar el contenido de disclaimer.html
 			fetch('books/libro-ficha.html')
 				.then(response => {
-				if (!response.ok) {
-					throw new Error('Error al cargar el archivo: ' + response.statusText);
-				}
-				return response.text();
+					if (!response.ok) {
+						throw new Error('Error al cargar el archivo: ' + response.statusText);
+					}
+					return response.text();
 				})
 				.then(data => {
-						// Cargar el contenido en <main>
-						const mainElement = document.querySelector('main');
-						mainElement.innerHTML = data;
-						cargarlibro(libroId);
+					// Cargar el contenido en <main>
+					const mainElement = document.querySelector('main');
+					mainElement.innerHTML = data;
+					cargarlibro(libroId);
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
