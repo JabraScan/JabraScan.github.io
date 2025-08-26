@@ -146,6 +146,23 @@ function cargarlibro(libroId) {
 						  seccionesHTML.className = "book-extra-sections";
 						  seccionesHTML.innerHTML = seccionUltimos + seccionPaginada;
 						  DataBook.appendChild(seccionesHTML);
+							// Después de insertar los capítulos en el DOM
+								document.querySelectorAll('.pdf-link').forEach(link => {
+								  link.addEventListener('click', function (e) {
+								    e.preventDefault();
+								    const clave = e.currentTarget.getAttribute("data-pdf-obra");
+								    const capitulo = e.currentTarget.getAttribute("data-pdf-capitulo");
+								
+								    console.log("Click detectado:", clave, capitulo);
+								
+								    localStorage.setItem('ultimaObra', clave);
+								    localStorage.setItem('ultimoCapitulo', capitulo);
+								    localStorage.setItem("ultimaPagina", 1);
+								
+								    window.location.href = 'lectorpdf.html';
+								  });
+								});
+
 						
 						  // Activar paginación
 						  const botones = document.querySelectorAll('.pagina-btn');
