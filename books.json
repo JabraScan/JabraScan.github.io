@@ -107,11 +107,12 @@
     { "Fecha" : "24-07-2025", "NombreArchivo" : "Suzume [JabraScan]_fin-216-223.pdf" , "numCapitulo" :  "5.9", "nombreCapitulo" : "Para Siempre - Todo El Tiempo"                                                  , "tituloObra" : "Suzume" },
     { "Fecha" : "24-07-2025", "NombreArchivo" : "Suzume [JabraScan]_fin-224-230.pdf" , "numCapitulo" :  "6.0", "nombreCapitulo" : "Día 6 y Recuerdos - Las Palabras Que Nadie Pudo Decir"                          , "tituloObra" : "Suzume" }
   
-],
+  ],
   "CallateDragonaMalvadaNoQuieroTenerMasHijosContigo": [
-    { "Fecha" : "26-8-2025",  "NombreArchivo" : "¡Callate_dragon_malvado_No_quiero_tener_mas_hijos_contigo!-1.pdf" , "nombreCapitulo" : "Después de la derrota y la captura, siempre hay"        , "tiuloObra" : "¡Callate, dragon malvado! No quiero tener mas hijos contigo."}
+    { "Fecha" : "26-8-2025",  "NombreArchivo" : "¡Callate_dragon_malvado_No_quiero_tener_mas_hijos_contigo!-1.pdf" , "numCapitulo" : "1", "nombreCapitulo" : "Después de la derrota y la captura, siempre hay"        , "tituloObra" : "¡Callate, dragon malvado! No quiero tener mas hijos contigo."}
     
   ]
 }
+
 
 
