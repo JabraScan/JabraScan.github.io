@@ -14,6 +14,11 @@ header {
   flex-wrap: wrap;
 }
 */
+.lector-book {
+  font-weight: bold;
+  color: #f8b400;
+  cursor: pointer;
+}
 .controls {
   display: flex;
   flex-wrap: wrap;
@@ -68,4 +73,5 @@ canvas {
   gap: 1em;
   align-items: center;
 }
+
 
