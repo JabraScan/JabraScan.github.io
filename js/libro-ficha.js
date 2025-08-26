@@ -260,3 +260,21 @@ function obtenerCapitulos(clave) {
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll('.pdf-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const obra = this.dataset.pdfObra;
+      const capitulo = this.dataset.pdfCapitulo;
+
+      // Guardar en localStorage
+      localStorage.setItem('pdfObra', obra);
+      localStorage.setItem('pdfCapitulo', capitulo);
+
+      // Redirigir a lectorpdf.html
+      window.location.href = 'lectorpdf.html';
+    });
+  });
+});
+
