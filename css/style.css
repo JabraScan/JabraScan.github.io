@@ -250,6 +250,7 @@ footer {
   font-size: 1.6em;
   font-weight: bold;
   margin: 0;
+  cursor: pointer;
 }
 
 .carousel-info-row .carousel-info-row-tags {
@@ -302,6 +303,9 @@ footer {
 .carousel-btn:hover {
   background: #fca311;
   color: #14213d;
+}
+.libro-item {
+    cursor: pointer;
 }
 
 @media (max-width: 700px) {
