@@ -91,7 +91,7 @@ function cargarlibro(libroId) {
 						  `).join('');
 						
 						  const seccionUltimos = `
-						    <div class="book-section">
+						    <div class="book-section book-latest-chapters">
 						      <h3><i class="fa-solid fa-clock-rotate-left"></i> Últimos capítulos</h3>
 						      <ul class="chapter-list">
 						        ${ultimosHTML}
@@ -127,16 +127,18 @@ function cargarlibro(libroId) {
 						  }
 						
 						  const seccionPaginada = `
-						    <div class="book-section">
+						    <div class="book-section book-chapters-list">
 						      <h3><i class="fa-solid fa-list-ol"></i> Todos los capítulos</h3>
-						      <div class="chapter-pagination">
-						        ${paginacionHTML}
-						        <div class="pagination-controls">
-						          ${Array.from({ length: paginas }, (_, i) => `
-						            <button class="pagina-btn" data-pagina="${i + 1}">${i + 1}</button>
-						          `).join('')}
-						        </div>
-						      </div>
+								<div class="chapter-pagination chapter-columns">
+									${paginacionHTML}
+								</div>
+								<div class="pagination-controls pagination">
+									${Array.from({ length: paginas }, (_, i) => `
+										<button disabled>Primero</button>
+		  								<button class="pagina-btn" data-pagina="${i + 1}">${i + 1}</button>
+										<button>Siguiente</button>
+									`).join('')}
+								</div>
 						    </div>
 						  `;
 						
