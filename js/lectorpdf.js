@@ -158,7 +158,7 @@
 					  h1.textContent = cap.tituloObra;
 					  //h1.onclick = () => onLibroClick(ultimaObra);
 		            //abrir archivo			
-						const nombreArchivo = encodeURIComponent(${cap.NombreArchivo});
+						const nombreArchivo = encodeURIComponent(cap.NombreArchivo);
 						//seleccionar pagina activa
 		              const pdfPath = `books/${clave}/${nombreArchivo}`;
 		
@@ -200,7 +200,7 @@ console.log("abrir automaticamente");
 			  h1.textContent = cap.tituloObra;
 			  //h1.onclick = () => onLibroClick(ultimaObra);
             //abrir archivo
-			const nombreArchivo = encodeURIComponent(${cap.NombreArchivo});
+			const nombreArchivo = encodeURIComponent(cap.NombreArchivo);
             const pdfPath = `books/${ultimaObra}/${nombreArchivo}`;
             pdfjsLib.getDocument(pdfPath).promise.then(doc => {
               pdfDoc = doc;
@@ -233,6 +233,7 @@ console.log("abrir automaticamente");
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
 
 
 
