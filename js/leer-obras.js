@@ -49,7 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 			//indicador +18
 		    const imagenContenedor = document.createElement("div");
-				  imagenContenedor.classList.add("imagen-contenedor libro-item");
+				  imagenContenedor.classList.add("imagen-contenedor");
+				  imagenContenedor.classList.add("libro-item");
 				
 				  const img = document.createElement("img");
 					  img.src = "../img/" + imagen;
