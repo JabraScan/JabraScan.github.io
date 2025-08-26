@@ -232,7 +232,6 @@ function obtenerCapitulos(clave) {
         // Ordenar por fecha y luego por número de capítulo
         return fechaA - fechaB || a.numCapitulo - b.numCapitulo;
       });
-console.log(resultado);
       return resultado;
     })
     .catch(error => {
