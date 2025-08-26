@@ -160,7 +160,11 @@
           .then(books => {
             const cap = books[ultimaObra]?.find(c => c.numCapitulo === ultimoCapitulo);
             if (!cap) return;
-    
+        		//actualizar h1
+      			const h1 = document.querySelector("header h1");
+      			  h1.textContent = c.tituloObra;
+              h1.onclick = () => onLibroClick(clave);
+            //abrir archivo
             const pdfPath = `books/${ultimaObra}/${cap.NombreArchivo}`;
             pdfjsLib.getDocument(pdfPath).promise.then(doc => {
               pdfDoc = doc;
@@ -172,3 +176,24 @@
       }
   }
 //});
+		function onLibroClick(libroId) {
+		    // Guarda el ID o nombre del libro seleccionado (ajusta según tu XML)
+		    localStorage.setItem('libroSeleccionado', libroId);
+		    // Redirige a la ficha
+		    //window.location.href = 'books/libro-ficha.html';
+			// Usar fetch para cargar el contenido de disclaimer.html
+			fetch('books/libro-ficha.html')
+				.then(response => {
+				if (!response.ok) {
+					throw new Error('Error al cargar el archivo: ' + response.statusText);
+				}
+				return response.text();
+				})
+				.then(data => {
+						// Cargar el contenido en <main>
+						const mainElement = document.querySelector('main');
+						mainElement.innerHTML = data;
+						cargarlibro(libroId);
+				})
+				.catch(err => console.error('Error:', err));
+		}
