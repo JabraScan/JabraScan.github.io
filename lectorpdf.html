@@ -9,30 +9,35 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body class="light-mode">
-  <header>
+  <!-- Botón hamburguesa -->
+  <button id="menu-toggle" aria-label="Mostrar/Ocultar menú">☰</button>
+  
+  <header id="main-header">
     <nav>
       <center><h1>Lector PDF</h1></center>
-      <a href="index.html" class="active">Volver a la página principal de JabraScan</a>
+      <a href="index.html" class="active">
+        <span class="icon">🏠</span>
+        <span class="label">Volver a la página principal de JabraScan</span>
+      </a>
       <!-- más enlaces aquí -->
     </nav>
 
     <div class="controls">
       <div class="controls-left">
-        <button id="readAloud">🔊 Leer página</button>
-        <button id="pauseReading" style="display:none;">⏸️ Pausar</button>
-        <button id="resumeReading" style="display:none;">⏯️ Reanudar</button>
-        <button id="stopReading" style="display:none;">⏹️ Detener</button>
+        <button><span class="icon">🔊</span><span class="label">Leer página</span></button>
+        <button style="display:none;"><span class="icon">⏸️</span><span class="label">Pausar</span></button>
+        <button style="display:none;"><span class="icon">⏯️</span><span class="label">Reanudar</span></button>
+        <button style="display:none;"><span class="icon">⏹️</span><span class="label">Detener</span></button>
       </div>
     
       <div class="controls-center">
-        <button id="prevChapter">⬅️ Anterior</button>
+        <button><span class="icon">⬅️</span><span class="label">Anterior</span></button>
         <select id="chapterSelect"></select>
-        <!--<button id="goMenu">📚 Ir al menú</button>-->
-        <button id="nextChapter">➡️ Siguiente</button>
+        <button><span class="icon">➡️</span><span class="label">Siguiente</span></button>
       </div>
     
       <div class="controls-right">
-        <button id="toggleMode">☀️</button>
+        <button><span class="icon">☀️</span><span class="label">Modo</span></button>
       </div>
     </div>
   </header>
@@ -40,12 +45,13 @@
   <main>
     <canvas id="pdfCanvas"></canvas>
     <div class="pdf-controls">
-      <button id="prevPage">⬅️ Página anterior</button>
+      <button><span class="icon">⬅️</span><span class="label">Página anterior</span></button>
       <span id="pageInfo">Página 1</span>
-      <button id="nextPage">➡️ Página siguiente</button>
+      <button><span class="icon">➡️</span><span class="label">Página siguiente</span></button>
     </div>
   </main>
 
   <script src="js/lectorpdf.js"></script>
 </body>
 </html>
+
