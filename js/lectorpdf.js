@@ -151,7 +151,7 @@
 		          fetch("books.json")
 		            .then(response => response.json())
 		            .then(books => {
-		              const cap = encodeURIComponent(books[clave]?.find(c => c.numCapitulo === capitulo));
+		              const cap = books[clave]?.find(c => c.numCapitulo === capitulo);
 		              if (!cap) return;
 					//actualizar h1
 					const h1 = document.querySelector("header h1");
@@ -159,7 +159,7 @@
 					  //h1.onclick = () => onLibroClick(ultimaObra);
 		            //abrir archivo			
 						//seleccionar pagina activa
-		              const pdfPath = `books/${clave}/${cap.NombreArchivo}`;
+		              const pdfPath = `books/${clave}/encodeURIComponent(${cap.NombreArchivo})`;
 		
 						 if (ultimaObra && ultimoCapitulo) {
 							 //abrir archivo y seleccionar la pagina activa
@@ -231,4 +231,5 @@ console.log("abrir automaticamente");
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
 
