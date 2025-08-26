@@ -28,6 +28,7 @@ nav a, nav span {
 nav a.active, nav a:hover, nav span.active {
   color: #fff;
   text-shadow: 0 0 5px #fca311;
+  cursor: pointer;
 }
 main {
   max-width: 900px;
