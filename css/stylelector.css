@@ -14,6 +14,7 @@ header {
   flex-wrap: wrap;
 }
 */
+
 header {
   position: fixed;       /* Fija el header en pantalla */
   top: 0;                /* Pegado arriba */
@@ -147,5 +148,57 @@ select:hover {
     max-width: 300px;
   }
 }
+/* Botón hamburguesa */
+#menu-toggle {
+  display: none; /* solo en móvil */
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  background: #4e54c8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  z-index: 1100;
+  cursor: pointer;
+}
 
+/* En pantallas pequeñas */
+@media (max-width: 600px) {
+  /* Mostrar botón hamburguesa */
+  #menu-toggle {
+    display: block;
+  }
 
+  /* Ocultar header por defecto */
+  #main-header {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #14213d;
+    z-index: 1000;
+    padding-top: 50px; /* espacio para que no tape el botón */
+  }
+
+  /* Mostrar header cuando tenga la clase .show */
+  #main-header.show {
+    display: block;
+  }
+
+  /* Solo iconos en móvil */
+  .label {
+    display: none;
+  }
+
+  .icon {
+    font-size: 1.2em;
+  }
+
+  /* Ajustar body para que no deje hueco fijo */
+  body {
+    padding-top: 0;
+  }
+}
