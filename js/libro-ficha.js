@@ -265,11 +265,11 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll('.pdf-link').forEach(link => {
     link.addEventListener('click', function (e) {
       e.preventDefault();
-      const obra = this.dataset.pdfObra;
-      const capitulo = this.dataset.pdfCapitulo;
+  	 	const clave = event.currentTarget.getAttribute("data-pdf-obra");
+    	const capitulo = event.currentTarget.getAttribute("data-pdf-capitulo");
 
       // Guardar en localStorage
-      localStorage.setItem('ultimaObra', obra);
+      localStorage.setItem('ultimaObra', clave);
       localStorage.setItem('ultimoCapitulo', capitulo);
 	  localStorage.setItem("ultimaPagina", 1);
 		console.log(obra);
