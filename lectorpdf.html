@@ -4,12 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lector PDF JabraScan</title>
+  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/stylelector.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body class="light-mode">
   <header>
-    <h1>Lector PDF</h1>
+    <nav>
+      <span onclick="window.location.reload();" class="active">Inicio</span>
+      <a href="https://northbladetl.com/" class="active" target="_blank">NorthBladeTL</a>
+      <a id="disclaimer-link" class="active">Disclaimer</a>
+      <!-- más enlaces aquí -->
+    </nav>
+    <center><h1 class="lector-book">Lector PDF</h1></center>
     <div class="controls">
       <!--
       <select id="fontSelector">
@@ -39,6 +46,7 @@
   <script src="js/lectorpdf.js"></script>
 </body>
 </html>
+
 
 
 
