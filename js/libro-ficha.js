@@ -261,7 +261,7 @@ function obtenerCapitulos(clave) {
 				.catch(err => console.error('Error:', err));
 		}
 
-document.addEventListener("DOMContentLoaded", function () {
+//document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll('.pdf-link').forEach(link => {
     link.addEventListener('click', function (e) {
       e.preventDefault();
@@ -278,5 +278,4 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = 'lectorpdf.html';
     });
   });
-});
-
+//});
