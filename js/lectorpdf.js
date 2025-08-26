@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  if (window.location.href.includes("lectorpdf.html")) {
+  //if (window.location.href.includes("lectorpdf.html")) 
+  {
       let pdfDoc = null;
       let pageNum = 1;
     
@@ -171,4 +172,5 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   }
 });
+
 
