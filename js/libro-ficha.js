@@ -265,8 +265,8 @@ function obtenerCapitulos(clave) {
   document.querySelectorAll('.pdf-link').forEach(link => {
     link.addEventListener('click', function (e) {
       e.preventDefault();
-  	 	const clave = event.currentTarget.getAttribute("data-pdf-obra");
-    	const capitulo = event.currentTarget.getAttribute("data-pdf-capitulo");
+  	 	const clave = e.currentTarget.getAttribute("data-pdf-obra");
+    	const capitulo = e.currentTarget.getAttribute("data-pdf-capitulo");
 
       // Guardar en localStorage
       localStorage.setItem('ultimaObra', clave);
