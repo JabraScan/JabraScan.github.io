@@ -49,12 +49,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 			//indicador +18
 		    const imagenContenedor = document.createElement("div");
-				  imagenContenedor.classList.add("imagen-contenedor");
+				  imagenContenedor.classList.add("imagen-contenedor libro-item");
 				
 				  const img = document.createElement("img");
-				  img.src = "../img/" + imagen;
-				  img.alt = nombreobra;
-				  imagenContenedor.appendChild(img);
+					  img.src = "../img/" + imagen;
+					  img.alt = nombreobra;
+					  imagenContenedor.appendChild(img);
 				
 				  if (contenido18 === "adulto") {
 				    imagenContenedor.classList.add("adulto");
@@ -65,11 +65,13 @@ document.addEventListener("DOMContentLoaded", function () {
 				  }
 	      const indice = 0;
 	
-	      const itemCarousel = document.createElement("div");
+			  itemCarousel.onclick = () => onLibroClick(obra.querySelector("clave").textContent.trim());
+
+		  const itemCarousel = document.createElement("div");
 		      itemCarousel.className = "carousel-item";
 		      itemCarousel.innerHTML = `
 		        <div class="carousel-info-overlay">
-		          <div class="carousel-info-title">${nombreobra}</div>
+		          <div class="carousel-info-title libro-item">${nombreobra}</div>
 				  </br>
 		          <!--<img src="../img/${imagen}" alt="${nombreobra}">-->
 		          <div class="carousel-info-row">
@@ -94,13 +96,15 @@ document.addEventListener("DOMContentLoaded", function () {
 			   	  </div>
 		        </div>
 		      `;
+			  const tituloElemento = itemCarousel.querySelector(".carousel-info-title");
+			  tituloElemento.onclick = () => onLibroClick(clave);
 		  itemCarousel.prepend(imagenContenedor);
 	      carouselContainer.appendChild(itemCarousel);
 
 		  const imgContenedorHhtml = imagenContenedor.innerHTML;
 	      const itemBook = document.createElement("article");
 		      itemBook.className = "book-card-main libro-item";
-			  itemBook.onclick = () => onLibroClick(obra.querySelector("clave").textContent.trim());
+			  itemBook.onclick = () => onLibroClick(clave);
 		      itemBook.innerHTML = `
 					  <p class="clave">${clave}</p>
 	   				  <!--${imgContenedorHhtml}-->
