@@ -160,7 +160,7 @@
 		            //abrir archivo			
 						const nombreArchivo = encodeURIComponent(${cap.NombreArchivo});
 						//seleccionar pagina activa
-		              const pdfPath = `books/${clave}/encodeURIComponent(${nombreArchivo})`;
+		              const pdfPath = `books/${clave}/${nombreArchivo}`;
 		
 						 if (ultimaObra && ultimoCapitulo) {
 							 //abrir archivo y seleccionar la pagina activa
@@ -233,6 +233,7 @@ console.log("abrir automaticamente");
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
 
 
 
