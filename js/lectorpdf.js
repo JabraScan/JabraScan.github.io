@@ -148,7 +148,32 @@ window.addEventListener("DOMContentLoaded", () => {
 document.querySelectorAll('.pdf-link').forEach(link => {
   link.addEventListener('click', event => {
     event.preventDefault();
-    const newUrl = event.target.getAttribute('data-pdf');
+    //obtener el nombre del fichero
+    const clave = event.target.getAttribute('data-pdf');
+    const capitulo = event.target.getAttribute('data-pdf');
+  
+    fetch("books.json")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("No se pudo cargar el archivo JSON");
+        }
+        return response.json();
+      })
+      .then(books => {
+        if (!books[clave]) {
+          console.warn(`La obra "${clave}" no existe.`);
+          return;
+        }
+  
+        const cap = books[clave].find(c => c.numCapitulo === capitulo);
+  
+        if (!cap) {
+          console.warn(`El capítulo "${capitulo}" no se encontró en "${clave}".`);
+          return;
+        }
+    
+    const newUrl = 'books/clave/cap';
+        console.log(newurl);
     if (newUrl) {
       pdfjsLib.getDocument(newUrl).promise.then(doc => {
         pdfDoc = doc;
@@ -158,6 +183,7 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
+
 
 
 
