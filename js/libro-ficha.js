@@ -158,11 +158,11 @@ function cargarlibro(libroId) {
 								    const clave = e.currentTarget.getAttribute("data-pdf-obra");
 								    const capitulo = e.currentTarget.getAttribute("data-pdf-capitulo");
 								
-								    console.log("Click detectado:", clave, capitulo);
-								
 								    localStorage.setItem('ultimaObra', clave);
 								    localStorage.setItem('ultimoCapitulo', capitulo);
 								    localStorage.setItem("ultimaPagina", 1);
+								
+								    console.log("Click detectado:", clave, capitulo);
 								
 								    window.location.href = 'lectorpdf.html';
 								  });
