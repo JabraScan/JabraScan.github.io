@@ -18,14 +18,14 @@ header h1 {
 nav {
   margin-top: 0.5em;
 }
-nav a {
+nav a, nav span {
   color: #fca311;
   text-decoration: none;
   margin: 0 1em;
   font-weight: bold;
   transition: color 0.2s;
 }
-nav a.active, nav a:hover {
+nav a.active, nav a:hover, nav span.active {
   color: #fff;
   text-shadow: 0 0 5px #fca311;
 }
