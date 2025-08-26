@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+//document.addEventListener("DOMContentLoaded", () => {
   //if (window.location.href.includes("lectorpdf.html")) 
   {
       let pdfDoc = null;
@@ -171,6 +171,4 @@ document.addEventListener("DOMContentLoaded", () => {
           .catch(error => console.error("Error al cargar el último capítulo:", error));
       }
   }
-});
-
-
+//});
