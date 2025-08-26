@@ -24,10 +24,10 @@
 
     <div class="controls">
       <div class="controls-left">
-        <button><span class="icon">🔊</span><span class="label">Leer página</span></button>
-        <button style="display:none;"><span class="icon">⏸️</span><span class="label">Pausar</span></button>
-        <button style="display:none;"><span class="icon">⏯️</span><span class="label">Reanudar</span></button>
-        <button style="display:none;"><span class="icon">⏹️</span><span class="label">Detener</span></button>
+        <button id="readAloud"><span class="icon">🔊</span><span class="label">Leer página</span></button>
+        <button id="pauseReading" style="display:none;"><span class="icon">⏸️</span><span class="label">Pausar</span></button>
+        <button id="resumeReading" style="display:none;"><span class="icon">⏯️</span><span class="label">Reanudar</span></button>
+        <button id="stopReading" style="display:none;"><span class="icon">⏹️</span><span class="label">Detener</span></button>
       </div>
     
       <div class="controls-center">
@@ -37,7 +37,7 @@
       </div>
     
       <div class="controls-right">
-        <button><span class="icon">☀️</span><span class="label">Modo</span></button>
+        <button id="toggleMode"><span class="icon">☀️</span><span class="label">Modo</span></button>
       </div>
     </div>
   </header>
@@ -62,6 +62,7 @@
   </script>
 </body>
 </html>
+
 
 
 
