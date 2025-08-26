@@ -75,9 +75,14 @@ function cargarlibro(libroId) {
 								  .sort((a, b) => {
 								    const fechaA = new Date(a.Fecha.split('-').reverse().join('-'));
 								    const fechaB = new Date(b.Fecha.split('-').reverse().join('-'));
-								    return fechaB - fechaA; // más recientes primero
+									// Primero ordenamos por fecha descendente
+									if (fechaB - fechaA !== 0) {
+									  return fechaB - fechaA;
+									}
+									// Si las fechas son iguales, ordenamos por numeroCapitulo descendente
+									return b.numeroCapitulo - a.numeroCapitulo;
 								  })
-								  .slice(0, 5); // últimos 5 capítulos
+								  .slice(0, 6); // últimos 6 capítulos
 						  const totalCapitulos = listacapitulos.length;
 						
 						  // Sección: Últimos capítulos
