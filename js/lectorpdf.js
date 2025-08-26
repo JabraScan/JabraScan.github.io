@@ -181,7 +181,7 @@
         	});
       });
 
-	  /*
+	  
       // Cargar último capítulo automáticamente
       const ultimaObra = localStorage.getItem("ultimaObra");
       const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
@@ -207,7 +207,7 @@ console.log("abrir automaticamente");
             });
           })
           .catch(error => console.error("Error al cargar el último capítulo:", error));
-      }*/
+      }
   }
 //});
 		function onLibroClick(libroId) {
@@ -231,5 +231,6 @@ console.log("abrir automaticamente");
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
 
 
