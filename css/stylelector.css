@@ -14,6 +14,19 @@ header {
   flex-wrap: wrap;
 }
 */
+header {
+  position: fixed;       /* Fija el header en pantalla */
+  top: 0;                /* Pegado arriba */
+  left: 0;
+  width: 100%;           /* Ocupa todo el ancho */
+  background-color: #14213d; /* Fondo sólido para que no se vea el contenido detrás */
+  z-index: 1000;         /* Encima de todo */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* Sombra sutil */
+}
+/* Ajusta el espacio para que el contenido no quede oculto debajo */
+body {
+  padding-top: 160px; /* Ajusta según la altura real del header */
+}
 header h1 {
   font-weight: bold;
   color: #f8b400;
@@ -134,3 +147,4 @@ select:hover {
     max-width: 300px;
   }
 }
+
