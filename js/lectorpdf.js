@@ -149,9 +149,9 @@ document.querySelectorAll('.pdf-link').forEach(link => {
   link.addEventListener('click', event => {
     event.preventDefault();
     //obtener el nombre del fichero
-    const clave = event.target.getAttribute('data-pdf');
-    const capitulo = event.target.getAttribute('data-pdf');
-  
+    const clave = event.target.getAttribute('data-pdf-obra');
+    const capitulo = event.target.getAttribute('data-pdf-capitulo');
+    
     fetch("books.json")
       .then(response => {
         if (!response.ok) {
@@ -183,6 +183,7 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
+
 
 
 
