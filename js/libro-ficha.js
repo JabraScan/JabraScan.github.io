@@ -111,7 +111,7 @@ function cargarlibro(libroId) {
 						
 						    const capitulosHTML = pagina.map(cap => `
 						      <li>
-		  						<a href="lector.html?pdf=books/${clave}/${cap.NombreArchivo}">
+		  						<a href="lectorpdf.html?pdf=books/${clave}/${cap.NombreArchivo}">
 								  <span>${cap.numCapitulo}: ${cap.nombreCapitulo}</span>
 								  <span>(${cap.Fecha})</span>
 								</a>
@@ -170,7 +170,6 @@ function cargarlibro(libroId) {
 						mainDataBook.className = "book-main";
 						mainDataBook.innerHTML = `
 							<div class="book-image">
-								<!--<img src="../../img/${imagen}" alt="${nombreobra}"/>-->
 								<div class="book-genres">
 									<span><i class="fa-solid fa-tags"></i>${Categoria}</span>                
 								</div>
@@ -241,3 +240,24 @@ console.log(resultado);
       return [];
     });
 }
+		function onFichaClick(capituloId) {
+		    // Guarda el ID o nombre del libro seleccionado (ajusta según tu XML)
+		    localStorage.setItem('Capitulo', capituloId);
+		    // Redirige a la ficha
+		    //window.location.href = 'books/libro-ficha.html';
+			// Usar fetch para cargar el contenido de disclaimer.html
+			fetch('lectorpdf.html')
+				.then(response => {
+				if (!response.ok) {
+					throw new Error('Error al cargar el archivo: ' + response.statusText);
+				}
+				return response.text();
+				})
+				.then(data => {
+						// Cargar el contenido en <main>
+						const mainElement = document.querySelector('main');
+						mainElement.innerHTML = data;
+						cargarlibro(libroId);
+				})
+				.catch(err => console.error('Error:', err));
+		}
