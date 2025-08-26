@@ -21,8 +21,14 @@ header {
 }
 .controls {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 0.5em;
+  gap: 12px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .controls select,
@@ -30,6 +36,13 @@ header {
 .controls button {
   padding: 0.5em;
   font-size: 1em;
+}
+.controls-left,
+.controls-center,
+.controls-right {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .light-mode {
@@ -73,5 +86,42 @@ canvas {
   gap: 1em;
   align-items: center;
 }
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+  font-size: 0.95em;
+}
 
+button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #5f65d8, #9fa4fc);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 600px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .controls-left,
+  .controls-center,
+  .controls-right {
+    justify-content: center;
+  }
+
+  button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
 
