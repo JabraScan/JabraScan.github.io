@@ -66,8 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				  }
 	      const indice = 0;
 	
-			  itemCarousel.onclick = () => onLibroClick(obra.querySelector("clave").textContent.trim());
-
 		  const itemCarousel = document.createElement("div");
 		      itemCarousel.className = "carousel-item";
 		      itemCarousel.innerHTML = `
