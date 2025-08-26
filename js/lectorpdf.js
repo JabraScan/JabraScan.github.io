@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+//document.addEventListener("DOMContentLoaded", () => {
   //if (window.location.href.includes("lectorpdf.html")) 
   {
       let pdfDoc = null;
@@ -209,7 +209,7 @@ console.log("abrir automaticamente");
           .catch(error => console.error("Error al cargar el último capítulo:", error));
       }*/
   }
-});
+//});
 		function onLibroClick(libroId) {
 		    // Guarda el ID o nombre del libro seleccionado (ajusta según tu XML)
 		    localStorage.setItem('libroSeleccionado', libroId);
@@ -231,3 +231,4 @@ console.log("abrir automaticamente");
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
