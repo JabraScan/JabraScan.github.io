@@ -142,7 +142,7 @@ console.log("abrir desde enlace");
 			  h1.textContent = cap.tituloObra;
 			  //h1.onclick = () => onLibroClick(ultimaObra);
             //abrir archivo			
-              const pdfPath = `books/${clave}/${cap.NombreArchivo}`;
+              const pdfPath = `books/${clave}/encodeURIComponent(${cap.NombreArchivo})`;
               pdfjsLib.getDocument(pdfPath).promise.then(doc => {
                 pdfDoc = doc;
                 pageNum = 1;
@@ -170,7 +170,7 @@ console.log("abrir automaticamente");
 			  h1.textContent = cap.tituloObra;
 			  //h1.onclick = () => onLibroClick(ultimaObra);
             //abrir archivo
-            const pdfPath = encodeURIComponent(`books/${ultimaObra}/${cap.NombreArchivo}`);
+            const pdfPath = `books/${ultimaObra}/encodeURIComponent(${cap.NombreArchivo})`);
             pdfjsLib.getDocument(pdfPath).promise.then(doc => {
               pdfDoc = doc;
               pageNum = !isNaN(ultimaPagina) ? ultimaPagina : 1;
@@ -202,6 +202,7 @@ console.log("abrir automaticamente");
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
 
 
 
