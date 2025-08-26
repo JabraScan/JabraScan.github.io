@@ -10,7 +10,7 @@
   "DualCultivation": [
     { "Fecha": "14-07-2025", "NombreArchivo": "DualCultivation-708_JabraScan.pdf" , "numCapitulo":  "708", "nombreCapitulo" :"Formación Atrapadora" , "tituloObra" : "Dual Cultivation" }
   ],
-  "PathtoDualCultivation":
+  "PathtoDualCultivation": [
     { "Fecha": "24-05-2025", "NombreArchivo": "PathtoDualCultivation-01[JabraScan].pdf" , "numCapitulo":  "1", "nombreCapitulo" : "Su Yang"                                        , "tituloObra" : "Path to Dual Cultivation"  },
     { "Fecha": "24-05-2025", "NombreArchivo": "PathtoDualCultivation-02[JabraScan].pdf" , "numCapitulo":  "2", "nombreCapitulo" : "El Primer Amor"                                 , "tituloObra" : "Path to Dual Cultivation"  },
     { "Fecha": "25-05-2025", "NombreArchivo": "PathtoDualCultivation-03[JabraScan].pdf" , "numCapitulo":  "3", "nombreCapitulo" : "Prodigio de la Espada"                          , "tituloObra" : "Path to Dual Cultivation"  },
@@ -71,3 +71,4 @@
     { "Fecha": "24-07-2025", "NombreArchivo": "Suzume [JabraScan]_fin-224-230.pdf" , "numCapitulo":  "6.0", "nombreCapitulo" : "Día 6 y Recuerdos - Las Palabras Que Nadie Pudo Decir"                          , "tituloObra" : "Suzume" }
   ]
 }
+
