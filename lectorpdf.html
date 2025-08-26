@@ -7,14 +7,6 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/stylelector.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script>
-    const menuToggle = document.getElementById('menu-toggle');
-    const header = document.getElementById('main-header');
-  
-    menuToggle.addEventListener('click', () => {
-      header.classList.toggle('show');
-    });
-  </script>
 </head>
 <body class="light-mode">
   <!-- Botón hamburguesa -->
@@ -60,7 +52,16 @@
   </main>
 
   <script src="js/lectorpdf.js"></script>
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const header = document.getElementById('main-header');
+  
+    menuToggle.addEventListener('click', () => {
+      header.classList.toggle('show');
+    });
+  </script>
 </body>
 </html>
+
 
 
