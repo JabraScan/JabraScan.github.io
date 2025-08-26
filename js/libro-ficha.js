@@ -269,9 +269,11 @@ document.addEventListener("DOMContentLoaded", function () {
       const capitulo = this.dataset.pdfCapitulo;
 
       // Guardar en localStorage
-      localStorage.setItem('pdfObra', obra);
-      localStorage.setItem('pdfCapitulo', capitulo);
-
+      localStorage.setItem('ultimaObra', obra);
+      localStorage.setItem('ultimoCapitulo', capitulo);
+	  localStorage.setItem("ultimaPagina", 1);
+		console.log(obra);
+		console.log(capitulo);
       // Redirigir a lectorpdf.html
       window.location.href = 'lectorpdf.html';
     });
