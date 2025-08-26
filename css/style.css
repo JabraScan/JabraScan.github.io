@@ -318,18 +318,18 @@ footer {
   }
 }
 .Activo {
-    color: lightseagreen;
+    color: 	#20B2AA; /*lightseagreen*/
     font-weight: bold;
 }
 .Finalizado {
-    color: prangered;
+    color: #ff4500; /*orangered*/
     font-weight: bold;
 }
 .Cancelado {
-    color: darkviolet;
+    color: #871F78; /*darkviolet;*/
     font-weight: bold;
 }
 .Pausado, .Hiatus {
-    color: darkgray;
+    color: a9a9a9; /*darkgray;*/
     font-weight: bold;
 }
