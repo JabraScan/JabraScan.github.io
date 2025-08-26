@@ -173,7 +173,7 @@ document.querySelectorAll('.pdf-link').forEach(link => {
         }
       });
     
-    const newUrl = 'books/clave/cap';
+    const newUrl = `books/${clave}/${cap.NombreArchivo}`;
         console.log(newurl);
     if (newUrl) {
       pdfjsLib.getDocument(newUrl).promise.then(doc => {
@@ -184,16 +184,3 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
