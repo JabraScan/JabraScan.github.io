@@ -31,7 +31,6 @@ function renderPage(num) {
   pdfDoc.getPage(num).then(page => {
     const scale = 1.5;
     const viewport = page.getViewport({ scale });
-    const viewport = page.getViewport({ scale });
 
     canvas.height = viewport.height;
     canvas.width = viewport.width;
@@ -159,6 +158,7 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
+
 
 
 
