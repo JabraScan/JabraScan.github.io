@@ -140,8 +140,7 @@
 			//actualizar h1
 			const h1 = document.querySelector("header h1");
 			  h1.textContent = cap.tituloObra;
-			  h1.onclick = () => onLibroClick(ultimaObra);
-				
+			  //h1.onclick = () => onLibroClick(ultimaObra);
             //abrir archivo			
               const pdfPath = `books/${clave}/${cap.NombreArchivo}`;
               pdfjsLib.getDocument(pdfPath).promise.then(doc => {
@@ -168,7 +167,7 @@
 			//actualizar h1
 			const h1 = document.querySelector("header h1");
 			  h1.textContent = cap.tituloObra;
-			  h1.onclick = () => onLibroClick(ultimaObra);
+			  //h1.onclick = () => onLibroClick(ultimaObra);
             //abrir archivo
             const pdfPath = `books/${ultimaObra}/${cap.NombreArchivo}`;
             pdfjsLib.getDocument(pdfPath).promise.then(doc => {
@@ -202,4 +201,5 @@
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
 
