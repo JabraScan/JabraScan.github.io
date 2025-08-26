@@ -116,7 +116,7 @@ function cargarlibro(libroId) {
 						
 						    const capitulosHTML = pagina.map(cap => `
 						      <li>
-		  						<a href="lectorpdf.html?obra=${clave}&capitulo=${cap.numCapitulo}">
+		  						<a href="#" data-pdf-obra="${clave}" data-pdf-capitulo="${cap.numCapitulo}" class="pdf-link">
 								  <span>${cap.numCapitulo} · ${cap.nombreCapitulo}</span>
 								  <span>(${cap.Fecha})</span>
 								</a>
@@ -139,9 +139,7 @@ function cargarlibro(libroId) {
 								</div>
 								<div class="pagination-controls pagination">
 									${Array.from({ length: paginas }, (_, i) => `
-										<button disabled>Primero</button>
 		  								<button class="pagina-btn" data-pagina="${i + 1}">${i + 1}</button>
-										<button>Siguiente</button>
 									`).join('')}
 								</div>
 						    </div>
