@@ -1,3 +1,4 @@
+/*
 const urlParams = new URLSearchParams(window.location.search);
 const pdfUrl = urlParams.get('pdf');
 
@@ -10,73 +11,75 @@ if (pdfUrl) {
 } else {
   console.error("No se proporcionó ningún PDF en la URL.");
 }
-
-let pdfDoc = null;
-let pageNum = 1;
-const canvas = document.getElementById('pdfCanvas');
-const ctx = canvas.getContext('2d');
-
-const fontSelector = document.getElementById("fontSelector");
-const fontSizeSlider = document.getElementById("fontSizeSlider");
-const toggleMode = document.getElementById("toggleMode");
-const startReadingBtn = document.getElementById("readAloud");
-const stopReadingBtn = document.getElementById("stopReading");
-const pauseReadingBtn = document.getElementById("pauseReading");
-const resumeReadingBtn = document.getElementById("resumeReading");
-const pageInfo = document.getElementById("pageInfo");
-const body = document.body;
-
-// Renderizar página
-function renderPage(num) {
-  pdfDoc.getPage(num).then(page => {
-    const scale = 1.5;
-    const viewport = page.getViewport({ scale });
-
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
-
-    const renderContext = {
-      canvasContext: ctx,
-      viewport: viewport
-    };
-    page.render(renderContext);
-
-    pageInfo.textContent = `Página ${num} de ${pdfDoc.numPages}`;
-    speechSynthesis.cancel(); // Detener lectura si se cambia de página
-  });
-}
-// Navegación
-document.getElementById("prevPage").onclick = () => {
-  if (pageNum <= 1) return;
-  pageNum--;
-  renderPage(pageNum);
-};
-
-document.getElementById("nextPage").onclick = () => {
-  if (pageNum >= pdfDoc.numPages) return;
-  pageNum++;
-  renderPage(pageNum);
-};
-
-// Cambiar fuente
-//fontSelector.onchange = () => {
-//  canvas.style.fontFamily = fontSelector.value;
-//};
-
-// Cambiar tamaño de letra
-//fontSizeSlider.oninput = () => {
-//  canvas.style.fontSize = `${fontSizeSlider.value}px`;
-//};
-
-// Modo diurno/nocturno
-toggleMode.onclick = () => {
-  body.classList.toggle("dark-mode");
-  body.classList.toggle("light-mode");
-  toggleMode.textContent = body.classList.contains("dark-mode") ? "☀️" : "🌙";
-
-  const isDark = document.body.classList.contains("dark-mode");
-  localStorage.setItem("modoNocturno", isDark ? "true" : "false");
-};
+*/
+document.addEventListener("DOMContentLoaded", () => {
+  let pdfDoc = null;
+  let pageNum = 1;
+  const canvas = document.getElementById('pdfCanvas');
+  const ctx = canvas.getContext('2d');
+  
+  const fontSelector = document.getElementById("fontSelector");
+  const fontSizeSlider = document.getElementById("fontSizeSlider");
+  const toggleMode = document.getElementById("toggleMode");
+  const startReadingBtn = document.getElementById("readAloud");
+  const stopReadingBtn = document.getElementById("stopReading");
+  const pauseReadingBtn = document.getElementById("pauseReading");
+  const resumeReadingBtn = document.getElementById("resumeReading");
+  const pageInfo = document.getElementById("pageInfo");
+  const body = document.body;
+  
+  // Renderizar página
+  function renderPage(num) {
+    pdfDoc.getPage(num).then(page => {
+      const scale = 1.5;
+      const viewport = page.getViewport({ scale });
+  
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+  
+      const renderContext = {
+        canvasContext: ctx,
+        viewport: viewport
+      };
+      page.render(renderContext);
+  
+      pageInfo.textContent = `Página ${num} de ${pdfDoc.numPages}`;
+      speechSynthesis.cancel(); // Detener lectura si se cambia de página
+    });
+  }
+  // Navegación
+  document.getElementById("prevPage").onclick = () => {
+    if (pageNum <= 1) return;
+    pageNum--;
+    renderPage(pageNum);
+  };
+  
+  document.getElementById("nextPage").onclick = () => {
+    if (pageNum >= pdfDoc.numPages) return;
+    pageNum++;
+    renderPage(pageNum);
+  };
+  
+  // Cambiar fuente
+  //fontSelector.onchange = () => {
+  //  canvas.style.fontFamily = fontSelector.value;
+  //};
+  
+  // Cambiar tamaño de letra
+  //fontSizeSlider.oninput = () => {
+  //  canvas.style.fontSize = `${fontSizeSlider.value}px`;
+  //};
+  
+  // Modo diurno/nocturno
+  toggleMode.onclick = () => {
+    body.classList.toggle("dark-mode");
+    body.classList.toggle("light-mode");
+    toggleMode.textContent = body.classList.contains("dark-mode") ? "☀️" : "🌙";
+  
+    const isDark = document.body.classList.contains("dark-mode");
+    localStorage.setItem("modoNocturno", isDark ? "true" : "false");
+  };
+}); //fin document.addEventListener("DOMContentLoaded", ()
 
 // Función para mostrar/ocultar botones Lectura
 function mostrarBotones({ play = false, pause = false, resume = false, stop = false }) {
@@ -184,3 +187,4 @@ document.querySelectorAll('.pdf-link').forEach(link => {
     }
   });
 });
+
