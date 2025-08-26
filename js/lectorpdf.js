@@ -128,7 +128,7 @@
     
           const clave = event.currentTarget.getAttribute("data-pdf-obra");
           const capitulo = event.currentTarget.getAttribute("data-pdf-capitulo");
-    
+console.log("abrir desde enlace");    
           localStorage.setItem("ultimaObra", clave);
           localStorage.setItem("ultimoCapitulo", capitulo);
     
@@ -159,6 +159,7 @@
       const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
     
       if (ultimaObra && ultimoCapitulo) {
+console.log("abrir automaticamente");
         fetch("books.json")
           .then(response => response.json())
           .then(books => {
@@ -201,5 +202,6 @@
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
 
 
