@@ -9,9 +9,9 @@
     ,{ "Fecha": "02-08-2025", "NombreArchivo": "Cultivation_Online-2057[JabraScan].pdf", "numCapitulo": "2057", "nombreCapitulo": "Luchando Contra El Grande"                                              , "tituloObra": "Cultivation Online" }
     ,{ "Fecha": "02-08-2025", "NombreArchivo": "Cultivation_Online-2058[JabraScan].pdf", "numCapitulo": "2058", "nombreCapitulo": "Entrando al Reino Inmortal"                                             , "tituloObra": "Cultivation Online" }
     ,{ "Fecha": "02-08-2025", "NombreArchivo": "Cultivation_Online-2059[JabraScan].pdf", "numCapitulo": "2059", "nombreCapitulo": "Llegando al Octavo Cielo"                                               , "tituloObra": "Cultivation Online" }
-    ,{ "Fecha": "03-08-2025", "NombreArchivo": "CultivationOnline-2060[JabraScan].pdf" , "numCapitulo": "2060", "nombreCapitulo" : "Esencia de Sangre del Fénix Primordial"                                , "tituloObra" : "Cultivation Online"},
-    ,{ "Fecha": "05-08-2025", "NombreArchivo": "CultivationOnline-2061[JabraScan].pdf" , "numCapitulo": "2061", "nombreCapitulo" : "Anguila Fundida del Infierno"                                          , "tituloObra" : "Cultivation Online"},
-    ,{ "Fecha": "10-08-2025", "NombreArchivo": "CultivationOnline-2062[JabraScan].pdf" , "numCapitulo": "2062", "nombreCapitulo" : "Anguila Fundida del Infierno (2)"                                      , "tituloObra" : "Cultivation Online"},
+    ,{ "Fecha": "03-08-2025", "NombreArchivo": "CultivationOnline-2060[JabraScan].pdf" , "numCapitulo": "2060", "nombreCapitulo" : "Esencia de Sangre del Fénix Primordial"                                , "tituloObra" : "Cultivation Online"}
+    ,{ "Fecha": "05-08-2025", "NombreArchivo": "CultivationOnline-2061[JabraScan].pdf" , "numCapitulo": "2061", "nombreCapitulo" : "Anguila Fundida del Infierno"                                          , "tituloObra" : "Cultivation Online"}
+    ,{ "Fecha": "10-08-2025", "NombreArchivo": "CultivationOnline-2062[JabraScan].pdf" , "numCapitulo": "2062", "nombreCapitulo" : "Anguila Fundida del Infierno (2)"                                      , "tituloObra" : "Cultivation Online"}
     ,{ "Fecha": "10-08-2025", "NombreArchivo": "Cultivation_Online-2063[JabraScan].pdf", "numCapitulo": "2063", "nombreCapitulo": "Anguila Fundida del Infierno (3)"                                       , "tituloObra": "Cultivation Online" }
     ,{ "Fecha": "10-08-2025", "NombreArchivo": "Cultivation_Online-2064[JabraScan].pdf", "numCapitulo": "2064", "nombreCapitulo": "Consumiendo la Esencia de Sangre del Fénix Primordial"                  , "tituloObra": "Cultivation Online" }
     ,{ "Fecha": "10-08-2025", "NombreArchivo": "Cultivation_Online-2065[JabraScan].pdf", "numCapitulo": "2065", "nombreCapitulo": "Refinando la Esencia de Sangre del Fénix Primordial"                    , "tituloObra": "Cultivation Online" }
@@ -35,9 +35,9 @@
     ,{ "Fecha": "23-08-2025", "NombreArchivo": "Cultivation_Online-2083[JabraScan].pdf", "numCapitulo": "2083", "nombreCapitulo": "La Aparición del Líder del Clan"                                        , "tituloObra": "Cultivation Online" }
     ,{ "Fecha": "23-08-2025", "NombreArchivo": "Cultivation_Online-2084[JabraScan].pdf", "numCapitulo": "2084", "nombreCapitulo": "La Supremacía del Monarca Inmortal"                                     , "tituloObra": "Cultivation Online" }
     ,{ "Fecha": "23-08-2025", "NombreArchivo": "Cultivation_Online-2085[JabraScan].pdf", "numCapitulo": "2085", "nombreCapitulo": "El Altar Ancestral del Tigre Blanco Celestial"                          , "tituloObra": "Cultivation Online" }
-    ,{ "Fecha": "23-08-2025", "NombreArchivo": "CultivationOnline-2086[JabraScan].pdf" , "numCapitulo": "2086", "nombreCapitulo" : "Enloquecido"                                                           , "tituloObra" : "Cultivation Online"},
-    ,{ "Fecha": "23-08-2025", "NombreArchivo": "CultivationOnline-2087[JabraScan].pdf" , "numCapitulo": "2087", "nombreCapitulo" : "Soy el Monarca Inmortal"                                               , "tituloObra" : "Cultivation Online"},
-    ,{ "Fecha": "23-08-2025", "NombreArchivo": "CultivationOnline-2088[JabraScan].pdf" , "numCapitulo": "2088", "nombreCapitulo" : "Extracción de Sangre Prohibida "                                       , "tituloObra" : "Cultivation Online"},
+    ,{ "Fecha": "23-08-2025", "NombreArchivo": "CultivationOnline-2086[JabraScan].pdf" , "numCapitulo": "2086", "nombreCapitulo" : "Enloquecido"                                                           , "tituloObra" : "Cultivation Online"}
+    ,{ "Fecha": "23-08-2025", "NombreArchivo": "CultivationOnline-2087[JabraScan].pdf" , "numCapitulo": "2087", "nombreCapitulo" : "Soy el Monarca Inmortal"                                               , "tituloObra" : "Cultivation Online"}
+    ,{ "Fecha": "23-08-2025", "NombreArchivo": "CultivationOnline-2088[JabraScan].pdf" , "numCapitulo": "2088", "nombreCapitulo" : "Extracción de Sangre Prohibida "                                       , "tituloObra" : "Cultivation Online"}
     ,{ "Fecha": "26-08-2025", "NombreArchivo": "Cultivation_Online-2089[JabraScan].pdf", "numCapitulo": "2089", "nombreCapitulo": "Abandonando el Valle Blanco Celestial"                                  , "tituloObra": "Cultivation Online" }
     ,{ "Fecha": "26-08-2025", "NombreArchivo": "Cultivation_Online-2090[JabraScan].pdf", "numCapitulo": "2090", "nombreCapitulo": "Refinando la Esencia de Sangre del Tigre Blanco Celestial"              , "tituloObra": "Cultivation Online" }
     ,{ "Fecha": "26-08-2025", "NombreArchivo": "Cultivation_Online-2091[JabraScan].pdf", "numCapitulo": "2091", "nombreCapitulo": "Regreso al Clan del Tigre Blanco Celestial"                             , "tituloObra": "Cultivation Online" }
@@ -108,3 +108,4 @@
     ,{ "Fecha": "24-07-2025", "NombreArchivo": "Suzume [JabraScan]_fin-224-230.pdf" , "numCapitulo":  "6.0", "nombreCapitulo" : "Día 6 y Recuerdos - Las Palabras Que Nadie Pudo Decir"                          , "tituloObra" : "Suzume" }
   ]
 }
+
