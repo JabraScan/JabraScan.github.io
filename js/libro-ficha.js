@@ -256,28 +256,6 @@ function obtenerCapitulos(clave) {
       return [];
     });
 }
-		function onFichaClick(capituloId) {
-		    // Guarda el ID o nombre del libro seleccionado (ajusta según tu XML)
-		    localStorage.setItem('Capitulo', capituloId);
-		    // Redirige a la ficha
-		    //window.location.href = 'books/libro-ficha.html';
-			// Usar fetch para cargar el contenido de disclaimer.html
-			fetch('lectorpdf.html')
-				.then(response => {
-				if (!response.ok) {
-					throw new Error('Error al cargar el archivo: ' + response.statusText);
-				}
-				return response.text();
-				})
-				.then(data => {
-						// Cargar el contenido en <main>
-						const mainElement = document.querySelector('main');
-						mainElement.innerHTML = data;
-						cargarlibro(libroId);
-				})
-				.catch(err => console.error('Error:', err));
-		}
-
 //document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll('.pdf-link').forEach(link => {
     link.addEventListener('click', function (e) {
