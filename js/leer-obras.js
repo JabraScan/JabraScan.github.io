@@ -112,18 +112,18 @@ document.addEventListener("DOMContentLoaded", function () {
 	  					<div class="book-author-name ${estado}">${estado}</div>
 			          </div>
 		      `;
+			//ultimo capitulo
+				fetch("books.json")
+					.then(r => r.json())
+					.then(data => {
+						const bloque = crearUltimoCapituloDeObra(data, clave);
+						if (bloque) itemBook.appendChild(bloque);
+				});
 			// Clonar imagenContenedor
 			const imagenContenedorA = imagenContenedor.cloneNode(true); // Clona el contenedor de imagen
 			// Prepend el contenedor de imagen al artículo
 			itemBook.prepend(imagenContenedorA);
-			//ultimo capitulo
-				fetch("books.json")
-				  .then(r => r.json())
-				  .then(data => {
-				    const bloque = crearUltimoCapituloDeObra(data, clave);
-				    if (bloque) itemBook.appendChild(bloque);
-				  });
-
+			//
 	      	booklistContainer.appendChild(itemBook);
 			//
 	    });
