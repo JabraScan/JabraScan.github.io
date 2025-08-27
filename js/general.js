@@ -1,19 +1,19 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Evento para abrir el disclaimer en el main
-    document.getElementById('disclaimer-link').addEventListener('click', function (e) {
+document.addEventListener("DOMContentLoaded", () => {
+  // Busca todos los enlaces que tengan data-target con la ruta del HTML
+  document.querySelectorAll("[data-target]").forEach(link => {
+    link.addEventListener("click", e => {
       e.preventDefault();
-      console.log("general");
-      // Usar fetch para cargar el contenido de disclaimer.html
-      fetch('disclaimer.html')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Error al cargar el archivo: ' + response.statusText);
-          }
-          return response.text();
+      const url = link.getAttribute("data-target");
+
+      fetch(url)
+        .then(res => {
+          if (!res.ok) throw new Error(`Error al cargar ${url}: ${res.statusText}`);
+          return res.text();
         })
-        .then(data => {
-          document.querySelector('main').innerHTML = data; // Cargar el contenido en el div
+        .then(html => {
+          document.querySelector("main").innerHTML = html;
         })
-        .catch(err => console.error('Error:', err));
+        .catch(err => console.error("Error:", err));
     });
+  });
 });
