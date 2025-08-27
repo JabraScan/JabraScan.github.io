@@ -194,33 +194,35 @@ function initlectorpdf() {
 
 	  
       // Cargar último capítulo automáticamente
-      const ultimaObra = localStorage.getItem("ultimaObra");
-      const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
-      const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
-    
-      if (ultimaObra && ultimoCapitulo) {
-console.log("abrir automaticamente");
-        fetch("books.json")
-          .then(response => response.json())
-          .then(books => {
-            const cap = books[ultimaObra]?.find(c => c.numCapitulo === ultimoCapitulo);
-            if (!cap) return;
-			//actualizar h1
-			const h1 = document.querySelector("header h1");
-			  h1.textContent = cap.tituloObra;
-			  //h1.onclick = () => onLibroClick(ultimaObra);
-            //abrir archivo
-			const nombreArchivo = encodeURIComponent(cap.NombreArchivo);
-            //const pdfPath = `books/${ultimaObra}/${nombreArchivo}`;
-			const pdfPath = `${window.location.origin}/books/${ultimaObra}/${nombreArchivo}`;
-            pdfjsLib.getDocument(pdfPath).promise.then(doc => {
-              pdfDoc = doc;
-              pageNum = !isNaN(ultimaPagina) ? ultimaPagina : 1;
-              renderPage(pageNum);
-            });
-          })
-          .catch(error => console.error("Error al cargar el último capítulo:", error));
-      }
+		const ultimaObra = localStorage.getItem("ultimaObra");
+		const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
+		const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
+		
+		if (ultimaObra && ultimoCapitulo) {
+		  console.log("Abriendo automáticamente último capítulo");
+		  fetch("books.json")
+		    .then(response => response.json())
+		    .then(books => {
+		      const cap = books[ultimaObra]?.find(c => c.numCapitulo === ultimoCapitulo);
+		      if (!cap) return;
+		
+		      // Actualizar título
+		      const h1 = document.querySelector("header h1");
+		      if (h1) h1.textContent = cap.tituloObra;
+		
+		      // Construir ruta absoluta para evitar problemas
+		      const nombreArchivo = encodeURIComponent(cap.NombreArchivo);
+		      const pdfPath = `${window.location.origin}/books/${ultimaObra}/${nombreArchivo}`;
+		
+		      pdfjsLib.getDocument(pdfPath).promise.then(doc => {
+		        pdfDoc = doc;
+		        pageNum = !isNaN(ultimaPagina) ? ultimaPagina : 1;
+		        renderPage(pageNum);
+		      });
+		    })
+		    .catch(error => console.error("Error al cargar el último capítulo:", error));
+		}
+	///
   }
 //});
 		function onLibroClick(libroId) {
@@ -245,5 +247,6 @@ console.log("abrir automaticamente");
 				.catch(err => console.error('Error:', err));
 		}
 }//fin init
+
 
 
