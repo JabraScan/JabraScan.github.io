@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	      const itemBook = document.createElement("article");
 		      itemBook.className = "book-card-main libro-item";
 			  itemBook.onclick = () => onLibroClick(clave);
-		      itemBook.innerHTML = `
+		      /*itemBook.innerHTML = `
 					  <p class="clave">${clave}</p>
 			          <div class="book-info-main">
 			            <h3>${nombreobra}</h3>
@@ -111,7 +111,15 @@ document.addEventListener("DOMContentLoaded", function () {
 						<div class="book-author-name">${autor}</div>
 	  					<div class="book-author-name ${estado}">${estado}</div>
 			          </div>
-		      `;
+		      `;*/
+				itemBook.innerHTML = `
+						  <p class="clave">${clave}</p>
+				          <div class="book-info-main">
+				            <h3>${nombreobra}</h3>
+							<div class="book-author-name"><bold>Autor:</bold> ${autor}</div>
+		  					<div class="book-author-name ${estado}">${estado}</div>
+				          </div>
+			      `;
 			//ultimo capitulo
 				fetch("books.json")
 					.then(r => r.json())
@@ -188,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			
 			  // crear el bloque HTML
 			  const divsection = document.createElement("div");
-			  divsection.className = "book-section book-latest-chapters";
+			  divsection.className = "book-latest-chapter";
 			  divsection.innerHTML = `
 	 					<span>Último cap.</span>  
 				        <span class="cap">${ultimo.numCapitulo}</span>
