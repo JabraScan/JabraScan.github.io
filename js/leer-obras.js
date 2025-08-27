@@ -189,23 +189,16 @@ document.addEventListener("DOMContentLoaded", function () {
 			  // crear el bloque HTML
 			  const divsection = document.createElement("div");
 			  divsection.className = "book-section book-latest-chapters";
-			  divsection.innerHTML = `<h3>Último capítulo de ${ultimo.tituloObra}</h3>`;
-			
+			  divsection.innerHTML = `
+	 					<span>Último cap.</span>  
+				        <span class="cap">${ultimo.numCapitulo}</span>
+				        <span class="fecha">( ${formatDateEs(parseDateDMY(ultimo.Fecha))} )</span> -
+	 				`;
+			/*
 			  const ul = document.createElement("ul");
 			  ul.className = "chapter-list";
 			
 			  const li = document.createElement("li");
-				  /*li.innerHTML = `
-				    <a href="#"
-				       data-pdf-obra="${claveObra}"
-				       data-pdf-capitulo="${ultimo.numCapitulo}"
-				       class="pdf-link-ucap">
-				        <span class="fecha">${formatDateEs(parseDateDMY(ultimo.Fecha))}</span> -
-				        <span class="obra ${claveObra}">${ultimo.tituloObra}</span> -
-				        <span class="cap">${ultimo.numCapitulo}</span> ·
-				        <span class="titulo">${ultimo.nombreCapitulo}</span>
-				    </a>
-				  `;*/
 				  li.innerHTML = `
 				        <span class="fecha">${formatDateEs(parseDateDMY(ultimo.Fecha))}</span> -
 				        <span class="cap">${ultimo.numCapitulo}</span>
@@ -213,6 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			
 			  ul.appendChild(li);
 			  divsection.appendChild(ul);
+	 		*/
 			  return divsection;
 		}
 
