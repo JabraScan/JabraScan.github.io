@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		        <div class="carousel-info-overlay">
 		          <div class="carousel-info-title libro-item">${nombreobra}</div>
 				  </br>
-		          <!--<img src="../img/${imagen}" alt="${nombreobra}">-->
 		          <div class="carousel-info-row">
 		            <span class="carousel-info-label clave">${clave}</span>
 		            <!--<span class="carousel-info-label">Valoración:</span> <span>${valoracion}</span>-->
@@ -106,18 +105,11 @@ document.addEventListener("DOMContentLoaded", function () {
 			  itemBook.onclick = () => onLibroClick(clave);
 		      itemBook.innerHTML = `
 					  <p class="clave">${clave}</p>
-	   				  <!--${imgContenedorHhtml}-->
-			          <!--<img src="../img/${imagen}" alt="${nombreobra}" loading="lazy"/>-->
 			          <div class="book-info-main">
 			            <h3>${nombreobra}</h3>
 						<div class="book-author-title">Autor:</div>
 						<div class="book-author-name">${autor}</div>
 	  					<div class="book-author-name ${estado}">${estado}</div>
-			            <!--<p class="book-sinopsis tooltip">
-				  			<b>Sinopsis:</b>
-							<span class="tooltip-text">${sinopsis}</span>
-			            	</br> ${sinopsis}
-			            </p>-->
 			          </div>
 		      `;
 			// Clonar imagenContenedor
