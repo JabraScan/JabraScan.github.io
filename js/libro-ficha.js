@@ -70,7 +70,21 @@ function cargarlibro(libroId) {
 					//Listado Capitulos
 						obtenerCapitulos(clave).then(listacapitulos => {
 						  // Aquí generamos las dos secciones
-						  const ultimosCapitulos = listacapitulos
+							const ultimosCapitulos = listacapitulos
+								  .filter(c => c.Fecha && c.Fecha.trim() !== "")
+								  .sort((a, b) => {
+								    const fechaA = new Date(a.Fecha.split('-').reverse().join('-'));
+								    const fechaB = new Date(b.Fecha.split('-').reverse().join('-'));
+								
+								    const diffFecha = fechaB - fechaA;
+								    if (diffFecha !== 0) return diffFecha;
+								
+								    // Descendente: comparamos b vs a
+								    return String(b.numeroCapitulo)
+								      .localeCompare(String(a.numeroCapitulo), undefined, { numeric: true, sensitivity: 'base' });
+								  })
+								  .slice(0, 6);
+						  /*const ultimosCapitulos = listacapitulos
 								  .filter(c => c.Fecha && c.Fecha.trim() !== "") // solo capítulos con fecha válida
 								  .sort((a, b) => {
 								    const fechaA = new Date(a.Fecha.split('-').reverse().join('-'));
@@ -82,7 +96,7 @@ function cargarlibro(libroId) {
 									// Si las fechas son iguales, ordenamos por numeroCapitulo descendente
 									return b.numeroCapitulo - a.numeroCapitulo;
 								  })
-								  .slice(0, 6); // últimos 6 capítulos
+								  .slice(0, 6); // últimos 6 capítulos*/
 						  const totalCapitulos = listacapitulos.length;
 						
 						  // Sección: Últimos capítulos
