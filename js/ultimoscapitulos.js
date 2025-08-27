@@ -25,6 +25,7 @@ const flatten = (obj) => {
         _fecha: parseDateDMY(it.Fecha),
         _num: parseChapterNumber(it.numCapitulo),
         _obra: it.tituloObra || key,
+        _clave: it.clave || key,
       });
     }
   }
@@ -70,7 +71,7 @@ const render = () => {
       const li = document.createElement("li");
       li.innerHTML = `
         <a href="#" style="flex-flow"
-           data-pdf-obra="${item._obra}"
+           data-pdf-obra="${item._clave}"
            data-pdf-capitulo="${item.numCapitulo}"
            class="pdf-link-ucap">
             <span class="fecha">${formatDateEs(item._fecha)}</span> -
@@ -96,10 +97,6 @@ const render = () => {
 								    localStorage.setItem("ultimaPagina", 1);
 								
 								    console.log("Click detectado:", clave, capitulo);
-		console.log(clave);
-		console.log(obra);
-		console.log(capitulo);
-
 								    //window.location.href = 'lectorpdf.html';
 								  });
 								});
