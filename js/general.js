@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log(`Reanudar: ${ultimaObra} / Cap. ${ultimoCapitulo} / Página ${ultimaPagina}`);
           spanSeguir.classList.add("active");
           // Aquí tu lógica para continuar leyendo
+          abrirLectorPDF();
         });
       }
     }
