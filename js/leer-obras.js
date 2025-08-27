@@ -49,8 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 			//indicador +18
 		    const imagenContenedor = document.createElement("div");
-				  imagenContenedor.classList.add("imagen-contenedor");
-				  imagenContenedor.classList.add("libro-item");
+				  imagenContenedor.classList.add("imagen-contenedor", "libro-item");
 				
 				  const img = document.createElement("img");
 					  img.src = "../img/" + imagen;
@@ -101,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		  const imgContenedorHhtml = imagenContenedor.innerHTML;
 	      const itemBook = document.createElement("article");
-		      itemBook.className = "book-card-main libro-item";
+		      itemBook.classList.add("book-card-main", "libro-item");
 			  itemBook.onclick = () => onLibroClick(clave);
 		      /*itemBook.innerHTML = `
 					  <p class="clave">${clave}</p>
