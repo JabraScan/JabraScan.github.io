@@ -14,6 +14,9 @@
       const pauseReadingBtn = document.getElementById("pauseReading");
       const resumeReadingBtn = document.getElementById("resumeReading");
       const toggleMode = document.getElementById("toggleMode");
+
+	  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
     
       // Renderizar página
       function renderPage(num) {
@@ -233,6 +236,7 @@ console.log("abrir automaticamente");
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
 
 
 
