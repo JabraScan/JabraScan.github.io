@@ -143,8 +143,9 @@ function initlectorpdf()
 			const h1 = document.querySelector("header h1");
 			  h1.textContent = cap.tituloObra;
 			  h1.onclick = () => onLibroClick(ultimaObra);
-            //abrir archivo			
-              const pdfPath = `books/${clave}/${cap.NombreArchivo}`;
+            //abrir archivo
+				const nombreA = encodeURIComponent(cap.NombreArchivo);
+              const pdfPath = `books/${clave}/${nombreA}`;
 			  console.log(`carga archivo ${pdfPath}`);
               pdfjsLib.getDocument(pdfPath).promise.then(doc => {
                 pdfDoc = doc;
@@ -174,7 +175,8 @@ function initlectorpdf()
 			  h1.textContent = cap.tituloObra;
 			  h1.onclick = () => onLibroClick(ultimaObra);
             //abrir archivo
-            const pdfPath = `books/${ultimaObra}/${cap.NombreArchivo}`;
+			  const nombreA = encodeURIComponent(cap.NombreArchivo);
+            const pdfPath = `books/${ultimaObra}/${nombreA}`;
 			  console.log(`carga automatica ${pdfPath}`);
             pdfjsLib.getDocument(pdfPath).promise.then(doc => {
               pdfDoc = doc;
@@ -207,6 +209,7 @@ function initlectorpdf()
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
 
 
 
