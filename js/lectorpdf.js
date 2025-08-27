@@ -81,8 +81,9 @@
 		        resumeReadingBtn.style.display = resume ? "inline-block" : "none";
 		        stopReadingBtn.style.display = stop ? "inline-block" : "none";
 		      }
-		    
-		      startReadingBtn.onclick = () => {
+		    //inicio startReading (voz canvas)
+		      /*comentado por actualizacion 
+			startReadingBtn.onclick = () => {
 		        pdfDoc.getPage(pageNum).then(page => {
 		          page.getTextContent().then(textContent => {
 		            const text = textContent.items.map(item => item.str).join(" ");
@@ -105,8 +106,49 @@
 		            speechSynthesis.speak(utterance);
 		          });
 		        });
-		      };
-		    
+		      };*/
+				//actualizado 27082025 1913 agregada funcionalidad para continuar leyendo hasta el final de la obra
+				startReadingBtn.onclick = () => {
+					  pdfDoc.getPage(pageNum).then(page => {
+					    page.getTextContent().then(textContent => {
+					      const text = textContent.items.map(item => item.str).join(" ");
+					      const utterance = new SpeechSynthesisUtterance(text);
+					      utterance.lang = "es-ES";
+					
+					      const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith("es"));
+					      if (voices.length > 0) {
+					        utterance.voice = voices.find(v => v.name.includes("Google") || v.name.includes("Helena")) || voices[0];
+					        utterance.rate = 0.95;
+					        utterance.pitch = 1.1;
+					        utterance.volume = 1;
+					        mostrarBotones({ pause: true, stop: true });
+					      }
+					
+					      // 📌 Aquí encadenamos la lectura continua
+					      utterance.onend = () => {
+					        const btnNext = document.querySelector('.nextPage');
+					
+					        if (btnNext && !btnNext.disabled) {
+					          btnNext.click(); // pasa a la siguiente página
+					          // Espera un poco a que se renderice la nueva página antes de leer
+					          setTimeout(() => {
+					            startReadingBtn.click();
+					          }, 500);
+					        } else {
+					          // No hay más páginas/capítulos
+					          const fin = new SpeechSynthesisUtterance("Ya no hay más contenido para leer");
+					          fin.lang = "es-ES";
+					          speechSynthesis.speak(fin);
+					          mostrarBotones({ play: true });
+					        }
+					      };
+					
+					      speechSynthesis.speak(utterance);
+					    });
+					  });
+				};
+				
+		    //fin startReading
 		      pauseReadingBtn.onclick = () => {
 		        if (speechSynthesis.speaking && !speechSynthesis.paused) {
 		          speechSynthesis.pause();
@@ -263,69 +305,6 @@
 	    .catch(error => console.error("Error al cargar el capítulo:", error));
 	}
 	//Actualizacion de botones de navegacion por las paginas del pdf
-/*version 2 cambiada por otra que funciona por clases, no por id
-	function actualizarBotonesNav(idxCapActual, capitulos, clave) {
-	  const btnPrevPag = document.getElementById("prevPage");
-	  const btnNextPag = document.getElementById("nextPage");
-	
-	  // --- Botón anterior ---
-	  if (pageNum > 1) {
-	    btnPrevPag.textContent = "Página anterior";
-	    btnPrevPag.disabled = false;
-	    btnPrevPag.onclick = () => {
-	      pageNum--;
-	      renderPage(pageNum);
-	      actualizarBotonesNav(idxCapActual, capitulos, clave);
-	      window.scrollTo({ top: 0, behavior: "smooth" });
-	    };
-	  } else {
-	    if (idxCapActual > 0) {
-	      btnPrevPag.textContent = "Capítulo anterior";
-	      btnPrevPag.disabled = false;
-	      btnPrevPag.onclick = () => {
-	        const prevCap = capitulos[idxCapActual - 1];
-	        localStorage.setItem("ultimaPagina", 1);
-	        localStorage.setItem("ultimaObra", clave);
-	        localStorage.setItem("ultimoCapitulo", prevCap.numCapitulo);
-	        cargarCapitulo(clave, prevCap.numCapitulo, 1);
-	        window.scrollTo({ top: 0, behavior: "smooth" });
-	      };
-	    } else {
-	      btnPrevPag.textContent = "Capítulo anterior";
-	      btnPrevPag.disabled = true;
-	      btnPrevPag.onclick = null;
-	    }
-	  }
-	
-	  // --- Botón siguiente ---
-	  if (pageNum < pdfDoc.numPages) {
-	    btnNextPag.textContent = "Página siguiente";
-	    btnNextPag.disabled = false;
-	    btnNextPag.onclick = () => {
-	      pageNum++;
-	      renderPage(pageNum);
-	      actualizarBotonesNav(idxCapActual, capitulos, clave);
-	      window.scrollTo({ top: 0, behavior: "smooth" });
-	    };
-	  } else {
-	    if (idxCapActual < capitulos.length - 1) {
-	      btnNextPag.textContent = "Capítulo siguiente";
-	      btnNextPag.disabled = false;
-	      btnNextPag.onclick = () => {
-	        const nextCap = capitulos[idxCapActual + 1];
-	        localStorage.setItem("ultimaPagina", 1);
-	        localStorage.setItem("ultimaObra", clave);
-	        localStorage.setItem("ultimoCapitulo", nextCap.numCapitulo);
-	        cargarCapitulo(clave, nextCap.numCapitulo, 1);
-	        window.scrollTo({ top: 0, behavior: "smooth" });
-	      };
-	    } else {
-	      btnNextPag.textContent = "Capítulo siguiente";
-	      btnNextPag.disabled = true;
-	      btnNextPag.onclick = null;
-	    }
-	  }
-	}*/
 	function actualizarBotonesNav(idxCapActual, capitulos, clave) {
 	  // Configuración de estados que se aplicará a todos los botones según clase
 		  let prevTexto, prevDisabled, prevAction;
@@ -400,5 +379,6 @@
 	}
 
 	//Fin botones de navegacion por pagina
+
 
 
