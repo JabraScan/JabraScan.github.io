@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					.then(r => r.json())
 					.then(data => {
 						const bloque = crearUltimoCapituloDeObra(data, clave);
-						if (bloque) itemBook.appendChild(bloque);
+						if (bloque) itemBook.querySelector("book-info-main").appendChild(bloque);
 				});
 			// Clonar imagenContenedor
 			const imagenContenedorA = imagenContenedor.cloneNode(true); // Clona el contenedor de imagen
