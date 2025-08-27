@@ -23,16 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   //fin enlaces data-target
-  // --- 2. Botón Seguir leyendo ---
+  // --- 2. Span "Seguir leyendo" ---
     const ultimaObra = localStorage.getItem("ultimaObra");
     const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
     const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
   
     if (ultimaObra && ultimoCapitulo && !isNaN(ultimaPagina)) {
-      const btnSeguir = document.getElementById("btnSeguir");
-      if (btnSeguir) {
-        btnSeguir.style.display = "inline-block";
-        btnSeguir.addEventListener("click", () => {
+      const spanSeguir = document.getElementById("btnSeguir");
+      if (spanSeguir) {
+        spanSeguir.style.display = "inline-block";
+        spanSeguir.addEventListener("click", () => {
           console.log(`Reanudar: ${ultimaObra} / Cap. ${ultimoCapitulo} / Página ${ultimaPagina}`);
           // Aquí tu lógica para continuar leyendo
         });
