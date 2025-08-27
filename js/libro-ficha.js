@@ -81,7 +81,7 @@ function cargarlibro(libroId) {
 								    const diffFecha = b.fechaObj - a.fechaObj;
 								    if (diffFecha !== 0) return diffFecha;
 								
-								    const diffCap = b.capNum - a.capNum;
+								    const diffCap = a.capNum - b.capNum;
 								    if (diffCap !== 0) return diffCap;
 								
 								    // Criterio extra opcional para desempatar del todo
