@@ -8,14 +8,13 @@ const parseChapterNumber = (n) => {
   return Number.isNaN(num) ? -Infinity : num;
 };
 
-const formatDateEs = (d) =>
-  new Intl.DateTimeFormat("es-ES", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  })
-    .format(d)
-    .replace(".", "");
+const formatDateEs = (d) => {
+  const date = typeof d === "string" ? parseDateDMY(d) : d;
+  const dd = String(date.getDate()).padStart(2, "0");
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const yyyy = date.getFullYear();
+  return `${dd}-${mm}-${yyyy}`;
+};
 
 const flatten = (obj) => {
   const items = [];
@@ -132,3 +131,19 @@ window.addEventListener("keydown", (e) => {
     qEl.select();
   }
 });
+  document.querySelectorAll('.pdf-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+  	 	const clave = e.currentTarget.getAttribute("data-pdf-obra");
+    	const capitulo = e.currentTarget.getAttribute("data-pdf-capitulo");
+
+      // Guardar en localStorage
+      localStorage.setItem('ultimaObra', clave);
+      localStorage.setItem('ultimoCapitulo', capitulo);
+	  localStorage.setItem("ultimaPagina", 1);
+		console.log(obra);
+		console.log(capitulo);
+      // Redirigir a lectorpdf.html
+      window.location.href = 'lectorpdf.html';
+    });
+  });
