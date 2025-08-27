@@ -12,6 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(html => {
           document.querySelector("main").innerHTML = html;
+          // 🚀 Aquí invocas la inicialización específica
+          if (url === "ultimosCapitulos.html") {
+            initUltimosCapitulos();
+          }
+          // other
         })
         .catch(err => console.error("Error:", err));
     });
