@@ -237,6 +237,7 @@ function initlectorpdf()
 				.catch(err => console.error('Error:', err));
 		}
 // 📌 Función para cargar un capítulo
+/* version 1.0
 		function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
 		  fetch("books.json")
 		    .then(response => response.json())
@@ -262,3 +263,85 @@ function initlectorpdf()
 		    })
 		    .catch(error => console.error("Error al cargar el capítulo:", error));
 		}
+*/
+	function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
+	  fetch("books.json")
+	    .then(response => response.json())
+	    .then(books => {
+	      const capitulos = books[clave];
+	      if (!capitulos) return;
+	
+	      // Buscar capítulo actual y su índice
+	      const idx = capitulos.findIndex(c => c.numCapitulo === capitulo);
+	      if (idx === -1) return;
+	      const cap = capitulos[idx];
+	
+	      // ✅ Actualizar título
+	      const h1 = document.getElementById("tituloObraPdf");
+	      h1.textContent = cap.tituloObra;
+	      h1.onclick = () => onLibroClick(clave);
+	
+	      // 📄 Cargar PDF
+	      const nombreA = encodeURIComponent(cap.NombreArchivo);
+	      const pdfPath = `books/${clave}/${nombreA}`;
+	      console.log(`Cargando PDF: ${pdfPath}`);
+	      pdfjsLib.getDocument(pdfPath).promise.then(doc => {
+	        pdfDoc = doc;
+	        pageNum = paginaInicial;
+	        renderPage(pageNum);
+	      });
+	
+	      // ⬅️ Botón capítulo anterior
+	      const btnPrev = document.getElementById("btnPrevCap");
+	      if (idx > 0) {
+	        const prevCap = capitulos[idx - 1];
+	        btnPrev.dataset.pdfObra = clave;
+	        btnPrev.dataset.pdfCapitulo = prevCap.numCapitulo;
+	        btnPrev.classList.add("pdf-link");
+	        btnPrev.disabled = false;
+	      } else {
+	        btnPrev.removeAttribute("data-pdf-obra");
+	        btnPrev.removeAttribute("data-pdf-capitulo");
+	        btnPrev.classList.remove("pdf-link");
+	        btnPrev.disabled = true;
+	      }
+	
+	      // ➡️ Botón capítulo siguiente
+	      const btnNext = document.getElementById("btnNextCap");
+	      if (idx < capitulos.length - 1) {
+	        const nextCap = capitulos[idx + 1];
+	        btnNext.dataset.pdfObra = clave;
+	        btnNext.dataset.pdfCapitulo = nextCap.numCapitulo;
+	        btnNext.classList.add("pdf-link");
+	        btnNext.disabled = false;
+	      } else {
+	        btnNext.removeAttribute("data-pdf-obra");
+	        btnNext.removeAttribute("data-pdf-capitulo");
+	        btnNext.classList.remove("pdf-link");
+	        btnNext.disabled = true;
+	      }
+	
+	      // 📜 Rellenar selector de capítulos
+	      const chapterSelect = document.getElementById("chapterSelect");
+	      chapterSelect.innerHTML = ""; // limpiar antes
+	      capitulos.forEach(c => {
+	        const option = document.createElement("option");
+	        option.value = c.numCapitulo;
+	        option.textContent = `${c.numCapitulo} · ${c.nombreCapitulo}`;
+	        if (c.numCapitulo === capitulo) {
+	          option.selected = true;
+	        }
+	        option.id = clave; // según tu requerimiento
+	        chapterSelect.appendChild(option);
+	      });
+	
+	      // 📌 Evento cambio selector → cargar nuevo capítulo
+	      chapterSelect.onchange = () => {
+	        const nuevoCap = chapterSelect.value;
+	        localStorage.setItem("ultimaObra", clave);
+	        localStorage.setItem("ultimoCapitulo", nuevoCap);
+	        cargarCapitulo(clave, nuevoCap, 1);
+	      };
+	    })
+	    .catch(error => console.error("Error al cargar el capítulo:", error));
+	}
