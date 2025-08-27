@@ -259,6 +259,7 @@
 	    .catch(error => console.error("Error al cargar el capítulo:", error));
 	}
 	//Actualizacion de botones de navegacion por las paginas del pdf
+/*version 2 cambiada por otra que funciona por clases, no por id
 	function actualizarBotonesNav(idxCapActual, capitulos, clave) {
 	  const btnPrevPag = document.getElementById("prevPage");
 	  const btnNextPag = document.getElementById("nextPage");
@@ -320,5 +321,79 @@
 	      btnNextPag.onclick = null;
 	    }
 	  }
+	}*/
+	function actualizarBotonesNav(idxCapActual, capitulos, clave) {
+	  // Configuración de estados que se aplicará a todos los botones según clase
+		  let prevTexto, prevDisabled, prevAction;
+		  let nextTexto, nextDisabled, nextAction;
+		
+		  // --- Lógica botón anterior ---
+		  if (pageNum > 1) {
+		    prevTexto = "Página anterior";
+		    prevDisabled = false;
+		    prevAction = () => {
+		      pageNum--;
+		      renderPage(pageNum);
+		      actualizarBotonesNav(idxCapActual, capitulos, clave);
+		      window.scrollTo({ top: 0, behavior: "smooth" });
+		    };
+		  } else if (idxCapActual > 0) {
+		    prevTexto = "Capítulo anterior";
+		    prevDisabled = false;
+		    prevAction = () => {
+		      const prevCap = capitulos[idxCapActual - 1];
+		      localStorage.setItem("ultimaPagina", 1);
+		      localStorage.setItem("ultimaObra", clave);
+		      localStorage.setItem("ultimoCapitulo", prevCap.numCapitulo);
+		      cargarCapitulo(clave, prevCap.numCapitulo, 1);
+		      window.scrollTo({ top: 0, behavior: "smooth" });
+		    };
+		  } else {
+		    prevTexto = "Capítulo anterior";
+		    prevDisabled = true;
+		    prevAction = null;
+		  }
+		
+		  // --- Lógica botón siguiente ---
+		  if (pageNum < pdfDoc.numPages) {
+		    nextTexto = "Página siguiente";
+		    nextDisabled = false;
+		    nextAction = () => {
+		      pageNum++;
+		      renderPage(pageNum);
+		      actualizarBotonesNav(idxCapActual, capitulos, clave);
+		      window.scrollTo({ top: 0, behavior: "smooth" });
+		    };
+		  } else if (idxCapActual < capitulos.length - 1) {
+		    nextTexto = "Capítulo siguiente";
+		    nextDisabled = false;
+		    nextAction = () => {
+		      const nextCap = capitulos[idxCapActual + 1];
+		      localStorage.setItem("ultimaPagina", 1);
+		      localStorage.setItem("ultimaObra", clave);
+		      localStorage.setItem("ultimoCapitulo", nextCap.numCapitulo);
+		      cargarCapitulo(clave, nextCap.numCapitulo, 1);
+		      window.scrollTo({ top: 0, behavior: "smooth" });
+		    };
+		  } else {
+		    nextTexto = "Capítulo siguiente";
+		    nextDisabled = true;
+		    nextAction = null;
+		  }
+		
+		  // --- Aplicar a todos los botones por clase ---
+		  document.querySelectorAll(".prevPage").forEach(btn => {
+		    btn.textContent = prevTexto;
+		    btn.disabled = prevDisabled;
+		    btn.onclick = prevAction;
+		  });
+		
+		  document.querySelectorAll(".nextPage").forEach(btn => {
+		    btn.textContent = nextTexto;
+		    btn.disabled = nextDisabled;
+		    btn.onclick = nextAction;
+		  });
 	}
+
 	//Fin botones de navegacion por pagina
+
