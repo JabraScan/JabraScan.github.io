@@ -399,3 +399,7 @@ footer {
   gap: 8px;
   flex-wrap: wrap;
 }
+.obra {
+  font-weight: bold;
+  color: #deb887;
+}
