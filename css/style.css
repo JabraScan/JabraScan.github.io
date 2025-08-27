@@ -1,3 +1,4 @@
+/* ====== Estilos globales ====== */
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
@@ -24,6 +25,7 @@ nav a, nav span {
   margin: 0 1em;
   font-weight: bold;
   transition: color 0.2s;
+  -webkit-transition: color 0.2s;
 }
 nav a.active, nav a:hover, nav span.active {
   color: #fff;
@@ -38,72 +40,78 @@ main {
   margin: 2em auto;
   padding: 0 1em;
 }
+
+/* ====== Indicador adulto (badge 18+) ====== */
 .indicador-adulto {
   position: absolute;
-  top: 10px; /* Ajusta la distancia desde la parte superior */
-  right: 10px; /* Ajusta la distancia desde la derecha */
-  width: 30px; /* Ancho del círculo */
-  height: 30px; /* Alto del círculo */
-  border-radius: 50%; /* Hace que el div sea un círculo */
-  border: 2px solid red; /* Borde rojo */
-  background-color: white; /* Fondo blanco */
-  color: red; /* Texto rojo */
-  font-size: 0.7em; /* Tamaño del texto */
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid red;
+  background-color: white;
+  color: red;
+  font-size: 0.7em;
   font-weight: bold;
   display: flex;
-  justify-content: center; /* Centra el texto horizontalmente */
-  align-items: center; /* Centra el texto verticalmente */
-  box-sizing: border-box; /* Incluye el borde en el tamaño total */
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 }
 .imagen-contenedor {
-  position: relative; /* Establece el contexto de posicionamiento */
+  position: relative;
   display: inline-block;
 }
 .imagen-contenedor:not(.adulto) .indicador-adulto {
   display: none;
 }
+
+/* ====== Etiquetas y utilidades ====== */
 .etiqueta {
   font-size: 0.8em;
   border-radius: 50px;
   background: blue;
   color: white;
-  padding: 0 20px 0 20px;
-  font-wheight:bold
+  padding: 0 20px;
+  font-weight: bold;
 }
-.clave {
-  display: none;
-}
+.clave { display: none; }
+.obra { font-weight: bold; color: #deb887; }
+.book-latest-chapter { place-self: flex-end; }
+.libro-item { cursor: pointer; }
+
+/* ====== Lista de libros / cards ====== */
 .book-list {
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
   justify-content: center;
 }
-.book-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  overflow: hidden;
-  max-width: 150px;
-  max-height: 600px;
-  box-shadow: 0 2px 10px #0001;
-  transition: transform 0.15s;
-  text-decoration: none;
-}
+.book-card,
 .book-card-main {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 2px 10px #0001;
+  transition: transform 0.15s, box-shadow 0.15s;
+  -webkit-transition: -webkit-transform 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+}
+.book-card {
+  max-width: 150px;
+  max-height: 600px;
+}
+.book-card-main {
   max-width: 45%;
   max-height: 150px;
-  box-shadow: 0 2px 10px #0001;
-  transition: transform 0.15s;
-  text-decoration: none;
   display: flex;
 }
-.book-card:hover .book-card-main:hover{
+.book-card:hover,
+.book-card-main:hover {
   transform: translateY(-5px) scale(1.03);
+  -webkit-transform: translateY(-5px) scale(1.03);
   box-shadow: 0 8px 24px #0002;
 }
 .book-card img {
@@ -117,39 +125,27 @@ main {
   object-fit: cover;
   display: block;
 }
-.book-info {
-  padding: 1em;
-}
+.book-info { padding: 1em; }
 .book-info-main {
   padding: 0.8em;
   font-size: 0.75em;
   flex: auto;
 }
-.book-info h2 .book-info-main h2{
+.book-info h2, .book-info-main h2 {
   font-size: 1.4em;
   margin: 0 0 0.5em 0;
 }
-.book-info h3 .book-info-main h3{
+.book-info h3, .book-info-main h3 {
   font-size: 1.2em;
   margin: 0 0 0.5em 0;
   color: cadetblue;
 }
-.book-author{
-  color: #666;
-  font-size: 1em;
-  margin: 0 0 0.5em 0;
-}
-.book-author-title{
-  font-weight: bold;
-  width: 15%;
-}
-.book-author-name {
-  width: 100%;
-}
-.book-sinopsis {
-  font-size: 0.98em;
-  color: #444;
-}
+.book-author { color: #666; font-size: 1em; margin: 0 0 0.5em 0; }
+.book-author-title { font-weight: bold; width: 15%; }
+.book-author-name { width: 100%; }
+.book-sinopsis { font-size: 0.98em; color: #444; }
+
+/* ====== Ficha / detalle de libro ====== */
 .book-detail {
   display: flex;
   gap: 2em;
@@ -165,32 +161,31 @@ main {
   border-radius: 6px;
   box-shadow: 0 4px 12px #0002;
 }
+
+/* ====== Lista de capítulos ====== */
 .chapter-list {
   background: #fff;
   padding: 1.5em;
   border-radius: 12px;
   box-shadow: 0 2px 10px #0001;
 }
-.chapter-list h2 {
-  margin-top: 0;
-}
+.chapter-list h2 { margin-top: 0; }
 .chapter-list ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.chapter-list li {
-  margin-bottom: 0.6em;
-}
+.chapter-list li { margin-bottom: 0.6em; }
 .chapter-list a {
   color: #14213d;
   text-decoration: none;
   font-size: 1.07em;
   transition: color 0.2s;
+  -webkit-transition: color 0.2s;
 }
-.chapter-list a:hover {
-  color: #fca311;
-}
+.chapter-list a:hover { color: #fca311; }
+
+/* ====== Footer ====== */
 footer {
   text-align: center;
   color: #888;
@@ -198,13 +193,8 @@ footer {
   padding: 2em 0 1em 0;
   margin-top: 4em;
 }
-@media (max-width: 700px) {
-  .book-detail { flex-direction: column; align-items: center; }
-  .book-detail .cover { width: 100%; max-width: 230px;}
-  main { padding: 0 0.5em; }
-  .book-card, .book-detail, .chapter-list { width: 100%; }
-}
-/* Carrusel principal */
+
+/* ====== Carrusel ====== */
 .carousel {
   position: relative;
   width: 100%;
@@ -214,73 +204,53 @@ footer {
   border-radius: 18px;
   box-shadow: 0 4px 20px #0002;
   background: #222;
+  -webkit-mask-image: -webkit-radial-gradient(white, black); /* fix recortes en iOS */
 }
-
 .carousel-track {
   display: flex;
   transition: transform 0.5s cubic-bezier(.77,0,.18,1);
+  -webkit-transition: -webkit-transform 0.5s cubic-bezier(.77,0,.18,1);
 }
-
 .carousel-item {
   min-width: 100%;
   position: relative;
   display: flex;
 }
-
 .carousel-item img {
-  //width: 20%;
+  width: 100%;
   height: 340px;
   object-fit: cover;
-  //display: block;
-  display: flex;
+  display: block;
   border-radius: 18px;
 }
-
 .carousel-info-overlay {
-  //position: absolute;
-  //top: 0;
-  //bottom: 0;
-  left: 20%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   right: 0;
   background: linear-gradient(0deg, rgba(20,33,61,0.95) 70%, rgba(20,33,61,0.4) 100%);
   color: #fff;
   padding: 1.2em 1.5em 1em 1.5em;
   border-radius: 0 0 18px 18px;
-  //display: flex;
-  //flex-direction: column;
   gap: 0.6em;
   width: 100%;
 }
-
 .carousel-info-title {
   font-size: 1.6em;
   font-weight: bold;
   margin: 0;
   cursor: pointer;
 }
-
-.carousel-info-row .carousel-info-row-tags {
+.carousel-info-row, .carousel-info-row-tags {
   display: flex;
-  gap: 1.6em;
-  font-size: 1.08em;
   flex-wrap: wrap;
-}
-.carousel-info-row-tags {
   gap: 0.6em;
-  display: flex;
-  font-size: 1.08em;
-  flex-wrap: wrap;
 }
-.carousel-info-row span {
-  padding: 10px 0 0 0;
-}
-
 .carousel-info-label {
   font-weight: bold;
   color: #fca311;
   margin-right: 0.4em;
 }
-
 .carousel-controls {
   position: absolute;
   top: 50%;
@@ -289,7 +259,6 @@ footer {
   justify-content: space-between;
   pointer-events: none;
 }
-
 .carousel-btn {
   background: rgba(20,33,61,0.85);
   border: none;
@@ -301,44 +270,23 @@ footer {
   cursor: pointer;
   pointer-events: all;
   transition: background 0.2s;
+  -webkit-transition: background 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 0.5em;
 }
 .carousel-btn:hover {
   background: #fca311;
   color: #14213d;
 }
-.libro-item {
-    cursor: pointer;
-}
 
-@media (max-width: 700px) {
-  .carousel-item img {
-    height: 200px;
-  }
-  .carousel-info-overlay {
-    font-size: 0.95em;
-    padding: 0.8em 0.8em 0.7em 0.8em;
-  }
-}
-.Activo {
-    color: 	#20B2AA; /*lightseagreen*/
-    font-weight: bold;
-}
-.Finalizado {
-    color: #ff4500; /*orangered*/
-    font-weight: bold;
-}
-.Cancelado {
-    color: #871F78; /*darkviolet;*/
-    font-weight: bold;
-}
-.Pausado, .Hiatus {
-    color: a9a9a9; /*darkgray;*/
-    font-weight: bold;
-}
+/* ====== Estado libro ====== */
+.Activo { color: #20B2AA; font-weight: bold; }
+.Finalizado { color: #ff4500; font-weight: bold; }
+.Cancelado { color: #871F78; font-weight: bold; }
+.Pausado, .Hiatus { color: #a9a9a9; font-weight: bold; }
+
+/* ====== Enlaces a capítulos (PDF) ====== */
 .pdf-link {
   display: flex;
   justify-content: space-between;
@@ -348,37 +296,13 @@ footer {
   padding: 6px 8px;
   border-radius: 4px;
   transition: background 0.2s ease;
+  -webkit-transition: background 0.2s ease;
 }
+.pdf-link:hover { background: #f0f0f0; }
+.pdf-link span:first-child { text-align: left; }
+.pdf-link span:last-child { text-align: right; }
 
-.pdf-link:hover {
-  background: #f0f0f0;
-}
-
-/*
-.pdf-link span {
-  flex: 1 1 45%;
-}
-*/
-.pdf-link span:first-child {
-  text-align: left;
-}
-
-.pdf-link span:last-child {
-  text-align: right;
-}
-
-/* Responsive: en pantallas pequeñas, apilar los spans */
-@media (max-width: 600px) {
-  .pdf-link {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .pdf-link span {
-    flex: 1 1 100%;
-    text-align: left;
-  }
-}
+/* ====== Buscador ====== */
 .buscador {
   display: flex;
   justify-content: space-between;
@@ -386,11 +310,10 @@ footer {
   flex-wrap: wrap;
   gap: 12px;
   padding: 10px;
-  /*background-color: #f9f9f9;*/
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background: #fff;
 }
-
 .buscador select,
 .buscador input,
 .buscador button {
@@ -404,14 +327,9 @@ footer {
   gap: 8px;
   flex-wrap: wrap;
 }
-.obra {
-  font-weight: bold;
-  color: #deb887;
-}
-.book-latest-chapter {
-  place-self: flex-end;
-}
-/*efecto lupa*/
+
+/* ====== Efecto lupa ====== */
+/* En escritorio: hover; en móvil: active/touch */
 .lupa {
   position: relative;
   display: inline-block;
@@ -421,7 +339,45 @@ footer {
 .lupa img {
   display: block;
   transition: transform 0.3s ease;
+  -webkit-transition: -webkit-transform 0.3s ease;
 }
-.lupa:hover img {
-  transform: scale(2); /* Aumenta la imagen dentro del contenedor */
+@media (hover: hover) {
+  .lupa:hover img {
+    transform: scale(2);
+    -webkit-transform: scale(2);
+  }
+}
+/* fallback táctiles */
+.lupa:active img {
+  transform: scale(2);
+  -webkit-transform: scale(2);
+}
+
+/* ====== Responsivo ====== */
+@media (max-width: 900px) {
+  .book-card-main { max-width: 100%; }
+}
+
+@media (max-width: 700px) {
+  .book-detail { flex-direction: column; align-items: center; }
+  .book-detail .cover { width: 100%; max-width: 230px; }
+  main { padding: 0 0.5em; }
+  .book-card, .book-detail, .chapter-list { width: 100%; }
+  .carousel-item img { height: 200px; }
+  .carousel-info-overlay {
+    font-size: 0.95em;
+    padding: 0.8em 0.8em 0.7em 0.8em;
+  }
+  .pdf-link { flex-direction: column; align-items: flex-start; }
+  .pdf-link span { flex: 1 1 100%; text-align: left; }
+}
+
+/* ====== Fixes varios iOS ====== */
+/* Corrige issues de scroll suave en contenedores largos */
+@supports (-webkit-touch-callout: none) {
+  .carousel,
+  .chapter-list,
+  .book-detail {
+    -webkit-overflow-scrolling: touch;
+  }
 }
