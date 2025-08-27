@@ -22,4 +22,21 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Error:", err));
     });
   });
+  //fin enlaces data-target
+  // --- 2. Botón Seguir leyendo ---
+    const ultimaObra = localStorage.getItem("ultimaObra");
+    const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
+    const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
+  
+    if (ultimaObra && ultimoCapitulo && !isNaN(ultimaPagina)) {
+      const btnSeguir = document.getElementById("btnSeguir");
+      if (btnSeguir) {
+        btnSeguir.style.display = "inline-block";
+        btnSeguir.addEventListener("click", () => {
+          console.log(`Reanudar: ${ultimaObra} / Cap. ${ultimoCapitulo} / Página ${ultimaPagina}`);
+          // Aquí tu lógica para continuar leyendo
+        });
+      }
+    }
+  //fin boton seguir leyendo
 });
