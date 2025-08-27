@@ -228,6 +228,9 @@ function cargarlibro(libroId) {
 					DataBook.prepend(headerDataBook);
 					  const bookImageContainer = mainDataBook.querySelector(".book-image");
 					  bookImageContainer.insertBefore(imagenContenedor, bookImageContainer.firstChild);
+
+					//actualizado 27082025 1945 - activamos disqus 
+						mostrarDisqus(clave, capitulo)
 				});
 }
 function obtenerCapitulos(clave) {
