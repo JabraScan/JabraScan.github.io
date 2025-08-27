@@ -30,6 +30,9 @@ nav a.active, nav a:hover, nav span.active {
   text-shadow: 0 0 5px #fca311;
   cursor: pointer;
 }
+nav .inactive {
+  display: none;
+}
 main {
   max-width: 900px;
   margin: 2em auto;
