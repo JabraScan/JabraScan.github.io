@@ -116,14 +116,15 @@ document.addEventListener("DOMContentLoaded", function () {
 			const imagenContenedorA = imagenContenedor.cloneNode(true); // Clona el contenedor de imagen
 			// Prepend el contenedor de imagen al artículo
 			itemBook.prepend(imagenContenedorA);
-	      booklistContainer.appendChild(itemBook);
 			//ultimo capitulo
 				fetch("books.json")
 				  .then(r => r.json())
 				  .then(data => {
 				    const bloque = crearUltimoCapituloDeObra(data, clave);
-				    if (bloque) booklistContainer.appendChild(bloque);
+				    if (bloque) itemBook.appendChild(bloque);
 				  });
+
+	      	booklistContainer.appendChild(itemBook);
 			//
 	    });
 	  })
