@@ -136,15 +136,16 @@ function initlectorpdf()
           fetch("books.json")
             .then(response => response.json())
             .then(books => {
+				console.log("carga desde enlace");
               const cap = books[clave]?.find(c => c.numCapitulo === capitulo);
               if (!cap) return;
 			//actualizar h1
 			const h1 = document.querySelector("header h1");
 			  h1.textContent = cap.tituloObra;
 			  h1.onclick = () => onLibroClick(ultimaObra);
-				console.log("carga desde enlace");
             //abrir archivo			
               const pdfPath = `books/${clave}/${cap.NombreArchivo}`;
+			  console.log(pdfPath);
               pdfjsLib.getDocument(pdfPath).promise.then(doc => {
                 pdfDoc = doc;
                 pageNum = 1;
@@ -173,6 +174,7 @@ function initlectorpdf()
 			  h1.onclick = () => onLibroClick(ultimaObra);
             //abrir archivo
             const pdfPath = `books/${ultimaObra}/${cap.NombreArchivo}`;
+			  console.log(pdfPath);
             pdfjsLib.getDocument(pdfPath).promise.then(doc => {
               pdfDoc = doc;
               pageNum = !isNaN(ultimaPagina) ? ultimaPagina : 1;
@@ -204,6 +206,7 @@ function initlectorpdf()
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
 
 
 
