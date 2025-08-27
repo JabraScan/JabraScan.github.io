@@ -43,11 +43,19 @@
   </header>
 
   <main>
-    <canvas id="pdfCanvas"></canvas>
+    <!--botones navegación cabecera pdf-->    
     <div class="pdf-controls">
-      <button id="prevPage"><span class="icon">⬅️</span><span class="label">Página anterior</span></button>
+      <button id="prevPage" class="prevPage"><span class="icon">⬅️</span><span class="label">Página anterior</span></button>
       <span id="pageInfo">Página 1</span>
-      <button id="nextPage"><span class="icon">➡️</span><span class="label">Página siguiente</span></button>
+      <button id="nextPage" class="nextPage"><span class="icon">➡️</span><span class="label">Página siguiente</span></button>
+    </div>
+    <!--contenido pdf-->
+    <canvas id="pdfCanvas"></canvas>
+    <!--botones navegación pie pdf-->    
+    <div class="pdf-controls">
+      <button id="prevPage" class="prevPage"><span class="icon">⬅️</span><span class="label">Página anterior</span></button>
+      <span id="pageInfo">Página 1</span>
+      <button id="nextPage" class="nextPage"><span class="icon">➡️</span><span class="label">Página siguiente</span></button>
     </div>
   </main>
 
@@ -62,6 +70,7 @@
   </script>
 </body>
 </html>
+
 
 
 
