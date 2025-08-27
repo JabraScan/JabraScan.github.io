@@ -216,11 +216,11 @@
 					const divBanner = document.createElement("div");
 						divBanner.className ="callatedragonmalvado"
 						divBanner.innerHTML = `
-	  							<center>
-									<span>Traducción aprobada por el autor</span>
-		  							<span><bold>Discord Oficial :</bold> <a href="https://discord.gg/Mk2qb65AxA" target="_blank">https://discord.gg/Mk2qb65AxA</a></span>
-			  						<img style="" src = "img/discord_oficial_jabrascan.jpg" alt = "Traducción aprobada">
-								</center>
+								<span>Traducción aprobada por el autor</span>
+								</br>
+								<span><bold>Discord Oficial :</bold> <a href="https://discord.gg/Mk2qb65AxA" target="_blank">https://discord.gg/Mk2qb65AxA</a></span>
+								</br>
+								<img style="" src = "img/discord_oficial_jabrascan.jpg" alt = "Traducción aprobada">
 		  					`;
 					datosAdic.appendChild(divBanner);
 				}
@@ -367,6 +367,7 @@
 	}
 
 	//Fin botones de navegacion por pagina
+
 
 
 
