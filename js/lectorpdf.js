@@ -219,7 +219,7 @@
 		  							</br>
 									<span>Traducción aprobada por el autor</span>
 		 							</br>
-		  							<span>Discord Oficial : <a href="${cap.discord}" target="_blank">${discord}</a></span>
+		  							<span><bold>Discord Oficial :</bold> <a href="https://discord.gg/Mk2qb65AxA" target="_blank">https://discord.gg/Mk2qb65AxA</a></span>
 			  						</br>
 			  						<img style="max-width: 90%;" src = "img/discord_oficial_jabrascan.jpg" alt = "Traducción aprobada">
 								</center>
@@ -369,6 +369,7 @@
 	}
 
 	//Fin botones de navegacion por pagina
+
 
 
 
