@@ -282,7 +282,8 @@ body {
   padding: 6px 8px;
   border-radius: 4px;
   transition: background 0.2s ease;
-  color: #14213d;
+  /*color: #14213d;*/
+  color: #888;
     font-size: 1.07em;
     transition: color 0.2s;
 }
