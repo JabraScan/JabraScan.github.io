@@ -160,7 +160,8 @@ function initlectorpdf()
       const ultimaObra = localStorage.getItem("ultimaObra");
       const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
       const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
-    console.log(`Obra ${ultimaObra} Cap ${ultimoCapitulo} Pag ${ultimaPagina}');
+    console.log(`Obra ${ultimaObra} Cap ${ultimoCapitulo} Pag ${ultimaPagina}`);
+	  
       if (ultimaObra && ultimoCapitulo) {
         fetch("books.json")
           .then(response => response.json())
@@ -206,6 +207,7 @@ function initlectorpdf()
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
 
 
 
