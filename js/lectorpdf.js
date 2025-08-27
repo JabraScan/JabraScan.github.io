@@ -165,7 +165,7 @@
 						//seleccionar pagina activa
 		              const pdfPath = `books/${clave}/${nombreArchivo}`;
 		
-						 if (ultimaObra && ultimoCapitulo) {
+						 /*if (ultimaObra && ultimoCapitulo) {
 							 //abrir archivo y seleccionar la pagina activa
 							pdfjsLib.getDocument(pdfPath).promise.then(doc => {
 								pdfDoc = doc;
@@ -179,7 +179,13 @@
 								pageNum = 1;
 								renderPage(pageNum);
 							});
-						 }
+						 }*/
+						console.log(pdfPath);
+						pdfjsLib.getDocument(pdfPath).promise.then(doc => {
+							pdfDoc = doc;
+							pageNum = !isNaN(ultimaPagina) ? ultimaPagina : 1;
+							renderPage(pageNum);
+						});
 		            })
 		            .catch(error => console.error("Error al cargar el PDF:", error));
         	});
@@ -236,6 +242,7 @@ console.log("abrir automaticamente");
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
 
 
 
