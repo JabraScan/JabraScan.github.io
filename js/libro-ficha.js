@@ -229,10 +229,12 @@ function cargarlibro(libroId) {
 										<b><i class="fa-solid fa-info-circle"></i> Sinopsis:</b>
 										<p id="sinopsis-obra">${sinopsis}</p>
 									</div>
-									<div class="book-buttons">
-									<button class="chapter-list"><i class="fa-solid fa-list"></i> Lista de capítulos</button>
-									<button class="read-first"><i class="fa-solid fa-play"></i> Empezar a leer</button>
+									<!--
+		 							<div class="book-buttons">
+										<button class="chapter-list"><i class="fa-solid fa-list"></i> Lista de capítulos</button>
+										<button class="read-first"><i class="fa-solid fa-play"></i> Empezar a leer</button>
 									</div>
+		 							-->
 							</div>
 						`;
 					DataBook.prepend(mainDataBook);
