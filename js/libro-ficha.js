@@ -71,21 +71,21 @@ function cargarlibro(libroId) {
 						obtenerCapitulos(clave).then(listacapitulos => {
 						  // Aquí generamos las dos secciones
 							const ultimosCapitulos = listacapitulos
-								  .filter(c => c.Fecha && c.Fecha.trim() !== "")
 								  .map(c => ({
-									...c,
-									fechaObj: new Date(...c.Fecha.split("-").reverse().map(Number)),
-									capNum: parseFloat(c.numeroCapitulo) // fuerza número
+								    ...c,
+								    fechaObj: parseDateDMY(c.Fecha),
+								    capNum: parseChapterNumber(c.numeroCapitulo)
 								  }))
+								  .filter(c => c.fechaObj) // descarta las fechas inválidas
 								  .sort((a, b) => {
-									const diffFecha = b.fechaObj - a.fechaObj;
-									if (diffFecha !== 0) return diffFecha;
+								    const diffFecha = b.fechaObj - a.fechaObj;
+								    if (diffFecha !== 0) return diffFecha;
 								
-									// Desempate seguro: mayor capítulo primero
-									if (b.capNum !== a.capNum) return b.capNum - a.capNum;
+								    const diffCap = b.capNum - a.capNum;
+								    if (diffCap !== 0) return diffCap;
 								
-									// Tercer criterio opcional: id o título para orden estable
-									return String(b.Titulo || "").localeCompare(String(a.Titulo || ""));
+								    // Criterio extra opcional para desempatar del todo
+								    return String(b.Titulo || "").localeCompare(String(a.Titulo || ""));
 								  })
 								  .slice(0, 6);
 						  /*const ultimosCapitulos = listacapitulos
@@ -297,3 +297,28 @@ function obtenerCapitulos(clave) {
     });
   });
 //});
+//controles de fecha y numero para la ordenacion
+function parseDateDMY(str) {
+  if (typeof str !== "string") return null;
+  const partes = str.split("-");
+  if (partes.length !== 3) return null;
+
+  const [d, m, y] = partes.map(Number);
+  const fecha = new Date(y, m - 1, d);
+
+  // Comprobar que el objeto Date coincide con los valores originales
+  if (
+    fecha.getFullYear() === y &&
+    fecha.getMonth() === m - 1 &&
+    fecha.getDate() === d
+  ) {
+    return fecha;
+  }
+  return null; // formato inválido
+}
+
+function parseChapterNumber(v) {
+  const num = parseFloat(v);
+  return Number.isFinite(num) ? num : -Infinity; // -Infinity si no es válido
+}
+//fin controles de fecha y numero para la ordenacion
