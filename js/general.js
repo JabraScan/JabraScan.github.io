@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
           document.querySelector("main").innerHTML = html;
           // 🚀 Aquí invocas la inicialización específica
           if (url === "ultimosCapitulos.html") {
+            ocultarDisqus();
             initUltimosCapitulos();
             console.log(url);
           }
@@ -27,8 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const ultimaObra = localStorage.getItem("ultimaObra");
     const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
     const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
-  console.log(ultimaObra);
-  console.log(ultimoCapitulo);
+  //console.log(ultimaObra);
+  //console.log(ultimoCapitulo);
     if (ultimaObra && ultimoCapitulo) {
       const spanSeguir = document.getElementById("btnSeguir");
       if (spanSeguir) {
