@@ -57,14 +57,6 @@ const render = () => {
   }
 
   emptyEl.style.display = "none";
-						  const seccionUltimos = `
-						    <div class="book-section book-latest-chapters">
-						      <h3><i class="fa-solid fa-clock-rotate-left"></i> Últimos capítulos</h3>
-						      <ul class="chapter-list">
-						        ${ultimosHTML}
-						      </ul>
-						    </div>
-						  `;
   //creamos un div
   const divsection = document.createElement("div");
     divsection.className = "book-section";
