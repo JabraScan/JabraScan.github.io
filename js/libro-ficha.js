@@ -72,16 +72,20 @@ function cargarlibro(libroId) {
 						  // Aquí generamos las dos secciones
 							const ultimosCapitulos = listacapitulos
 								  .filter(c => c.Fecha && c.Fecha.trim() !== "")
+								  .map(c => ({
+									...c,
+									fechaObj: new Date(...c.Fecha.split("-").reverse().map(Number)),
+									capNum: parseFloat(c.numeroCapitulo) // fuerza número
+								  }))
 								  .sort((a, b) => {
-								    const fechaA = new Date(a.Fecha.split('-').reverse().join('-'));
-								    const fechaB = new Date(b.Fecha.split('-').reverse().join('-'));
+									const diffFecha = b.fechaObj - a.fechaObj;
+									if (diffFecha !== 0) return diffFecha;
 								
-								    const diffFecha = fechaB - fechaA;
-								    if (diffFecha !== 0) return diffFecha;
+									// Desempate seguro: mayor capítulo primero
+									if (b.capNum !== a.capNum) return b.capNum - a.capNum;
 								
-								    // Descendente: comparamos b vs a
-								    return String(b.numeroCapitulo)
-								      .localeCompare(String(a.numeroCapitulo), undefined, { numeric: true, sensitivity: 'base' });
+									// Tercer criterio opcional: id o título para orden estable
+									return String(b.Titulo || "").localeCompare(String(a.Titulo || ""));
 								  })
 								  .slice(0, 6);
 						  /*const ultimosCapitulos = listacapitulos
