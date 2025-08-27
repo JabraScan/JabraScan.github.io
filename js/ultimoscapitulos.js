@@ -72,7 +72,7 @@ const render = () => {
         <a href="#" style="flex-flow"
            data-pdf-obra="${item._obra}"
            data-pdf-capitulo="${item.numCapitulo}"
-           class="pdf-link">
+           class="pdf-link-ucap">
             <span class="fecha">${formatDateEs(item._fecha)}</span>
             <span class="obra">${item._obra}</span>
             <span class="cap">${item.numCapitulo}</span>
@@ -123,7 +123,7 @@ window.addEventListener("keydown", (e) => {
     qEl.select();
   }
 });
-  document.querySelectorAll('.pdf-link').forEach(link => {
+  document.querySelectorAll('.pdf-link-ucap').forEach(link => {
     link.addEventListener('click', function (e) {
       e.preventDefault();
   	 	const clave = e.currentTarget.getAttribute("data-pdf-obra");
