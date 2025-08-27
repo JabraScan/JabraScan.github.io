@@ -88,19 +88,6 @@ function cargarlibro(libroId) {
 								    return String(b.Titulo || "").localeCompare(String(a.Titulo || ""));
 								  })
 								  .slice(0, 6);
-						  /*const ultimosCapitulos = listacapitulos
-								  .filter(c => c.Fecha && c.Fecha.trim() !== "") // solo capítulos con fecha válida
-								  .sort((a, b) => {
-								    const fechaA = new Date(a.Fecha.split('-').reverse().join('-'));
-								    const fechaB = new Date(b.Fecha.split('-').reverse().join('-'));
-									// Primero ordenamos por fecha descendente
-									if (fechaB - fechaA !== 0) {
-									  return fechaB - fechaA;
-									}
-									// Si las fechas son iguales, ordenamos por numeroCapitulo descendente
-									return b.numeroCapitulo - a.numeroCapitulo;
-								  })
-								  .slice(0, 6); // últimos 6 capítulos*/
 						  const totalCapitulos = listacapitulos.length;
 						
 						  // Sección: Últimos capítulos
@@ -183,9 +170,7 @@ function cargarlibro(libroId) {
 								    console.log("Click detectado:", clave, capitulo);
 								
 								    //window.location.href = 'lectorpdf.html';
-									  abrirLectorPDF(() => {
-										   inicializarPDF(); // función que hace pdfjsLib.getDocument(...)
-										});
+									  abrirLectorPDF();
 								  });
 								});
 
