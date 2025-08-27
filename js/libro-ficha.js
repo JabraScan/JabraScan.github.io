@@ -230,7 +230,7 @@ function cargarlibro(libroId) {
 					  bookImageContainer.insertBefore(imagenContenedor, bookImageContainer.firstChild);
 
 					//actualizado 27082025 1945 - activamos disqus 
-						mostrarDisqus(clave, capitulo)
+						mostrarDisqus(clave, clave);
 				});
 }
 function obtenerCapitulos(clave) {
