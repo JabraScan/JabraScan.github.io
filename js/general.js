@@ -27,8 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const ultimaObra = localStorage.getItem("ultimaObra");
     const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
     const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
-  
-    if (ultimaObra && ultimoCapitulo && !isNaN(ultimaPagina)) {
+  console.log(ultimaObra);
+  console.log(ultimoCapitulo);
+    if (ultimaObra && ultimoCapitulo) {
       const spanSeguir = document.getElementById("btnSeguir");
       if (spanSeguir) {
         //spanSeguir.style.display = "inline-block";
