@@ -69,14 +69,13 @@ const render = () => {
     state.filtered.forEach((item) => {
       const li = document.createElement("li");
       li.innerHTML = `
-        <a href="#"
+        <a href="#" style="flex-flow"
            data-pdf-obra="${item._obra}"
            data-pdf-capitulo="${item.numCapitulo}"
            class="pdf-link">
             <span class="fecha">${formatDateEs(item._fecha)}</span>
             <span class="obra">${item._obra}</span>
-            <span class="cap">Capítulo ${item.numCapitulo}</span>
-            <span class="titulo">${item.nombreCapitulo}</span>
+            <span class="cap">${item.numCapitulo} · ${item.nombreCapitulo}</span>
         </a>
       `;
       ul.appendChild(li);
