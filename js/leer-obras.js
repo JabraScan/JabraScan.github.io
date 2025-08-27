@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			  divsection.innerHTML = `
 	 					<span>Último cap.</span>  
 				        <span class="cap">${ultimo.numCapitulo}</span>
-				        <span class="fecha">( ${formatDateEs(parseDateDMY(ultimo.Fecha))} )</span> -
+				        <span class="fecha">( ${formatDateEs(parseDateDMY(ultimo.Fecha))} )</span>
 	 				`;
 			/*
 			  const ul = document.createElement("ul");
