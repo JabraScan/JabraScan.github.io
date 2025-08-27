@@ -212,24 +212,19 @@
 	      h1.onclick = () => onLibroClick(clave);
 		  //actualizar aprobacion autor "dragona..."
 			const datosAdic = document.querySelector(".optionaldata");
-				if (cap.bannerOpcional !== "") {
+				if (clave === "CallateDragonaMalvadaNoQuieroTenerMasHijosContigo") {
 					const divBanner = document.createElement("div");
-						divBanner.classList.add("lupa");
-						const imgBanner = document.createElement("img");
-							imgBanner.src = "../img/" + cap.bannerOpcional;
-							imgBanner.alt = "Traducción aprobada";
-					divBanner.appendChild(imgBanner);
+						divBanner.innerHTML = `
+	  							<center>
+		  							</br>
+									<span>Traducción aprobada por el autor</span>
+		 							</br>
+		  							<span>Discord Oficial : <a href="${cap.discord}" target="_blank">${discord}</a></span>
+			  						</br>
+			  						<img style="max-width: 90%;" src = "img/discord_oficial_jabrascan.jpg" alt = "Traducción aprobada">
+								</center>
+		  					`;
 					datosAdic.appendChild(divBanner);
-				}
-				if (cap.aprobadaAutor === 'si') {
-					const aprobadoAutor = document.createElement("span");
-						aprobadoAutor.classList.add("carousel-info-label");
-	 					aprobadoAutor.innerHTML = `
-								Traducción aprobada por el autor
-	 							</br>
-	  							<span>Discord Oficial : <a href="${cap.discord}" target="_blank">${discord}</a></span>
-							`;
-					datosAdic.appendChild(aprobadoAutor);
 				}
 	
 	      // 📄 Cargar PDF
@@ -374,6 +369,7 @@
 	}
 
 	//Fin botones de navegacion por pagina
+
 
 
 
