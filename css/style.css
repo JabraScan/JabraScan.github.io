@@ -411,3 +411,17 @@ footer {
 .book-latest-chapter {
   place-self: flex-end;
 }
+/*efecto lupa*/
+.lupa {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+.lupa img {
+  display: block;
+  transition: transform 0.3s ease;
+}
+.lupa:hover img {
+  transform: scale(2); /* Aumenta la imagen dentro del contenedor */
+}
