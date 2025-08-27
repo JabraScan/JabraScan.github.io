@@ -121,7 +121,33 @@ function initlectorpdf()
       window.addEventListener("resize", () => {
         if (pdfDoc) renderPage(pageNum);
       });
-    
+
+	  //codigo Optimizado carga libros
+		// 🎯 Evento para enlaces de PDF
+		document.querySelectorAll(".pdf-link").forEach(link => {
+		  link.addEventListener("click", event => {
+		    event.preventDefault();
+		
+		    const clave = event.currentTarget.getAttribute("data-pdf-obra");
+		    const capitulo = event.currentTarget.getAttribute("data-pdf-capitulo");
+		
+		    localStorage.setItem("ultimaObra", clave);
+		    localStorage.setItem("ultimoCapitulo", capitulo);
+		
+		    cargarCapitulo(clave, capitulo, 1);
+		  });
+		});
+		
+		// 🔄 Carga automática del último capítulo
+		const ultimaObra = localStorage.getItem("ultimaObra");
+		const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
+		const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
+		
+		if (ultimaObra && ultimoCapitulo) {
+		  cargarCapitulo(ultimaObra, ultimoCapitulo, !isNaN(ultimaPagina) ? ultimaPagina : 1);
+		}
+			
+/* codigo carga libros antiguo    
       // Cargar PDF desde enlace
       document.querySelectorAll(".pdf-link").forEach(link => {
         link.addEventListener("click", event => {
@@ -139,8 +165,9 @@ function initlectorpdf()
 				console.log("carga desde enlace");
               const cap = books[clave]?.find(c => c.numCapitulo === capitulo);
               if (!cap) return;
+				
 			//actualizar h1
-			const h1 = document.querySelector("header h1");
+			const h1 = document.querySelector("center h1");
 			  h1.textContent = cap.tituloObra;
 			  h1.onclick = () => onLibroClick(ultimaObra);
             //abrir archivo
@@ -171,7 +198,7 @@ function initlectorpdf()
             const cap = books[ultimaObra]?.find(c => c.numCapitulo === ultimoCapitulo);
             if (!cap) return;
 			//actualizar h1
-			const h1 = document.querySelector("header h1");
+			const h1 = document.querySelector("center h1");
 			  h1.textContent = cap.tituloObra;
 			  h1.onclick = () => onLibroClick(ultimaObra);
             //abrir archivo
@@ -185,7 +212,7 @@ function initlectorpdf()
             });
           })
           .catch(error => console.error("Error al cargar el último capítulo:", error));
-      }
+      }*/
   }
 //});
 		function onLibroClick(libroId) {
@@ -209,11 +236,29 @@ function initlectorpdf()
 				})
 				.catch(err => console.error('Error:', err));
 		}
-
-
-
-
-
-
-
-
+// 📌 Función para cargar un capítulo
+		function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
+		  fetch("books.json")
+		    .then(response => response.json())
+		    .then(books => {
+		      const cap = books[clave]?.find(c => c.numCapitulo === capitulo);
+		      if (!cap) return;
+		
+		      // ✅ Actualizar título
+		      const h1 = document.getElementById("tituloObraPdf");
+		      h1.textContent = cap.tituloObra;
+		      h1.onclick = () => onLibroClick(clave);
+		
+		      // 📄 Abrir PDF
+		      const nombreA = encodeURIComponent(cap.NombreArchivo);
+		      const pdfPath = `books/${clave}/${nombreA}`;
+		      console.log(`Cargando PDF: ${pdfPath}`);
+		
+		      pdfjsLib.getDocument(pdfPath).promise.then(doc => {
+		        pdfDoc = doc;
+		        pageNum = paginaInicial;
+		        renderPage(pageNum);
+		      });
+		    })
+		    .catch(error => console.error("Error al cargar el capítulo:", error));
+		}
