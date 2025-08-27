@@ -182,7 +182,8 @@ function cargarlibro(libroId) {
 								
 								    console.log("Click detectado:", clave, capitulo);
 								
-								    window.location.href = 'lectorpdf.html';
+								    //window.location.href = 'lectorpdf.html';
+									  abrirLectorPDF();
 								  });
 								});
 
@@ -322,3 +323,20 @@ function parseChapterNumber(v) {
   return Number.isFinite(num) ? num : -Infinity; // -Infinity si no es válido
 }
 //fin controles de fecha y numero para la ordenacion
+//Abrir pdf
+	// Función para abrir el lector PDF dentro del main
+	function abrirLectorPDF() {
+	  fetch('lectorpdf.html')
+	    .then(r => r.text())
+	    .then(html => {
+	      // Inserta el HTML en el main
+	      document.querySelector('main').innerHTML = html;
+	
+	      // Inyecta lectorpdf.js dinámicamente para que sí se ejecute
+	      const script = document.createElement('script');
+	      script.src = 'js/lectorpdf.js';
+	      document.body.appendChild(script);
+	    })
+	    .catch(err => console.error('Error cargando lectorpdf.html:', err));
+	}
+//fin Abrir pdf
