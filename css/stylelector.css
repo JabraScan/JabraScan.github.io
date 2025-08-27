@@ -232,7 +232,8 @@ select:hover {
 }
 .callatedragonmalvado {
   text-align: center; /* Esto centrará el contenido inline y inline-block */
-}
+  display: inline-grid
+;}
 .callatedragonmalvado img {
   max-width: 90%;
   border-radius: 6px;
@@ -241,3 +242,4 @@ select:hover {
 .callatedragonmalvado span {
     margin-top: 20px;
 }
+
