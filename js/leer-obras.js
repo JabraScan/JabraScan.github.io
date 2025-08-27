@@ -42,22 +42,35 @@ document.addEventListener("DOMContentLoaded", function () {
 			  categoriaObj += '<span class="etiqueta">' + item + '</span>'; // Imprime cada item en la consola
 			  // Puedes hacer lo que necesites con cada 'item' aquí
 			});
-			//indicador +18
+			//imagen de la ficha
 		    const imagenContenedor = document.createElement("div");
 				  imagenContenedor.classList.add("imagen-contenedor", "libro-item");
-				
+				//indicador +18
 				  const img = document.createElement("img");
 					  img.src = "../img/" + imagen;
 					  img.alt = nombreobra;
 					  imagenContenedor.appendChild(img);
-				
-				  if (contenido18 === "adulto") {
-				    imagenContenedor.classList.add("adulto");
-				    const indicador = document.createElement("div");
-				    indicador.classList.add("indicador-adulto");
-				    indicador.textContent = "+18";
-				    imagenContenedor.appendChild(indicador);
-				  }
+			
+					  if (contenido18 === "adulto") {
+					    imagenContenedor.classList.add("adulto");
+					    const indicador = document.createElement("div");
+					    indicador.classList.add("indicador-adulto");
+					    indicador.textContent = "+18";
+					    imagenContenedor.appendChild(indicador);
+					  }
+				//fin indicador +18
+				//banner opcional
+					if (bannerOpcional !== "") {
+						const divBanner = document.createElement("div");
+							divBanner.classList.add("lupa");
+							const imgBanner = document.createElement("img");
+								imgBanner.src = "../img/" + bannerOpcional;
+								imgBanner.alt = "Traducción aprobada";
+						divBanner.appendChild(imgBanner);
+						imagenContenedor.appendChild(divBanner);
+					}
+				//fin banner opcional
+			//fin imagen de la ficha
 	      const indice = 0;
 	
 		  const itemCarousel = document.createElement("div");
