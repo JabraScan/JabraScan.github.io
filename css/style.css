@@ -403,3 +403,6 @@ footer {
   font-weight: bold;
   color: #deb887;
 }
+.book-latest-chapter {
+  place-self: flex-end;
+}
