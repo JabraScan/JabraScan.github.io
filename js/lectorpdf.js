@@ -1,7 +1,6 @@
 //document.addEventListener("DOMContentLoaded", () => {
   //if (window.location.href.includes("lectorpdf.html")) 
-function initlectorpdf() {
-{
+  {
       let pdfDoc = null;
       let pageNum = 1;
     
@@ -15,10 +14,7 @@ function initlectorpdf() {
       const pauseReadingBtn = document.getElementById("pauseReading");
       const resumeReadingBtn = document.getElementById("resumeReading");
       const toggleMode = document.getElementById("toggleMode");
-
-	  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
-    console.log("Canvas encontrado:", document.getElementById("pdfCanvas"));
+    
       // Renderizar página
       function renderPage(num) {
         pdfDoc.getPage(num).then(page => {
@@ -127,102 +123,62 @@ function initlectorpdf() {
     
       // Cargar PDF desde enlace
       document.querySelectorAll(".pdf-link").forEach(link => {
-       	 link.addEventListener("click", event => {
-		          event.preventDefault();
-		    
-					const claveParam = event.currentTarget.getAttribute("data-pdf-obra");
-					const capituloParam = event.currentTarget.getAttribute("data-pdf-capitulo");
-					
-					let clave, capitulo, ultimaPagina;
-					
-					// Si vienen parámetros, los usamos y guardamos en localStorage
-					if (claveParam && capituloParam) {
-					    console.log("Abrir desde enlace");
-					    clave = claveParam;
-					    capitulo = capituloParam;
-					
-					    localStorage.setItem("ultimaObra", clave);
-					    localStorage.setItem("ultimoCapitulo", capitulo);
-					
-					} else {
-						// Si no vienen parámetros, cargamos desde localStorage
-			    		console.log("Abrir desde localStorage");
-							clave = localStorage.getItem("ultimaObra");
-			      			capitulo = localStorage.getItem("ultimoCapitulo");
-			      			ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
-					}
-		    
-		          fetch("books.json")
-		            .then(response => response.json())
-		            .then(books => {
-		              const cap = books[clave]?.find(c => c.numCapitulo === capitulo);
-		              if (!cap) return;
-					//actualizar h1
-					const h1 = document.querySelector("header h1");
-					  h1.textContent = cap.tituloObra;
-					  //h1.onclick = () => onLibroClick(ultimaObra);
-		            //abrir archivo			
-						const nombreArchivo = encodeURIComponent(cap.NombreArchivo);
-						//seleccionar pagina activa
-		              	const pdfPath = `${window.location.origin}/books/${clave}/${nombreArchivo}`;
-
-						 /*if (ultimaObra && ultimoCapitulo) {
-							 //abrir archivo y seleccionar la pagina activa
-							pdfjsLib.getDocument(pdfPath).promise.then(doc => {
-								pdfDoc = doc;
-								pageNum = !isNaN(ultimaPagina) ? ultimaPagina : 1;
-								renderPage(pageNum);
-				            });
-						 } else {				
-							//abrir archivo en la primera pagina
-							pdfjsLib.getDocument(pdfPath).promise.then(doc => {
-								pdfDoc = doc;
-								pageNum = 1;
-								renderPage(pageNum);
-							});
-						 }*/
-						console.log(pdfPath);
-						pdfjsLib.getDocument(pdfPath).promise.then(doc => {
-							pdfDoc = doc;
-							pageNum = !isNaN(ultimaPagina) ? ultimaPagina : 1;
-							renderPage(pageNum);
-						});
-		            })
-		            .catch(error => console.error("Error al cargar el PDF:", error));
-        	});
+        link.addEventListener("click", event => {
+          event.preventDefault();
+    
+          const clave = event.currentTarget.getAttribute("data-pdf-obra");
+          const capitulo = event.currentTarget.getAttribute("data-pdf-capitulo");
+    
+          localStorage.setItem("ultimaObra", clave);
+          localStorage.setItem("ultimoCapitulo", capitulo);
+    
+          fetch("books.json")
+            .then(response => response.json())
+            .then(books => {
+              const cap = books[clave]?.find(c => c.numCapitulo === capitulo);
+              if (!cap) return;
+			//actualizar h1
+			const h1 = document.querySelector("header h1");
+			  h1.textContent = cap.tituloObra;
+			  h1.onclick = () => onLibroClick(ultimaObra);
+				
+            //abrir archivo			
+              const pdfPath = `books/${clave}/${cap.NombreArchivo}`;
+              pdfjsLib.getDocument(pdfPath).promise.then(doc => {
+                pdfDoc = doc;
+                pageNum = 1;
+                renderPage(pageNum);
+              });
+            })
+            .catch(error => console.error("Error al cargar el PDF:", error));
+        });
       });
-
-	  
+    
       // Cargar último capítulo automáticamente
-		const ultimaObra = localStorage.getItem("ultimaObra");
-		const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
-		const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
-		
-		if (ultimaObra && ultimoCapitulo) {
-		  console.log("Abriendo automáticamente último capítulo");
-		  fetch("books.json")
-		    .then(response => response.json())
-		    .then(books => {
-		      const cap = books[ultimaObra]?.find(c => c.numCapitulo === ultimoCapitulo);
-		      if (!cap) return;
-		
-		      // Actualizar título
-		      const h1 = document.querySelector("header h1");
-		      if (h1) h1.textContent = cap.tituloObra;
-		
-		      // Construir ruta absoluta para evitar problemas
-		      const nombreArchivo = encodeURIComponent(cap.NombreArchivo);
-		      const pdfPath = `${window.location.origin}/books/${ultimaObra}/${nombreArchivo}`;
-		
-		      pdfjsLib.getDocument(pdfPath).promise.then(doc => {
-		        pdfDoc = doc;
-		        pageNum = !isNaN(ultimaPagina) ? ultimaPagina : 1;
-		        renderPage(pageNum);
-		      });
-		    })
-		    .catch(error => console.error("Error al cargar el último capítulo:", error));
-		}
-	///
+      const ultimaObra = localStorage.getItem("ultimaObra");
+      const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
+      const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
+    
+      if (ultimaObra && ultimoCapitulo) {
+        fetch("books.json")
+          .then(response => response.json())
+          .then(books => {
+            const cap = books[ultimaObra]?.find(c => c.numCapitulo === ultimoCapitulo);
+            if (!cap) return;
+			//actualizar h1
+			const h1 = document.querySelector("header h1");
+			  h1.textContent = cap.tituloObra;
+			  h1.onclick = () => onLibroClick(ultimaObra);
+            //abrir archivo
+            const pdfPath = `books/${ultimaObra}/${cap.NombreArchivo}`;
+            pdfjsLib.getDocument(pdfPath).promise.then(doc => {
+              pdfDoc = doc;
+              pageNum = !isNaN(ultimaPagina) ? ultimaPagina : 1;
+              renderPage(pageNum);
+            });
+          })
+          .catch(error => console.error("Error al cargar el último capítulo:", error));
+      }
   }
 //});
 		function onLibroClick(libroId) {
@@ -246,7 +202,4 @@ function initlectorpdf() {
 				})
 				.catch(err => console.error('Error:', err));
 		}
-}//fin init
-
-
 
