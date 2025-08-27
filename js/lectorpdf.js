@@ -81,32 +81,6 @@
 		        resumeReadingBtn.style.display = resume ? "inline-block" : "none";
 		        stopReadingBtn.style.display = stop ? "inline-block" : "none";
 		      }
-		    //inicio startReading (voz canvas)
-		      /*comentado por actualizacion 
-			startReadingBtn.onclick = () => {
-		        pdfDoc.getPage(pageNum).then(page => {
-		          page.getTextContent().then(textContent => {
-		            const text = textContent.items.map(item => item.str).join(" ");
-		            const utterance = new SpeechSynthesisUtterance(text);
-		            utterance.lang = "es-ES";
-		    
-		            const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith("es"));
-		            if (voices.length > 0) {
-		              utterance.voice = voices.find(v => v.name.includes("Google") || v.name.includes("Helena")) || voices[0];
-		              utterance.rate = 0.95;
-		              utterance.pitch = 1.1;
-		              utterance.volume = 1;
-		              mostrarBotones({ pause: true, stop: true });
-		            }
-		    
-		            utterance.onend = () => {
-		              mostrarBotones({ play: true });
-		            };
-		    
-		            speechSynthesis.speak(utterance);
-		          });
-		        });
-		      };*/
 				//actualizado 27082025 1913 agregada funcionalidad para continuar leyendo hasta el final de la obra
 				startReadingBtn.onclick = () => {
 					  pdfDoc.getPage(pageNum).then(page => {
@@ -250,11 +224,11 @@
 				if (cap.aprobadaAutor === 'si') {
 					const aprobadoAutor = document.createElement("span");
 						aprobadoAutor.classList.add("carousel-info-label");
-	 					aprobadoAutor.innerHTML = '
+	 					aprobadoAutor.innerHTML = `
 								Traducción aprobada por el autor
 	 							</br>
 	  							<span>Discord Oficial : <a href="${cap.discord}" target="_blank">${discord}</a></span>
-							';
+							`;
 					datosAdic.appendChild(aprobadoAutor);
 				}
 	
@@ -400,6 +374,7 @@
 	}
 
 	//Fin botones de navegacion por pagina
+
 
 
 
