@@ -58,28 +58,41 @@ const render = () => {
   }
 
   emptyEl.style.display = "none";
-
+						  const seccionUltimos = `
+						    <div class="book-section book-latest-chapters">
+						      <h3><i class="fa-solid fa-clock-rotate-left"></i> Últimos capítulos</h3>
+						      <ul class="chapter-list">
+						        ${ultimosHTML}
+						      </ul>
+						    </div>
+						  `;
+  //creamos un div
+  const divsection = document.createElement("div");
+    divsection.className = "book-section";
+    divsection.className = "book-latest-chapters";
+    divsection.innerHTML = `<h3><i class="fa-solid fa-clock-rotate-left"></i> Últimos capítulos</h3>`;
   // Creamos el <ul>
   const ul = document.createElement("ul");
-  ul.className = "chapter-list";
+    ul.className = "chapter-list";
+  
+    state.filtered.forEach((item) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <a href="#"
+           data-pdf-obra="${item._obra}"
+           data-pdf-capitulo="${item.numCapitulo}"
+           class="pdf-link">
+            <span class="fecha">${formatDateEs(item._fecha)}</span> - 
+            <span class="obra">${item._obra}</span> - 
+            <span class="cap">Capítulo ${item.numCapitulo}</span> - 
+            <span class="titulo">${item.nombreCapitulo}</span>
+        </a>
+      `;
+      ul.appendChild(li);
+    });
 
-  state.filtered.forEach((item) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <a href="#"
-         data-pdf-obra="${item._obra}"
-         data-pdf-capitulo="${item.numCapitulo}"
-         class="pdf-link">
-          <span class="fecha">${formatDateEs(item._fecha)}</span> - 
-          <span class="obra">${item._obra}</span> - 
-          <span class="cap">Capítulo ${item.numCapitulo}</span> - 
-          <span class="titulo">${item.nombreCapitulo}</span>
-      </a>
-    `;
-    ul.appendChild(li);
-  });
-
-  listEl.appendChild(ul);
+  divsection.appendChild(ul);
+  listEl.appendChild(divsection);
 
   metaEl.textContent = `${state.filtered.length} capítulos · ${
     new Set(state.filtered.map((i) => i._obra)).size
