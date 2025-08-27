@@ -374,3 +374,28 @@ footer {
     text-align: left;
   }
 }
+.buscador {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px;
+  /*background-color: #f9f9f9;*/
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.buscador select,
+.buscador input,
+.buscador button {
+  padding: 0.5em;
+  font-size: 1em;
+}
+.buscador-left,
+.buscador-center,
+.buscador-right {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
