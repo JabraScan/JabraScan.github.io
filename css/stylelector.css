@@ -230,6 +230,11 @@ select:hover {
     padding-top: 0;
   }
 }
-
-
-
+.callatedragonmalvado img {
+  max-width: 90%;
+  border-radius: 6px;
+  margin-top: 20px;
+}
+.callatedragonmalvado span {
+    margin-top: 20px;
+}
