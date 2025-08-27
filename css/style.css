@@ -330,7 +330,7 @@ footer {
 
 /* ====== Efecto lupa ====== */
 /* En escritorio: hover; en móvil: active/touch */
-.lupa {
+/*.lupa {
   position: relative;
   display: inline-block;
   overflow: hidden;
@@ -340,7 +340,7 @@ footer {
   display: block;
   transition: transform 0.3s ease;
   -webkit-transition: -webkit-transform 0.3s ease;
-}
+}*/
 @media (hover: hover) {
   .lupa:hover img {
     transform: scale(2);
