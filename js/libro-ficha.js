@@ -331,14 +331,18 @@ function parseChapterNumber(v) {
 	  fetch('lectorpdf.html')
 	    .then(r => r.text())
 	    .then(html => {
-	      // Inserta el HTML en el main
 	      document.querySelector('main').innerHTML = html;
 	
-	      // Inyecta lectorpdf.js dinámicamente para que sí se ejecute
-	      const script = document.createElement('script');
-			script.src = "js/lectorpdf.js";
-			script.onload = () => initlectorpdf();
-			document.body.appendChild(script);
+	      // Si ya tienes cargado lectorpdf.js, basta llamar init
+	      if (typeof initlectorpdf === "function") {
+	        initlectorpdf();
+	      } else {
+	        // Si no está cargado aún, lo añadimos dinámicamente
+	        const script = document.createElement('script');
+	        script.src = 'js/lectorpdf.js';
+	        script.onload = () => initlectorpdf();
+	        document.body.appendChild(script);
+	      }
 	    })
 	    .catch(err => console.error('Error cargando lectorpdf.html:', err));
 	}
