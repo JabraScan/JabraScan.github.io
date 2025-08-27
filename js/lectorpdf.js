@@ -164,7 +164,7 @@
 		
 						 if (ultimaObra && ultimoCapitulo) {
 							 //abrir archivo y seleccionar la pagina activa
-							jsLib.getDocument(pdfPath).promise.then(doc => {
+							pdfjsLib.getDocument(pdfPath).promise.then(doc => {
 								pdfDoc = doc;
 								pageNum = !isNaN(ultimaPagina) ? ultimaPagina : 1;
 								renderPage(pageNum);
@@ -233,6 +233,7 @@ console.log("abrir automaticamente");
 				})
 				.catch(err => console.error('Error:', err));
 		}
+
 
 
 
