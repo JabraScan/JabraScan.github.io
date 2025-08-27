@@ -31,9 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (ultimaObra && ultimoCapitulo && !isNaN(ultimaPagina)) {
       const spanSeguir = document.getElementById("btnSeguir");
       if (spanSeguir) {
-        spanSeguir.style.display = "inline-block";
+        //spanSeguir.style.display = "inline-block";
         spanSeguir.addEventListener("click", () => {
           console.log(`Reanudar: ${ultimaObra} / Cap. ${ultimoCapitulo} / Página ${ultimaPagina}`);
+          spanSeguir.classList.add("active");
           // Aquí tu lógica para continuar leyendo
         });
       }
