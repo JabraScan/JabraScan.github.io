@@ -59,17 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
 					    imagenContenedor.appendChild(indicador);
 					  }
 				//fin indicador +18
-				//banner opcional
-					if (bannerOpcional !== "") {
-						const divBanner = document.createElement("div");
-							divBanner.classList.add("lupa");
-							const imgBanner = document.createElement("img");
-								imgBanner.src = "../img/" + bannerOpcional;
-								imgBanner.alt = "Traducción aprobada";
-						divBanner.appendChild(imgBanner);
-						imagenContenedor.appendChild(divBanner);
-					}
-				//fin banner opcional
 			//fin imagen de la ficha
 	      const indice = 0;
 	
