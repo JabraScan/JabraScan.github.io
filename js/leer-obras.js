@@ -116,8 +116,8 @@ document.addEventListener("DOMContentLoaded", function () {
 						  <p class="clave">${clave}</p>
 				          <div class="book-info-main">
 				            <h3>${nombreobra}</h3>
-							<div class="book-author-name"><bold>Autor:</bold> ${autor}</div>
-		  					<div class="book-author-name ${estado}">${estado}</div>
+							<div class="book-author-name"><bold class="book-author-title">Autor:</bold> ${autor}</div>
+		  					<div class="book-estado ${estado}">${estado}</div>
 				          </div>
 			      `;
 			//ultimo capitulo
