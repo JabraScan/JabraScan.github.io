@@ -187,73 +187,6 @@ function initlectorpdf()
 		if (ultimaObra && ultimoCapitulo) {
 		  cargarCapitulo(ultimaObra, ultimoCapitulo, !isNaN(ultimaPagina) ? ultimaPagina : 1);
 		}
-			
-/* codigo carga libros antiguo    
-      // Cargar PDF desde enlace
-      document.querySelectorAll(".pdf-link").forEach(link => {
-        link.addEventListener("click", event => {
-          event.preventDefault();
-    
-          const clave = event.currentTarget.getAttribute("data-pdf-obra");
-          const capitulo = event.currentTarget.getAttribute("data-pdf-capitulo");
-    
-          localStorage.setItem("ultimaObra", clave);
-          localStorage.setItem("ultimoCapitulo", capitulo);
-    
-          fetch("books.json")
-            .then(response => response.json())
-            .then(books => {
-				console.log("carga desde enlace");
-              const cap = books[clave]?.find(c => c.numCapitulo === capitulo);
-              if (!cap) return;
-				
-			//actualizar h1
-			const h1 = document.querySelector("center h1");
-			  h1.textContent = cap.tituloObra;
-			  h1.onclick = () => onLibroClick(ultimaObra);
-            //abrir archivo
-				const nombreA = encodeURIComponent(cap.NombreArchivo);
-              const pdfPath = `books/${clave}/${nombreA}`;
-			  console.log(`carga archivo ${pdfPath}`);
-              pdfjsLib.getDocument(pdfPath).promise.then(doc => {
-                pdfDoc = doc;
-                pageNum = 1;
-                renderPage(pageNum);
-              });
-            })
-            .catch(error => console.error("Error al cargar el PDF:", error));
-        });
-      });
-    
-      // Cargar último capítulo automáticamente
-      const ultimaObra = localStorage.getItem("ultimaObra");
-      const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
-      const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
-    console.log(`Obra ${ultimaObra} Cap ${ultimoCapitulo} Pag ${ultimaPagina}`);
-	  
-      if (ultimaObra && ultimoCapitulo) {
-        fetch("books.json")
-          .then(response => response.json())
-          .then(books => {
-			  console.log("carga automatica ");
-            const cap = books[ultimaObra]?.find(c => c.numCapitulo === ultimoCapitulo);
-            if (!cap) return;
-			//actualizar h1
-			const h1 = document.querySelector("center h1");
-			  h1.textContent = cap.tituloObra;
-			  h1.onclick = () => onLibroClick(ultimaObra);
-            //abrir archivo
-			  const nombreA = encodeURIComponent(cap.NombreArchivo);
-            const pdfPath = `books/${ultimaObra}/${nombreA}`;
-			  console.log(`carga automatica ${pdfPath}`);
-            pdfjsLib.getDocument(pdfPath).promise.then(doc => {
-              pdfDoc = doc;
-              pageNum = !isNaN(ultimaPagina) ? ultimaPagina : 1;
-              renderPage(pageNum);
-            });
-          })
-          .catch(error => console.error("Error al cargar el último capítulo:", error));
-      }*/
   }
 //});
 		function onLibroClick(libroId) {
@@ -278,33 +211,6 @@ function initlectorpdf()
 				.catch(err => console.error('Error:', err));
 		}
 // 📌 Función para cargar un capítulo
-/* version 1.0
-		function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
-		  fetch("books.json")
-		    .then(response => response.json())
-		    .then(books => {
-		      const cap = books[clave]?.find(c => c.numCapitulo === capitulo);
-		      if (!cap) return;
-		
-		      // ✅ Actualizar título
-		      const h1 = document.getElementById("tituloObraPdf");
-		      h1.textContent = cap.tituloObra;
-		      h1.onclick = () => onLibroClick(clave);
-		
-		      // 📄 Abrir PDF
-		      const nombreA = encodeURIComponent(cap.NombreArchivo);
-		      const pdfPath = `books/${clave}/${nombreA}`;
-		      console.log(`Cargando PDF: ${pdfPath}`);
-		
-		      pdfjsLib.getDocument(pdfPath).promise.then(doc => {
-		        pdfDoc = doc;
-		        pageNum = paginaInicial;
-		        renderPage(pageNum);
-		      });
-		    })
-		    .catch(error => console.error("Error al cargar el capítulo:", error));
-		}
-*/
 	function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
 	  fetch("books.json")
 	    .then(response => response.json())
@@ -332,34 +238,36 @@ function initlectorpdf()
 	        renderPage(pageNum);
 	      });
 	
-	      // ⬅️ Botón capítulo anterior
+	// ⬅️ Botón capítulo anterior
 	      const btnPrev = document.getElementById("btnPrevCap");
 	      if (idx > 0) {
 	        const prevCap = capitulos[idx - 1];
-	        btnPrev.dataset.pdfObra = clave;
-	        btnPrev.dataset.pdfCapitulo = prevCap.numCapitulo;
-	        btnPrev.classList.add("pdf-link");
 	        btnPrev.disabled = false;
+	        btnPrev.onclick = () => {
+	          localStorage.setItem("ultimaPagina", 1);
+	          localStorage.setItem("ultimaObra", clave);
+	          localStorage.setItem("ultimoCapitulo", prevCap.numCapitulo);
+	          cargarCapitulo(clave, prevCap.numCapitulo, 1);
+	        };
 	      } else {
-	        btnPrev.removeAttribute("data-pdf-obra");
-	        btnPrev.removeAttribute("data-pdf-capitulo");
-	        btnPrev.classList.remove("pdf-link");
 	        btnPrev.disabled = true;
+	        btnPrev.onclick = null;
 	      }
 	
 	      // ➡️ Botón capítulo siguiente
 	      const btnNext = document.getElementById("btnNextCap");
 	      if (idx < capitulos.length - 1) {
 	        const nextCap = capitulos[idx + 1];
-	        btnNext.dataset.pdfObra = clave;
-	        btnNext.dataset.pdfCapitulo = nextCap.numCapitulo;
-	        btnNext.classList.add("pdf-link");
 	        btnNext.disabled = false;
+	        btnNext.onclick = () => {
+	          localStorage.setItem("ultimaPagina", 1);
+	          localStorage.setItem("ultimaObra", clave);
+	          localStorage.setItem("ultimoCapitulo", nextCap.numCapitulo);
+	          cargarCapitulo(clave, nextCap.numCapitulo, 1);
+	        };
 	      } else {
-	        btnNext.removeAttribute("data-pdf-obra");
-	        btnNext.removeAttribute("data-pdf-capitulo");
-	        btnNext.classList.remove("pdf-link");
 	        btnNext.disabled = true;
+	        btnNext.onclick = null;
 	      }
 	
 	      // 📜 Rellenar selector de capítulos
@@ -386,4 +294,5 @@ function initlectorpdf()
 	    })
 	    .catch(error => console.error("Error al cargar el capítulo:", error));
 	}
+
 
