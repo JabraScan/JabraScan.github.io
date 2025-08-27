@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Capítulos más recientes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --bg:#0f1115; --card:#171a21; --muted:#9aa4b2; --text:#e6e9ef; --accent:#7c9cff; --chip:#222634; --ok:#2dd4bf;
+      --border:#232838;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif;
+      background:linear-gradient(180deg,#0e1117, #0b0d12 60%); color:var(--text);
+    }
+    header{
+      position:sticky; top:0; z-index:10; backdrop-filter:saturate(1.2) blur(8px);
+      background:rgba(15,17,21,.75); border-bottom:1px solid var(--border);
+    }
+    .wrap{max-width:1000px; margin:0 auto; padding:20px}
+    .title{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; padding:8px 0;
+    }
+    .title h1{font-size:20px; margin:0; letter-spacing:.2px}
+    .meta{font-size:12px; color:var(--muted)}
+    .controls{
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .pill{
+      background:var(--chip); color:var(--text); border:1px solid var(--border);
+      padding:8px 10px; border-radius:10px; font-size:13px;
+    }
+    .search{display:flex; align-items:center; gap:8px}
+    .search input{
+      background:var(--card); border:1px solid var(--border); color:var(--text);
+      padding:10px 12px; border-radius:10px; width:240px;
+    }
+    main .list{
+      display:grid; grid-template-columns:1fr; gap:12px; padding:18px 0 40px;
+    }
+    @media (min-width:720px){
+      main .list{grid-template-columns:1fr 1fr}
+    }
+    .card{
+      background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden;
+      display:flex; gap:12px; padding:14px; transition:transform .12s ease, border-color .12s ease;
+    }
+    .card:hover{transform:translateY(-2px); border-color:#2a3045}
+    .left{
+      width:52px; height:52px; border-radius:10px; display:grid; place-items:center; flex:0 0 52px;
+      background:linear-gradient(135deg, #1f2433, #121520);
+      color:var(--accent); font-weight:700;
+      border:1px solid var(--border);
+    }
+    .body{flex:1; min-width:0}
+    .row1{
+      display:flex; gap:8px; align-items:center; justify-content:space-between; margin-bottom:4px;
+    }
+    .obra{
+      font-size:13px; color:var(--muted); display:flex; gap:8px; align-items:center;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .date{
+      font-size:12px; color:var(--muted);
+    }
+    .titleRow{
+      font-size:15px; font-weight:650; line-height:1.3; margin-bottom:6px;
+      overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+    }
+    .row3{
+      display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+    }
+    .chip{
+      background:var(--chip); color:#cbd5e1; border:1px solid var(--border);
+      padding:4px 8px; border-radius:999px; font-size:12px;
+    }
+    .file{
+      font-size:12px; color:#a7b1c2; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+      border-left:1px dashed var(--border); padding-left:8px;
+    }
+    .empty{
+      color:var(--muted); font-size:14px; padding:28px; border:1px dashed var(--border); border-radius:12px; text-align:center;
+    }
+    footer{
+      border-top:1px solid var(--border); color:var(--muted); font-size:12px; padding:16px 0 30px;
+    }
+    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:#0b0d12; border:1px solid var(--border);
+      padding:2px 6px; border-radius:6px; color:#b5c1d6}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="title">
+        <div>
+          <h1>Capítulos más recientes</h1>
+          <div class="meta" id="meta">Cargando…</div>
+        </div>
+        <div class="controls">
+          <div class="pill">Orden: fecha ↓ · capítulo ↓ · obra ↓</div>
+          <label class="search">
+            <input id="q" type="search" placeholder="Filtrar por obra o título…" aria-label="Buscar" />
+          </label>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="list" class="list"></div>
+    <div id="empty" class="empty" style="display:none;">No hay resultados para tu búsqueda.</div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      Sugerencia: presiona <span class="kbd">/</span> para enfocar la búsqueda y escribe el nombre de la obra o del capítulo.
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
