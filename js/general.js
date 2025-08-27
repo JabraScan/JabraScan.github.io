@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Cargar el "copyright" con el año en curso
+	const footElement = document.getElementById('copyjabra');
+  	let now = new Date();
+  	let annCurso = now.getFullYear()
+  	footElement.innerHTML = `<p>&copy; ${annCurso} JabraScan. No oficial, sin fines de lucro.</p>`;
   // Busca todos los enlaces que tengan data-target con la ruta del HTML
   document.querySelectorAll("[data-target]").forEach(link => {
     link.addEventListener("click", e => {
