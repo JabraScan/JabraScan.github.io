@@ -211,7 +211,8 @@ console.log("abrir automaticamente");
 			  //h1.onclick = () => onLibroClick(ultimaObra);
             //abrir archivo
 			const nombreArchivo = encodeURIComponent(cap.NombreArchivo);
-            const pdfPath = `books/${ultimaObra}/${nombreArchivo}`;
+            //const pdfPath = `books/${ultimaObra}/${nombreArchivo}`;
+			const pdfPath = `${window.location.origin}/books/${ultimaObra}/${nombreArchivo}`;
             pdfjsLib.getDocument(pdfPath).promise.then(doc => {
               pdfDoc = doc;
               pageNum = !isNaN(ultimaPagina) ? ultimaPagina : 1;
@@ -244,3 +245,4 @@ console.log("abrir automaticamente");
 				.catch(err => console.error('Error:', err));
 		}
 }//fin init
+
