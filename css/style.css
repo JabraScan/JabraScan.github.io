@@ -224,7 +224,7 @@ footer {
   border-radius: 18px;
 }
 .carousel-info-overlay {
-  position: absolute;
+  /*position: absolute;*/
   bottom: 0;
   left: 0;
   right: 0;
