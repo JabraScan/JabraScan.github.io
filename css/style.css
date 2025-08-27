@@ -99,6 +99,7 @@ main {
   -webkit-transition: -webkit-transform 0.15s, box-shadow 0.15s;
   text-decoration: none;
 }
+/*
 .book-card-main, 
 .book-card-main * {
   display: block !important;
@@ -107,6 +108,7 @@ main {
   color: #000 !important;
   z-index: 999 !important;
 }
+*/
 .book-card {
   max-width: 150px;
   max-height: 600px;
