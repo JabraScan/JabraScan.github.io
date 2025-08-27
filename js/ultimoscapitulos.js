@@ -76,7 +76,7 @@ function initUltimosCapitulos() {
 	           data-pdf-capitulo="${item.numCapitulo}"
 	           class="pdf-link-ucap">
 	            <span class="fecha">${formatDateEs(item._fecha)}</span> -
-	            <span class="obra">${item._obra}</span> -
+	            <span class="obra ${item._clave}">${item._obra}</span> -
 	            <span class="cap">${item.numCapitulo}</span> ·
 				<span class="titulo">${item.nombreCapitulo}</span>
 	        </a>
