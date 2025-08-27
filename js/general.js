@@ -33,9 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const spanSeguir = document.getElementById("btnSeguir");
       if (spanSeguir) {
         //spanSeguir.style.display = "inline-block";
+        spanSeguir.classList.remove("inactive");
+        spanSeguir.classList.add("active");
         spanSeguir.addEventListener("click", () => {
           console.log(`Reanudar: ${ultimaObra} / Cap. ${ultimoCapitulo} / Página ${ultimaPagina}`);
-          spanSeguir.classList.add("active");
           // Aquí tu lógica para continuar leyendo
           abrirLectorPDF();
         });
