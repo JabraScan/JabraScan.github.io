@@ -66,6 +66,17 @@ function cargarlibro(libroId) {
 						    indicador.textContent = "+18";
 						    imagenContenedor.appendChild(indicador);
 						  }
+					//banner opcional
+					if (bannerOpcional !== "") {
+						const divBanner = document.createElement("div");
+							divBanner.classList.add("lupa");
+							const imgBanner = document.createElement("img");
+								imgBanner.src = "../img/" + bannerOpcional;
+								imgBanner.alt = "Traducción aprobada";
+						divBanner.appendChild(imgBanner);
+						imagenContenedor.appendChild(divBanner);
+					}
+				//fin banner opcional
 					const imgContenedorHhtml = imagenContenedor.innerHTML;
 					//Listado Capitulos
 						obtenerCapitulos(clave).then(listacapitulos => {
