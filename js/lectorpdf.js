@@ -1,43 +1,5 @@
 //document.addEventListener("DOMContentLoaded", () => {
   //if (window.location.href.includes("lectorpdf.html")) 
-/*
-function initlectorpdf()
-  {
-      let pdfDoc = null;
-      let pageNum = 1;
-    
-      const canvas = document.getElementById("pdfCanvas");
-      const ctx = canvas.getContext("2d");
-      const pageInfo = document.getElementById("pageInfo");
-      const body = document.body;
-    
-      const startReadingBtn = document.getElementById("readAloud");
-      const stopReadingBtn = document.getElementById("stopReading");
-      const pauseReadingBtn = document.getElementById("pauseReading");
-      const resumeReadingBtn = document.getElementById("resumeReading");
-      const toggleMode = document.getElementById("toggleMode");
-    
-      // Renderizar página
-      function renderPage(num) {
-        pdfDoc.getPage(num).then(page => {
-          const scale = 1.5;
-          const viewport = page.getViewport({ scale });
-    
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
-    
-          const renderContext = {
-            canvasContext: ctx,
-            viewport: viewport
-          };
-    
-          page.render(renderContext);
-          pageInfo.textContent = `Página ${num} de ${pdfDoc.numPages}`;
-          speechSynthesis.cancel();
-          localStorage.setItem("ultimaPagina", num);
-        });
-      }
-  */  
 //actualizacion 27082025 1554
 			// Variables globales para que todas las funciones las vean
 			let pdfDoc = null;
@@ -78,6 +40,7 @@ function initlectorpdf()
 			  const resumeReadingBtn = document.getElementById("resumeReading");
   			  const toggleMode = document.getElementById("toggleMode");
 //FIN actualizacion 27082025 1554
+	/*movido a la funcion actualizarBotonesNav 27082025 1839
       // Navegación
       document.getElementById("prevPage").onclick = () => {
         if (pageNum > 1) {
@@ -92,7 +55,7 @@ function initlectorpdf()
           renderPage(pageNum);
         }
       };
-    
+    */
       // Modo claro/oscuro
       toggleMode.onclick = () => {
         body.classList.toggle("dark-mode");
@@ -107,7 +70,7 @@ function initlectorpdf()
         toggleMode.textContent = "☀️";
       }
     
-      // Botones de lectura
+      // Botones de lectura de Voz
       function mostrarBotones({ play = false, pause = false, resume = false, stop = false }) {
         startReadingBtn.style.display = play ? "inline-block" : "none";
         pauseReadingBtn.style.display = pause ? "inline-block" : "none";
@@ -236,6 +199,7 @@ function initlectorpdf()
 	        pdfDoc = doc;
 	        pageNum = paginaInicial;
 	        renderPage(pageNum);
+			  actualizarBotonesNav(idx, capitulos, clave);
 	      });
 	
 	// ⬅️ Botón capítulo anterior
@@ -294,5 +258,67 @@ function initlectorpdf()
 	    })
 	    .catch(error => console.error("Error al cargar el capítulo:", error));
 	}
-
-
+	//Actualizacion de botones de navegacion por las paginas del pdf
+	function actualizarBotonesNav(idxCapActual, capitulos, clave) {
+	  const btnPrevPag = document.getElementById("prevPage");
+	  const btnNextPag = document.getElementById("nextPage");
+	
+	  // --- Botón anterior ---
+	  if (pageNum > 1) {
+	    btnPrevPag.textContent = "Página anterior";
+	    btnPrevPag.disabled = false;
+	    btnPrevPag.onclick = () => {
+	      pageNum--;
+	      renderPage(pageNum);
+	      actualizarBotonesNav(idxCapActual, capitulos, clave);
+	      window.scrollTo({ top: 0, behavior: "smooth" });
+	    };
+	  } else {
+	    if (idxCapActual > 0) {
+	      btnPrevPag.textContent = "Capítulo anterior";
+	      btnPrevPag.disabled = false;
+	      btnPrevPag.onclick = () => {
+	        const prevCap = capitulos[idxCapActual - 1];
+	        localStorage.setItem("ultimaPagina", 1);
+	        localStorage.setItem("ultimaObra", clave);
+	        localStorage.setItem("ultimoCapitulo", prevCap.numCapitulo);
+	        cargarCapitulo(clave, prevCap.numCapitulo, 1);
+	        window.scrollTo({ top: 0, behavior: "smooth" });
+	      };
+	    } else {
+	      btnPrevPag.textContent = "Capítulo anterior";
+	      btnPrevPag.disabled = true;
+	      btnPrevPag.onclick = null;
+	    }
+	  }
+	
+	  // --- Botón siguiente ---
+	  if (pageNum < pdfDoc.numPages) {
+	    btnNextPag.textContent = "Página siguiente";
+	    btnNextPag.disabled = false;
+	    btnNextPag.onclick = () => {
+	      pageNum++;
+	      renderPage(pageNum);
+	      actualizarBotonesNav(idxCapActual, capitulos, clave);
+	      window.scrollTo({ top: 0, behavior: "smooth" });
+	    };
+	  } else {
+	    if (idxCapActual < capitulos.length - 1) {
+	      btnNextPag.textContent = "Capítulo siguiente";
+	      btnNextPag.disabled = false;
+	      btnNextPag.onclick = () => {
+	        const nextCap = capitulos[idxCapActual + 1];
+	        localStorage.setItem("ultimaPagina", 1);
+	        localStorage.setItem("ultimaObra", clave);
+	        localStorage.setItem("ultimoCapitulo", nextCap.numCapitulo);
+	        cargarCapitulo(clave, nextCap.numCapitulo, 1);
+	        window.scrollTo({ top: 0, behavior: "smooth" });
+	      };
+	    } else {
+	      btnNextPag.textContent = "Capítulo siguiente";
+	      btnNextPag.disabled = true;
+	      btnNextPag.onclick = null;
+	    }
+	  }
+	}
+	//Fin botones de navegacion por pagina
