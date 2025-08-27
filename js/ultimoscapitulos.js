@@ -96,8 +96,11 @@ const render = () => {
 								    localStorage.setItem("ultimaPagina", 1);
 								
 								    console.log("Click detectado:", clave, capitulo);
-								
-								    window.location.href = 'lectorpdf.html';
+		console.log(clave);
+		console.log(obra);
+		console.log(capitulo);
+
+								    //window.location.href = 'lectorpdf.html';
 								  });
 								});
 	
@@ -139,7 +142,7 @@ window.addEventListener("keydown", (e) => {
     qEl.select();
   }
 });
-
+/*
   document.querySelectorAll('.pdf-link-ucap').forEach(link => {
     link.addEventListener('click', function (e) {
       e.preventDefault();
@@ -153,6 +156,7 @@ window.addEventListener("keydown", (e) => {
 		console.log(obra);
 		console.log(capitulo);
       // Redirigir a lectorpdf.html
-      //window.location.href = 'lectorpdf.html';
+      window.location.href = 'lectorpdf.html';
     });
   });
+*/
