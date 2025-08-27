@@ -1,10 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 	// Cargar el contenido en <main>
-	const footElement = document.querySelector('footer');
-	let now = new Date();
-	let annCurso = now.getFullYear()
-	footElement.innerHTML = `<p>&copy; ${annCurso} JabraScan. No oficial, sin fines de lucro.</p>`;
-	// leer-obras.js
 	fetch('obras.xml')
 	  .then(response => response.text())
 	  .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
