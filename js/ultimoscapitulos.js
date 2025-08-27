@@ -75,7 +75,8 @@ const render = () => {
            class="pdf-link">
             <span class="fecha">${formatDateEs(item._fecha)}</span>
             <span class="obra">${item._obra}</span>
-            <span class="cap">${item.numCapitulo} · ${item.nombreCapitulo}</span>
+            <span class="cap">${item.numCapitulo}</span>
+			<span class="titulo">${item.nombreCapitulo}</span>
         </a>
       `;
       ul.appendChild(li);
