@@ -96,8 +96,8 @@ const render = () => {
 								    localStorage.setItem('ultimoCapitulo', capitulo);
 								    localStorage.setItem("ultimaPagina", 1);
 								
-								    console.log("Click detectado:", clave, capitulo);
-								    //window.location.href = 'lectorpdf.html';
+								    //console.log("Click detectado:", clave, capitulo);
+								    window.location.href = 'lectorpdf.html';
 								  });
 								});
 	
