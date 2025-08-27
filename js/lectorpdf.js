@@ -18,7 +18,7 @@ function initlectorpdf() {
 
 	  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
-    
+    console.log("Canvas encontrado:", document.getElementById("pdfCanvas"));
       // Renderizar página
       function renderPage(num) {
         pdfDoc.getPage(num).then(page => {
@@ -245,4 +245,5 @@ console.log("abrir automaticamente");
 				.catch(err => console.error('Error:', err));
 		}
 }//fin init
+
 
