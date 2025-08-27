@@ -153,6 +153,6 @@ window.addEventListener("keydown", (e) => {
 		console.log(obra);
 		console.log(capitulo);
       // Redirigir a lectorpdf.html
-      window.location.href = 'lectorpdf.html';
+      //window.location.href = 'lectorpdf.html';
     });
   });
