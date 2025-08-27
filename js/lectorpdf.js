@@ -40,117 +40,121 @@
 			  const resumeReadingBtn = document.getElementById("resumeReading");
   			  const toggleMode = document.getElementById("toggleMode");
 //FIN actualizacion 27082025 1554
-	/*movido a la funcion actualizarBotonesNav 27082025 1839
-      // Navegación
-      document.getElementById("prevPage").onclick = () => {
-        if (pageNum > 1) {
-          pageNum--;
-          renderPage(pageNum);
-        }
-      };
-    
-      document.getElementById("nextPage").onclick = () => {
-        if (pageNum < pdfDoc.numPages) {
-          pageNum++;
-          renderPage(pageNum);
-        }
-      };
-    */
-      // Modo claro/oscuro
-      toggleMode.onclick = () => {
-        body.classList.toggle("dark-mode");
-        body.classList.toggle("light-mode");
-        toggleMode.textContent = body.classList.contains("dark-mode") ? "☀️" : "🌙";
-        localStorage.setItem("modoNocturno", body.classList.contains("dark-mode") ? "true" : "false");
-      };
-    
-      if (localStorage.getItem("modoNocturno") === "true") {
-        body.classList.add("dark-mode");
-        body.classList.remove("light-mode");
-        toggleMode.textContent = "☀️";
-      }
-    
-      // Botones de lectura de Voz
-      function mostrarBotones({ play = false, pause = false, resume = false, stop = false }) {
-        startReadingBtn.style.display = play ? "inline-block" : "none";
-        pauseReadingBtn.style.display = pause ? "inline-block" : "none";
-        resumeReadingBtn.style.display = resume ? "inline-block" : "none";
-        stopReadingBtn.style.display = stop ? "inline-block" : "none";
-      }
-    
-      startReadingBtn.onclick = () => {
-        pdfDoc.getPage(pageNum).then(page => {
-          page.getTextContent().then(textContent => {
-            const text = textContent.items.map(item => item.str).join(" ");
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = "es-ES";
-    
-            const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith("es"));
-            if (voices.length > 0) {
-              utterance.voice = voices.find(v => v.name.includes("Google") || v.name.includes("Helena")) || voices[0];
-              utterance.rate = 0.95;
-              utterance.pitch = 1.1;
-              utterance.volume = 1;
-              mostrarBotones({ pause: true, stop: true });
-            }
-    
-            utterance.onend = () => {
-              mostrarBotones({ play: true });
-            };
-    
-            speechSynthesis.speak(utterance);
-          });
-        });
-      };
-    
-      pauseReadingBtn.onclick = () => {
-        if (speechSynthesis.speaking && !speechSynthesis.paused) {
-          speechSynthesis.pause();
-          mostrarBotones({ resume: true, stop: true });
-        }
-      };
-    
-      resumeReadingBtn.onclick = () => {
-        if (speechSynthesis.paused) {
-          speechSynthesis.resume();
-          mostrarBotones({ pause: true, stop: true });
-        }
-      };
-    
-      stopReadingBtn.onclick = () => {
-        speechSynthesis.cancel();
-        mostrarBotones({ play: true });
-      };
-    
-      window.addEventListener("resize", () => {
-        if (pdfDoc) renderPage(pageNum);
-      });
-
-	  //codigo Optimizado carga libros
-		// 🎯 Evento para enlaces de PDF
-		document.querySelectorAll(".pdf-link").forEach(link => {
-		  link.addEventListener("click", event => {
-		    event.preventDefault();
+//actualizacion 27082025 1901, añade funcionalidad al boton hamburguesa
+			// Botón hamburguesa y comportamiento responsive
+			const menuToggle = document.getElementById('menu-toggle');
+			const mainHeader = document.getElementById('main-header');
+			
+			menuToggle.addEventListener('click', () => {
+			  mainHeader.classList.toggle('show');
+			  document.body.classList.toggle('no-scroll', mainHeader.classList.contains('show'));
+			});
+			
+			// Cierra menú al clicar un enlace
+			mainHeader.querySelectorAll('a').forEach(link => {
+			  link.addEventListener('click', () => {
+			    if (window.innerWidth <= 600) {
+			      mainHeader.classList.remove('show');
+			      document.body.classList.remove('no-scroll');
+			    }
+			  });
+			});
+//FIN actualizacion 27082025 1901
+		      // Modo claro/oscuro
+		      toggleMode.onclick = () => {
+		        body.classList.toggle("dark-mode");
+		        body.classList.toggle("light-mode");
+		        toggleMode.textContent = body.classList.contains("dark-mode") ? "☀️" : "🌙";
+		        localStorage.setItem("modoNocturno", body.classList.contains("dark-mode") ? "true" : "false");
+		      };
+		    
+		      if (localStorage.getItem("modoNocturno") === "true") {
+		        body.classList.add("dark-mode");
+		        body.classList.remove("light-mode");
+		        toggleMode.textContent = "☀️";
+		      }
+		    
+		      // Botones de lectura de Voz
+		      function mostrarBotones({ play = false, pause = false, resume = false, stop = false }) {
+		        startReadingBtn.style.display = play ? "inline-block" : "none";
+		        pauseReadingBtn.style.display = pause ? "inline-block" : "none";
+		        resumeReadingBtn.style.display = resume ? "inline-block" : "none";
+		        stopReadingBtn.style.display = stop ? "inline-block" : "none";
+		      }
+		    
+		      startReadingBtn.onclick = () => {
+		        pdfDoc.getPage(pageNum).then(page => {
+		          page.getTextContent().then(textContent => {
+		            const text = textContent.items.map(item => item.str).join(" ");
+		            const utterance = new SpeechSynthesisUtterance(text);
+		            utterance.lang = "es-ES";
+		    
+		            const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith("es"));
+		            if (voices.length > 0) {
+		              utterance.voice = voices.find(v => v.name.includes("Google") || v.name.includes("Helena")) || voices[0];
+		              utterance.rate = 0.95;
+		              utterance.pitch = 1.1;
+		              utterance.volume = 1;
+		              mostrarBotones({ pause: true, stop: true });
+		            }
+		    
+		            utterance.onend = () => {
+		              mostrarBotones({ play: true });
+		            };
+		    
+		            speechSynthesis.speak(utterance);
+		          });
+		        });
+		      };
+		    
+		      pauseReadingBtn.onclick = () => {
+		        if (speechSynthesis.speaking && !speechSynthesis.paused) {
+		          speechSynthesis.pause();
+		          mostrarBotones({ resume: true, stop: true });
+		        }
+		      };
+		    
+		      resumeReadingBtn.onclick = () => {
+		        if (speechSynthesis.paused) {
+		          speechSynthesis.resume();
+		          mostrarBotones({ pause: true, stop: true });
+		        }
+		      };
+		    
+		      stopReadingBtn.onclick = () => {
+		        speechSynthesis.cancel();
+		        mostrarBotones({ play: true });
+		      };
+		    
+		      window.addEventListener("resize", () => {
+		        if (pdfDoc) renderPage(pageNum);
+		      });
 		
-		    const clave = event.currentTarget.getAttribute("data-pdf-obra");
-		    const capitulo = event.currentTarget.getAttribute("data-pdf-capitulo");
-		
-		    localStorage.setItem("ultimaObra", clave);
-		    localStorage.setItem("ultimoCapitulo", capitulo);
-		
-		    cargarCapitulo(clave, capitulo, 1);
-		  });
-		});
-		
-		// 🔄 Carga automática del último capítulo
-		const ultimaObra = localStorage.getItem("ultimaObra");
-		const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
-		const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
-		
-		if (ultimaObra && ultimoCapitulo) {
-		  cargarCapitulo(ultimaObra, ultimoCapitulo, !isNaN(ultimaPagina) ? ultimaPagina : 1);
-		}
-  }
+			  //codigo Optimizado carga libros
+				// 🎯 Evento para enlaces de PDF
+				document.querySelectorAll(".pdf-link").forEach(link => {
+				  link.addEventListener("click", event => {
+				    event.preventDefault();
+				
+				    const clave = event.currentTarget.getAttribute("data-pdf-obra");
+				    const capitulo = event.currentTarget.getAttribute("data-pdf-capitulo");
+				
+				    localStorage.setItem("ultimaObra", clave);
+				    localStorage.setItem("ultimoCapitulo", capitulo);
+				
+				    cargarCapitulo(clave, capitulo, 1);
+				  });
+				});
+				
+				// 🔄 Carga automática del último capítulo
+				const ultimaObra = localStorage.getItem("ultimaObra");
+				const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
+				const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
+				
+				if (ultimaObra && ultimoCapitulo) {
+				  cargarCapitulo(ultimaObra, ultimoCapitulo, !isNaN(ultimaPagina) ? ultimaPagina : 1);
+				}
+		  }
 //});
 		function onLibroClick(libroId) {
 		    // Guarda el ID o nombre del libro seleccionado (ajusta según tu XML)
@@ -396,4 +400,5 @@
 	}
 
 	//Fin botones de navegacion por pagina
+
 
