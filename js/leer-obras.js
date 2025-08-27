@@ -117,6 +117,14 @@ document.addEventListener("DOMContentLoaded", function () {
 			// Prepend el contenedor de imagen al artículo
 			itemBook.prepend(imagenContenedorA);
 	      booklistContainer.appendChild(itemBook);
+			//ultimo capitulo
+				fetch("books.json")
+				  .then(r => r.json())
+				  .then(data => {
+				    const bloque = crearUltimoCapituloDeObra(data, clave);
+				    if (bloque) booklistContainer.appendChild(bloque);
+				  });
+			//
 	    });
 	  })
 	  .catch(err => console.error("Error al cargar el XML:", err));
@@ -146,3 +154,65 @@ document.addEventListener("DOMContentLoaded", function () {
 				})
 				.catch(err => console.error('Error:', err));
 		}
+//Buscar ultimo capitulo
+		function crearUltimoCapituloDeObra(data, claveObra) {
+			  const parseDateDMY = (s) => {
+			    const [dd, mm, yyyy] = s.split("-").map(Number);
+			    return new Date(yyyy, mm - 1, dd);
+			  };
+			  const parseChapterNumber = (n) => {
+			    const num = parseFloat(String(n).replace(/[^0-9.]/g, ""));
+			    return Number.isNaN(num) ? -Infinity : num;
+			  };
+			  const formatDateEs = (d) => {
+			    const dd = String(d.getDate()).padStart(2, "0");
+			    const mm = String(d.getMonth() + 1).padStart(2, "0");
+			    const yyyy = d.getFullYear();
+			    return `${dd}-${mm}-${yyyy}`;
+			  };
+			
+			  const capitulos = data[claveObra];
+			  if (!Array.isArray(capitulos) || capitulos.length === 0) {
+			    return null; // no hay datos para esa clave
+			  }
+			
+			  // ordenar por fecha ↓ y numCapitulo ↓
+			  const ordenados = capitulos.slice().sort((a, b) => {
+			    const fechaDiff = parseDateDMY(b.Fecha) - parseDateDMY(a.Fecha);
+			    if (fechaDiff !== 0) return fechaDiff;
+			    return parseChapterNumber(b.numCapitulo) - parseChapterNumber(a.numCapitulo);
+			  });
+			
+			  const ultimo = ordenados[0];
+			
+			  // crear el bloque HTML
+			  const divsection = document.createElement("div");
+			  divsection.className = "book-section book-latest-chapters";
+			  divsection.innerHTML = `<h3>Último capítulo de ${ultimo.tituloObra}</h3>`;
+			
+			  const ul = document.createElement("ul");
+			  ul.className = "chapter-list";
+			
+			  const li = document.createElement("li");
+				  /*li.innerHTML = `
+				    <a href="#"
+				       data-pdf-obra="${claveObra}"
+				       data-pdf-capitulo="${ultimo.numCapitulo}"
+				       class="pdf-link-ucap">
+				        <span class="fecha">${formatDateEs(parseDateDMY(ultimo.Fecha))}</span> -
+				        <span class="obra ${claveObra}">${ultimo.tituloObra}</span> -
+				        <span class="cap">${ultimo.numCapitulo}</span> ·
+				        <span class="titulo">${ultimo.nombreCapitulo}</span>
+				    </a>
+				  `;*/
+				  li.innerHTML = `
+				        <span class="fecha">${formatDateEs(parseDateDMY(ultimo.Fecha))}</span> -
+				        <span class="cap">${ultimo.numCapitulo}</span>
+				  `;
+			
+			  ul.appendChild(li);
+			  divsection.appendChild(ul);
+			  return divsection;
+		}
+
+//fin funcion carga ultimo cap
