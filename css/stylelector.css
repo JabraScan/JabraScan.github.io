@@ -144,6 +144,9 @@ select {
 select:hover {
   border-color: #4e54c8;
 }
+.chapterSelect {
+  max-width: 100px;
+}
 
 @media (max-width: 600px) {
   .controls {
@@ -215,4 +218,5 @@ select:hover {
     padding-top: 0;
   }
 }
+
 
