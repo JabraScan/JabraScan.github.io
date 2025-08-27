@@ -122,6 +122,19 @@ button:hover {
 button:active {
   transform: scale(0.98);
 }
+button:disabled, select:disabled,
+  button[disabled] {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    background: grey;
+    color: white;
+    font-weight: 500;
+    cursor: not-allowed;
+    transition: transform 0.2s ease, background 0.3s ease;
+    font-size: 0.95em;
+    background-color: grey;
+  }
 
 select {
   background-color: white;
@@ -202,3 +215,4 @@ select:hover {
     padding-top: 0;
   }
 }
+
