@@ -108,8 +108,8 @@
     { "Fecha" : "24-07-2025", "NombreArchivo" : "Suzume [JabraScan]_fin-190-196.pdf" , "numCapitulo" :  "5.7", "nombreCapitulo" : "Día 5 - Pueblo Natal"                                                           , "tituloObra" : "Suzume" },
     { "Fecha" : "24-07-2025", "NombreArchivo" : "Suzume [JabraScan]_fin-197-215.pdf" , "numCapitulo" :  "5.8", "nombreCapitulo" : "Para Siempre - La Ciudad Que Aún Arde"                                          , "tituloObra" : "Suzume" },
     { "Fecha" : "24-07-2025", "NombreArchivo" : "Suzume [JabraScan]_fin-216-223.pdf" , "numCapitulo" :  "5.9", "nombreCapitulo" : "Para Siempre - Todo El Tiempo"                                                  , "tituloObra" : "Suzume" },
-    { "Fecha" : "24-07-2025", "NombreArchivo" : "Suzume [JabraScan]_fin-224-230.pdf" , "numCapitulo" :  "6.0", "nombreCapitulo" : "Día 6 y Recuerdos - Las Palabras Que Nadie Pudo Decir"                          , "tituloObra" : "Suzume" }
-  
+    { "Fecha" : "24-07-2025", "NombreArchivo" : "Suzume [JabraScan]_fin-224-228.pdf" , "numCapitulo" :  "6.0", "nombreCapitulo" : "Día 6 y Recuerdos - Las Palabras Que Nadie Pudo Decir"                          , "tituloObra" : "Suzume" },
+    { "Fecha" : "24-07-2025", "NombreArchivo" : "Suzume [JabraScan]_fin-229-230.pdf" , "numCapitulo" :  "7.0", "nombreCapitulo" : "Epílogo"                                                                        , "tituloObra" : "Suzume" }  
   ],
   "CallateDragonaMalvadaNoQuieroTenerMasHijosContigo": [
     { "Fecha" : "26-08-2025",  "NombreArchivo" : "CDMNQTMHC-001[RexScan].pdf" , "numCapitulo" : "1", "nombreCapitulo" : "Después de la derrota y la captura, siempre hay alguien que queda embarazada."        , "tituloObra" : "¡Cállate, dragón malvado! No quiero tener mas hijos contigo."}
@@ -118,6 +118,7 @@
     { "Fecha" : "26-08-2025",  "NombreArchivo" : "algo.pdf" , "numCapitulo" : "0", "nombreCapitulo" : "Test"        , "tituloObra" : "The Eminence in Shadow"}
   ]
 }
+
 
 
 
