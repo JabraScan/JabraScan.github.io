@@ -186,7 +186,19 @@ select:hover {
   #menu-toggle {
     display: block;
   }
-
+@media (max-width: 900px) { /* o el ancho que consideres */
+  #menu-toggle { display: block; }
+  #main-header { display: none; }
+  #main-header.show { display: block; }
+  .label { display: none; }
+}
+.menu-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 900; /* debajo del menú */
+}
   /* Ocultar header por defecto */
   #main-header {
     display: none;
@@ -218,5 +230,6 @@ select:hover {
     padding-top: 0;
   }
 }
+
 
 
