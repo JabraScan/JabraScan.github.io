@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // 🚀 Aquí invocas la inicialización específica
           if (url === "ultimosCapitulos.html") {
             initUltimosCapitulos();
+            console.log(url);
           }
           // other
         })
