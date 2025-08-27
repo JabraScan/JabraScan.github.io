@@ -1,6 +1,7 @@
 //document.addEventListener("DOMContentLoaded", () => {
   //if (window.location.href.includes("lectorpdf.html")) 
-  {
+function initlectorpdf() {
+{
       let pdfDoc = null;
       let pageNum = 1;
     
@@ -242,13 +243,4 @@ console.log("abrir automaticamente");
 				})
 				.catch(err => console.error('Error:', err));
 		}
-
-
-
-
-
-
-
-
-
-
+}//fin init
