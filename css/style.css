@@ -120,6 +120,7 @@ main {
 .book-info-main {
   padding: 0.8em;
   font-size: 0.75em;
+  flex: auto;
 }
 .book-info h2 .book-info-main h2{
   font-size: 1.4em;
