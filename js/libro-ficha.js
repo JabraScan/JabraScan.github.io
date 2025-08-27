@@ -336,8 +336,8 @@ function parseChapterNumber(v) {
 	
 	      // Inyecta lectorpdf.js dinámicamente para que sí se ejecute
 	      const script = document.createElement('script');
-	      script.src = 'js/lectorpdf.js';
-	      document.body.appendChild(script);
+			s.onload = () => initlectorpdf();
+			document.body.appendChild(s);
 	    })
 	    .catch(err => console.error('Error cargando lectorpdf.html:', err));
 	}
