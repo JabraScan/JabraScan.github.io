@@ -84,7 +84,23 @@ const render = () => {
 
   divsection.appendChild(ul);
   listEl.appendChild(divsection);
-
+							// Después de insertar los capítulos en el DOM
+								document.querySelectorAll('.pdf-link-ucap').forEach(link => {
+								  link.addEventListener('click', function (e) {
+								    e.preventDefault();
+								    const clave = e.currentTarget.getAttribute("data-pdf-obra");
+								    const capitulo = e.currentTarget.getAttribute("data-pdf-capitulo");
+								
+								    localStorage.setItem('ultimaObra', clave);
+								    localStorage.setItem('ultimoCapitulo', capitulo);
+								    localStorage.setItem("ultimaPagina", 1);
+								
+								    console.log("Click detectado:", clave, capitulo);
+								
+								    window.location.href = 'lectorpdf.html';
+								  });
+								});
+	
   metaEl.textContent = `${state.filtered.length} capítulos · ${
     new Set(state.filtered.map((i) => i._obra)).size
   } obras`;
@@ -123,6 +139,7 @@ window.addEventListener("keydown", (e) => {
     qEl.select();
   }
 });
+
   document.querySelectorAll('.pdf-link-ucap').forEach(link => {
     link.addEventListener('click', function (e) {
       e.preventDefault();
