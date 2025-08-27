@@ -1,5 +1,6 @@
 //document.addEventListener("DOMContentLoaded", () => {
   //if (window.location.href.includes("lectorpdf.html")) 
+/*
 function initlectorpdf()
   {
       let pdfDoc = null;
@@ -36,7 +37,47 @@ function initlectorpdf()
           localStorage.setItem("ultimaPagina", num);
         });
       }
-    
+  */  
+//actualizacion 27082025 1554
+			// Variables globales para que todas las funciones las vean
+			let pdfDoc = null;
+			let pageNum = 1;
+			let canvas, ctx, pageInfo, body;
+			
+			// ========== Renderizar página ==========
+			function renderPage(num) {
+			  pdfDoc.getPage(num).then(page => {
+			    const scale = 1.5;
+			    const viewport = page.getViewport({ scale });
+			
+			    canvas.height = viewport.height;
+			    canvas.width = viewport.width;
+			
+			    const renderContext = {
+			      canvasContext: ctx,
+			      viewport: viewport
+			    };
+			
+			    page.render(renderContext);
+			    pageInfo.textContent = `Página ${num} de ${pdfDoc.numPages}`;
+			    speechSynthesis.cancel();
+			    localStorage.setItem("ultimaPagina", num);
+			  });
+			}
+			
+			// ========== Inicializador lector PDF ==========
+			function initlectorpdf() {
+			  canvas = document.getElementById("pdfCanvas");
+			  ctx = canvas.getContext("2d");
+			  pageInfo = document.getElementById("pageInfo");
+			  body = document.body;
+			
+			  const startReadingBtn = document.getElementById("readAloud");
+			  const stopReadingBtn = document.getElementById("stopReading");
+			  const pauseReadingBtn = document.getElementById("pauseReading");
+			  const resumeReadingBtn = document.getElementById("resumeReading");
+  			  const toggleMode = document.getElementById("toggleMode");
+//FIN actualizacion 27082025 1554
       // Navegación
       document.getElementById("prevPage").onclick = () => {
         if (pageNum > 1) {
@@ -345,3 +386,4 @@ function initlectorpdf()
 	    })
 	    .catch(error => console.error("Error al cargar el capítulo:", error));
 	}
+
