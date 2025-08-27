@@ -320,8 +320,10 @@ function parseChapterNumber(v) {
 	
 	      // Si ya tienes cargado lectorpdf.js, basta llamar init
 	      if (typeof initlectorpdf === "function") {
+			  console.log("initlectorpdf");
 	        initlectorpdf();
 	      } else {
+			  console.log("initlectorpdf no cargado");
 	        // Si no está cargado aún, lo añadimos dinámicamente
 	        const script = document.createElement('script');
 	        script.src = 'js/lectorpdf.js';
