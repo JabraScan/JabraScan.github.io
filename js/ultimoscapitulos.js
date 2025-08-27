@@ -41,7 +41,7 @@ const sortDesc = (a, b) => {
   });
 };
 
-const listEl = document.getElementById("list");
+const listEl = document.getElementById("book-card-caps");
 const emptyEl = document.getElementById("empty");
 const metaEl = document.getElementById("meta");
 const qEl = document.getElementById("q");
