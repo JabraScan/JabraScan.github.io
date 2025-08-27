@@ -183,7 +183,9 @@ function cargarlibro(libroId) {
 								    console.log("Click detectado:", clave, capitulo);
 								
 								    //window.location.href = 'lectorpdf.html';
-									  abrirLectorPDF();
+									  abrirLectorPDF(() => {
+										   inicializarPDF(); // función que hace pdfjsLib.getDocument(...)
+										});
 								  });
 								});
 
@@ -336,7 +338,6 @@ function parseChapterNumber(v) {
 	      const script = document.createElement('script');
 	      script.src = 'js/lectorpdf.js';
 	      document.body.appendChild(script);
-			initlectorpdf();
 	    })
 	    .catch(err => console.error('Error cargando lectorpdf.html:', err));
 	}
