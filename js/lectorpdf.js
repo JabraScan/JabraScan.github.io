@@ -228,7 +228,7 @@
 	      // 📄 Cargar PDF
 	      const nombreA = encodeURIComponent(cap.NombreArchivo);
 	      const pdfPath = `books/${clave}/${nombreA}`;
-	      console.log(`Cargando PDF: ${pdfPath}`);
+	      //console.log(`Cargando PDF: ${pdfPath}`);
 	      pdfjsLib.getDocument(pdfPath).promise.then(doc => {
 	        pdfDoc = doc;
 	        pageNum = paginaInicial;
@@ -367,6 +367,7 @@
 	}
 
 	//Fin botones de navegacion por pagina
+
 
 
 
