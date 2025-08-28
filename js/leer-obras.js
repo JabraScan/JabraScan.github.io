@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				const imagenContenedorB = imagenContenedor.cloneNode(true); // Clona el contenedor de imagen
 				// Prepend el contenedor de imagen al artículo
 				itemBook.prepend(imagenContenedorA);
-				itemBookNOpc.prepend(imagenContenedorA);
+				itemBookNOpc.prepend(imagenContenedorB);
 			//
 	      	booklistContainer.appendChild(itemBook);
 	      	booklistContainer.appendChild(itemBookNOpc);
