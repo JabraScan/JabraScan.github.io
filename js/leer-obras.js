@@ -99,22 +99,38 @@ document.addEventListener("DOMContentLoaded", function () {
 	      const itemBook = document.createElement("article");
 		      itemBook.classList.add("book-card-main", "libro-item");
 			  itemBook.onclick = () => onLibroClick(clave);
-		      /*itemBook.innerHTML = `
-					  <p class="clave">${clave}</p>
-			          <div class="book-info-main">
-			            <h3>${nombreobra}</h3>
-						<div class="book-author-title">Autor:</div>
-						<div class="book-author-name">${autor}</div>
-	  					<div class="book-author-name ${estado}">${estado}</div>
-			          </div>
-		      `;*/
 				itemBook.innerHTML = `
-						  <p class="clave">${clave}</p>
-				          <div class="book-info-main">
+						<div class="book-info-main">
+							<p class="clave">${clave}</p>
+							<h3>${nombreobra}</h3>
+							<div class="book-author-name"><bold class="book-author-title">Autor:</bold> ${autor}</div>
+							<div class="book-estado ${estado}">${estado}</div>
+						</div>
+			      `;
+			const itemBookNOpc = document.createElement("ul");
+		      itemBookNOpc.classList.add("lista-libros");
+			  itemBookNOpc.onclick = () => onLibroClick(clave);
+				itemBookNOpc.innerHTML = `
+						<div class="book-info-main">
+						  	<p class="clave">${clave}</p>
 				            <h3>${nombreobra}</h3>
 							<div class="book-author-name"><bold class="book-author-title">Autor:</bold> ${autor}</div>
 		  					<div class="book-estado ${estado}">${estado}</div>
-				          </div>
+						</div>
+						<li class="item-libro">
+							<img id="img-libro-1" src="" alt="Portada libro 1" class="portada">
+							<div class="info-libro">
+	  							<p class="clave">${clave}</p>
+								<strong id="titulo-libro-1">${nombreobra}</strong><br>
+								Autor: <span id="autor-libro-1"> ${autor}</span><br>
+								Estado: <span id="estado-libro-1 ${estado}">${estado}</span><br>
+								<!--
+								Último capítulo:
+									<span id="cap-libro-1"></span>
+									(<span id="fecha-libro-1"></span>)
+		 						-->
+							</div>
+						</li>
 			      `;
 			//ultimo capitulo
 				fetch("books.json")
@@ -129,12 +145,11 @@ document.addEventListener("DOMContentLoaded", function () {
 			itemBook.prepend(imagenContenedorA);
 			//
 	      	booklistContainer.appendChild(itemBook);
+	      	booklistContainer.appendChild(itemBookNOpc);
 			//
 	    });
 	  })
 	  .catch(err => console.error("Error al cargar el XML:", err));
-	
-
 });
 
 		function onLibroClick(libroId) {
