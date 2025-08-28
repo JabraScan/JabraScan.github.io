@@ -145,7 +145,6 @@ function initUltimosCapitulos() {
 		        })
 		        .then((capitulos) =>
 		          capitulos.map((cap) => ({ ...cap, tituloObra: titulo }))
-			  console.log(capitulos);
 		        )
 		        .catch((err) => {
 		          console.warn(err.message);
@@ -156,7 +155,8 @@ function initUltimosCapitulos() {
 		    return Promise.all(obrasPromises);
 		  })
 		  .then((listasDeCapitulos) => {
-		    const todosLosCapitulos = listasDeCapitulos.flat();
+console.log(listasDeCapitulos);
+			const todosLosCapitulos = listasDeCapitulos.flat();
 		    state.items = todosLosCapitulos.sort(sortDesc);
 		    state.filtered = [...state.items];
 		    render();
