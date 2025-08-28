@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Detección de iOS
+	if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+		document.body.classList.add('ios');
+	}
   // Cargar el "copyright" con el año en curso
 	const footElement = document.getElementById('copyjabra');
   	let now = new Date();
