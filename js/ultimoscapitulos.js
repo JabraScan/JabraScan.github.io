@@ -132,7 +132,7 @@ function initUltimosCapitulos() {
 	  });*/
 	//optimizacion lectura capitulos 29082025 0031
 		//se ha creado un indice json y un json por obra
-		fetch("books.json")
+		fetch("capitulos.json")
 		  .then((res) => res.json())
 		  .then((index) => {
 		    const obrasPromises = Object.entries(index).map(([titulo, ruta]) =>
