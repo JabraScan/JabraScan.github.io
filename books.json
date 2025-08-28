@@ -143,7 +143,8 @@
     { "Fecha" : "26-08-2025", "NombreArchivo" : "Cultivation_Online-2091[JabraScan].pdf", "numCapitulo" : "2091", "nombreCapitulo" : "Regreso al Clan del Tigre Blanco Celestial"                             , "tituloObra": "Cultivation Online" },
     { "Fecha" : "26-08-2025", "NombreArchivo" : "Cultivation_Online-2092[JabraScan].pdf", "numCapitulo" : "2092", "nombreCapitulo" : "Regreso al Clan del Tigre Blanco Celestial (2)"                         , "tituloObra": "Cultivation Online" },
     { "Fecha" : "26-08-2025", "NombreArchivo" : "Cultivation_Online-2093[JabraScan].pdf", "numCapitulo" : "2093", "nombreCapitulo" : "El Secreto del Líder del Clan"                                          , "tituloObra": "Cultivation Online" },
-    { "Fecha" : "27-08-2025", "NombreArchivo" : "Cultivation_Online-2094[JabraScan].pdf", "numCapitulo" : "2094", "nombreCapitulo" : "La Persistencia de Bai Xutao"                                           , "tituloObra": "Cultivation Online" }
+    { "Fecha" : "27-08-2025", "NombreArchivo" : "Cultivation_Online-2094[JabraScan].pdf", "numCapitulo" : "2094", "nombreCapitulo" : "La Persistencia de Bai Xutao"                                           , "tituloObra": "Cultivation Online" },
+    { "Fecha" : "27-08-2025", "NombreArchivo" : "Cultivation_Online-2095[JabraScan].pdf", "numCapitulo" : "2095", "nombreCapitulo" : "Un Desvío"                                                              , "tituloObra": "Cultivation Online" }
   ],
   "DualCultivation": [
     { "Fecha" : "14-07-2025", "NombreArchivo" : "DualCultivation-708_JabraScan.pdf" , "numCapitulo" :  "708", "nombreCapitulo" :"Formación Atrapadora" , "tituloObra" : "Dual Cultivation" }
@@ -775,6 +776,7 @@
     { "Fecha" : "26-08-2025",  "NombreArchivo" : "algo.pdf" , "numCapitulo" : "0", "nombreCapitulo" : "Test"        , "tituloObra" : "The Eminence in Shadow"}
   ]
 }
+
 
 
 
