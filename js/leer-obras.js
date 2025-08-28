@@ -130,8 +130,9 @@ document.addEventListener("DOMContentLoaded", function () {
 					.then(data => {
 						const bloque = crearUltimoCapituloDeObra(data, clave);
 						if (bloque) {
-							itemBook.querySelector(".book-info-main").appendChild(bloque);
-							itemBookNOpc.querySelector(".book-info-main").appendChild(bloque);
+							const bloqueB = bloque.cloneNode(true); // Clona el contenedor 
+								itemBook.querySelector(".book-info-main").appendChild(bloque);
+								itemBookNOpc.querySelector(".book-info-main").appendChild(bloqueB);
 						}
 				});
 			// Clonar imagenContenedor
