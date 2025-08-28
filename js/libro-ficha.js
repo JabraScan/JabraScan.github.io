@@ -85,7 +85,7 @@ function cargarlibro(libroId) {
 							  .map(c => ({
 								    ...c,
 								    fechaObj: parseDateDMY(c.Fecha),
-								    capNum: parseChapterNumber(c.numeroCapitulo)
+								    capNum: parseChapterNumber(c.numCapitulo)
 							  }))
 							  .filter(c => c.fechaObj)
 							  .sort((a, b) => {
