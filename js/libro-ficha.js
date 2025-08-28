@@ -104,7 +104,7 @@ function cargarlibro(libroId) {
 							  })
 							  .slice(0, 6);
 							//fin actualizacion 28082025 1319
-							console.log(ultimosCapitulos);
+							//console.log(ultimosCapitulos);
 						  const totalCapitulos = listacapitulos.length;
 						
 						  // Sección: Últimos capítulos
@@ -184,7 +184,7 @@ function cargarlibro(libroId) {
 								    localStorage.setItem('ultimoCapitulo', capitulo);
 								    localStorage.setItem("ultimaPagina", 1);
 								
-								    console.log("Click detectado:", clave, capitulo);
+								    //console.log("Click detectado:", clave, capitulo);
 								
 								    //window.location.href = 'lectorpdf.html';
 									  abrirLectorPDF();
@@ -300,8 +300,8 @@ function obtenerCapitulos(clave) {
       localStorage.setItem('ultimaObra', clave);
       localStorage.setItem('ultimoCapitulo', capitulo);
 	  localStorage.setItem("ultimaPagina", 1);
-		console.log(obra);
-		console.log(capitulo);
+		//console.log(obra);
+		//console.log(capitulo);
       // Redirigir a lectorpdf.html
       window.location.href = 'lectorpdf.html';
     });
@@ -342,10 +342,10 @@ function parseChapterNumber(v) {
 	
 	      // Si ya tienes cargado lectorpdf.js, basta llamar init
 	      if (typeof initlectorpdf === "function") {
-			  console.log("initlectorpdf");
+			  //console.log("initlectorpdf");
 	        initlectorpdf();
 	      } else {
-			  console.log("initlectorpdf no cargado");
+			  //console.log("initlectorpdf no cargado");
 	        // Si no está cargado aún, lo añadimos dinámicamente
 	        const script = document.createElement('script');
 	        script.src = 'js/lectorpdf.js';
