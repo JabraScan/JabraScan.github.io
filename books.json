@@ -217,11 +217,11 @@
     { "Fecha" : "05-03-2025",  "NombreArchivo" : "ShadowSlave-0001[JabraScan].pdf" , "numCapitulo" :  "3", "nombreCapitulo" : "Comienza la Pesadilla."        , "tituloObra" : "Shadow Slave"},
     { "Fecha" : "05-03-2025",  "NombreArchivo" : "ShadowSlave-0001[JabraScan].pdf" , "numCapitulo" :  "4", "nombreCapitulo" : "Comienza la Pesadilla."        , "tituloObra" : "Shadow Slave"},
     { "Fecha" : "05-03-2025",  "NombreArchivo" : "ShadowSlave-0001[JabraScan].pdf" , "numCapitulo" :  "5", "nombreCapitulo" : "Comienza la Pesadilla."        , "tituloObra" : "Shadow Slave"},
-    { "Fecha" : "05-03-2025",  "NombreArchivo" : "ShadowSlave-0001[JabraScan].pdf" , "numCapitulo" :  "6", "nombreCapitulo" : "Comienza la Pesadilla."        , "tituloObra" : "Shadow Slave"}
+    { "Fecha" : "05-03-2025",  "NombreArchivo" : "ShadowSlave-0001[JabraScan].pdf" , "numCapitulo" :  "6", "nombreCapitulo" : "Comienza la Pesadilla."        , "tituloObra" : "Shadow Slave"},
     { "Fecha" : "05-03-2025",  "NombreArchivo" : "ShadowSlave-0001[JabraScan].pdf" , "numCapitulo" :  "7", "nombreCapitulo" : "Comienza la Pesadilla."        , "tituloObra" : "Shadow Slave"},
     { "Fecha" : "05-03-2025",  "NombreArchivo" : "ShadowSlave-0001[JabraScan].pdf" , "numCapitulo" :  "8", "nombreCapitulo" : "Comienza la Pesadilla."        , "tituloObra" : "Shadow Slave"},
     { "Fecha" : "05-03-2025",  "NombreArchivo" : "ShadowSlave-0001[JabraScan].pdf" , "numCapitulo" :  "9", "nombreCapitulo" : "Comienza la Pesadilla."        , "tituloObra" : "Shadow Slave"},
-    { "Fecha" : "05-03-2025",  "NombreArchivo" : "ShadowSlave-0001[JabraScan].pdf" , "numCapitulo" : "10", "nombreCapitulo" : "Comienza la Pesadilla."        , "tituloObra" : "Shadow Slave"},
+    { "Fecha" : "05-03-2025",  "NombreArchivo" : "ShadowSlave-0001[JabraScan].pdf" , "numCapitulo" : "10", "nombreCapitulo" : "Comienza la Pesadilla."        , "tituloObra" : "Shadow Slave"}
   ],
   "CallateDragonaMalvadaNoQuieroTenerMasHijosContigo": [
     { "Fecha" : "26-08-2025",  "NombreArchivo" : "CDMNQTMHC-001[RexScan].pdf" , "numCapitulo" : "1", "nombreCapitulo" : "Después de la derrota y la captura, siempre hay alguien que queda embarazada."        , "tituloObra" : "¡Cállate, dragón malvado! No quiero tener mas hijos contigo."},
@@ -239,6 +239,7 @@
     { "Fecha" : "26-08-2025",  "NombreArchivo" : "algo.pdf" , "numCapitulo" : "0", "nombreCapitulo" : "Test"        , "tituloObra" : "The Eminence in Shadow"}
   ]
 }
+
 
 
 
