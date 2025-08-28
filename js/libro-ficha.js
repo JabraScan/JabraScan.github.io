@@ -141,7 +141,7 @@ const ultimosCapitulos = listacapitulos
     // 3) Título descendente (ignorando mayúsculas/minúsculas)
     //return String(b.Titulo || "").localeCompare(String(a.Titulo || ""), undefined, {
     //  sensitivity: "base"
-    });
+    //});
   })
   .slice(0, 6);
 							//fin actualizacion 28082025 1319
