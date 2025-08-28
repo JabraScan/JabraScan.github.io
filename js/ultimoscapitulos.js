@@ -145,6 +145,7 @@ function initUltimosCapitulos() {
 		        })
 		        .then((capitulos) =>
 		          capitulos.map((cap) => ({ ...cap, tituloObra: titulo }))
+			  console.log(capitulos);
 		        )
 		        .catch((err) => {
 		          console.warn(err.message);
@@ -159,7 +160,6 @@ function initUltimosCapitulos() {
 		    state.items = todosLosCapitulos.sort(sortDesc);
 		    state.filtered = [...state.items];
 		    render();
-			  console.log(todosLosCapitulos);
 		  })
 		  .catch((err) => {
 		    console.error("Error cargando el índice books.json:", err);
