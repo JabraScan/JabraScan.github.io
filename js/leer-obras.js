@@ -131,6 +131,8 @@ document.addEventListener("DOMContentLoaded", function () {
 						const bloque = crearUltimoCapituloDeObra(data, clave);
 						if (bloque) {
 							const bloqueB = bloque.cloneNode(true); // Clona el contenedor 
+							console.log(bloque);
+							console.log(bloqueB);
 								itemBook.querySelector(".book-info-main").appendChild(bloque);
 								itemBookNOpc.querySelector(".book-info-main").appendChild(bloqueB);
 						}
@@ -156,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		    // Redirige a la ficha
 		    //window.location.href = 'books/libro-ficha.html';
 			// Usar fetch para cargar el contenido de disclaimer.html
-			console.log("obras");
+			//console.log("obras");
 			fetch('books/libro-ficha.html')
 				.then(response => {
 				if (!response.ok) {
