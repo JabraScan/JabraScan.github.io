@@ -119,7 +119,7 @@ function initUltimosCapitulos() {
 	      );
 	  render();
 	};
-	/*
+	
 	fetch("books.json")
 	  .then((res) => res.json())
 	  .then((data) => {
@@ -129,37 +129,39 @@ function initUltimosCapitulos() {
 	  })
 	  .catch((err) => {
 	    console.error("Error cargando books.json:", err);
-	  });*/
+	  });
 	//optimizacion lectura capitulos 29082025 0031
 		//se ha creado un indice json y un json por obra
-fetch("capitulos.json")
-  .then((res) => res.json())
-  .then((index) => {
-    const obrasPromises = Object.entries(index).map(([clave, ruta]) =>
-      fetch(ruta)
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error(`❌ No se pudo cargar "${clave}" desde ${ruta}`);
-          }
-          return res.json();
-        })
-        .catch((err) => {
-          console.warn(err.message);
-          return []; // Evita que falle el .flat()
-        })
-    );
-
-    return Promise.all(obrasPromises);
-  })
-  .then((listasDeCapitulos) => {
-    const todosLosCapitulos = listasDeCapitulos.flat(); // ← Igual que flatten(data)
-    state.items = todosLosCapitulos.sort(sortDesc);
-    state.filtered = [...state.items];
-    render();
-  })
-  .catch((err) => {
-    console.error("Error cargando capitulos.json:", err);
-  });
+		/*
+			fetch("capitulos.json")
+			  .then((res) => res.json())
+			  .then((index) => {
+			    const obrasPromises = Object.entries(index).map(([clave, ruta]) =>
+			      fetch(ruta)
+			        .then((res) => {
+			          if (!res.ok) {
+			            throw new Error(`❌ No se pudo cargar "${clave}" desde ${ruta}`);
+			          }
+			          return res.json();
+			        })
+			        .catch((err) => {
+			          console.warn(err.message);
+			          return []; // Evita que falle el .flat()
+			        })
+			    );
+			
+			    return Promise.all(obrasPromises);
+			  })
+			  .then((listasDeCapitulos) => {
+			    const todosLosCapitulos = listasDeCapitulos.flat(); // ← Igual que flatten(data)
+			    state.items = todosLosCapitulos.sort(sortDesc);
+			    state.filtered = [...state.items];
+			    render();
+			  })
+			  .catch((err) => {
+			    console.error("Error cargando capitulos.json:", err);
+			  });
+	 */
 	//fin optimizacion lectura capitulos 29082025 0031
 	
 	qEl.addEventListener("input", applyFilter);
