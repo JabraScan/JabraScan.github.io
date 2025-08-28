@@ -131,8 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
 						const bloque = crearUltimoCapituloDeObra(data, clave);
 						if (bloque) {
 							const bloqueB = bloque.cloneNode(true); // Clona el contenedor 
-							console.log(bloque);
-							console.log(bloqueB);
 								itemBook.querySelector(".book-info-main").appendChild(bloque);
 								itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
 						}
