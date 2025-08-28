@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 			//imagen de la ficha
 		    const imagenContenedor = document.createElement("div");
-				  imagenContenedor.classList.add("imagen-contenedor", "libro-item");
+				  imagenContenedor.classList.add("imagen-contenedor");
 				//indicador +18
 				  const img = document.createElement("img");
 					  img.src = "../img/" + imagen;
