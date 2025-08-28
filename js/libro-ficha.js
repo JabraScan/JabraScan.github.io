@@ -80,71 +80,31 @@ function cargarlibro(libroId) {
 					const imgContenedorHhtml = imagenContenedor.innerHTML;
 					//Listado Capitulos
 						obtenerCapitulos(clave).then(listacapitulos => {
-						  // Aquí generamos las dos secciones
-							/*actualizado
-							const ultimosCapitulos = listacapitulos
-								  .map(c => ({
+						// Aquí generamos las dos secciones
+						  const ultimosCapitulos = listacapitulos
+							  .map(c => ({
 								    ...c,
 								    fechaObj: parseDateDMY(c.Fecha),
 								    capNum: parseChapterNumber(c.numeroCapitulo)
-								  }))
-								  .filter(c => c.fechaObj) // descarta las fechas inválidas
-								  .sort((a, b) => {
+							  }))
+							  .filter(c => c.fechaObj)
+							  .sort((a, b) => {
+								    // 1) Fecha descendente
 								    const diffFecha = b.fechaObj - a.fechaObj;
 								    if (diffFecha !== 0) return diffFecha;
 								
-								    const diffCap = a.capNum - b.capNum;
+								    // 2) capNum descendente (natural: "2" < "10", "E2" < "E10")
+								    const diffCap = compareCapNumDesc(a, b);
 								    if (diffCap !== 0) return diffCap;
 								
-								    // Criterio extra opcional para desempatar del todo
-								    return String(b.Titulo || "").localeCompare(String(a.Titulo || ""));
-								  })
-								  .slice(0, 6);
-		  					*/
-							//Actualizacion 28082025 1319 para ordenar tipo texto numeroCapitulo, agrega control para fechas con formato d-m-aaaa, dd-m-aaaa y d-mm-aaaa
-							/*const ultimosCapitulos = listacapitulos
-								  .map(c => ({
-								    ...c,
-								    fechaObj: parseDateDMY(c.Fecha),
-								    capNum: parseChapterNumber(c.numeroCapitulo) // ahora es texto
-								  }))
-								  .filter(c => c.fechaObj) // descarta fechas inválidas
-								  .sort((a, b) => {
-								    // Ordenar por fecha descendente
-								    const diffFecha = b.fechaObj - a.fechaObj;
-								    if (diffFecha !== 0) return diffFecha;
-								
-								    // Desempate por capNum descendente (texto)
-								    const diffCap = String(b.capNum).localeCompare(String(a.capNum));
-								    if (diffCap !== 0) return diffCap;
-								
-								    // Desempate opcional por título descendente
-								    return String(b.Titulo || "").localeCompare(String(a.Titulo || ""));
+								    // 3) Título descendente (ignorando mayúsculas/minúsculas)
+								    //return String(b.Titulo || "").localeCompare(String(a.Titulo || ""), undefined, {
+								    //  sensitivity: "base"
+								    //});
 							  })
-							  .slice(0, 6);*/
-const ultimosCapitulos = listacapitulos
-  .map(c => ({
-    ...c,
-    fechaObj: parseDateDMY(c.Fecha),
-    capNum: parseChapterNumber(c.numeroCapitulo)
-  }))
-  .filter(c => c.fechaObj)
-  .sort((a, b) => {
-    // 1) Fecha descendente
-    const diffFecha = b.fechaObj - a.fechaObj;
-    if (diffFecha !== 0) return diffFecha;
-
-    // 2) capNum descendente (natural: "2" < "10", "E2" < "E10")
-    const diffCap = compareCapNumDesc(a, b);
-    if (diffCap !== 0) return diffCap;
-
-    // 3) Título descendente (ignorando mayúsculas/minúsculas)
-    //return String(b.Titulo || "").localeCompare(String(a.Titulo || ""), undefined, {
-    //  sensitivity: "base"
-    //});
-  })
-  .slice(0, 6);
+							  .slice(0, 6);
 							//fin actualizacion 28082025 1319
+							console.log(ultimosCapitulos);
 						  const totalCapitulos = listacapitulos.length;
 						
 						  // Sección: Últimos capítulos
@@ -397,90 +357,54 @@ function parseChapterNumber(v) {
 	}
 //fin Abrir pdf
 //parse fecha y num cap en formato texto 28082025
-/*
 	function parseDateDMY(fechaStr) {
-		  if (!fechaStr) return null;
-		
-		  // Separar por guiones
-		  let parts = fechaStr.split("-");
-		  if (parts.length !== 3) return null;
-		
-		  let [d, m, y] = parts.map(p => p.trim());
-		
-		  // Añadir cero a la izquierda si falta
-		  d = d.padStart(2, "0");
-		  m = m.padStart(2, "0");
-		
-		  // Validar formato
-		  if (!/^\d{2}$/.test(d) || !/^\d{2}$/.test(m) || !/^\d{4}$/.test(y)) return null;
-		
-		  // Crear objeto Date (mes en JS empieza en 0)
-		  const date = new Date(Number(y), Number(m) - 1, Number(d));
-		
-		  // Comprobar que la fecha sea real
-		  if (
-		    date.getDate() !== Number(d) ||
-		    date.getMonth() !== Number(m) - 1 ||
-		    date.getFullYear() !== Number(y)
-		  ) {
-		    return			 null;
-		  }
-		
-		  return date;
+	  if (!fechaStr) return null;
+	
+	  const parts = String(fechaStr).split("-");
+	  if (parts.length !== 3) return null;
+	
+	  let [d, m, y] = parts.map(p => p.trim());
+	  d = d.padStart(2, "0");
+	  m = m.padStart(2, "0");
+	
+	  if (!/^\d{2}$/.test(d) || !/^\d{2}$/.test(m) || !/^\d{4}$/.test(y)) return null;
+	
+	  const date = new Date(Number(y), Number(m) - 1, Number(d));
+	  if (
+	    date.getFullYear() !== Number(y) ||
+	    date.getMonth() !== Number(m) - 1 ||
+	    date.getDate() !== Number(d)
+	  ) {
+	    return null;
+	  }
+	
+	  return date;
 	}
 	
 	function parseChapterNumber(numeroCapitulo) {
-		  // Asegura que devuelve texto (string)
-		  return numeroCapitulo != null ? String(numeroCapitulo).trim() : "";
-	}*/
-function parseDateDMY(fechaStr) {
-  if (!fechaStr) return null;
-
-  const parts = String(fechaStr).split("-");
-  if (parts.length !== 3) return null;
-
-  let [d, m, y] = parts.map(p => p.trim());
-  d = d.padStart(2, "0");
-  m = m.padStart(2, "0");
-
-  if (!/^\d{2}$/.test(d) || !/^\d{2}$/.test(m) || !/^\d{4}$/.test(y)) return null;
-
-  const date = new Date(Number(y), Number(m) - 1, Number(d));
-  if (
-    date.getFullYear() !== Number(y) ||
-    date.getMonth() !== Number(m) - 1 ||
-    date.getDate() !== Number(d)
-  ) {
-    return null;
-  }
-
-  return date;
-}
-
-function parseChapterNumber(numeroCapitulo) {
-  // Lo dejamos como texto, pero normalizado
-  return numeroCapitulo != null ? String(numeroCapitulo).trim() : "";
-}
-
-// Comparación "natural" descendente para texto con números (p.ej. "2" < "10", "E2" < "E10")
-function compareCapNumDesc(a, b) {
-  const sa = String(a.capNum ?? "").trim();
-  const sb = String(b.capNum ?? "").trim();
-
-  // Vacíos al final en orden descendente
-  if (sa === "" && sb === "") return 0;
-  if (sa === "") return 1;
-  if (sb === "") return -1;
-
-  // Comparación natural con números, descendente (sb vs sa)
-  const r = sb.localeCompare(sa, undefined, { numeric: true, sensitivity: "base" });
-  if (r !== 0) return r;
-
-  // Fallback: si ambos son números puros, compara numéricamente
-  const na = Number(sa);
-  const nb = Number(sb);
-  if (!Number.isNaN(na) && !Number.isNaN(nb) && nb !== na) return nb - na;
-
-  return 0;
-}
+	  // Lo dejamos como texto, pero normalizado
+	  return numeroCapitulo != null ? String(numeroCapitulo).trim() : "";
+	}
+	
+	// Comparación "natural" descendente para texto con números (p.ej. "2" < "10", "E2" < "E10")
+	function compareCapNumDesc(a, b) {
+	  const sa = String(a.capNum ?? "").trim();
+	  const sb = String(b.capNum ?? "").trim();
+	
+	  // Vacíos al final en orden descendente
+	  if (sa === "" && sb === "") return 0;
+	  if (sa === "") return 1;
+	  if (sb === "") return -1;
+	
+	  // Comparación natural con números, descendente (sb vs sa)
+	  const r = sb.localeCompare(sa, undefined, { numeric: true, sensitivity: "base" });
+	  if (r !== 0) return r;
+	
+	  // Fallback: si ambos son números puros, compara numéricamente
+	  const na = Number(sa);
+	  const nb = Number(sb);
+	  if (!Number.isNaN(na) && !Number.isNaN(nb) && nb !== na) return nb - na;
+	
+	  return 0;
+	}
 //fin parse fecha y num cap
