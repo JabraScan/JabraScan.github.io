@@ -240,7 +240,7 @@
         { "Fecha" : "07-03-2025", "NombreArchivo" : "ShadowSlave-0026[JabraScan].pdf", "numCapitulo" : "26", "nombreCapitulo" : "Estrella cambiante"            , "tituloObra" : "Shadow Slave" },
         { "Fecha" : "07-03-2025", "NombreArchivo" : "ShadowSlave-0027[JabraScan].pdf", "numCapitulo" : "27", "nombreCapitulo" : "Medida de Poder"               , "tituloObra" : "Shadow Slave" },
         { "Fecha" : "07-03-2025", "NombreArchivo" : "ShadowSlave-0028[JabraScan].pdf", "numCapitulo" : "28", "nombreCapitulo" : "Montaje de entrenamiento"      , "tituloObra" : "Shadow Slave" },
-        { "Fecha" : "07-03-2025", "NombreArchivo" : "ShadowSlave-0029[JabraScan].pdf", "numCapitulo" : "29", "nombreCapitulo" : "El último día en la Tierra     , "tituloObra" : "Shadow Slave" },
+        { "Fecha" : "07-03-2025", "NombreArchivo" : "ShadowSlave-0029[JabraScan].pdf", "numCapitulo" : "29", "nombreCapitulo" : "El último día en la Tierra"    , "tituloObra" : "Shadow Slave" },
         { "Fecha" : "07-03-2025", "NombreArchivo" : "ShadowSlave-0030[JabraScan].pdf", "numCapitulo" : "30", "nombreCapitulo" : "Vacío sin estrellas"           , "tituloObra" : "Shadow Slave" },
         { "Fecha" : "09-03-2025", "NombreArchivo" : "ShadowSlave-0031[JabraScan].pdf", "numCapitulo" : "31", "nombreCapitulo" : "Marea baja"                    , "tituloObra" : "Shadow Slave" },
         { "Fecha" : "09-03-2025", "NombreArchivo" : "ShadowSlave-0032[JabraScan].pdf", "numCapitulo" : "32", "nombreCapitulo" : "Tomar una decisión"            , "tituloObra" : "Shadow Slave" },
@@ -324,6 +324,7 @@
     { "Fecha" : "26-08-2025",  "NombreArchivo" : "algo.pdf" , "numCapitulo" : "0", "nombreCapitulo" : "Test"        , "tituloObra" : "The Eminence in Shadow"}
   ]
 }
+
 
 
 
