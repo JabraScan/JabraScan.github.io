@@ -331,7 +331,6 @@
     { "Fecha" : "22-02-2025", "NombreArchivo" : "DualCultivation-0182[JabraScan]vol04.pdf", "numCapitulo" :  "182", "nombreCapitulo" : "Más que amigos"                                                 , "tituloObra" : "Dual Cultivation - Vol 04" },
     { "Fecha" : "22-02-2025", "NombreArchivo" : "DualCultivation-0183[JabraScan]vol04.pdf", "numCapitulo" :  "183", "nombreCapitulo" : "Lamiéndose unas a otras (Yuri)"                                 , "tituloObra" : "Dual Cultivation - Vol 04" },
     { "Fecha" : "22-02-2025", "NombreArchivo" : "DualCultivation-0184[JabraScan]vol04.pdf", "numCapitulo" :  "184", "nombreCapitulo" : "Dejando el Santo Continente Central"                            , "tituloObra" : "Dual Cultivation - Vol 04" },
-    { "Fecha" : "14-07-2025", "NombreArchivo" : "DualCultivation-708_JabraScan.pdf" , "numCapitulo" :  "708", "nombreCapitulo" :"Formación Atrapadora" , "tituloObra" : "Dual Cultivation" }
   ],
   "PathtoDualCultivation": [
     { "Fecha" : "24-05-2025", "NombreArchivo" : "PathtoDualCultivation-01[JabraScan].pdf" , "numCapitulo" : "1", "nombreCapitulo" : "Su Yang"                                        , "tituloObra" : "Path to Dual Cultivation"  },
@@ -960,6 +959,7 @@
     { "Fecha" : "26-08-2025",  "NombreArchivo" : "algo.pdf" , "numCapitulo" : "0", "nombreCapitulo" : "Test"        , "tituloObra" : "The Eminence in Shadow"}
   ]
 }
+
 
 
 
