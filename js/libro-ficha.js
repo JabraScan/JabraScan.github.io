@@ -376,7 +376,7 @@ function parseChapterNumber(v) {
 //fin Abrir pdf
 //parse fecha y num cap en formato texto 28082025
 	function parseDateDMY(fechaStr) {
-		  if (!f	echaStr) return null;
+		  if (!fechaStr) return null;
 		
 		  // Separar por guiones
 		  let parts = fechaStr.split("-");
