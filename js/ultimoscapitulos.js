@@ -119,7 +119,7 @@ function initUltimosCapitulos() {
 	      );
 	  render();
 	};
-	
+	/*
 	fetch("books.json")
 	  .then((res) => res.json())
 	  .then((data) => {
@@ -129,7 +129,41 @@ function initUltimosCapitulos() {
 	  })
 	  .catch((err) => {
 	    console.error("Error cargando books.json:", err);
-	  });
+	  });*/
+	//optimizacion lectura capitulos 29082025 0031
+		//se ha creado un indice json y un json por obra
+		fetch("books.json")
+		  .then((res) => res.json())
+		  .then((index) => {
+		    const obrasPromises = Object.entries(index).map(([titulo, ruta]) =>
+		      fetch(ruta)
+		        .then((res) => {
+		          if (!res.ok) {
+		            throw new Error(`❌ No se pudo cargar "${titulo}" desde ${ruta}`);
+		          }
+		          return res.json();
+		        })
+		        .then((capitulos) =>
+		          capitulos.map((cap) => ({ ...cap, tituloObra: titulo }))
+		        )
+		        .catch((err) => {
+		          console.warn(err.message);
+		          return []; // Devuelve lista vacía para que no rompa el .flat()
+		        })
+		    );
+		
+		    return Promise.all(obrasPromises);
+		  })
+		  .then((listasDeCapitulos) => {
+		    const todosLosCapitulos = listasDeCapitulos.flat();
+		    state.items = todosLosCapitulos.sort(sortDesc);
+		    state.filtered = [...state.items];
+		    render();
+		  })
+		  .catch((err) => {
+		    console.error("Error cargando el índice books.json:", err);
+		  });
+	//fin optimizacion lectura capitulos 29082025 0031
 	
 	qEl.addEventListener("input", applyFilter);
 	
