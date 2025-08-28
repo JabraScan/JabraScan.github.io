@@ -140,9 +140,11 @@ document.addEventListener("DOMContentLoaded", function () {
 						if (bloque) itemBook.querySelector(".book-info-main").appendChild(bloque);
 				});
 			// Clonar imagenContenedor
-			const imagenContenedorA = imagenContenedor.cloneNode(true); // Clona el contenedor de imagen
-			// Prepend el contenedor de imagen al artículo
-			itemBook.prepend(imagenContenedorA);
+				const imagenContenedorA = imagenContenedor.cloneNode(true); // Clona el contenedor de imagen
+				const imagenContenedorB = imagenContenedor.cloneNode(true); // Clona el contenedor de imagen
+				// Prepend el contenedor de imagen al artículo
+				itemBook.prepend(imagenContenedorA);
+				itemBookNOpc.prepend(imagenContenedorA);
 			//
 	      	booklistContainer.appendChild(itemBook);
 	      	booklistContainer.appendChild(itemBookNOpc);
