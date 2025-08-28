@@ -100,6 +100,26 @@
     <bannerOpcional></bannerOpcional>
   </obra>
   <obra>
+    <clave>ShadoSlave</clave>
+    <nombreobra>Shadow Slave</nombreobra>
+    <nombreobra2>Esclavo de la Sombra</nombreobra2>
+    <autor>Guiltythree</autor>
+    <sinopsis>Creciendo en la pobreza, Sunny nunca esperó nada bueno de la vida. Sin embargo, ni siquiera él anticipó ser elegido por el Hechizo de la Pesadilla y convertirse en uno de los Despiertos, un grupo de élite de personas dotadas de poderes sobrenaturales. Transportado a un mundo mágico en ruinas, se encontró enfrentándose a terribles monstruos y a otros Despiertos en una batalla mortal por la supervivencia. Lo que es peor, el poder divino que recibió resultó tener un pequeño, pero potencialmente fatal efecto secundario...</sinopsis>
+    <valoracion>9.0</valoracion>
+    <tipoobra>Novela Web</tipoobra>
+    <categoria>Acción, Aventura, Drama, Fantasía, Romance, Sobrenatural</categoria>
+    <imagen>ShadowSlave.webp</imagen>
+    <fechaCreacion>05/03/2025</fechaCreacion>
+    <ubicacion>Novela Inglesa</ubicacion>
+    <estado>Activo</estado>
+    <traductor>Morlan</traductor>
+    <adulto></adulto>
+    <aprobadaAutor>no</aprobadaAutor>
+    <observaciones></observaciones>
+    <discord></discord>
+    <bannerOpcional></bannerOpcional>
+  </obra>
+  <obra>
     <clave>Suzume</clave>
     <nombreobra>Suzume no Tojimari</nombreobra>
     <nombreobra2></nombreobra2>
