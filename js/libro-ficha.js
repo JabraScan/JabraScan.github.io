@@ -81,6 +81,7 @@ function cargarlibro(libroId) {
 					//Listado Capitulos
 						obtenerCapitulos(clave).then(listacapitulos => {
 						  // Aquí generamos las dos secciones
+							/*actualizado
 							const ultimosCapitulos = listacapitulos
 								  .map(c => ({
 								    ...c,
@@ -99,6 +100,29 @@ function cargarlibro(libroId) {
 								    return String(b.Titulo || "").localeCompare(String(a.Titulo || ""));
 								  })
 								  .slice(0, 6);
+		  					*/
+							//Actualizacion 28082025 1319 para ordenar tipo texto numeroCapitulo, agrega control para fechas con formato d-m-aaaa, dd-m-aaaa y d-mm-aaaa
+							const ultimosCapitulos = listacapitulos
+								  .map(c => ({
+								    ...c,
+								    fechaObj: parseDateDMY(c.Fecha),
+								    capNum: parseChapterNumber(c.numeroCapitulo) // ahora es texto
+								  }))
+								  .filter(c => c.fechaObj) // descarta fechas inválidas
+								  .sort((a, b) => {
+								    // Ordenar por fecha descendente
+								    const diffFecha = b.fechaObj - a.fechaObj;
+								    if (diffFecha !== 0) return diffFecha;
+								
+								    // Desempate por capNum descendente (texto)
+								    const diffCap = String(b.capNum).localeCompare(String(a.capNum));
+								    if (diffCap !== 0) return diffCap;
+								
+								    // Desempate opcional por título descendente
+								    return String(b.Titulo || "").localeCompare(String(a.Titulo || ""));
+							  })
+							  .slice(0, 6);
+							//fin actualizacion 28082025 1319
 						  const totalCapitulos = listacapitulos.length;
 						
 						  // Sección: Últimos capítulos
@@ -350,3 +374,40 @@ function parseChapterNumber(v) {
 	    .catch(err => console.error('Error cargando lectorpdf.html:', err));
 	}
 //fin Abrir pdf
+//parse fecha y num cap en formato texto 28082025
+	function parseDateDMY(fechaStr) {
+		  if (!f	echaStr) return null;
+		
+		  // Separar por guiones
+		  let parts = fechaStr.split("-");
+		  if (parts.length !== 3) return null;
+		
+		  let [d, m, y] = parts.map(p => p.trim());
+		
+		  // Añadir cero a la izquierda si falta
+		  d = d.padStart(2, "0");
+		  m = m.padStart(2, "0");
+		
+		  // Validar formato
+		  if (!/^\d{2}$/.test(d) || !/^\d{2}$/.test(m) || !/^\d{4}$/.test(y)) return null;
+		
+		  // Crear objeto Date (mes en JS empieza en 0)
+		  const date = new Date(Number(y), Number(m) - 1, Number(d));
+		
+		  // Comprobar que la fecha sea real
+		  if (
+		    date.getDate() !== Number(d) ||
+		    date.getMonth() !== Number(m) - 1 ||
+		    date.getFullYear() !== Number(y)
+		  ) {
+		    return			 null;
+		  }
+		
+		  return date;
+	}
+	
+	function parseChapterNumber(numeroCapitulo) {
+		  // Asegura que devuelve texto (string)
+		  return numeroCapitulo != null ? String(numeroCapitulo).trim() : "";
+	}
+//fin parse fecha y num cap
