@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
 							console.log(bloque);
 							console.log(bloqueB);
 								itemBook.querySelector(".book-info-main").appendChild(bloque);
-								itemBookNOpc.querySelector(".book-info-main").appendChild(bloqueB);
+								itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
 						}
 				});
 			// Clonar imagenContenedor
