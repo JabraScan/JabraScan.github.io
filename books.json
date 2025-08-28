@@ -561,7 +561,7 @@
     { "Fecha" : "18-06-2025", "NombreArchivo" : "ShadowSlave-0347[JabraScan]_vol02.pdf", "numCapitulo" : "347", "nombreCapitulo" : "Caída Libre"                            , "tituloObra" : "Shadow Slave - Vol 02" },
     { "Fecha" : "18-06-2025", "NombreArchivo" : "ShadowSlave-0348[JabraScan]_vol02.pdf", "numCapitulo" : "348", "nombreCapitulo" : "Irrompible"                             , "tituloObra" : "Shadow Slave - Vol 02" },
     { "Fecha" : "18-06-2025", "NombreArchivo" : "ShadowSlave-0349[JabraScan]_vol02.pdf", "numCapitulo" : "349", "nombreCapitulo" : "Destino"                                , "tituloObra" : "Shadow Slave - Vol 02" },
-    { "Fecha" : "18-06-2025", "NombreArchivo" : "ShadowSlave-0350[JabraScan]_vol02.pdf", "numCapitulo" : "350", "nombreCapitulo" : "Fin de la Pesadilla"                    , "tituloObra" : "Shadow Slave - Vol 02" },
+    { "Fecha" : "18-06-2025", "NombreArchivo" : "ShadowSlave-0350[JabraScan]_vol02.pdf", "numCapitulo" : "350", "nombreCapitulo" : "Fin de la Pesadilla"                    , "tituloObra" : "Shadow Slave - Vol 02" }
   ],
   "CallateDragonaMalvadaNoQuieroTenerMasHijosContigo": [
     { "Fecha" : "26-08-2025",  "NombreArchivo" : "CDMNQTMHC-001[RexScan].pdf" , "numCapitulo" : "1", "nombreCapitulo" : "Después de la derrota y la captura, siempre hay alguien que queda embarazada."        , "tituloObra" : "¡Cállate, dragón malvado! No quiero tener mas hijos contigo."},
@@ -579,6 +579,7 @@
     { "Fecha" : "26-08-2025",  "NombreArchivo" : "algo.pdf" , "numCapitulo" : "0", "nombreCapitulo" : "Test"        , "tituloObra" : "The Eminence in Shadow"}
   ]
 }
+
 
 
 
