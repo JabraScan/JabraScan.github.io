@@ -397,6 +397,9 @@ footer {
     border-bottom: 1px solid #ccc;
     padding-bottom: 1em;
   }
+  .item-libro img {
+    max-height: 0.6em;
+  }
 
   .portada {
     width: 80px;
@@ -404,7 +407,9 @@ footer {
     margin-right: 10px;
     object-fit: cover;
   }
-
+  .info-libro {
+    margin-left: 0.5em;
+  }
   .info-libro p {
     margin: 0 0 5px;
   }
