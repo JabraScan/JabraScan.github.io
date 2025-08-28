@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    const obras = data.querySelectorAll("obra");
 	    const carouselContainer = document.querySelector(".carousel-track");
 	    const booklistContainer = document.querySelector(".book-list");
+		const booklistContainernopc = document.querySelector(".lista-libros");
 		  
 	    obras.forEach(obra => {
 	      const clave = obra.querySelector("clave").textContent.trim();
@@ -107,18 +108,10 @@ document.addEventListener("DOMContentLoaded", function () {
 							<div class="book-estado ${estado}">${estado}</div>
 						</div>
 			      `;
-			const itemBookNOpc = document.createElement("ul");
-		      itemBookNOpc.classList.add("lista-libros");
+			const itemBookNOpc = document.createElement("li");
+		      itemBookNOpc.classList.add("item-libro");
 			  itemBookNOpc.onclick = () => onLibroClick(clave);
 				itemBookNOpc.innerHTML = `
-						<div class="book-info-main">
-						  	<p class="clave">${clave}</p>
-				            <h3>${nombreobra}</h3>
-							<div class="book-author-name"><bold class="book-author-title">Autor:</bold> ${autor}</div>
-		  					<div class="book-estado ${estado}">${estado}</div>
-						</div>
-						<li class="item-libro">
-							<img id="img-libro-1" src="" alt="Portada libro 1" class="portada">
 							<div class="info-libro">
 	  							<p class="clave">${clave}</p>
 								<strong id="titulo-libro-1">${nombreobra}</strong><br>
@@ -130,7 +123,6 @@ document.addEventListener("DOMContentLoaded", function () {
 									(<span id="fecha-libro-1"></span>)
 		 						-->
 							</div>
-						</li>
 			      `;
 			//ultimo capitulo
 				fetch("books.json")
@@ -147,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				itemBookNOpc.prepend(imagenContenedorB);
 			//
 	      	booklistContainer.appendChild(itemBook);
-	      	booklistContainer.appendChild(itemBookNOpc);
+	      	booklistContainernopc.appendChild(itemBookNOpc);
 			//
 	    });
 	  })
