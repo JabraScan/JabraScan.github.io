@@ -165,9 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
 							const bloqueB = bloque.cloneNode(true);
 							itemBook.querySelector(".book-info-main").appendChild(bloque);
 							itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
-console.log(obrasUnificadas);
-							//itemBook.setAttribute('data-fecha', '2024-12-15');
-
+							
 							  const hoyTag = itemBook.querySelector('.tag-capitulo.hoy');
 							  if (hoyTag) {
 							    const bookInfoMain = hoyTag.closest('.book-card-main');
@@ -196,8 +194,29 @@ console.log(obrasUnificadas);
 	    });
 	  })
 	  .catch(err => console.error("Error al cargar el XML:", err));
+
+	ordenarLibrosPorFecha();
 });
 
+  function ordenarLibrosPorFecha(contenedorSelector = '.book-list') {
+    const contenedor = document.querySelector(contenedorSelector);
+    if (!contenedor) return;
+
+    const articulos = Array.from(contenedor.querySelectorAll('.book-card-main'));
+
+    articulos.sort((a, b) => {
+      const fechaA = new Date(a.querySelector('.fecha')?.dataset.fecha || 0);
+      const fechaB = new Date(b.querySelector('.fecha')?.dataset.fecha || 0);
+      return fechaB - fechaA; // más reciente primero
+    });
+
+    articulos.forEach(articulo => contenedor.appendChild(articulo));
+  }
+
+  // Ejecuta la función al cargar la página
+  document.addEventListener('DOMContentLoaded', () => {
+    ordenarLibrosPorFecha();
+  });
 		function onLibroClick(libroId) {
 		    // Guarda el ID o nombre del libro seleccionado (ajusta según tu XML)
 		    localStorage.setItem('libroSeleccionado', libroId);
@@ -271,6 +290,7 @@ console.log(obrasUnificadas);
 			  // crear el bloque HTML
 			  const divsection = document.createElement("div");
 			  divsection.className = "book-latest-chapter";
+			  divsection.setAttribute('data-fecha', fechaUltimo);
 			  divsection.innerHTML = `
 	 					<span>Último cap.</span>  
 				        <span class="cap">${ultimo.numCapitulo}</span>
