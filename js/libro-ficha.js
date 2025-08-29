@@ -290,32 +290,53 @@ function obtenerCapitulos(clave) {
       console.error("Error al cargar el archivo JSON:", error);
       return [];
     });*/
-	return fetch('capitulos.json')
-  .then(response => response.json())
-  .then(dataCapitulos => {
-    if (!dataCapitulos[clave]) {
-      console.error("Clave no encontrada.");
-      return [];
-    }
+	return fetch('books.json')
+	  .then(response => response.json())
+	  .then(index => {
+	    const ruta = index[clave];
+	    if (!ruta) {
+	      console.error("Clave no encontrada en el índice.");
+	      return [];
+	    }
+	
+	    return fetch(ruta)
+	      .then(res => {
+	        if (!res.ok) {
+	          throw new Error(`❌ No se pudo cargar "${clave}" desde ${ruta}`);
+	        }
+	        return res.json();
+	      })
+	      .then(dataObra => {
+	        const capitulos = dataObra[clave] || [];
+	
+	        const resultado = capitulos.map(item => {
+	          const partes = item.NombreArchivo.split(' - '); // si lo necesitas
+	          return {
+	            NombreArchivo: item.NombreArchivo,
+	            Fecha: item.Fecha,
+	            numCapitulo: item.numCapitulo,
+	            nombreCapitulo: item.nombreCapitulo
+	          };
+	        });
+	
+	        resultado.sort((a, b) => {
+	          const [diaA, mesA, anioA] = a.Fecha.split('-');
+	          const [diaB, mesB, anioB] = b.Fecha.split('-');
+	
+	          const fechaA = new Date(`${anioA}-${mesA}-${diaA}`);
+	          const fechaB = new Date(`${anioB}-${mesB}-${diaB}`);
+	
+	          return fechaA - fechaB || a.numCapitulo - b.numCapitulo;
+	        });
+	
+	        return resultado;
+	      });
+	  })
+	  .catch(error => {
+	    console.error("Error al cargar los capítulos:", error);
+	    return [];
+	  });
 
-    const resultado = dataCapitulos[clave].map(item => {
-      const partes = item.NombreArchivo.split(' - ');
-
-      return {
-        NombreArchivo: item.NombreArchivo,
-        Fecha: item.Fecha,
-        numCapitulo: item.numCapitulo,
-        nombreCapitulo: item.nombreCapitulo,
-        partes: partes // si quieres conservar las partes extraídas
-      };
-    });
-
-    return resultado;
-  })
-  .catch(err => {
-    console.error("Error cargando capitulos.json:", err);
-    return [];
-  });
 
 }
 //document.addEventListener("DOMContentLoaded", function () {
