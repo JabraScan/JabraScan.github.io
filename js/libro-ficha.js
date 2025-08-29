@@ -290,7 +290,7 @@ function obtenerCapitulos(clave) {
       console.error("Error al cargar el archivo JSON:", error);
       return [];
     });*/
-	return fetch('books.json')
+	return fetch('capitulos.json')
 	  .then(response => response.json())
 	  .then(index => {
 	    const ruta = index[clave];
