@@ -272,35 +272,7 @@ function obtenerCapitulos(clave) {
           numCapitulo: item.numCapitulo,
           nombreCapitulo: item.nombreCapitulo
         };
-      });*/
-	return fetch('capitulos.json')
-	  .then(response => response.json())
-	  .then(dataCapitulos => {
-		if (!dataCapitulos[clave]) {
-		  console.error("Clave no encontrada.");
-		  return [];
-		}
-	
-		const resultado = dataCapitulos[clave].map(item => {
-		  const partes = item.NombreArchivo.split(' - ');
-	
-		  return {
-			NombreArchivo: item.NombreArchivo,
-			Fecha: item.Fecha,
-			numCapitulo: item.numCapitulo,
-			nombreCapitulo: item.nombreCapitulo,
-			partes: partes // si quieres conservar las partes extraídas
-		  };
-		});
-	
-		return resultado;
-	  })
-	  .catch(err => {
-		console.error("Error cargando capitulos.json:", err);
-		return [];
-	  });
-
-
+      });
       resultado.sort((a, b) => {
         // Convertir la fecha de dd-mm-aaaa a un objeto Date
         const [diaA, mesA, anioA] = a.Fecha.split('-');
@@ -317,7 +289,34 @@ function obtenerCapitulos(clave) {
     .catch(error => {
       console.error("Error al cargar el archivo JSON:", error);
       return [];
+    });*/
+	return fetch('capitulos.json')
+  .then(response => response.json())
+  .then(dataCapitulos => {
+    if (!dataCapitulos[clave]) {
+      console.error("Clave no encontrada.");
+      return [];
+    }
+
+    const resultado = dataCapitulos[clave].map(item => {
+      const partes = item.NombreArchivo.split(' - ');
+
+      return {
+        NombreArchivo: item.NombreArchivo,
+        Fecha: item.Fecha,
+        numCapitulo: item.numCapitulo,
+        nombreCapitulo: item.nombreCapitulo,
+        partes: partes // si quieres conservar las partes extraídas
+      };
     });
+
+    return resultado;
+  })
+  .catch(err => {
+    console.error("Error cargando capitulos.json:", err);
+    return [];
+  });
+
 }
 //document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll('.pdf-link').forEach(link => {
