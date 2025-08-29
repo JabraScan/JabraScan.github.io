@@ -230,84 +230,89 @@ function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
       if (idx === -1) return;
       const cap = capitulosObra[idx];
 
-      // Actualizar título
-      const h1 = document.getElementById("tituloObraPdf");
-      h1.textContent = cap._obra;
-      h1.onclick = () => onLibroClick(clave);
-
-      // Banner especial
-      const datosAdic = document.querySelector(".optionaldata");
-      if (clave === "CallateDragonaMalvadaNoQuieroTenerMasHijosContigo") {
-        const divBanner = document.createElement("div");
-        divBanner.className = "callatedragonmalvado";
-        divBanner.innerHTML = `
-          <span>Traducción aprobada por el autor</span><br>
-          <span><strong>Discord Oficial:</strong> <a href="https://discord.gg/Mk2qb65AxA" target="_blank">https://discord.gg/Mk2qb65AxA</a></span><br>
-          <img src="img/discord_oficial_jabrascan.jpg" alt="Traducción aprobada">
-        `;
-        datosAdic.appendChild(divBanner);
-      }
-
-      // Cargar PDF
-      const nombreA = encodeURIComponent(cap.NombreArchivo);
-      const pdfPath = `books/${clave}/${nombreA}`;
-      pdfjsLib.getDocument(pdfPath).promise.then(doc => {
-        pdfDoc = doc;
-        pageNum = paginaInicial;
-        renderPage(pageNum);
-        actualizarBotonesNav(idx, capitulosObra, clave);
-      });
-
-      // Botones navegación
-      const btnPrev = document.getElementById("btnPrevCap");
-      const btnNext = document.getElementById("btnNextCap");
-
-      if (idx > 0) {
-        const prevCap = capitulosObra[idx - 1];
-        btnPrev.disabled = false;
-        btnPrev.onclick = () => {
-          localStorage.setItem("ultimaPagina", 1);
-          localStorage.setItem("ultimaObra", clave);
-          localStorage.setItem("ultimoCapitulo", prevCap.numCapitulo);
-          cargarCapitulo(clave, prevCap.numCapitulo, 1);
-        };
-      } else {
-        btnPrev.disabled = true;
-        btnPrev.onclick = null;
-      }
-
-      if (idx < capitulosObra.length - 1) {
-        const nextCap = capitulosObra[idx + 1];
-        btnNext.disabled = false;
-        btnNext.onclick = () => {
-          localStorage.setItem("ultimaPagina", 1);
-          localStorage.setItem("ultimaObra", clave);
-          localStorage.setItem("ultimoCapitulo", nextCap.numCapitulo);
-          cargarCapitulo(clave, nextCap.numCapitulo, 1);
-        };
-      } else {
-        btnNext.disabled = true;
-        btnNext.onclick = null;
-      }
-
-      // Selector de capítulos
-      const chapterSelect = document.getElementById("chapterSelect");
-      chapterSelect.innerHTML = "";
-      capitulosObra.forEach(c => {
-        const option = document.createElement("option");
-        option.value = c.numCapitulo;
-        option.textContent = `${c.numCapitulo} · ${c.nombreCapitulo}`;
-        if (c.numCapitulo === capitulo) option.selected = true;
-        option.id = clave;
-        chapterSelect.appendChild(option);
-      });
-
-      chapterSelect.onchange = () => {
-        const nuevoCap = chapterSelect.value;
-        localStorage.setItem("ultimaObra", clave);
-        localStorage.setItem("ultimoCapitulo", nuevoCap);
-        cargarCapitulo(clave, nuevoCap, 1);
-      };
+		// ✅ Actualizar título
+	      const h1 = document.getElementById("tituloObraPdf");
+	      h1.textContent = cap.tituloObra;
+	      h1.onclick = () => onLibroClick(clave);
+		  //actualizar aprobacion autor "dragona..."
+			const datosAdic = document.querySelector(".optionaldata");
+				if (clave === "CallateDragonaMalvadaNoQuieroTenerMasHijosContigo") {
+					const divBanner = document.createElement("div");
+						divBanner.className ="callatedragonmalvado"
+						divBanner.innerHTML = `
+								<span>Traducción aprobada por el autor</span>
+								</br>
+								<span><bold>Discord Oficial :</bold> <a href="https://discord.gg/Mk2qb65AxA" target="_blank">https://discord.gg/Mk2qb65AxA</a></span>
+								</br>
+								<img style="" src = "img/discord_oficial_jabrascan.jpg" alt = "Traducción aprobada">
+		  					`;
+					datosAdic.appendChild(divBanner);
+				}
+	
+	      // 📄 Cargar PDF
+	      const nombreA = encodeURIComponent(cap.NombreArchivo);
+	      const pdfPath = `books/${clave}/${nombreA}`;
+	      //console.log(`Cargando PDF: ${pdfPath}`);
+	      pdfjsLib.getDocument(pdfPath).promise.then(doc => {
+	        pdfDoc = doc;
+	        pageNum = paginaInicial;
+	        renderPage(pageNum);
+			  actualizarBotonesNav(idx, capitulos, clave);
+	      });
+	
+	// ⬅️ Botón capítulo anterior
+	      const btnPrev = document.getElementById("btnPrevCap");
+	      if (idx > 0) {
+	        const prevCap = capitulos[idx - 1];
+	        btnPrev.disabled = false;
+	        btnPrev.onclick = () => {
+	          localStorage.setItem("ultimaPagina", 1);
+	          localStorage.setItem("ultimaObra", clave);
+	          localStorage.setItem("ultimoCapitulo", prevCap.numCapitulo);
+	          cargarCapitulo(clave, prevCap.numCapitulo, 1);
+	        };
+	      } else {
+	        btnPrev.disabled = true;
+	        btnPrev.onclick = null;
+	      }
+	
+	      // ➡️ Botón capítulo siguiente
+	      const btnNext = document.getElementById("btnNextCap");
+	      if (idx < capitulos.length - 1) {
+	        const nextCap = capitulos[idx + 1];
+	        btnNext.disabled = false;
+	        btnNext.onclick = () => {
+	          localStorage.setItem("ultimaPagina", 1);
+	          localStorage.setItem("ultimaObra", clave);
+	          localStorage.setItem("ultimoCapitulo", nextCap.numCapitulo);
+	          cargarCapitulo(clave, nextCap.numCapitulo, 1);
+	        };
+	      } else {
+	        btnNext.disabled = true;
+	        btnNext.onclick = null;
+	      }
+	
+	      // 📜 Rellenar selector de capítulos
+	      const chapterSelect = document.getElementById("chapterSelect");
+	      chapterSelect.innerHTML = ""; // limpiar antes
+	      capitulos.forEach(c => {
+	        const option = document.createElement("option");
+	        option.value = c.numCapitulo;
+	        option.textContent = `${c.numCapitulo} · ${c.nombreCapitulo}`;
+	        if (c.numCapitulo === capitulo) {
+	          option.selected = true;
+	        }
+	        option.id = clave; // según tu requerimiento
+	        chapterSelect.appendChild(option);
+	      });
+	
+	      // 📌 Evento cambio selector → cargar nuevo capítulo
+	      chapterSelect.onchange = () => {
+	        const nuevoCap = chapterSelect.value;
+	        localStorage.setItem("ultimaObra", clave);
+	        localStorage.setItem("ultimoCapitulo", nuevoCap);
+	        cargarCapitulo(clave, nuevoCap, 1);
+	      };
     })
     .catch(error => console.error("Error al cargar el capítulo:", error));
 }
@@ -487,3 +492,4 @@ function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
 	}
 
 	//Fin botones de navegacion por pagina
+
