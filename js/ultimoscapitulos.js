@@ -123,6 +123,8 @@ function initUltimosCapitulos() {
 	fetch("books.json")
 	  .then((res) => res.json())
 	  .then((data) => {
+		  console.log("old");
+			console.log(data);
 	    state.items = flatten(data).sort(sortDesc);
 	    state.filtered = [...state.items];
 	    render();
@@ -153,6 +155,8 @@ function initUltimosCapitulos() {
 			    return Promise.all(obrasPromises);
 			  })
 			  .then((listasDeCapitulos) => {
+				  console.log("nuevo");
+					console.log(listasDeCapitulos);
 			    const todosLosCapitulos = listasDeCapitulos.flat(); // ← Igual que flatten(data)
 			    state.items = todosLosCapitulos.sort(sortDesc);
 			    state.filtered = [...state.items];
