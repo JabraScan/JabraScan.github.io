@@ -144,9 +144,10 @@ function initUltimosCapitulos() {
 			          if (!res.ok) {
 			            throw new Error(`❌ No se pudo cargar "${clave}" desde ${ruta}`);
 			          }
-			          return res.json().then((capitulos) => {
-			            // Envolver el array con su clave
-			            return { [clave]: capitulos };
+			         return res.json().then((data) => {
+			            // Extraer directamente el array usando la clave
+			            const capitulos = data[clave] || [];
+			            return capitulos.map((cap) => ({ ...cap, obra: clave }));
 			          });
 			        })
 			        .catch((err) => {
