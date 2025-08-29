@@ -165,10 +165,12 @@ document.addEventListener("DOMContentLoaded", function () {
 							const bloqueB = bloque.cloneNode(true);
 							itemBook.querySelector(".book-info-main").appendChild(bloque);
 							itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
+console.log(obrasUnificadas);
+							//itemBook.setAttribute('data-fecha', '2024-12-15');
 
 							  const hoyTag = itemBook.querySelector('.tag-capitulo.hoy');
 							  if (hoyTag) {
-							    const bookInfoMain = hoyTag.closest('.book-info-main');
+							    const bookInfoMain = hoyTag.closest('.book-card-main');
 							    if (bookInfoMain) {
 							      	bookInfoMain.classList.add('hoy-book');
 							    }
