@@ -195,6 +195,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	    });
 	  })
 	  .catch(err => console.error("Error al cargar el XML:", err));
+
+	window.addEventListener('DOMContentLoaded', ordenarLibrosPorFecha);
 });
 
   // Ejecuta la función al cargar la página
