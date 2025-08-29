@@ -290,7 +290,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			  // crear el bloque HTML
 			  const divsection = document.createElement("div");
 			  divsection.className = "book-latest-chapter";
-			  divsection.setAttribute('data-fecha', fechaUltimo);
+			  divsection.setAttribute('data-fecha', ultimo.Fecha.toISOString().split('T')[0]);
 			  divsection.innerHTML = `
 	 					<span>Último cap.</span>  
 				        <span class="cap">${ultimo.numCapitulo}</span>
