@@ -449,7 +449,11 @@ footer {
 .tag-capitulo.nuevo {
   background-color: #007bff;
 }
-
+.hoy-book {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 8px;
+}
 /* Solo parpadea en pantallas grandes (PC) */
 @media (min-width: 768px) {
   .tag-capitulo.hoy {
@@ -459,6 +463,20 @@ footer {
   @keyframes parpadeo {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.4; }
+  }
+  .hoy-book {
+    animation: bordeParpadeante 2s infinite;
+  }
+
+  @keyframes bordeParpadeante {
+    0%, 100% {
+      border-color: rgba(40, 167, 69, 0.6); /* verde difuminado */
+      box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
+    }
+    50% {
+      border-color: rgba(40, 167, 69, 0.2);
+      box-shadow: 0 0 4px rgba(40, 167, 69, 0.1);
+    }
   }
 }
 /*fin etiquetas para los capitulos*/
