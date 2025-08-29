@@ -69,30 +69,18 @@ function initUltimosCapitulos() {
 	    ul.className = "chapter-list";
 
 	    state.filtered.forEach((item) => {
-	  console.log(item);
 			const li = document.createElement("li");
-			li.innerHTML = `
-				<a href="#" style="flex-flow"
-						data-pdf-obra="${item._clave}"
-						data-pdf-capitulo="${item.numCapitulo}"
-						class="pdf-link-ucap">
-					<span class="fecha">${formatDateEs(item._fecha)}</span> -
-					<span class="obra ${item._clave}">${item._obra}</span> -
-					<span class="cap">${item.numCapitulo}</span> ·
-					<span class="titulo">${item.nombreCapitulo}</span>
-				</a>
-			`;
-			/*			li.innerHTML = `
-			<a href="#" style="flex-flow"
-			data-pdf-obra="${clave}"
-			data-pdf-capitulo="${item.numCapitulo}"
-			class="pdf-link-ucap">
-			<span class="fecha">${formatDateEs(item.Fecha)}</span> -
-			<span class="obra ${clave}">${item.nombreCapitulo}</span> -
-			<span class="cap">${item.numCapitulo}</span> ·
-			<span class="titulo">${item.nombreCapitulo}</span>
-			</a>
-			`;*/
+				li.innerHTML = `
+					<a href="#" style="flex-flow"
+							data-pdf-obra="${item._clave}"
+							data-pdf-capitulo="${item.numCapitulo}"
+							class="pdf-link-ucap">
+						<span class="fecha">${formatDateEs(item._fecha)}</span> -
+						<span class="obra ${item._clave}">${item._obra}</span> -
+						<span class="cap">${item.numCapitulo}</span> ·
+						<span class="titulo">${item.nombreCapitulo}</span>
+					</a>
+				`;
 			ul.appendChild(li);
 	    });
 	
@@ -147,36 +135,6 @@ function initUltimosCapitulos() {
    */
 	//optimizacion lectura capitulos 29082025 0031
 		//se ha creado un indice json y un json por obra
-		/*fetch("capitulos.json")
-			  .then((res) => res.json())
-			  .then((index) => {
-			    const obrasPromises = Object.entries(index).map(([clave, ruta]) =>
-			      fetch(ruta)
-			        .then((res) => {
-			          if (!res.ok) {
-			            throw new Error(`❌ No se pudo cargar "${clave}" desde ${ruta}`);
-			          }
-			          return res.json(); // ← No transformamos nada aquí
-			        })
-			        .catch((err) => {
-			          console.warn(err.message);
-			          return { [clave]: [] }; // ← Mantiene la estructura aunque esté vacío
-			        })
-			    );
-			
-			    return Promise.all(obrasPromises);
-			  })
-			  .then((listasDeObras) => {
-			    // Combinar todos los objetos en uno solo
-			    const todos = Object.assign({}, ...listasDeObras);
-			    state.items = Object.values(todos).flat().sort(sortDesc);
-			    state.filtered = [...state.items];
-			    render();
-			  })
-			  .catch((err) => {
-			    console.error("Error cargando capitulos.json:", err);
-			  });*/
-	//fin optimizacion lectura capitulos 29082025 0031
 		fetch("capitulos.json")
 		  .then((res) => res.json())
 		  .then((index) => {
@@ -209,16 +167,15 @@ function initUltimosCapitulos() {
 		  })
 		  .then((listasDeObras) => {
 		    const todos = Object.assign({}, ...listasDeObras);
-		    //state.items = Object.values(todos).flat().sort(sortDesc);
-			   state.items = flatten(todos).sort(sortDesc);
-		    state.filtered = [...state.items];
+				state.items = flatten(todos).sort(sortDesc);
+		    	state.filtered = [...state.items];
 		    render();
 		  })
 		  .catch((err) => {
 		    console.error("Error cargando capitulos.json:", err);
 		  });
-		
-	//fin nueva optimizacion
+	//fin optimizacion lectura capitulos 29082025 0031
+	
 	qEl.addEventListener("input", applyFilter);
 	
 	window.addEventListener("keydown", (e) => {
