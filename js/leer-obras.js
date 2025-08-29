@@ -124,17 +124,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		 						-->
 							</div>
 			      `;
-			//ultimo capitulo
-				/*fetch("books.json")
-					.then(r => r.json())
-					.then(data => {
-						const bloque = crearUltimoCapituloDeObra(data, clave);
-						if (bloque) {
-							const bloqueB = bloque.cloneNode(true); // Clona el contenedor 
-								itemBook.querySelector(".book-info-main").appendChild(bloque);
-								itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
-						}
-				});*/
 	//optimizacion lectura capitulos 29082025 0031 -ultimo capitulo
 		//se ha creado un indice json y un json por obra
 				fetch("capitulos.json")
@@ -180,8 +169,9 @@ document.addEventListener("DOMContentLoaded", function () {
 				  .catch((err) => {
 				    console.error("Error cargando capitulos.json:", err);
 				  });
-
 	//fin optimizacion lectura capitulos 29082025 0031
+	//agregar etiquetas para los nuevos capitulos
+	//
 			// Clonar imagenContenedor
 				const imagenContenedorA = imagenContenedor.cloneNode(true); // Clona el contenedor de imagen
 				const imagenContenedorB = imagenContenedor.cloneNode(true); // Clona el contenedor de imagen
@@ -246,16 +236,55 @@ document.addEventListener("DOMContentLoaded", function () {
 			  });
 			
 			  const ultimo = ordenados[0];
-			
+			  const fechaUltimo = parseDateDMY(ultimo.Fecha);
 			  // crear el bloque HTML
 			  const divsection = document.createElement("div");
 			  divsection.className = "book-latest-chapter";
 			  divsection.innerHTML = `
 	 					<span>Último cap.</span>  
 				        <span class="cap">${ultimo.numCapitulo}</span>
-				        <span class="fecha">( ${formatDateEs(parseDateDMY(ultimo.Fecha))} )</span>
+				        <span class="fecha">( ${formatDateEs(fechaUltimo)} )</span>
+						${generarEtiqueta(fechaUltimo)}
 	 				`;
 			  return divsection;
 		}
 
 //fin funcion carga ultimo cap
+//function para etiquetas capitulo nuevo
+	function generarEtiquetaNuevo(fechaInput) {
+		const hoy = new Date();
+		const fecha = new Date(fechaInput);
+		
+		// Normalizar fechas (sin hora)
+		hoy.setHours(0, 0, 0, 0);
+		fecha.setHours(0, 0, 0, 0);
+		
+		const diferenciaDias = Math.floor((hoy - fecha) / (1000 * 60 * 60 * 24));
+		
+		let texto = '';
+		let fondo = '';
+		let color = '#FFFFFF'; // blanco
+	
+		if (diferenciaDias === 0) {
+			texto = 'hoy';
+			fondo = '#28a745'; // verde
+		} else if (diferenciaDias > 0 && diferenciaDias <= 7) {
+			texto = 'nuevo';
+			fondo = '#007bff'; // azul
+		} else {
+			return ''; // No se muestra etiqueta si no cumple criterios
+		}
+		
+		// Crear etiqueta con estilos
+		const etiqueta = `<span style="
+							background-color: ${fondo};
+							color: ${color};
+							padding: 4px 8px;
+							border-radius: 12px;
+							font-family: sans-serif;
+							font-size: 0.9em;
+						">${texto}</span>`;
+	
+		return etiqueta;
+	}
+//fin funcion etiquetas
