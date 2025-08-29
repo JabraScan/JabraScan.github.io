@@ -292,20 +292,19 @@ document.addEventListener("DOMContentLoaded", function () {
 			if (!contenedor) return;
 			
 			const articulos = Array.from(contenedor.querySelectorAll('.book-card-main'));
-console.log('array');
-console.log(articulos);
-			articulos.sort((a, b) => {
-		        const fechaStrA = a.querySelector('.book-latest-chapter')?.dataset.fecha;
-		        const fechaStrB = b.querySelector('.book-latest-chapter')?.dataset.fecha;
-contole.log('fechaA ' + fechaStrA);
-contole.log('fechaB ' + fechaStrB);
-		        const fechaA = convertirFecha(fechaStrA);
-		        const fechaB = convertirFecha(fechaStrB);
-
-				return fechaB - fechaA; // más reciente primero
-			});
 			
-			articulos.forEach(articulo => contenedor.appendChild(articulo));
+			if (articulos.length < 2) return; // nada que ordenar
+			
+			const articulosOrdenados = articulos
+			.map(articulo => {
+				const fechaStr = articulo.querySelector('.book-latest-chapter')?.dataset.fecha;
+				const fecha = convertirFecha(fechaStr);
+				return { fecha, elemento: articulo };
+			})
+			.sort((a, b) => b.fecha - a.fecha); // más reciente primero
+			
+			// Reinsertar en el DOM
+			articulosOrdenados.forEach(({ elemento }) => contenedor.appendChild(elemento));
 		}
 		function convertirFecha(fechaStr) {
 		    if (!fechaStr) return new Date('1900-01-01');
