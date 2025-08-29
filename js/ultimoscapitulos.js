@@ -70,6 +70,7 @@ function initUltimosCapitulos() {
 	    state.filtered.forEach((item) => {
 	  console.log(item);
 	      const li = document.createElement("li");
+		/*
 	      li.innerHTML = `
 	        <a href="#" style="flex-flow"
 	           data-pdf-obra="${item._clave}"
@@ -81,6 +82,18 @@ function initUltimosCapitulos() {
 				<span class="titulo">${item.nombreCapitulo}</span>
 	        </a>
 	      `;
+	   */
+			li.innerHTML = `
+		        <a href="#" style="flex-flow"
+		           data-pdf-obra="${clave}"
+		           data-pdf-capitulo="${item.numCapitulo}"
+		           class="pdf-link-ucap">
+		            <span class="fecha">${formatDateEs(item.Fecha)}</span> -
+		            <span class="obra ${clave}">${item.nombreCapitulo}</span> -
+		            <span class="cap">${item.numCapitulo}</span> ·
+					<span class="titulo">${item.nombreCapitulo}</span>
+		        </a>
+	      	`;
 	      ul.appendChild(li);
 	    });
 	
