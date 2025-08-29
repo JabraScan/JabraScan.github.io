@@ -67,34 +67,33 @@ function initUltimosCapitulos() {
 	  // Creamos el <ul>
 	  const ul = document.createElement("ul");
 	    ul.className = "chapter-list";
+
 	    state.filtered.forEach((item) => {
 	  console.log(item);
-	      const li = document.createElement("li");
-		/*
-	      li.innerHTML = `
-	        <a href="#" style="flex-flow"
-	           data-pdf-obra="${item._clave}"
-	           data-pdf-capitulo="${item.numCapitulo}"
-	           class="pdf-link-ucap">
-	            <span class="fecha">${formatDateEs(item._fecha)}</span> -
-	            <span class="obra ${item._clave}">${item._obra}</span> -
-	            <span class="cap">${item.numCapitulo}</span> ·
-				<span class="titulo">${item.nombreCapitulo}</span>
-	        </a>
-	      `;
-	   */
+			const li = document.createElement("li");
 			li.innerHTML = `
-		        <a href="#" style="flex-flow"
-		           data-pdf-obra="${clave}"
-		           data-pdf-capitulo="${item.numCapitulo}"
-		           class="pdf-link-ucap">
-		            <span class="fecha">${formatDateEs(item.Fecha)}</span> -
-		            <span class="obra ${clave}">${item.nombreCapitulo}</span> -
-		            <span class="cap">${item.numCapitulo}</span> ·
+				<a href="#" style="flex-flow"
+						data-pdf-obra="${item._clave}"
+						data-pdf-capitulo="${item.numCapitulo}"
+						class="pdf-link-ucap">
+					<span class="fecha">${formatDateEs(item._fecha)}</span> -
+					<span class="obra ${item._clave}">${item._obra}</span> -
+					<span class="cap">${item.numCapitulo}</span> ·
 					<span class="titulo">${item.nombreCapitulo}</span>
-		        </a>
-	      	`;
-	      ul.appendChild(li);
+				</a>
+			`;
+			/*			li.innerHTML = `
+			<a href="#" style="flex-flow"
+			data-pdf-obra="${clave}"
+			data-pdf-capitulo="${item.numCapitulo}"
+			class="pdf-link-ucap">
+			<span class="fecha">${formatDateEs(item.Fecha)}</span> -
+			<span class="obra ${clave}">${item.nombreCapitulo}</span> -
+			<span class="cap">${item.numCapitulo}</span> ·
+			<span class="titulo">${item.nombreCapitulo}</span>
+			</a>
+			`;*/
+			ul.appendChild(li);
 	    });
 	
 	  divsection.appendChild(ul);
@@ -210,7 +209,8 @@ function initUltimosCapitulos() {
 		  })
 		  .then((listasDeObras) => {
 		    const todos = Object.assign({}, ...listasDeObras);
-		    state.items = Object.values(todos).flat().sort(sortDesc);
+		    //state.items = Object.values(todos).flat().sort(sortDesc);
+			   state.items = flatten(todos).sort(sortDesc);
 		    state.filtered = [...state.items];
 		    render();
 		  })
