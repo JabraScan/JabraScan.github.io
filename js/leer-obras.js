@@ -165,6 +165,14 @@ document.addEventListener("DOMContentLoaded", function () {
 							const bloqueB = bloque.cloneNode(true);
 							itemBook.querySelector(".book-info-main").appendChild(bloque);
 							itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
+
+							  const hoyTag = itemBook.querySelector('.tag-capitulo.hoy');
+							  if (hoyTag) {
+							    const bookInfoMain = hoyTag.closest('.book-info-main');
+							    if (bookInfoMain) {
+							      	bookInfoMain.classList.add('hoy-book');
+							    }
+							  }
 						}
 				  })
 				  .catch((err) => {
