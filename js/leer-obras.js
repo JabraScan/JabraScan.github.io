@@ -191,11 +191,10 @@
 	      	booklistContainer.appendChild(itemBook);
 	      	booklistContainernopc.appendChild(itemBookNOpc);
 			//
+			ordenarLibrosPorFecha();
 	    });
 	  })
 	  .catch(err => console.error("Error al cargar el XML:", err));
-
-	ordenarLibrosPorFecha();
 });
 
   // Ejecuta la función al cargar la página
