@@ -148,7 +148,7 @@ function initUltimosCapitulos() {
    */
 	//optimizacion lectura capitulos 29082025 0031
 		//se ha creado un indice json y un json por obra
-		fetch("capitulos.json")
+		/*fetch("capitulos.json")
 			  .then((res) => res.json())
 			  .then((index) => {
 			    const obrasPromises = Object.entries(index).map(([clave, ruta]) =>
@@ -176,16 +176,56 @@ function initUltimosCapitulos() {
 			  })
 			  .catch((err) => {
 			    console.error("Error cargando capitulos.json:", err);
-			  });
+			  });*/
 	//fin optimizacion lectura capitulos 29082025 0031
-	
+		fetch("capitulos.json")
+		  .then((res) => res.json())
+		  .then((index) => {
+		    const obrasPromises = Object.entries(index).map(([clave, ruta]) =>
+		      fetch(ruta)
+		        .then((res) => {
+		          if (!res.ok) {
+		            throw new Error(`❌ No se pudo cargar "${clave}" desde ${ruta}`);
+		          }
+		          return res.json();
+		        })
+		        .then((data) => {
+		          const capitulos = data[clave] || [];
+		
+		          // Añadir la propiedad "obra" a cada capítulo
+		          const capitulosConObra = capitulos.map((cap) => ({
+		            ...cap,
+		            obra: clave
+		          }));
+		
+		          return { [clave]: capitulosConObra };
+		        })
+		        .catch((err) => {
+		          console.warn(err.message);
+		          return { [clave]: [] };
+		        })
+		    );
+		
+		    return Promise.all(obrasPromises);
+		  })
+		  .then((listasDeObras) => {
+		    const todos = Object.assign({}, ...listasDeObras);
+		    state.items = Object.values(todos).flat().sort(sortDesc);
+		    state.filtered = [...state.items];
+		    render();
+		  })
+		  .catch((err) => {
+		    console.error("Error cargando capitulos.json:", err);
+		  });
+		
+	//fin nueva optimizacion
 	qEl.addEventListener("input", applyFilter);
 	
 	window.addEventListener("keydown", (e) => {
 	  if (e.key === "/" && document.activeElement !== qEl) {
-	    e.preventDefault();
-	    qEl.focus();
-	    qEl.select();
+		e.preventDefault();
+		qEl.focus();
+		qEl.select();
 	  }
 	});
 }
