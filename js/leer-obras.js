@@ -211,38 +211,20 @@ document.addEventListener("DOMContentLoaded", function () {
 		const hoy = new Date();
 		const fecha = new Date(fechaInput);
 		
-		// Normalizar fechas (sin hora)
 		hoy.setHours(0, 0, 0, 0);
 		fecha.setHours(0, 0, 0, 0);
 		
 		const diferenciaDias = Math.floor((hoy - fecha) / (1000 * 60 * 60 * 24));
 		
-		let texto = '';
-		let fondo = '';
-		let color = '#FFFFFF'; // blanco
-	
 		if (diferenciaDias === 0) {
-			texto = 'hoy';
-			fondo = '#28a745'; // verde
+			return `<span class="tag-capitulo hoy">hoy</span>`;
 		} else if (diferenciaDias > 0 && diferenciaDias <= 7) {
-			texto = 'nuevo';
-			fondo = '#007bff'; // azul
+			return `<span class="tag-capitulo nuevo">nuevo</span>`;
 		} else {
-			return ''; // No se muestra etiqueta si no cumple criterios
+			return '';
 		}
-		
-		// Crear etiqueta con estilos
-		const etiqueta = `<span style="
-							background-color: ${fondo};
-							color: ${color};
-							padding: 4px 8px;
-							border-radius: 12px;
-							font-family: sans-serif;
-							font-size: 0.9em;
-						">${texto}</span>`;
-	
-		return etiqueta;
 	}
+
 //fin funcion etiquetas
 //Buscar ultimo capitulo
 		function crearUltimoCapituloDeObra(data, claveObra) {
