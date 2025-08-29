@@ -198,22 +198,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	ordenarLibrosPorFecha();
 });
 
-function ordenarLibrosPorFecha(contenedorSelector = '.book-list') {
-	const contenedor = document.querySelector(contenedorSelector);
-	if (!contenedor) return;
-	
-	const articulos = Array.from(contenedor.querySelectorAll('.book-card-main'));
-	
-	articulos.sort((a, b) => {
-		const fechaA = new Date(a.querySelector('.book-latest-chapter')?.dataset.fecha || 0);
-		const fechaB = new Date(b.querySelector('.book-latest-chapter')?.dataset.fecha || 0);
-
-		return fechaB - fechaA; // más reciente primero
-	});
-	
-	articulos.forEach(articulo => contenedor.appendChild(articulo));
-}
-
   // Ejecuta la función al cargar la página
   document.addEventListener('DOMContentLoaded', () => {
     ordenarLibrosPorFecha();
@@ -303,3 +287,29 @@ function ordenarLibrosPorFecha(contenedorSelector = '.book-list') {
 		}
 
 //fin funcion carga ultimo cap
+//funcion ordenar fichas de libro por fecha descendente
+		function ordenarLibrosPorFecha(contenedorSelector = '.book-list') {
+			const contenedor = document.querySelector(contenedorSelector);
+			if (!contenedor) return;
+			
+			const articulos = Array.from(contenedor.querySelectorAll('.book-card-main'));
+console.log(articulos);
+			articulos.sort((a, b) => {
+		        const fechaStrA = a.querySelector('.book-latest-chapter')?.dataset.fecha;
+		        const fechaStrB = b.querySelector('.book-latest-chapter')?.dataset.fecha;
+contole.log(fechaStrA);
+contole.log(fechaStrB);
+		        const fechaA = convertirFecha(fechaStrA);
+		        const fechaB = convertirFecha(fechaStrB);
+
+				return fechaB - fechaA; // más reciente primero
+			});
+			
+			articulos.forEach(articulo => contenedor.appendChild(articulo));
+		}
+		function convertirFecha(fechaStr) {
+		    if (!fechaStr) return new Date('1900-01-01');
+		    const [dia, mes, año] = fechaStr.split('-');
+		    return new Date(`${año}-${mes}-${dia}`);
+		}
+//fin funcion ordenar fichas de libro
