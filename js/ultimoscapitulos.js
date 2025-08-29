@@ -67,8 +67,8 @@ function initUltimosCapitulos() {
 	  // Creamos el <ul>
 	  const ul = document.createElement("ul");
 	    ul.className = "chapter-list";
-	  console.log(item);
 	    state.filtered.forEach((item) => {
+	  console.log(item);
 	      const li = document.createElement("li");
 	      li.innerHTML = `
 	        <a href="#" style="flex-flow"
