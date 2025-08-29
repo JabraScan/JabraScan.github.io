@@ -452,7 +452,7 @@ footer {
 
 /* Solo parpadea en pantallas grandes (PC) */
 @media (min-width: 768px) {
-  .tag-capitulo.nuevo {
+  .tag-capitulo.hoy {
     animation: parpadeo 2s infinite;
   }
 
