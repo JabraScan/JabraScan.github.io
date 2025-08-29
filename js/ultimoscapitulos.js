@@ -67,7 +67,7 @@ function initUltimosCapitulos() {
 	  // Creamos el <ul>
 	  const ul = document.createElement("ul");
 	    ul.className = "chapter-list";
-	  
+	  console.log(item);
 	    state.filtered.forEach((item) => {
 	      const li = document.createElement("li");
 	      li.innerHTML = `
@@ -155,14 +155,8 @@ function initUltimosCapitulos() {
 			    return Promise.all(obrasPromises);
 			  })
 			  .then((listasDeObras) => {
-			    //console.log("nuevo");
-			    //console.log(listasDeObras);
-			
 			    // Combinar todos los objetos en uno solo
 			    const todos = Object.assign({}, ...listasDeObras);
-			    //console.log("combinado");
-			    //console.log(todos);
-			
 			    state.items = Object.values(todos).flat().sort(sortDesc);
 			    state.filtered = [...state.items];
 			    render();
@@ -170,7 +164,6 @@ function initUltimosCapitulos() {
 			  .catch((err) => {
 			    console.error("Error cargando capitulos.json:", err);
 			  });
-	 
 	//fin optimizacion lectura capitulos 29082025 0031
 	
 	qEl.addEventListener("input", applyFilter);
