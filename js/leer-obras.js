@@ -191,18 +191,13 @@ document.addEventListener("DOMContentLoaded", function () {
 	      	booklistContainer.appendChild(itemBook);
 	      	booklistContainernopc.appendChild(itemBookNOpc);
 			//
-			ordenarLibrosPorFecha();
 	    });
 	  })
 	  .catch(err => console.error("Error al cargar el XML:", err));
 
-	window.addEventListener('DOMContentLoaded', ordenarLibrosPorFecha);
+	ordenarLibrosPorFecha();
 });
 
-  // Ejecuta la función al cargar la página
-  document.addEventListener('DOMContentLoaded', () => {
-    ordenarLibrosPorFecha();
-  });
 		function onLibroClick(libroId) {
 		    // Guarda el ID o nombre del libro seleccionado (ajusta según tu XML)
 		    localStorage.setItem('libroSeleccionado', libroId);
