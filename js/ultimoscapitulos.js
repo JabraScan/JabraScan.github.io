@@ -134,8 +134,7 @@ function initUltimosCapitulos() {
 	  });
 	//optimizacion lectura capitulos 29082025 0031
 		//se ha creado un indice json y un json por obra
-		
-			fetch("capitulos.json")
+		fetch("capitulos.json")
 			  .then((res) => res.json())
 			  .then((index) => {
 			    const obrasPromises = Object.entries(index).map(([clave, ruta]) =>
@@ -144,25 +143,26 @@ function initUltimosCapitulos() {
 			          if (!res.ok) {
 			            throw new Error(`❌ No se pudo cargar "${clave}" desde ${ruta}`);
 			          }
-			         return res.json().then((data) => {
-			            // Extraer directamente el array usando la clave
-			            const capitulos = data[clave] || [];
-			            return capitulos.map((cap) => ({ ...cap, obra: clave }));
-			          });
+			          return res.json(); // ← No transformamos nada aquí
 			        })
 			        .catch((err) => {
 			          console.warn(err.message);
-			          return []; // Evita que falle el .flat()
+			          return { [clave]: [] }; // ← Mantiene la estructura aunque esté vacío
 			        })
 			    );
 			
 			    return Promise.all(obrasPromises);
 			  })
-			  .then((listasDeCapitulos) => {
-				  console.log("nuevo");
-					console.log(listasDeCapitulos);
-			    const todosLosCapitulos = listasDeCapitulos.flat(); // ← Igual que flatten(data)
-			    state.items = todosLosCapitulos.sort(sortDesc);
+			  .then((listasDeObras) => {
+			    console.log("nuevo");
+			    console.log(listasDeObras);
+			
+			    // Combinar todos los objetos en uno solo
+			    const todos = Object.assign({}, ...listasDeObras);
+			    console.log("combinado");
+			    console.log(todos);
+			
+			    state.items = Object.values(todos).flat().sort(sortDesc);
 			    state.filtered = [...state.items];
 			    render();
 			  })
