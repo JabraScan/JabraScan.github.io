@@ -432,3 +432,33 @@ footer {
     }
   }
 /*fin estilos para mostrar en pantallas pequeñas*/
+/*etiquetas para los capitulos en el  main*/
+.tag-capitulo {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-family: sans-serif;
+  font-size: 0.9em;
+  color: #FFFFFF;
+  display: inline-block;
+}
+
+.tag-capitulo.hoy {
+  background-color: #28a745;
+}
+
+.tag-capitulo.nuevo {
+  background-color: #007bff;
+}
+
+/* Solo parpadea en pantallas grandes (PC) */
+@media (min-width: 768px) {
+  .tag-capitulo.nuevo {
+    animation: parpadeo 2s infinite;
+  }
+
+  @keyframes parpadeo {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+}
+/*fin etiquetas para los capitulos*/
