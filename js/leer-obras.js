@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
 							</div>
 			      `;
 			//ultimo capitulo
-				fetch("books.json")
+				/*fetch("books.json")
 					.then(r => r.json())
 					.then(data => {
 						const bloque = crearUltimoCapituloDeObra(data, clave);
@@ -134,7 +134,57 @@ document.addEventListener("DOMContentLoaded", function () {
 								itemBook.querySelector(".book-info-main").appendChild(bloque);
 								itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
 						}
-				});
+				});*/
+	//optimizacion lectura capitulos 29082025 0031 -ultimo capitulo
+		//se ha creado un indice json y un json por obra
+				fetch("capitulos.json")
+				  .then((res) => res.json())
+				  .then((index) => {
+				    const obrasPromises = Object.entries(index).map(([clave, ruta]) =>
+				      fetch(ruta)
+				        .then((res) => {
+				          if (!res.ok) {
+				            throw new Error(`❌ No se pudo cargar "${clave}" desde ${ruta}`);
+				          }
+				          return res.json();
+				        })
+				        .then((data) => {
+				          const capitulos = data[clave] || [];
+				
+				          // Añadir la propiedad "obra" a cada capítulo
+				          const capitulosConObra = capitulos.map((cap) => ({
+				            ...cap,
+				            obra: clave
+				          }));
+				
+				          return { [clave]: capitulosConObra };
+				        })
+				        .catch((err) => {
+				          console.warn(err.message);
+				          return { [clave]: [] };
+				        })
+				    );
+				
+				    return Promise.all(obrasPromises);
+				  })
+				  .then((listasDeObras) => {
+				    const obrasUnificadas = Object.assign({}, ...listasDeObras);
+				
+				    // Para cada obra, crear y añadir el bloque visual
+				    Object.entries(obrasUnificadas).forEach(([clave, capitulos]) => {
+				      const bloque = crearUltimoCapituloDeObra({ [clave]: capitulos }, clave);
+				      if (bloque) {
+				        const bloqueB = bloque.cloneNode(true);
+				        itemBook.querySelector(".book-info-main").appendChild(bloque);
+				        itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
+				      }
+				    });
+				  })
+				  .catch((err) => {
+				    console.error("Error cargando capitulos.json:", err);
+				  });
+
+	//fin optimizacion lectura capitulos 29082025 0031
 			// Clonar imagenContenedor
 				const imagenContenedorA = imagenContenedor.cloneNode(true); // Clona el contenedor de imagen
 				const imagenContenedorB = imagenContenedor.cloneNode(true); // Clona el contenedor de imagen
