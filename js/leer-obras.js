@@ -206,50 +206,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				})
 				.catch(err => console.error('Error:', err));
 		}
-//Buscar ultimo capitulo
-		function crearUltimoCapituloDeObra(data, claveObra) {
-			  const parseDateDMY = (s) => {
-			    const [dd, mm, yyyy] = s.split("-").map(Number);
-			    return new Date(yyyy, mm - 1, dd);
-			  };
-			  const parseChapterNumber = (n) => {
-			    const num = parseFloat(String(n).replace(/[^0-9.]/g, ""));
-			    return Number.isNaN(num) ? -Infinity : num;
-			  };
-			  const formatDateEs = (d) => {
-			    const dd = String(d.getDate()).padStart(2, "0");
-			    const mm = String(d.getMonth() + 1).padStart(2, "0");
-			    const yyyy = d.getFullYear();
-			    return `${dd}-${mm}-${yyyy}`;
-			  };
-			
-			  const capitulos = data[claveObra];
-			  if (!Array.isArray(capitulos) || capitulos.length === 0) {
-			    return null; // no hay datos para esa clave
-			  }
-			
-			  // ordenar por fecha ↓ y numCapitulo ↓
-			  const ordenados = capitulos.slice().sort((a, b) => {
-			    const fechaDiff = parseDateDMY(b.Fecha) - parseDateDMY(a.Fecha);
-			    if (fechaDiff !== 0) return fechaDiff;
-			    return parseChapterNumber(b.numCapitulo) - parseChapterNumber(a.numCapitulo);
-			  });
-			
-			  const ultimo = ordenados[0];
-			  const fechaUltimo = parseDateDMY(ultimo.Fecha);
-			  // crear el bloque HTML
-			  const divsection = document.createElement("div");
-			  divsection.className = "book-latest-chapter";
-			  divsection.innerHTML = `
-	 					<span>Último cap.</span>  
-				        <span class="cap">${ultimo.numCapitulo}</span>
-				        <span class="fecha">( ${formatDateEs(fechaUltimo)} )</span>
-						${generarEtiqueta(fechaUltimo)}
-	 				`;
-			  return divsection;
-		}
-
-//fin funcion carga ultimo cap
 //function para etiquetas capitulo nuevo
 	function generarEtiquetaNuevo(fechaInput) {
 		const hoy = new Date();
@@ -288,3 +244,47 @@ document.addEventListener("DOMContentLoaded", function () {
 		return etiqueta;
 	}
 //fin funcion etiquetas
+//Buscar ultimo capitulo
+		function crearUltimoCapituloDeObra(data, claveObra) {
+			  const parseDateDMY = (s) => {
+			    const [dd, mm, yyyy] = s.split("-").map(Number);
+			    return new Date(yyyy, mm - 1, dd);
+			  };
+			  const parseChapterNumber = (n) => {
+			    const num = parseFloat(String(n).replace(/[^0-9.]/g, ""));
+			    return Number.isNaN(num) ? -Infinity : num;
+			  };
+			  const formatDateEs = (d) => {
+			    const dd = String(d.getDate()).padStart(2, "0");
+			    const mm = String(d.getMonth() + 1).padStart(2, "0");
+			    const yyyy = d.getFullYear();
+			    return `${dd}-${mm}-${yyyy}`;
+			  };
+			
+			  const capitulos = data[claveObra];
+			  if (!Array.isArray(capitulos) || capitulos.length === 0) {
+			    return null; // no hay datos para esa clave
+			  }
+			
+			  // ordenar por fecha ↓ y numCapitulo ↓
+			  const ordenados = capitulos.slice().sort((a, b) => {
+			    const fechaDiff = parseDateDMY(b.Fecha) - parseDateDMY(a.Fecha);
+			    if (fechaDiff !== 0) return fechaDiff;
+			    return parseChapterNumber(b.numCapitulo) - parseChapterNumber(a.numCapitulo);
+			  });
+			
+			  const ultimo = ordenados[0];
+			  const fechaUltimo = parseDateDMY(ultimo.Fecha);
+			  // crear el bloque HTML
+			  const divsection = document.createElement("div");
+			  divsection.className = "book-latest-chapter";
+			  divsection.innerHTML = `
+	 					<span>Último cap.</span>  
+				        <span class="cap">${ultimo.numCapitulo}</span>
+				        <span class="fecha">( ${formatDateEs(fechaUltimo)} )</span>
+						${generarEtiquetaNuevo(fechaUltimo)}
+	 				`;
+			  return divsection;
+		}
+
+//fin funcion carga ultimo cap
