@@ -253,7 +253,7 @@ function cargarlibro(libroId) {
 				});
 }
 function obtenerCapitulos(clave) {
-  return fetch('books.json')
+  /*return fetch('books.json')
     .then(response => response.json())
     .then(dataCapitulos => {
       if (!dataCapitulos[clave]) {
@@ -261,7 +261,10 @@ function obtenerCapitulos(clave) {
         return [];
       }
 
-      const resultado = dataCapitulos[clave].map(item => {
+      //const resultado = dataCapitulos[clave].map(item => {
+
+		
+		//
         const partes = item.NombreArchivo.split(' - ');
         return {
           NombreArchivo: item.NombreArchivo,
@@ -269,7 +272,34 @@ function obtenerCapitulos(clave) {
           numCapitulo: item.numCapitulo,
           nombreCapitulo: item.nombreCapitulo
         };
-      });
+      });*/
+	return fetch('capitulos.json')
+	  .then(response => response.json())
+	  .then(dataCapitulos => {
+		if (!dataCapitulos[clave]) {
+		  console.error("Clave no encontrada.");
+		  return [];
+		}
+	
+		const resultado = dataCapitulos[clave].map(item => {
+		  const partes = item.NombreArchivo.split(' - ');
+	
+		  return {
+			NombreArchivo: item.NombreArchivo,
+			Fecha: item.Fecha,
+			numCapitulo: item.numCapitulo,
+			nombreCapitulo: item.nombreCapitulo,
+			partes: partes // si quieres conservar las partes extraídas
+		  };
+		});
+	
+		return resultado;
+	  })
+	  .catch(err => {
+		console.error("Error cargando capitulos.json:", err);
+		return [];
+	  });
+
 
       resultado.sort((a, b) => {
         // Convertir la fecha de dd-mm-aaaa a un objeto Date
