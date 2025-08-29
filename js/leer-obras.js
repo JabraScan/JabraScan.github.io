@@ -1,4 +1,4 @@
- adocument.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
 	// Cargar el contenido en <main>
 	fetch('obras.xml')
 	  .then(response => response.text())
