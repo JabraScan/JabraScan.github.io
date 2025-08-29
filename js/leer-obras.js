@@ -198,20 +198,21 @@ document.addEventListener("DOMContentLoaded", function () {
 	ordenarLibrosPorFecha();
 });
 
-  function ordenarLibrosPorFecha(contenedorSelector = '.book-list') {
-    const contenedor = document.querySelector(contenedorSelector);
-    if (!contenedor) return;
+function ordenarLibrosPorFecha(contenedorSelector = '.book-list') {
+	const contenedor = document.querySelector(contenedorSelector);
+	if (!contenedor) return;
+	
+	const articulos = Array.from(contenedor.querySelectorAll('.book-card-main'));
+	
+	articulos.sort((a, b) => {
+		const fechaA = new Date(a.querySelector('.book-latest-chapter')?.dataset.fecha || 0);
+		const fechaB = new Date(b.querySelector('.book-latest-chapter')?.dataset.fecha || 0);
 
-    const articulos = Array.from(contenedor.querySelectorAll('.book-card-main'));
-
-    articulos.sort((a, b) => {
-      const fechaA = new Date(a.querySelector('.fecha')?.dataset.fecha || 0);
-      const fechaB = new Date(b.querySelector('.fecha')?.dataset.fecha || 0);
-      return fechaB - fechaA; // más reciente primero
-    });
-
-    articulos.forEach(articulo => contenedor.appendChild(articulo));
-  }
+		return fechaB - fechaA; // más reciente primero
+	});
+	
+	articulos.forEach(articulo => contenedor.appendChild(articulo));
+}
 
   // Ejecuta la función al cargar la página
   document.addEventListener('DOMContentLoaded', () => {
