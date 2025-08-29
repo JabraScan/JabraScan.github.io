@@ -293,22 +293,35 @@ document.addEventListener("DOMContentLoaded", function () {
 			
 			const articulos = Array.from(contenedor.querySelectorAll('.book-card-main'));
 			
-			if (articulos.length < 2) return; // nada que ordenar
+			const conFecha = [];
+			const sinFecha = [];
 			
-			const articulosOrdenados = articulos
-			.map(articulo => {
-				const fechaStr = articulo.querySelector('.book-latest-chapter')?.dataset.fecha;
-				const fecha = convertirFecha(fechaStr);
-				return { fecha, elemento: articulo };
-			})
-			.sort((a, b) => b.fecha - a.fecha); // más reciente primero
+			articulos.forEach(articulo => {
+			const fechaStr = articulo.querySelector('.book-latest-chapter')?.dataset.fecha;
+			const fecha = convertirFecha(fechaStr);
 			
-			// Reinsertar en el DOM
-			articulosOrdenados.forEach(({ elemento }) => contenedor.appendChild(elemento));
+			if (isNaN(fecha)) {
+			  sinFecha.push(articulo); // fecha inválida o ausente
+			} else {
+			  conFecha.push({ fecha, elemento: articulo });
+			}
+			});
+			
+			conFecha.sort((a, b) => b.fecha - a.fecha); // más reciente primero
+			
+			// Limpiar el contenedor antes de reinsertar
+			contenedor.innerHTML = '';
+			
+			// Insertar primero los artículos con fecha ordenada
+			conFecha.forEach(({ elemento }) => contenedor.appendChild(elemento));
+			
+			// Luego los artículos sin fecha
+			sinFecha.forEach(elemento => contenedor.appendChild(elemento));
 		}
+
 		function convertirFecha(fechaStr) {
-		    if (!fechaStr) return new Date('1900-01-01');
-		    const [dia, mes, año] = fechaStr.split('-');
-		    return new Date(`${año}-${mes}-${dia}`);
+			if (!fechaStr || !fechaStr.includes('-')) return NaN;
+			const [dd, mm, yyyy] = fechaStr.split('-');
+			return new Date(`${yyyy}-${mm}-${dd}`);
 		}
 //fin funcion ordenar fichas de libro
