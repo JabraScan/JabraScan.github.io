@@ -287,41 +287,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //fin funcion carga ultimo cap
 //funcion ordenar fichas de libro por fecha descendente
-		function ordenarLibrosPorFecha(contenedorSelector = '.book-list') {
-			const contenedor = document.querySelector(contenedorSelector);
-			if (!contenedor) return;
-			
-			const articulos = Array.from(contenedor.querySelectorAll('.book-card-main'));
-			
-			const conFecha = [];
-			const sinFecha = [];
-			
-			articulos.forEach(articulo => {
-			const fechaStr = articulo.querySelector('.book-latest-chapter')?.dataset.fecha;
-			const fecha = convertirFecha(fechaStr);
-			
-			if (isNaN(fecha)) {
-			  sinFecha.push(articulo); // fecha inválida o ausente
-			} else {
-			  conFecha.push({ fecha, elemento: articulo });
-			}
-			});
-			
-			conFecha.sort((a, b) => b.fecha - a.fecha); // más reciente primero
-			
-			// Limpiar el contenedor antes de reinsertar
-			contenedor.innerHTML = '';
-			
-			// Insertar primero los artículos con fecha ordenada
-			conFecha.forEach(({ elemento }) => contenedor.appendChild(elemento));
-			
-			// Luego los artículos sin fecha
-			sinFecha.forEach(elemento => contenedor.appendChild(elemento));
-		}
+function ordenarLibrosPorFecha() {
+  const section = document.querySelector('section.book-card-main.libro-item');
+  if (!section) return;
 
-		function convertirFecha(fechaStr) {
-			if (!fechaStr || !fechaStr.includes('-')) return NaN;
-			const [dd, mm, yyyy] = fechaStr.split('-');
-			return new Date(`${yyyy}-${mm}-${dd}`);
-		}
+  const articles = Array.from(section.querySelectorAll('article.book-card-main.libro-item'));
+
+  const parseFecha = (fechaStr) => {
+    if (!fechaStr) return null;
+    const [dia, mes, año] = fechaStr.split('-');
+    return new Date(`${año}-${mes}-${dia}`);
+  };
+
+  articles.sort((a, b) => {
+    const fechaA = parseFecha(a.querySelector('.book-latest-chapter')?.getAttribute('data-fecha'));
+    const fechaB = parseFecha(b.querySelector('.book-latest-chapter')?.getAttribute('data-fecha'));
+
+    if (!fechaA && !fechaB) return 0;
+    if (!fechaA) return 1;
+    if (!fechaB) return -1;
+
+    return fechaB - fechaA; // Orden descendente
+  });
+
+  // Reorganizar el DOM
+  section.innerHTML = '';
+  articles.forEach(article => section.appendChild(article));
+}
 //fin funcion ordenar fichas de libro
