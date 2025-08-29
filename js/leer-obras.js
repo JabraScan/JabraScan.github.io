@@ -169,7 +169,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				  })
 				  .then((listasDeObras) => {
 				    const obrasUnificadas = Object.assign({}, ...listasDeObras);
-			console.log(listasDeObras);
 				    // crear y añadir el bloque visual
 						const bloque = crearUltimoCapituloDeObra(obrasUnificadas, clave);
 						if (bloque) {
@@ -202,9 +201,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		    // Guarda el ID o nombre del libro seleccionado (ajusta según tu XML)
 		    localStorage.setItem('libroSeleccionado', libroId);
 		    // Redirige a la ficha
-		    //window.location.href = 'books/libro-ficha.html';
-			// Usar fetch para cargar el contenido de disclaimer.html
-			//console.log("obras");
 			fetch('books/libro-ficha.html')
 				.then(response => {
 				if (!response.ok) {
@@ -259,7 +255,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				        <span class="cap">${ultimo.numCapitulo}</span>
 				        <span class="fecha">( ${formatDateEs(parseDateDMY(ultimo.Fecha))} )</span>
 	 				`;
-			console.log(divsection);
 			  return divsection;
 		}
 
