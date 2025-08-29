@@ -132,7 +132,7 @@ function initUltimosCapitulos() {
 	  });
 	//optimizacion lectura capitulos 29082025 0031
 		//se ha creado un indice json y un json por obra
-		/*
+		
 			fetch("capitulos.json")
 			  .then((res) => res.json())
 			  .then((index) => {
@@ -161,7 +161,7 @@ function initUltimosCapitulos() {
 			  .catch((err) => {
 			    console.error("Error cargando capitulos.json:", err);
 			  });
-	 */
+	 
 	//fin optimizacion lectura capitulos 29082025 0031
 	
 	qEl.addEventListener("input", applyFilter);
