@@ -119,7 +119,7 @@ function initUltimosCapitulos() {
 	      );
 	  render();
 	};
-	
+	/*
 	fetch("books.json")
 	  .then((res) => res.json())
 	  .then((data) => {
@@ -132,6 +132,7 @@ function initUltimosCapitulos() {
 	  .catch((err) => {
 	    console.error("Error cargando books.json:", err);
 	  });
+   */
 	//optimizacion lectura capitulos 29082025 0031
 		//se ha creado un indice json y un json por obra
 		fetch("capitulos.json")
@@ -154,13 +155,13 @@ function initUltimosCapitulos() {
 			    return Promise.all(obrasPromises);
 			  })
 			  .then((listasDeObras) => {
-			    console.log("nuevo");
-			    console.log(listasDeObras);
+			    //console.log("nuevo");
+			    //console.log(listasDeObras);
 			
 			    // Combinar todos los objetos en uno solo
 			    const todos = Object.assign({}, ...listasDeObras);
-			    console.log("combinado");
-			    console.log(todos);
+			    //console.log("combinado");
+			    //console.log(todos);
 			
 			    state.items = Object.values(todos).flat().sort(sortDesc);
 			    state.filtered = [...state.items];
