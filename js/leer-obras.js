@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				  })
 				  .then((listasDeObras) => {
 				    const obrasUnificadas = Object.assign({}, ...listasDeObras);
-				
+			console.log(listasDeObras);
 				    // Para cada obra, crear y añadir el bloque visual
 					Object.keys(obrasUnificadas).forEach(clave => {
 						const bloque = crearUltimoCapituloDeObra(obrasUnificadas, clave);
@@ -261,19 +261,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				        <span class="cap">${ultimo.numCapitulo}</span>
 				        <span class="fecha">( ${formatDateEs(parseDateDMY(ultimo.Fecha))} )</span>
 	 				`;
-			/*
-			  const ul = document.createElement("ul");
-			  ul.className = "chapter-list";
-			
-			  const li = document.createElement("li");
-				  li.innerHTML = `
-				        <span class="fecha">${formatDateEs(parseDateDMY(ultimo.Fecha))}</span> -
-				        <span class="cap">${ultimo.numCapitulo}</span>
-				  `;
-			
-			  ul.appendChild(li);
-			  divsection.appendChild(ul);
-	 		*/
+			console.log(divsection);
 			  return divsection;
 		}
 
