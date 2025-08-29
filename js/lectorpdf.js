@@ -194,6 +194,125 @@
 				.catch(err => console.error('Error:', err));
 		}
 // 📌 Función para cargar un capítulo
+function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
+  fetch("capitulos.json")
+    .then(res => res.json())
+    .then(index => {
+      const obrasPromises = Object.entries(index).map(([k, ruta]) =>
+        fetch(ruta)
+          .then(res => {
+            if (!res.ok) throw new Error(`❌ No se pudo cargar "${k}" desde ${ruta}`);
+            return res.json();
+          })
+          .then(data => {
+            const capitulos = data[k] || [];
+            const capitulosConObra = capitulos.map(cap => ({
+              ...cap,
+              _clave: k,
+              _obra: cap.tituloObra || k,
+              _fecha: parseDateDMY(cap.Fecha),
+              _num: parseChapterNumber(cap.numCapitulo)
+            }));
+            return capitulosConObra;
+          })
+          .catch(err => {
+            console.warn(err.message);
+            return [];
+          })
+      );
+
+      return Promise.all(obrasPromises);
+    })
+    .then(listas => {
+      const todos = listas.flat(); // array plano de todos los capítulos
+      const capitulosObra = todos.filter(c => c._clave === clave);
+      const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
+      if (idx === -1) return;
+      const cap = capitulosObra[idx];
+
+      // Actualizar título
+      const h1 = document.getElementById("tituloObraPdf");
+      h1.textContent = cap._obra;
+      h1.onclick = () => onLibroClick(clave);
+
+      // Banner especial
+      const datosAdic = document.querySelector(".optionaldata");
+      if (clave === "CallateDragonaMalvadaNoQuieroTenerMasHijosContigo") {
+        const divBanner = document.createElement("div");
+        divBanner.className = "callatedragonmalvado";
+        divBanner.innerHTML = `
+          <span>Traducción aprobada por el autor</span><br>
+          <span><strong>Discord Oficial:</strong> <a href="https://discord.gg/Mk2qb65AxA" target="_blank">https://discord.gg/Mk2qb65AxA</a></span><br>
+          <img src="img/discord_oficial_jabrascan.jpg" alt="Traducción aprobada">
+        `;
+        datosAdic.appendChild(divBanner);
+      }
+
+      // Cargar PDF
+      const nombreA = encodeURIComponent(cap.NombreArchivo);
+      const pdfPath = `books/${clave}/${nombreA}`;
+      pdfjsLib.getDocument(pdfPath).promise.then(doc => {
+        pdfDoc = doc;
+        pageNum = paginaInicial;
+        renderPage(pageNum);
+        actualizarBotonesNav(idx, capitulosObra, clave);
+      });
+
+      // Botones navegación
+      const btnPrev = document.getElementById("btnPrevCap");
+      const btnNext = document.getElementById("btnNextCap");
+
+      if (idx > 0) {
+        const prevCap = capitulosObra[idx - 1];
+        btnPrev.disabled = false;
+        btnPrev.onclick = () => {
+          localStorage.setItem("ultimaPagina", 1);
+          localStorage.setItem("ultimaObra", clave);
+          localStorage.setItem("ultimoCapitulo", prevCap.numCapitulo);
+          cargarCapitulo(clave, prevCap.numCapitulo, 1);
+        };
+      } else {
+        btnPrev.disabled = true;
+        btnPrev.onclick = null;
+      }
+
+      if (idx < capitulosObra.length - 1) {
+        const nextCap = capitulosObra[idx + 1];
+        btnNext.disabled = false;
+        btnNext.onclick = () => {
+          localStorage.setItem("ultimaPagina", 1);
+          localStorage.setItem("ultimaObra", clave);
+          localStorage.setItem("ultimoCapitulo", nextCap.numCapitulo);
+          cargarCapitulo(clave, nextCap.numCapitulo, 1);
+        };
+      } else {
+        btnNext.disabled = true;
+        btnNext.onclick = null;
+      }
+
+      // Selector de capítulos
+      const chapterSelect = document.getElementById("chapterSelect");
+      chapterSelect.innerHTML = "";
+      capitulosObra.forEach(c => {
+        const option = document.createElement("option");
+        option.value = c.numCapitulo;
+        option.textContent = `${c.numCapitulo} · ${c.nombreCapitulo}`;
+        if (c.numCapitulo === capitulo) option.selected = true;
+        option.id = clave;
+        chapterSelect.appendChild(option);
+      });
+
+      chapterSelect.onchange = () => {
+        const nuevoCap = chapterSelect.value;
+        localStorage.setItem("ultimaObra", clave);
+        localStorage.setItem("ultimoCapitulo", nuevoCap);
+        cargarCapitulo(clave, nuevoCap, 1);
+      };
+    })
+    .catch(error => console.error("Error al cargar el capítulo:", error));
+}
+
+/*
 	function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
 	  fetch("books.json")
 	    .then(response => response.json())
@@ -292,6 +411,7 @@
 	    })
 	    .catch(error => console.error("Error al cargar el capítulo:", error));
 	}
+*/
 	//Actualizacion de botones de navegacion por las paginas del pdf
 	function actualizarBotonesNav(idxCapActual, capitulos, clave) {
 	  // Configuración de estados que se aplicará a todos los botones según clase
@@ -367,13 +487,3 @@
 	}
 
 	//Fin botones de navegacion por pagina
-
-
-
-
-
-
-
-
-
-
