@@ -171,14 +171,14 @@ document.addEventListener("DOMContentLoaded", function () {
 				    const obrasUnificadas = Object.assign({}, ...listasDeObras);
 				
 				    // Para cada obra, crear y añadir el bloque visual
-				    Object.entries(obrasUnificadas).forEach(([clave, capitulos]) => {
-				      const bloque = crearUltimoCapituloDeObra({ [clave]: capitulos }, clave);
-				      if (bloque) {
-				        const bloqueB = bloque.cloneNode(true);
-				        itemBook.querySelector(".book-info-main").appendChild(bloque);
-				        itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
-				      }
-				    });
+					Object.keys(obrasUnificadas).forEach(clave => {
+						const bloque = crearUltimoCapituloDeObra(obrasUnificadas, clave);
+						if (bloque) {
+							const bloqueB = bloque.cloneNode(true);
+							itemBook.querySelector(".book-info-main").appendChild(bloque);
+							itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
+						}
+					});
 				  })
 				  .catch((err) => {
 				    console.error("Error cargando capitulos.json:", err);
