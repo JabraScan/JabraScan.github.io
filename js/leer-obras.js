@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+ adocument.addEventListener("DOMContentLoaded", function () {
 	// Cargar el contenido en <main>
 	fetch('obras.xml')
 	  .then(response => response.text())
@@ -293,12 +293,13 @@ document.addEventListener("DOMContentLoaded", function () {
 			if (!contenedor) return;
 			
 			const articulos = Array.from(contenedor.querySelectorAll('.book-card-main'));
+console.log('array');
 console.log(articulos);
 			articulos.sort((a, b) => {
 		        const fechaStrA = a.querySelector('.book-latest-chapter')?.dataset.fecha;
 		        const fechaStrB = b.querySelector('.book-latest-chapter')?.dataset.fecha;
-contole.log(fechaStrA);
-contole.log(fechaStrB);
+contole.log('fechaA ' + fechaStrA);
+contole.log('fechaB ' + fechaStrB);
 		        const fechaA = convertirFecha(fechaStrA);
 		        const fechaB = convertirFecha(fechaStrB);
 
