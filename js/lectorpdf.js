@@ -263,7 +263,7 @@ function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
 	// ⬅️ Botón capítulo anterior
 	      const btnPrev = document.getElementById("btnPrevCap");
 	      if (idx > 0) {
-	        const prevCap = capitulos[idx - 1];
+	        const prevCap = capitulosObra[idx - 1];
 	        btnPrev.disabled = false;
 	        btnPrev.onclick = () => {
 	          localStorage.setItem("ultimaPagina", 1);
@@ -278,8 +278,8 @@ function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
 	
 	      // ➡️ Botón capítulo siguiente
 	      const btnNext = document.getElementById("btnNextCap");
-	      if (idx < capitulos.length - 1) {
-	        const nextCap = capitulos[idx + 1];
+	      if (idx < capitulosObra.length - 1) {
+	        const nextCap = capitulosObra[idx + 1];
 	        btnNext.disabled = false;
 	        btnNext.onclick = () => {
 	          localStorage.setItem("ultimaPagina", 1);
@@ -295,7 +295,7 @@ function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
 	      // 📜 Rellenar selector de capítulos
 	      const chapterSelect = document.getElementById("chapterSelect");
 	      chapterSelect.innerHTML = ""; // limpiar antes
-	      capitulos.forEach(c => {
+	      capitulosObra.forEach(c => {
 	        const option = document.createElement("option");
 	        option.value = c.numCapitulo;
 	        option.textContent = `${c.numCapitulo} · ${c.nombreCapitulo}`;
@@ -492,4 +492,5 @@ function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
 	}
 
 	//Fin botones de navegacion por pagina
+
 
