@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		  const observaciones = obra.querySelector("observaciones").textContent.trim();
 		  const discord = obra.querySelector("discord").textContent.trim();
 		  const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
+		  const wiki = obra.querySelector("wiki").textContent.trim();
 
 		  let OKAutor = '';
 		  if (aprobadaAutor === 'si') {
