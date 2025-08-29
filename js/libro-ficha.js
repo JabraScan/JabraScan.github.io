@@ -237,7 +237,7 @@ function cargarlibro(libroId) {
 										<p id="sinopsis-obra">${sinopsis}</p>
 									</div>
 		 							<div class="book_extras">
-		  								<a class="book-wiki" href="${sinopsis}" target="_blank">Fans Wiki</a>
+		  								<a class="book-wiki" href="${wiki}" target="_blank">Fans Wiki</a>
 		  							</div>
 									<!--
 		 							<div class="book-buttons">
