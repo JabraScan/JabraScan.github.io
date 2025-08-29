@@ -34,6 +34,7 @@ function cargarlibro(libroId) {
 			  const observaciones = obra.querySelector("observaciones").textContent.trim();
 			  const discord = obra.querySelector("discord").textContent.trim();
 			  const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
+			  const wiki = obra.querySelector("wiki").textContent.trim();
 				  //Aprobado por el autor
 				  let OKAutor = '';
 				  if (aprobadaAutor === 'si') {
@@ -235,6 +236,9 @@ function cargarlibro(libroId) {
 										<b><i class="fa-solid fa-info-circle"></i> Sinopsis:</b>
 										<p id="sinopsis-obra">${sinopsis}</p>
 									</div>
+		 							<div class="book_extras">
+		  								<a class="book-wiki" href="${sinopsis}" target="_blank">Fans Wiki</a>
+		  							</div>
 									<!--
 		 							<div class="book-buttons">
 										<button class="chapter-list"><i class="fa-solid fa-list"></i> Lista de capítulos</button>
