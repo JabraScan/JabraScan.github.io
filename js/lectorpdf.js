@@ -257,7 +257,7 @@ function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
 	        pdfDoc = doc;
 	        pageNum = paginaInicial;
 	        renderPage(pageNum);
-			  actualizarBotonesNav(idx, capitulos, clave);
+			  actualizarBotonesNav(idx, capitulosObra, clave);
 	      });
 	
 	// ⬅️ Botón capítulo anterior
@@ -492,5 +492,6 @@ function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
 	}
 
 	//Fin botones de navegacion por pagina
+
 
 
