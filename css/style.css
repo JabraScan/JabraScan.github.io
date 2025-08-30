@@ -506,7 +506,7 @@ footer {
   justify-content: flex-start;
 }
 .ultcap-chapter span {
-  span-left: 0.2em;
+  margin: 0 0.1em 0 0.1em;
   display: block;
 }
 .book-chapters-list ul li {
@@ -524,3 +524,4 @@ footer {
   white-space: nowrap;
   max-width: 400px;
 }
+
