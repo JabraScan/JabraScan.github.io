@@ -483,4 +483,6 @@ footer {
 /*fin etiquetas para los capitulos*/
 .ultcap-chapter span {
   span-left: 0.2em;
+  display: block;
 }
+
