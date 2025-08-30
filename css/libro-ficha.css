@@ -309,6 +309,44 @@ body {
     flex: 1 1 100%;
     text-align: left;
   }
-
-
-
+/*===botones de paginacion===*/
+    .pagination-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      background-color: transparent;
+      color: black;
+      padding: 0.5em 1em;
+      gap: 0.5em;
+      flex-wrap: wrap;
+      border-radius: 6px;
+    }
+    
+    /* Botones de paginación */
+    .pagina-btn {
+      flex: 0 0 100px; /* Todos los botones del mismo ancho */
+      padding: 0.4em 0.6em;
+      font-size: 0.9em;
+      background-color: transparent;
+      border: 1px solid #ccc;
+      color: black;
+      cursor: pointer;
+      text-align: center;
+    }
+    
+    /* Botón deshabilitado */
+    .pagina-btn:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+    
+    /* Rango centrado entre los botones */
+    .pagination-range {
+      flex: 1 1 auto;
+      text-align: center;
+      font-weight: bold;
+      font-size: 0.95em;
+      color: black;
+    }
+/*===fin botones de paginacion===*/
