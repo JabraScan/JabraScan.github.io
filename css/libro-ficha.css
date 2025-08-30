@@ -248,7 +248,7 @@ body {
 }
 
 /* Móviles < 600px */
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .book-card-caps {
     margin: 0.5rem;
     padding: 0.8rem 0.3rem;
@@ -303,7 +303,7 @@ body {
   }
 }
 /* Responsive: en pantallas pequeñas, apilar los spans */
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .pdf-link {
     flex-direction: column;
     align-items: flex-start;
@@ -369,4 +369,9 @@ body {
 .chapter-page ul li {
   flex: 0 0 calc(50% - 0.5em); /* Dos columnas horizontales */
   box-sizing: border-box;
+}
+@media (max-width: 700px) {
+  .chapter-page ul li {
+    flex: 0 0 100%;
+  }
 }
