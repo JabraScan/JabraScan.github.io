@@ -4,16 +4,20 @@ import { activarLinksPDF } from './eventos.js';
 import { parseDateDMY } from './utils.js';
 
 export function initUltimosCapitulos() {
+  // 📦 Elementos del DOM
   const listEl = document.getElementById("book-card-caps");
   const emptyEl = document.getElementById("empty");
   const metaEl = document.getElementById("meta");
   const qEl = document.getElementById("q");
 
+  // 🧠 Estado interno
   const state = {
-    items: [],
-    filtered: []
+    items: [],       // Todos los capítulos
+    filtered: [],    // Capítulos filtrados por búsqueda
+    orderAsc: false  // Orden actual: false = descendente
   };
 
+  // 📅 Formatea fecha al estilo español
   const formatDateEs = (date) => {
     const d = typeof date === "string" ? parseDateDMY(date) : date;
     if (!d) return "";
@@ -23,6 +27,7 @@ export function initUltimosCapitulos() {
     return `${dd}-${mm}-${yyyy}`;
   };
 
+  // 🎨 Renderiza la lista de capítulos
   const render = () => {
     listEl.innerHTML = "";
 
@@ -36,11 +41,21 @@ export function initUltimosCapitulos() {
 
     const section = document.createElement("div");
     section.className = "book-section book-latest-chapters";
-    section.innerHTML = `<h3><i class="fa-solid fa-clock-rotate-left"></i> Últimos capítulos</h3>`;
+
+    // 🧭 Encabezado con botón de orden
+    section.innerHTML = `
+      <div class="book-header">
+        <span><i class="fa-solid fa-clock-rotate-left"></i> Últimos capítulos</span>
+        <button id="toggle-order" class="order-toggle" title="${state.orderAsc ? 'Orden ascendente' : 'Orden descendente'}">
+          <i class="fa-solid ${state.orderAsc ? 'fa-arrow-up-wide-short' : 'fa-arrow-down-wide-short'}"></i>
+        </button>
+      </div>
+    `;
 
     const ul = document.createElement("ul");
     ul.className = "chapter-list";
 
+    // 📚 Genera cada capítulo como <li>
     for (const item of state.filtered) {
       const li = document.createElement("li");
       li.innerHTML = `
@@ -61,10 +76,25 @@ export function initUltimosCapitulos() {
 
     activarLinksPDF();
 
+    // 📊 Muestra resumen de capítulos y obras
     const totalObras = new Set(state.filtered.map(i => i._obra)).size;
     metaEl.textContent = `${state.filtered.length} capítulos · ${totalObras} obras`;
+
+    // 🔁 Evento para alternar orden al hacer clic en el icono
+    const toggleBtn = section.querySelector("#toggle-order");
+    toggleBtn.addEventListener("click", () => {
+      state.orderAsc = !state.orderAsc;
+
+      const sortFn = state.orderAsc
+        ? (a, b) => parseDateDMY(a._fecha) - parseDateDMY(b._fecha)
+        : (a, b) => parseDateDMY(b._fecha) - parseDateDMY(a._fecha);
+
+      state.filtered.sort(sortFn);
+      render(); // 🔄 Vuelve a renderizar con nuevo orden
+    });
   };
 
+  // 🔍 Aplica filtro de búsqueda
   const applyFilter = () => {
     const q = qEl.value.trim().toLowerCase();
     state.filtered = !q
@@ -74,11 +104,18 @@ export function initUltimosCapitulos() {
           it.nombreCapitulo.toLowerCase().includes(q) ||
           String(it.numCapitulo).includes(q)
         );
+
+    // 🧮 Aplica orden actual al filtrar
+    const sortFn = state.orderAsc
+      ? (a, b) => parseDateDMY(a._fecha) - parseDateDMY(b._fecha)
+      : (a, b) => parseDateDMY(b._fecha) - parseDateDMY(a._fecha);
+
+    state.filtered.sort(sortFn);
     render();
   };
 
+  // ⌨️ Atajo para enfocar el campo de búsqueda
   qEl.addEventListener("input", applyFilter);
-
   window.addEventListener("keydown", (e) => {
     if (e.key === "/" && document.activeElement !== qEl) {
       e.preventDefault();
@@ -87,11 +124,11 @@ export function initUltimosCapitulos() {
     }
   });
 
+  // 🚚 Carga inicial de capítulos
   cargarCapitulos()
     .then(data => {
-      state.items = flatten(data).sort(sortDesc);
-      state.filtered = [...state.items];
-      render();
+      state.items = flatten(data);
+      applyFilter(); // Aplica filtro y orden inicial
     })
     .catch(err => {
       console.error("Error cargando capitulos.json:", err);
