@@ -55,6 +55,8 @@ export function activarPaginacion(rangos) {
   const rangoSpan = document.querySelector('.pagination-range');
   const btnPrev = document.querySelector('.pagina-btn[data-prev]');
   const btnNext = document.querySelector('.pagina-btn[data-next]');
+  const btnFirst = document.querySelector('.btn-first-pag');
+  const btnLast = document.querySelector('.btn-last-pag');
   let paginaActual = 1;
   const totalPaginas = paginas.length;
 
@@ -69,8 +71,14 @@ export function activarPaginacion(rangos) {
       rangoSpan.textContent = rangos[nuevaPagina - 1] || '';
     }
 
-    if (btnPrev) btnPrev.disabled = nuevaPagina === 1;
-    if (btnNext) btnNext.disabled = nuevaPagina === totalPaginas;
+    if (btnPrev) {
+      btnPrev.disabled = nuevaPagina === 1;
+      btnFirst.disabled = nuevaPagina === 1;
+    }
+    if (btnNext) {
+      btnNext.disabled = nuevaPagina === totalPaginas;
+      btnLast.disabled = nuevaPagina === totalPaginas;
+    }      
 
     paginaActual = nuevaPagina;
   };
@@ -90,3 +98,4 @@ export function activarPaginacion(rangos) {
 
   mostrarPagina(1);
 }
+
