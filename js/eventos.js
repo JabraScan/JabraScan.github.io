@@ -27,7 +27,7 @@ export function activarLinksPDF() {
     });
   });
 }
-
+/*
 export function activarPaginacion() {
   const botones = document.querySelectorAll('.pagina-btn');
   botones.forEach(btn => {
@@ -38,5 +38,43 @@ export function activarPaginacion() {
       });
     });
   });
+}
+*/
+export function activarPaginacion() {
+  const botones = document.querySelectorAll('.pagina-btn');
+  const paginas = document.querySelectorAll('.chapter-page');
+  const etiquetas = document.querySelectorAll('.pagination-label');
+  let paginaActual = 1;
+  const totalPaginas = paginas.length;
+
+  const mostrarPagina = (nuevaPagina) => {
+    if (nuevaPagina < 1 || nuevaPagina > totalPaginas) return;
+
+    paginas.forEach(div => {
+      div.style.display = div.getAttribute('data-pagina') === String(nuevaPagina) ? 'block' : 'none';
+    });
+
+    etiquetas.forEach(label => {
+      label.style.display = label.getAttribute('data-pagina') === String(nuevaPagina) ? 'block' : 'none';
+    });
+
+    paginaActual = nuevaPagina;
+  };
+
+  botones.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.hasAttribute('data-prev')) {
+        mostrarPagina(paginaActual - 1);
+      } else if (btn.hasAttribute('data-next')) {
+        mostrarPagina(paginaActual + 1);
+      } else if (btn.hasAttribute('data-pagina')) {
+        const nueva = parseInt(btn.getAttribute('data-pagina'));
+        mostrarPagina(nueva);
+      }
+    });
+  });
+
+  // Mostrar la primera página al cargar
+  mostrarPagina(1);
 }
 
