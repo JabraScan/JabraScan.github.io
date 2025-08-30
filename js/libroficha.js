@@ -195,11 +195,11 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
 
   const paginacionHTML = `
     <div class="pagination-controls">
-      <button class="pagina-btn" data-pagina="1">Primero</button>
+      <button class="pagina-btn btn-first-pag" data-pagina="1">Primero</button>
       <button class="pagina-btn" data-prev="true">Previo</button>
       <span class="pagination-range">${rangos[0]}</span>
       <button class="pagina-btn" data-next="true">Siguiente</button>
-      <button class="pagina-btn" data-pagina="${paginas}">Último</button>
+      <button class="pagina-btn btn-last-pag" data-pagina="${paginas}">Último</button>
     </div>
   `;
 
@@ -223,6 +223,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
