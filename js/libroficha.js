@@ -120,7 +120,7 @@ export function cargarlibro(libroId) {
           <li>
             <a href="#" data-pdf-obra="${clave}" data-pdf-capitulo="${cap.numCapitulo}" class="pdf-link">
               <span>${cap.numCapitulo}: ${cap.nombreCapitulo}</span>
-              <!--<span>(${cap.Fecha})</span>-->
+              <span>(${cap.Fecha})</span>
             </a>
           </li>`).join('');
 
@@ -166,7 +166,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
       <li>
         <a href="#" data-pdf-obra="${clave}" data-pdf-capitulo="${cap.numCapitulo}" class="pdf-link">
           <span>${cap.numCapitulo} · ${cap.nombreCapitulo}</span>
-          <span>(${cap.Fecha})</span>
+          <!--<span>(${cap.Fecha})</span>-->
         </a>
       </li>`).join('');
 
@@ -216,4 +216,5 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
