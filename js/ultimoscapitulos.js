@@ -1,23 +1,22 @@
 // ultimoscapitulos.js
-import { flatten, sortDesc, cargarCapitulos } from './data.js';
+import { flatten, sortDesc, sortAsc, cargarCapitulos } from './data.js';
 import { activarLinksPDF } from './eventos.js';
 import { parseDateDMY } from './utils.js';
 
 export function initUltimosCapitulos() {
-  // 📦 Elementos del DOM
   const listEl = document.getElementById("book-card-caps");
   const emptyEl = document.getElementById("empty");
   const metaEl = document.getElementById("meta");
   const qEl = document.getElementById("q");
 
-  // 🧠 Estado interno
+  // Estado interno de la vista
   const state = {
-    items: [],       // Todos los capítulos
-    filtered: [],    // Capítulos filtrados por búsqueda
-    orderAsc: false  // Orden actual: false = descendente
+    items: [],
+    filtered: [],
+    orden: "desc" // Estado inicial de ordenación
   };
 
-  // 📅 Formatea fecha al estilo español
+  // Formatea fecha en formato DD-MM-YYYY
   const formatDateEs = (date) => {
     const d = typeof date === "string" ? parseDateDMY(date) : date;
     if (!d) return "";
@@ -27,7 +26,7 @@ export function initUltimosCapitulos() {
     return `${dd}-${mm}-${yyyy}`;
   };
 
-  // 🎨 Renderiza la lista de capítulos
+  // Renderiza la lista de capítulos
   const render = () => {
     listEl.innerHTML = "";
 
@@ -42,12 +41,21 @@ export function initUltimosCapitulos() {
     const section = document.createElement("div");
     section.className = "book-section book-latest-chapters";
 
-    // 🧭 Encabezado con botón de orden
+    // Icono dinámico según el orden actual
+    const iconClass = state.orden === "asc"
+      ? "fa-arrow-up-wide-short"
+      : "fa-arrow-down-wide-short";
+
+    const titleText = state.orden === "asc"
+      ? "Orden ascendente"
+      : "Orden descendente";
+
+    // Cabecera con botón de ordenación
     section.innerHTML = `
       <div class="book-header">
         <span><i class="fa-solid fa-clock-rotate-left"></i> Últimos capítulos</span>
-        <button id="toggle-order" class="order-toggle" title="${state.orderAsc ? 'Orden ascendente' : 'Orden descendente'}">
-          <i class="fa-solid ${state.orderAsc ? 'fa-arrow-up-wide-short' : 'fa-arrow-down-wide-short'}"></i>
+        <button id="toggle-order" class="order-toggle" title="${titleText}">
+          <i class="fa-solid ${iconClass}"></i>
         </button>
       </div>
     `;
@@ -55,7 +63,6 @@ export function initUltimosCapitulos() {
     const ul = document.createElement("ul");
     ul.className = "chapter-list";
 
-    // 📚 Genera cada capítulo como <li>
     for (const item of state.filtered) {
       const li = document.createElement("li");
       li.innerHTML = `
@@ -76,28 +83,24 @@ export function initUltimosCapitulos() {
 
     activarLinksPDF();
 
-    // 📊 Muestra resumen de capítulos y obras
     const totalObras = new Set(state.filtered.map(i => i._obra)).size;
     metaEl.textContent = `${state.filtered.length} capítulos · ${totalObras} obras`;
 
-    // 🔁 Evento para alternar orden al hacer clic en el icono
-    const toggleBtn = section.querySelector("#toggle-order");
-    toggleBtn.addEventListener("click", () => {
-      state.orderAsc = !state.orderAsc;
-
-      const sortFn = state.orderAsc
-        ? (a, b) => parseDateDMY(a._fecha) - parseDateDMY(b._fecha)
-        : (a, b) => parseDateDMY(b._fecha) - parseDateDMY(a._fecha);
-
-      state.filtered.sort(sortFn);
-      render(); // 🔄 Vuelve a renderizar con nuevo orden
-    });
+    // Activar botón de ordenación
+    const toggleBtn = document.getElementById("toggle-order");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", () => {
+        // Alternar orden y volver a aplicar filtro
+        state.orden = state.orden === "asc" ? "desc" : "asc";
+        applyFilter(); // Refiltra y reordena
+      });
+    }
   };
 
-  // 🔍 Aplica filtro de búsqueda
+  // Aplica filtro de búsqueda y ordenación
   const applyFilter = () => {
     const q = qEl.value.trim().toLowerCase();
-    state.filtered = !q
+    const base = !q
       ? [...state.items]
       : state.items.filter(it =>
           it._obra.toLowerCase().includes(q) ||
@@ -105,17 +108,18 @@ export function initUltimosCapitulos() {
           String(it.numCapitulo).includes(q)
         );
 
-    // 🧮 Aplica orden actual al filtrar
-    const sortFn = state.orderAsc
-      ? (a, b) => parseDateDMY(a._fecha) - parseDateDMY(b._fecha)
-      : (a, b) => parseDateDMY(b._fecha) - parseDateDMY(a._fecha);
+    // Ordenar según estado actual
+    state.filtered = state.orden === "asc"
+      ? base.sort(sortAsc)
+      : base.sort(sortDesc);
 
-    state.filtered.sort(sortFn);
     render();
   };
 
-  // ⌨️ Atajo para enfocar el campo de búsqueda
+  // Filtro en tiempo real
   qEl.addEventListener("input", applyFilter);
+
+  // Atajo para enfocar búsqueda con "/"
   window.addEventListener("keydown", (e) => {
     if (e.key === "/" && document.activeElement !== qEl) {
       e.preventDefault();
@@ -124,7 +128,7 @@ export function initUltimosCapitulos() {
     }
   });
 
-  // 🚚 Carga inicial de capítulos
+  // Cargar datos iniciales
   cargarCapitulos()
     .then(data => {
       state.items = flatten(data);
