@@ -9,7 +9,7 @@
         { "Fecha" : "27-08-2025",  "NombreArchivo" : "CDMNQTMHC-007.pdf" , "numCapitulo" :  "7", "nombreCapitulo" : "Pidiendo misericordia, León"                          , "tituloObra" : "¡Cállate, dragón malvado! No quiero tener mas hijos contigo."},
         { "Fecha" : "27-08-2025",  "NombreArchivo" : "CDMNQTMHC-008.pdf" , "numCapitulo" :  "8", "nombreCapitulo" : "Estás a cargo de cuidar al niño."                     , "tituloObra" : "¡Cállate, dragón malvado! No quiero tener mas hijos contigo."},
         { "Fecha" : "27-08-2025",  "NombreArchivo" : "CDMNQTMHC-009.pdf" , "numCapitulo" :  "9", "nombreCapitulo" : "En forma mortal, impregnando a un dragón"             , "tituloObra" : "¡Cállate, dragón malvado! No quiero tener mas hijos contigo."},
-        { "Fecha" : "27-08-2025",  "NombreArchivo" : "CDMNQTMHC-010.pdf" , "numCapitulo" : "10", "nombreCapitulo" : "Mamá es el dragón malo; ¿qué pasa con papá?"          , "tituloObra" : "¡Cállate, dragón malvado! No quiero tener mas hijos contigo."}
+        { "Fecha" : "27-08-2025",  "NombreArchivo" : "CDMNQTMHC-010.pdf" , "numCapitulo" : "10", "nombreCapitulo" : "Mamá es el dragón malo; ¿qué pasa con papá?"          , "tituloObra" : "¡Cállate, dragón malvado! No quiero tener mas hijos contigo."},
         {
         "Fecha": "29-08-2025",
         "NombreArchivo": "CDMNQTMHC-11.pdf",
@@ -289,6 +289,6 @@
         "numCapitulo": "50",
         "nombreCapitulo": "v1c50 · En el enésimo día sin Noia, extrañándola.",
         "tituloObra": "CDMNQTMHC Vol 1"
-    },
+    }
     ]
 }
