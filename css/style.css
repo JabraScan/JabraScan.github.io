@@ -419,8 +419,7 @@ footer {
   }
 
   /* Media query: tablets y móviles en iOS */
-  /*@media only screen and (max-width: 1028px) */
-  {
+  @media only screen and (max-width: 1200px) {
     body.ios .lista-libros {
       display: block;
     }
@@ -481,4 +480,5 @@ footer {
   }
 }
 /*fin etiquetas para los capitulos*/
+
 
