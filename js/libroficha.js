@@ -151,7 +151,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     return ordenActual === "asc" ? fechaA - fechaB : fechaB - fechaA;
   });
 
-  const capitulosPorPagina = 10;
+  const capitulosPorPagina = 50;
   const paginas = Math.ceil(listaOrdenada.length / capitulosPorPagina);
   let contenidoPaginas = '';
   let rangos = [];
@@ -217,6 +217,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
