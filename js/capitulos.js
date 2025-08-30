@@ -1,6 +1,7 @@
 // capitulos.js
 import { generarEtiquetaNuevo, parseFecha } from './utils.js';
-
+//codigo 30082025 1000
+/*
 export function obtenerCapitulos(clave) {
   return fetch('../capitulos.json')
     .then(response => response.json())
@@ -74,3 +75,76 @@ export function crearUltimoCapituloDeObra(data, claveObra) {
     `;
     return divsection;
 }
+*/
+//optimizacion de la funcion con control de json y capitulos con formato incorrecto
+export function obtenerCapitulos(clave) {
+  return fetch('../capitulos.json')
+    .then(response => {
+      if (!response.ok) {
+        console.error("❌ No se pudo cargar el índice de capítulos.");
+        return Promise.reject(new Error("Archivo capitulos.json no encontrado"));
+      }
+      return response.json().catch(() => {
+        console.error("❌ El archivo capitulos.json tiene un formato inválido.");
+        return Promise.reject(new Error("Formato inválido en capitulos.json"));
+      });
+    })
+    .then(index => {
+      if (!index || typeof index !== 'object') {
+        console.error("❌ El índice de capítulos está vacío o mal estructurado.");
+        return [];
+      }
+
+      const ruta = index[clave];
+      if (!ruta) {
+        console.error(`❌ Clave "${clave}" no encontrada en el índice.`);
+        return [];
+      }
+
+      return fetch(ruta)
+        .then(res => {
+          if (!res.ok) {
+            console.error(`❌ No se pudo cargar el archivo de la obra "${clave}" desde ${ruta}`);
+            return [];
+          }
+          return res.json().catch(() => {
+            console.error(`❌ El archivo "${ruta}" tiene un formato JSON inválido.`);
+            return [];
+          });
+        })
+        .then(dataObra => {
+          const capitulos = Array.isArray(dataObra?.[clave])
+            ? dataObra[clave]
+            : [];
+
+          if (!capitulos.length) {
+            console.warn(`⚠️ No se encontraron capítulos válidos para "${clave}".`);
+          }
+
+          return capitulos.map((item, i) => {
+            if (
+              typeof item !== 'object' ||
+              !item?.NombreArchivo ||
+              !item?.Fecha ||
+              item?.numCapitulo == null ||
+              !item?.nombreCapitulo
+            ) {
+              console.warn(`⚠️ Capítulo inválido en posición ${i} del archivo "${clave}".`);
+              return null;
+            }
+
+            return {
+              NombreArchivo: item.NombreArchivo,
+              Fecha: item.Fecha,
+              numCapitulo: item.numCapitulo,
+              nombreCapitulo: item.nombreCapitulo
+            };
+          }).filter(Boolean); // Elimina los capítulos inválidos
+        });
+    })
+    .catch(error => {
+      console.error("❌ Error general al cargar los capítulos:", error.message);
+      return [];
+    });
+}
+
