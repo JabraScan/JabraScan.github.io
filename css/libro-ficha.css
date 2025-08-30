@@ -172,6 +172,8 @@ body {
   list-style: none;
   padding: 0;
   margin: 0 0 0.7em 0;
+}
+.book-chapters-list ul {
   height: 3.5em
 }
 
@@ -286,7 +288,7 @@ body {
 }
 
 .chapter-list.pdf-link {
-  display: inline;
+  display: block;
 }
 /* Tablets pequeñas entre 601px y 700px */
 @media (max-width: 700px) and (min-width: 601px) {
@@ -353,6 +355,7 @@ body {
       color: black;
     }
 /*===fin botones de paginacion===*/
+
 
 
 
