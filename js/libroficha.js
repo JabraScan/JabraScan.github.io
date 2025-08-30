@@ -150,7 +150,7 @@ export function cargarlibro(libroId) {
 function renderCapitulosConOrden(listacapitulos, clave, seccionUltimos, ordenActual = "asc") {
   const DataBook = document.querySelector('.book-card-caps');
 
-  // 🔄 Ordena los capítulos por fecha
+  // Ordenar capítulos por fecha
   const listaOrdenada = [...listacapitulos].sort((a, b) => {
     const fechaA = parseDateDMY(a.Fecha);
     const fechaB = parseDateDMY(b.Fecha);
@@ -159,13 +159,14 @@ function renderCapitulosConOrden(listacapitulos, clave, seccionUltimos, ordenAct
 
   const capitulosPorPagina = 10;
   const paginas = Math.ceil(listaOrdenada.length / capitulosPorPagina);
-  let paginacionHTML = '';
-  let botonesHTML = '';
+  let contenidoPaginas = '';
+  let rangoEtiquetas = [];
 
   for (let i = 0; i < paginas; i++) {
     const pagina = listaOrdenada.slice(i * capitulosPorPagina, (i + 1) * capitulosPorPagina);
-    const inicio = pagina[0]?.numCapitulo || '';
-    const fin = pagina[pagina.length - 1]?.numCapitulo || '';
+    const inicio = pagina[0]?.numCapitulo.padStart(4, '0') || '';
+    const fin = pagina[pagina.length - 1]?.numCapitulo.padStart(4, '0') || '';
+    rangoEtiquetas.push(`C.${inicio} - C.${fin}`);
 
     const capitulosHTML = pagina.map(cap => `
       <li>
@@ -175,31 +176,44 @@ function renderCapitulosConOrden(listacapitulos, clave, seccionUltimos, ordenAct
         </a>
       </li>`).join('');
 
-    paginacionHTML += `
+    contenidoPaginas += `
       <div class="chapter-page" data-pagina="${i + 1}" style="display: ${i === 0 ? 'block' : 'none'};">
         <ul>${capitulosHTML}</ul>
       </div>
       <div class="pagination-label" data-pagina="${i + 1}" style="display: ${i === 0 ? 'block' : 'none'};">
-        <span>C.${inicio} - C.${fin}</span>
+        <span>${rangoEtiquetas[i]}</span>
       </div>
     `;
+  }
 
+  // 🔘 Botón de orden con icono y clase personalizada
+  const ordenBtnHTML = `
+    <button id="ordenar-btn" class="order-toggle" style="float: left;">
+      <i class="fa-solid fa-arrow-up-wide-short"></i>
+    </button>
+  `;
+
+  // 🧭 Botones de navegación
+  let botonesHTML = `
+    <button class="pagination-btn" data-pagina="1">Primero</button>
+    <button class="pagination-btn" data-prev="true">Previo</button>
+  `;
+
+  for (let i = 0; i < paginas; i++) {
     botonesHTML += `<button class="pagination-btn" data-pagina="${i + 1}">${i + 1}</button>`;
   }
 
-  // 🔘 Botón de orden con clase personalizada
-  const ordenBtnHTML = `
-    <button id="ordenar-btn" class="order-toggle">
-      Ordenar por fecha: ${ordenActual === "asc" ? "Ascendente ↑" : "Descendente ↓"}
-    </button>
+  botonesHTML += `
+    <button class="pagination-btn" data-next="true">Siguiente</button>
+    <button class="pagination-btn" data-pagina="${paginas}">Último</button>
   `;
 
   const seccionTodos = `
     <div class="book-section book-chapters-list">
       <h3><i class="fa-solid fa-list-ol"></i> Todos los capítulos</h3>
       ${ordenBtnHTML}
+      ${contenidoPaginas}
       <div class="pagination-controls">${botonesHTML}</div>
-      ${paginacionHTML}
     </div>
   `;
 
@@ -207,15 +221,16 @@ function renderCapitulosConOrden(listacapitulos, clave, seccionUltimos, ordenAct
   DataBook.insertAdjacentHTML("beforeend", seccionUltimos);
   DataBook.insertAdjacentHTML("beforeend", seccionTodos);
 
-  // 🧠 Activa eventos
   activarLinksPDF();
   activarPaginacion();
 
   // 🔁 Evento para alternar orden
   const ordenarBtn = document.getElementById("ordenar-btn");
   ordenarBtn.addEventListener("click", () => {
-    const nuevoOrden = ordenActual === "asc" ? "desc" : "asc";
     document.querySelector('.book-chapters-list').remove();
+    const nuevoOrden = ordenActual === "asc" ? "desc" : "asc";
     renderCapitulosConOrden(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
+
