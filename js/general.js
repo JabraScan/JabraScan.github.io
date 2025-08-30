@@ -4,7 +4,7 @@ import { abrirLectorPDF } from './lector.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   // Detección de iOS
-  if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) && !window.MSStream) {
+  if (/iPad|iPhone|iPod|Macintosh|AppleWebKit/.test(navigator.userAgent) && !window.MSStream) {
     document.body.classList.add('ios');
   }
 
@@ -57,4 +57,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
 
