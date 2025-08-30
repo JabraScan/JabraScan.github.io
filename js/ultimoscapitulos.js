@@ -67,7 +67,7 @@ export function initUltimosCapitulos() {
     for (const item of state.filtered) {
       const li = document.createElement("li");
       li.innerHTML = `
-        <a href="#" class="pdf-link"
+        <a href="#" class="pdf-link ultcap-chapter"
            data-pdf-obra="${item._clave}"
            data-pdf-capitulo="${item.numCapitulo}">
           <span class="fecha">${formatDateEs(item._fecha)}</span> -
@@ -143,5 +143,6 @@ export function initUltimosCapitulos() {
       console.error("Error cargando capitulos.json:", err);
     });
 }
+
 
 
