@@ -357,6 +357,18 @@ body {
     }
 /*===fin botones de paginacion===*/
 
+.chapter-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em; /* Espacio entre columnas y filas */
+}
+
+.chapter-page li {
+  flex: 0 0 calc(50% - 1em); /* Dos columnas */
+  box-sizing: border-box;
+}
+
+
 
 
 
