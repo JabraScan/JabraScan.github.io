@@ -173,10 +173,11 @@ body {
   padding: 0;
   margin: 0 0 0.7em 0;
 }
+/*
 .book-chapters-list ul {
   height: 3.5em
 }
-
+*/
 .book-latest-chapters li,
 .book-chapters-list li {
   padding: 0.3em 0;
@@ -355,6 +356,7 @@ body {
       color: black;
     }
 /*===fin botones de paginacion===*/
+
 
 
 
