@@ -61,7 +61,7 @@ export function initUltimosCapitulos() {
     `;
 
     const ul = document.createElement("ul");
-    ul.className = "chapter-list";
+    ul.classList.add("chapter-list","ultcap-chapter");
 
     // Genera cada capítulo como elemento de lista
     for (const item of state.filtered) {
@@ -143,6 +143,7 @@ export function initUltimosCapitulos() {
       console.error("Error cargando capitulos.json:", err);
     });
 }
+
 
 
 
