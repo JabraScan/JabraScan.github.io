@@ -1,15 +1,21 @@
 import { parseDateDMY, parseChapterNumber } from './utils.js';
 
+// Variables globales para el lector PDF
 let pdfDoc = null;
 let pageNum = 1;
 let canvas, ctx, pageInfo, body;
 
+/**
+ * Inicializa el lector PDF al cargar la página.
+ * Configura el entorno visual, botones, enlaces y carga la última lectura.
+ */
 export function initLectorPDF() {
   canvas = document.getElementById("pdfCanvas");
   ctx = canvas.getContext("2d");
   pageInfo = document.getElementById("pageInfo");
   body = document.body;
-console.log('initLectorPDF ejecutado');
+  console.log('initLectorPDF ejecutado');
+
   configurarModoOscuro();
   configurarMenuHamburguesa();
   configurarBotonesLectura();
@@ -17,6 +23,10 @@ console.log('initLectorPDF ejecutado');
   cargarUltimaLectura();
 }
 
+/**
+ * Renderiza una página específica del documento PDF.
+ * @param {number} num - Número de página a renderizar.
+ */
 export function renderPage(num) {
   pdfDoc.getPage(num).then(page => {
     const scale = 1.5;
@@ -30,6 +40,12 @@ export function renderPage(num) {
   });
 }
 
+/**
+ * Carga un capítulo específico de una obra.
+ * @param {string} clave - Identificador de la obra.
+ * @param {string} capitulo - Número del capítulo a cargar.
+ * @param {number} paginaInicial - Página inicial del capítulo.
+ */
 export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
   fetch("capitulos.json")
     .then(res => res.json())
@@ -50,11 +66,15 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
         actualizarTituloObra(cap.tituloObra, clave);
         cargarPDF(clave, cap.NombreArchivo, paginaInicial, idx, capitulosObra);
         configurarSelectorCapitulos(capitulo, capitulosObra, clave);
+        configurarBotonesCapitulo(idx, capitulosObra, clave); // ← Botones de navegación
       })
     )
     .catch(err => console.error("Error al cargar el capítulo:", err));
 }
 
+/**
+ * Carga el archivo PDF y renderiza la página inicial.
+ */
 function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
   const pdfPath = `books/${clave}/${encodeURIComponent(nombreArchivo)}`;
   pdfjsLib.getDocument(pdfPath).promise.then(doc => {
@@ -65,6 +85,9 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
   });
 }
 
+/**
+ * Actualiza el título de la obra y muestra banner especial si aplica.
+ */
 function actualizarTituloObra(titulo, clave) {
   const h1 = document.getElementById("tituloObraPdf");
   h1.textContent = titulo;
@@ -83,6 +106,9 @@ function actualizarTituloObra(titulo, clave) {
   }
 }
 
+/**
+ * Configura el selector de capítulos en el menú desplegable.
+ */
 function configurarSelectorCapitulos(capituloActual, capitulosObra, clave) {
   const chapterSelect = document.getElementById("chapterSelect");
   chapterSelect.innerHTML = "";
@@ -102,6 +128,9 @@ function configurarSelectorCapitulos(capituloActual, capitulosObra, clave) {
   };
 }
 
+/**
+ * Configura los botones de navegación entre páginas y capítulos.
+ */
 function actualizarBotonesNav(idx, capitulos, clave) {
   const prevAction = pageNum > 1
     ? () => { pageNum--; renderPage(pageNum); actualizarBotonesNav(idx, capitulos, clave); }
@@ -128,6 +157,9 @@ function actualizarBotonesNav(idx, capitulos, clave) {
   });
 }
 
+/**
+ * Configura el modo oscuro/claro del lector.
+ */
 function configurarModoOscuro() {
   const toggleMode = document.getElementById("toggleMode");
   toggleMode.onclick = () => {
@@ -144,6 +176,9 @@ function configurarModoOscuro() {
   }
 }
 
+/**
+ * Configura el menú hamburguesa para dispositivos móviles.
+ */
 function configurarMenuHamburguesa() {
   const menuToggle = document.getElementById('menu-toggle');
   const mainHeader = document.getElementById('main-header');
@@ -163,6 +198,9 @@ function configurarMenuHamburguesa() {
   });
 }
 
+/**
+ * Configura los botones para lectura en voz alta.
+ */
 function configurarBotonesLectura() {
   const startBtn = document.getElementById("readAloud");
   const pauseBtn = document.getElementById("pauseReading");
@@ -176,57 +214,62 @@ function configurarBotonesLectura() {
     stopBtn.style.display = stop ? "inline-block" : "none";
   }
 
-  startBtn.onclick = () => {
-    pdfDoc.getPage(pageNum).then(page => {
-      page.getTextContent().then(textContent => {
-        const text = textContent.items.map(item => item.str).join(" ");
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = "es-ES";
-        const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith("es"));
-        utterance.voice = voices.find(v => v.name.includes("Google") || v.name.includes("Helena")) || voices[0];
-        utterance.rate = 0.95;
-        utterance.pitch = 1.1;
-        utterance.volume = 1;
-        mostrar({ pause: true, stop: true });
+startBtn.onclick = () => {
+  pdfDoc.getPage(pageNum).then(page => {
+    page.getTextContent().then(textContent => {
+      const text = textContent.items.map(item => item.str).join(" ");
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "es-ES";
 
-        utterance.onend = () => {
-          const btnNext = document.querySelector('.nextPage');
-          if (btnNext && !btnNext.disabled) {
-            btnNext.click();
-            setTimeout(() => startBtn.click(), 500);
-          } else {
-            const fin = new SpeechSynthesisUtterance("Ya no hay más contenido para leer");
-            fin.lang = "es-ES";
-            speechSynthesis.speak(fin);
-            mostrar({ play: true });
-          }
-        };
+      const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith("es"));
+      utterance.voice = voices.find(v => v.name.includes("Google") || v.name.includes("Helena")) || voices[0];
+      utterance.rate = 0.95;
+      utterance.pitch = 1.1;
+      utterance.volume = 1;
 
-        speechSynthesis.speak(utterance);
-      });
-    });
-  };
-
-  pauseBtn.onclick = () => {
-    if (speechSynthesis.speaking && !speechSynthesis.paused) {
-      speechSynthesis.pause();
-      mostrar({ resume: true, stop: true });
-    }
-  };
-
-  resumeBtn.onclick = () => {
-    if (speechSynthesis.paused) {
-      speechSynthesis.resume();
       mostrar({ pause: true, stop: true });
-    }
-  };
 
-  stopBtn.onclick = () => {
-    speechSynthesis.cancel();
-    mostrar({ play: true });
-  };
+      utterance.onend = () => {
+        const btnNext = document.querySelector('.nextPage');
+        if (btnNext && !btnNext.disabled) {
+          btnNext.click();
+          setTimeout(() => startBtn.click(), 500);
+        } else {
+          const fin = new SpeechSynthesisUtterance("Ya no hay más contenido para leer");
+          fin.lang = "es-ES";
+          speechSynthesis.speak(fin);
+          mostrar({ play: true });
+        }
+      };
+
+      speechSynthesis.speak(utterance);
+    });
+  });
+};
+
+pauseBtn.onclick = () => {
+  if (speechSynthesis.speaking && !speechSynthesis.paused) {
+    speechSynthesis.pause();
+    mostrar({ resume: true, stop: true });
+  }
+};
+
+resumeBtn.onclick = () => {
+  if (speechSynthesis.paused) {
+    speechSynthesis.resume();
+    mostrar({ pause: true, stop: true });
+  }
+};
+
+stopBtn.onclick = () => {
+  speechSynthesis.cancel();
+  mostrar({ play: true });
+};
 }
 
+/**
+ * Configura los enlaces que cargan capítulos desde elementos HTML.
+ */
 function configurarEnlacesPDF() {
   document.querySelectorAll(".pdf-link").forEach(link => {
     link.addEventListener("click", event => {
@@ -240,6 +283,9 @@ function configurarEnlacesPDF() {
   });
 }
 
+/**
+ * Carga la última lectura guardada en localStorage.
+ */
 function cargarUltimaLectura() {
   const ultimaObra = localStorage.getItem("ultimaObra");
   const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
@@ -249,7 +295,9 @@ function cargarUltimaLectura() {
   }
 }
 
-// Función auxiliar para redirigir a la ficha del libro
+/**
+ * Redirige a la ficha del libro correspondiente.
+ */
 function onLibroClick(libroId) {
   localStorage.setItem('libroSeleccionado', libroId);
   fetch('books/libro-ficha.html')
@@ -267,4 +315,42 @@ function onLibroClick(libroId) {
       });
     })
     .catch(err => console.error('Error:', err));
+}
+
+/**
+ * Configura los botones de capítulo anterior y siguiente.
+ * Se llama desde cargarCapitulo().
+ */
+function configurarBotonesCapitulo(idx, capitulosObra, clave) {
+  // ⬅️ Botón capítulo anterior
+  const btnPrev = document.getElementById("btnPrevCap");
+  if (idx > 0) {
+    const prevCap = capitulosObra[idx - 1];
+    btnPrev.disabled = false;
+    btnPrev.onclick = () => {
+      localStorage.setItem("ultimaPagina", 1);
+      localStorage.setItem("ultimaObra", clave);
+      localStorage.setItem("ultimoCapitulo", prevCap.numCapitulo);
+      cargarCapitulo(clave, prevCap.numCapitulo, 1);
+    };
+  } else {
+    btnPrev.disabled = true;
+    btnPrev.onclick = null;
+  }
+
+  // ➡️ Botón capítulo siguiente
+  const btnNext = document.getElementById("btnNextCap");
+  if (idx < capitulosObra.length - 1) {
+    const nextCap = capitulosObra[idx + 1];
+    btnNext.disabled = false;
+    btnNext.onclick = () => {
+      localStorage.setItem("ultimaPagina", 1);
+      localStorage.setItem("ultimaObra", clave);
+      localStorage.setItem("ultimoCapitulo", nextCap.numCapitulo);
+      cargarCapitulo(clave, nextCap.numCapitulo, 1);
+    };
+  } else {
+    btnNext.disabled = true;
+    btnNext.onclick = null;
+  }
 }
