@@ -44,34 +44,37 @@ export function activarPaginacion() {
  * Activa la paginación de capítulos con botones de navegación y rango dinámico.
  * @param {Array} rangos - Lista de rangos por página, ej. ["C.0001 - C.0010", "C.0011 - C.0020", ...]
  */
+/**
+ * Activa la paginación de capítulos con navegación completa y rango dinámico.
+ * Desactiva botones "Previo" y "Siguiente" en los extremos.
+ * @param {Array} rangos - Lista de rangos por página, ej. ["C.0001 - C.0010", ...]
+ */
 export function activarPaginacion(rangos) {
   const botones = document.querySelectorAll('.pagina-btn');
   const paginas = document.querySelectorAll('.chapter-page');
   const rangoSpan = document.querySelector('.pagination-range');
+  const btnPrev = document.querySelector('.pagina-btn[data-prev]');
+  const btnNext = document.querySelector('.pagina-btn[data-next]');
   let paginaActual = 1;
   const totalPaginas = paginas.length;
 
-  /**
-   * Muestra la página indicada y actualiza el rango.
-   * @param {number} nuevaPagina - Número de página a mostrar.
-   */
   const mostrarPagina = (nuevaPagina) => {
     if (nuevaPagina < 1 || nuevaPagina > totalPaginas) return;
 
-    // Ocultar todas las páginas
     paginas.forEach(div => {
       div.style.display = div.getAttribute('data-pagina') === String(nuevaPagina) ? 'block' : 'none';
     });
 
-    // Actualizar rango visible
     if (rangoSpan) {
       rangoSpan.textContent = rangos[nuevaPagina - 1] || '';
     }
 
+    if (btnPrev) btnPrev.disabled = nuevaPagina === 1;
+    if (btnNext) btnNext.disabled = nuevaPagina === totalPaginas;
+
     paginaActual = nuevaPagina;
   };
 
-  // Asignar eventos a los botones
   botones.forEach(btn => {
     btn.addEventListener('click', () => {
       if (btn.hasAttribute('data-prev')) {
@@ -85,6 +88,5 @@ export function activarPaginacion(rangos) {
     });
   });
 
-  // Mostrar la primera página al cargar
   mostrarPagina(1);
 }
