@@ -502,7 +502,9 @@ footer {
   -webkit-transition: color 0.2s;
 }
 .chapter-list-ultimos a:hover { color: #fca311; }
-
+.ultcap-chapter {
+  justify-content: flex-start;
+}
 .ultcap-chapter span {
   span-left: 0.2em;
   display: block;
@@ -520,5 +522,5 @@ footer {
   overflow: hidden;
   text-overflow: ellipsis; /* Muestra "..." si el texto es muy largo */
   white-space: nowrap;
+  max-width: 400px;
 }
-
