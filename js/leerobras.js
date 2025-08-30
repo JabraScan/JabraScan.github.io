@@ -192,23 +192,14 @@ function ordenarLibrosPorFecha() {
 /**
  * 📚 Función: ordenarLibrosPorFecha
  * ----------------------------------
- * Ordena los elementos dentro del contenedor `.book-list` según la fecha del último capítulo.
- * Aplica tanto a elementos <article> como <li> que representen libros.
+ * Ordena dos listas de libros por fecha:
+ * 1. Elementos <article> dentro de .book-list
+ * 2. Elementos <li> dentro de .lista-libros
  * 
- * Requisitos:
- * - Cada elemento debe contener un hijo con clase `.book-latest-chapter`
- * - El atributo `data-fecha` debe tener el formato "DD-MM-YYYY"
+ * Cada elemento debe contener un hijo con clase .book-latest-chapter
+ * con atributo data-fecha en formato "DD-MM-YYYY"
  */
 function ordenarLibrosPorFecha() {
-  // 🔍 Selecciona el contenedor principal de la lista de libros
-  const container = document.querySelector('.book-list');
-  if (!container) return; // Si no existe, termina la función
-
-  // 📦 Selecciona todos los elementos de libro: <article> y <li>
-  const items = Array.from(
-    container.querySelectorAll('article.book-card-main.libro-item, li.item-libro')
-  );
-
   /**
    * 🗓️ Función auxiliar: getFecha
    * Extrae y convierte la fecha del último capítulo en un objeto Date
@@ -223,19 +214,40 @@ function ordenarLibrosPorFecha() {
     return new Date(`${año}-${mes}-${dia}`); // Formato compatible con Date
   };
 
-  // 🔄 Ordena los elementos por fecha descendente (más reciente primero)
-  items.sort((a, b) => {
-    const fechaA = getFecha(a);
-    const fechaB = getFecha(b);
+  /**
+   * 🔄 Función auxiliar: ordenarYReemplazar
+   * Ordena los elementos hijos de un contenedor por fecha
+   * @param {Element} container - Contenedor padre (ul o div)
+   * @param {string} selector - Selector de elementos hijos a ordenar
+   */
+  const ordenarYReemplazar = (container, selector) => {
+    const items = Array.from(container.querySelectorAll(selector));
 
-    if (!fechaA && !fechaB) return 0;  // Ninguna tiene fecha
-    if (!fechaA) return 1;             // Solo B tiene fecha → B primero
-    if (!fechaB) return -1;            // Solo A tiene fecha → A primero
+    items.sort((a, b) => {
+      const fechaA = getFecha(a);
+      const fechaB = getFecha(b);
 
-    return fechaB - fechaA;            // Más reciente primero
-  });
+      if (!fechaA && !fechaB) return 0;
+      if (!fechaA) return 1;
+      if (!fechaB) return -1;
 
-  // 🧹 Limpia el contenedor y reinyecta los elementos ordenados
-  container.innerHTML = '';
-  items.forEach(item => container.appendChild(item));
+      return fechaB - fechaA; // Más reciente primero
+    });
+
+    // Limpia el contenedor y reinyecta los elementos ordenados
+    container.innerHTML = '';
+    items.forEach(item => container.appendChild(item));
+  };
+
+  // 🧩 Ordena artículos dentro de .book-list
+  const bookListContainer = document.querySelector('.book-list');
+  if (bookListContainer) {
+    ordenarYReemplazar(bookListContainer, 'article.book-card-main.libro-item');
+  }
+
+  // 🧩 Ordena <li> dentro de .lista-libros
+  const listaLibrosContainer = document.querySelector('.lista-libros');
+  if (listaLibrosContainer) {
+    ordenarYReemplazar(listaLibrosContainer, 'li.item-libro');
+  }
 }
