@@ -32,7 +32,7 @@ export function obtenerCapitulos(clave) {
       console.error("Error al cargar los capítulos:", error);
       return [];
     });
-}
+}*/
 
 export function crearUltimoCapituloDeObra(data, claveObra) {
     const parseDateDMY = (s) => {
@@ -75,7 +75,6 @@ export function crearUltimoCapituloDeObra(data, claveObra) {
     `;
     return divsection;
 }
-*/
 //optimizacion de la funcion con control de json y capitulos con formato incorrecto
 export function obtenerCapitulos(clave) {
   return fetch('../capitulos.json')
@@ -147,4 +146,5 @@ export function obtenerCapitulos(clave) {
       return [];
     });
 }
+
 
