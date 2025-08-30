@@ -160,7 +160,7 @@ function onLibroClick(libroId) {
     })
     .catch(err => console.error('Error:', err));
 }
-
+/*
 function ordenarLibrosPorFecha() {
   const container = document.querySelector('.book-list');
   if (!container) return;
@@ -187,4 +187,55 @@ function ordenarLibrosPorFecha() {
 
   container.innerHTML = '';
   articles.forEach(article => container.appendChild(article));
+}
+*/
+/**
+ * 📚 Función: ordenarLibrosPorFecha
+ * ----------------------------------
+ * Ordena los elementos dentro del contenedor `.book-list` según la fecha del último capítulo.
+ * Aplica tanto a elementos <article> como <li> que representen libros.
+ * 
+ * Requisitos:
+ * - Cada elemento debe contener un hijo con clase `.book-latest-chapter`
+ * - El atributo `data-fecha` debe tener el formato "DD-MM-YYYY"
+ */
+function ordenarLibrosPorFecha() {
+  // 🔍 Selecciona el contenedor principal de la lista de libros
+  const container = document.querySelector('.book-list');
+  if (!container) return; // Si no existe, termina la función
+
+  // 📦 Selecciona todos los elementos de libro: <article> y <li>
+  const items = Array.from(
+    container.querySelectorAll('article.book-card-main.libro-item, li.item-libro')
+  );
+
+  /**
+   * 🗓️ Función auxiliar: getFecha
+   * Extrae y convierte la fecha del último capítulo en un objeto Date
+   * @param {HTMLElement} element - Elemento del libro
+   * @returns {Date|null} - Fecha válida o null si no existe o es incorrecta
+   */
+  const getFecha = (element) => {
+    const fechaStr = element.querySelector('.book-latest-chapter')?.getAttribute('data-fecha');
+    if (!fechaStr || !/^\d{2}-\d{2}-\d{4}$/.test(fechaStr)) return null;
+
+    const [dia, mes, año] = fechaStr.split('-');
+    return new Date(`${año}-${mes}-${dia}`); // Formato compatible con Date
+  };
+
+  // 🔄 Ordena los elementos por fecha descendente (más reciente primero)
+  items.sort((a, b) => {
+    const fechaA = getFecha(a);
+    const fechaB = getFecha(b);
+
+    if (!fechaA && !fechaB) return 0;  // Ninguna tiene fecha
+    if (!fechaA) return 1;             // Solo B tiene fecha → B primero
+    if (!fechaB) return -1;            // Solo A tiene fecha → A primero
+
+    return fechaB - fechaA;            // Más reciente primero
+  });
+
+  // 🧹 Limpia el contenedor y reinyecta los elementos ordenados
+  container.innerHTML = '';
+  items.forEach(item => container.appendChild(item));
 }
