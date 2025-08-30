@@ -136,7 +136,7 @@ export function cargarlibro(libroId) {
     });
 }
 /**
- * Renderiza todos los capítulos con ordenación y paginación.
+ * Renderiza todos los capítulos con ordenación por fecha y paginación.
  * @param {Array} listacapitulos - Lista completa de capítulos.
  * @param {string} clave - Clave de la obra.
  * @param {string} seccionUltimos - HTML de la sección de últimos capítulos.
@@ -145,7 +145,6 @@ export function cargarlibro(libroId) {
 function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "asc") {
   const DataBook = document.querySelector('.book-card-caps');
 
-  // Ordenar capítulos por fecha
   const listaOrdenada = [...listacapitulos].sort((a, b) => {
     const fechaA = parseDateDMY(a.Fecha);
     const fechaB = parseDateDMY(b.Fecha);
@@ -157,7 +156,6 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
   let contenidoPaginas = '';
   let rangos = [];
 
-  // Construir páginas y rangos
   for (let i = 0; i < paginas; i++) {
     const pagina = listaOrdenada.slice(i * capitulosPorPagina, (i + 1) * capitulosPorPagina);
     const inicio = pagina[0]?.numCapitulo.padStart(4, '0') || '';
@@ -179,7 +177,6 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     `;
   }
 
-  // Cabecera con botón de ordenación
   const headerHTML = `
     <div class="chapter-header" style="display: flex; justify-content: space-between; align-items: center;">
       <h3><i class="fa-solid fa-list-ol"></i> Todos los capítulos</h3>
@@ -189,7 +186,6 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     </div>
   `;
 
-  // Controles de paginación
   const paginacionHTML = `
     <div class="pagination-controls">
       <button class="pagina-btn" data-pagina="1">Primero</button>
@@ -200,7 +196,6 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     </div>
   `;
 
-  // Sección completa
   const seccionTodos = `
     <div class="book-section book-chapters-list">
       ${headerHTML}
@@ -209,19 +204,15 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     </div>
   `;
 
-  // Insertar en el DOM
   DataBook.insertAdjacentHTML("beforeend", seccionUltimos);
   DataBook.insertAdjacentHTML("beforeend", seccionTodos);
 
-  // Activar eventos
   activarLinksPDF();
   activarPaginacion(rangos);
 
-  // Botón de ordenación dinámico
   document.getElementById("ordenar-btn").addEventListener("click", () => {
     document.querySelector('.book-chapters-list').remove();
     const nuevoOrden = ordenActual === "asc" ? "desc" : "asc";
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
-
