@@ -419,18 +419,30 @@ footer {
   }
 
   /* Media query: tablets y móviles en iOS */
+/*
   @media only screen and (max-width: 1200px) {
     body.ios .lista-libros {
       display: block;
     }
-
+*/
     /* Oculta cualquier .libro-item y .book-card-main */
-    body.ios .libro-item,
+/*    body.ios .libro-item,
     body.ios .book-card-main,
     body.ios .book-card-main.libro-item {
       display: none !important;
     }
   }
+*/
+body[class*="ios"] .lista-libros {
+  display: block;
+}
+
+body[class*="ios"] .libro-item,
+body[class*="ios"] .book-card-main,
+body[class*="ios"] .book-card-main.libro-item {
+  display: none !important;
+}
+
 /*fin estilos para mostrar en pantallas pequeñas*/
 /*etiquetas para los capitulos en el  main*/
 .tag-capitulo {
@@ -480,5 +492,6 @@ footer {
   }
 }
 /*fin etiquetas para los capitulos*/
+
 
 
