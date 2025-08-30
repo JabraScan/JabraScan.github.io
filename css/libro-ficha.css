@@ -333,6 +333,7 @@ body {
       color: black;
       cursor: pointer;
       text-align: center;
+      border-radius: 6px;
     }
     
     /* Botón deshabilitado */
@@ -350,3 +351,4 @@ body {
       color: black;
     }
 /*===fin botones de paginacion===*/
+
