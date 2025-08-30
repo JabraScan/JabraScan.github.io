@@ -17,11 +17,19 @@ export function flatten(data) {
   return result;
 }
 
+// Ordena por fecha descendente
 export function sortDesc(a, b) {
   const f = b._fecha - a._fecha;
   if (f !== 0) return f;
   if (b._num !== a._num) return b._num - a._num;
   return String(b._obra).localeCompare(String(a._obra), "es", { sensitivity: "base" });
+}
+
+// Ordena por fecha ascendente
+export function sortAsc(a, b) {
+  const fechaA = new Date(a._fecha);
+  const fechaB = new Date(b._fecha);
+  return fechaA - fechaB;
 }
 
 export async function cargarCapitulos() {
