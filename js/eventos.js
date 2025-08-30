@@ -40,10 +40,10 @@ export function activarPaginacion() {
   });
 }
 */
-export function activarPaginacion() {
+export function activarPaginacion(rangos) {
   const botones = document.querySelectorAll('.pagina-btn');
   const paginas = document.querySelectorAll('.chapter-page');
-  const etiquetas = document.querySelectorAll('.pagination-label');
+  const rangoSpan = document.querySelector('.pagination-range');
   let paginaActual = 1;
   const totalPaginas = paginas.length;
 
@@ -54,9 +54,7 @@ export function activarPaginacion() {
       div.style.display = div.getAttribute('data-pagina') === String(nuevaPagina) ? 'block' : 'none';
     });
 
-    etiquetas.forEach(label => {
-      label.style.display = label.getAttribute('data-pagina') === String(nuevaPagina) ? 'block' : 'none';
-    });
+    rangoSpan.textContent = rangos[nuevaPagina - 1] || '';
 
     paginaActual = nuevaPagina;
   };
@@ -74,7 +72,5 @@ export function activarPaginacion() {
     });
   });
 
-  // Mostrar la primera página al cargar
   mostrarPagina(1);
 }
-
