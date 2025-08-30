@@ -309,6 +309,7 @@ body {
     flex: 1 1 100%;
     text-align: left;
   }
+}
 /*===botones de paginacion===*/
     .pagination-controls {
       display: flex;
@@ -351,4 +352,5 @@ body {
       color: black;
     }
 /*===fin botones de paginacion===*/
+
 
