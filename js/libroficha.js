@@ -79,14 +79,14 @@ export function cargarlibro(libroId) {
               </div>
               <div class="book-info-container">
                 <div class="book-info">
-                  <h2 id="nombre-obra">${nombreobra}</h2>
-                  <div><b>Autor: </b> ${autor}</div>
-                  <div><b>Traducción: </b>${traduccion}</div>
+                  <h2 id="nombre-obra" class="ficha-obra-nombre">${nombreobra}</h2>
+                  <div class="ficha-obra-autor"><b>Autor: </b> ${autor}</div>
+                  <div class="ficha-obra-traductor"><b>Traducción: </b>${traduccion}</div>
                   ${OKAutor}
                 </div>
                 <div class="book-synopsis">
                   <b><i class="fa-solid fa-info-circle"></i> Sinopsis:</b>
-                  <p id="sinopsis-obra">${sinopsis}</p>
+                  <p id="sinopsis-obra" class="ficha-obra-sinopsis">${sinopsis}</p>
                 </div>
                 <div class="book_extras">
                   <a class="book-wiki" href="${wiki}" target="_blank">Fans Wiki</a>
@@ -101,11 +101,16 @@ export function cargarlibro(libroId) {
                   const booklinks  = mainDataBook.querySelector('.book-links');
                     booklinks.appendChild(numVisitas);
         });
-
+      //modulo valoracion
+      obtenerInfo(clave).then(info => {
+          const bloqueValoracion = crearBloqueValoracion(clave, info.valoracion, info.votos);
+          mainDataBook.querySelector(".book-info-container").appendChild(bloqueValoracion);
+      });
 
       DataBook.prepend(mainDataBook);
       DataBook.prepend(headerDataBook);
       mainDataBook.querySelector(".book-image").prepend(imagenContenedor);
+      
 
       if (typeof mostrarDisqus === "function") {
         mostrarDisqus(clave, clave);
@@ -234,6 +239,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
