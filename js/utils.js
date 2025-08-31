@@ -104,7 +104,7 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
   tuValoracion.className = "your-rating";
 
   // 🔐 Verificamos si el usuario ya ha votado usando localStorage
-  const claveLocal = `obra_${clave}`;
+  const claveLocal = clave;
   const yaVotado = localStorage.getItem(claveLocal);
 
   // 🧠 Si ya votó, mostramos agradecimiento; si no, invitamos a votar
@@ -152,5 +152,6 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
 
   return bloque;
 }
+
 
 
