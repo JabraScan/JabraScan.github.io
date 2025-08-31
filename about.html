@@ -24,18 +24,16 @@
         margin-bottom: 0.5em;
       }
   
-      /* 📌 Títulos de sección */
+      /* 📌 Títulos de sección con íconos */
       .about-section-title {
         font-size: 1.4em;
         color: #444;
         border-bottom: 1px solid #ccc;
         padding-bottom: 0.3em;
         margin-top: 2em;
-      }
-  
-      /* 📄 Párrafos de contenido */
-      .about-paragraph {
-        margin: 1em 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
       }
   
       /* ✉️ Bloque de contacto */
@@ -51,38 +49,49 @@
         font-weight: bold;
         color: #333;
       }
+  
+      /* 🎯 Íconos Font Awesome */
+      .about-icon {
+        color: #555;
+      }
   </style>
   </head>
   <body>
     <div class="about-container">
-        <!-- 🏷️ Título principal -->
-          <h1 class="about-title">Acerca de</h1>
-        
-        <!-- ✉️ Sección de contacto -->
-          <h2 class="about-section-title">Contacto</h2>
-            <div class="about-contact">
-              <p class="about-paragraph">
-                Email: <span class="about-email">jabrarexscan@gmail.com</span>
-              </p>
-            </div>
-        
-        <!-- 🎓 Sección de créditos -->
-          <h2 class="about-section-title">Créditos</h2>
-            <p class="about-paragraph">
-              No tengo ningún Patreon ni BuyMeACoffee para que la gente pueda hacer donaciones, y este sitio no se monetiza a través de anuncios. Dirijo este sitio de traducción únicamente como un hobby y no aceptamos ningún tipo de ayuda económica debido a la posibilidad de que surjan problemas legales y de licencia, así como a la presión que conlleva la obtención de beneficios económicos.
-            </p>
-            <p class="about-paragraph">
-              <strong>¡Por favor, compra la versión oficial del manhwa/novela si te lo puedes permitir!</strong>
-            </p>
-        
-        <!-- 🧑‍🏫 Sección del traductor -->
-        <h2 class="about-section-title">Traductor</h2>
+      <!-- 🏷️ Título principal -->
+      <h1 class="about-title">Acerca de</h1>
+    
+      <!-- ✉️ Sección de contacto -->
+      <h2 class="about-section-title">
+        <i class="fas fa-envelope about-icon"></i> Contacto
+      </h2>
+        <div class="about-contact">
           <p class="about-paragraph">
-            El equipo de JabraScan y RexScan está formado por un grupo de traductores aburridos, que traducen varias novelas por diversión.
+            Email: <span class="about-email">jabrarexscan@gmail.com</span>
           </p>
-          <p class="about-paragraph">
-            Nuestro equipo tiene una vida y le gusta disfrutar del tiempo con la familia y los amigos, así que por favor no les pidas que traduzcan más rápido.
-          </p>
+        </div>
+    
+      <!-- 🎓 Sección de créditos -->
+      <h2 class="about-section-title">
+        <i class="fas fa-graduation-cap about-icon"></i> Créditos
+      </h2>
+        <p class="about-paragraph">
+          No tengo ningún Patreon ni BuyMeACoffee para que la gente pueda hacer donaciones, y este sitio no se monetiza a través de anuncios. Dirijo este sitio de traducción únicamente como un hobby y no aceptamos ningún tipo de ayuda económica debido a la posibilidad de que surjan problemas legales y de licencia, así como a la presión que conlleva la obtención de beneficios económicos.
+        </p>
+        <p class="about-paragraph">
+          <strong>¡Por favor, compra la versión oficial del manhwa/novela si te lo puedes permitir!</strong>
+        </p>
+    
+      <!-- 🧑‍🏫 Sección del traductor -->
+      <h2 class="about-section-title">
+        <i class="fas fa-user-edit about-icon"></i> Traductor
+      </h2>
+        <p class="about-paragraph">
+          El equipo de JabraScan y RexScan está formado por un grupo de traductores aburridos, que traducen varias novelas por diversión.
+        </p>
+        <p class="about-paragraph">
+          Nuestro equipo tiene una vida y le gusta disfrutar del tiempo con la familia y los amigos, así que por favor no les pidas que traduzcan más rápido.
+        </p>
     </div>
   </body>
 </html>
