@@ -178,11 +178,11 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     `;
   }
 
-  const headerHTML = `
+  /*const headerHTML = `
     <div class="chapter-header" style="display: flex; justify-content: space-between; align-items: center;">
       <h3><i class="fa-solid fa-list-ol"></i> Todos los capítulos</h3>
     </div>
-  `;
+  `;*/
   //Opcion botón ordenar, el problema es que lo hace un poco raro, por eso lo elimino
   const headerHTML = `
     <div class="chapter-header" style="display: flex; justify-content: space-between; align-items: center;">
@@ -223,6 +223,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
