@@ -126,8 +126,8 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
     {
       estrella.addEventListener("click", () => {
         valorarRecurso(clave, i).then(res => {
-console.log(`${clave} - ${i} - ${res}`);
-          if (res === "OK") {
+    //console.log(`${clave} - ${i} - ${res}`);
+          if (res && res.trim().startsWith("OK")) {
             // 🗂️ Guardamos el voto en localStorage
             localStorage.setItem(claveLocal, i);
 
@@ -154,6 +154,7 @@ console.log(`${clave} - ${i} - ${res}`);
 
   return bloque;
 }
+
 
 
 
