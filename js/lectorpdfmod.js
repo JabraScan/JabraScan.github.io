@@ -15,7 +15,7 @@ export function initLectorPDF() {
   ctx = canvas.getContext("2d");
   pageInfo = document.getElementById("pageInfo");
   body = document.body;
-  console.log('initLectorPDF ejecutado');
+  //console.log('initLectorPDF ejecutado');
 
   configurarModoOscuro();
   configurarMenuHamburguesa();
@@ -82,10 +82,9 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
     pdfDoc = doc;
     pageNum = paginaInicial;
     renderPage(pageNum);
+console.log(`Capitulo ${capitulosObra[idx]}`);
     actualizarBotonesNav(idx, capitulosObra, clave);
-    console.log(`capitulos: ${capitulosObra}`);
-    console.log(`idx ${idx}`);
-    incrementarVisita(`${clave} ${nombreArchivo}`);
+    incrementarVisita(`${clave}_${nombreArchivo}`);
   });
 }
 
