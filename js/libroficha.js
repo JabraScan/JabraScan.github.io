@@ -1,6 +1,7 @@
 import { obtenerCapitulos } from './capitulos.js';
 import { parseDateDMY, parseChapterNumber, compareCapNumDesc } from './utils.js';
 import { activarLinksPDF, activarPaginacion } from './eventos.js';
+import { incrementarVisita, leerVisitas } from './contadoresGoogle.js';
 
 /**
  * Carga los datos de una obra y renderiza sus capítulos.
@@ -132,6 +133,7 @@ export function cargarlibro(libroId) {
         `;
 
         renderCapitulos(listacapitulos, clave, seccionUltimos, "asc");
+        incrementarVisita(`obra_${clave}`);
       });
     });
 }
@@ -223,6 +225,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
