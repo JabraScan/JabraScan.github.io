@@ -30,3 +30,38 @@ export function leerVisitas(idvisitado) {
       return 0;
     });
 }
+
+/**
+ * Envía una valoración (de 0 a 5) para un recurso identificado por ID
+ * @param {string} idvisitado
+ * @param {number} valor Valor numérico entre 0 y 5
+ * @returns {Promise<string>} "OK" si se registró correctamente
+ */
+export function valorarRecurso(idvisitado, valor) {
+  const url = `${URL_BASE}?id=${encodeURIComponent(idvisitado)}&accion=valorar&valor=${valor}`;
+  return fetch(url)
+    .then(res => res.text())
+    .catch(err => {
+      console.error("Error valorando recurso:", err);
+      return "ERROR";
+    });
+}
+
+/**
+ * Obtiene la información completa del recurso: visitas, valoración promedio y fecha de última actualización
+ * @param {string} idvisitado
+ * @returns {Promise<Object>} Objeto con propiedades: visitas, valoracion, fechaActualizacion
+ */
+export function obtenerInfo(idvisitado) {
+  const url = `${URL_BASE}?id=${encodeURIComponent(idvisitado)}&accion=obtenerInfo`;
+  return fetch(url)
+    .then(res => res.json())
+    .catch(err => {
+      console.error("Error obteniendo información:", err);
+      return {
+        visitas: 0,
+        valoracion: 0,
+        fechaActualizacion: null
+      };
+    });
+}
