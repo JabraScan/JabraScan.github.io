@@ -94,19 +94,25 @@ export function cargarlibro(libroId) {
               </div>
             `;
       
-      leerVisitas(`obra_${clave}`).then(vis => {
+      /*leerVisitas(`obra_${clave}`).then(vis => {
           const visitas = vis === -1 ? 1 : vis+1;
             const numVisitas = document.createElement("a");
                   numVisitas.innerHTML = `<a href="#"><i class="fa-solid fa-eye"  ></i> ${visitas} veces</a>`;
                   const booklinks  = mainDataBook.querySelector('.book-links');
                     booklinks.appendChild(numVisitas);
-        });
-      //modulo valoracion
+        });*/
+      //modulo valoracion y visitas
       obtenerInfo(`obra_${clave}`).then(info => {
-        const claveValoracion = `obra_${clave}`;
-        console.log(`bloque claveValoracion, ${info.valoracion}, ${info.votos}`);
-        console.log(info);
-          const bloqueValoracion = crearBloqueValoracion(claveValoracion, info.valoracion, info.votos);
+          const visitas = info.visitas === -1 ? 1 : vis+1;
+          const numVisitas = document.createElement("a");
+            numVisitas.innerHTML = `<a href="#"><i class="fa-solid fa-eye"  ></i> ${visitas} veces</a>`;
+            const booklinks  = mainDataBook.querySelector('.book-links');
+          booklinks.appendChild(numVisitas);
+        
+          const claveValoracion = `obra_${clave}`;
+          console.log(`bloque claveValoracion, ${info.valoracion}, ${info.votos}`);
+          console.log(info);
+            const bloqueValoracion = crearBloqueValoracion(claveValoracion, info.valoracion, info.votos);
           mainDataBook.querySelector(".book-info-container").appendChild(bloqueValoracion);
       });
 
@@ -242,6 +248,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
