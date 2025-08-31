@@ -1,4 +1,5 @@
 import { parseDateDMY, parseChapterNumber } from './utils.js';
+import { incrementarVisita, leerVisitas } from './contadoresGoogle.js';
 
 // Variables globales para el lector PDF
 let pdfDoc = null;
@@ -82,7 +83,7 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
     pageNum = paginaInicial;
     renderPage(pageNum);
     actualizarBotonesNav(idx, capitulosObra, clave);
-    incrementarContador(`${clave} ${capitulosObra}`);
+    incrementarVisita(`${clave} ${capitulosObra}`);
   });
 }
 
