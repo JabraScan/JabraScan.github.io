@@ -1,3 +1,5 @@
+import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
+
 export function parseDateDMY(fechaStr) {
   if (!fechaStr) return null;
 
@@ -150,4 +152,5 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
 
   return bloque;
 }
+
 
