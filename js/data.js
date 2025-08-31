@@ -33,7 +33,8 @@ export function sortAsc(a, b) {
 }
 
 export async function cargarCapitulos() {
-  const index = await fetch("capitulos.json").then(res => res.json());
+  const ficheroCaps = `capitulos.json?t=${Date.now()}`;
+  const index = await fetch(ficheroCaps).then(res => res.json());
   const promesas = Object.entries(index).map(([clave, ruta]) =>
     fetch(ruta)
       .then(res => {
