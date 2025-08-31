@@ -102,7 +102,7 @@ export function cargarlibro(libroId) {
                     booklinks.appendChild(numVisitas);
         });
       //modulo valoracion
-      obtenerInfo(clave).then(info => {
+      obtenerInfo(`obra_${clave}`).then(info => {
         const claveValoracion = `obra_${clave}`;
         console.log(`bloque claveValoracion, ${info.valoracion}, ${info.votos}`);
         console.log(info);
@@ -242,6 +242,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
