@@ -41,8 +41,6 @@ export function cargarlibro(libroId) {
       const aprobadaAutor = get("aprobadaAutor");
       const wiki = get("wiki");
       
-      const visitas = await leerVisitas('obra_' + clave);
-
       const OKAutor = aprobadaAutor === 'si' ? `
         <span class="carousel-info-label">Traducción aprobada por el autor</span><br>
         <span>Discord Oficial : <a href="${discord}" target="_blank">${discord}</a></span>
@@ -70,32 +68,38 @@ export function cargarlibro(libroId) {
 
       const mainDataBook = document.createElement("div");
       mainDataBook.className = "book-main";
-      mainDataBook.innerHTML = `
-        <div class="book-image">
-          <div class="book-genres"><span><i class="fa-solid fa-tags"></i>${Categoria}</span></div>
-          <div class="book-links">
-            <a href="#"><i class="fa-solid fa-book" ></i> ${tipoobra}</a>
-            <a href="#"><i class="fa-solid fa-globe"></i> ${ubicacion}</a>
-            <a href="#"><i class="fa-solid fa-clock"></i> ${estado}</a>
-            <a href="#"><i class="fa-solid fa-eye"  ></i> ${visitas}</a>
-          </div>
-        </div>
-        <div class="book-info-container">
-          <div class="book-info">
-            <h2 id="nombre-obra">${nombreobra}</h2>
-            <div><b>Autor: </b> ${autor}</div>
-            <div><b>Traducción: </b>${traduccion}</div>
-            ${OKAutor}
-          </div>
-          <div class="book-synopsis">
-            <b><i class="fa-solid fa-info-circle"></i> Sinopsis:</b>
-            <p id="sinopsis-obra">${sinopsis}</p>
-          </div>
-          <div class="book_extras">
-            <a class="book-wiki" href="${wiki}" target="_blank">Fans Wiki</a>
-          </div>
-        </div>
-      `;
+
+        leerVisitas(`obra_${clave}`).then(vis => {
+          const visitas = vis === -1 ? 0 : vis;
+        
+          mainDataBook.innerHTML = `
+              <div class="book-image">
+                <div class="book-genres"><span><i class="fa-solid fa-tags"></i>${Categoria}</span></div>
+                <div class="book-links">
+                  <a href="#"><i class="fa-solid fa-book" ></i> ${tipoobra}</a>
+                  <a href="#"><i class="fa-solid fa-globe"></i> ${ubicacion}</a>
+                  <a href="#"><i class="fa-solid fa-clock"></i> ${estado}</a>
+                  <a href="#"><i class="fa-solid fa-eye"  ></i> ${visitas}</a>
+                </div>
+              </div>
+              <div class="book-info-container">
+                <div class="book-info">
+                  <h2 id="nombre-obra">${nombreobra}</h2>
+                  <div><b>Autor: </b> ${autor}</div>
+                  <div><b>Traducción: </b>${traduccion}</div>
+                  ${OKAutor}
+                </div>
+                <div class="book-synopsis">
+                  <b><i class="fa-solid fa-info-circle"></i> Sinopsis:</b>
+                  <p id="sinopsis-obra">${sinopsis}</p>
+                </div>
+                <div class="book_extras">
+                  <a class="book-wiki" href="${wiki}" target="_blank">Fans Wiki</a>
+                </div>
+              </div>
+            `;
+        });
+
 
       DataBook.prepend(mainDataBook);
       DataBook.prepend(headerDataBook);
@@ -228,6 +232,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
