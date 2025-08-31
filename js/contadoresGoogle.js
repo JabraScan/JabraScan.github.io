@@ -59,9 +59,10 @@ export function obtenerInfo(idvisitado) {
     .catch(err => {
       console.error("Error obteniendo información:", err);
       return {
-        visitas: 0,
-        valoracion: 0,
-        fechaActualizacion: null
+        visitas: 1,
+        valoracion: 5,
+        fechaActualizacion: null,
+        votos: 1
       };
     });
 }
