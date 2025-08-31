@@ -72,9 +72,10 @@ export function cargarlibro(libroId) {
         <div class="book-image">
           <div class="book-genres"><span><i class="fa-solid fa-tags"></i>${Categoria}</span></div>
           <div class="book-links">
-            <a href="#"><i class="fa-solid fa-book"></i> ${tipoobra}</a>
+            <a href="#"><i class="fa-solid fa-book" ></i> ${tipoobra}</a>
             <a href="#"><i class="fa-solid fa-globe"></i> ${ubicacion}</a>
             <a href="#"><i class="fa-solid fa-clock"></i> ${estado}</a>
+            <a href="#"><i class="fa-solid fa-eye"  ></i> leerVisitas(`obra_${clave}`)</a>
           </div>
         </div>
         <div class="book-info-container">
@@ -225,6 +226,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
