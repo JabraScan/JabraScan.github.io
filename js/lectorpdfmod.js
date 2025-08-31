@@ -85,7 +85,7 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
     actualizarBotonesNav(idx, capitulosObra, clave);
     console.log(`capitulos: ${capitulosObra}`);
     console.log(`idx ${idx}`);
-    incrementarVisita(`${clave} ${capitulosObra}`);
+    incrementarVisita(`${clave} ${nombreArchivo}`);
   });
 }
 
