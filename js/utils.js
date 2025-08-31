@@ -122,8 +122,10 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
     estrella.style.cursor = yaVotado ? "default" : "pointer";
 
     // 🗳️ Evento de click para votar
-    if (!yaVotado) {
+    //if (!yaVotado) 
+    {
       estrella.addEventListener("click", () => {
+        console.log(`${clave} - ${i}`);
         valorarRecurso(clave, i).then(res => {
           if (res === "OK") {
             // 🗂️ Guardamos el voto en localStorage
@@ -152,6 +154,7 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
 
   return bloque;
 }
+
 
 
 
