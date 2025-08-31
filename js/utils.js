@@ -83,7 +83,7 @@ export function generarEtiquetaNuevo(fechaInput) {
  * @param {number} votos - Número total de votos registrados
  * @returns {HTMLElement} - Bloque HTML listo para insertar en el DOM
  */
-function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) {
+export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) {
   // 🧱 Contenedor principal del bloque
   const bloque = document.createElement("div");
   bloque.className = "book-rating";
@@ -150,3 +150,4 @@ function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) {
 
   return bloque;
 }
+
