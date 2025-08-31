@@ -68,18 +68,13 @@ export function cargarlibro(libroId) {
 
       const mainDataBook = document.createElement("div");
       mainDataBook.className = "book-main";
-
-        leerVisitas(`obra_${clave}`).then(vis => {
-          const visitas = vis === -1 ? 0 : vis;
-        
-          mainDataBook.innerHTML = `
+         mainDataBook.innerHTML = `
               <div class="book-image">
                 <div class="book-genres"><span><i class="fa-solid fa-tags"></i>${Categoria}</span></div>
                 <div class="book-links">
                   <a href="#"><i class="fa-solid fa-book" ></i> ${tipoobra}</a>
                   <a href="#"><i class="fa-solid fa-globe"></i> ${ubicacion}</a>
                   <a href="#"><i class="fa-solid fa-clock"></i> ${estado}</a>
-                  <a href="#"><i class="fa-solid fa-eye"  ></i> ${visitas}</a>
                 </div>
               </div>
               <div class="book-info-container">
@@ -98,6 +93,13 @@ export function cargarlibro(libroId) {
                 </div>
               </div>
             `;
+      
+      leerVisitas(`obra_${clave}`).then(vis => {
+          const visitas = vis === -1 ? 0 : vis;
+            const numVisitas = document.createElement("a");
+                  numVisitas.innerHTML = `<a href="#"><i class="fa-solid fa-eye"  ></i> ${visitas}</a>`;
+                  const booklinks  = mainDataBook.querySelector('.book-links');
+                    booklinks.appendChild(numVisitas);
         });
 
 
@@ -232,6 +234,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
