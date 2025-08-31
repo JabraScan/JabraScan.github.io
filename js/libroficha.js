@@ -183,7 +183,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
       <h3><i class="fa-solid fa-list-ol"></i> Todos los capítulos</h3>
     </div>
   `;
-  /*Opcion botón ordenar, el problema es que lo hace un poco raro, por eso lo elimino
+  //Opcion botón ordenar, el problema es que lo hace un poco raro, por eso lo elimino
   const headerHTML = `
     <div class="chapter-header" style="display: flex; justify-content: space-between; align-items: center;">
       <h3><i class="fa-solid fa-list-ol"></i> Todos los capítulos</h3>
@@ -191,7 +191,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
         <i class="fa-solid ${ordenActual === "asc" ? "fa-arrow-up-wide-short" : "fa-arrow-down-wide-short"}"></i>
       </button>
     </div>
-  `;  */
+  `;
 
   const paginacionHTML = `
     <div class="pagination-controls">
@@ -223,6 +223,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
