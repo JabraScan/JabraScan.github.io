@@ -82,6 +82,7 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
     pageNum = paginaInicial;
     renderPage(pageNum);
     actualizarBotonesNav(idx, capitulosObra, clave);
+    incrementarContador(`${clave} ${capitulosObra}`);
   });
 }
 
