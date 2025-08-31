@@ -96,6 +96,7 @@ export function cargarlibro(libroId) {
       
       leerVisitas(`obra_${clave}`).then(vis => {
           const visitas = vis === -1 ? 0 : vis;
+console.log(`vis ${vis} - vis ${visitas}`);
             const numVisitas = document.createElement("a");
                   numVisitas.innerHTML = `<a href="#"><i class="fa-solid fa-eye"  ></i> ${visitas}</a>`;
                   const booklinks  = mainDataBook.querySelector('.book-links');
@@ -234,6 +235,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
