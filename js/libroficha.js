@@ -40,6 +40,8 @@ export function cargarlibro(libroId) {
       const discord = get("discord");
       const aprobadaAutor = get("aprobadaAutor");
       const wiki = get("wiki");
+      
+      const visitas = await leerVisitas('obra_' + clave);
 
       const OKAutor = aprobadaAutor === 'si' ? `
         <span class="carousel-info-label">Traducción aprobada por el autor</span><br>
@@ -75,7 +77,7 @@ export function cargarlibro(libroId) {
             <a href="#"><i class="fa-solid fa-book" ></i> ${tipoobra}</a>
             <a href="#"><i class="fa-solid fa-globe"></i> ${ubicacion}</a>
             <a href="#"><i class="fa-solid fa-clock"></i> ${estado}</a>
-            <a href="#"><i class="fa-solid fa-eye"  ></i> ${leerVisitas('obra_' + clave)}</a>
+            <a href="#"><i class="fa-solid fa-eye"  ></i> ${visitas}</a>
           </div>
         </div>
         <div class="book-info-container">
@@ -226,6 +228,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
