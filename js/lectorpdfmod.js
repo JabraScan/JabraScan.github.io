@@ -82,9 +82,9 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
     pdfDoc = doc;
     pageNum = paginaInicial;
     renderPage(pageNum);
-console.log(`Capitulo ${capitulosObra[idx]}`);
+//console.log(`Capitulo ${capitulosObra[idx].numCapitulo}`);
     actualizarBotonesNav(idx, capitulosObra, clave);
-    incrementarVisita(`${clave}_${nombreArchivo}`);
+    incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo`);
   });
 }
 
