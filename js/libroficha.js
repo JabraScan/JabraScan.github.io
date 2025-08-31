@@ -103,9 +103,10 @@ export function cargarlibro(libroId) {
         });
       //modulo valoracion
       obtenerInfo(clave).then(info => {
-        console.log(`bloque obra_${clave}, ${info.valoracion}, ${info.votos}`);
+        const claveValoracion = `obra_${clave}`;
+        console.log(`bloque claveValoracion, ${info.valoracion}, ${info.votos}`);
         console.log(info);
-          const bloqueValoracion = crearBloqueValoracion(`obra_${clave}`, info.valoracion, info.votos);
+          const bloqueValoracion = crearBloqueValoracion(claveValoracion, info.valoracion, info.votos);
           mainDataBook.querySelector(".book-info-container").appendChild(bloqueValoracion);
       });
 
@@ -241,6 +242,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
