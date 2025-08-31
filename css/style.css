@@ -524,4 +524,9 @@ footer {
   white-space: nowrap;
   max-width: 400px;
 }
-
+/* Oculta elementos con esta clase en pantallas menores a 768px */
+@media screen and (max-width: 768px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
