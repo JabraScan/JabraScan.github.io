@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const carouselContainer = document.querySelector(".carousel-track");
       const booklistContainer = document.querySelector(".book-list");
       const booklistContainernopc = document.querySelector(".lista-libros");
+      const booklastread = document.querySelector(".main-ultimoCapituloleido");
 
       const promesasCapitulos = [];
 
@@ -26,6 +27,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const discord = obra.querySelector("discord").textContent.trim();
         const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
 
+      //Ultimmo capitulo leido
+          const ultimaObra = localStorage.getItem("ultimaObra");
+          const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
+        booklastread.innerHTML = `${ultimaObra}·${ultimoCapitulo}`;
+        
         let OKAutor = '';
         if (aprobadaAutor === 'si') {
           OKAutor = `
@@ -33,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <span>Discord Oficial : <a href="${discord}" target="_blank">${discord}</a></span>
           `;
         }
-
+        
         const categoriaIndiv = Categoria.split(",").map(item => item.trim());
         const categoriaObj = categoriaIndiv.map(item => `<span class="etiqueta">${item}</span>`).join('');
 
