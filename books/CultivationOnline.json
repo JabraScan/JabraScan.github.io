@@ -154,6 +154,8 @@
     { "Fecha" : "31-08-2025", "NombreArchivo" : "CultivationOnline-2102_JabraScan.pdf", "numCapitulo" : "2102", "nombreCapitulo" : "Traidores"                                                                          , "tituloObra": "Cultivation Online" },
     { "Fecha" : "31-08-2025", "NombreArchivo" : "CultivationOnline-2103_JabraScan.pdf", "numCapitulo" : "2103", "nombreCapitulo" : "La Bóveda de la Gruta del Sellado Demoniaco"                                        , "tituloObra": "Cultivation Online" },
     { "Fecha" : "31-08-2025", "NombreArchivo" : "CultivationOnline-2104_JabraScan.pdf", "numCapitulo" : "2104", "nombreCapitulo" : "Qian Chu"                                                                           , "tituloObra": "Cultivation Online" },
-    { "Fecha" : "31-08-2025", "NombreArchivo" : "CultivationOnline-2105_JabraScan.pdf", "numCapitulo" : "2105", "nombreCapitulo" : "Tesoros Robados"                                                                    , "tituloObra": "Cultivation Online" }
+    { "Fecha" : "31-08-2025", "NombreArchivo" : "CultivationOnline-2105_JabraScan.pdf", "numCapitulo" : "2105", "nombreCapitulo" : "Tesoros Robados (1)"                                                                , "tituloObra": "Cultivation Online" },
+    { "Fecha" : "01-09-2025", "NombreArchivo" : "CultivationOnline-2106_JabraScan.pdf", "numCapitulo" : "2106", "nombreCapitulo" : "Tesoros Robados (2)"                                                                , "tituloObra": "Cultivation Online" },
+    { "Fecha" : "01-09-2025", "NombreArchivo" : "CultivationOnline-2107_JabraScan.pdf", "numCapitulo" : "2107", "nombreCapitulo" : "Tesoros Robados (3)"                                                                , "tituloObra": "Cultivation Online" }
   ]
 }
