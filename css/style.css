@@ -537,7 +537,7 @@ footer {
       left: 50%;
       transform: translateX(-50%);
       z-index: 1000;
-      /*font-family: Arial, sans-serif;*/
-      font-family: 'Segoe UI', Arial, sans-serif;
+      font-family: Arial, sans-serif;
       color: #9f9f95;
   }
+
