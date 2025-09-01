@@ -530,11 +530,16 @@ footer {
     display: none !important;
   }
 }
+@media only screen and (max-width: 1200px) {
+   .hide-on-tablet {
+     display: none !important;
+   }
+ }
 
 /*ultimo capitulo leido*/
   .main-ultimoCapituloleido {
       position: absolute;
-      left: 50%;
+      left: 45%;
       transform: translateX(-50%);
       z-index: 1000;
       font-family: Arial, sans-serif;
