@@ -111,7 +111,7 @@ export function obtenerCapitulos(clave) {
           if (!capitulos.length) {
             console.warn(`⚠️ No se encontraron capítulos válidos para "${clave}".`);
           }
-
+          /* optimizacion para ocultar los capitulos con fecha de publicacion futura
           // Mapea y filtra los capítulos válidos
           return capitulos.map((item, i) => {
             // Verifica que cada capítulo tenga la estructura esperada
@@ -134,6 +134,41 @@ export function obtenerCapitulos(clave) {
               nombreCapitulo: item.nombreCapitulo
             };
           }).filter(Boolean); // Elimina los capítulos inválidos (null)
+          */
+            // Mapea y filtra los capítulos válidos y publicados
+            return capitulos.map((item, i) => {
+              // Verifica que cada capítulo tenga la estructura esperada
+              if (
+                typeof item !== 'object' ||
+                !item?.NombreArchivo ||
+                !item?.Fecha ||
+                item?.numCapitulo == null ||
+                !item?.nombreCapitulo
+              ) {
+                console.warn(`⚠️ Capítulo inválido en posición ${i} del archivo "${clave}".`);
+                return null;
+              }
+            
+              // 🗓️ Filtrado por fecha: solo incluir si la fecha es hoy o anterior
+              const fechaCapitulo = new Date(item.Fecha);
+              const hoy = new Date();
+              hoy.setHours(0, 0, 0, 0); // Elimina la hora para comparar solo la fecha
+            
+              if (fechaCapitulo > hoy) {
+                console.info(`⏳ Capítulo "${item.nombreCapitulo}" programado para el futuro (${item.Fecha}), se omite.`);
+                return null;
+              }
+            
+              // Devuelve el capítulo válido
+              return {
+                NombreArchivo: item.NombreArchivo,
+                Fecha: item.Fecha,
+                numCapitulo: item.numCapitulo,
+                nombreCapitulo: item.nombreCapitulo
+              };
+            }).filter(Boolean); // Elimina los capítulos inválidos o futuros
+
+          //
         });
     })
     .catch(error => {
@@ -142,3 +177,4 @@ export function obtenerCapitulos(clave) {
       return [];
     });
 }
+
