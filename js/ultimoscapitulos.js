@@ -1,7 +1,7 @@
 // ultimoscapitulos.js
 import { flatten, sortDesc, sortAsc, cargarCapitulos } from './data.js';
 import { activarLinksPDF } from './eventos.js';
-import { parseDateDMY } from './utils.js';
+import { parseDateDMY, parseFecha } from './utils.js';
 
 export function initUltimosCapitulos() {
   const listEl = document.getElementById("book-card-caps");
@@ -168,3 +168,4 @@ export function initUltimosCapitulos() {
           console.error("Error cargando capitulos.json:", err);
         });
 }
+
