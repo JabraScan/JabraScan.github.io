@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
             Estado: <span class="${estado}">${estado}</span><br>
           </div>
         `;
-
+/*
         const promesaCapitulo = fetch("capitulos.json")
           .then((res) => res.json())
           .then((index) => {
@@ -130,7 +130,57 @@ document.addEventListener("DOMContentLoaded", function () {
               }
             }
           })
-          .catch((err) => console.error("Error cargando capítulos:", err));
+          .catch((err) => console.error("Error cargando capítulos:", err));*/
+          const promesaCapitulo = fetch("capitulos.json")
+            .then((res) => res.json())
+            .then((index) => {
+              const ruta = index[clave];
+              return fetch(ruta)
+                .then((res) => res.json())
+                .then((data) => {
+                  const capitulos = data[clave] || [];
+          
+                  // 🗓️ Filtrar capítulos cuya fecha sea mayor que hoy
+                  const hoy = new Date();
+                  hoy.setHours(0, 0, 0, 0); // Elimina la hora para comparar solo la fecha
+          
+                  const capitulosConObra = capitulos
+                    .filter((cap, i) => {
+                      const fechaCap = new Date(cap.Fecha);
+                      if (fechaCap > hoy) {
+                        console.info(`⏳ Capítulo "${cap.nombreCapitulo}" programado para el futuro (${cap.Fecha}), se omite.`);
+                        return false;
+                      }
+                      return true;
+                    })
+                    .map((cap) => ({ ...cap, obra: clave }));
+          
+                  // ⚠️ Aviso si todos los capítulos fueron filtrados
+                  if (capitulosConObra.length === 0) {
+                    console.warn(`⚠️ Todos los capítulos de "${clave}" están programados para el futuro.`);
+                  }
+          
+                  return { [clave]: capitulosConObra };
+                });
+            })
+            .then((data) => {
+              const bloque = crearUltimoCapituloDeObra(data, clave);
+              if (bloque) {
+                const bloqueB = bloque.cloneNode(true);
+                itemBook.querySelector(".book-info-main").appendChild(bloque);
+                itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
+          
+                const hoyTag = itemBook.querySelector('.tag-capitulo.hoy');
+                if (hoyTag) {
+                  const bookInfoMain = hoyTag.closest('.book-card-main');
+                  if (bookInfoMain) {
+                    bookInfoMain.classList.add('hoy-book');
+                  }
+                }
+              }
+            })
+            .catch((err) => console.error("❌ Error cargando capítulos:", err));
+
 
         promesasCapitulos.push(promesaCapitulo);
 
