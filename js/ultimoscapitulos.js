@@ -134,7 +134,7 @@ export function initUltimosCapitulos() {
   });
 
   // Carga los capítulos desde el archivo JSON
-  cargarCapitulos()
+  /*cargarCapitulos()
     .then(data => {
       state.items = flatten(data); // Obtiene todos los capítulos
       applyFilter();               // Aplica filtro y orden inicial
@@ -142,8 +142,29 @@ export function initUltimosCapitulos() {
     .catch(err => {
       console.error("Error cargando capitulos.json:", err);
     });
+    */
+    // Carga los capítulos desde el archivo JSON
+      cargarCapitulos()
+        .then(data => {
+          const hoy = new Date();
+          hoy.setHours(0, 0, 0, 0); // Normaliza la fecha actual
+      
+          // Filtra capítulos cuya fecha sea menor o igual a hoy
+          const todos = flatten(data);
+          const publicados = todos.filter(cap => {
+            const fechaCap = parseFecha(cap._fecha); // Usa tu función personalizada
+            if (!fechaCap || fechaCap > hoy) {
+              console.info(`⏳ Capítulo "${cap.nombreCapitulo}" de "${cap._obra}" aún no publicado (${cap._fecha})`);
+              return false;
+            }
+            return true;
+          });
+      
+          // Asigna los capítulos filtrados al estado
+          state.items = publicados;
+          applyFilter(); // Aplica filtro y orden inicial
+        })
+        .catch(err => {
+          console.error("Error cargando capitulos.json:", err);
+        });
 }
-
-
-
-
