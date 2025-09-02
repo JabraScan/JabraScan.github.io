@@ -150,7 +150,7 @@ export function obtenerCapitulos(clave) {
               }
             
               // 🗓️ Filtrado por fecha: solo incluir si la fecha es hoy o anterior
-              const fechaCapitulo = new Date(parseDateDMY(item.Fecha));
+              const fechaCapitulo = new Date(parseFecha(item.Fecha));
               const hoy = new Date();
               hoy.setHours(0, 0, 0, 0); // Elimina la hora para comparar solo la fecha
             
@@ -177,6 +177,7 @@ export function obtenerCapitulos(clave) {
       return [];
     });
 }
+
 
 
 
