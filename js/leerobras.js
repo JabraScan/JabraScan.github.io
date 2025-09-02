@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   const capitulosConObra = capitulos
                     .filter((cap, i) => {
                       const fechaCap = new Date(cap.Fecha);
-                      if (fechaCap > hoy) {
+                      if (parseDateDMY(fechaCap) > parseDateDMY(hoy)) {
                         console.info(`⏳ Capítulo "${cap.nombreCapitulo}" programado para el futuro (${cap.Fecha}), se omite.`);
                         return false;
                       }
