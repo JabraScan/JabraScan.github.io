@@ -150,11 +150,11 @@ export function obtenerCapitulos(clave) {
               }
             
               // 🗓️ Filtrado por fecha: solo incluir si la fecha es hoy o anterior
-              const fechaCapitulo = new Date(item.Fecha);
+              const fechaCapitulo = new Date(parseDateDMY(item.Fecha));
               const hoy = new Date();
               hoy.setHours(0, 0, 0, 0); // Elimina la hora para comparar solo la fecha
             
-              if (parseDateDMY(fechaCapitulo) > parseDateDMY(hoy)) {
+              if (fechaCapitulo > hoy) {
                 console.info(`⏳ Capítulo "${item.nombreCapitulo}" programado para el futuro (${item.Fecha}), se omite.`);
                 return null;
               }
@@ -177,5 +177,6 @@ export function obtenerCapitulos(clave) {
       return [];
     });
 }
+
 
 
