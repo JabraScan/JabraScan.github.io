@@ -96,7 +96,7 @@ function actualizarTituloObra(titulo, clave) {
   h1.textContent = titulo;
   h1.onclick = () => onLibroClick(clave);
 
-  if (clave === "CallateDragonaMalvadaNoQuieroTenerMasHijosContigo") {
+  if (clave === "CDMNQTMHC") {
     const datosAdic = document.querySelector(".optionaldata");
     const divBanner = document.createElement("div");
     divBanner.className = "callatedragonmalvado";
