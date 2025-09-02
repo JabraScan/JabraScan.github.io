@@ -155,7 +155,7 @@ export function obtenerCapitulos(clave) {
               hoy.setHours(0, 0, 0, 0); // Elimina la hora para comparar solo la fecha
             
               if (fechaCapitulo > hoy) {
-                console.info(`⏳ Capítulo "${item.nombreCapitulo}" programado para el futuro (${item.Fecha}), se omite.`);
+                //console.info(`⏳ Capítulo "${item.nombreCapitulo}" programado para el futuro (${item.Fecha}), se omite.`);
                 return null;
               }
             
@@ -177,6 +177,7 @@ export function obtenerCapitulos(clave) {
       return [];
     });
 }
+
 
 
 
