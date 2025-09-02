@@ -152,7 +152,7 @@ export function initUltimosCapitulos() {
           // Filtra capítulos cuya fecha sea menor o igual a hoy
           const todos = flatten(data);
           const publicados = todos.filter(cap => {
-            const fechaCap = parseFecha(cap._fecha); // Usa tu función personalizada
+            const fechaCap = cap._fecha; // Usa tu función personalizada
             if (!fechaCap || fechaCap > hoy) {
               console.info(`⏳ Capítulo "${cap.nombreCapitulo}" de "${cap._obra}" aún no publicado (${cap._fecha})`);
               return false;
@@ -168,4 +168,5 @@ export function initUltimosCapitulos() {
           console.error("Error cargando capitulos.json:", err);
         });
 }
+
 
