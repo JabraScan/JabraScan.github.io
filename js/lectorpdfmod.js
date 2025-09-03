@@ -13,7 +13,7 @@ let canvas, ctx, pageInfo, body;
 export function initLectorPDF() {
   canvas = document.getElementById("pdfCanvas");
   ctx = canvas.getContext("2d");
-  pageInfo = document.getElementById(".pageInfo");
+  pageInfo = document.querySelector(".pageInfo");
   body = document.body;
   //console.log('initLectorPDF ejecutado');
 
