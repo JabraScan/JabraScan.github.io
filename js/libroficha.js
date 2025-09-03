@@ -103,6 +103,7 @@ export function cargarlibro(libroId) {
         });*/
       //modulo valoracion y visitas
       obtenerInfo(`obra_${clave}`).then(info => {
+        console.log(info);
           const visitas = info.visitas === -1 ? 1 : info.visitas+info.visitasCapitulo+1;
           const numVisitas = document.createElement("a");
             numVisitas.innerHTML = `<a href="#"><i class="fa-solid fa-eye"  ></i> ${visitas} veces</a>`;
@@ -247,6 +248,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
