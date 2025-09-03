@@ -62,7 +62,9 @@ export function obtenerInfo(idvisitado) {
         visitas: 1,
         valoracion: 5,
         fechaActualizacion: null,
-        votos: 1
+        votos: 1,
+        obra: null,
+        numVisitasCapitulo: 0
       };
     });
 }
