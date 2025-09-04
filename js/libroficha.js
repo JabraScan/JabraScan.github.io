@@ -39,12 +39,13 @@ export function cargarlibro(libroId) {
       const contenido18 = get("adulto");
       const discord = get("discord");
       const aprobadaAutor = get("aprobadaAutor");
-      const wiki = get("wiki");
+      const wikifan = get("wiki");
       
       const OKAutor = aprobadaAutor === 'si' ? `
         <span class="carousel-info-label">Traducción aprobada por el autor</span><br>
         <span>Discord Oficial : <a href="${discord}" target="_blank">${discord}</a></span>
       ` : '';
+      const wiki = wikifan === '' ? '' : `<a class="book-wiki" href="${wiki}" target="_blank">Fans Wiki</a>`;
 
       const imagenContenedor = document.createElement("div");
       imagenContenedor.classList.add("imagen-contenedor");
@@ -89,7 +90,7 @@ export function cargarlibro(libroId) {
                   <p id="sinopsis-obra" class="ficha-obra-sinopsis">${sinopsis}</p>
                 </div>
                 <div class="book_extras">
-                  <a class="book-wiki" href="${wiki}" target="_blank">Fans Wiki</a>
+                  ${wiki}
                 </div>
               </div>
             `;
@@ -250,6 +251,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
