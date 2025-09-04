@@ -557,6 +557,7 @@ footer {
       cursor: pointer;
       font-size: inherit;
       padding: 0;
+      color: #fff;
     }
     
     .dropdown-mainnav-content {
@@ -582,3 +583,4 @@ footer {
     .dropdown-mainnav:hover .dropdown-mainnav-content {
       display: block;
     }
+
