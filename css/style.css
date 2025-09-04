@@ -40,6 +40,9 @@ main {
   margin: 2em auto;
   padding: 0 1em;
 }
+.nav a:hover, nav span:hover {
+  background-color: #f1f1f1;
+}
 
 /* ====== Indicador adulto (badge 18+) ====== */
 .indicador-adulto {
@@ -583,4 +586,3 @@ footer {
     .dropdown-mainnav:hover .dropdown-mainnav-content {
       display: block;
     }
-
