@@ -2,7 +2,7 @@ import { obtenerCapitulos } from './capitulos.js';
 import { parseDateDMY, parseChapterNumber, compareCapNumDesc, crearBloqueValoracion } from './utils.js';
 import { activarLinksPDF, activarPaginacion } from './eventos.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
-
+import { mostrarurl } from './general.js';
 /**
  * Carga los datos de una obra y renderiza sus capítulos.
  * @param {string} libroId - Clave identificadora de la obra.
@@ -40,7 +40,10 @@ export function cargarlibro(libroId) {
       const discord = get("discord");
       const aprobadaAutor = get("aprobadaAutor");
       const wikifan = get("wiki");
-      
+
+      //actualizar url
+      mostrarurl(clave);
+      //generar contenido
       const OKAutor = aprobadaAutor === 'si' ? `
         <span class="carousel-info-label">Traducción aprobada por el autor</span><br>
         <span>Discord Oficial : <a href="${discord}" target="_blank">${discord}</a></span>
@@ -104,7 +107,7 @@ export function cargarlibro(libroId) {
         });*/
       //modulo valoracion y visitas
       obtenerInfo(`obra_${clave}`).then(info => {
-        //console.log(info);
+        console.log(info);
           const visitCap = info.visitas === -1 ? 0 : info.numVisitasCapitulo;
           const visitObra = info.visitas === -1 ? 1 : info.visitas + 1;
           const visitas = visitCap + visitObra;
@@ -251,39 +254,3 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
