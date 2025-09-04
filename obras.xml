@@ -216,7 +216,7 @@
     <fechaCreacion>31/04/2024</fechaCreacion>
     <ubicacion>Novela Japonesa</ubicacion>
     <estado>Finalizado</estado>
-    <traductor>Turret Translations</traductor>
+    <traductor><![CDATA[<a href="https://frizcosas.blogspot.com/">Turret Translations</a>]]></traductor>
     <adulto></adulto>
     <aprobadaAutor>no</aprobadaAutor>
     <observaciones>Traductor Japonés-Español: Frizcop</observaciones>
