@@ -1,5 +1,6 @@
 import { parseDateDMY, parseChapterNumber } from './utils.js';
 import { incrementarVisita, leerVisitas } from './contadoresGoogle.js';
+import { mostrarurl } from './general.js';
 
 // Variables globales para el lector PDF
 let pdfDoc = null;
@@ -62,7 +63,8 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
         }));
         const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
         if (idx === -1) return;
-
+        
+        mostrarurl(clave, capitulo); //actualizar barra de direcciones
         const cap = capitulosObra[idx];
         actualizarTituloObra(cap.tituloObra, clave);
         cargarPDF(clave, cap.NombreArchivo, paginaInicial, idx, capitulosObra);
