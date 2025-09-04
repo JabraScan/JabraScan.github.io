@@ -197,4 +197,31 @@
     <bannerOpcional></bannerOpcional>
     <wiki></wiki>
   </obra>
+  <obra>
+    <clave>DanmachiArgonauta</clave>
+    <nombreobra>Danmachi - Relato Heroico: Argonauta</nombreobra>
+    <nombreobra2>Arugonouto zenshou douke koushin danjon ni deai o motomeru no wa machigatte irudarou ka eiyuutan</nombreobra2>
+    <nombreobra3></nombreobra3>
+    <autor>Fujino Ōmori</autor>
+    <sinopsis>Una historia ambientada en la antigüedad temprana, cuando no existía la "Bendición de los Dioses".
+              El romance heroico de un hombre, transmitido hasta el día de hoy en innumerables relatos. Un héroe extremadamente débil y deslucido en comparación con otros héroes de la historia. Sin embargo, algunos lo llaman el "Héroe del Comienzo".
+              Pero, ¿por qué se le llama así?
+              Esta es la historia de un hombre ridículo.
+              Un bufón que tenía deseos desproporcionados, fue manipulado por innumerables intrigas, y aún así se mantuvo como un tonto hasta el final.
+              Ahora, comencemos la "Comedia".</sinopsis>
+    <valoracion>9.0</valoracion>
+    <tipoobra>Novela Ligera</tipoobra>
+    <categoria> Acción, Aventura, Comedia, Fantasía, Romance</categoria>
+    <imagen>DanmachiArgonauta.webp</imagen>
+    <fechaCreacion>31/04/2024</fechaCreacion>
+    <ubicacion>Novela Japonesa</ubicacion>
+    <estado>Finalizado</estado>
+    <traductor>Turret Translations</traductor>
+    <adulto></adulto>
+    <aprobadaAutor>no</aprobadaAutor>
+    <observaciones>Traductor Japonés-Español: Frizcop</observaciones>
+    <discord></discord>
+    <bannerOpcional></bannerOpcional>
+    <wiki></wiki>
+  </obra>
 </obras>
