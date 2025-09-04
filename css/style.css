@@ -27,7 +27,7 @@ nav a, nav span {
   transition: color 0.2s;
   -webkit-transition: color 0.2s;
 }
-nav a.active, nav a:hover, nav span.active {
+nav a.active, nav a:hover, nav span.active, nav span:hover {
   color: #fff;
   text-shadow: 0 0 5px #fca311;
   cursor: pointer;
@@ -40,9 +40,7 @@ main {
   margin: 2em auto;
   padding: 0 1em;
 }
-.nav a:hover, nav span:hover {
-  background-color: #f1f1f1;
-}
+
 
 /* ====== Indicador adulto (badge 18+) ====== */
 .indicador-adulto {
@@ -586,3 +584,4 @@ footer {
     .dropdown-mainnav:hover .dropdown-mainnav-content {
       display: block;
     }
+
