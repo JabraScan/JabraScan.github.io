@@ -23,21 +23,6 @@ export function generarToken() {
 //@returns {Promise<Response>} Respuesta cruda
 //
 function postToAPI(payload) {
-  const formData = new URLSearchParams({
-    ...payload,
-    clave: API_KEY // Se incluye si estás usando autenticación
-  });
-
-  return fetch(URL_BASE, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: formData
-  });
-}
-/*
-function postToAPI(payload) {
   return fetch(URL_BASE, {
     method: "POST",
     headers: {
@@ -45,11 +30,10 @@ function postToAPI(payload) {
     },
     body: JSON.stringify({
       ...payload,
-      clave: API_KEY // Se incluye si estás usando autenticación
+      token: generarToken() // si estás usando validación
     })
   });
-}*/
-
+}
 //
 //➕ Incrementa el contador de visitas para un ID
 //@param {string} idvisitado
