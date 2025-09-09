@@ -79,12 +79,23 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
  * Carga el archivo PDF y renderiza la página inicial.
  */
 function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
-  const pdfPath = `books/${clave}/${encodeURIComponent(nombreArchivo)}`;
+  //añadido el 09-09-2025 23:28 para gestionar los capitulos mas alla de 999
+      // Extraemos el número de capítulo actual
+      const numCapitulo = capitulosObra[idx].numCapitulo;
+      // Si el número es mayor a 999, tomamos todos los dígitos excepto los tres últimos.
+      // Ejemplo: 1203 → "1", 123653 → "123"
+      const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
+      // Concatenamos el fragmento extra a la clave, asegurándonos de que sea texto.
+      // Esto evita sumas si 'clave' es numérica.
+      const claveFinal = String(clave) + extra;
+      // Construimos la ruta final del PDF, codificando el nombre del archivo para URLs válidas.
+      const pdfPath = `books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+  //const pdfPath = `books/${clave}/${encodeURIComponent(nombreArchivo)}`;
   pdfjsLib.getDocument(pdfPath).promise.then(doc => {
     pdfDoc = doc;
     pageNum = paginaInicial;
     renderPage(pageNum);
-console.log(`Capitulo ${capitulosObra[idx].numCapitulo}`);
+//console.log(`Capitulo ${capitulosObra[idx].numCapitulo}`);
     actualizarBotonesNav(idx, capitulosObra, clave);
     incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
   });
