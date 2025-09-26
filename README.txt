@@ -3,7 +3,6 @@
 Este proyecto publica traducciones de novelas usando GitHub Pages.
 
 ## Cómo subir una obra
-1. Crear carpeta correspondiente en `books/`.
 2. Añadir capítulos en formato `.pdf`.
 3. Confirmar que el SPA los detecta correctamente.
 
