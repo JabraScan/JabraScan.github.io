@@ -29,11 +29,22 @@ document.addEventListener("DOMContentLoaded", function () {
         const discord = obra.querySelector("discord").textContent.trim();
         const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
 
-      //Ultimmo capitulo leido
-          const ultimaObra = localStorage.getItem("ultimaObra");
-          const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
-        booklastread.innerHTML = `${ultimaObra}·${ultimoCapitulo}`;
-        
+        //Ultimmo capitulo leido
+        const ultimaObra = localStorage.getItem("ultimaObra");
+        const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
+        // Evitar mostrar "null·null" o valores vacíos si aún no hay progreso
+        if (booklastread) {
+          if (ultimaObra && ultimoCapitulo) {
+            booklastread.textContent = `${ultimaObra}·${ultimoCapitulo}`;
+            booklastread.classList.remove('hide-on-tablet');
+          } else {
+            // Limpia el contenido y opcionalmente oculta el contenedor
+            booklastread.textContent = '';
+            // Si prefieres ocultarlo por completo, descomenta la siguiente línea:
+            // booklastread.style.display = 'none';
+          }
+        }
+
         let OKAutor = '';
         if (aprobadaAutor === 'si') {
           OKAutor = `
