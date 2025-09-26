@@ -178,18 +178,28 @@ function actualizarBotonesNav(idx, capitulos, clave) {
  */
 function configurarModoOscuro() {
   const toggleMode = document.getElementById("toggleMode");
-  toggleMode.onclick = () => {
-    body.classList.toggle("dark-mode");
-    body.classList.toggle("light-mode");
-    toggleMode.textContent = body.classList.contains("dark-mode") ? "☀️" : "🌙";
-    localStorage.setItem("modoNocturno", body.classList.contains("dark-mode") ? "true" : "false");
+  const canvas = document.getElementById("pdfCanvas");
+  
+  const aplicarModo = (esOscuro) => {
+    body.classList.toggle("dark-mode", esOscuro);
+    body.classList.toggle("light-mode", !esOscuro);
+    toggleMode.textContent = esOscuro ? "☀️" : "🌙";
+    localStorage.setItem("modoNocturno", esOscuro);
+
+    // Forzar la eliminación del filtro directamente en el estilo del elemento
+    if (canvas) {
+      canvas.style.filter = 'none';
+    }
   };
 
-  if (localStorage.getItem("modoNocturno") === "true") {
-    body.classList.add("dark-mode");
-    body.classList.remove("light-mode");
-    toggleMode.textContent = "☀️";
-  }
+  toggleMode.onclick = () => {
+    const esOscuro = !body.classList.contains("dark-mode");
+    aplicarModo(esOscuro);
+  };
+
+  // Aplicar al cargar la página
+  const modoGuardado = localStorage.getItem("modoNocturno") === "true";
+  aplicarModo(modoGuardado);
 }
 
 /**
