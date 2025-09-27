@@ -117,11 +117,24 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
         const imageUrl = `${domain}/${data.imagen}`;
         const pageUrl = `${domain}/lectorpdf.html?obra=${clave}&cap=${cap.numCapitulo}`;
 
+        // Prepara los datos estructurados para el capítulo
+        const structuredData = {
+          "@context": "https://schema.org",
+          "@type": "Chapter",
+          "name": `Capítulo ${cap.numCapitulo}: ${cap.nombreCapitulo}`,
+          "partOfBook": {
+            "@type": "Book",
+            "name": data.titulo
+          },
+          "url": pageUrl
+        };
+
         updateMetaTags({
           title: pageTitle,
           description: pageDescription,
           imageUrl: imageUrl,
-          url: pageUrl
+          url: pageUrl,
+          structuredData: structuredData
         });
 
         mostrarurl(clave, capitulo); //actualizar barra de direcciones

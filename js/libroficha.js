@@ -54,11 +54,26 @@ export function cargarlibro(libroId) {
       const imageUrl = `${domain}/${imagen}`;
       const pageUrl = `${domain}/books/libro-ficha.html?obra=${libroId}`;
 
+      // Prepara los datos estructurados para el libro
+      const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Book",
+        "name": nombreobra,
+        "author": {
+          "@type": "Person",
+          "name": autor
+        },
+        "description": sinopsis,
+        "image": imageUrl,
+        "url": pageUrl
+      };
+
       updateMetaTags({
         title: pageTitle,
         description: pageDescription,
         imageUrl: imageUrl,
-        url: pageUrl
+        url: pageUrl,
+        structuredData: structuredData
       });
 
       //actualizar url

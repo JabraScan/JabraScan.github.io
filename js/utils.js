@@ -162,8 +162,9 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
  * @param {string} [data.imageUrl] - La URL de la imagen para previsualizaciones (debe ser absoluta).
  * @param {string} [data.url] - La URL canónica de la página.
  * @param {string} [data.keywords] - Palabras clave opcionales separadas por comas.
+ * @param {object} [data.structuredData] - Objeto con los datos estructurados para JSON-LD.
  */
-export function updateMetaTags({ title, description, imageUrl, url, keywords }) {
+export function updateMetaTags({ title, description, imageUrl, url, keywords, structuredData }) {
   // Función auxiliar para crear o actualizar una metaetiqueta
   const setMeta = (attr, value, content) => {
     let element = document.querySelector(`meta[${attr}='${value}']`);
@@ -210,6 +211,21 @@ export function updateMetaTags({ title, description, imageUrl, url, keywords }) 
   // Actualiza las keywords si se proporcionan
   if (keywords) {
     setMeta('name', 'keywords', keywords);
+  }
+
+  // LÓGICA PARA JSON-LD
+  // Elimina el script de datos estructurados anterior si existe
+  const oldJsonLdScript = document.querySelector('script[type="application/ld+json"]');
+  if (oldJsonLdScript) {
+    oldJsonLdScript.remove();
+  }
+
+  // Crea y añade el nuevo script si se proporcionan datos estructurados
+  if (structuredData) {
+    const jsonLdScript = document.createElement('script');
+    jsonLdScript.type = 'application/ld+json';
+    jsonLdScript.textContent = JSON.stringify(structuredData, null, 2);
+    document.head.appendChild(jsonLdScript);
   }
 
   // Etiquetas estáticas que no dependen de los parámetros (se pueden establecer siempre)
