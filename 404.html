@@ -3,15 +3,28 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Redirigiendo...</title>
+    <title>Página no encontrada</title>
     <script>
-      // Redirige a index.html con hash, que tu código ya sabe manejar
-      const ruta = location.pathname.replace(/^\/|\/$/g, ""); // Ej: "CDMNQTMHC"
-      console.log(location.replace(`index.html#${ruta}`));
-      //location.replace(`index.html#${ruta}`);
+      let segundos = 3; // tiempo de espera en segundos
+
+      function actualizarMensaje() {
+        const mensaje = document.getElementById("contador");
+        mensaje.textContent = segundos;
+        if (segundos === 0) {
+          location.replace("index.html");
+        }
+        segundos--;
+      }
+
+      // Inicia cuenta regresiva
+      window.onload = () => {
+        actualizarMensaje();
+        setInterval(actualizarMensaje, 1000);
+      };
     </script>
   </head>
   <body>
-    <p>Redirigiendo a la página principal...</p>
+    <p>Redirigiendo a la página principal en <span id="contador">3</span> segundos...</p>
+    <p><a href="index.html">Haz clic aquí si no eres redirigido automáticamente</a></p>
   </body>
 </html>
