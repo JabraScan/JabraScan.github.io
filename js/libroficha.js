@@ -1,4 +1,5 @@
 import { obtenerCapitulos } from './capitulos.js';
+import { updateMetaTags } from './utils.js';
 import { parseDateDMY, parseChapterNumber, compareCapNumDesc, crearBloqueValoracion } from './utils.js';
 import { activarLinksPDF, activarPaginacion } from './eventos.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
@@ -45,6 +46,20 @@ export function cargarlibro(libroId) {
       const discord = get("discord");
       const aprobadaAutor = get("aprobadaAutor");
       const wikifan = get("wiki");
+
+      // ACTUALIZACIÓN DE METAETIQUETAS PARA SEO Y REDES SOCIALES
+      const pageTitle = `${nombreobra} | JabraScan`;
+      const pageDescription = sinopsis.substring(0, 155) + '...';
+      const domain = window.location.origin;
+      const imageUrl = `${domain}/${imagen}`;
+      const pageUrl = `${domain}/books/libro-ficha.html?obra=${libroId}`;
+
+      updateMetaTags({
+        title: pageTitle,
+        description: pageDescription,
+        imageUrl: imageUrl,
+        url: pageUrl
+      });
 
       //actualizar url
       mostrarurl(clave);

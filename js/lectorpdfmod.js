@@ -1,4 +1,4 @@
-import { parseDateDMY, parseChapterNumber } from './utils.js';
+import { parseDateDMY, parseChapterNumber, updateMetaTags } from './utils.js';
 import { incrementarVisita, leerVisitas } from './contadoresGoogle.js';
 import { mostrarurl } from './general.js';
 
@@ -108,8 +108,23 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
         const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
         if (idx === -1) return;
         
-        mostrarurl(clave, capitulo); //actualizar barra de direcciones
         const cap = capitulosObra[idx];
+
+        // Actualización de metaetiquetas para SEO y redes sociales
+        const pageTitle = `${data.titulo} - Cap. ${cap.numCapitulo}: ${cap.nombreCapitulo} | JabraScan`;
+        const pageDescription = data.sinopsis.substring(0, 155) + '...'; // Límite para meta description
+        const domain = window.location.origin;
+        const imageUrl = `${domain}/${data.imagen}`;
+        const pageUrl = `${domain}/lectorpdf.html?obra=${clave}&cap=${cap.numCapitulo}`;
+
+        updateMetaTags({
+          title: pageTitle,
+          description: pageDescription,
+          imageUrl: imageUrl,
+          url: pageUrl
+        });
+
+        mostrarurl(clave, capitulo); //actualizar barra de direcciones
         actualizarTituloObra(cap.tituloObra, clave);
         cargarPDF(clave, cap.NombreArchivo, paginaInicial, idx, capitulosObra);
         configurarSelectorCapitulos(capitulo, capitulosObra, clave);

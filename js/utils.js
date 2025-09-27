@@ -154,6 +154,66 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
   return bloque;
 }
 
-export function truncarTexto(texto, maxLength = 40) {
-  return texto.length > maxLength ? texto.slice(0, maxLength) + "…" : texto;
+/**
+ * Actualiza las metaetiquetas del documento de forma granular para mejorar el SEO y la apariencia en redes sociales.
+ * @param {object} data - Objeto con la información a actualizar.
+ * @param {string} [data.title] - El nuevo título de la página.
+ * @param {string} [data.description] - La nueva descripción.
+ * @param {string} [data.imageUrl] - La URL de la imagen para previsualizaciones (debe ser absoluta).
+ * @param {string} [data.url] - La URL canónica de la página.
+ * @param {string} [data.keywords] - Palabras clave opcionales separadas por comas.
+ */
+export function updateMetaTags({ title, description, imageUrl, url, keywords }) {
+  // Función auxiliar para crear o actualizar una metaetiqueta
+  const setMeta = (attr, value, content) => {
+    let element = document.querySelector(`meta[${attr}='${value}']`);
+    if (!element) {
+      element = document.createElement('meta');
+      element.setAttribute(attr, value);
+      document.head.appendChild(element);
+    }
+    element.setAttribute('content', content);
+  };
+
+  // Actualiza el título si se proporciona
+  if (title) {
+    document.title = title;
+    setMeta('property', 'og:title', title);
+    setMeta('name', 'twitter:title', title);
+  }
+
+  // Actualiza la descripción si se proporciona
+  if (description) {
+    setMeta('name', 'description', description);
+    setMeta('property', 'og:description', description);
+    setMeta('name', 'twitter:description', description);
+  }
+
+  // Actualiza la imagen si se proporciona
+  if (imageUrl) {
+    setMeta('property', 'og:image', imageUrl);
+    setMeta('name', 'twitter:image', imageUrl);
+  }
+
+  // Actualiza la URL canónica si se proporciona
+  if (url) {
+    setMeta('property', 'og:url', url);
+    let canonicalLink = document.querySelector("link[rel='canonical']");
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', url);
+  }
+
+  // Actualiza las keywords si se proporcionan
+  if (keywords) {
+    setMeta('name', 'keywords', keywords);
+  }
+
+  // Etiquetas estáticas que no dependen de los parámetros (se pueden establecer siempre)
+  setMeta('property', 'og:type', 'website');
+  setMeta('property', 'og:site_name', 'JabraScan');
+  setMeta('name', 'twitter:card', 'summary_large_image');
 }
