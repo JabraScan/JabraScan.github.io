@@ -1,9 +1,14 @@
 {
     "MLHSB": [
-        { "Fecha" : "28-09-2025", "NombreArchivo" : "MLHSB_JabraScan_0001.pdf", "numCapitulo" : "1", "nombreCapitulo" : "Capítulo 1 - Lleno de Quejas"      , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
-        { "Fecha" : "28-09-2025", "NombreArchivo" : "MLHSB_JabraScan_0002.pdf", "numCapitulo" : "2", "nombreCapitulo" : "Capítulo 2 - La Sala Maldita"      , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
-        { "Fecha" : "28-09-2025", "NombreArchivo" : "MLHSB_JabraScan_0003.pdf", "numCapitulo" : "3", "nombreCapitulo" : "Capítulo 3"                        , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
-        { "Fecha" : "28-09-2025", "NombreArchivo" : "MLHSB_JabraScan_0004.pdf", "numCapitulo" : "4", "nombreCapitulo" : "Capítulo 4 - ¡No hay más comida!"  , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
-        { "Fecha" : "28-09-2025", "NombreArchivo" : "MLHSB_JabraScan_0005.pdf", "numCapitulo" : "5", "nombreCapitulo" : "Capítulo 5"                        , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" }
+        { "Fecha" : "28-09-2025", "NombreArchivo" : "MLHSB_JabraScan_0001.pdf", "numCapitulo" :  "1", "nombreCapitulo" : "Capítulo 1 - Lleno de Quejas"      , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "28-09-2025", "NombreArchivo" : "MLHSB_JabraScan_0002.pdf", "numCapitulo" :  "2", "nombreCapitulo" : "Capítulo 2 - La Sala Maldita"      , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "28-09-2025", "NombreArchivo" : "MLHSB_JabraScan_0003.pdf", "numCapitulo" :  "3", "nombreCapitulo" : "Capítulo 3"                        , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "28-09-2025", "NombreArchivo" : "MLHSB_JabraScan_0004.pdf", "numCapitulo" :  "4", "nombreCapitulo" : "Capítulo 4 - ¡No hay más comida!"  , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "28-09-2025", "NombreArchivo" : "MLHSB_JabraScan_0005.pdf", "numCapitulo" :  "5", "nombreCapitulo" : "Capítulo 5"                        , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "29-09-2025", "NombreArchivo" : "MLHSB_JabraScan_0006.pdf", "numCapitulo" :  "6", "nombreCapitulo" : "Capítulo 6"                        , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "30-09-2025", "NombreArchivo" : "MLHSB_JabraScan_0007.pdf", "numCapitulo" :  "7", "nombreCapitulo" : "Capítulo 7"                        , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "01-10-2025", "NombreArchivo" : "MLHSB_JabraScan_0008.pdf", "numCapitulo" :  "8", "nombreCapitulo" : "Capítulo 8"                        , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "02-10-2025", "NombreArchivo" : "MLHSB_JabraScan_0009.pdf", "numCapitulo" :  "9", "nombreCapitulo" : "Capítulo 9"                        , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "03-10-2025", "NombreArchivo" : "MLHSB_JabraScan_0010.pdf", "numCapitulo" : "10", "nombreCapitulo" : "Capítulo 10"                      , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" }
     ]
 }
