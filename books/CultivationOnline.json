@@ -1557,6 +1557,9 @@
         { "Fecha" : "23-09-2025", "NombreArchivo" : "CultivationOnline-2154_JabraScan.pdf", "numCapitulo" : "2154", "nombreCapitulo" : "Espada de Aspecto Familiar"                                                         , "tituloObra" : "Cultivation Online" },
         { "Fecha" : "24-09-2025", "NombreArchivo" : "CultivationOnline-2155_JabraScan.pdf", "numCapitulo" : "2155", "nombreCapitulo" : "La Marca del Creador"                                                               , "tituloObra" : "Cultivation Online" },
         { "Fecha" : "26-09-2025", "NombreArchivo" : "CultivationOnline-2156_JabraScan.pdf", "numCapitulo" : "2156", "nombreCapitulo" : "Bárbaros (1)"                                                               		, "tituloObra" : "Cultivation Online" },
-        { "Fecha" : "26-09-2025", "NombreArchivo" : "CultivationOnline-2157_JabraScan.pdf", "numCapitulo" : "2157", "nombreCapitulo" : "Bárbaros (2)"                                                              			, "tituloObra" : "Cultivation Online" }
+        { "Fecha" : "26-09-2025", "NombreArchivo" : "CultivationOnline-2157_JabraScan.pdf", "numCapitulo" : "2157", "nombreCapitulo" : "Bárbaros (2)"                                                              			, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "29-09-2025", "NombreArchivo" : "CultivationOnline-2158_JabraScan.pdf", "numCapitulo" : "2158", "nombreCapitulo" : "El Despertar Absoluto del Dragón"                                      				, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "30-09-2025", "NombreArchivo" : "CultivationOnline-2159_JabraScan.pdf", "numCapitulo" : "2159", "nombreCapitulo" : "Diez Golpes de la Jefa Mu"                            			                 	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "01-10-2025", "NombreArchivo" : "CultivationOnline-2160_JabraScan.pdf", "numCapitulo" : "2160", "nombreCapitulo" : "Abuela Mu"                                          			                   	, "tituloObra" : "Cultivation Online" }
   ]
 }
