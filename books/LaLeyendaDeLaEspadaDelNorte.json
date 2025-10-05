@@ -202,6 +202,7 @@
         { "Fecha" : "08-09-2025", "NombreArchivo" : "TLOTNB-0200_JabraScan.pdf", "numCapitulo" : "200", "nombreCapitulo" : "Donde Hay Luz, Debe Haber Sombra (4)"                                          , "tituloObra" : "La Leyenda de la Espada del Norte" },
         { "Fecha" : "09-09-2025", "NombreArchivo" : "TLOTNB-0201_JabraScan.pdf", "numCapitulo" : "201", "nombreCapitulo" : "Crisis y Encuentros Desafortunados (1)"                                        , "tituloObra" : "La Leyenda de la Espada del Norte" },
         { "Fecha" : "10-09-2025", "NombreArchivo" : "TLOTNB-0202_JabraScan.pdf", "numCapitulo" : "202", "nombreCapitulo" : "Crisis y Encuentros Desafortunados (2)"                                        , "tituloObra" : "La Leyenda de la Espada del Norte" },
-        { "Fecha" : "21-09-2025", "NombreArchivo" : "TLOTNB-0203_JabraScan.pdf", "numCapitulo" : "203", "nombreCapitulo" : "Crisis y Encuentros Desafortunados (3)"                                        , "tituloObra" : "La Leyenda de la Espada del Norte" }
+        { "Fecha" : "21-09-2025", "NombreArchivo" : "TLOTNB-0203_JabraScan.pdf", "numCapitulo" : "203", "nombreCapitulo" : "Crisis y Encuentros Desafortunados (3)"                                        , "tituloObra" : "La Leyenda de la Espada del Norte" },
+        { "Fecha" : "05-10-2025", "NombreArchivo" : "TLOTNB-0204_JabraScan.pdf", "numCapitulo" : "204", "nombreCapitulo" : "Cuando Un niño Se Convierte En Hombre (1)"                                     , "tituloObra" : "La Leyenda de la Espada del Norte" }
     ]
 }
