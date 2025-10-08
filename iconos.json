@@ -11,5 +11,6 @@
   "ShadowSlave":                 {  "icono": "🕶️", "descripcion": "Shadow Slave"                            },
   "Suzume":                      {  "icono": "🚪", "descripcion": "Suzume"                                  },
   "TheEminenceInShadow":         {  "icono": "🌑", "descripcion": "The Eminence in Shadow"                  },
+  "ZombieClaseSApocalipsis":     {  "icono": "🧟‍♂️", "descripcion": "Zombi de Clase S en un Apocalipsis"      },
   "Default":                     {  "icono": "✨", "descripcion": ""  }
 }
