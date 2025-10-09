@@ -20,12 +20,13 @@ export function cargarlibro(libroId) {
         .find(o => o.querySelector('clave')?.textContent.trim() === libroId);
 
       if (!obra) {
-        document.body.innerHTML = `
+       /* document.body.innerHTML = `
           <div style="text-align: center; margin-top: 2rem;">
             <p>Obra no encontrada.</p>
             <a href="https://jabrascan.github.io/">Ir a la página inicial</a>
           </div>
-        `;
+        `;*/
+        window.location.href = "https://jabrascan.github.io/";
         return;
       }
 
@@ -258,3 +259,4 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
