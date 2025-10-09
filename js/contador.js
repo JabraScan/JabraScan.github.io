@@ -42,7 +42,7 @@ export async function renderResumenObras() {
         const info = iconosRes[item.obra] || iconosRes["Default"];
         const icono = info.icono || "✨";
         const descripcion = info.descripcion || item.obra || item.id;
-        const etiqueta = `${icono} ${truncarTexto(descripcion, 30)}`;
+        const etiqueta = `${icono} ${truncarTexto(descripcion, 22)}`;
         etiquetasCombinadas.push(etiqueta);
         etiquetasCompletas.push(`${icono} ${descripcion}`);
       });
@@ -89,40 +89,6 @@ export async function renderResumenObras() {
         }
       }
     });
-/*
-    // 📈 Gráfico con descripciones
-    new Chart(canvasDescripcion, {
-      type: "bar",
-      data: {
-        labels: etiquetasCombinadas,
-        datasets: [{
-          label: "Visitas totales",
-          data: visitasTotales,
-          backgroundColor: "rgba(75, 192, 192, 0.6)",
-          borderColor: "rgba(75, 192, 192, 1)",
-          borderWidth: 1
-        }]
-      },
-      options: {
-        indexAxis: "y",
-        responsive: true,
-        plugins: {
-          title: {
-            display: true,
-            text: "Visitas"
-          },
-          legend: {
-            display: false
-          }
-        },
-        scales: {
-          x: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-*/
   } catch (error) {
     console.error("❌ Error al renderizar gráficos:", error);
     if (errorBox) {
