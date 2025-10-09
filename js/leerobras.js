@@ -91,17 +91,21 @@ document.addEventListener("DOMContentLoaded", function () {
         itemCarousel.prepend(imagenContenedor);
         carouselContainer.appendChild(itemCarousel);
 
-        const itemBook = document.createElement("article");
-        itemBook.classList.add("book-card-main", "libro-item");
-        itemBook.onclick = () => onLibroClick(clave);
+        const itemBook = document.createElement("div");
+        itemBook.classList.add("col");
         itemBook.innerHTML = `
-          <div class="book-info-main">
-            <p class="clave">${clave}</p>
-            <h3>${nombreobra}</h3>
-            <div class="book-author-name"><strong class="book-author-title">Autor:</strong> ${autor}</div>
-            <div class="book-estado ${estado}">${estado}</div>
-          </div>
+          <article class="card h-100 book-card-main libro-item" data-clave="${clave}">
+            <div class="card-body d-flex flex-column">
+              <p class="clave d-none">${clave}</p>
+              <h3 class="card-title h6 mb-2">${nombreobra}</h3>
+              <div class="card-text">
+                <div class="book-author-name mb-2"><strong class="book-author-title">Autor:</strong> ${autor}</div>
+                <div class="book-estado badge ${estado === 'En progreso' ? 'bg-success' : estado === 'Pausado' ? 'bg-warning' : 'bg-secondary'} mb-2">${estado}</div>
+              </div>
+            </div>
+          </article>
         `;
+        itemBook.querySelector(".libro-item").onclick = () => onLibroClick(clave);
 
         const itemBookNOpc = document.createElement("li");
         itemBookNOpc.classList.add("item-libro");
@@ -176,30 +180,33 @@ document.addEventListener("DOMContentLoaded", function () {
                   return { [clave]: capitulosConObra };
                 });
             })
-            .then((data) => {
-              const bloque = crearUltimoCapituloDeObra(data, clave);
-              if (bloque) {
-                const bloqueB = bloque.cloneNode(true);
-                itemBook.querySelector(".book-info-main").appendChild(bloque);
-                itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
-          
-                const hoyTag = itemBook.querySelector('.tag-capitulo.hoy');
-                if (hoyTag) {
-                  const bookInfoMain = hoyTag.closest('.book-card-main');
-                  if (bookInfoMain) {
-                    bookInfoMain.classList.add('hoy-book');
-                  }
-                }
+          .then((data) => {
+            const bloque = crearUltimoCapituloDeObra(data, clave);
+            if (bloque) {
+              const bloqueB = bloque.cloneNode(true);
+              itemBook.querySelector(".card-body").appendChild(bloque);
+              itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
+
+              const hoyTag = itemBook.querySelector('.tag-capitulo.hoy');
+              if (hoyTag) {
+                // Añadir clase al div.col que contiene la tarjeta
+                itemBook.classList.add('hoy-book');
               }
-            })
-            .catch((err) => console.error("❌ Error cargando capítulos:", err));
-
-
+            }
+          })
+          .catch((err) => console.error("❌ Error cargando capítulos:", err));
         promesasCapitulos.push(promesaCapitulo);
 
         const imagenContenedorA = imagenContenedor.cloneNode(true);
         const imagenContenedorB = imagenContenedor.cloneNode(true);
-        itemBook.prepend(imagenContenedorA);
+        
+        // Agregar la imagen como card-img-top dentro del article
+        const cardImg = imagenContenedorA.querySelector('img');
+        if (cardImg) {
+          cardImg.classList.add('card-img-top');
+          itemBook.querySelector('.card').prepend(imagenContenedorA);
+        }
+        
         itemBookNOpc.prepend(imagenContenedorB);
 
         booklistContainer.appendChild(itemBook);
@@ -272,11 +279,13 @@ function ordenarLibrosPorFecha() {
   /**
    * 🗓️ Función auxiliar: getFecha
    * Extrae y convierte la fecha del último capítulo en un objeto Date
-   * @param {HTMLElement} element - Elemento del libro
+   * @param {HTMLElement} element - Elemento del libro (div.col o li)
    * @returns {Date|null} - Fecha válida o null si no existe o es incorrecta
    */
   const getFecha = (element) => {
-    const fechaStr = element.querySelector('.book-latest-chapter')?.getAttribute('data-fecha');
+    // Buscar dentro del article si es un div.col
+    const searchElement = element.classList.contains('col') ? element.querySelector('.card') : element;
+    const fechaStr = searchElement?.querySelector('.book-latest-chapter')?.getAttribute('data-fecha');
     if (!fechaStr || !/^\d{2}-\d{2}-\d{4}$/.test(fechaStr)) return null;
 
     const [dia, mes, año] = fechaStr.split('-');
@@ -311,7 +320,7 @@ function ordenarLibrosPorFecha() {
   // 🧩 Ordena artículos dentro de .book-list
   const bookListContainer = document.querySelector('.book-list');
   if (bookListContainer) {
-    ordenarYReemplazar(bookListContainer, 'article.book-card-main.libro-item');
+    ordenarYReemplazar(bookListContainer, 'div.col');
   }
 
   // 🧩 Ordena <li> dentro de .lista-libros
