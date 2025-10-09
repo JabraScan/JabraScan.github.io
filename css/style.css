@@ -95,11 +95,6 @@ header {
 .navbar-toggler:focus {
   box-shadow: 0 0 0 0.15rem rgba(252, 163, 17, 0.4);
 }
-main {
-  max-width: 900px;
-  margin: 2em auto;
-  padding: 0 1em;
-}
 
 
 /* ====== Indicador adulto (badge 18+) ====== */
