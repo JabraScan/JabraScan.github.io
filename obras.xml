@@ -1,5 +1,6 @@
 <obras>
   <obra>
+    <visible>si</visible>
     <clave>CDMNQTMHC</clave>
     <nombreobra>¡Cállate, dragón malvado! No quiero tener mas hijos contigo.</nombreobra>
     <nombreobra2>闭嘴恶龙我不想再跟你生孩子了</nombreobra2>
@@ -22,6 +23,7 @@
     <wiki>https://shut-up-evil-dragon-i-dont-want-to-raise-a-child.fandom.com/wiki/Shut_up_Evil_Dragon_I_don%27t_want_to_have_any_more_kids_with_you!_Wiki</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>CultivationOnline</clave>
     <nombreobra>Cultivation Online</nombreobra>
     <nombreobra2></nombreobra2>
@@ -44,6 +46,7 @@
     <wiki>https://cultivation-online.fandom.com/wiki/Cultivation_Online_Wiki</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>DualCultivation</clave>
     <nombreobra>Dual Cultivation</nombreobra>
     <nombreobra2></nombreobra2>
@@ -66,6 +69,7 @@
     <wiki>https://dual-cultivation-novel.fandom.com/wiki/Dual_Cultivation_Wiki</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>FirstDemonicDragon</clave>
     <nombreobra>First Demonic Dragon</nombreobra>
     <nombreobra2>Primer Dragon Demoniaco</nombreobra2>
@@ -91,6 +95,7 @@
     <wiki>https://first-demonic-dragon.fandom.com/wiki/First_Demonic_Dragon_Wiki</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>LaLeyendaDeLaEspadaDelNorte</clave>
     <nombreobra>La Leyenda de la Espada del Norte</nombreobra>
     <nombreobra2></nombreobra2>
@@ -113,6 +118,7 @@
     <wiki>https://legend-of-the-northern-blade.fandom.com/wiki/Main_Page</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>MLHSB</clave>
     <nombreobra>¡El Héroe de Nivel Máximo Ha Regresado!</nombreobra>
     <nombreobra2>¡Max Level Hero Strikes Back!</nombreobra2>
@@ -138,6 +144,7 @@
     <wiki>https://the-max-level-hero-strikes-back.fandom.com/wiki/The_Max_Level_Hero_Strikes_Back_Wiki</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>PathtoDualCultivation</clave>
     <nombreobra>Path to Dual Cultivation</nombreobra>
     <nombreobra2></nombreobra2>
@@ -160,6 +167,7 @@
     <wiki>https://dual-cultivation-novel.fandom.com/wiki/Path_to_Dual_Cultivation_(Prequel)</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>MadamePleaseBehave</clave>
     <nombreobra>Señora, por favor comportese</nombreobra>
     <nombreobra2>Madam, Please Behave</nombreobra2>
@@ -182,6 +190,7 @@
     <wiki></wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>ShadowSlave</clave>
     <nombreobra>Shadow Slave</nombreobra>
     <nombreobra2>Esclavo de la Sombra</nombreobra2>
@@ -204,6 +213,7 @@
     <wiki>https://shadowslave.fandom.com/wiki/Shadow_Slave_Wiki</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>Suzume</clave>
     <nombreobra>Suzume no Tojimari</nombreobra>
     <nombreobra2></nombreobra2>
@@ -226,6 +236,7 @@
     <wiki>https://doblaje-espana.fandom.com/es/wiki/Suzume</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>TheEminenceInShadow</clave>
     <nombreobra>The Eminence in Shadow</nombreobra>
     <nombreobra2>La Eminencia en la Sombra</nombreobra2>
@@ -248,6 +259,7 @@
     <wiki></wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>DanmachiArgonauta</clave>
     <nombreobra>Danmachi - Relato Heroico: Argonauta</nombreobra>
     <nombreobra2>Arugonouto zenshou douke koushin danjon ni deai o motomeru no wa machigatte irudarou ka eiyuutan</nombreobra2>
@@ -275,6 +287,7 @@
     <wiki></wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>ZombieClaseSApocalipsis</clave>
     <nombreobra>Zombi de Clase S en un Apocalipsis</nombreobra>
     <nombreobra2>Apocalypse’s S-Class Zombie</nombreobra2>
