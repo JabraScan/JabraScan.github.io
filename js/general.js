@@ -69,7 +69,7 @@ import { renderResumenObras } from './contador.js';
           if (url === "ultimosCapitulos.html") {
             ocultarDisqus?.();
             initUltimosCapitulos();
-          } else if (url === "count.html") {
+          } else if (url === "counts.html") {
              ocultarDisqus?.();
              renderResumenObras();
          }
@@ -174,5 +174,6 @@ import { renderResumenObras } from './contador.js';
     
       if (obra) abrirObraCapitulo(obra, capitulo);
     }
+
 
 
