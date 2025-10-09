@@ -45,7 +45,7 @@ export async function renderResumenObras() {
         etiquetasCombinadas.push(etiqueta);
       });
     // 📈 Gráfico con descripciones
-    new window.Chart(canvasDescripcion, {
+    new Chart(canvasDescripcion, {
       type: "bar",
       data: {
         labels: etiquetasCombinadas,
