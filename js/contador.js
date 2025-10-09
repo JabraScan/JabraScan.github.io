@@ -1,101 +1,112 @@
-//import Chart from 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js';
-import { obtenerResumenObras } from './contadoresGoogle.js'; // Asegúrate de que el nombre coincida con tu archivo de funciones
+import { obtenerResumenObras } from './contadoresGoogle.js';
 
 /**
- * 📊 Renderiza la gráfica de resumen de obras en el canvas #graficaObras
+ * 📊 Renderiza dos gráficos horizontales:
+ * - Uno con descripciones de obras
+ * - Otro con iconos de obras
  */
-export async function renderResumenObras() {
-  const canvas = document.getElementById("graficaObras");
+export async function renderGraficosConIconos() {
+  const canvasDescripcion = document.getElementById("graficaDescripcion");
+  const canvasIcono = document.getElementById("graficaIcono");
   const errorBox = document.getElementById("error");
+  const loader = document.getElementById("loader");
+
+  if (loader) loader.style.display = "block";
 
   try {
-    const resumen = await obtenerResumenObras();
+    const [resumen, iconosRes] = await Promise.all([
+      obtenerResumenObras(),
+      fetch('./iconos.json').then(res => res.json())
+    ]);
 
     if (!Array.isArray(resumen) || resumen.length === 0) {
       throw new Error("No se encontraron datos.");
     }
-    // 🎯 Extraer datos para la gráfica
-    const etiquetas = resumen.map(item => item.obra || item.id);
-    //const visitasTotales = resumen.map(item => item.visitas || 0);
-    //const visitasCapitulos = resumen.map(item => item.visitasCapitulos || 0);
 
-    const visitasTotales = resumen.map(item => item.visitas || 0) + resumen.map(item => item.visitasCapitulos || 0);
+    // 🔍 Preparar datos
+    const visitasTotales = resumen.map(item => (item.visitas || 0) + (item.visitasCapitulos || 0));
 
-    // 📈 Crear gráfica con Chart.js
-    /*barras verticales
-    new Chart(canvas, {
+    const etiquetasDescripcion = resumen.map(item => {
+      const info = iconosRes[item.obra] || iconosRes["Default"];
+      return info.descripcion || item.obra || item.id;
+    });
+
+    const etiquetasIcono = resumen.map(item => {
+      const info = iconosRes[item.obra] || iconosRes["Default"];
+      return info.icono || "✨";
+    });
+
+    // 📈 Gráfico con descripciones
+    new window.Chart(canvasDescripcion, {
       type: "bar",
       data: {
-        labels: etiquetas,
-        datasets: [
-          {
-            label: "Visitas",
-            data: visitasTotales,
-            backgroundColor: "rgba(54, 162, 235, 0.6)",
-            borderColor: "rgba(54, 162, 235, 1)",
-            borderWidth: 1
-          }
-        ]
+        labels: etiquetasDescripcion,
+        datasets: [{
+          label: "Visitas totales",
+          data: visitasTotales,
+          backgroundColor: "rgba(75, 192, 192, 0.6)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1
+        }]
       },
       options: {
+        indexAxis: "y",
         responsive: true,
         plugins: {
           title: {
             display: true,
-            text: "Resumen de Obras"
+            text: "Visitas"
           },
           legend: {
-            position: "top"
+            display: false
           }
         },
         scales: {
-          y: {
+          x: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+/*  // 📈 Gráfico con iconos
+    new window.Chart(canvasIcono, {
+      type: "bar",
+      data: {
+        labels: etiquetasIcono,
+        datasets: [{
+          label: "Visitas totales",
+          data: visitasTotales,
+          backgroundColor: "rgba(255, 159, 64, 0.6)",
+          borderColor: "rgba(255, 159, 64, 1)",
+          borderWidth: 1
+        }]
+      },
+      options: {
+        indexAxis: "y",
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: "Visitas por obra (icono)"
+          },
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
             beginAtZero: true
           }
         }
       }
     });*/
-    //barras horizontales
-    new window.Chart(canvas, {
-        type: "bar",
-        data: {
-          labels: etiquetas,
-          datasets: [
-            {
-              label: "Visitas totales",
-              data: visitasTotales,
-              backgroundColor: "rgba(54, 162, 235, 0.6)",
-              borderColor: "rgba(54, 162, 235, 1)",
-              borderWidth: 1
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            title: {
-              display: true,
-              text: "Resumen de Obras"
-            },
-            legend: {
-              position: "top"
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
-
   } catch (error) {
-    console.error("❌ Error al renderizar resumen:", error);
+    console.error("❌ Error al renderizar gráficos:", error);
     if (errorBox) {
       errorBox.textContent = "❌ Error al cargar datos: " + error.message;
       errorBox.classList.remove("hidden");
     }
   } finally {
-    if (loader) loader.style.display = "none"; // ✅ Ocultar loader al terminar
+    if (loader) loader.style.display = "none";
   }
 }
