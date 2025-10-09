@@ -22,6 +22,7 @@ export async function renderResumenObras() {
     const visitasTotales = resumen.map(item => item.visitas || 0) + resumen.map(item => item.visitasCapitulos || 0);
 
     // 📈 Crear gráfica con Chart.js
+    /*barras verticales
     new Chart(canvas, {
       type: "bar",
       data: {
@@ -33,14 +34,7 @@ export async function renderResumenObras() {
             backgroundColor: "rgba(54, 162, 235, 0.6)",
             borderColor: "rgba(54, 162, 235, 1)",
             borderWidth: 1
-          }/*,
-          {
-            label: "Visitas capítulos",
-            data: visitasCapitulos,
-            backgroundColor: "rgba(255, 206, 86, 0.6)",
-            borderColor: "rgba(255, 206, 86, 1)",
-            borderWidth: 1
-          }*/
+          }
         ]
       },
       options: {
@@ -60,7 +54,41 @@ export async function renderResumenObras() {
           }
         }
       }
-    });
+    });*/
+    //barras horizontales
+    new window.Chart(canvas, {
+        type: "bar",
+        data: {
+          labels: etiquetas,
+          datasets: [
+            {
+              label: "Visitas totales",
+              data: visitasTotales,
+              backgroundColor: "rgba(54, 162, 235, 0.6)",
+              borderColor: "rgba(54, 162, 235, 1)",
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: "Resumen de Obras"
+            },
+            legend: {
+              position: "top"
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
   } catch (error) {
     console.error("❌ Error al renderizar resumen:", error);
     if (errorBox) {
