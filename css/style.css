@@ -584,4 +584,16 @@ footer {
     .dropdown-mainnav:hover .dropdown-mainnav-content {
       display: block;
     }
+/*loader*/
+.loader {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 1rem;
+  animation: parpadeo 1s infinite;
+}
 
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
