@@ -12,7 +12,6 @@ export function cargarlibro(libroId) {
     document.body.innerHTML = '<p>No se encontró el libro seleccionado.</p>';
     return;
   }
-
   fetch('obras.xml')
     .then(response => response.text())
     .then(str => new DOMParser().parseFromString(str, "text/xml"))
@@ -259,6 +258,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
