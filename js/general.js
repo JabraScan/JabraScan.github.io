@@ -68,7 +68,10 @@ import { cargarlibro } from './libroficha.js';
           if (url === "ultimosCapitulos.html") {
             ocultarDisqus?.();
             initUltimosCapitulos();
-          }
+          } else if (url === "count.html") {
+             ocultarDisqus?.();
+             renderResumenObras();
+         }
     
           // Puedes añadir más inicializaciones aquí si lo necesitas
         })
@@ -170,3 +173,4 @@ import { cargarlibro } from './libroficha.js';
     
       if (obra) abrirObraCapitulo(obra, capitulo);
     }
+
