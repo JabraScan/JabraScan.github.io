@@ -1,7 +1,6 @@
 import { obtenerResumenObras } from './contadoresGoogle.js';
 import { truncarTexto } from './utils.js';
 
-
 /**
  * 📊 Renderiza dos gráficos horizontales:
  * - Uno con descripciones de obras
