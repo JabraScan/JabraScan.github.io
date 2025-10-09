@@ -8,32 +8,78 @@ body {
 header {
   background: #14213d;
   color: #fff;
-  padding: 1.5em 1em 1em 1em;
-  text-align: center;
   border-bottom: 4px solid #fca311;
+  position: relative;
+  padding: 0;
 }
-header h1 {
-  margin: 0;
-  font-size: 2.2em;
+.navbar-jabrascan {
+  background-color: #14213d;
+  padding: 1rem 1.5rem;
 }
-nav {
-  margin-top: 0.5em;
+.navbar-jabrascan .navbar-brand {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
 }
-nav a, nav span {
+.navbar-jabrascan .navbar-brand:hover,
+.navbar-jabrascan .navbar-brand:focus {
   color: #fca311;
-  text-decoration: none;
-  margin: 0 1em;
+}
+.navbar-jabrascan .nav-link {
+  color: #fca311;
   font-weight: bold;
   transition: color 0.2s;
   -webkit-transition: color 0.2s;
 }
-nav a.active, nav a:hover, nav span.active, nav span:hover {
+.navbar-jabrascan .nav-link.active,
+.navbar-jabrascan .nav-link:hover,
+.navbar-jabrascan .nav-link:focus {
   color: #fff;
   text-shadow: 0 0 5px #fca311;
-  cursor: pointer;
 }
-nav .inactive {
+.navbar-jabrascan .nav-link.inactive {
   display: none;
+}
+.navbar-jabrascan .dropdown-menu {
+  background: #0f1a33;
+  border: 1px solid rgba(252, 163, 17, 0.3);
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  padding: 0.5rem;
+}
+.navbar-jabrascan .dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 1.5rem;
+  width: 18px;
+  height: 10px;
+  background: linear-gradient(135deg, transparent 50%, #0f1a33 50%), linear-gradient(225deg, transparent 50%, #0f1a33 50%);
+  filter: drop-shadow(0 -2px 2px rgba(0, 0, 0, 0.35));
+}
+.navbar-jabrascan .dropdown-item {
+  color: #fca311;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1rem;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  -webkit-transition: background 0.2s ease, color 0.2s ease, -webkit-transform 0.2s ease;
+}
+.navbar-jabrascan .dropdown-item:hover,
+.navbar-jabrascan .dropdown-item:focus {
+  background: rgba(252, 163, 17, 0.15);
+  color: #fff;
+  transform: translateX(4px);
+  -webkit-transform: translateX(4px);
+}
+.navbar-jabrascan .dropdown-divider {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.15rem rgba(252, 163, 17, 0.4);
 }
 main {
   max-width: 900px;
@@ -205,6 +251,7 @@ footer {
   border-radius: 18px;
   box-shadow: 0 4px 20px #0002;
   background: #222;
+  mask-image: radial-gradient(white, black);
   -webkit-mask-image: -webkit-radial-gradient(white, black); /* fix recortes en iOS */
 }
 .carousel-track {
