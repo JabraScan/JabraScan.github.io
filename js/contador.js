@@ -1,6 +1,9 @@
 import { obtenerResumenObras } from './contadoresGoogle.js'; // Asegúrate de que el nombre coincida con tu archivo de funciones
 
-document.addEventListener("DOMContentLoaded", async () => {
+/**
+ * 📊 Renderiza la gráfica de resumen de obras en el canvas #graficaObras
+ */
+export async function renderResumenObras() {
   const canvas = document.getElementById("graficaObras");
   const errorBox = document.getElementById("error");
 
@@ -11,12 +14,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       throw new Error("No se encontraron datos.");
     }
 
-    // Extraer datos para la gráfica
+    // 🎯 Extraer datos para la gráfica
     const etiquetas = resumen.map(item => item.obra || item.id);
     const visitasTotales = resumen.map(item => item.visitas || 0);
     const visitasCapitulos = resumen.map(item => item.visitasCapitulos || 0);
 
-    // Crear gráfica con Chart.js
+    // 📈 Crear gráfica con Chart.js
     new Chart(canvas, {
       type: "bar",
       data: {
@@ -57,10 +60,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
   } catch (error) {
-    console.error("Error al poblar el HTML:", error);
+    console.error("❌ Error al renderizar resumen:", error);
     if (errorBox) {
       errorBox.textContent = "❌ Error al cargar datos: " + error.message;
       errorBox.classList.remove("hidden");
     }
   }
-});
+}
