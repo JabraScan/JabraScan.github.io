@@ -62,6 +62,7 @@ export async function renderResumenObras() {
       options: {
         indexAxis: "y",
         responsive: true,
+        maintainAspectRatio: false, // 🔧 Permite que el gráfico se estire verticalmente
         plugins: {
           title: {
             display: true,
