@@ -36,9 +36,15 @@ export async function renderResumenObras() {
       const info = iconosRes[item.obra] || iconosRes["Default"];
       return info.icono || "✨";
     });
-
-    const etiquetasCombinadas =  `${icono} truncarTexto(${descripcion}, 30)`;
-
+    // Crear etiquetas combinadas icono + Obra
+    const etiquetasCombinadas = [];    
+      resumen.forEach(item => {
+        const info = iconosRes[item.obra] || iconosRes["Default"];
+        const icono = info.icono || "✨";
+        const descripcion = info.descripcion || item.obra || item.id;
+        const etiqueta = `${icono} ${truncarTexto(descripcion, 30)}`;
+        etiquetasCombinadas.push(etiqueta);
+      });
     // 📈 Gráfico con descripciones
     new window.Chart(canvasDescripcion, {
       type: "bar",
