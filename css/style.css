@@ -597,3 +597,9 @@ footer {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
 }
+canvas#graficaObras {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100%;
+}
