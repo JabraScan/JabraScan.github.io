@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
     .then(data => {
       const obras = data.querySelectorAll("obra");
-      const carouselContainer = document.querySelector(".carousel-track");
+      const carouselContainer = document.querySelector(".custom-carousel-track");
       const booklistContainer = document.querySelector(".book-list");
       const booklistContainernopc = document.querySelector(".lista-libros");
       const booklastread = document.querySelector(".main-ultimoCapituloleido");
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const itemCarousel = document.createElement("div");
-        itemCarousel.className = "carousel-item";
+        itemCarousel.className = "custom-carousel-item";
         itemCarousel.innerHTML = `
           <div class="carousel-info-overlay">
             <div class="carousel-info-title libro-item">${nombreobra}</div><br>

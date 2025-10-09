@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const track = document.querySelector('.carousel-track');
-  const items = Array.from(document.querySelectorAll('.carousel-item'));
-  const prevBtn = document.querySelector('.carousel-btn.prev');
-  const nextBtn = document.querySelector('.carousel-btn.next');
+  const track = document.querySelector('.custom-carousel-track');
+  const items = Array.from(document.querySelectorAll('.custom-carousel-item'));
+  const prevBtn = document.querySelector('.custom-carousel-btn.prev');
+  const nextBtn = document.querySelector('.custom-carousel-btn.next');
 
   let currentIndex = 0;
 
   function showItem(index) {
-    let items = Array.from(document.querySelectorAll('.carousel-item'));
+    let items = Array.from(document.querySelectorAll('.custom-carousel-item'));
     if (items.length === 0) {
       return;
     }
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Ejecuta el setInterval y guarda la referencia
   intervalId = setInterval(() => {
-    let items = Array.from(document.querySelectorAll('.carousel-item'));
+    let items = Array.from(document.querySelectorAll('.custom-carousel-item'));
     if (items.length === 0) {
         console.warn("No hay elementos en el carrusel");
       clearInterval(intervalId); // Detener el intervalo

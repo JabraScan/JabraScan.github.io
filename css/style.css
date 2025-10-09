@@ -256,7 +256,7 @@ footer {
 }
 
 /* ====== Carrusel ====== */
-.carousel {
+.custom-carousel {
   position: relative;
   width: 100%;
   max-width: 900px;
@@ -268,17 +268,17 @@ footer {
   mask-image: radial-gradient(white, black);
   -webkit-mask-image: -webkit-radial-gradient(white, black); /* fix recortes en iOS */
 }
-.carousel-track {
+.custom-carousel-track {
   display: flex;
   transition: transform 0.5s cubic-bezier(.77,0,.18,1);
   -webkit-transition: -webkit-transform 0.5s cubic-bezier(.77,0,.18,1);
 }
-.carousel-item {
+.custom-carousel-item {
   min-width: 100%;
   position: relative;
   display: flex;
 }
-.carousel-item img {
+.custom-carousel-item img {
   width: 100%;
   height: 340px;
   object-fit: cover;
@@ -313,7 +313,7 @@ footer {
   color: #fca311;
   margin-right: 0.4em;
 }
-.carousel-controls {
+.custom-carousel-controls {
   position: absolute;
   top: 50%;
   width: 100%;
@@ -321,7 +321,7 @@ footer {
   justify-content: space-between;
   pointer-events: none;
 }
-.carousel-btn {
+.custom-carousel-btn {
   background: rgba(20,33,61,0.85);
   border: none;
   color: #fca311;
@@ -337,7 +337,7 @@ footer {
   align-items: center;
   justify-content: center;
 }
-.carousel-btn:hover {
+.custom-carousel-btn:hover {
   background: #fca311;
   color: #14213d;
 }
