@@ -14,31 +14,16 @@ header {
 }
 .navbar-jabrascan {
   background-color: #14213d;
-  padding: 1rem 1.5rem 1.25rem 1.5rem;
-  overflow: visible;
+  padding: 1rem 1.5rem;
 }
 .navbar-jabrascan .navbar-brand {
   font-size: 2rem;
   font-weight: 700;
   color: #fff;
-  gap: 0.75rem;
 }
 .navbar-jabrascan .navbar-brand:hover,
 .navbar-jabrascan .navbar-brand:focus {
   color: #fca311;
-}
-.navbar-jabrascan .navbar-brand-logo {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 2px solid rgba(252, 163, 17, 0.8);
-  object-fit: cover;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
-}
-.navbar-jabrascan .brand-text {
-  display: inline-flex;
-  flex-direction: column;
-  line-height: 1.1;
 }
 .navbar-jabrascan .nav-link {
   color: #fca311;
@@ -54,13 +39,6 @@ header {
 }
 .navbar-jabrascan .nav-link.inactive {
   display: none;
-}
-.navbar-jabrascan .nav-item.position-relative {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: visible;
-  padding-bottom: 0.25rem;
 }
 .navbar-jabrascan .dropdown-menu {
   background: #0f1a33;
@@ -102,6 +80,11 @@ header {
 }
 .navbar-toggler:focus {
   box-shadow: 0 0 0 0.15rem rgba(252, 163, 17, 0.4);
+}
+main {
+  max-width: 900px;
+  margin: 2em auto;
+  padding: 0 1em;
 }
 
 
@@ -147,73 +130,67 @@ header {
 
 /* ====== Lista de libros / cards ====== */
 .book-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
   justify-content: center;
 }
 .book-card,
 .book-card-main {
-  cursor: pointer;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px #0001;
   transition: transform 0.15s, box-shadow 0.15s;
   -webkit-transition: -webkit-transform 0.15s, box-shadow 0.15s;
   text-decoration: none;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+.book-card {
+  max-width: 150px;
+  max-height: 600px;
+}
+.book-card-main {
+  max-width: 45%;
+  max-height: 150px;
+  display: flex;
+}
+.book-card:hover,
 .book-card-main:hover {
   transform: translateY(-5px) scale(1.03);
   -webkit-transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px #0002;
 }
-.book-card-main .card-img-top {
+.book-card img {
   width: 100%;
-  height: 280px;
+  height: 220px;
   object-fit: cover;
   display: block;
 }
-.book-card-main .imagen-contenedor {
-  position: relative;
-  width: 100%;
+.book-card-main img {
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
-.book-card-main .card-title {
-  color: #14213d;
-  font-weight: 600;
-  font-size: 1rem;
+.book-info { padding: 1em; }
+.book-info-main {
+  padding: 0.8em;
+  font-size: 0.75em;
+  flex: auto;
 }
-.book-card-main .card-body {
-  font-size: 0.9rem;
-  padding: 1rem;
+.book-info h2, .book-info-main h2 {
+  font-size: 1.4em;
+  margin: 0 0 0.5em 0;
 }
-.book-author { color: #666; font-size: 0.9em; margin: 0 0 0.5em 0; }
-.book-author-title { font-weight: bold; }
-.book-author-name { 
-  width: 100%;
-  font-size: 0.85rem;
-  color: #666;
+.book-info h3, .book-info-main h3 {
+  font-size: 1.2em;
+  margin: 0 0 0.5em 0;
+  color: cadetblue;
 }
+.book-author { color: #666; font-size: 1em; margin: 0 0 0.5em 0; }
+.book-author-title { font-weight: bold; width: 15%; }
+.book-author-name { width: 100%; }
 .book-sinopsis { font-size: 0.98em; color: #444; }
-.book-estado {
-  display: inline-block;
-  font-size: 0.75rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-}
-
-/* Estados de libro */
-.book-estado.En.progreso,
-.book-estado.bg-success {
-  background-color: #198754 !important;
-  color: white;
-}
-.book-estado.Pausado,
-.book-estado.bg-warning {
-  background-color: #ffc107 !important;
-  color: #000;
-}
-.book-estado.Finalizado,
-.book-estado.bg-secondary {
-  background-color: #6c757d !important;
-  color: white;
-}
 
 /* ====== Ficha / detalle de libro ====== */
 .book-detail {
@@ -264,49 +241,30 @@ footer {
   margin-top: 4em;
 }
 
-/* ====== Carrusel Personalizado ====== */
-.custom-carousel {
+/* ====== Carrusel ====== */
+.carousel {
   position: relative;
   width: 100%;
-  max-width: 1140px;
-  margin: 0 auto 2rem;
+  max-width: 900px;
+  margin: 2em auto;
   overflow: hidden;
   border-radius: 18px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px #0002;
   background: #222;
   mask-image: radial-gradient(white, black);
   -webkit-mask-image: -webkit-radial-gradient(white, black); /* fix recortes en iOS */
 }
-
-/* Ajustes responsive del carrusel */
-@media (max-width: 1400px) {
-  .custom-carousel {
-    max-width: 960px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .custom-carousel {
-    max-width: 720px;
-  }
-}
-
-@media (max-width: 992px) {
-  .custom-carousel {
-    max-width: 100%;
-  }
-}
-.custom-carousel-track {
+.carousel-track {
   display: flex;
   transition: transform 0.5s cubic-bezier(.77,0,.18,1);
   -webkit-transition: -webkit-transform 0.5s cubic-bezier(.77,0,.18,1);
 }
-.custom-carousel-item {
+.carousel-item {
   min-width: 100%;
   position: relative;
   display: flex;
 }
-.custom-carousel-item img {
+.carousel-item img {
   width: 100%;
   height: 340px;
   object-fit: cover;
@@ -341,63 +299,33 @@ footer {
   color: #fca311;
   margin-right: 0.4em;
 }
-.custom-carousel-controls {
+.carousel-controls {
   position: absolute;
   top: 50%;
   width: 100%;
   display: flex;
   justify-content: space-between;
   pointer-events: none;
-  transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  padding: 0 1rem;
 }
-.custom-carousel-btn {
-  background: rgba(20, 33, 61, 0.1) !important;
-  border: 2px solid rgba(252, 163, 17, 0.7) !important;
-  color: #fca311 !important;
-  font-size: 1.5rem;
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 50% !important;
+.carousel-btn {
+  background: rgba(20,33,61,0.85);
+  border: none;
+  color: #fca311;
+  font-size: 2em;
+  width: 2.2em;
+  height: 2.2em;
+  border-radius: 50%;
   cursor: pointer;
   pointer-events: all;
-  transition: all 0.3s ease !important;
-  -webkit-transition: all 0.3s ease !important;
+  transition: background 0.2s;
+  -webkit-transition: background 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
-.custom-carousel-btn:hover,
-.custom-carousel-btn:focus {
-  background: rgba(252, 163, 17, 0.8) !important;
-  color: #14213d !important;
-  border-color: rgba(252, 163, 17, 0.9) !important;
-  transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(252, 163, 17, 0.5);
-}
-.custom-carousel-btn:active {
-  transform: scale(0.95) !important;
-  -webkit-transform: scale(0.95) !important;
-}
-.custom-carousel-btn:focus-visible {
-  outline: 3px solid #fca311;
-  outline-offset: 3px;
-}
-.custom-carousel-btn i {
-  font-size: 1.2rem;
-  pointer-events: none;
-}
-/* Posicionamiento específico de los botones */
-.custom-carousel-btn.prev {
-  margin-left: 0.5rem;
-}
-.custom-carousel-btn.next {
-  margin-right: 0.5rem;
+.carousel-btn:hover {
+  background: #fca311;
+  color: #14213d;
 }
 
 /* ====== Estado libro ====== */
@@ -481,27 +409,15 @@ footer {
 @media (max-width: 700px) {
   .book-detail { flex-direction: column; align-items: center; }
   .book-detail .cover { width: 100%; max-width: 230px; }
+  main { padding: 0 0.5em; }
   .book-card, .book-detail, .chapter-list { width: 100%; }
-  .custom-carousel-item img { height: 200px; }
+  .carousel-item img { height: 200px; }
   .carousel-info-overlay {
     font-size: 0.95em;
     padding: 0.8em 0.8em 0.7em 0.8em;
   }
   .pdf-link { flex-direction: column; align-items: flex-start; }
   .pdf-link span { flex: 1 1 100%; text-align: left; }
-}
-
-@media (max-width: 576px) {
-  .navbar-jabrascan {
-    padding: 0.75rem 1rem;
-  }
-  .navbar-jabrascan .navbar-brand {
-    font-size: 1.6rem;
-  }
-  .navbar-jabrascan .navbar-brand-logo {
-    width: 36px;
-    height: 36px;
-  }
 }
 
 /* ====== Fixes varios iOS ====== */
@@ -582,10 +498,10 @@ footer {
 .tag-capitulo.nuevo {
   background-color: #007bff;
 }
-.hoy-book,
-.hoy-book .card {
-  border: 2px solid transparent !important;
-  border-radius: 12px !important;
+.hoy-book {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 8px;
 }
 /* Solo parpadea en pantallas grandes (PC) */
 @media (min-width: 768px) {
@@ -597,18 +513,18 @@ footer {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.4; }
   }
-  .hoy-book .card {
+  .hoy-book {
     animation: bordeParpadeante 2s infinite;
   }
 
   @keyframes bordeParpadeante {
     0%, 100% {
-      border-color: rgba(40, 167, 69, 0.6) !important; /* verde difuminado */
-      box-shadow: 0 0 12px rgba(40, 167, 69, 0.5) !important;
+      border-color: rgba(40, 167, 69, 0.6); /* verde difuminado */
+      box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
     }
     50% {
-      border-color: rgba(40, 167, 69, 0.2) !important;
-      box-shadow: 0 0 6px rgba(40, 167, 69, 0.2) !important;
+      border-color: rgba(40, 167, 69, 0.2);
+      box-shadow: 0 0 4px rgba(40, 167, 69, 0.1);
     }
   }
 }
@@ -661,68 +577,21 @@ footer {
   .hide-on-mobile {
     display: none !important;
   }
-  
-  /* Botones del carrusel más pequeños en móviles */
-  .custom-carousel-btn {
-    width: 2.5rem !important;
-    height: 2.5rem !important;
-    font-size: 1rem !important;
-  }
-  .custom-carousel-btn i {
-    font-size: 0.9rem !important;
-  }
-  .custom-carousel-controls {
-    padding: 0 0.5rem;
-  }
 }
 @media only screen and (max-width: 1200px) {
    .hide-on-tablet {
      display: none !important;
    }
-}
+ }
 
-/* Estilos responsive para el último capítulo leído */
-@media (max-width: 991px) {
-  /* Ocultar en vista colapsada para evitar problemas de posicionamiento */
-  .main-ultimoCapituloleido {
-    display: none !important;
-  }
-  
-  .navbar-jabrascan .nav-item.position-relative {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    padding-bottom: 0;
-    position: relative;
-  }
-  .navbar-jabrascan .nav-item.position-relative .nav-link {
-    padding-left: 0.5rem;
-  }
-}/*ultimo capitulo leido*/
+/*ultimo capitulo leido*/
   .main-ultimoCapituloleido {
       position: absolute;
-      top: 100%;
-      left: 50%;
+      left: 45%;
       transform: translateX(-50%);
-      white-space: nowrap;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      font-size: 0.55rem;
-      color: rgba(252, 163, 17, 0.65);
-      padding: 0;
-      margin-top: 0.1rem;
-      background: transparent;
-      border-radius: 0;
-      z-index: 1;
-      pointer-events: none;
-      line-height: 1;
-      font-weight: 300;
-      letter-spacing: 0.02em;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  }
-  /* Ocultar cuando está vacío */
-  .main-ultimoCapituloleido:empty {
-      display: none;
+      z-index: 1000;
+      font-family: Arial, sans-serif;
+      color: #9f9f95;
   }
 /*dropdown nav*/
     .dropdown-mainnav {
@@ -762,22 +631,4 @@ footer {
     .dropdown-mainnav:hover .dropdown-mainnav-content {
       display: block;
     }
-/*loader*/
-.loader {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 1rem;
-  animation: parpadeo 1s infinite;
-}
 
-@keyframes parpadeo {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-canvas#graficaObras {
-  display: block;
-  width: 100% !important;
-  height: auto !important;
-  max-width: 100%;
-}
