@@ -250,18 +250,37 @@ footer {
   margin-top: 4em;
 }
 
-/* ====== Carrusel ====== */
+/* ====== Carrusel Personalizado ====== */
 .custom-carousel {
   position: relative;
   width: 100%;
-  max-width: 900px;
-  margin: 2em auto;
+  max-width: 1140px;
+  margin: 0 auto 2rem;
   overflow: hidden;
   border-radius: 18px;
-  box-shadow: 0 4px 20px #0002;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   background: #222;
   mask-image: radial-gradient(white, black);
   -webkit-mask-image: -webkit-radial-gradient(white, black); /* fix recortes en iOS */
+}
+
+/* Ajustes responsive del carrusel */
+@media (max-width: 1400px) {
+  .custom-carousel {
+    max-width: 960px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .custom-carousel {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 992px) {
+  .custom-carousel {
+    max-width: 100%;
+  }
 }
 .custom-carousel-track {
   display: flex;
@@ -418,9 +437,8 @@ footer {
 @media (max-width: 700px) {
   .book-detail { flex-direction: column; align-items: center; }
   .book-detail .cover { width: 100%; max-width: 230px; }
-  main { padding: 0 0.5em; }
   .book-card, .book-detail, .chapter-list { width: 100%; }
-  .carousel-item img { height: 200px; }
+  .custom-carousel-item img { height: 200px; }
   .carousel-info-overlay {
     font-size: 0.95em;
     padding: 0.8em 0.8em 0.7em 0.8em;
