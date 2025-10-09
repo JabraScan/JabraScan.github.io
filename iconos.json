@@ -13,5 +13,6 @@
   "Suzume":                      {  "icono": "🚪", "descripcion": "Suzume"                                  },
   "TheEminenceInShadow":         {  "icono": "🌑", "descripcion": "The Eminence in Shadow"                  },
   "ZombieClaseSApocalipsis":     {  "icono": "🧟‍♂️", "descripcion": "Zombi de Clase S en un Apocalipsis"      },
+  "Inicio":                      {  "icono": "✨", "descripcion": "JabraRexScan"                            },
   "Default":                     {  "icono": "✨", "descripcion": ""  }
 }
