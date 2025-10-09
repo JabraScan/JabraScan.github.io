@@ -36,11 +36,13 @@ export async function renderGraficosConIconos() {
       return info.icono || "✨";
     });
 
+    const etiquetasCombinadas =  `${icono} ${descripcion}`;
+
     // 📈 Gráfico con descripciones
     new window.Chart(canvasDescripcion, {
       type: "bar",
       data: {
-        labels: etiquetasDescripcion,
+        labels: etiquetasCombinadas,
         datasets: [{
           label: "Visitas totales",
           data: visitasTotales,
