@@ -67,6 +67,18 @@ export async function renderResumenObras() {
           },
           legend: {
             display: false
+          },
+          // 🧠 Mostrar tooltip con título completo + visitas
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const index = context.dataIndex;
+                const info = iconosRes[resumen[index].obra] || iconosRes["Default"];
+                const descripcionCompleta = info.descripcion || resumen[index].obra || resumen[index].id;
+                const visitas = context.dataset.data[index];
+                return `${descripcionCompleta}: ${visitas} visitas`;
+              }
+            }
           }
         },
         scales: {
@@ -76,16 +88,17 @@ export async function renderResumenObras() {
         }
       }
     });
-/*  // 📈 Gráfico con iconos
-    new window.Chart(canvasIcono, {
+/*
+    // 📈 Gráfico con descripciones
+    new Chart(canvasDescripcion, {
       type: "bar",
       data: {
-        labels: etiquetasIcono,
+        labels: etiquetasCombinadas,
         datasets: [{
           label: "Visitas totales",
           data: visitasTotales,
-          backgroundColor: "rgba(255, 159, 64, 0.6)",
-          borderColor: "rgba(255, 159, 64, 1)",
+          backgroundColor: "rgba(75, 192, 192, 0.6)",
+          borderColor: "rgba(75, 192, 192, 1)",
           borderWidth: 1
         }]
       },
@@ -95,7 +108,7 @@ export async function renderResumenObras() {
         plugins: {
           title: {
             display: true,
-            text: "Visitas por obra (icono)"
+            text: "Visitas"
           },
           legend: {
             display: false
@@ -107,7 +120,8 @@ export async function renderResumenObras() {
           }
         }
       }
-    });*/
+    });
+*/
   } catch (error) {
     console.error("❌ Error al renderizar gráficos:", error);
     if (errorBox) {
