@@ -20,10 +20,24 @@ header {
   font-size: 2rem;
   font-weight: 700;
   color: #fff;
+  gap: 0.75rem;
 }
 .navbar-jabrascan .navbar-brand:hover,
 .navbar-jabrascan .navbar-brand:focus {
   color: #fca311;
+}
+.navbar-jabrascan .navbar-brand-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(252, 163, 17, 0.8);
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+.navbar-jabrascan .brand-text {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.1;
 }
 .navbar-jabrascan .nav-link {
   color: #fca311;
@@ -418,6 +432,19 @@ footer {
   }
   .pdf-link { flex-direction: column; align-items: flex-start; }
   .pdf-link span { flex: 1 1 100%; text-align: left; }
+}
+
+@media (max-width: 576px) {
+  .navbar-jabrascan {
+    padding: 0.75rem 1rem;
+  }
+  .navbar-jabrascan .navbar-brand {
+    font-size: 1.6rem;
+  }
+  .navbar-jabrascan .navbar-brand-logo {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 /* ====== Fixes varios iOS ====== */
