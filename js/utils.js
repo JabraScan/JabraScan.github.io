@@ -154,10 +154,6 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
   return bloque;
 }
 
-
-
-
-
-
-
-
+export function truncarTexto(texto, maxLength = 40) {
+  return texto.length > maxLength ? texto.slice(0, maxLength) + "…" : texto;
+}
