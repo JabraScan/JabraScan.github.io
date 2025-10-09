@@ -66,5 +66,7 @@ console.log(resumen);
       errorBox.textContent = "❌ Error al cargar datos: " + error.message;
       errorBox.classList.remove("hidden");
     }
+  } finally {
+    if (loader) loader.style.display = "none"; // ✅ Ocultar loader al terminar
   }
 }
