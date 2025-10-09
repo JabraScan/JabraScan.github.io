@@ -14,7 +14,6 @@ export async function renderResumenObras() {
     if (!Array.isArray(resumen) || resumen.length === 0) {
       throw new Error("No se encontraron datos.");
     }
-console.log(resumen);
     // 🎯 Extraer datos para la gráfica
     const etiquetas = resumen.map(item => item.obra || item.id);
     //const visitasTotales = resumen.map(item => item.visitas || 0);
