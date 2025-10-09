@@ -7,8 +7,7 @@ import { truncarTexto } from './utils.js';
  * - Otro con iconos de obras
  */
 export async function renderResumenObras() {
-  const canvasDescripcion = document.getElementById("graficaDescripcion");
-  const canvasIcono = document.getElementById("graficaIcono");
+  const canvasDescripcion = document.getElementById("graficaObras");
   const errorBox = document.getElementById("error");
   const loader = document.getElementById("loader");
 
