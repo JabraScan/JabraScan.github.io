@@ -36,13 +36,15 @@ export async function renderResumenObras() {
       return info.icono || "✨";
     });
     // Crear etiquetas combinadas icono + Obra
-    const etiquetasCombinadas = [];    
+    const etiquetasCombinadas = [];   // 🧠 Guardar etiquetas truncadas para el grafico
+    const etiquetasCompletas = [];    // 🧠 Guardar etiquetas completas para el tooltip
       resumen.forEach(item => {
         const info = iconosRes[item.obra] || iconosRes["Default"];
         const icono = info.icono || "✨";
         const descripcion = info.descripcion || item.obra || item.id;
         const etiqueta = `${icono} ${truncarTexto(descripcion, 30)}`;
         etiquetasCombinadas.push(etiqueta);
+        etiquetasCompletas.push(`${icono} ${descripcion}`);
       });
     // 📈 Gráfico con descripciones
     new Chart(canvasDescripcion, {
@@ -73,10 +75,8 @@ export async function renderResumenObras() {
             callbacks: {
               label: function(context) {
                 const index = context.dataIndex;
-                const info = iconosRes[resumen[index].obra] || iconosRes["Default"];
-                const descripcionCompleta = info.descripcion || resumen[index].obra || resumen[index].id;
                 const visitas = context.dataset.data[index];
-                return `${descripcionCompleta}: ${visitas} visitas`;
+                return `${etiquetasCompletas[index]}: ${visitas} visitas`;
               }
             }
           }
