@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const promesasCapitulos = [];
 
       obras.forEach(obra => {
+        const visible = obra.querySelector("visible")?.textContent.trim().toLowerCase();
+            if (visible !== "si") return; // Salta al siguiente si no es visible
+        
         const clave = obra.querySelector("clave").textContent.trim();
         const nombreobra = obra.querySelector("nombreobra").textContent.trim();
         const autor = obra.querySelector("autor").textContent.trim();
