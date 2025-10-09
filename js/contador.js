@@ -7,7 +7,7 @@ import { truncarTexto } from './utils.js';
  * - Uno con descripciones de obras
  * - Otro con iconos de obras
  */
-export async function renderGraficosConIconos() {
+export async function renderResumenObras() {
   const canvasDescripcion = document.getElementById("graficaDescripcion");
   const canvasIcono = document.getElementById("graficaIcono");
   const errorBox = document.getElementById("error");
