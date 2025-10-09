@@ -37,18 +37,38 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🚀 Desplazamiento automático
   // Inicializa el intervalo fuera del setInterval
   let intervalId;
+  const carouselContainer = document.querySelector('.custom-carousel');
   
-  // Ejecuta el setInterval y guarda la referencia
-  intervalId = setInterval(() => {
-    let items = Array.from(document.querySelectorAll('.custom-carousel-item'));
-    if (items.length === 0) {
+  // Función para iniciar el intervalo automático
+  function startAutoSlide() {
+    intervalId = setInterval(() => {
+      let items = Array.from(document.querySelectorAll('.custom-carousel-item'));
+      if (items.length === 0) {
         console.warn("No hay elementos en el carrusel");
-      clearInterval(intervalId); // Detener el intervalo
-      return;
+        clearInterval(intervalId); // Detener el intervalo
+        return;
+      }
+      const slideWidth = items[0].offsetWidth;
+      const maxIndex = track.children.length - Math.floor(track.parentElement.offsetWidth / slideWidth);
+      currentIndex = (currentIndex < items.length) ? currentIndex + 1 : 0;
+      showItem(currentIndex);
+    }, 5000); // Cambia cada 5 segundos
+  }
+  
+  // Función para detener el intervalo automático
+  function stopAutoSlide() {
+    if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = null;
     }
-    const slideWidth = items[0].offsetWidth;
-    const maxIndex = track.children.length - Math.floor(track.parentElement.offsetWidth / slideWidth);
-    currentIndex = (currentIndex < items.length) ? currentIndex + 1 : 0;
-    showItem(currentIndex);
-  }, 5000); // Cambia cada 3 segundos
+  }
+  
+  // Pausar cuando el mouse está sobre el carrusel
+  if (carouselContainer) {
+    carouselContainer.addEventListener('mouseenter', stopAutoSlide);
+    carouselContainer.addEventListener('mouseleave', startAutoSlide);
+  }
+  
+  // Iniciar el desplazamiento automático
+  startAutoSlide();
 });
