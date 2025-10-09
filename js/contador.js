@@ -1,4 +1,6 @@
 import { obtenerResumenObras } from './contadoresGoogle.js';
+import { truncarTexto } from './utils.js';
+
 
 /**
  * 📊 Renderiza dos gráficos horizontales:
@@ -36,7 +38,7 @@ export async function renderGraficosConIconos() {
       return info.icono || "✨";
     });
 
-    const etiquetasCombinadas =  `${icono} ${descripcion}`;
+    const etiquetasCombinadas =  `${icono} truncarTexto(${descripcion}, 30)`;
 
     // 📈 Gráfico con descripciones
     new window.Chart(canvasDescripcion, {
