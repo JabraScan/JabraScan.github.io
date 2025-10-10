@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (index < 0) index = items.length - 1;
     if (index >= items.length) index = 0;
     currentIndex = index;
-    const width = items[0].offsetWidth;
+    const width = items[0].offsetWidth || track.parentElement.offsetWidth;
     track.style.transform = `translateX(-${width * currentIndex}px)`;
   }
 
@@ -34,6 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   showItem(0);
 
+  // Recalcular al redimensionar para responsividad con Bootstrap
+  window.addEventListener('resize', () => {
+    showItem(currentIndex);
+  });
+
   // 🚀 Desplazamiento automático
   // Inicializa el intervalo fuera del setInterval
   let intervalId;
@@ -48,8 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(intervalId); // Detener el intervalo
         return;
       }
-      const slideWidth = items[0].offsetWidth;
-      const maxIndex = track.children.length - Math.floor(track.parentElement.offsetWidth / slideWidth);
+      const slideWidth = items[0].offsetWidth || track.parentElement.offsetWidth;
+      const maxIndex = Math.max(0, track.children.length - Math.floor(track.parentElement.offsetWidth / slideWidth));
       currentIndex = (currentIndex < items.length) ? currentIndex + 1 : 0;
       showItem(currentIndex);
     }, 5000); // Cambia cada 5 segundos
