@@ -14,7 +14,8 @@ header {
 }
 .navbar-jabrascan {
   background-color: #14213d;
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.5rem 1.25rem 1.5rem;
+  overflow: visible;
 }
 .navbar-jabrascan .navbar-brand {
   font-size: 2rem;
@@ -53,6 +54,13 @@ header {
 }
 .navbar-jabrascan .nav-link.inactive {
   display: none;
+}
+.navbar-jabrascan .nav-item.position-relative {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible;
+  padding-bottom: 0.25rem;
 }
 .navbar-jabrascan .dropdown-menu {
   background: #0f1a33;
@@ -671,16 +679,50 @@ footer {
    .hide-on-tablet {
      display: none !important;
    }
- }
+}
 
-/*ultimo capitulo leido*/
+/* Estilos responsive para el último capítulo leído */
+@media (max-width: 991px) {
+  /* Ocultar en vista colapsada para evitar problemas de posicionamiento */
+  .main-ultimoCapituloleido {
+    display: none !important;
+  }
+  
+  .navbar-jabrascan .nav-item.position-relative {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 0;
+    position: relative;
+  }
+  .navbar-jabrascan .nav-item.position-relative .nav-link {
+    padding-left: 0.5rem;
+  }
+}/*ultimo capitulo leido*/
   .main-ultimoCapituloleido {
       position: absolute;
-      left: 45%;
+      top: 100%;
+      left: 50%;
       transform: translateX(-50%);
-      z-index: 1000;
-      font-family: Arial, sans-serif;
-      color: #9f9f95;
+      white-space: nowrap;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 0.55rem;
+      color: rgba(252, 163, 17, 0.65);
+      padding: 0;
+      margin-top: 0.1rem;
+      background: transparent;
+      border-radius: 0;
+      z-index: 1;
+      pointer-events: none;
+      line-height: 1;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  /* Ocultar cuando está vacío */
+  .main-ultimoCapituloleido:empty {
+      display: none;
   }
 /*dropdown nav*/
     .dropdown-mainnav {
