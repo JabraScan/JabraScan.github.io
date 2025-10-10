@@ -23,7 +23,7 @@ export async function renderResumenObras() {
       throw new Error("No se encontraron datos.");
     }
     // Reordenar resumen
-    resumen = reordenarResumen(resumen);
+    resumen = obtenerObrasOrdenadas(resumen);
 
     // 🔍 Preparar datos
     const visitasTotales = resumen.map(item => (item.visitas || 0) + (item.visitasCapitulos || 0));
