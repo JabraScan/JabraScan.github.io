@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <div class="carousel-info-row-tags">${categoriaObj}</div><br>
             <div class="carousel-info-row">${OKAutor}</div>
+            <div class="carousel-latest-chapter-container"></div>
           </div>
         `;
         itemCarousel.querySelector(".carousel-info-title").onclick = () => onLibroClick(clave);
@@ -187,8 +188,16 @@ document.addEventListener("DOMContentLoaded", function () {
             const bloque = crearUltimoCapituloDeObra(data, clave);
             if (bloque) {
               const bloqueB = bloque.cloneNode(true);
+              const bloqueC = bloque.cloneNode(true);
               itemBook.querySelector(".card-body").appendChild(bloque);
               itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
+              
+              // Agregar el último capítulo al carrusel
+              const carouselChapterContainer = itemCarousel.querySelector(".carousel-latest-chapter-container");
+              if (carouselChapterContainer) {
+                bloqueC.classList.add('carousel-chapter-info');
+                carouselChapterContainer.appendChild(bloqueC);
+              }
 
               const hoyTag = itemBook.querySelector('.tag-capitulo.hoy');
               if (hoyTag) {
