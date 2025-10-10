@@ -21,7 +21,7 @@ header {
 }
 /* Compensar altura de la navbar fija (aprox 56-64px) */
 .reader-page main {
-  margin-top: 72px;
+  margin-top: 10px;
 }
 .reader-page .navbar .brand-text {
   font-weight: 600;
