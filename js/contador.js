@@ -22,6 +22,8 @@ export async function renderResumenObras() {
     if (!Array.isArray(resumen) || resumen.length === 0) {
       throw new Error("No se encontraron datos.");
     }
+    // Reordenar resumen
+    resumen = reordenarResumen(resumen);
 
     // 🔍 Preparar datos
     const visitasTotales = resumen.map(item => (item.visitas || 0) + (item.visitasCapitulos || 0));
@@ -98,4 +100,22 @@ export async function renderResumenObras() {
   } finally {
     if (loader) loader.style.display = "none";
   }
+}
+// 📦 Obtener obras ordenadas por visitas, dejando obra_Inicio primero
+function obtenerObrasOrdenadas(resumen) {
+  const copia = [...resumen]; // 🧠 Evitar mutar el original
+
+  // 🔍 Separar obra_Inicio si existe
+  const inicio = copia.find(item => item.id === "obra_Inicio");
+  const resto = copia.filter(item => item.id !== "obra_Inicio");
+
+  // 🔢 Ordenar el resto por visitas totales descendente
+  resto.sort((a, b) => {
+    const visitasA = (a.visitas || 0) + (a.visitasCapitulos || 0);
+    const visitasB = (b.visitas || 0) + (b.visitasCapitulos || 0);
+    return visitasB - visitasA;
+  });
+
+  // 📎 Combinar obra_Inicio al principio si existe
+  return inicio ? [inicio, ...resto] : resto;
 }
