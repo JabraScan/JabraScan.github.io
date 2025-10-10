@@ -80,6 +80,10 @@ import { renderResumenObras } from './contador.js';
         })
         .then(html => {
           document.querySelector("main").innerHTML = html;
+          // Al salir del lector, aseguramos que la navbar global esté visible y quitamos clase de lector
+          const globalNavbar = document.querySelector('header .navbar');
+          if (globalNavbar) globalNavbar.style.display = '';
+          document.body.classList.remove('reader-page');
     
           // 🛠️ Inicialización específica por vista
           if (url === "ultimosCapitulos.html") {
@@ -111,6 +115,9 @@ import { renderResumenObras } from './contador.js';
             .then(data => {
               mainElement.innerHTML = data;
               cargarlibro(obra); // Función externa que carga los datos del libro
+              const globalNavbar = document.querySelector('header .navbar');
+              if (globalNavbar) globalNavbar.style.display = '';
+              document.body.classList.remove('reader-page');
             })
             .catch(err => console.error('Error:', err));
     } else {
