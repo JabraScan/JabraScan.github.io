@@ -14,7 +14,7 @@ export async function renderResumenObras() {
   if (loader) loader.style.display = "block";
 
   try {
-    const [resumen, iconosRes] = await Promise.all([
+    let [resumen, iconosRes] = await Promise.all([
       obtenerResumenObras(),
       fetch('./iconos.json').then(res => res.json())
     ]);
