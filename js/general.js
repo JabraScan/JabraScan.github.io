@@ -2,6 +2,7 @@
 import { initUltimosCapitulos } from './ultimoscapitulos.js';
 import { abrirLectorPDF } from './lector.js';
 import { cargarlibro } from './libroficha.js';
+import { renderResumenObras } from './contador.js';
 
     document.addEventListener("DOMContentLoaded", () => {
       // 📱 Detección de iOS para aplicar estilos específicos
@@ -68,7 +69,10 @@ import { cargarlibro } from './libroficha.js';
           if (url === "ultimosCapitulos.html") {
             ocultarDisqus?.();
             initUltimosCapitulos();
-          }
+          } else if (url === "counts.html") {
+             ocultarDisqus?.();
+             renderResumenObras();
+         }
     
           // Puedes añadir más inicializaciones aquí si lo necesitas
         })
@@ -170,3 +174,6 @@ import { cargarlibro } from './libroficha.js';
     
       if (obra) abrirObraCapitulo(obra, capitulo);
     }
+
+
+

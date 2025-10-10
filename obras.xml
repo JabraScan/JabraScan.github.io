@@ -1,5 +1,6 @@
 <obras>
   <obra>
+    <visible>si</visible>
     <clave>CDMNQTMHC</clave>
     <nombreobra>¡Cállate, dragón malvado! No quiero tener mas hijos contigo.</nombreobra>
     <nombreobra2>闭嘴恶龙我不想再跟你生孩子了</nombreobra2>
@@ -22,6 +23,7 @@
     <wiki>https://shut-up-evil-dragon-i-dont-want-to-raise-a-child.fandom.com/wiki/Shut_up_Evil_Dragon_I_don%27t_want_to_have_any_more_kids_with_you!_Wiki</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>CultivationOnline</clave>
     <nombreobra>Cultivation Online</nombreobra>
     <nombreobra2></nombreobra2>
@@ -44,6 +46,7 @@
     <wiki>https://cultivation-online.fandom.com/wiki/Cultivation_Online_Wiki</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>DualCultivation</clave>
     <nombreobra>Dual Cultivation</nombreobra>
     <nombreobra2></nombreobra2>
@@ -66,6 +69,33 @@
     <wiki>https://dual-cultivation-novel.fandom.com/wiki/Dual_Cultivation_Wiki</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
+    <clave>FirstDemonicDragon</clave>
+    <nombreobra>First Demonic Dragon</nombreobra>
+    <nombreobra2>Primer Dragon Demoniaco</nombreobra2>
+    <nombreobra3></nombreobra3>
+    <autor>AnathaShesha</autor>
+    <sinopsis>Carter Williams era el típico perdedor de veinte años. 
+        Después de una pelea en la calle que lo deja inconsciente, se despierta en el cuerpo de un joven dragón en un mundo completamente nuevo.
+        Armado con un sistema que lo ayuda y dos hermosas esposas que lo apoyan, Carter jura no volver a vivir su vida escondido en la oscuridad mientras busca el título de rey dragón. 
+    </sinopsis>
+    <valoracion>9.0</valoracion>
+    <tipoobra>Novela Web</tipoobra>
+    <categoria>Accion, Aventura, Comedia, Fantasia, Harén, Romance</categoria>
+    <imagen>FirstDemonicDragon.webp</imagen>
+    <fechaCreacion>03/04/2025</fechaCreacion>
+    <ubicacion>Novela USA</ubicacion>
+    <estado>Activo</estado>
+    <traductor>Jabracadabra</traductor>
+    <adulto>si</adulto>
+    <aprobadaAutor>no</aprobadaAutor>
+    <observaciones></observaciones>
+    <discord></discord>
+    <bannerOpcional></bannerOpcional>
+    <wiki>https://first-demonic-dragon.fandom.com/wiki/First_Demonic_Dragon_Wiki</wiki>
+  </obra>
+  <obra>
+    <visible>si</visible>
     <clave>LaLeyendaDeLaEspadaDelNorte</clave>
     <nombreobra>La Leyenda de la Espada del Norte</nombreobra>
     <nombreobra2></nombreobra2>
@@ -88,6 +118,33 @@
     <wiki>https://legend-of-the-northern-blade.fandom.com/wiki/Main_Page</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
+    <clave>MLHSB</clave>
+    <nombreobra>¡El Héroe de Nivel Máximo Ha Regresado!</nombreobra>
+    <nombreobra2>¡Max Level Hero Strikes Back!</nombreobra2>
+    <nombreobra3>만렙 영웅님께서 귀환하신다!</nombreobra3>
+    <autor>Devil's tail</autor>
+    <sinopsis>Davey, el débil príncipe de un país insignificante. Tras entrar en coma, su alma escapó a un templo donde se reunían las almas de los héroes.
+              ¡Se entrenó durante mil años y ahora ha regresado como un héroe de nivel máximo!
+              “¡Solo esperen, chicos, los enfrentaré a todos cara a cara!”
+              La refrescante historia de la vida real y la venganza de Davey acaba de comenzar.</sinopsis>
+    <valoracion>9.0</valoracion>
+    <tipoobra>Novela Web</tipoobra>
+    <categoria>Accion, Aventura, Fantasia, Harém</categoria>
+    <imagen>mlhsb.jpg</imagen>
+    <fechaCreacion>28/09/2025</fechaCreacion>
+    <ubicacion>Novela Coreana</ubicacion>
+    <estado>Activo</estado>
+    <traductor>Jabracadabra</traductor>
+    <adulto></adulto>
+    <aprobadaAutor>no</aprobadaAutor>
+    <observaciones></observaciones>
+    <discord></discord>
+    <bannerOpcional></bannerOpcional>
+    <wiki>https://the-max-level-hero-strikes-back.fandom.com/wiki/The_Max_Level_Hero_Strikes_Back_Wiki</wiki>
+  </obra>
+  <obra>
+    <visible>si</visible>
     <clave>PathtoDualCultivation</clave>
     <nombreobra>Path to Dual Cultivation</nombreobra>
     <nombreobra2></nombreobra2>
@@ -110,6 +167,7 @@
     <wiki>https://dual-cultivation-novel.fandom.com/wiki/Path_to_Dual_Cultivation_(Prequel)</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>MadamePleaseBehave</clave>
     <nombreobra>Señora, por favor comportese</nombreobra>
     <nombreobra2>Madam, Please Behave</nombreobra2>
@@ -132,6 +190,7 @@
     <wiki></wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>ShadowSlave</clave>
     <nombreobra>Shadow Slave</nombreobra>
     <nombreobra2>Esclavo de la Sombra</nombreobra2>
@@ -154,6 +213,7 @@
     <wiki>https://shadowslave.fandom.com/wiki/Shadow_Slave_Wiki</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>Suzume</clave>
     <nombreobra>Suzume no Tojimari</nombreobra>
     <nombreobra2></nombreobra2>
@@ -176,6 +236,7 @@
     <wiki>https://doblaje-espana.fandom.com/es/wiki/Suzume</wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>TheEminenceInShadow</clave>
     <nombreobra>The Eminence in Shadow</nombreobra>
     <nombreobra2>La Eminencia en la Sombra</nombreobra2>
@@ -198,6 +259,7 @@
     <wiki></wiki>
   </obra>
   <obra>
+    <visible>si</visible>
     <clave>DanmachiArgonauta</clave>
     <nombreobra>Danmachi - Relato Heroico: Argonauta</nombreobra>
     <nombreobra2>Arugonouto zenshou douke koushin danjon ni deai o motomeru no wa machigatte irudarou ka eiyuutan</nombreobra2>
@@ -223,5 +285,58 @@
     <discord></discord>
     <bannerOpcional></bannerOpcional>
     <wiki></wiki>
+  </obra>
+  <obra>
+    <visible>si</visible>
+    <clave>ZombieClaseSApocalipsis</clave>
+    <nombreobra>Zombi de Clase S en un Apocalipsis</nombreobra>
+    <nombreobra2>Apocalypse’s S-Class Zombie</nombreobra2>
+    <nombreobra3></nombreobra3>
+    <autor>Gaetol[개톨]</autor>
+    <sinopsis>Al ser mordida por un zombi, también me convertí en una especie de zombi. Pero entonces,
+      [Regeneración de Zombie (Pasivo)]
+      Clase S
+      Una habilidad de recuperación inusual que solo tienen los zombis. El usuario de la habilidad recupera naturalmente todo el daño infligido en el cuerpo.
+      Esto es totalmente como ganar la lotería, ¿verdad?
+      ...... eso es lo que pensé, hasta hace una hora..</sinopsis>
+    <valoracion>9.0</valoracion>
+    <tipoobra>Novela Web</tipoobra>
+    <categoria> Accion, Fantasía, Maduro, Romance, Sobrenatural</categoria>
+    <imagen>ZombieClaseSApocalipsis.jpg</imagen>
+    <fechaCreacion>03/08/2025</fechaCreacion>
+    <ubicacion>Novela Coreana</ubicacion>
+    <estado>Activo</estado>
+    <traductor>Joven Maestro</traductor>
+    <adulto></adulto>
+    <aprobadaAutor>no</aprobadaAutor>
+    <observaciones></observaciones>
+    <discord></discord>
+    <bannerOpcional></bannerOpcional>
+    <wiki></wiki>
+  </obra>
+  <obra>
+    <visible>si</visible>
+    <clave>MyWivesAreBeautifulDemons</clave>
+    <nombreobra>Mis Esposas son Hermosos Demonios</nombreobra>
+    <nombreobra2>My Wives Are Beautiful Demons</nombreobra2>
+    <nombreobra3></nombreobra3>
+    <autor>Gaetol[개톨]</autor>
+    <sinopsis>Vergil, un joven de 21 años, lleva una vida aparentemente sencilla en un mundo un tanto conflictivo. Su familia también es sencilla: aunque su padre ya no está vivo, su madre siempre ha estado a su lado, a pesar de ser un poco... agresiva. Pero eso ya no es tan raro hoy en día, ¿verdad?
+        Todo cambia drásticamente cuando Vergil, tras una muerte inesperada, despierta convertido en demonio. Para su sorpresa, descubre que se ha casado accidentalmente con hermosas demonios de sangre pura.
+        Ahora, descubrirá cómo funciona realmente el mundo desde la perspectiva de un demonio.</sinopsis>
+    <valoracion>9.0</valoracion>
+    <tipoobra>Novela Web</tipoobra>
+    <categoria>Fantasía , Acción , Romance , Aventura , Adultos , Comedia , Harén , Recuentos de la vida</categoria>
+    <imagen>MyWivesAreBeautifulDemons.webp</imagen>
+    <fechaCreacion>09/10/2025</fechaCreacion>
+    <ubicacion>Novela Inglesa</ubicacion>
+    <estado>Activo</estado>
+    <traductor>Leo</traductor>
+    <adulto>si</adulto>
+    <aprobadaAutor>no</aprobadaAutor>
+    <observaciones></observaciones>
+    <discord></discord>
+    <bannerOpcional></bannerOpcional>
+    <wiki>https://my-wives-are-beautiful-demons.fandom.com/wiki/My_Wives_are_Beautiful_Demons_Wiki</wiki>
   </obra>
 </obras>

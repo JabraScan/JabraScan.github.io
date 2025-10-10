@@ -232,4 +232,8 @@ export function updateMetaTags({ title, description, imageUrl, url, keywords, st
   setMeta('property', 'og:type', 'website');
   setMeta('property', 'og:site_name', 'JabraScan');
   setMeta('name', 'twitter:card', 'summary_large_image');
+  };
+
+export function truncarTexto(texto, maxLength = 40) {
+  return texto.length > maxLength ? texto.slice(0, maxLength) + "…" : texto;
 }
