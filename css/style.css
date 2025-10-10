@@ -164,6 +164,37 @@ main {
   padding-top: 1rem;
 }
 
+/* ====== Paginación ====== */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.pagination-container .page-btn {
+  border: 1px solid rgba(252, 163, 17, 0.4);
+  background: rgba(20, 33, 61, 0.15);
+  color: #fca311;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.pagination-container .page-btn:hover {
+  background: rgba(252, 163, 17, 0.2);
+  color: #fff;
+}
+.pagination-container .page-btn.active {
+  background: rgba(252, 163, 17, 0.3);
+  color: #14213d;
+  font-weight: 700;
+}
+.pagination-container .page-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* ====== Indicador adulto (badge 18+) ====== */
 .indicador-adulto {
   position: absolute;

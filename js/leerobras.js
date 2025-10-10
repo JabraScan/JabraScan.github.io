@@ -3,8 +3,17 @@ import { crearUltimoCapituloDeObra } from './capitulos.js';
 import { parseFecha } from './utils.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
 
+// ===== Estado de paginación (ámbito de módulo) =====
+let PAGE_SIZE_DEFAULT = 10;
+let pageSize = PAGE_SIZE_DEFAULT;
+let currentPage = 1;
+let allCardsDesktop = []; // div.col para .book-list
+let allItemsMobile = []; // li.item-libro para .lista-libros
+let paginationContainer = null;
+
 document.addEventListener("DOMContentLoaded", function () {
   incrementarVisita("obra_Inicio");
+  paginationContainer = document.getElementById('pagination');
   fetch('obras.xml')
     .then(response => response.text())
     .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
@@ -223,12 +232,23 @@ document.addEventListener("DOMContentLoaded", function () {
         
         itemBookNOpc.prepend(imagenContenedorB);
 
-        booklistContainer.appendChild(itemBook);
-        booklistContainernopc.appendChild(itemBookNOpc);
+        // Almacenar para paginación; render diferido
+        allCardsDesktop.push(itemBook);
+        allItemsMobile.push(itemBookNOpc);
       });
 
       Promise.all(promesasCapitulos).then(() => {
-        ordenarLibrosPorFecha();
+        // Ordenar por fecha más reciente primero
+        ordenarColeccionPorFecha(allCardsDesktop);
+        ordenarColeccionPorFecha(allItemsMobile);
+
+        // Inicializar página desde hash (#page=2)
+        const hash = window.location.hash || '';
+        const m = hash.match(/page=(\d+)/i);
+        if (m) currentPage = Math.max(1, parseInt(m[1], 10));
+
+        renderPage(currentPage);
+        setupPagination();
       });
     })
     .catch(err => console.error("Error al cargar el XML:", err));
@@ -289,57 +309,132 @@ function ordenarLibrosPorFecha() {
  * Cada elemento debe contener un hijo con clase .book-latest-chapter
  * con atributo data-fecha en formato "DD-MM-YYYY"
  */
-function ordenarLibrosPorFecha() {
-  /**
-   * 🗓️ Función auxiliar: getFecha
-   * Extrae y convierte la fecha del último capítulo en un objeto Date
-   * @param {HTMLElement} element - Elemento del libro (div.col o li)
-   * @returns {Date|null} - Fecha válida o null si no existe o es incorrecta
-   */
-  const getFecha = (element) => {
-    // Buscar dentro del article si es un div.col
-    const searchElement = element.classList.contains('col') ? element.querySelector('.card') : element;
-    const fechaStr = searchElement?.querySelector('.book-latest-chapter')?.getAttribute('data-fecha');
-    if (!fechaStr || !/^\d{2}-\d{2}-\d{4}$/.test(fechaStr)) return null;
+// Extrae fecha 'DD-MM-YYYY' de un elemento libro (div.col o li)
+function getFechaDeElemento(element) {
+  const searchElement = element.classList.contains('col') ? element.querySelector('.card') : element;
+  const fechaStr = searchElement?.querySelector('.book-latest-chapter')?.getAttribute('data-fecha');
+  if (!fechaStr || !/^\d{2}-\d{2}-\d{4}$/.test(fechaStr)) return null;
+  const [dia, mes, año] = fechaStr.split('-');
+  return new Date(`${año}-${mes}-${dia}`);
+}
 
-    const [dia, mes, año] = fechaStr.split('-');
-    return new Date(`${año}-${mes}-${dia}`); // Formato compatible con Date
-  };
+function ordenarColeccionPorFecha(arr) {
+  arr.sort((a, b) => {
+    const fechaA = getFechaDeElemento(a);
+    const fechaB = getFechaDeElemento(b);
+    if (!fechaA && !fechaB) return 0;
+    if (!fechaA) return 1;
+    if (!fechaB) return -1;
+    return fechaB - fechaA;
+  });
+}
 
-  /**
-   * 🔄 Función auxiliar: ordenarYReemplazar
-   * Ordena los elementos hijos de un contenedor por fecha
-   * @param {Element} container - Contenedor padre (ul o div)
-   * @param {string} selector - Selector de elementos hijos a ordenar
-   */
-  const ordenarYReemplazar = (container, selector) => {
-    const items = Array.from(container.querySelectorAll(selector));
+function getTotalPages() {
+  return Math.max(1, Math.ceil(allCardsDesktop.length / pageSize));
+}
 
-    items.sort((a, b) => {
-      const fechaA = getFecha(a);
-      const fechaB = getFecha(b);
+function renderPage(page) {
+  const booklistContainer = document.querySelector('.book-list');
+  const booklistContainernopc = document.querySelector('.lista-libros');
+  if (!booklistContainer || !booklistContainernopc) return;
 
-      if (!fechaA && !fechaB) return 0;
-      if (!fechaA) return 1;
-      if (!fechaB) return -1;
+  const totalPages = getTotalPages();
+  currentPage = Math.min(Math.max(1, page), totalPages);
 
-      return fechaB - fechaA; // Más reciente primero
-    });
+  const start = (currentPage - 1) * pageSize;
+  const end = start + pageSize;
 
-    // Limpia el contenedor y reinyecta los elementos ordenados
-    container.innerHTML = '';
-    items.forEach(item => container.appendChild(item));
-  };
+  // Render desktop grid
+  booklistContainer.innerHTML = '';
+  allCardsDesktop.slice(start, end).forEach(node => booklistContainer.appendChild(node));
 
-  // 🧩 Ordena artículos dentro de .book-list
-  const bookListContainer = document.querySelector('.book-list');
-  if (bookListContainer) {
-    ordenarYReemplazar(bookListContainer, 'div.col');
-  }
+  // Render mobile list
+  booklistContainernopc.innerHTML = '';
+  allItemsMobile.slice(start, end).forEach(node => booklistContainernopc.appendChild(node));
 
-  // 🧩 Ordena <li> dentro de .lista-libros
-  const listaLibrosContainer = document.querySelector('.lista-libros');
-  if (listaLibrosContainer) {
-    ordenarYReemplazar(listaLibrosContainer, 'li.item-libro');
+  // Actualizar hash sin romper otras partes (#...&page=2 o #page=2)
+  const baseHash = (window.location.hash || '').replace(/([&?#])?page=\d+/i, '').replace(/^#?/, '');
+  const joiner = baseHash.length ? (baseHash.includes('=') ? '&' : '&') : '';
+  const newHash = `#${baseHash}${joiner}page=${currentPage}`.replace('#&', '#');
+  if (window.location.hash !== newHash) {
+    window.history.replaceState(null, '', newHash);
   }
 }
+
+function setupPagination() {
+  if (!paginationContainer) return;
+  const totalPages = getTotalPages();
+  // Ocultar si no hay necesidad de paginar
+  if (totalPages <= 1) {
+    paginationContainer.innerHTML = '';
+    paginationContainer.style.display = 'none';
+    return;
+  }
+  paginationContainer.style.display = 'flex';
+  const makeBtn = (label, page, disabled = false, active = false) => {
+    const btn = document.createElement('button');
+    btn.className = `page-btn btn btn-sm ${active ? 'active' : ''}`;
+    btn.textContent = label;
+    if (disabled) btn.disabled = true;
+    btn.addEventListener('click', () => {
+      renderPage(page);
+      setupPagination();
+      // Scroll al tope del grid
+      document.querySelector('main')?.scrollIntoView({ behavior: 'smooth' });
+    });
+    return btn;
+  };
+
+  paginationContainer.innerHTML = '';
+  const prev = makeBtn('«', Math.max(1, currentPage - 1), currentPage === 1);
+  paginationContainer.appendChild(prev);
+
+  // Rango compacto: primeras, actuales +/-2, últimas
+  const total = totalPages;
+  const pages = new Set([1, 2, total - 1, total, currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2]
+    .filter(p => p >= 1 && p <= total));
+  const sorted = Array.from(pages).sort((a, b) => a - b);
+  let prevNum = 0;
+  sorted.forEach(p => {
+    if (p - prevNum > 1) {
+      const dots = document.createElement('span');
+      dots.textContent = '…';
+      dots.style.margin = '0 6px';
+      paginationContainer.appendChild(dots);
+    }
+    paginationContainer.appendChild(makeBtn(String(p), p, false, p === currentPage));
+    prevNum = p;
+  });
+
+  const next = makeBtn('»', Math.min(totalPages, currentPage + 1), currentPage === totalPages);
+  paginationContainer.appendChild(next);
+
+  /* Selector de tamaño de página opcional
+  const sizeSelect = document.createElement('select');
+  sizeSelect.className = 'form-select form-select-sm ms-2';
+  ;[10, 20, 30, 40, 50].forEach(sz => {
+    const opt = document.createElement('option');
+    opt.value = String(sz);
+    opt.textContent = `${sz}/página`;
+    if (sz === pageSize) opt.selected = true;
+    sizeSelect.appendChild(opt);
+  });
+  sizeSelect.addEventListener('change', () => {
+    pageSize = parseInt(sizeSelect.value, 10);
+    renderPage(1);
+    setupPagination();
+  });
+  paginationContainer.appendChild(sizeSelect);*/
+}
+
+// Permitir navegación por hash manual (#page=3)
+window.addEventListener('hashchange', () => {
+  const m = (window.location.hash || '').match(/page=(\d+)/i);
+  if (m) {
+    const newPage = Math.max(1, parseInt(m[1], 10));
+    if (newPage !== currentPage) {
+      renderPage(newPage);
+      setupPagination();
+    }
+  }
+});
