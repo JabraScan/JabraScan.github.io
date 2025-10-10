@@ -10,10 +10,14 @@ let currentPage = 1;
 let allCardsDesktop = []; // div.col para .book-list
 let allItemsMobile = []; // li.item-libro para .lista-libros
 let paginationContainer = null;
+let searchInput = null;
+let filteredCardsDesktop = [];
+let filteredItemsMobile = [];
 
 document.addEventListener("DOMContentLoaded", function () {
   incrementarVisita("obra_Inicio");
   paginationContainer = document.getElementById('pagination');
+  searchInput = document.getElementById('q-index');
   fetch('obras.xml')
     .then(response => response.text())
     .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
@@ -28,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       obras.forEach(obra => {
         const visible = obra.querySelector("visible")?.textContent.trim().toLowerCase();
-            if (visible !== "si") return; // Salta al siguiente si no es visible
-        
+        if (visible !== "si") return; // Salta al siguiente si no es visible
+
         const clave = obra.querySelector("clave").textContent.trim();
         const nombreobra = obra.querySelector("nombreobra").textContent.trim();
         const autor = obra.querySelector("autor").textContent.trim();
@@ -40,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const contenido18 = obra.querySelector("adulto").textContent.trim();
         const discord = obra.querySelector("discord").textContent.trim();
         const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
-          const sinopsis = obra.querySelector("sinopsis")?.textContent.trim() || "";
+        const sinopsis = obra.querySelector("sinopsis")?.textContent.trim() || "";
 
         //Ultimmo capitulo leido
         const ultimaObra = localStorage.getItem("ultimaObra");
@@ -65,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <span>Discord Oficial : <a href="${discord}" target="_blank">${discord}</a></span>
           `;
         }
-        
+
         const categoriaIndiv = Categoria.split(",").map(item => item.trim());
         const categoriaObj = categoriaIndiv.map(item => `<span class="etiqueta">${item}</span>`).join('');
 
@@ -85,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const itemCarousel = document.createElement("div");
         itemCarousel.className = "custom-carousel-item";
-          itemCarousel.innerHTML = `
+        itemCarousel.innerHTML = `
             <div class="carousel-info-overlay">
               <div class="carousel-info-title libro-item">${nombreobra}</div>
               <div class="carousel-info-sinopsis">${sinopsis}</div>
@@ -133,7 +137,36 @@ document.addEventListener("DOMContentLoaded", function () {
             Estado: <span class="${estado}">${estado}</span><br>
           </div>
         `;
-/*
+        /*
+                const promesaCapitulo = fetch("capitulos.json")
+                  .then((res) => res.json())
+                  .then((index) => {
+                    const ruta = index[clave];
+                    return fetch(ruta)
+                      .then((res) => res.json())
+                      .then((data) => {
+                        const capitulos = data[clave] || [];
+                        const capitulosConObra = capitulos.map((cap) => ({ ...cap, obra: clave }));
+                        return { [clave]: capitulosConObra };
+                      });
+                  })
+                  .then((data) => {
+                    const bloque = crearUltimoCapituloDeObra(data, clave);
+                    if (bloque) {
+                      const bloqueB = bloque.cloneNode(true);
+                      itemBook.querySelector(".book-info-main").appendChild(bloque);
+                      itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
+        
+                      const hoyTag = itemBook.querySelector('.tag-capitulo.hoy');
+                      if (hoyTag) {
+                        const bookInfoMain = hoyTag.closest('.book-card-main');
+                        if (bookInfoMain) {
+                          bookInfoMain.classList.add('hoy-book');
+                        }
+                      }
+                    }
+                  })
+                  .catch((err) => console.error("Error cargando capítulos:", err));*/
         const promesaCapitulo = fetch("capitulos.json")
           .then((res) => res.json())
           .then((index) => {
@@ -142,7 +175,27 @@ document.addEventListener("DOMContentLoaded", function () {
               .then((res) => res.json())
               .then((data) => {
                 const capitulos = data[clave] || [];
-                const capitulosConObra = capitulos.map((cap) => ({ ...cap, obra: clave }));
+
+                // 🗓️ Filtrar capítulos cuya fecha sea mayor que hoy
+                const hoy = new Date();
+                hoy.setHours(0, 0, 0, 0); // Elimina la hora para comparar solo la fecha
+
+                const capitulosConObra = capitulos
+                  .filter((cap, i) => {
+                    const fechaCap = new Date(parseFecha(cap.Fecha));
+                    if (fechaCap > hoy) {
+                      //console.info(`⏳ Capítulo "${cap.nombreCapitulo}" programado para el futuro (${cap.Fecha}), se omite.`);
+                      return false;
+                    }
+                    return true;
+                  })
+                  .map((cap) => ({ ...cap, obra: clave }));
+
+                // ⚠️ Aviso si todos los capítulos fueron filtrados
+                if (capitulosConObra.length === 0) {
+                  console.warn(`⚠️ Todos los capítulos de "${clave}" están programados para el futuro.`);
+                }
+
                 return { [clave]: capitulosConObra };
               });
           })
@@ -150,59 +203,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const bloque = crearUltimoCapituloDeObra(data, clave);
             if (bloque) {
               const bloqueB = bloque.cloneNode(true);
-              itemBook.querySelector(".book-info-main").appendChild(bloque);
-              itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
-
-              const hoyTag = itemBook.querySelector('.tag-capitulo.hoy');
-              if (hoyTag) {
-                const bookInfoMain = hoyTag.closest('.book-card-main');
-                if (bookInfoMain) {
-                  bookInfoMain.classList.add('hoy-book');
-                }
-              }
-            }
-          })
-          .catch((err) => console.error("Error cargando capítulos:", err));*/
-          const promesaCapitulo = fetch("capitulos.json")
-            .then((res) => res.json())
-            .then((index) => {
-              const ruta = index[clave];
-              return fetch(ruta)
-                .then((res) => res.json())
-                .then((data) => {
-                  const capitulos = data[clave] || [];
-          
-                  // 🗓️ Filtrar capítulos cuya fecha sea mayor que hoy
-                  const hoy = new Date();
-                  hoy.setHours(0, 0, 0, 0); // Elimina la hora para comparar solo la fecha
-          
-                  const capitulosConObra = capitulos
-                    .filter((cap, i) => {
-                      const fechaCap = new Date(parseFecha(cap.Fecha));
-                      if (fechaCap > hoy) {
-                        //console.info(`⏳ Capítulo "${cap.nombreCapitulo}" programado para el futuro (${cap.Fecha}), se omite.`);
-                        return false;
-                      }
-                      return true;
-                    })
-                    .map((cap) => ({ ...cap, obra: clave }));
-          
-                  // ⚠️ Aviso si todos los capítulos fueron filtrados
-                  if (capitulosConObra.length === 0) {
-                    console.warn(`⚠️ Todos los capítulos de "${clave}" están programados para el futuro.`);
-                  }
-          
-                  return { [clave]: capitulosConObra };
-                });
-            })
-          .then((data) => {
-            const bloque = crearUltimoCapituloDeObra(data, clave);
-            if (bloque) {
-              const bloqueB = bloque.cloneNode(true);
               const bloqueC = bloque.cloneNode(true);
               itemBook.querySelector(".card-body").appendChild(bloque);
               itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
-              
+
               // Agregar el último capítulo al carrusel
               const carouselChapterBadge = itemCarousel.querySelector(".carousel-chapter-badge");
               if (carouselChapterBadge) {
@@ -222,14 +226,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const imagenContenedorA = imagenContenedor.cloneNode(true);
         const imagenContenedorB = imagenContenedor.cloneNode(true);
-        
+
         // Agregar la imagen como card-img-top dentro del article
         const cardImg = imagenContenedorA.querySelector('img');
         if (cardImg) {
           cardImg.classList.add('card-img-top');
           itemBook.querySelector('.card').prepend(imagenContenedorA);
         }
-        
+
         itemBookNOpc.prepend(imagenContenedorB);
 
         // Almacenar para paginación; render diferido
@@ -242,6 +246,10 @@ document.addEventListener("DOMContentLoaded", function () {
         ordenarColeccionPorFecha(allCardsDesktop);
         ordenarColeccionPorFecha(allItemsMobile);
 
+        // Inicialmente, la colección filtrada es la completa
+        filteredCardsDesktop = [...allCardsDesktop];
+        filteredItemsMobile = [...allItemsMobile];
+
         // Inicializar página desde hash (#page=2)
         const hash = window.location.hash || '';
         const m = hash.match(/page=(\d+)/i);
@@ -249,6 +257,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
         renderPage(currentPage);
         setupPagination();
+
+        // Conectar buscador del navbar si existe
+        if (searchInput) {
+          const doFilter = () => {
+            const q = searchInput.value.trim().toLowerCase();
+            if (!q) {
+              filteredCardsDesktop = [...allCardsDesktop];
+              filteredItemsMobile = [...allItemsMobile];
+            } else {
+              const match = (el) => {
+                // Buscar por título de obra y autor si está presente en la card
+                const title = el.querySelector('.card-title')?.textContent?.toLowerCase() || '';
+                const autor = el.querySelector('.book-author-name')?.textContent?.toLowerCase() || '';
+                const clave = el.querySelector('.clave')?.textContent?.toLowerCase() || '';
+                return title.includes(q) || autor.includes(q) || clave.includes(q);
+              };
+              filteredCardsDesktop = allCardsDesktop.filter(match);
+              // Para móvil: usa estructura distinta
+              const matchMobile = (el) => {
+                const t = el.querySelector('strong')?.textContent?.toLowerCase() || '';
+                const autor = el.querySelector('.info-libro span')?.textContent?.toLowerCase() || '';
+                const clave = el.querySelector('.clave')?.textContent?.toLowerCase() || '';
+                return t.includes(q) || autor.includes(q) || clave.includes(q);
+              };
+              filteredItemsMobile = allItemsMobile.filter(matchMobile);
+            }
+            // Reiniciar a página 1 tras filtrar
+            renderPage(1);
+            setupPagination();
+          };
+          searchInput.addEventListener('input', doFilter);
+        }
       });
     })
     .catch(err => console.error("Error al cargar el XML:", err));
@@ -330,7 +370,8 @@ function ordenarColeccionPorFecha(arr) {
 }
 
 function getTotalPages() {
-  return Math.max(1, Math.ceil(allCardsDesktop.length / pageSize));
+  const total = filteredCardsDesktop?.length ?? allCardsDesktop.length;
+  return Math.max(1, Math.ceil(total / pageSize));
 }
 
 function renderPage(page) {
@@ -346,18 +387,24 @@ function renderPage(page) {
 
   // Render desktop grid
   booklistContainer.innerHTML = '';
-  allCardsDesktop.slice(start, end).forEach(node => booklistContainer.appendChild(node));
+  (filteredCardsDesktop.length ? filteredCardsDesktop : allCardsDesktop)
+    .slice(start, end)
+    .forEach(node => booklistContainer.appendChild(node));
 
   // Render mobile list
   booklistContainernopc.innerHTML = '';
-  allItemsMobile.slice(start, end).forEach(node => booklistContainernopc.appendChild(node));
+  (filteredItemsMobile.length ? filteredItemsMobile : allItemsMobile)
+    .slice(start, end)
+    .forEach(node => booklistContainernopc.appendChild(node));
 
   // Actualizar hash sin romper otras partes (#...&page=2 o #page=2)
   const baseHash = (window.location.hash || '').replace(/([&?#])?page=\d+/i, '').replace(/^#?/, '');
-  const joiner = baseHash.length ? (baseHash.includes('=') ? '&' : '&') : '';
-  const newHash = `#${baseHash}${joiner}page=${currentPage}`.replace('#&', '#');
-  if (window.location.hash !== newHash) {
-    window.history.replaceState(null, '', newHash);
+  // Solo gestionar hash de paginación cuando NO hay otra vista declarada
+  if (!baseHash || baseHash === '' || baseHash === 'index.html') {
+    const newHash = `#page=${currentPage}`;
+    if (window.location.hash !== newHash) {
+      window.history.replaceState(null, '', newHash);
+    }
   }
 }
 
