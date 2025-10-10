@@ -47,46 +47,44 @@
         <div class="offcanvas-body d-flex flex-column gap-3">
           <div class="nav flex-column">
             <a class="nav-link" href="#" data-target="index.html">
-              <i class="fas fa-home me-2"></i> Volver a la página principal
+              <i class="fas fa-home me-2"></i> página principal
             </a>
           </div>
         </div>
+      </div>
+
+      <!-- Controles del lector en la navbar (lado opuesto al título) -->
+      <div class="navbar-controls ms-auto d-flex align-items-center gap-2 flex-wrap" role="toolbar" aria-label="Controles de lectura y tema">
+        <div class="btn-group me-1" role="group">
+          <button id="readAloud" type="button" class="btn btn-primary" aria-label="Leer página">
+            <i class="fa-solid fa-volume-high me-1" aria-hidden="true"></i>
+            <span class="label">Leer página</span>
+          </button>
+          <button id="pauseReading" type="button" class="btn btn-outline-primary" style="display:none;" aria-label="Pausar lectura">
+            <i class="fa-solid fa-pause me-1" aria-hidden="true"></i>
+            <span class="label">Pausar</span>
+          </button>
+          <button id="resumeReading" type="button" class="btn btn-outline-primary" style="display:none;" aria-label="Reanudar lectura">
+            <i class="fa-solid fa-play me-1" aria-hidden="true"></i>
+            <span class="label">Reanudar</span>
+          </button>
+          <button id="stopReading" type="button" class="btn btn-outline-danger" style="display:none;" aria-label="Detener lectura">
+            <i class="fa-solid fa-stop me-1" aria-hidden="true"></i>
+            <span class="label">Detener</span>
+          </button>
+        </div>
+        <button id="toggleMode" type="button" class="btn btn-outline-secondary" aria-label="Cambiar tema">
+          <i class="theme-icon fa-regular fa-moon" aria-hidden="true"></i>
+          <span class="label ms-1">Modo</span>
+        </button>
       </div>
     </div>
   </nav>
 
   <main class="container-fluid py-3 pt-5">
-    <!-- Controles del lector (único bloque) -->
-    <div class="controls row g-2 align-items-center mb-3">
-      <!-- Izquierda: lectura + modo (en una sola línea en md+) -->
-      <div class="col-12 col-md-5">
-        <div class="d-flex flex-wrap flex-md-nowrap align-items-center gap-2" role="toolbar" aria-label="Controles de lectura y tema">
-          <div class="btn-group" role="group">
-            <button id="readAloud" type="button" class="btn btn-primary" aria-label="Leer página">
-              <i class="fa-solid fa-volume-high me-1" aria-hidden="true"></i>
-              <span class="label">Leer página</span>
-            </button>
-            <button id="pauseReading" type="button" class="btn btn-outline-primary" style="display:none;" aria-label="Pausar lectura">
-              <i class="fa-solid fa-pause me-1" aria-hidden="true"></i>
-              <span class="label">Pausar</span>
-            </button>
-            <button id="resumeReading" type="button" class="btn btn-outline-primary" style="display:none;" aria-label="Reanudar lectura">
-              <i class="fa-solid fa-play me-1" aria-hidden="true"></i>
-              <span class="label">Reanudar</span>
-            </button>
-            <button id="stopReading" type="button" class="btn btn-outline-danger" style="display:none;" aria-label="Detener lectura">
-              <i class="fa-solid fa-stop me-1" aria-hidden="true"></i>
-              <span class="label">Detener</span>
-            </button>
-          </div>
-          <button id="toggleMode" type="button" class="btn btn-outline-secondary" aria-label="Cambiar tema">
-            <i class="theme-icon fa-regular fa-moon" aria-hidden="true"></i>
-            <span class="label ms-1">Modo</span>
-          </button>
-        </div>
-      </div>
-      <!-- Centro: navegación de capítulos en un único input-group -->
-      <div class="col-12 col-md-7">
+    <!-- Navegación de capítulos (se queda en main) -->
+  <div class="row g-2 align-items-center mb-4 mt-4">
+      <div class="col-12">
         <div class="input-group cap-input-group flex-wrap flex-md-nowrap justify-content-md-center" role="group" aria-label="Navegación de capítulos">
           <button id="btnPrevCap" type="button" class="btnPrevCap btn btn-brand" aria-label="Capítulo anterior">
             <i class="fa-solid fa-arrow-left me-1" aria-hidden="true"></i>
@@ -102,7 +100,7 @@
       </div>
     </div>
     <!--botones navegación cabecera pdf-->
-    <div class="pdf-controls d-flex gap-2 align-items-center justify-content-center mb-2">
+  <div class="pdf-controls d-flex gap-2 align-items-center justify-content-center mt-3 mb-4">
       <button class="prevPage btn btn-outline-secondary" aria-label="Página anterior">
         <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
         <span class="label ms-1">Página anterior</span>
@@ -114,11 +112,11 @@
       </button>
     </div>
     <!--contenido pdf-->
-    <div id="pdfContainer" class="d-flex justify-content-center w-100">
+  <div id="pdfContainer" class="d-flex justify-content-center w-100 my-3 my-md-3">
       <canvas id="pdfCanvas"></canvas>
     </div>
     <!--botones navegación pie pdf-->
-    <div class="pdf-controls d-flex gap-2 align-items-center justify-content-center mt-2">
+  <div class="pdf-controls d-flex gap-2 align-items-center justify-content-center mt-3">
       <button class="prevPage btn btn-outline-secondary" aria-label="Página anterior">
         <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
         <span class="label ms-1">Página anterior</span>

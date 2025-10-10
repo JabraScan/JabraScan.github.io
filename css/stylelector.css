@@ -28,6 +28,10 @@ header {
   color: #f8b400;
 }
 
+/* Controles en la navbar del lector */
+.reader-navbar .navbar-controls .btn { height: 38px; padding-top: 6px; padding-bottom: 6px; }
+.reader-navbar .navbar-controls .btn .label { white-space: nowrap; }
+
 /* Fondo y borde inferior para la navbar del lector cuando no hay <header> global */
 .reader-navbar.navbar-jabrascan {
   background: rgba(20, 33, 61, 0.85) !important;
