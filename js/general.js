@@ -15,6 +15,22 @@ import { renderResumenObras } from './contador.js';
       const now = new Date();
       footElement.innerHTML = `<p>&copy; ${now.getFullYear()} JabraScan. No oficial, sin fines de lucro.</p>`;
     
+      // Efecto sticky header con sombra al hacer scroll
+      const header = document.querySelector('header');
+      let lastScroll = 0;
+      
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 10) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+        
+        lastScroll = currentScroll;
+      });
+    
       // 🔗 Enlaces con atributo data-target para cargar vistas genéricas
       document.querySelectorAll("[data-target]").forEach(link => {
         link.addEventListener("click", e => {
