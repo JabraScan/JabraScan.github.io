@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const contenido18 = obra.querySelector("adulto").textContent.trim();
         const discord = obra.querySelector("discord").textContent.trim();
         const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
+          const sinopsis = obra.querySelector("sinopsis")?.textContent.trim() || "";
 
         //Ultimmo capitulo leido
         const ultimaObra = localStorage.getItem("ultimaObra");
@@ -75,22 +76,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const itemCarousel = document.createElement("div");
         itemCarousel.className = "custom-carousel-item";
-        itemCarousel.innerHTML = `
-          <div class="carousel-info-overlay">
-            <div class="carousel-info-title libro-item">${nombreobra}</div><br>
-            <div class="carousel-info-row">
-              <span class="carousel-info-label clave">${clave}</span>
-              <span class="carousel-info-label">Autor:</span> <span>${autor}</span>
-              <span class="carousel-info-label">Traducción:</span> <span>${traduccion}</span>
+          itemCarousel.innerHTML = `
+            <div class="carousel-info-overlay">
+              <div class="carousel-info-title libro-item">${nombreobra}</div>
+              <div class="carousel-info-sinopsis">${sinopsis}</div>
+              <div class="carousel-info-row">
+                <span class="carousel-info-label clave">${clave}</span>
+                <span class="carousel-info-label">Autor:</span> <span>${autor}</span>
+                <span class="carousel-info-label">Traducción:</span> <span>${traduccion}</span>
+              </div>
+              <div class="carousel-info-row">
+                <span class="carousel-info-label">Estado:</span> <span class="${estado}">${estado}</span>
+              </div>
+              <div class="carousel-info-row-tags">${categoriaObj}</div><br>
+              <div class="carousel-info-row">${OKAutor}</div>
+              <div class="carousel-latest-chapter-container"></div>
             </div>
-            <div class="carousel-info-row">
-              <span class="carousel-info-label">Estado:</span> <span class="${estado}">${estado}</span>
-            </div>
-            <div class="carousel-info-row-tags">${categoriaObj}</div><br>
-            <div class="carousel-info-row">${OKAutor}</div>
-            <div class="carousel-latest-chapter-container"></div>
-          </div>
-        `;
+          `;
         itemCarousel.querySelector(".carousel-info-title").onclick = () => onLibroClick(clave);
         itemCarousel.prepend(imagenContenedor);
         carouselContainer.appendChild(itemCarousel);
