@@ -307,7 +307,7 @@ footer {
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  height: 400px;
+  height: 450px;
 }
 .custom-carousel-item .imagen-contenedor {
   flex: 0 0 auto;
