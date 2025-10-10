@@ -305,25 +305,34 @@ footer {
   min-width: 100%;
   position: relative;
   display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+.custom-carousel-item .imagen-contenedor {
+  flex: 0 0 auto;
+  width: 35%;
+  min-width: 200px;
+  position: relative;
 }
 .custom-carousel-item img {
   width: 100%;
-  height: 340px;
+  height: 100%;
+  min-height: 340px;
   object-fit: cover;
   display: block;
-  border-radius: 18px;
+  border-radius: 18px 0 0 18px;
 }
 .carousel-info-overlay {
-  /*position: absolute;*/
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(0deg, rgba(20,33,61,0.95) 70%, rgba(20,33,61,0.4) 100%);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(90deg, rgba(20,33,61,0.98) 0%, rgba(20,33,61,0.95) 100%);
   color: #fff;
   padding: 1.2em 1.5em 1em 1.5em;
-  border-radius: 0 0 18px 18px;
+  border-radius: 0 18px 18px 0;
   gap: 0.6em;
-  width: 100%;
+  position: relative;
 }
 .carousel-info-title {
   font-size: 1.6em;
@@ -356,40 +365,51 @@ footer {
   color: #fca311;
   margin-right: 0.4em;
 }
-.carousel-latest-chapter-container {
-  margin-top: 0.8em;
-  padding-top: 0.8em;
-  border-top: 1px solid rgba(252, 163, 17, 0.3);
+.carousel-chapter-badge {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  background: rgba(20, 33, 61, 0.95);
+  border: 2px solid rgba(252, 163, 17, 0.7);
+  border-radius: 8px;
+  padding: 0.6em 1em;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  max-width: calc(100% - 2em);
 }
-.carousel-chapter-info {
+.carousel-chapter-badge-info {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5em;
-  font-size: 0.95em;
+  gap: 0.4em;
+  font-size: 0.9em;
+  white-space: nowrap;
 }
-.carousel-chapter-info span {
+.carousel-chapter-badge-info span {
   color: #fff;
 }
-.carousel-chapter-info .cap {
+.carousel-chapter-badge-info .cap {
   color: #fca311;
   font-weight: bold;
+  font-size: 1.1em;
 }
-.carousel-chapter-info .fecha {
-  color: #aaa;
-  font-size: 0.9em;
+.carousel-chapter-badge-info .fecha {
+  color: #ccc;
+  font-size: 0.85em;
 }
-.carousel-chapter-info .tag-capitulo {
-  font-size: 0.75em;
-  padding: 0.25em 0.5em;
+.carousel-chapter-badge-info .tag-capitulo {
+  font-size: 0.7em;
+  padding: 0.3em 0.6em;
   border-radius: 4px;
   font-weight: bold;
 }
-.carousel-chapter-info .tag-capitulo.hoy {
+.carousel-chapter-badge-info .tag-capitulo.hoy {
   background-color: #28a745;
   color: #fff;
 }
-.carousel-chapter-info .tag-capitulo.nuevo {
+.carousel-chapter-badge-info .tag-capitulo.nuevo {
   background-color: #fca311;
   color: #14213d;
 }
@@ -534,16 +554,60 @@ footer {
   .book-detail { flex-direction: column; align-items: center; }
   .book-detail .cover { width: 100%; max-width: 230px; }
   .book-card, .book-detail, .chapter-list { width: 100%; }
-  .custom-carousel-item img { height: 200px; }
-  .carousel-info-overlay {
-    font-size: 0.95em;
-    padding: 0.8em 0.8em 0.7em 0.8em;
+  
+  /* Ajustar carrusel para pantallas pequeñas */
+  .custom-carousel-item .imagen-contenedor {
+    width: 40%;
+    min-width: 150px;
   }
+  .custom-carousel-item img { 
+    min-height: 280px;
+    border-radius: 18px 0 0 18px;
+  }
+  .carousel-info-overlay {
+    font-size: 0.85em;
+    padding: 0.8em 1em;
+  }
+  .carousel-info-title {
+    font-size: 1.3em !important;
+  }
+  .carousel-info-sinopsis {
+    font-size: 0.9em !important;
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
+    max-height: 2.6em !important;
+  }
+  
   .pdf-link { flex-direction: column; align-items: flex-start; }
   .pdf-link span { flex: 1 1 100%; text-align: left; }
 }
 
 @media (max-width: 576px) {
+  /* Ajustar carrusel para móviles pequeños */
+  .custom-carousel-item .imagen-contenedor {
+    width: 38%;
+    min-width: 130px;
+  }
+  .custom-carousel-item img {
+    min-height: 240px;
+  }
+  .carousel-info-overlay {
+    font-size: 0.75em;
+    padding: 0.6em 0.8em;
+  }
+  .carousel-info-title {
+    font-size: 1.2em !important;
+  }
+  .carousel-info-sinopsis {
+    font-size: 0.85em !important;
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
+  }
+  .carousel-info-row, .carousel-info-row-tags {
+    font-size: 0.9em !important;
+    gap: 0.4em !important;
+  }
+  
   .navbar-jabrascan {
     padding: 0.75rem 1rem;
   }
@@ -734,11 +798,23 @@ footer {
   .carousel-info-row, .carousel-info-row-tags {
     font-size: 0.85em !important;
   }
-  .carousel-chapter-info {
-    font-size: 0.85em !important;
-  }
   .carousel-info-overlay {
     padding: 0.8em 1em !important;
+  }
+  
+  /* Ajustar el badge del último capítulo en móvil */
+  .carousel-chapter-badge {
+    bottom: 0.5em !important;
+    right: 0.5em !important;
+    padding: 0.4em 0.7em !important;
+    font-size: 0.85em !important;
+  }
+  .carousel-chapter-badge-info {
+    font-size: 0.8em !important;
+    gap: 0.3em !important;
+  }
+  .carousel-chapter-badge-info .cap {
+    font-size: 1em !important;
   }
 }
 @media only screen and (max-width: 1200px) {
