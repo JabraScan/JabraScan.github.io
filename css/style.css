@@ -327,7 +327,6 @@ footer {
 .custom-carousel {
   position: relative;
   width: 100%;
-  max-width: 1140px;
   margin: 0 auto 2rem;
   overflow: hidden;
   border-radius: 18px;
@@ -337,24 +336,7 @@ footer {
   -webkit-mask-image: -webkit-radial-gradient(white, black); /* fix recortes en iOS */
 }
 
-/* Ajustes responsive del carrusel */
-@media (max-width: 1400px) {
-  .custom-carousel {
-    max-width: 960px;
-  }
-}
 
-@media (max-width: 1200px) {
-  .custom-carousel {
-    max-width: 720px;
-  }
-}
-
-@media (max-width: 992px) {
-  .custom-carousel {
-    max-width: 100%;
-  }
-}
 .custom-carousel-track {
   display: flex;
   transition: transform 0.5s cubic-bezier(.77,0,.18,1);
