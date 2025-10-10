@@ -1,19 +1,42 @@
 /* ====== Estilos globales ====== */
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
 body {
   margin: 0;
+  padding: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
   background: #f3f4f6;
   color: #222;
 }
 header {
-  background: #14213d;
+  background: rgba(20, 33, 61, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: #fff;
   border-bottom: 4px solid #fca311;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   padding: 0;
+  margin: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+}
+header.scrolled {
+  background: rgba(20, 33, 61, 0.95);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 .navbar-jabrascan {
-  background-color: #14213d;
+  background-color: transparent;
   padding: 1rem 1.5rem 1.25rem 1.5rem;
   overflow: visible;
 }
@@ -43,14 +66,37 @@ header {
 .navbar-jabrascan .nav-link {
   color: #fca311;
   font-weight: bold;
-  transition: color 0.2s;
-  -webkit-transition: color 0.2s;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  position: relative;
 }
-.navbar-jabrascan .nav-link.active,
+.navbar-jabrascan .nav-link.active {
+  color: #fff;
+  background: rgba(252, 163, 17, 0.2);
+  text-shadow: 0 0 8px #fca311;
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+}
+.navbar-jabrascan .nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 3px;
+  background: #fca311;
+  border-radius: 2px;
+  box-shadow: 0 0 10px #fca311;
+}
 .navbar-jabrascan .nav-link:hover,
 .navbar-jabrascan .nav-link:focus {
   color: #fff;
+  background: rgba(252, 163, 17, 0.1);
   text-shadow: 0 0 5px #fca311;
+  transform: scale(1.03);
+  -webkit-transform: scale(1.03);
 }
 .navbar-jabrascan .nav-link.inactive {
   display: none;
@@ -84,15 +130,24 @@ header {
   font-weight: 600;
   border-radius: 0.5rem;
   padding: 0.6rem 1rem;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
-  -webkit-transition: background 0.2s ease, color 0.2s ease, -webkit-transform 0.2s ease;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
 }
 .navbar-jabrascan .dropdown-item:hover,
 .navbar-jabrascan .dropdown-item:focus {
-  background: rgba(252, 163, 17, 0.15);
+  background: rgba(252, 163, 17, 0.2);
   color: #fff;
   transform: translateX(4px);
   -webkit-transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(252, 163, 17, 0.3);
+}
+.navbar-jabrascan .dropdown-item:active {
+  background: rgba(252, 163, 17, 0.3);
+}
+.navbar-jabrascan .dropdown-toggle.show {
+  color: #fff;
+  background: rgba(252, 163, 17, 0.2);
+  border-radius: 0.5rem;
 }
 .navbar-jabrascan .dropdown-divider {
   border-top-color: rgba(255, 255, 255, 0.1);
@@ -104,6 +159,10 @@ header {
   box-shadow: 0 0 0 0.15rem rgba(252, 163, 17, 0.4);
 }
 
+/* ====== Main container ====== */
+main {
+  padding-top: 1rem;
+}
 
 /* ====== Indicador adulto (badge 18+) ====== */
 .indicador-adulto {
