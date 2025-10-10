@@ -862,11 +862,7 @@ footer {
     font-size: 1em !important;
   }
 }
-@media only screen and (max-width: 1200px) {
-   .hide-on-tablet {
-     display: none !important;
-   }
-}
+/* Reemplazado por utilidades Bootstrap: usar d-none d-xl-block en HTML */
 
 /* Estilos responsive para el último capítulo leído */
 @media (max-width: 991px) {
