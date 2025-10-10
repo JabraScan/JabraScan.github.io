@@ -29,9 +29,10 @@
 </head>
 <body class="reader-page light-mode">
   <!-- Navbar del lector (única en modo SPA) -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-jabrascan fixed-top reader-navbar">
     <div class="container-fluid">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#" data-target="index.html">
+        <img src="favicon.ico" alt="Logo de la comunidad JabraScan" class="navbar-brand-logo">
         <span class="brand-text" id="tituloObraPdf">Lector PDF</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasReader" aria-controls="offcanvasReader" aria-label="Abrir menú">
@@ -45,7 +46,7 @@
         </div>
         <div class="offcanvas-body d-flex flex-column gap-3">
           <div class="nav flex-column">
-            <a class="nav-link text-white" href="index.html">
+            <a class="nav-link" href="#" data-target="index.html">
               <i class="fas fa-home me-2"></i> Volver a la página principal
             </a>
           </div>
