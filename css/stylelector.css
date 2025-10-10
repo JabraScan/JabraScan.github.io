@@ -27,6 +27,15 @@ header {
   font-weight: 600;
   color: #f8b400;
 }
+
+/* Fondo y borde inferior para la navbar del lector cuando no hay <header> global */
+.reader-navbar.navbar-jabrascan {
+  background: rgba(20, 33, 61, 0.85) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 4px solid #fca311;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
 .lector-book {
   font-weight: bold;
   color: #f8b400;

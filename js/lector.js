@@ -9,10 +9,10 @@ export function abrirLectorPDF() {
       }
 
       main.innerHTML = html;
-      // Oculta la navbar global si existe (dejamos solo la del lector)
-      const globalNavbar = document.querySelector('header .navbar');
-      if (globalNavbar) {
-        globalNavbar.style.display = 'none';
+      // Oculta el header global completo (no solo la navbar), dejamos solo la del lector
+      const globalHeader = document.querySelector('header');
+      if (globalHeader) {
+        globalHeader.style.display = 'none';
       }
       // Añadimos clase de página de lector para estilos específicos
       document.body.classList.add('reader-page');

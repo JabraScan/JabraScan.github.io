@@ -80,9 +80,9 @@ import { renderResumenObras } from './contador.js';
         })
         .then(html => {
           document.querySelector("main").innerHTML = html;
-          // Al salir del lector, aseguramos que la navbar global esté visible y quitamos clase de lector
-          const globalNavbar = document.querySelector('header .navbar');
-          if (globalNavbar) globalNavbar.style.display = '';
+          // Al salir del lector, aseguramos que el header global esté visible y quitamos clase de lector
+          const globalHeader = document.querySelector('header');
+          if (globalHeader) globalHeader.style.display = '';
           document.body.classList.remove('reader-page');
     
           // 🛠️ Inicialización específica por vista
@@ -115,8 +115,8 @@ import { renderResumenObras } from './contador.js';
             .then(data => {
               mainElement.innerHTML = data;
               cargarlibro(obra); // Función externa que carga los datos del libro
-              const globalNavbar = document.querySelector('header .navbar');
-              if (globalNavbar) globalNavbar.style.display = '';
+              const globalHeader = document.querySelector('header');
+              if (globalHeader) globalHeader.style.display = '';
               document.body.classList.remove('reader-page');
             })
             .catch(err => console.error('Error:', err));
