@@ -21,13 +21,13 @@ export function cargarlibro(libroId) {
         .find(o => o.querySelector('clave')?.textContent.trim() === libroId);
 
       if (!obra) {
-       /* document.body.innerHTML = `
-          <div style="text-align: center; margin-top: 2rem;">
-            <p>Obra no encontrada.</p>
-            <a href="https://jabrascan.github.io/">Ir a la página inicial</a>
-          </div>
-        `;*/
-        window.location.href = "https://jabrascan.github.io/";
+        document.body.innerHTML = `
+            <div style="text-align: center; margin-top: 2rem;">
+              <p>Obra no encontrada.</p>
+              <a href="/index.html">Ir a la página inicial</a>
+            </div>
+          `;
+        // window.location.href = "https://jabrascan.github.io/";
         return;
       }
 
@@ -107,7 +107,7 @@ export function cargarlibro(libroId) {
 
       const mainDataBook = document.createElement("div");
       mainDataBook.className = "book-main";
-         mainDataBook.innerHTML = `
+      mainDataBook.innerHTML = `
               <div class="book-image">
                 <div class="book-genres"><span><i class="fa-solid fa-tags"></i>${Categoria}</span></div>
                 <div class="book-links">
@@ -132,7 +132,7 @@ export function cargarlibro(libroId) {
                 </div>
               </div>
             `;
-      
+
       /*leerVisitas(`obra_${clave}`).then(vis => {
           const visitas = vis === -1 ? 1 : vis+1;
             const numVisitas = document.createElement("a");
@@ -143,24 +143,24 @@ export function cargarlibro(libroId) {
       //modulo valoracion y visitas
       obtenerInfo(`obra_${clave}`).then(info => {
         //console.log(info);
-          const visitCap = info.visitas === -1 ? 0 : info.numVisitasCapitulo;
-          const visitObra = info.visitas === -1 ? 1 : info.visitas + 1;
-          const visitas = visitCap + visitObra;
-          const numVisitas = document.createElement("a");
-            numVisitas.innerHTML = `<a href="#"><i class="fa-solid fa-eye"  ></i> ${visitas} veces</a>`;
-            const booklinks  = mainDataBook.querySelector('.book-links');
-          booklinks.appendChild(numVisitas);
-        
-          const claveValoracion = `obra_${clave}`;
-          //console.log(info);
-            const bloqueValoracion = crearBloqueValoracion(claveValoracion, info.valoracion, info.votos);
-          mainDataBook.querySelector(".book-info-container").appendChild(bloqueValoracion);
+        const visitCap = info.visitas === -1 ? 0 : info.numVisitasCapitulo;
+        const visitObra = info.visitas === -1 ? 1 : info.visitas + 1;
+        const visitas = visitCap + visitObra;
+        const numVisitas = document.createElement("a");
+        numVisitas.innerHTML = `<a href="#"><i class="fa-solid fa-eye"  ></i> ${visitas} veces</a>`;
+        const booklinks = mainDataBook.querySelector('.book-links');
+        booklinks.appendChild(numVisitas);
+
+        const claveValoracion = `obra_${clave}`;
+        //console.log(info);
+        const bloqueValoracion = crearBloqueValoracion(claveValoracion, info.valoracion, info.votos);
+        mainDataBook.querySelector(".book-info-container").appendChild(bloqueValoracion);
       });
 
       DataBook.prepend(mainDataBook);
       DataBook.prepend(headerDataBook);
       mainDataBook.querySelector(".book-image").prepend(imagenContenedor);
-      
+
 
       if (typeof mostrarDisqus === "function") {
         mostrarDisqus(clave, clave);
