@@ -55,7 +55,7 @@ header {
 }
 /* Alineación del input-group de capítulos */
 .cap-input-group .form-select {
-  min-width: 220px;
+  /*min-width: 220px;*/
   max-width: 420px;
 }
 .cap-input-group .input-group-text {
@@ -172,4 +172,5 @@ select {
 .callatedragonmalvado span {
     margin-top: 20px;
 }
+
 
