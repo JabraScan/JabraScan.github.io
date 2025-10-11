@@ -164,6 +164,9 @@ function actualizarTituloObra(titulo, clave) {
     `;
     datosAdic.appendChild(divBanner);
   }
+
+  const enlaceObra = document.getElementById("volverAObra");
+  enlaceObra.href = `index.html#${clave}`; 
 }
 
 /**
