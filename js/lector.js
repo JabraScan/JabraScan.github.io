@@ -9,6 +9,13 @@ export function abrirLectorPDF() {
       }
 
       main.innerHTML = html;
+      // Oculta el header global completo (no solo la navbar), dejamos solo la del lector
+      const globalHeader = document.querySelector('header');
+      if (globalHeader) {
+        globalHeader.style.display = 'none';
+      }
+      // Añadimos clase de página de lector para estilos específicos
+      document.body.classList.add('reader-page');
       // Verifica si el canvas ya está presente
       const canvas = document.getElementById("pdfCanvas");
       if (canvas) {
