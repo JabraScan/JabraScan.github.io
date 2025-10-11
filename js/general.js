@@ -49,16 +49,28 @@ document.addEventListener("DOMContentLoaded", () => {
   // 📖 Botón "Seguir leyendo" para reanudar lectura desde localStorage
   const ultimaObra = localStorage.getItem("ultimaObra");
   const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
+  const btnSeguir = document.getElementById("btnSeguir");
 
-  if (ultimaObra && ultimoCapitulo) {
-    const btnSeguir = document.getElementById("btnSeguir");
-    if (btnSeguir) {
+  const tieneLecturaValida = (
+    ultimaObra && ultimoCapitulo &&
+    ultimaObra !== "null" && ultimoCapitulo !== "null"
+  );
+
+  if (btnSeguir) {
+    if (tieneLecturaValida) {
       btnSeguir.classList.remove("inactive");
       btnSeguir.classList.add("active");
-      btnSeguir.addEventListener("click", () => {
-        mostrarurl(ultimaObra, parseInt(ultimoCapitulo, 10)); // ✅ Usa tu función
+      btnSeguir.style.display = "";
+      btnSeguir.onclick = () => {
+        mostrarurl(ultimaObra, parseInt(ultimoCapitulo, 10));
         abrirLectorPDF();
-      });
+      };
+    } else {
+      // No hay datos: mantener inactivo y ocultar
+      btnSeguir.classList.add("inactive");
+      btnSeguir.classList.remove("active");
+      btnSeguir.style.display = "none";
+      btnSeguir.onclick = null;
     }
   }
 

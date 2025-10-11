@@ -46,10 +46,25 @@ document.addEventListener("DOMContentLoaded", function () {
         const aprobadaAutor = obra.querySelector("aprobadaAutor").textContent.trim();
         const sinopsis = obra.querySelector("sinopsis")?.textContent.trim() || "";
 
-      //Ultimmo capitulo leido
-          const ultimaObra = localStorage.getItem("ultimaObra");
-          const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
-        booklastread.innerHTML = `${ultimaObra}·${ultimoCapitulo}`;
+      // Último capítulo leído (mostrar solo si hay datos válidos)
+      const ultimaObra = localStorage.getItem("ultimaObra");
+      const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
+      if (booklastread) {
+        if (
+          ultimaObra &&
+          ultimoCapitulo &&
+          ultimaObra !== "null" &&
+          ultimoCapitulo !== "null"
+        ) {
+          // Mostrar formato Obra-Capítulo
+          booklastread.textContent = `${ultimaObra}-${ultimoCapitulo}`;
+          booklastread.classList.remove('d-none');
+        } else {
+          // Vaciar para que :empty de CSS lo oculte y evitar "null-null"
+          booklastread.textContent = "";
+          booklastread.classList.add('d-none');
+        }
+      }
         
         let OKAutor = '';
         if (aprobadaAutor === 'si') {
