@@ -107,12 +107,12 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
         }));
         const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
         if (idx === -1) return;
-        
+
         const cap = capitulosObra[idx];
 
         // Actualización de metaetiquetas para SEO y redes sociales
         const pageTitle = `${data.titulo} - Cap. ${cap.numCapitulo}: ${cap.nombreCapitulo} | JabraScan`;
-        const pageDescription = data.sinopsis.substring(0, 155) + '...'; // Límite para meta description
+        const pageDescription = (data.sinopsis ? data.sinopsis.substring(0, 155) : "") + '...'; // Límite para meta description
         const domain = window.location.origin;
         const imageUrl = `${domain}/${data.imagen}`;
         const pageUrl = `${domain}/lectorpdf.html?obra=${clave}&cap=${cap.numCapitulo}`;
@@ -152,22 +152,22 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
  */
 function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
   //añadido el 09-09-2025 23:28 para gestionar los capitulos mas alla de 999
-      // Extraemos el número de capítulo actual
-      const numCapitulo = capitulosObra[idx].numCapitulo;
-      // Si el número es mayor a 999, tomamos todos los dígitos excepto los tres últimos.
-      // Ejemplo: 1203 → "1", 123653 → "123"
-      const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
-      // Concatenamos el fragmento extra a la clave, asegurándonos de que sea texto.
-      // Esto evita sumas si 'clave' es numérica.
-      const claveFinal = String(clave) + extra;
-      // Construimos la ruta final del PDF, codificando el nombre del archivo para URLs válidas.
-      const pdfPath = `books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+  // Extraemos el número de capítulo actual
+  const numCapitulo = capitulosObra[idx].numCapitulo;
+  // Si el número es mayor a 999, tomamos todos los dígitos excepto los tres últimos.
+  // Ejemplo: 1203 → "1", 123653 → "123"
+  const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
+  // Concatenamos el fragmento extra a la clave, asegurándonos de que sea texto.
+  // Esto evita sumas si 'clave' es numérica.
+  const claveFinal = String(clave) + extra;
+  // Construimos la ruta final del PDF, codificando el nombre del archivo para URLs válidas.
+  const pdfPath = `books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
   //const pdfPath = `books/${clave}/${encodeURIComponent(nombreArchivo)}`;
   pdfjsLib.getDocument(pdfPath).promise.then(doc => {
     pdfDoc = doc;
     pageNum = paginaInicial;
     renderPage(pageNum);
-//console.log(`Capitulo ${capitulosObra[idx].numCapitulo}`);
+    //console.log(`Capitulo ${capitulosObra[idx].numCapitulo}`);
     actualizarBotonesNav(idx, capitulosObra, clave);
     incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
   });
@@ -258,11 +258,11 @@ function configurarModoOscuro() {
     const icon = toggleMode.querySelector('.theme-icon');
     if (icon) {
       if (body.classList.contains('dark-mode')) {
-        icon.classList.remove('fa-moon','fa-regular');
-        icon.classList.add('fa-sun','fa-solid');
+        icon.classList.remove('fa-moon', 'fa-regular');
+        icon.classList.add('fa-sun', 'fa-solid');
       } else {
-        icon.classList.remove('fa-sun','fa-solid');
-        icon.classList.add('fa-moon','fa-regular');
+        icon.classList.remove('fa-sun', 'fa-solid');
+        icon.classList.add('fa-moon', 'fa-regular');
       }
     }
     localStorage.setItem("modoNocturno", body.classList.contains("dark-mode") ? "true" : "false");
@@ -273,8 +273,8 @@ function configurarModoOscuro() {
     body.classList.remove("light-mode");
     const icon = toggleMode.querySelector('.theme-icon');
     if (icon) {
-      icon.classList.remove('fa-moon','fa-regular');
-      icon.classList.add('fa-sun','fa-solid');
+      icon.classList.remove('fa-moon', 'fa-regular');
+      icon.classList.add('fa-sun', 'fa-solid');
     }
   }
 }
@@ -322,57 +322,57 @@ function configurarBotonesLectura() {
     stopBtn.style.display = stop ? "inline-block" : "none";
   }
 
-startBtn.onclick = () => {
-  pdfDoc.getPage(pageNum).then(page => {
-    page.getTextContent().then(textContent => {
-      const text = textContent.items.map(item => item.str).join(" ");
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "es-ES";
+  startBtn.onclick = () => {
+    pdfDoc.getPage(pageNum).then(page => {
+      page.getTextContent().then(textContent => {
+        const text = textContent.items.map(item => item.str).join(" ");
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "es-ES";
 
-      const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith("es"));
-      utterance.voice = voices.find(v => v.name.includes("Google") || v.name.includes("Helena")) || voices[0];
-      utterance.rate = 0.95;
-      utterance.pitch = 1.1;
-      utterance.volume = 1;
+        const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith("es"));
+        utterance.voice = voices.find(v => v.name.includes("Google") || v.name.includes("Helena")) || voices[0];
+        utterance.rate = 0.95;
+        utterance.pitch = 1.1;
+        utterance.volume = 1;
 
-      mostrar({ pause: true, stop: true });
+        mostrar({ pause: true, stop: true });
 
-      utterance.onend = () => {
-        const btnNext = document.querySelector('.nextPage');
-        if (btnNext && !btnNext.disabled) {
-          btnNext.click();
-          setTimeout(() => startBtn.click(), 500);
-        } else {
-          const fin = new SpeechSynthesisUtterance("Ya no hay más contenido para leer");
-          fin.lang = "es-ES";
-          speechSynthesis.speak(fin);
-          mostrar({ play: true });
-        }
-      };
+        utterance.onend = () => {
+          const btnNext = document.querySelector('.nextPage');
+          if (btnNext && !btnNext.disabled) {
+            btnNext.click();
+            setTimeout(() => startBtn.click(), 500);
+          } else {
+            const fin = new SpeechSynthesisUtterance("Ya no hay más contenido para leer");
+            fin.lang = "es-ES";
+            speechSynthesis.speak(fin);
+            mostrar({ play: true });
+          }
+        };
 
-      speechSynthesis.speak(utterance);
+        speechSynthesis.speak(utterance);
+      });
     });
-  });
-};
+  };
 
-pauseBtn.onclick = () => {
-  if (speechSynthesis.speaking && !speechSynthesis.paused) {
-    speechSynthesis.pause();
-    mostrar({ resume: true, stop: true });
-  }
-};
+  pauseBtn.onclick = () => {
+    if (speechSynthesis.speaking && !speechSynthesis.paused) {
+      speechSynthesis.pause();
+      mostrar({ resume: true, stop: true });
+    }
+  };
 
-resumeBtn.onclick = () => {
-  if (speechSynthesis.paused) {
-    speechSynthesis.resume();
-    mostrar({ pause: true, stop: true });
-  }
-};
+  resumeBtn.onclick = () => {
+    if (speechSynthesis.paused) {
+      speechSynthesis.resume();
+      mostrar({ pause: true, stop: true });
+    }
+  };
 
-stopBtn.onclick = () => {
-  speechSynthesis.cancel();
-  mostrar({ play: true });
-};
+  stopBtn.onclick = () => {
+    speechSynthesis.cancel();
+    mostrar({ play: true });
+  };
 }
 
 /**

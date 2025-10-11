@@ -112,7 +112,9 @@ document.addEventListener("DOMContentLoaded", function () {
           `;
         itemCarousel.querySelector(".carousel-info-title").onclick = () => onLibroClick(clave);
         itemCarousel.prepend(imagenContenedor);
-        carouselContainer.appendChild(itemCarousel);
+        if (carouselContainer) {
+          carouselContainer.appendChild(itemCarousel);
+        }
 
         const itemBook = document.createElement("div");
         itemBook.classList.add("col");
