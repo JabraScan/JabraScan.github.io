@@ -125,7 +125,7 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
     if (!yaVotado) {
       estrella.addEventListener("click", () => {
         valorarRecurso(clave, i).then(res => {
-    //console.log(`${clave} - ${i} - ${res}`);
+          //console.log(`${clave} - ${i} - ${res}`);
           if (res && res.trim().startsWith("OK")) {
             // 🗂️ Guardamos el voto en localStorage
             localStorage.setItem(claveLocal, i);
@@ -232,4 +232,8 @@ export function updateMetaTags({ title, description, imageUrl, url, keywords, st
   setMeta('property', 'og:type', 'website');
   setMeta('property', 'og:site_name', 'JabraScan');
   setMeta('name', 'twitter:card', 'summary_large_image');
+}
+
+export function truncarTexto(texto, maxLength = 40) {
+  return texto.length > maxLength ? texto.slice(0, maxLength) + "…" : texto;
 }
