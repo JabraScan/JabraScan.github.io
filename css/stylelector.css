@@ -157,7 +157,7 @@ select {
     width: 100%;
     max-width: 320px;
   }
-  .cap-input-group .form-select { min-width: 100%; }
+  /*.cap-input-group .form-select { min-width: 100%; }
 }
 /* Eliminado menú hamburguesa custom: usamos offcanvas de Bootstrap */
 .callatedragonmalvado {
@@ -172,5 +172,6 @@ select {
 .callatedragonmalvado span {
     margin-top: 20px;
 }
+
 
 
