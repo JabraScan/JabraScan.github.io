@@ -5,6 +5,7 @@ import { parseDateDMY, parseFecha } from './utils.js';
 
 export function initUltimosCapitulos() {
   const listEl = document.getElementById("book-card-caps");
+  const toggleViewBtn = document.getElementById("toggle-view");
   const emptyEl = document.getElementById("empty");
   const metaEl = document.getElementById("meta");
   const qEl = document.getElementById("q");
@@ -17,7 +18,8 @@ export function initUltimosCapitulos() {
     filtered: [],
     orden: "desc",
     currentPage: 1,
-    pageSize: 15
+    pageSize: 15,
+    vista: "cards" // "cards" o "lista"
   };
 
   // Formatea la fecha en formato DD-MM-YYYY
@@ -30,7 +32,7 @@ export function initUltimosCapitulos() {
     return `${dd}-${mm}-${yyyy}`;
   };
 
-  // Renderiza la página actual de capítulos como cards de Bootstrap
+  // Renderiza la página actual de capítulos según la vista
   const renderPage = () => {
     listEl.innerHTML = "";
 
@@ -48,41 +50,73 @@ export function initUltimosCapitulos() {
     const endIndex = Math.min(startIndex + state.pageSize, state.filtered.length);
     const pageItems = state.filtered.slice(startIndex, endIndex);
 
-    // Genera cada capítulo como una card de Bootstrap
-    pageItems.forEach(item => {
-      const colDiv = document.createElement("div");
-      colDiv.className = "col";
-
-      colDiv.innerHTML = `
-        <article class="card h-100 chapter-card" data-clave="${item._clave}">
-          <div class="card-body d-flex flex-column">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title h6 mb-0 flex-grow-1 me-2" style="line-height: 1.3; max-height: 2.6em; overflow: hidden;" title="${item._obra}">${item._obra}</h5>
-              <span class="badge bg-warning text-dark" style="min-width: fit-content;">${item.numCapitulo}</span>
+    if (state.vista === "cards") {
+      // Genera cada capítulo como una card de Bootstrap
+      pageItems.forEach(item => {
+        const colDiv = document.createElement("div");
+        colDiv.className = "col";
+        colDiv.innerHTML = `
+          <article class="card h-100 chapter-card" data-clave="${item._clave}">
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-title h6 mb-0 flex-grow-1 me-2" style="line-height: 1.3; max-height: 2.6em; overflow: hidden;" title="${item._obra}">${item._obra}</h5>
+                <span class="badge bg-warning text-dark" style="min-width: fit-content;">${item.numCapitulo}</span>
+              </div>
+              <p class="card-text small text-muted mb-2">
+                <i class="fa-solid fa-calendar-days me-1"></i>
+                ${formatDateEs(item._fecha)}
+              </p>
+              <p class="card-text flex-grow-1" style="font-size: 0.9rem; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;" title="${item.nombreCapitulo}">
+                ${item.nombreCapitulo}
+              </p>
+              <div class="mt-auto pt-2">
+                <a href="#" class="btn btn-primary btn-sm pdf-link w-100"
+                   data-pdf-obra="${item._clave}"
+                   data-pdf-capitulo="${item.numCapitulo}">
+                  <i class="fa-solid fa-book-open me-1"></i>Leer
+                </a>
+              </div>
             </div>
-            
-            <p class="card-text small text-muted mb-2">
-              <i class="fa-solid fa-calendar-days me-1"></i>
-              ${formatDateEs(item._fecha)}
-            </p>
-            
-            <p class="card-text flex-grow-1" style="font-size: 0.9rem; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;" title="${item.nombreCapitulo}">
-              ${item.nombreCapitulo}
-            </p>
-            
-            <div class="mt-auto pt-2">
-              <a href="#" class="btn btn-primary btn-sm pdf-link w-100"
-                 data-pdf-obra="${item._clave}"
-                 data-pdf-capitulo="${item.numCapitulo}">
-                <i class="fa-solid fa-book-open me-1"></i>Leer
-              </a>
-            </div>
-          </div>
-        </article>
+          </article>
+        `;
+        listEl.appendChild(colDiv);
+      });
+    } else {
+      // Vista de lista
+      const table = document.createElement("table");
+      table.className = "table table-striped table-hover align-middle mb-0";
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th>Obra</th>
+            <th>Capítulo</th>
+            <th>Fecha</th>
+            <th>Título</th>
+            <th>Leer</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
       `;
-
-      listEl.appendChild(colDiv);
-    });
+      const tbody = table.querySelector("tbody");
+      pageItems.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td title="${item._obra}">${item._obra}</td>
+          <td><span class="badge bg-warning text-dark">${item.numCapitulo}</span></td>
+          <td>${formatDateEs(item._fecha)}</td>
+          <td title="${item.nombreCapitulo}">${item.nombreCapitulo}</td>
+          <td>
+            <a href="#" class="btn btn-primary btn-sm pdf-link"
+               data-pdf-obra="${item._clave}"
+               data-pdf-capitulo="${item.numCapitulo}">
+              <i class="fa-solid fa-book-open me-1"></i>Leer
+            </a>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+      listEl.appendChild(table);
+    }
 
     // Activa los enlaces PDF
     activarLinksPDF();
@@ -96,6 +130,19 @@ export function initUltimosCapitulos() {
 
     // Renderiza la paginación
     renderPagination();
+    // Actualiza el botón de vista
+    updateViewButton();
+  };
+
+  // Actualiza el botón de vista
+  const updateViewButton = () => {
+    if (!toggleViewBtn) return;
+    const iconClass = state.vista === "cards" ? "fa-list" : "fa-th-large";
+    const titleText = state.vista === "cards"
+      ? "Ver como lista"
+      : "Ver como tarjetas";
+    toggleViewBtn.innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
+    toggleViewBtn.title = titleText;
   };
 
   // Actualiza el botón de ordenación
@@ -205,6 +252,11 @@ export function initUltimosCapitulos() {
   toggleOrderBtn.addEventListener("click", () => {
     state.orden = state.orden === "asc" ? "desc" : "asc";
     applyFilter();
+  });
+
+  toggleViewBtn.addEventListener("click", () => {
+    state.vista = state.vista === "cards" ? "lista" : "cards";
+    renderPage();
   });
 
   // Atajo de teclado para enfocar el campo de búsqueda
