@@ -1053,7 +1053,7 @@ footer {
     }
   }
 
-  .hoy-book .card {
+  .hoy-book {
     animation: bordeParpadeante 2s infinite;
   }
 
@@ -1426,4 +1426,5 @@ canvas#graficaObras {
     margin-left: 0.5rem !important;
     margin-right: 0.5rem !important;
   }
+
 }
