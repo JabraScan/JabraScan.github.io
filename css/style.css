@@ -130,6 +130,25 @@ header.scrolled {
   line-height: 1.1;
 }
 
+@media (max-width: 575.98px) {
+  .navbar-jabrascan .brand-text {
+    font-size: 1.2rem !important;
+    white-space: normal;
+    max-width: 150px;
+    overflow-wrap: break-word;
+  }
+
+  .navbar-jabrascan .navbar-brand {
+    gap: 0.5em !important;
+  }
+
+  .navbar-jabrascan .navbar-brand-logo {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+
 .navbar-jabrascan .nav-link {
   color: #fca311;
   font-weight: bold;
