@@ -4,7 +4,7 @@ import { parseFecha } from './utils.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
 
 // ===== Estado de paginación (ámbito de módulo) =====
-let PAGE_SIZE_DEFAULT = 10;
+let PAGE_SIZE_DEFAULT = 15;
 let pageSize = PAGE_SIZE_DEFAULT;
 let currentPage = 1;
 let allCardsDesktop = []; // div.col para .book-list
