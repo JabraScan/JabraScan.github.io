@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // ⚠️ Aviso si todos los capítulos fueron filtrados
                 if (capitulosConObra.length === 0) {
-                  console.warn(`⚠️ Todos los capítulos de "${clave}" están programados para el futuro.`);
+                  console.warn(`⚠️ No hay capítulos disponibles en este momento.`);
                 }
 
                 return { [clave]: capitulosConObra };
@@ -482,7 +482,7 @@ function setupPagination() {
 window.addEventListener('hashchange', () => {
   const m = (window.location.hash || '').match(/page=(\d+)/i);
   if (m) {
-    const newPage = Math.max(1, parseInt(m[1], 10));
+    const newPage = Math.max(1, parseInt(m[1], 15));
     if (newPage !== currentPage) {
       renderPage(newPage);
       setupPagination();
