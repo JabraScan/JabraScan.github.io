@@ -315,6 +315,7 @@ startBtn.onclick = () => {
       utterance.onend = () => {
         const btnNext = document.querySelector('.nextPage');
         if (btnNext && !btnNext.disabled) {
+          stopBtn.click();
           btnNext.click();
           setTimeout(() => startBtn.click(), 500);
         } else {
