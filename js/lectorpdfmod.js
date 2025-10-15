@@ -317,7 +317,7 @@ startBtn.onclick = () => {
         if (btnNext && !btnNext.disabled) {
           stopBtn.click();
           btnNext.click();
-          setTimeout(() => startBtn.click(), 500);
+          setTimeout(() => startBtn.click(), 1000);
         } else {
           const fin = new SpeechSynthesisUtterance("Ya no hay más contenido para leer");
           fin.lang = "es-ES";
