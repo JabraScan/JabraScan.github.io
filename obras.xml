@@ -307,6 +307,32 @@
   </obra>
   <obra>
     <visible>si</visible>
+    <clave>Shimoneta</clave>
+    <nombreobra>Shimoneta</nombreobra>
+    <nombreobra2></nombreobra2>
+    <nombreobra3></nombreobra3>
+    <autor>Akagi Hirotaka</autor>
+    <sinopsis><![CDATA[Hace dieciséis años, con la aprobación de la Ley de Orden Público y Moral, el lenguaje soez fue objeto de luto por parte del público. El protagonista, Okuma Tanukichi, se matricula en una de las mejores escuelas de moral pública de Japón, pero nada más entrar en la escuela es reclutado por Ayame Kajou, la fundadora de la organización antisocial «SOX». 
+          Tanukichi que se ha convertido en miembro de «SOX» después de que se le hayan extirpado sus debilidades, cooperará en un atentado terrorista para conseguir respaldar a Anna, la presidenta del consejo estudiantil que siente un gran deseo por él, pero… ¿Es una prisión? ¿O es un harem?
+      ]]>
+    </sinopsis>
+    <valoracion>9.0</valoracion>
+    <tipoobra>Novela Web</tipoobra>
+    <categoria>Acción, Adulto, Comedia, Ecchi, Maduro, Harem, Romance, Vida Escolar</categoria>
+    <imagen>Shimoneta.jpg</imagen>
+    <fechaCreacion>15/10/2025</fechaCreacion>
+    <ubicacion>Novela Japonesa</ubicacion>
+    <estado>Activo</estado>
+    <traductor>[MK & Defous123] , Gran Maestro</traductor>
+    <adulto>adulto</adulto>
+    <aprobadaAutor>no</aprobadaAutor>
+    <observaciones></observaciones>
+    <discord></discord>
+    <bannerOpcional></bannerOpcional>
+    <wiki></wiki>
+  </obra>
+  <obra>
+    <visible>si</visible>
     <clave>Suzume</clave>
     <nombreobra>Suzume no Tojimari</nombreobra>
     <nombreobra2></nombreobra2>
@@ -373,7 +399,7 @@
     <fechaCreacion>03/08/2025</fechaCreacion>
     <ubicacion>Novela Coreana</ubicacion>
     <estado>Activo</estado>
-    <traductor>Joven Maestro</traductor>
+    <traductor>Gran Maestro</traductor>
     <adulto></adulto>
     <aprobadaAutor>no</aprobadaAutor>
     <observaciones></observaciones>
