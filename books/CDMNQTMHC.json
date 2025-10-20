@@ -50,13 +50,7 @@
         { "Fecha" : "29-08-2025",  "NombreArchivo" : "CDMNQTMHC-048.pdf", "numCapitulo" : "48", "nombreCapitulo" : "v1c48 · Escúchame, gracias."                                                                        , "tituloObra": "CDMNQTMHC Vol 1" },
         { "Fecha" : "29-08-2025",  "NombreArchivo" : "CDMNQTMHC-049.pdf", "numCapitulo" : "49", "nombreCapitulo" : "v1c49 · Ahora puedes besar a tu novia."                                                             , "tituloObra": "CDMNQTMHC Vol 1" },
         { "Fecha" : "29-08-2025",  "NombreArchivo" : "CDMNQTMHC-050.pdf", "numCapitulo" : "50", "nombreCapitulo" : "v1c50 · En el enésimo día sin Noia, extrañándola."                                                  , "tituloObra": "CDMNQTMHC Vol 1" },
-    { 
-        "Fecha": "29-08-2025",
-        "NombreArchivo": "CDMNQTMHC-050.pdf",
-        "numCapitulo": "50",
-        "nombreCapitulo": "v1c50 · En el enésimo día sin Noia, extrañándola.",
-        "tituloObra": "CDMNQTMHC Vol 1"
-    },
+		{ "Fecha" : "29-08-2025",  "NombreArchivo" : "CDMNQTMHC-050.pdf", "numCapitulo" : "50", "nombreCapitulo" : "v1c50 · En el enésimo día sin Noia, extrañándola."													, "tituloObra": "CDMNQTMHC Vol 1" },
     {
         "Fecha": "29-08-2025",
         "NombreArchivo": "CDMNQTMHC-051.pdf",
