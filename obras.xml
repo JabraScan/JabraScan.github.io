@@ -341,6 +341,33 @@ He tardado diez años en escribir este libro.
     <bannerOpcional></bannerOpcional>
     <wiki></wiki>
   </obra>
+	<obra>	
+		<visible>si</visible>
+		<clave>Roshidere</clave>
+		<nombreobra>Roshidere</nombreobra>
+		<nombreobra2>Alya Sometimes Hides Her Feelings in Russian</nombreobra2>
+		<nombreobra3>時々ボソッとロシア語でデレる隣のアーリャさん</nombreobra3>
+		<autor>SunSunSun</autor>
+		"<sinopsis><![CDATA[Alya Mikhailovna Kujo, que asiste a una escuela privada, Seirei Gakuen, es una chica de secundaria con cabello plateado que se ve tan hermosa que cualquiera puede darse la vuelta si ella camina.
+					El personaje principal, Masachika Kuze, que se sienta junto a Alya, es un estudiante desmotivado que solo duerme en la escuela y siempre se queja.
+					Por alguna razón, Alya a veces habla ruso. Sin embargo, Alyano sabía que Masachika también podía entender el ruso en su nivel nativo."
+		      ]]>
+		</sinopsis>
+		<valoracion>9.0</valoracion>
+		<tipoobra>Novela Ligera</tipoobra>
+		<categoria>Academia, Comedia, Recuentos de Vida</categoria>
+		<imagen>Roshidere.wepb</imagen>
+		<fechaCreacion>22/10/2025</fechaCreacion>
+		<ubicacion>Novela Japonesa</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Tavo</traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki>https://roshidere.fandom.com/wiki/Alya_Sometimes_Hides_Her_Feelings_in_Russian_(Light_Novel)#Japanese</wiki>
+	</obra>
   <obra>
     <visible>si</visible>
     <clave>ShadowSlave</clave>
