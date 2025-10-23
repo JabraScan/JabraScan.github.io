@@ -474,6 +474,35 @@ He tardado diez años en escribir este libro.
     <bannerOpcional></bannerOpcional>
     <wiki></wiki>
   </obra>
+  	<obra>	
+	  	<visible>si</visible>
+	  	<clave>UnicoHombreUnidadMilitar</clave>
+	  	<nombreobra>El Único Hombre En La Unidad Militar</nombreobra>
+	  	<nombreobra2>부대에 남군이 나 혼자</nombreobra2>
+	  	<nombreobra3></nombreobra3>
+	  	<autor>TwoJ</autor>
+	  	<sinopsis><![CDATA[«¿Te enviaré a una unidad femenina?»
+		  		Jaejoon se ve obligado a unirse a un programa de prueba de unidades mixtas en el que es el único hombre en una unidad compuesta únicamente por mujeres.
+		  		¿Podrá completar su servicio militar en este ambiente lleno de tentaciones y desafíos?
+		  
+		  		Una mezcla de humor, drama y situaciones complicadas que surgen cuando un hombre se encuentra en medio de un entorno inesperado y dinámico.
+	        ]]>
+		</sinopsis>
+	  	<valoracion>9.0</valoracion>
+	  	<tipoobra>Novela Web</tipoobra>
+	  	<categoria>Accion , Adulto , Comedia , Romance , Haren , Sexo , Recuentos de la vida</categoria>
+	  	<imagen>UnicoHombreUnidadMilitar.webp</imagen>
+	  	<fechaCreacion>22/10/2025</fechaCreacion>
+	  	<ubicacion>Novela Coreana</ubicacion>
+	  	<estado>Activo</estado>
+	  	<traductor>Leo</traductor>
+  		<adulto>adulto</adulto>
+  		<aprobadaAutor>no</aprobadaAutor>
+  		<observaciones></observaciones>
+  		<discord></discord>
+  		<bannerOpcional></bannerOpcional>
+	  	<wiki></wiki>
+  	</obra>	
 	<obra>	
 		<visible>si</visible>
 		<clave>YoMateJugadorAcademia</clave>
@@ -568,33 +597,4 @@ He tardado diez años en escribir este libro.
     <wiki>https://my-wives-are-beautiful-demons.fandom.com/wiki/My_Wives_are_Beautiful_Demons_Wiki</wiki>
   </obra>
 
-  	<obra>	
-	  	<visible>no</visible>
-	  	<clave>UnicoHombreUnidadMilitar</clave>
-	  	<nombreobra>El Único Hombre En La Unidad Militar</nombreobra>
-	  	<nombreobra2>부대에 남군이 나 혼자</nombreobra2>
-	  	<nombreobra3></nombreobra3>
-	  	<autor>TwoJ</autor>
-	  	<sinopsis><![CDATA[«¿Te enviaré a una unidad femenina?»
-		  		Jaejoon se ve obligado a unirse a un programa de prueba de unidades mixtas en el que es el único hombre en una unidad compuesta únicamente por mujeres.
-		  		¿Podrá completar su servicio militar en este ambiente lleno de tentaciones y desafíos?
-		  
-		  		Una mezcla de humor, drama y situaciones complicadas que surgen cuando un hombre se encuentra en medio de un entorno inesperado y dinámico.
-	        ]]>
-		</sinopsis>
-	  	<valoracion>9.0</valoracion>
-	  	<tipoobra>Novela Web</tipoobra>
-	  	<categoria>Accion , Adulto , Comedia , Romance , Haren , Sexo , Recuentos de la vida</categoria>
-	  	<imagen>UnicoHombreUnidadMilitar.webp</imagen>
-	  	<fechaCreacion>22/10/2025</fechaCreacion>
-	  	<ubicacion>Novela Coreana</ubicacion>
-	  	<estado>Activo</estado>
-	  	<traductor>Leo</traductor>
-  		<adulto>adulto</adulto>
-  		<aprobadaAutor>no</aprobadaAutor>
-  		<observaciones></observaciones>
-  		<discord></discord>
-  		<bannerOpcional></bannerOpcional>
-	  	<wiki></wiki>
-  	</obra>	
 </obras>
