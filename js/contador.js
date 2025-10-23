@@ -86,9 +86,19 @@ export async function renderResumenObras() {
           },
           datalabels: {
             anchor: 'end',
-            align: 'right',
+            align: function(context) {
+              const value = context.dataset.data[context.dataIndex];
+              const max = Math.max(...context.dataset.data);
+              const porcentaje = value / max;
+              return porcentaje > 0.9 ? 'start' : 'right';
+            },
             formatter: value => value,
-            color: '#333',
+            color: function(context) {
+              const value = context.dataset.data[context.dataIndex];
+              const max = Math.max(...context.dataset.data);
+              const porcentaje = value / max;
+              return porcentaje > 0.9 ? '#000' : '#333';
+            },
             font: {
               weight: 'bold'
             }
