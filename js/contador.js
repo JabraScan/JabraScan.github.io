@@ -50,6 +50,7 @@ export async function renderResumenObras() {
       });
     // 📈 Gráfico con descripciones
     new Chart(canvasDescripcion, {
+      plugins: [ChartDataLabels],
       type: "bar",
       data: {
         labels: etiquetasCombinadas,
@@ -81,6 +82,15 @@ export async function renderResumenObras() {
                 const visitas = context.dataset.data[index];
                 return `${etiquetasCompletas[index]}: ${visitas} visitas`;
               }
+            }
+          },
+          datalabels: {
+            anchor: 'end',
+            align: 'right',
+            formatter: value => value,
+            color: '#333',
+            font: {
+              weight: 'bold'
             }
           }
         },
