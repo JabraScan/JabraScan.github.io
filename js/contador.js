@@ -97,7 +97,7 @@ export async function renderResumenObras() {
               const value = context.dataset.data[context.dataIndex];
               const max = Math.max(...context.dataset.data);
               const porcentaje = value / max;
-              return porcentaje > 0.9 ? '#fff' : '#333';
+              return porcentaje > 0.55 ? '#fff' : '#333';
             },
             font: {
               weight: 'bold'
