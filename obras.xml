@@ -120,7 +120,10 @@
     <valoracion>9.0</valoracion>
     <tipoobra>Novela Web</tipoobra>
     <categoria>Romance, Acción, Venganza, Harem, Fantasía, Cultivo</categoria>
-    <imagen>DualCultivation.webp</imagen>
+	<imagen>DualCultivation.webp</imagen>
+	    <imagen>DualCultivation/DualCultivation_1.webp</imagen>
+	    <imagen>DualCultivation/DualCultivation_2.webp</imagen>
+	    <imagen>DualCultivation/DualCultivation_3.webp</imagen>
     <fechaCreacion>24/08/2025</fechaCreacion>
     <ubicacion>Novela China</ubicacion>
     <estado>Activo</estado>
