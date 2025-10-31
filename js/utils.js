@@ -159,11 +159,14 @@ export function truncarTexto(texto, maxLength = 40) {
 }
 
 // 🖼️ Función para obtener la imagen correcta según el mes actual
-export function seleccionarImagen(nodosImagen) {
+export function obtenerImagenCorrecta(nodosImagen) {
   const totalImagenes = nodosImagen.length;
 
   // 🚫 Si no hay imágenes, devolvemos vacío
   if (totalImagenes === 0) return "";
+
+  // ⚡ Si solo hay 1 imagen, devolvemos directamente esa
+  if (totalImagenes === 1) return nodosImagen[0].textContent.trim();
 
   // 📅 Obtenemos el mes actual (0 = enero, 11 = diciembre)
   const mesActual = new Date().getMonth();
@@ -177,4 +180,3 @@ export function seleccionarImagen(nodosImagen) {
   // ✅ Devolvemos la ruta de la imagen seleccionada
   return nodosImagen[indice].textContent.trim();
 }
-
