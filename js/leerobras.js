@@ -1,6 +1,6 @@
 import { cargarlibro } from './libroficha.js';
 import { crearUltimoCapituloDeObra } from './capitulos.js';
-import { parseFecha } from './utils.js';
+import { parseFecha, seleccionarImagen } from './utils.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
 
 // ===== Estado de paginación (ámbito de módulo) =====
