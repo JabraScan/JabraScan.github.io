@@ -37,7 +37,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const clave = obra.querySelector("clave").textContent.trim();
         const nombreobra = obra.querySelector("nombreobra").textContent.trim();
         const autor = obra.querySelector("autor").textContent.trim();
-        const imagen = obra.querySelector("imagen").textContent.trim();
+        //const imagen = obra.querySelector("imagen").textContent.trim();
+        // 🎨 Seleccionamos la imagen correcta según el mes
+        const imagen = seleccionarImagen(obra.querySelectorAll("imagen"));
         const estado = obra.querySelector("estado").textContent.trim();
         const Categoria = obra.querySelector("categoria").textContent.trim();
         const traduccion = obra.querySelector("traductor").textContent.trim();
