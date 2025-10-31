@@ -6,6 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 🎃 Solo ejecutar si es 31 de octubre (Halloween)
   if (dia === 31 && mes === 10) {
+    // 🌌 Cambiar fondo del body por una imagen
+    document.body.style.backgroundImage = "url('https://marketplace.canva.com/EAE_yso-jzs/1/0/1600w/canva-negro-minimalista-halloween-fondo-de-pantalla-de-escritorio-W4ElY_ki-xs.jpg')";
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundAttachment = "fixed";
+
     // 📱 Detectar si es móvil para reducir cantidad
     const isMobile = window.innerWidth < 600;
 
