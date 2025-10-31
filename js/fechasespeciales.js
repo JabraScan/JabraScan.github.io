@@ -45,7 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Cambiar también el logo del navbar
     const logoImg = document.querySelector("a.navbar-brand img");
-    if (logoImg) logoImg.src = fiesta.favicon;
+    if (logoImg) {
+      logoImg.src = fiesta.favicon;
+      logoImg.style.border = "none";
+      logoImg.style.outline = "none";
+      logoImg.style.background = "transparent";
+    }
   }
 
   // 🎭 Animar iconos detrás del texto
