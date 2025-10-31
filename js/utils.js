@@ -159,7 +159,7 @@ export function truncarTexto(texto, maxLength = 40) {
 }
 
 // 🖼️ Función para obtener la imagen correcta según el mes actual
-export function obtenerImagenCorrecta(nodosImagen) {
+export function seleccionarImagen(nodosImagen) {
   const totalImagenes = nodosImagen.length;
 
   // 🚫 Si no hay imágenes, devolvemos vacío
@@ -177,3 +177,4 @@ export function obtenerImagenCorrecta(nodosImagen) {
   // ✅ Devolvemos la ruta de la imagen seleccionada
   return nodosImagen[indice].textContent.trim();
 }
+
