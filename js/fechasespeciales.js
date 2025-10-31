@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundAttachment = "fixed";
     // 🎭 Animar título con iconos
+    /*
     const clave = `${dia}-${mes}`;
     if (iconosFestivos[clave]) {
       let i = 0;
@@ -45,8 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
         i++;
       }, 1000); // cambia cada segundo
     }
+    */
     // 🖼️ Cambiar favicon
-    if (fiesta.favicon) {
+    if (false and fiesta.favicon) {
       let link = document.querySelector("link[rel~='icon']");
       if (!link) {
         link     = document.createElement("link");
