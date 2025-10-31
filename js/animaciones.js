@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mes = hoy.getMonth() + 1; // 📅 Enero=0 → Octubre=9
 
   // 🎃 Solo ejecutar si es 31 de octubre
-  if (dia === 31 && mes === 10) {
+  if (false && dia === 31 && mes === 10) {
     // 🧙‍♀️ Inyectar CSS de Halloween
     const halloweenCSS = document.createElement("link");
     halloweenCSS.rel = "stylesheet";
