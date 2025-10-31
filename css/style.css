@@ -1143,6 +1143,9 @@ footer {
   .hide-on-mobile {
     display: none !important;
   }
+  .book-chapters-list ul li span:last-child {
+    overflow: visible;
+  }
 
   /* Botones del carrusel más pequeños en móviles */
   .custom-carousel-btn {
@@ -1448,4 +1451,5 @@ canvas#graficaObras {
     margin-left: 0.3rem;
   }
 }
+
 
