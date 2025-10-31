@@ -1,4 +1,4 @@
-/* Overlay Halloween */
+/* 🎃 Overlay Halloween */
 #halloween-overlay {
   position: fixed;
   top: 0;
@@ -9,25 +9,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* por encima de todo */
+  z-index: 9999; /* 🔝 por encima de todo */
   color: orange;
   font-family: 'Creepster', cursive, sans-serif;
   flex-direction: column;
   animation: fadeOut 2s ease forwards;
-  animation-delay: 4s; /* tiempo visible antes de desaparecer */
+  animation-delay: 4s; /* ⏳ tiempo visible antes de desaparecer */
 }
 
+/* 👻 Texto principal */
 #halloween-overlay h1 {
   font-size: 3em;
   text-shadow: 0 0 20px orange, 0 0 40px red;
   animation: flicker 2s infinite;
 }
 
+/* ✨ Efecto parpadeo */
 @keyframes flicker {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
   20%, 24%, 55% { opacity: 0.3; }
 }
 
+/* 🌫️ Efecto desvanecimiento */
 @keyframes fadeOut {
   to {
     opacity: 0;
@@ -35,7 +38,7 @@
   }
 }
 
-/* Murciélagos */
+/* 🦇 Murciélagos */
 .bat {
   position: absolute;
   width: 40px;
@@ -44,7 +47,26 @@
   animation: fly 10s linear infinite;
 }
 
+/* 🌀 Animación de vuelo */
 @keyframes fly {
   from { transform: translateX(-100px) translateY(0); }
   to { transform: translateX(110vw) translateY(-50vh); }
+}
+
+/* ♿ Accesibilidad: reducir animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  .bat, #halloween-overlay h1 {
+    animation: none !important;
+  }
+}
+
+/* 📱 Ajustes móviles */
+@media (max-width: 600px) {
+  #halloween-overlay h1 {
+    font-size: 2em; /* 🔠 texto más pequeño en pantallas reducidas */
+  }
+  .bat {
+    width: 25px;
+    height: 12px; /* 🦇 murciélagos más pequeños */
+  }
 }
