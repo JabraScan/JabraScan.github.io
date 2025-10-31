@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { dia:  1, mes:  1, fondo: "./img_especial/new_year.webp"      }, // 🎆 Año Nuevo
     { dia: 14, mes:  2, fondo: "./img_especial/valentin.webp"      }, // ❤️ San Valentín (opcional)
     { dia: 17, mes:  3, fondo: "./img_especial/san_patricio.webp"  }, // 🍀 San Patricio
+    { dia: 22, mes:  4, fondo: "./img_especial/diatierra.webp"     }, // 🌍 Día de la Tierra
     { dia: 31, mes: 10, fondo: "./img_especial/halloween.webp"     }, // 🎃 Halloween
     { dia: 25, mes: 12, fondo: "./img_especial/navidad.webp"       }, // 🎄 Navidad
     { dia: 31, mes: 12, fondo: "./img_especial/nochevieja.webp"    }  // 🍾 Nochevieja
