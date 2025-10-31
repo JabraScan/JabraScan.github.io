@@ -1003,6 +1003,7 @@ footer {
   }
 
   /* Oculta cualquier .libro-item y .book-card-main */
+  body.ios .book-list,
   body.ios .libro-item,
   body.ios .book-card-main,
   body.ios .book-card-main.libro-item {
@@ -1447,3 +1448,4 @@ canvas#graficaObras {
     margin-left: 0.3rem;
   }
 }
+
