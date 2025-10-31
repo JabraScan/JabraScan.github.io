@@ -4,6 +4,36 @@ import { abrirLectorPDF } from './lector.js';
 import { cargarlibro } from './libroficha.js';
 import { renderResumenObras } from './contador.js';
 
+// Helper: carga un script externo sólo una vez y devuelve una Promise
+function loadScript(src, globalName) {
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) {
+      // Si se pasa un nombre global a comprobar, validamos que la librería ya esté lista
+      if (globalName) {
+        if (window[globalName]) return resolve();
+        // Si existe la etiqueta pero la librería global no está definida (scripts inyectados vía innerHTML no se ejecutan), forzamos la carga
+        const s2 = document.createElement('script');
+        s2.src = src;
+        s2.async = false;
+        s2.onload = () => resolve();
+        s2.onerror = () => reject(new Error('No se pudo cargar ' + src));
+        document.head.appendChild(s2);
+        return;
+      }
+      // Si no necesitamos comprobar global, consideramos que ya está disponible
+      return resolve();
+    }
+
+    const s = document.createElement('script');
+    s.src = src;
+    s.async = false; // respetar orden si se añaden múltiples
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error('No se pudo cargar ' + src));
+    document.head.appendChild(s);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   // 📱 Detección de iOS para aplicar estilos específicos
   if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) && !window.MSStream) {
@@ -99,11 +129,20 @@ function cargarVista(url) {
 
       // 🛠️ Inicialización específica por vista
       if (url === "ultimosCapitulos.html") {
-        ocultarDisqus?.();
+          window.ocultarDisqus?.();
         initUltimosCapitulos();
       } else if (url === "counts.html") {
-        ocultarDisqus?.();
-        renderResumenObras();
+        // Cargar Chart.js y plugin antes de renderizar para evitar carga global innecesaria
+          window.ocultarDisqus?.();
+        const chartUrl = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+        const datalabelsUrl = 'https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0';
+        loadScript(chartUrl, 'Chart')
+          .then(() => loadScript(datalabelsUrl, 'ChartDataLabels'))
+          .then(() => renderResumenObras())
+          .catch(err => {
+            console.error('Error cargando librerías de gráficos:', err);
+            renderResumenObras(); // intentar renderizar de todos modos (mostrará error internamente si falta Chart)
+          });
       }
 
       // Puedes añadir más inicializaciones aquí si lo necesitas
@@ -126,7 +165,17 @@ function abrirObraCapitulo(obra, capitulo = null) {
       })
       .then(data => {
         mainElement.innerHTML = data;
-        cargarlibro(obra); // Función externa que carga los datos del libro
+        // Cargar Disqus dinámicamente sólo cuando se muestra la ficha de la obra
+        loadScript('js/disqus.js')
+          .catch(err => console.warn('No se pudo cargar disqus.js:', err))
+          .finally(() => {
+            try {
+              cargarlibro(obra); // Función externa que carga los datos del libro
+            } catch (e) {
+              console.error('Error al ejecutar cargarlibro:', e);
+            }
+          });
+
         const globalHeader = document.querySelector('header');
         if (globalHeader) globalHeader.style.display = '';
         document.body.classList.remove('reader-page');
