@@ -4,7 +4,7 @@
   position: fixed; /* siempre visibles aunque hagas scroll */
   width: 40px;
   height: 20px;
-  background: url('https://upload.wikimedia.org/wikipedia/commons/3/3e/Bat_silhouette.svg')
+  background: url('https://commons.wikimedia.org/wiki/Category:Bat_silhouettes#/media/File:Bat_shadow_black.svg')
               no-repeat center/contain;
   animation: fly 10s linear infinite;
   z-index: 9999; /* por encima del contenido */
