@@ -1,0 +1,50 @@
+/* Overlay Halloween */
+#halloween-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* por encima de todo */
+  color: orange;
+  font-family: 'Creepster', cursive, sans-serif;
+  flex-direction: column;
+  animation: fadeOut 2s ease forwards;
+  animation-delay: 4s; /* tiempo visible antes de desaparecer */
+}
+
+#halloween-overlay h1 {
+  font-size: 3em;
+  text-shadow: 0 0 20px orange, 0 0 40px red;
+  animation: flicker 2s infinite;
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.3; }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Murciélagos */
+.bat {
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/3/3e/Bat_silhouette.svg') no-repeat center/contain;
+  animation: fly 10s linear infinite;
+}
+
+@keyframes fly {
+  from { transform: translateX(-100px) translateY(0); }
+  to { transform: translateX(110vw) translateY(-50vh); }
+}
