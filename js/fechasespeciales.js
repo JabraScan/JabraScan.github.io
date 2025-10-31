@@ -6,13 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const tituloBase = document.title;
   // 🎉 Configuración de festividades
   const festividades = [
-    { dia:  1, mes:  1, fondo: "./img_especial/new_year.webp"      }, // 🎆 Año Nuevo
-    { dia: 14, mes:  2, fondo: "./img_especial/valentin.webp"      }, // ❤️ San Valentín (opcional)
-    { dia: 17, mes:  3, fondo: "./img_especial/san_patricio.webp"  }, // 🍀 San Patricio
-    { dia: 22, mes:  4, fondo: "./img_especial/diatierra.webp"     }, // 🌍 Día de la Tierra
-    { dia: 31, mes: 10, fondo: "./img_especial/halloween.webp"     }, // 🎃 Halloween
-    { dia: 25, mes: 12, fondo: "./img_especial/navidad.webp"       }, // 🎄 Navidad
-    { dia: 31, mes: 12, fondo: "./img_especial/nochevieja.webp"    }  // 🍾 Nochevieja
+    { dia:  1, mes:  1, fondo: "./img_especial/new_year.webp"     , favicon: "./img_especial/RexJabra_newyear.ico"      }, // 🎆 Año Nuevo
+    { dia: 14, mes:  2, fondo: "./img_especial/valentin.webp"     , favicon: "./img_especial/RexJabra_valentin.ico"     }, // ❤️ San Valentín
+    { dia: 17, mes:  3, fondo: "./img_especial/san_patricio.webp" , favicon: "./img_especial/RexJabra_Patrick.ico"      }, // 🍀 San Patricio
+    { dia: 22, mes:  4, fondo: "./img_especial/diatierra.webp"    , favicon: "./img_especial/RexJabra_tierra.ico"       }, // 🌍 Día de la Tierra
+    { dia: 31, mes: 10, fondo: "./img_especial/halloween.webp"    , favicon: "./img_especial/RexJabra_Halloween.ico"    }, // 🎃 Halloween
+    { dia: 25, mes: 12, fondo: "./img_especial/navidad.webp"      , favicon: "./img_especial/RexJabra_navidad.ico"      }, // 🎄 Navidad
+    { dia: 31, mes: 12, fondo: "./img_especial/nochevieja.webp"   , favicon: "./img_especial/RexJabra_nochevieja.ico"   }  // 🍾 Nochevieja
   ];
   // 🎨 Configuración de animaciones de iconos para el título
   const iconosFestivos = {
@@ -44,6 +44,16 @@ document.addEventListener("DOMContentLoaded", () => {
         document.title = `${icono} ${tituloBase}`;
         i++;
       }, 1000); // cambia cada segundo
+    }
+    // 🖼️ Cambiar favicon
+    if (fiesta.favicon) {
+      let link = document.querySelector("link[rel~='icon']");
+      if (!link) {
+        link     = document.createElement("link");
+        link.rel = "icon";
+        document.head.appendChild(link);
+      }
+      link.href = fiesta.favicon;
     }
   }
 });
