@@ -35,7 +35,8 @@ export function cargarlibro(libroId) {
       const nombreobra = get("nombreobra");
       const autor = get("autor");
       const sinopsis = get("sinopsis");
-      const imagen = get("imagen");
+      //const imagen = get("imagen");
+      const imagen = seleccionarImagen(obra.querySelectorAll("imagen"));
       const tipoobra = get("tipoobra");
       const Categoria = get("categoria");
       const estado = get("estado");
@@ -259,4 +260,5 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
