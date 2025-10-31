@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const hoy = new Date();
   const dia = hoy.getDate();
   const mes = hoy.getMonth() + 1; // Enero = 0 → Octubre = 9
-
+  // Guardamos el título original de la página
+  const tituloBase = document.title;
   // 🎉 Configuración de festividades
   const festividades = [
     { dia:  1, mes:  1, fondo: "./img_especial/new_year.webp"      }, // 🎆 Año Nuevo
