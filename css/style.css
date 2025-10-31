@@ -1435,4 +1435,15 @@ canvas#graficaObras {
   background: transparent;
   border: none;
 }
+/* Evita problemas de fondo en móvil */
+/* Ajustes SOLO en móvil (pantallas <= 768px) */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll !important; /* evita glitches en móvil */
+  }
 
+  .brand-iconos {
+    font-size: 0.9em;   /* más pequeño en móvil */
+    margin-left: 0.3rem;
+  }
+}
