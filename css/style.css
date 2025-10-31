@@ -1429,3 +1429,10 @@ canvas#graficaObras {
 
 }
 
+.brand-iconos {
+  margin-left: 0.5rem;
+  transition: opacity 0.3s ease;
+  background: transparent;
+  border: none;
+}
+
