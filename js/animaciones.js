@@ -6,6 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 🎃 Solo ejecutar si es 31 de octubre (Halloween)
   if (dia === 31 && mes === 10) {
+    // 👉 Inyectar el CSS de Halloween dinámicamente
+    const halloweenCSS = document.createElement("link");
+    halloweenCSS.rel = "stylesheet";
+    halloweenCSS.href = "css/halloween.css"; // ruta a tu CSS especial
+    document.head.appendChild(halloweenCSS);
     // 🌌 Cambiar fondo del body por una imagen
     document.body.style.backgroundImage = "url('./img_especial/halloween.webp')";
     document.body.style.backgroundSize = "cover";
