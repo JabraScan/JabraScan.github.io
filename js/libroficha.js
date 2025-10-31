@@ -1,5 +1,5 @@
 import { obtenerCapitulos } from './capitulos.js';
-import { parseDateDMY, parseChapterNumber, compareCapNumDesc, crearBloqueValoracion } from './utils.js';
+import { parseDateDMY, parseChapterNumber, compareCapNumDesc, crearBloqueValoracion, seleccionarImagen } from './utils.js';
 import { activarLinksPDF, activarPaginacion } from './eventos.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
 import { mostrarurl } from './general.js';
@@ -260,5 +260,6 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
