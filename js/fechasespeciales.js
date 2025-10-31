@@ -52,8 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const brandText = document.querySelector("a.navbar-brand .brand-text");
   if (brandText && iconosFestivos[clave]) {
     const spanIconos = document.createElement("span");
-    spanIconos.style.marginLeft = "0.5rem";
-    spanIconos.style.transition = "opacity 0.3s ease";
+      spanIconos.classList.add("brand-iconos");
     brandText.insertAdjacentElement("afterend", spanIconos);
 
     let i = 0;
