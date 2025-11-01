@@ -109,7 +109,7 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
           _fecha: parseDateDMY(cap.Fecha),
           _num: parseChapterNumber(cap.numCapitulo)
         }))
-        .filter(cap => cap._fecha <= hoy);   // ✅ solo capítulos publicados hasta hoy        const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
+        //.filter(cap => cap._fecha <= hoy);   // ✅ solo capítulos publicados hasta hoy        const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
         if (idx === -1) return;
         
         mostrarurl(clave, capitulo); //actualizar barra de direcciones
