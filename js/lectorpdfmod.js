@@ -95,7 +95,12 @@ export function renderPage(num) {
 export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
   fetch("capitulos.json")
     .then(res => res.json())
-    .then(index => fetch(index[clave])
+    .then(index => {
+      const recurso = index[clave];
+      if (!recurso) {
+        throw new Error(`No se encontró la ruta de capítulos para "${clave}" en capitulos.json`);
+      }
+      return fetch(recurso)
       .then(res => res.json())
       .then(data => {
         const capitulos = data[clave] || [];
@@ -109,7 +114,9 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
           _fecha: parseDateDMY(cap.Fecha),
           _num: parseChapterNumber(cap.numCapitulo)
         }))
-        //.filter(cap => cap._fecha <= hoy);   // ✅ solo capítulos publicados hasta hoy        const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
+        //.filter(cap => cap._fecha <= hoy);   // ✅ solo capítulos publicados hasta hoy
+
+        const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
         if (idx === -1) return;
         
         mostrarurl(clave, capitulo); //actualizar barra de direcciones
@@ -118,8 +125,8 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
         cargarPDF(clave, cap.NombreArchivo, paginaInicial, idx, capitulosObra);
         configurarSelectorCapitulos(capitulo, capitulosObra, clave);
         configurarBotonesCapitulo(idx, capitulosObra, clave); // ← Botones de navegación
-      })
-    )
+      });
+    })
     .catch(err => console.error("Error al cargar el capítulo:", err));
 }
 

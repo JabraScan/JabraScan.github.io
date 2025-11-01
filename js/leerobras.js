@@ -112,9 +112,14 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <div class="carousel-chapter-badge"></div>
           `;
-        itemCarousel.querySelector(".carousel-info-title").onclick = () => onLibroClick(clave);
+        const carouselTitle = itemCarousel.querySelector(".carousel-info-title");
+        if (carouselTitle) {
+          carouselTitle.onclick = () => onLibroClick(clave);
+        }
         itemCarousel.prepend(imagenContenedor);
-        carouselContainer.appendChild(itemCarousel);
+        if (carouselContainer) {
+          carouselContainer.appendChild(itemCarousel);
+        }
 
         const itemBook = document.createElement("div");
         itemBook.classList.add("col");
@@ -210,8 +215,14 @@ document.addEventListener("DOMContentLoaded", function () {
             if (bloque) {
               const bloqueB = bloque.cloneNode(true);
               const bloqueC = bloque.cloneNode(true);
-              itemBook.querySelector(".card-body").appendChild(bloque);
-              itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
+              const cardBody = itemBook.querySelector(".card-body");
+              const infoLibro = itemBookNOpc.querySelector(".info-libro");
+              if (cardBody) {
+                cardBody.appendChild(bloque);
+              }
+              if (infoLibro) {
+                infoLibro.appendChild(bloqueB);
+              }
 
               // Agregar el último capítulo al carrusel
               const carouselChapterBadge = itemCarousel.querySelector(".carousel-chapter-badge");
