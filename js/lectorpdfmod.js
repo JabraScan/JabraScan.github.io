@@ -99,17 +99,13 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
       .then(res => res.json())
       .then(data => {
         const capitulos = data[clave] || [];
-        // 📅 Fecha actual (sin horas para comparar solo día/mes/año)
-        const hoy = new Date();
-        hoy.setHours(0, 0, 0, 0);
-        // 🔎 Mapear y filtrar capítulos por fecha
         const capitulosObra = capitulos.map(cap => ({
           ...cap,
           _clave: clave,
           _fecha: parseDateDMY(cap.Fecha),
           _num: parseChapterNumber(cap.numCapitulo)
-        }))
-        //.filter(cap => cap._fecha <= hoy);   // ✅ solo capítulos publicados hasta hoy        const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
+        }));
+        const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
         if (idx === -1) return;
         
         mostrarurl(clave, capitulo); //actualizar barra de direcciones
