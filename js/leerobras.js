@@ -1,6 +1,6 @@
 import { cargarlibro } from './libroficha.js';
 import { crearUltimoCapituloDeObra } from './capitulos.js';
-import { parseFecha, seleccionarImagen } from './utils.js';
+import { parseFecha, seleccionarImagen, obtenerNombreObra } from './utils.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
 
 // ===== Estado de paginación (ámbito de módulo) =====
@@ -35,7 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (visible !== "si") return; // Salta al siguiente si no es visible
 
         const clave = obra.querySelector("clave").textContent.trim();
-        const nombreobra = obra.querySelector("nombreobra").textContent.trim();
+        //const nombreobra = obra.querySelector("nombreobra").textContent.trim();
+        const { nombreobra, nombresAlternativos } = obtenerNombreObra(obra.querySelectorAll("nombreobra"));
         const autor = obra.querySelector("autor").textContent.trim();
         //const imagen = obra.querySelector("imagen").textContent.trim();
         // 🎨 Seleccionamos la imagen correcta según el mes
@@ -92,12 +93,19 @@ document.addEventListener("DOMContentLoaded", function () {
           indicador.textContent = "+18";
           imagenContenedor.appendChild(indicador);
         }
-
+        // 👻 generar bloque oculto con los alternativos
+        const hiddenNames = nombresAlternativos.length > 0 
+          ? `<div class="hidden-alt-names" style="display:none;">
+               ${nombresAlternativos.map(n => `<span>${n}</span>`).join("")}
+             </div>`
+          : "";
+          
         const itemCarousel = document.createElement("div");
         itemCarousel.className = "custom-carousel-item";
         itemCarousel.innerHTML = `
             <div class="carousel-info-overlay">
               <div class="carousel-info-title libro-item">${nombreobra}</div>
+              ${hiddenNames}
               <div class="carousel-info-sinopsis">${sinopsis}</div>
               <div class="carousel-info-row">
                 <span class="carousel-info-label clave">${clave}</span>
@@ -123,6 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="card-body d-flex flex-column">
               <p class="clave d-none">${clave}</p>
               <h3 class="card-title h6 mb-2">${nombreobra}</h3>
+              ${hiddenNames}
               <div class="card-text">
                 <div class="book-author-name mb-2"><strong class="book-author-title">Autor:</strong> ${autor}</div>
                 <div class="book-estado badge ${estado === 'En progreso' ? 'bg-success' : estado === 'Pausado' ? 'bg-warning' : 'bg-secondary'} mb-2">${estado}</div>
