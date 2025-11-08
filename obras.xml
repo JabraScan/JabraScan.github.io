@@ -390,7 +390,7 @@ He tardado diez años en escribir este libro.
 	</obra>
 	<obra>
 		<visible>no</visible>
-		<clave>MeConvertíEnPatrónVillanos</clave>
+		<clave>MeConvertiEnPatronVillanos</clave>
 		<nombreobra>Me convertí en el patrón de los villanos</nombreobra>
 		<nombreobra>Became the Patron of Villains</nombreobra>
 		<nombreobra>악당들의 후원자가 되었다</nombreobra>
@@ -402,7 +402,9 @@ He tardado diez años en escribir este libro.
 		<valoracion>9.0</valoracion>
 		<tipoobra>Novela Web</tipoobra>
 		<categoria>Acción, Aventura, Comedia, Fantasía, Harem, Transmigración, Malentendidos</categoria>
-		<imagen>MeConvertíEnPatrónVillanos.webp</imagen>
+		<imagen>MeConvertiEnPatronVillanos/MeConvertiEnPatronVillanos.webp</imagen>
+		<imagen>MeConvertiEnPatronVillanos/MeConvertiEnPatronVillanos_2.webp</imagen>
+		<imagen>MeConvertiEnPatronVillanos/MeConvertiEnPatronVillanos_3.webp</imagen>
 		<fechaCreacion>45953</fechaCreacion>
 		<ubicacion>Novela Coreana</ubicacion>
 		<estado>Activo</estado>
