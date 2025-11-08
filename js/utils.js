@@ -192,3 +192,24 @@ export function seleccionarImagen(nodosImagen) {
   return nodosImagen[indice].textContent.trim();
 }
 
+/**
+ * 📚 Función para obtener los nombres de obra desde un nodo XML <obra>
+ * Devuelve:
+ *   - nombreobra: 🏷️ el primer nombre (el que se muestra)
+ *   - nombresAlternativos: 📂 el resto de nombres (para ocultar en HTML)
+ */
+export function obtenerNombreObra(obra) {
+  // 🔎 Recoger todas las etiquetas <nombreobra> del nodo obra
+  const nombresObra = Array.from(obra.querySelectorAll("nombreobra"))
+    .map(n => n.textContent.trim())   // ✂️ Eliminar espacios
+    .filter(Boolean);                 // ✅ Filtrar vacíos
+
+  // 🏷️ El primero es el que se muestra en pantalla
+  const nombreobra = nombresObra[0] || "";
+
+  // 📂 El resto son los alternativos (para SEO / indexación)
+  const nombresAlternativos = nombresObra.slice(1);
+
+  // 📦 Devolver ambos parámetros en un objeto
+  return { nombreobra, nombresAlternativos };
+}
