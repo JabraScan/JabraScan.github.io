@@ -157,29 +157,6 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
 export function truncarTexto(texto, maxLength = 40) {
   return texto.length > maxLength ? texto.slice(0, maxLength) + "…" : texto;
 }
-
-// 🖼️ Función para obtener la imagen correcta según el mes actual
-/*export function seleccionarImagen(nodosImagen) {
-  const totalImagenes = nodosImagen.length;
-
-  // 🚫 Si no hay imágenes, devolvemos vacío
-  if (totalImagenes === 0) return "";
-
-  // ⚡ Si solo hay 1 imagen, devolvemos directamente esa
-  if (totalImagenes === 1) return nodosImagen[0].textContent.trim();
-
-  // 📅 Obtenemos el mes actual (0 = enero, 11 = diciembre)
-  const mesActual = new Date().getMonth();
-
-  // 🔢 Calculamos cuántos meses dura cada imagen
-  const mesesPorImagen = 12 / totalImagenes;
-
-  // 🎯 Determinamos el índice de la imagen a mostrar
-  const indice = Math.floor(mesActual / mesesPorImagen);
-
-  // ✅ Devolvemos la ruta de la imagen seleccionada
-  return nodosImagen[indice].textContent.trim();
-}*/
 // 🖼️ Selecciona la imagen correcta para que TODAS se muestren en un año
 export function seleccionarImagen(nodosImagen) {
   const totalImagenes = nodosImagen.length;
@@ -214,3 +191,4 @@ export function seleccionarImagen(nodosImagen) {
 
   return nodosImagen[indice].textContent.trim();
 }
+
