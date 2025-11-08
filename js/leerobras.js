@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // 👻 generar bloque oculto con los alternativos
         const hiddenNames = nombresAlternativos.length > 0 
           ? `<div class="hidden-alt-names" style="display:none;">
-               ${nombresAlternativos.map(n => `<span>${n}</span>`).join("")}
+               ${nombresAlternativos.map(n => `<span style="display:flex;">${n}</span>`).join("")}
              </div>`
           : "";
           
