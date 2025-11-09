@@ -4,53 +4,268 @@
   "@graph": [
     {
       "@type": "Book",
+      "name": "¡Cállate, dragón malvado! No quiero tener mas hijos contigo.",
+      "author": { "@type": "Person", "name": "奶昔尾尾酱" },
+      "genre": ["Drama","Romance","Acción","Comedia","Fantasía","Aventura","Ecchi","Sobrenatural","Magia"],
+      "description": "Después de ser derrotado y capturado, el héroe asesino de dragones, Leon, se convirtió en prisionero de la Emperatriz Dragón Plateado...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Tavo",
+      "image": ["CallateDragonaMalvada.webp","shut-up-evil-dragon-i-dont-want-to-raise-a-child-with-v0_1.webp","shut-up-evil-dragon-i-dont-want-to-raise-a-child-with-v0_2.webp"],
+      "url": "https://shut-up-evil-dragon-i-dont-want-to-have-any-more-kids-with-you!_Wiki"
+    },
+    {
+      "@type": "Book",
+      "name": "Cultivation Online",
+      "author": { "@type": "Person", "name": "MyLittleBrother" },
+      "genre": ["Acción","Aventura","Comedia","Cultivo","Fantasía","Harem","Realidad Virtual","Videojuegos (VRMMORPG)"],
+      "description": "Yuan nació con una enfermedad incurable que le dejó ciego a una edad temprana...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Jabracadabra",
+      "image": ["CultivationOnline.jpg"],
+      "url": "https://cultivation-online.fandom.com/wiki/Cultivation_Online_Wiki"
+    },
+    {
+      "@type": "Book",
+      "name": "Cultivo Dual: Reuniendo Esposas de Rango SSS en el Mundo del Cultivo",
+      "author": { "@type": "Person", "name": "Idiocrat" },
+      "genre": ["Acción","Adultos","Fantasía","Harén","Romance"],
+      "description": "« ATENCIÓN : CONTENIDO PARA ADULTOS » Se suponía que debía revisar mis estadísticas...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Leo",
+      "image": ["CDREdRSSelMdC.jpg"]
+    },
+    {
+      "@type": "Book",
+      "name": "Danmachi - Relato Heroico: Argonauta",
+      "author": { "@type": "Person", "name": "Fujino Ōmori" },
+      "genre": ["Acción","Aventura","Comedia","Fantasía","Romance"],
+      "description": "Una historia ambientada en la antigüedad temprana, cuando no existía la Bendición de los Dioses...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Turret Translations",
+      "image": ["DanmachiArgonauta.webp"]
+    },
+    {
+      "@type": "Book",
+      "name": "Dual Cultivation",
+      "author": { "@type": "Person", "name": "MyLittleBrother" },
+      "genre": ["Romance","Acción","Venganza","Harem","Fantasía","Cultivo"],
+      "description": "Su Yang es un poderoso Cultivador Dual que fue encarcelado después de ofender al Emperador Celestial...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Jabracadabra",
+      "image": ["DualCultivation.webp","DualCultivation/DualCultivation_1.webp","DualCultivation/DualCultivation_2.webp","DualCultivation/DualCultivation_3.webp"],
+      "url": "https://dual-cultivation-novel.fandom.com/wiki/Dual_Cultivation_Wiki"
+    },
+    {
+      "@type": "Book",
+      "name": "First Demonic Dragon",
+      "author": { "@type": "Person", "name": "AnathaShesha" },
+      "genre": ["Acción","Aventura","Comedia","Fantasía","Harén","Romance"],
+      "description": "Carter Williams era el típico perdedor de veinte años. Después de una pelea en la calle...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Jabracadabra",
+      "image": ["FirstDemonicDragon/FirstDemonic_01.webp","FirstDemonicDragon/FirstDemonic_02.webp","..."]
+    },
+    {
+      "@type": "Book",
+      "name": "Imperfect Girl",
+      "author": { "@type": "Person", "name": "Nisio Isin (西尾維新)" },
+      "genre": ["Drama","Maduro","Misterio","Psicológico"],
+      "description": "Lo siento, pero aquí no encontrará un resumen de la trama...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Gran Maestro",
+      "image": ["ImperfectGirl.jpg"]
+    },
+    {
+      "@type": "Book",
+      "name": "La Leyenda de la Espada del Norte",
+      "author": { "@type": "Person", "name": "Woo-Gak" },
+      "genre": ["Acción","Fantasía","Aventura","Artes Marciales","Recuentos de Vida"],
+      "description": "Durante décadas, los valientes guerreros del Ejército del Norte lucharon...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Jabracadabra",
+      "image": ["LaLeyendaDeLaEspadaDelNorte.webp"],
+      "url": "https://legend-of-the-northern-blade.fandom.com/wiki/Main_Page"
+    },
+    {
+      "@type": "Book",
+      "name": "¡El Héroe de Nivel Máximo Ha Regresado!",
+      "author": { "@type": "Person", "name": "Devil's tail" },
+      "genre": ["Acción","Aventura","Fantasía","Harém"],
+      "description": "Davey, el débil príncipe de un país insignificante...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Jabracadabra",
+      "image": ["mlhsb.jpg"],
+      "url": "https://the-max-level-hero-strikes-back.fandom.com/wiki/The_Max_Level_Hero_Strikes_Back_Wiki"
+    },
+    {
+      "@type": "Book",
+      "name": "Mis Tres Esposas son Hermosas Vampiros",
+      "author": { "@type": "Person", "name": "Victor Weismann" },
+      "genre": ["Acción","Comedia","Fantasía","Gore","Harem","Magia","Romance","Sobrenatural","Superpoderes","Vampiros"],
+      "description": "Víctor era un hombre normal de 21 años...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Jabracadabra",
+      "image": ["Mis3EsposasSonHermosasVampiros.webp"],
+      "url": "https://mtwabv.fandom.com/wiki/My_Three_Wives_Are_Beautiful_Vampires_Wiki"
+    },
+    {
+      "@type": "Book",
       "name": "Path to Dual Cultivation",
       "author": { "@type": "Person", "name": "MyLittleBrother" },
-      "genre": ["Acción", "Aventura", "Cultivo", "Fantasía", "Harem", "Romance"],
+      "genre": ["Acción","Aventura","Cultivo","Fantasía","Harem","Romance"],
       "description": "Bendecido por los cielos, Su Yang nació con una apariencia extraordinariamente hermosa...",
       "inLanguage": "es",
       "bookFormat": "EBook",
-      "publisher": "Jabracadabra"
+      "publisher": "Jabracadabra",
+      "image": ["PathtoDualCultivation.webp"],
+      "url": "https://dual-cultivation-novel.fandom.com/wiki/Path_to_Dual_Cultivation_(Prequel)"
+    },
+    {
+      "@type": "Book",
+      "name": "Señora, por favor comportese",
+      "author": { "@type": "Person", "name": "刘家长子.CS" },
+      "genre": ["Comedia","Drama","Fantasía","Recuentos de vida","Romance","Tragedia"],
+      "description": "Tras transmigrar, Liu Changqing se saltó la etapa de las citas...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Tavo",
+      "image": ["MadamePleaseBehave.webp"]
+    },
+
+    {
+      "@type": "Book",
+      "name": "Me convertí en el patrón de los villanos",
+      "author": { "@type": "Person", "name": "봄한방울 (Bom Hanbangul)" },
+      "genre": ["Acción","Aventura","Comedia","Fantasía","Harem","Transmigración","Malentendidos"],
+      "description": "Durante diez años apoyé a los villanos con la intención de reformarlos. Pero ahora me descubro a mí mismo como el gran artífice detrás de la oscuridad del reino…",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Leo",
+      "image": ["MeConvertiEnPatronVillanos/MeConvertiEnPatronVillanos.webp","MeConvertiEnPatronVillanos/MeConvertiEnPatronVillanos_2.webp","MeConvertiEnPatronVillanos/MeConvertiEnPatronVillanos_3.webp"]
+    },
+    {
+      "@type": "Book",
+      "name": "Mi Maestra de la Universidad es la Mamá de Mis Hijos",
+      "author": { "@type": "Person", "name": "J.K. luosen" },
+      "genre": ["Drama","Romance","Vida escolar","Recuentos de la vida"],
+      "description": "Después de que terminó el Gaokao, Lin Feng comenzó a trabajar en un bar para ganar dinero para la matrícula...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Leo",
+      "image": ["MyCollegeTeacherMyChildrenMom.webp"]
+    },
+    {
+      "@type": "Book",
+      "name": "Roshidere - Alya-san, quien se sienta a mi lado, a veces susurra cosas dulces en ruso.",
+      "author": { "@type": "Person", "name": "SunSunSun" },
+      "genre": ["Academia","Comedia","Recuentos de Vida"],
+      "description": "Alya Mikhailovna Kujo, que asiste a una escuela privada, Seirei Gakuen, es una chica de secundaria con cabello plateado...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Tavo",
+      "image": ["Roshidere.webp"],
+      "url": "https://roshidere.fandom.com/wiki/Alya_Sometimes_Hides_Her_Feelings_in_Russian_(Light_Novel)#Japanese"
     },
     {
       "@type": "Book",
       "name": "Shadow Slave",
       "author": { "@type": "Person", "name": "Guiltythree" },
-      "genre": ["Acción", "Aventura", "Drama", "Fantasía", "Romance", "Sobrenatural"],
-      "description": "Creciendo en la pobreza, Sunny nunca esperó nada bueno de la vida...",
+      "genre": ["Acción","Aventura","Drama","Fantasía","Romance","Sobrenatural"],
+      "description": "Creciendo en la pobreza, Sunny nunca esperó nada bueno de la vida. Sin embargo, ni siquiera él anticipó ser elegido por el Hechizo de la Pesadilla...",
       "inLanguage": "es",
       "bookFormat": "EBook",
-      "publisher": "Morlan"
+      "publisher": "Morlan",
+      "image": ["ShadowSlave.webp"],
+      "url": "https://shadowslave.fandom.com/wiki/Shadow_Slave_Wiki"
+    },
+    {
+      "@type": "Book",
+      "name": "Shimoneta",
+      "author": { "@type": "Person", "name": "Akagi Hirotaka" },
+      "genre": ["Acción","Adulto","Comedia","Ecchi","Maduro","Harem","Romance","Vida Escolar"],
+      "description": "Hace dieciséis años, con la aprobación de la Ley de Orden Público y Moral, el lenguaje soez fue objeto de luto por parte del público...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Gran Maestro",
+      "image": ["Shimoneta.jpg"]
     },
     {
       "@type": "Book",
       "name": "Suzume no Tojimari",
       "author": { "@type": "Person", "name": "Makoto Shinkai (新海 誠)" },
-      "genre": ["Aventura", "Drama", "Fantasía", "Romance", "Sobrenatural"],
+      "genre": ["Fantasía","Drama","Aventura","Romance"],
       "description": "Una joven de 17 años llamada Suzume ayuda a un misterioso joven a cerrar las puertas de otro mundo...",
       "inLanguage": "es",
       "bookFormat": "EBook",
       "publisher": "Jabracadabra"
     },
+
     {
       "@type": "Book",
-      "name": "Reverend Insanity",
-      "author": { "@type": "Person", "name": "Gu Zhen Ren" },
-      "genre": ["Acción", "Aventura", "Cultivo", "Fantasía", "Psicológico"],
-      "description": "Fang Yuan es un villano despiadado con una mente de mil años...",
+      "name": "The Eminence in Shadow",
+      "author": { "@type": "Person", "name": "逢沢大介, 坂野杏梨" },
+      "genre": ["Academia","Acción","Artes Marciales","Aventura","Comedia","Drama","Fantasía","Magia","Reencarnación"],
+      "description": "Tal cual como todos adoraban héroes en su niñez, cierto adolescente adoraba los poderes que se esconden en las sombras...",
       "inLanguage": "es",
       "bookFormat": "EBook",
-      "publisher": "Morlan"
+      "publisher": "Tavo",
+      "image": ["TheEminenceInShadow.webp"]
     },
     {
       "@type": "Book",
-      "name": "Lord of the Mysteries",
-      "author": { "@type": "Person", "name": "Cuttlefish That Loves Diving" },
-      "genre": ["Acción", "Aventura", "Fantasía", "Misterio", "Sobrenatural"],
-      "description": "En un mundo de vapor y magia, Klein Moretti se convierte en el Señor de los Misterios...",
+      "name": "El Único Hombre En La Unidad Militar",
+      "author": { "@type": "Person", "name": "TwoJ" },
+      "genre": ["Acción","Adulto","Comedia","Romance","Harén","Sexo","Recuentos de la vida"],
+      "description": "Jaejoon se ve obligado a unirse a un programa de prueba de unidades mixtas en el que es el único hombre en una unidad compuesta únicamente por mujeres...",
       "inLanguage": "es",
       "bookFormat": "EBook",
-      "publisher": "Jabracadabra"
+      "publisher": "Leo",
+      "image": ["UnicoHombreUnidadMilitar.webp"]
+    },
+    {
+      "@type": "Book",
+      "name": "Yo Maté al Jugador de la Academia",
+      "author": { "@type": "Person", "name": "사람살려" },
+      "genre": ["Acción","Aventura","Comedia","Fantasía","Harén","Romance","Vida Escolar"],
+      "description": "Hace tres años, me desperté como un personaje de juego; como un personaje secundario, por cierto...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Tavo",
+      "image": ["YoMateJugadorAcademia.webp"],
+      "url": "https://i-killed-the-player-of-the-academy.fandom.com/wiki/I_Killed_the_Player_of_the_Academy_Wiki"
+    },
+    {
+      "@type": "Book",
+      "name": "Zombi de Clase S en un Apocalipsis",
+      "author": { "@type": "Person", "name": "Gaetol[개톨]" },
+      "genre": ["Acción","Fantasía","Maduro","Romance","Sobrenatural"],
+      "description": "Al ser mordida por un zombi, también me convertí en una especie de zombi. Pero entonces, [Regeneración de Zombie (Pasivo)] Clase S...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Gran Maestro",
+      "image": ["ZombieClaseSApocalipsis.jpg"]
+    },
+    {
+      "@type": "Book",
+      "name": "Mis Esposas son Hermosos Demonios",
+      "author": { "@type": "Person", "name": "Gaetol[개톨]" },
+      "genre": ["Fantasía","Acción","Romance","Aventura","Adultos","Comedia","Harén","Recuentos de la vida"],
+      "description": "Vergil, un joven de 21 años, lleva una vida aparentemente sencilla en un mundo un tanto conflictivo...",
+      "inLanguage": "es",
+      "bookFormat": "EBook",
+      "publisher": "Leo",
+      "image": ["MyWivesAreBeautifulDemons.webp"],
+      "url": "https://my-wives-are-beautiful-demons.fandom.com/wiki/My_Wives_are_Beautiful_Demons_Wiki"
     }
   ]
 }
