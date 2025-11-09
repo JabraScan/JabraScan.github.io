@@ -1,8 +1,7 @@
 /**
  * 📂 Archivo: /js/xmlTojson.js
- * 📝 Convierte obras.xml en JSON-LD según Schema.org
+ * 📝 Convierte obras.xml en JSON-LD según Schema.org (versión minimalista SEO)
  * 🚀 Inyecta el resultado en <head> como <script type="application/ld+json">
- * ✅ Obvia etiquetas vacías o inexistentes
  */
 
 async function xmlToJsonLd() {
@@ -15,57 +14,29 @@ async function xmlToJsonLd() {
   const obras = Array.from(xmlDoc.querySelectorAll("obra")).map(obra => {
     const jsonObra = { "@type": "Book" };
 
-    // 🏷️ Títulos múltiples
+    // 🏷️ Nombres alternativos de la obra
     const nombres = Array.from(obra.querySelectorAll("nombreobra"))
       .map(n => n.textContent.trim()).filter(Boolean);
     if (nombres.length) jsonObra.name = nombres;
-
-    // 🖼️ Imágenes múltiples
-    const imagenes = Array.from(obra.querySelectorAll("imagen"))
-      .map(img => img.textContent.trim()).filter(Boolean);
-    if (imagenes.length) jsonObra.image = imagenes;
-
-    // 🏷️ Categorías separadas por coma
-    const categorias = (obra.querySelector("categoria")?.textContent || "")
-      .split(",").map(c => c.trim()).filter(Boolean);
-    if (categorias.length) jsonObra.genre = categorias;
-
-    // --- Campos estándar ---
-    addIfExists(jsonObra, "identifier", obra.querySelector("clave"));
-    addIfExists(jsonObra, "description", obra.querySelector("sinopsis"));
-    addIfExists(jsonObra, "bookFormat", obra.querySelector("tipoobra"));
-    addIfExists(jsonObra, "dateCreated",
-      normalizarFecha(obra.querySelector("fechaCreacion")?.textContent.trim()));
-    addIfExists(jsonObra, "locationCreated", obra.querySelector("ubicacion"));
-    addIfExists(jsonObra, "creativeWorkStatus", obra.querySelector("estado"));
-    addIfExists(jsonObra, "translator", obra.querySelector("traductor"));
-    addIfExists(jsonObra, "mainEntityOfPage", obra.querySelector("wiki"));
 
     // Autor
     const autor = obra.querySelector("autor")?.textContent.trim();
     if (autor) jsonObra.author = { "@type": "Person", "name": autor };
 
-    // Valoración
-    const valoracion = obra.querySelector("valoracion")?.textContent.trim();
-    if (valoracion) {
-      jsonObra.aggregateRating = {
-        "@type": "AggregateRating",
-        "ratingValue": valoracion
-      };
-    }
+    // Descripción / sinopsis
+    addIfExists(jsonObra, "description", obra.querySelector("sinopsis"));
 
-    // Audiencia (adulto)
-    const adulto = obra.querySelector("adulto")?.textContent.trim();
-    if (adulto && adulto.toLowerCase().includes("adulto")) {
-      jsonObra.audience = { "@type": "PeopleAudience", "suggestedMinAge": 18 };
-    }
+    // Identificador único
+    addIfExists(jsonObra, "identifier", obra.querySelector("clave"));
 
-    // --- Campos personalizados ---
-    addIfExists(jsonObra, "visible", obra.querySelector("visible"));
-    addIfExists(jsonObra, "aprobadaAutor", obra.querySelector("aprobadaAutor"));
-    addIfExists(jsonObra, "observaciones", obra.querySelector("observaciones"));
-    addIfExists(jsonObra, "discussionUrl", obra.querySelector("discord"));
-    addIfExists(jsonObra, "bannerOpcional", obra.querySelector("bannerOpcional"));
+    // Fecha de creación
+    addIfExists(jsonObra, "dateCreated",
+      normalizarFecha(obra.querySelector("fechaCreacion")?.textContent.trim()));
+
+    // Categorías / géneros
+    const categorias = (obra.querySelector("categoria")?.textContent || "")
+      .split(",").map(c => c.trim()).filter(Boolean);
+    if (categorias.length) jsonObra.genre = categorias;
 
     return jsonObra;
   });
