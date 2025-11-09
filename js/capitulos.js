@@ -136,6 +136,7 @@ export function obtenerCapitulos(clave) {
           }).filter(Boolean); // Elimina los capítulos inválidos (null)
           */
             // Mapea y filtra los capítulos válidos y publicados
+          console.log(capitulos);
             return capitulos.map((item, i) => {
               // Verifica que cada capítulo tenga la estructura esperada
               if (
@@ -145,7 +146,6 @@ export function obtenerCapitulos(clave) {
                 item?.numCapitulo == null ||
                 !item?.nombreCapitulo
               ) {
-                console.log(item);
                 console.warn(`⚠️ Capítulo inválido en posición ${i} del archivo "${clave}".`);
                 return null;
               }
@@ -178,6 +178,7 @@ export function obtenerCapitulos(clave) {
       return [];
     });
 }
+
 
 
 
