@@ -136,7 +136,6 @@ export function obtenerCapitulos(clave) {
           }).filter(Boolean); // Elimina los capítulos inválidos (null)
           */
             // Mapea y filtra los capítulos válidos y publicados
-          console.log(capitulos);
             return capitulos.map((item, i) => {
               // Verifica que cada capítulo tenga la estructura esperada
               if (
@@ -178,6 +177,7 @@ export function obtenerCapitulos(clave) {
       return [];
     });
 }
+
 
 
 
