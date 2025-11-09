@@ -1,4 +1,3 @@
-<script type="application/ld+json">
 {
    "@context":"https://schema.org",
    "@graph":[
@@ -437,7 +436,7 @@
             "Kage no Jitsuryokusha ni Naritakute!",
             "TEIS",
             "KageJitsu",
-            "Shadow-sama",
+            "Shadow-sama"
          ],
          "author":{
             "@type":"Person",
@@ -553,4 +552,3 @@
       }
    ]
 }
-</script>
