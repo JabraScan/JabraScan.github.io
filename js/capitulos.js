@@ -145,6 +145,7 @@ export function obtenerCapitulos(clave) {
                 item?.numCapitulo == null ||
                 !item?.nombreCapitulo
               ) {
+                console.log(item);
                 console.warn(`⚠️ Capítulo inválido en posición ${i} del archivo "${clave}".`);
                 return null;
               }
@@ -177,6 +178,7 @@ export function obtenerCapitulos(clave) {
       return [];
     });
 }
+
 
 
 
