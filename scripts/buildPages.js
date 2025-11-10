@@ -22,7 +22,11 @@ function parseObras(xmlText) {
     // Ajustar imágenes a /img/
     const imagenes = Array.isArray(o.imagen) ? o.imagen : (o.imagen ? [o.imagen] : []);
     const imagenesConRuta = imagenes.map(img => `/img/${img}`);
-    const image = imagenesConRuta[0] || "";
+    return {
+      // ...
+      image: imagenesConRuta[0] || "",
+      galeria: imagenesConRuta.map(img => `<img src="${img}" alt="Imagen de ${titlePrincipal}" style="max-width:150px;">`).join("\n")
+    };
 
     const aprobadaAutor = (o.aprobadaAutor || "").toLowerCase() === "si";
     const discord = o.discord || "";
@@ -50,12 +54,9 @@ function parseObras(xmlText) {
 }
 
 function renderTemplate(tpl, data) {
-  // Generar bloque de títulos alternativos
-  const altTitlesHtml = data.titlesAlternativos.map(t => `<h2>${t}</h2>`).join("\n");
-
+  // Sustituye cada marcador {{...}} por el valor correspondiente
   let html = tpl
     .replace(/{{titlePrincipal}}/g, data.titlePrincipal)
-    .replace(/{{titlesAlternativos}}/g, altTitlesHtml)
     .replace(/{{description}}/g, data.description || "")
     .replace(/{{author}}/g, data.author || "")
     .replace(/{{image}}/g, data.image || "")
@@ -68,6 +69,7 @@ function renderTemplate(tpl, data) {
     .replace(/{{traductor}}/g, data.traductor)
     .replace(/{{wiki}}/g, data.wiki);
 
+  // Bloque de aprobación/discord
   if (data.aprobadaAutor) {
     const extra = `<p><strong>Aprobado por el autor</strong></p>` +
                   (data.discord ? `<p><a href="${data.discord}">Discord</a></p>` : "");
@@ -75,6 +77,9 @@ function renderTemplate(tpl, data) {
   } else {
     html = html.replace("{{aprobacion}}", "");
   }
+
+  // Galería de imágenes (si la añadimos en el template)
+  html = html.replace(/{{galeria}}/g, data.galeria || "");
 
   return html;
 }
