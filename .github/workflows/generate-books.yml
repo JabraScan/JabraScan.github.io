@@ -1,31 +1,36 @@
-name: Generar páginas de obras
+name: Generar HTML de obras y sitemap
 
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: write   # 🔑 Permite a la acción hacer commit y push
 
 jobs:
-  generate-books:
+  build-pages:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Node
-        uses: actions/setup-node@v3
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      - name: Generar páginas de obra y sitemap
+      - name: Instalar dependencias necesarias
+        run: |
+          npm install fast-xml-parser --no-save
+
+      - name: Generar todos los HTML y sitemap
         run: node scripts/buildPages.js
 
-      - name: Commit y push
+      - name: Commit y push de archivos generados
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .
-          git diff --cached --quiet || git commit -m "Build: páginas books/{clave}.html + sitemap"
+          git add -A
+          git diff --cached --quiet || git commit -m "Build: generar HTML de obras y actualizar sitemap"
           git push
