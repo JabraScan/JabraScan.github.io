@@ -104,13 +104,15 @@ function main() {
   obras.forEach(obra => {
     const filePath = `books/${obra.clave}.html`;
     // ✅ Solo crea si no existe
-    if (!fs.existsSync(filePath)) {
+    //if (!fs.existsSync(filePath)) 
+    {
       const html = renderTemplate(tpl, obra);
       fs.writeFileSync(filePath, html, 'utf8');
-      console.log(`Generado: ${filePath}`);
-    } else {
-      console.log(`Saltado (ya existe): ${filePath}`);
-    }
+      //console.log(`Generado: ${filePath}`);
+    } 
+    //else {
+    //  console.log(`Saltado (ya existe): ${filePath}`);
+    //}
   });
 
   // Generar sitemap.xml (siempre se actualiza)
@@ -122,7 +124,7 @@ function main() {
     `\n</urlset>\n`;
 
   fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
-  console.log(`Sitemap actualizado con ${obras.length} URLs.`);
+  //console.log(`Sitemap actualizado con ${obras.length} URLs.`);
 }
 
 main();
