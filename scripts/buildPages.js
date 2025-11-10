@@ -18,14 +18,34 @@ function parseObras(xmlText) {
 
     const author = o.autor || "";
     const description = o.sinopsis || "";
+
+    // Ajustar imágenes a /img/
     const imagenes = Array.isArray(o.imagen) ? o.imagen : (o.imagen ? [o.imagen] : []);
-    const image = imagenes[0] || "";
+    const imagenesConRuta = imagenes.map(img => `/img/${img}`);
+    const image = imagenesConRuta[0] || "";
+
     const aprobadaAutor = (o.aprobadaAutor || "").toLowerCase() === "si";
     const discord = o.discord || "";
 
     const url = `https://jabrascan.net/books/${clave}.html`;
 
-    return { clave, titlePrincipal, titlesAlternativos, author, description, image, url, aprobadaAutor, discord };
+    return {
+      clave,
+      titlePrincipal,
+      titlesAlternativos,
+      author,
+      description,
+      image,
+      url,
+      aprobadaAutor,
+      discord,
+      tipoobra: o.tipoobra || "",
+      categoria: o.categoria || "",
+      fechaCreacion: o.fechaCreacion || "",
+      ubicacion: o.ubicacion || "",
+      traductor: o.traductor || "",
+      wiki: o.wiki ? `<p><a href="${o.wiki}">Wiki</a></p>` : ""
+    };
   });
 }
 
@@ -40,7 +60,13 @@ function renderTemplate(tpl, data) {
     .replace(/{{author}}/g, data.author || "")
     .replace(/{{image}}/g, data.image || "")
     .replace(/{{url}}/g, data.url)
-    .replace(/{{clave}}/g, data.clave);
+    .replace(/{{clave}}/g, data.clave)
+    .replace(/{{tipoobra}}/g, data.tipoobra)
+    .replace(/{{categoria}}/g, data.categoria)
+    .replace(/{{fechaCreacion}}/g, data.fechaCreacion)
+    .replace(/{{ubicacion}}/g, data.ubicacion)
+    .replace(/{{traductor}}/g, data.traductor)
+    .replace(/{{wiki}}/g, data.wiki);
 
   if (data.aprobadaAutor) {
     const extra = `<p><strong>Aprobado por el autor</strong></p>` +
