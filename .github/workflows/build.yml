@@ -5,6 +5,9 @@ on:
     branches:
       - main   # cambia si tu rama publicada es otra
 
+permissions:
+  contents: write   # 🔑 Permite al workflow hacer commit/push
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,10 +24,12 @@ jobs:
       - name: Ejecutar script de build
         run: node scripts/xmlToJsonLd.js
 
-      - name: Commit de cambios
+      - name: Commit y push cambios
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
           git diff --cached --quiet || git commit -m "Build: insertar JSON-LD en index.html"
           git push
