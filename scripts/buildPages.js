@@ -98,13 +98,17 @@ function main() {
 
   obras.forEach(obra => {
     const filePath = `books/${obra.clave}.html`;
-    // 🔥 Sobrescribe SIEMPRE todos los HTML
-    const html = renderTemplate(tpl, obra);
-    fs.writeFileSync(filePath, html, 'utf8');
-    console.log(`Generado: ${filePath}`);
+    // ✅ Solo crea si no existe
+    if (!fs.existsSync(filePath)) {
+      const html = renderTemplate(tpl, obra);
+      fs.writeFileSync(filePath, html, 'utf8');
+      console.log(`Generado: ${filePath}`);
+    } else {
+      console.log(`Saltado (ya existe): ${filePath}`);
+    }
   });
 
-  // Generar sitemap.xml
+  // Generar sitemap.xml (siempre se actualiza)
   const sitemap =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
