@@ -53,7 +53,7 @@ He tardado diez años en escribir este libro.
     main { max-width: 900px; margin: auto; padding: 20px; background: #fff; }
     h1 { font-size: 1.8em; margin-bottom: 10px; }
     h2 { margin-top: 25px; font-size: 1.4em; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
-    .meta p { margin: 4px 0; color: #555; }
+    .meta p { margin: 4px 10px 4px 10px; color: #555; }
     .portada { max-width: 250px; border-radius: 6px; margin: 10px auto; display: block; }
     .sinopsis { margin-top: 20px; }
     .galeria { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
@@ -73,16 +73,17 @@ He tardado diez años en escribir este libro.
 <body>
   <main>
     <h1>Imperfect Girl</h1>
-    <div class="meta">
-      <p><strong>Autor:</strong> Nisio Isin (西尾維新)</p>
-      <p><strong>Género:</strong> Novela</p>
-      <p><strong>Categoría:</strong> Drama, Maduro, Misterio, Psicológico</p>
-      <p><strong>Fecha de creación:</strong> 18/10/2025</p>
-      <p><strong>Traductor:</strong> Gran Maestro</p>
-      少女不十分 (Shōjo Fujūbun)
+    <div style="display:flex">
+      <img class="portada" src="/img/ImperfectGirl.jpg" alt="Portada de Imperfect Girl">
+      <div class="meta">
+        <p><strong>Autor:</strong> Nisio Isin (西尾維新)</p>
+        <p><strong>Género:</strong> Novela</p>
+        <p><strong>Categoría:</strong> Drama, Maduro, Misterio, Psicológico</p>
+        <p><strong>Fecha de creación:</strong> 18/10/2025</p>
+        <p><strong>Traductor:</strong> Gran Maestro</p>
+        少女不十分 (Shōjo Fujūbun)
+      </div>
     </div>
-
-    <img class="portada" src="/img/ImperfectGirl.jpg" alt="Portada de Imperfect Girl">
 
     <div class="sinopsis">
       <h2>Sinopsis</h2>
@@ -93,7 +94,9 @@ Ocurrió hace 10 años, y mi recuerdo de todo ello es ciertamente bastante vago,
 He tardado diez años en escribir este libro.
       </p>
     </div>
-
+    <div class="acciones">
+      <a href="/#ImperfectGirl">📖 Leer Capítulos</a>
+    </div>
     <!-- Bloque de aprobación y discord -->
     
 
@@ -103,7 +106,6 @@ He tardado diez años en escribir este libro.
     </div>
 
     <div class="acciones">
-      <a href="/#ImperfectGirl">📖 Leer en la app</a>
       
     </div>
   </main>

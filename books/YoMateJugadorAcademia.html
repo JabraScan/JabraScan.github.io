@@ -74,7 +74,7 @@
     main { max-width: 900px; margin: auto; padding: 20px; background: #fff; }
     h1 { font-size: 1.8em; margin-bottom: 10px; }
     h2 { margin-top: 25px; font-size: 1.4em; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
-    .meta p { margin: 4px 0; color: #555; }
+    .meta p { margin: 4px 10px 4px 10px; color: #555; }
     .portada { max-width: 250px; border-radius: 6px; margin: 10px auto; display: block; }
     .sinopsis { margin-top: 20px; }
     .galeria { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
@@ -94,16 +94,17 @@
 <body>
   <main>
     <h1>Yo Mate al Jugador de la Academia</h1>
-    <div class="meta">
-      <p><strong>Autor:</strong> 사람살려</p>
-      <p><strong>Género:</strong> Novela Web</p>
-      <p><strong>Categoría:</strong> Acción, Aventura, Comedia, Fantasía, Harem, Romance, Vida Escolar</p>
-      <p><strong>Fecha de creación:</strong> 22/10/2025</p>
-      <p><strong>Traductor:</strong> Tavo</p>
-      I Killed the Academy Player, 아카데미 플레이어를 죽였다
+    <div style="display:flex">
+      <img class="portada" src="/img/YoMateJugadorAcademia.webp" alt="Portada de Yo Mate al Jugador de la Academia">
+      <div class="meta">
+        <p><strong>Autor:</strong> 사람살려</p>
+        <p><strong>Género:</strong> Novela Web</p>
+        <p><strong>Categoría:</strong> Acción, Aventura, Comedia, Fantasía, Harem, Romance, Vida Escolar</p>
+        <p><strong>Fecha de creación:</strong> 22/10/2025</p>
+        <p><strong>Traductor:</strong> Tavo</p>
+        I Killed the Academy Player, 아카데미 플레이어를 죽였다
+      </div>
     </div>
-
-    <img class="portada" src="/img/YoMateJugadorAcademia.webp" alt="Portada de Yo Mate al Jugador de la Academia">
 
     <div class="sinopsis">
       <h2>Sinopsis</h2>
@@ -121,7 +122,9 @@
 				Regresé al pasado; a hace 3 años. Ahora es mi oportunidad. Debo matar al jugador."
 		  </p>
     </div>
-
+    <div class="acciones">
+      <a href="/#YoMateJugadorAcademia">📖 Leer Capítulos</a>
+    </div>
     <!-- Bloque de aprobación y discord -->
     
 
@@ -131,7 +134,6 @@
     </div>
 
     <div class="acciones">
-      <a href="/#YoMateJugadorAcademia">📖 Leer en la app</a>
       <p><a href="https://i-killed-the-player-of-the-academy.fandom.com/wiki/I_Killed_the_Player_of_the_Academy_Wiki">Wiki</a></p>
     </div>
   </main>
