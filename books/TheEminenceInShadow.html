@@ -52,19 +52,23 @@
     .acciones a { display: inline-block; margin-right: 15px; color: #0066cc; text-decoration: none; }
     .acciones a:hover { text-decoration: underline; }
     .alternativos p { margin: 2px 0 2px 20px; color: #666; }
+    .info { display: flex; gap: 20px; }
+
     /* Responsive */
     @media (max-width: 600px) {
       h1 { font-size: 1.5em; }
       .portada { max-width: 100%; }
       .galeria img { max-width: 45%; }
+      .info { flex-direction: column; }
     }
   </style>
 </head>
 <body>
   <main>
     <h1>The Eminence in Shadow</h1>
-    <div style="display:flex">
+    <div class="info">
       <img class="portada" src="/img/TheEminenceInShadow.webp" alt="Portada de The Eminence in Shadow">
+
       <div class="meta">
         <p><strong>Autor:</strong> 逢沢大介, 坂野杏梨</p>
         <p><strong>Género:</strong> Novela</p>
