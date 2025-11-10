@@ -98,7 +98,7 @@ function main() {
 
   obras.forEach(obra => {
     const filePath = `books/${obra.clave}.html`;
-    // Genera siempre todos los HTML
+    // 🔥 Sobrescribe SIEMPRE todos los HTML
     const html = renderTemplate(tpl, obra);
     fs.writeFileSync(filePath, html, 'utf8');
     console.log(`Generado: ${filePath}`);
