@@ -1,4 +1,5 @@
 const fs = require('fs');
+const crypto = require('crypto');
 
 function normalizarFecha(fecha) {
   if (!fecha) return "";
@@ -62,8 +63,14 @@ function main() {
   ensureDir('books');
 
   obras.forEach(obra => {
-    const html = renderTemplate(tpl, obra);
-    fs.writeFileSync(`books/${obra.clave}.html`, html, 'utf8');
+    const filePath = `books/${obra.clave}.html`;
+    if (!fs.existsSync(filePath)) {
+      const html = renderTemplate(tpl, obra);
+      fs.writeFileSync(filePath, html, 'utf8');
+      console.log(`Generado: ${filePath}`);
+    } else {
+      console.log(`Ya existe: ${filePath}, no se regenera`);
+    }
   });
 
   // Generar sitemap.xml
@@ -76,7 +83,7 @@ function main() {
 
   fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
 
-  console.log(`Generadas ${obras.length} páginas estáticas en /books y sitemap.xml actualizado.`);
+  console.log(`Generadas/actualizadas ${obras.length} páginas en /books y sitemap.xml.`);
 }
 
 main();
