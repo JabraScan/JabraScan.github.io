@@ -1,54 +1,56 @@
 const fs = require('fs');
-const crypto = require('crypto');
-
-function normalizarFecha(fecha) {
-  if (!fecha) return "";
-  const p = fecha.split("/");
-  return p.length === 3 ? `${p[2]}-${p[1].padStart(2,"0")}-${p[0].padStart(2,"0")}` : fecha;
-}
+const { XMLParser } = require('fast-xml-parser');
 
 function parseObras(xmlText) {
-  const blocks = [...xmlText.matchAll(/<obra>([\s\S]*?)<\/obra>/g)].map(m => m[1]);
-  return blocks.map(block => {
-    const get = (tag) => block.match(new RegExp(`<${tag}>([\\s\\S]*?)<\\/${tag}>`))?.[1]?.trim() || "";
-    const nombres = [...block.matchAll(/<nombreobra>([\s\S]*?)<\/nombreobra>/g)].map(x => x[1].trim()).filter(Boolean);
-    const title = nombres[0] || "Obra";
-    const clave = get("clave") || title.toLowerCase().replace(/\s+/g, "-");
-    const author = get("autor");
-    const description = get("sinopsis");
-    const image = get("imagen") || "default.jpg";
-    const dateCreated = normalizarFecha(get("fechaCreacion"));
-    const categorias = (get("categoria") || "").split(",").map(c => c.trim()).filter(Boolean);
+  const parser = new XMLParser({ ignoreAttributes: false, trimValues: true });
+  const doc = parser.parse(xmlText);
+
+  // Recoge todas las <obra>
+  const obras = Array.isArray(doc.obras?.obra) ? doc.obras.obra : [doc.obras?.obra || doc.obra].filter(Boolean);
+
+  return obras.map(o => {
+    const clave = o.clave || "sin-clave";
+
+    // Si hay múltiples <nombreobra>, fast-xml-parser devuelve array
+    const titles = Array.isArray(o.nombreobra) ? o.nombreobra : [o.nombreobra].filter(Boolean);
+    const titlePrincipal = titles[0] || "Obra sin título";
+    const titlesAlternativos = titles.slice(1);
+
+    const author = o.autor || "";
+    const description = o.sinopsis || "";
+    const imagenes = Array.isArray(o.imagen) ? o.imagen : (o.imagen ? [o.imagen] : []);
+    const image = imagenes[0] || "";
+    const aprobadaAutor = (o.aprobadaAutor || "").toLowerCase() === "si";
+    const discord = o.discord || "";
 
     const url = `https://jabrascan.net/books/${clave}.html`;
 
-    const jsonld = {
-      "@context": "https://schema.org",
-      "@type": "Book",
-      "@id": url,
-      "url": url,
-      "name": title,
-      ...(author ? { "author": { "@type": "Person", "name": author } } : {}),
-      ...(description ? { "description": description } : {}),
-      ...(image ? { "image": image } : {}),
-      ...(dateCreated ? { "dateCreated": dateCreated } : {}),
-      ...(clave ? { "identifier": clave } : {}),
-      ...(categorias.length ? { "genre": categorias } : {})
-    };
-
-    return { title, clave, author, description, image, url, jsonld };
+    return { clave, titlePrincipal, titlesAlternativos, author, description, image, url, aprobadaAutor, discord };
   });
 }
 
 function renderTemplate(tpl, data) {
-  return tpl
-    .replace(/{{title}}/g, data.title)
+  // Generar bloque de títulos alternativos
+  const altTitlesHtml = data.titlesAlternativos.map(t => `<h2>${t}</h2>`).join("\n");
+
+  let html = tpl
+    .replace(/{{titlePrincipal}}/g, data.titlePrincipal)
+    .replace(/{{titlesAlternativos}}/g, altTitlesHtml)
     .replace(/{{description}}/g, data.description || "")
     .replace(/{{author}}/g, data.author || "")
     .replace(/{{image}}/g, data.image || "")
     .replace(/{{url}}/g, data.url)
-    .replace(/{{clave}}/g, data.clave)
-    .replace(/{{jsonld}}/g, JSON.stringify(data.jsonld, null, 2));
+    .replace(/{{clave}}/g, data.clave);
+
+  if (data.aprobadaAutor) {
+    const extra = `<p><strong>Aprobado por el autor</strong></p>` +
+                  (data.discord ? `<p><a href="${data.discord}">Discord</a></p>` : "");
+    html = html.replace("{{aprobacion}}", extra);
+  } else {
+    html = html.replace("{{aprobacion}}", "");
+  }
+
+  return html;
 }
 
 function ensureDir(dir) {
@@ -56,21 +58,24 @@ function ensureDir(dir) {
 }
 
 function main() {
+  const tplPath = 'books/templateObra.html';
+  if (!fs.existsSync(tplPath)) {
+    console.error(`No se encontró la plantilla en ${tplPath}`);
+    process.exit(1);
+  }
+  const tpl = fs.readFileSync(tplPath, 'utf8');
   const xml = fs.readFileSync('obras.xml', 'utf8');
+
   const obras = parseObras(xml);
-  const tpl = fs.readFileSync('books/templateObra.html', 'utf8');
 
   ensureDir('books');
 
   obras.forEach(obra => {
     const filePath = `books/${obra.clave}.html`;
-    if (!fs.existsSync(filePath)) {
-      const html = renderTemplate(tpl, obra);
-      fs.writeFileSync(filePath, html, 'utf8');
-      console.log(`Generado: ${filePath}`);
-    } else {
-      console.log(`Ya existe: ${filePath}, no se regenera`);
-    }
+    // Genera siempre todos los HTML
+    const html = renderTemplate(tpl, obra);
+    fs.writeFileSync(filePath, html, 'utf8');
+    console.log(`Generado: ${filePath}`);
   });
 
   // Generar sitemap.xml
@@ -82,8 +87,7 @@ function main() {
     `\n</urlset>\n`;
 
   fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
-
-  console.log(`Generadas/actualizadas ${obras.length} páginas en /books y sitemap.xml.`);
+  console.log(`Sitemap actualizado con ${obras.length} URLs.`);
 }
 
 main();
