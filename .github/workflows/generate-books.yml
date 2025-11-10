@@ -1,0 +1,31 @@
+name: Generar páginas de obras
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  generate-books:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Generar páginas de obra y sitemap
+        run: node scripts/buildPages.js
+
+      - name: Commit y push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --cached --quiet || git commit -m "Build: páginas books/{clave}.html + sitemap"
+          git push
