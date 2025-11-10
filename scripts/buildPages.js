@@ -6,7 +6,9 @@ function parseObras(xmlText) {
   const doc = parser.parse(xmlText);
 
   // Recoge todas las <obra>
-  const obras = Array.isArray(doc.obras?.obra) ? doc.obras.obra : [doc.obras?.obra || doc.obra].filter(Boolean);
+  const obras = Array.isArray(doc.obras?.obra)
+    ? doc.obras.obra
+    : [doc.obras?.obra || doc.obra].filter(Boolean);
 
   return obras.map(o => {
     const clave = o.clave || "sin-clave";
@@ -14,7 +16,11 @@ function parseObras(xmlText) {
     // Si hay múltiples <nombreobra>, fast-xml-parser devuelve array
     const titles = Array.isArray(o.nombreobra) ? o.nombreobra : [o.nombreobra].filter(Boolean);
     const titlePrincipal = titles[0] || "Obra sin título";
-    const titlesAlternativos = titles.slice(1).join(', '); // texto para el template
+
+    // MODIFICACIÓN: generar los alternativos como párrafos HTML
+    const titlesAlternativos = titles.slice(1)
+      .map(t => `<p>${t}</p>`)
+      .join("\n");
 
     const author = o.autor || "";
     const description = o.sinopsis || "";
@@ -41,7 +47,7 @@ function parseObras(xmlText) {
     return {
       clave,
       titlePrincipal,
-      titlesAlternativos,
+      titlesAlternativos, // ahora viene ya formateado en <p>
       author,
       description,
       image,
