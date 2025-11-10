@@ -1,0 +1,30 @@
+name: Generar JSON-LD e insertar en index.html
+
+on:
+  push:
+    branches:
+      - main   # cambia si tu rama publicada es otra
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Ejecutar script de build
+        run: node scripts/xmlToJsonLd.js
+
+      - name: Commit de cambios
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Build: insertar JSON-LD en index.html"
+          git push
