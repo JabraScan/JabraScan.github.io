@@ -2,20 +2,33 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>{{title}}</title>
+  <title>{{titlePrincipal}}</title>
   <meta name="description" content="{{description}}">
   <link rel="canonical" href="{{url}}">
-  <script type="application/ld+json">
-  {{jsonld}}
-  </script>
 </head>
 <body>
   <main>
-    <h1>{{title}}</h1>
-    <img src="{{image}}" alt="Portada de {{title}}" style="max-width:200px;">
+    <!-- Título principal -->
+    <h1>{{titlePrincipal}}</h1>
+
+    <!-- Resto de títulos alternativos -->
+    {{titlesAlternativos}}
+
+    <!-- Imagen principal -->
+    <img src="{{image}}" alt="Portada de {{titlePrincipal}}" style="max-width:200px;">
+
+    <!-- Autor -->
     <p><strong>Autor:</strong> {{author}}</p>
+
+    <!-- Sinopsis -->
     <p>{{description}}</p>
-    <p><a href="/#{{clave}}">Leer en la app</a></p>
+
+    <!-- Bloque de aprobación y discord -->
+    {{aprobacion}}
+
+    <!-- Enlace a la app -->
+    <p><a href="/#{{clave}}">Leer en la pagina</a></p>
   </main>
 </body>
 </html>
+
