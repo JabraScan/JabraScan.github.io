@@ -46,7 +46,7 @@
     .acciones { margin-top: 20px; }
     .acciones a { display: inline-block; margin-right: 15px; color: #0066cc; text-decoration: none; }
     .acciones a:hover { text-decoration: underline; }
-
+    .alternativos p { margin: 2px 0 2px 20px; color: #666; }
     /* Responsive */
     @media (max-width: 600px) {
       h1 { font-size: 1.5em; }
@@ -66,7 +66,10 @@
         <p><strong>Categoría:</strong> {{categoria}}</p>
         <p><strong>Fecha de creación:</strong> {{fechaCreacion}}</p>
         <p><strong>Traductor:</strong> {{traductor}}</p>
-        {{titlesAlternativos}}
+        <p><strong>Otros Títulos:</strong></p>
+        <div class="alternativos">
+          {{titlesAlternativos}}
+        </div>
       </div>
     </div>
 
