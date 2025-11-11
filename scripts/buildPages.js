@@ -117,11 +117,12 @@ function main() {
 
   obras.forEach(obra => {
     const filePath = `books/${obra.clave}.html`;
-    // Sobrescribe siempre (descomenta el if si quieres crear solo si no existe)
-    // if (!fs.existsSync(filePath)) {
-    const html = renderTemplate(tpl, obra);
-    fs.writeFileSync(filePath, html, 'utf8');
-    // }
+    // Sobrescribe siempre (comentar if)
+    // Solo html de obras que no existen (descomenta el if si quieres crear solo si no existe)
+    if (!fs.existsSync(filePath)) {
+      const html = renderTemplate(tpl, obra);
+      fs.writeFileSync(filePath, html, 'utf8');
+    }
   });
 
   // Generar sitemap.xml (siempre se actualiza)
