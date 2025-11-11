@@ -1,12 +1,9 @@
 /* ====== Estilos específicos para la página de login ====== */
 .login-container {
   background: #fff;
-  padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   text-align: center;
-  max-width: 400px;
-  margin: 4rem auto;
 }
 
 .login-container h1 {
@@ -14,39 +11,36 @@
   color: #14213d; /* coherente con tu CSS global */
 }
 
-.login-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0.5rem 0;
-  padding: 0.75rem;
-  font-size: 1rem;
-  cursor: pointer;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  width: 100%;
-  transition: transform 0.2s ease;
+/* Iconos de los botones de login */
+.login-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
-.login-btn img {
-  height: 20px;
-  margin-right: 10px;
-  margin-right: 10px;
+/* Ajustes de botones */
+.login-btn {
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
 }
 
 .login-btn:hover {
   transform: scale(1.03);
 }
 
+/* Colores corporativos */
 .google {
   background-color: #4285F4;
+  border: none;
 }
 
 .meta {
   background-color: #1877F2;
+  border: none;
 }
 
+/* Información del usuario */
 .user-info {
   margin-top: 1rem;
   font-size: 0.9rem;
