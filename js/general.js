@@ -3,7 +3,6 @@ import { initUltimosCapitulos } from './ultimoscapitulos.js';
 import { abrirLectorPDF } from './lector.js';
 import { cargarlibro } from './libroficha.js';
 import { renderResumenObras } from './contador.js';
-import { loginGoogle, loginMeta } from './login.js';
 
 // Helper: carga un script externo sólo una vez y devuelve una Promise
 function loadScript(src, globalName) {
@@ -283,6 +282,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
