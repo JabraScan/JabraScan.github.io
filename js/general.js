@@ -3,6 +3,7 @@ import { initUltimosCapitulos } from './ultimoscapitulos.js';
 import { abrirLectorPDF } from './lector.js';
 import { cargarlibro } from './libroficha.js';
 import { renderResumenObras } from './contador.js';
+import { loginGoogle, loginMeta } from './login.js';
 
 // Helper: carga un script externo sólo una vez y devuelve una Promise
 function loadScript(src, globalName) {
@@ -143,17 +144,30 @@ function cargarVista(url) {
             console.error('Error cargando librerías de gráficos:', err);
             renderResumenObras(); // intentar renderizar de todos modos (mostrará error internamente si falta Chart)
           });
-      } else if (url == "login.html") {
-        // Cargar el script de login manualmente
-        if (!document.querySelector('script[src="js/login.js"]')) {
-          const script = document.createElement("script");
-          script.src = "js/login.js";
-          document.body.appendChild(script);
-        }
-        const btnGoogle = document.querySelector("#btnGoogle");
-          if (btnGoogle) {  btnGoogle.addEventListener("click", loginGoogle);  }
-        const btnMeta = document.querySelector("#btnMeta");
-          if (btnMeta) {  btnMeta.addEventListener("click", loginMeta);  }
+      } else if (url === "login.html") {
+          const attachLoginListeners = () => {
+            const btnGoogle = document.querySelector("#btnGoogle");
+            if (btnGoogle) {
+              btnGoogle.removeEventListener("click", loginGoogle);
+              btnGoogle.addEventListener("click", loginGoogle);
+            }
+        
+            const btnMeta = document.querySelector("#btnMeta");
+            if (btnMeta) {
+              btnMeta.removeEventListener("click", loginMeta);
+              btnMeta.addEventListener("click", loginMeta);
+            }
+          };
+        
+          const existing = document.querySelector('script[src="js/login.js"]');
+          if (!existing) {
+            const script = document.createElement("script");
+            script.src = "js/login.js";
+            script.onload = attachLoginListeners; // listeners tras cargar
+            document.body.appendChild(script);
+          } else {
+            attachLoginListeners(); // listeners aunque ya esté cargado
+          }
       }
 
       // Puedes añadir más inicializaciones aquí si lo necesitas
@@ -269,6 +283,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
