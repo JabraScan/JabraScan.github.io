@@ -33,7 +33,7 @@ function showUserNick(nickname, avatar) {
 }
 
 // Captura token de la URL (?token=XYZ) y limpia la URL
-(function initSessionFromUrl() {
+function initSessionFromUrl() {
   const params = new URLSearchParams(window.location.search);
   const tokenFromUrl = params.get("token");
 
@@ -49,10 +49,10 @@ function showUserNick(nickname, avatar) {
     window.history.replaceState({}, document.title, window.location.pathname); // 👈 limpia la URL
     window.location.href = "/"; // 👈 redirige al inicio
   }
-})();
+}
 
 // Estado de sesión al cargar index
-(async function checkSessionOnLoad() {
+async function checkSessionOnLoad() {
   const token = localStorage.getItem("jwt");
   if (!token) {
     showLoginButton();
@@ -82,7 +82,7 @@ function showUserNick(nickname, avatar) {
     localStorage.clear(); // 👈 borra todo si el token no es válido
     showLoginButton();
   }
-})();
+}
 
 //cerrar sesion
 function logout() {
@@ -94,8 +94,11 @@ function logout() {
   window.location.href = "/";
 }
 
-// Enganchar el listener al enlace de logout
+// Enganchar inicialización y logout al cargar DOM
 document.addEventListener("DOMContentLoaded", () => {
+  initSessionFromUrl();   // 👈 captura ?token=..., guarda jwt y redirige
+  checkSessionOnLoad();   // 👈 llama a /me y actualiza UI (showUserNick / showLoginButton)
+
   const logoutLink = document.getElementById("logout-link");
   if (logoutLink) {
     logoutLink.addEventListener("click", (e) => {
