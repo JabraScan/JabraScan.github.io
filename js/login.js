@@ -37,9 +37,10 @@ function showUserNick(name) {
   if (tokenFromUrl) {
     localStorage.setItem("jwt", tokenFromUrl);
     window.history.replaceState({}, document.title, window.location.pathname);
+
+    window.location.href = "/index.html";
   }
 })();
-
 // Estado de sesión al cargar index
 (async function checkSessionOnLoad() {
   const token = localStorage.getItem("jwt");
