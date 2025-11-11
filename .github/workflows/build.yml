@@ -13,9 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout del repositorio
+      # 1️⃣ Checkout del repositorio con historial completo
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # Necesario para poder hacer pull/rebase
 
       # 2️⃣ Configurar Node.js
       - name: Configurar Node.js
@@ -24,18 +26,14 @@ jobs:
           node-version: '18'
 
       # 3️⃣ Instalar dependencias necesarias
-      # (fast-xml-parser y cualquier otra que uses en tus scripts)
       - name: Instalar dependencias
-        run: |
-          npm install fast-xml-parser --no-save
+        run: npm install fast-xml-parser --no-save
 
       # 4️⃣ Bloque A: Generar JSON-LD e insertarlo en index.html
-      # Este bloque ejecuta tu script xmlToJsonLd.js
       - name: Generar JSON-LD en index.html
         run: node scripts/xmlToJsonLd.js
 
       # 5️⃣ Bloque B: Generar HTML de obras y sitemap
-      # Este bloque ejecuta tu script buildPages.js
       - name: Generar HTML de obras y sitemap
         run: node scripts/buildPages.js
 
@@ -46,4 +44,5 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git diff --cached --quiet || git commit -m "Build: actualizar index y obras"
+          git pull origin main --rebase   # 🔑 Trae cambios remotos antes de empujar
           git push
