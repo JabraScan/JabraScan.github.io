@@ -2,10 +2,10 @@
 const WORKER_URL = "https://jabrascan.net";
 
 // Acciones de login
-export function loginGoogle() {
+function loginGoogle() {
   window.location.href = `${WORKER_URL}/auth/google`;
 }
-export function loginMeta() {
+function loginMeta() {
   window.location.href = `${WORKER_URL}/auth/meta`;
 }
 
