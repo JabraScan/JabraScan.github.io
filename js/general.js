@@ -143,6 +143,13 @@ function cargarVista(url) {
             console.error('Error cargando librerías de gráficos:', err);
             renderResumenObras(); // intentar renderizar de todos modos (mostrará error internamente si falta Chart)
           });
+      } else if (url == "login.html") {
+        // Cargar el script de login manualmente
+        if (!document.querySelector('script[src="js/login.js"]')) {
+          const script = document.createElement("script");
+          script.src = "js/login.js";
+          document.body.appendChild(script);
+        }
       }
 
       // Puedes añadir más inicializaciones aquí si lo necesitas
@@ -258,6 +265,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
