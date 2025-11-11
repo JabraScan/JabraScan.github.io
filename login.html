@@ -3,12 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Página de Login</title>
-  <!-- CSS global -->
-  <link rel="stylesheet" href="css/index.css">
   <!-- CSS específico del login -->
   <link rel="stylesheet" href="css/login.css">
 
   <script>
+    // Si index.css no está cargado, lo añadimos
+    if (!document.querySelector('link[href*="index.css"]')) {
+      const indexCss = document.createElement("link");
+      indexCss.rel = "stylesheet";
+      indexCss.href = "index.css";
+      document.head.appendChild(indexCss);
+    }
+
     // Si Bootstrap CSS no está cargado, lo añadimos
     if (!document.querySelector('link[href*="bootstrap"]')) {
       const bsCss = document.createElement("link");
@@ -19,15 +25,6 @@
   </script>
 </head>
 <body>
-  <header class="navbar-jabrascan navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">
-        <img src="logo.png" alt="Logo" class="navbar-brand-logo">
-        <span class="brand-text">Jabrascan</span>
-      </a>
-    </div>
-  </header>
-
   <main class="d-flex justify-content-center align-items-center min-vh-100">
     <div class="login-container card shadow p-4" style="max-width: 400px; width: 100%;">
       <h1 class="h4 mb-4 text-center">Inicia sesión</h1>
