@@ -23,6 +23,15 @@
       document.head.appendChild(bsCss);
     }
   </script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+    if (token) {
+      localStorage.setItem("jwt", token);
+      window.location.href = "/"; // redirige al inicio ya con token guardado
+    }
+  </script>
+  <script src="js/login.js"></script>
 </head>
 <body>
   <main class="d-flex justify-content-center">
