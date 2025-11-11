@@ -630,14 +630,20 @@
                       rel="noopener noreferrer">TurretTranslations</a></li>
                 </ul>
               </li>
+              <!--
               <li class="nav-item position-relative">
                 <a class="nav-link btn-login" id="login-link" href="#" data-target="login.html">Login</a>
               </li>
-              <!--
               <li class="nav-item position-relative">
                 <a class="nav-link" id="user-nick" href="#" style="display:none;"></a>
               </li>
               -->
+              <!-- Botón de login (visible por defecto) -->
+              <li class="nav-item position-relative" id="login-wrapper">
+                <a class="nav-link btn-login" id="login-link" href="#" data-target="login.html">Login</a>
+              </li>
+              
+              <!-- Bloque de usuario con dropdown (oculto por defecto) -->
               <li class="nav-item dropdown position-relative d-none" id="user-nick-wrapper">
                 <a class="nav-link dropdown-toggle" href="#" id="user-nick" role="button"
                    data-bs-toggle="dropdown" aria-expanded="false"></a>
@@ -689,3 +695,4 @@
       crossorigin="anonymous"></script>
   </body>
 </html>
+
