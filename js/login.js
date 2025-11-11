@@ -1,4 +1,5 @@
-const WORKER_URL = "https://logingooglemeta.jabrarexscan.workers.dev";
+//const WORKER_URL = "https://logingooglemeta.jabrarexscan.workers.dev";
+const WORKER_URL = "https://jabrascan.net";
 
 // Acciones de login
 function loginGoogle() {
