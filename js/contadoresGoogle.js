@@ -19,7 +19,7 @@
 const URL_GOOGLE = "https://script.google.com/macros/s/AKfycbzd0PXifcGV1nG1gNucm_9DB7UI_YLdOS4qEYZm_8CcW-W4jBkh3PNZiQ2qK4tqgok6Bg/exec";
 
 // URL del Cloudflare Worker que replica el flujo (ajusta al tuyo)
-const URL_CLOUDFLARE = "https://api.midominio.com/registros"; // TODO: cambia por tu ruta real
+const URL_CLOUDFLARE = "https://jabrascan.net/registros"; // TODO: cambia por tu ruta real
 
 //const API_KEY = "X%B~ZiP?RJA5LUGVAU_9KgDp?7~rUX8KW2D9Q3Fgiyt=1.]Ww#a^FGEMFuM:}#WP4r2L!e9U?fA+qcUjReWV"; // Opcional, si tu backend lo requiere
 const API_KEY = "";
