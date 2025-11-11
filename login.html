@@ -8,7 +8,7 @@
 
   <script>
     // Si index.css no está cargado, lo añadimos
-    if (!document.querySelector('link[href*="index.css"]')) {
+    if (!document.querySelector('link[href*="css/index.css"]')) {
       const indexCss = document.createElement("link");
       indexCss.rel = "stylesheet";
       indexCss.href = "index.css";
@@ -29,6 +29,11 @@
     <div class="login-container card shadow p-4" style="max-width: 400px; width: 100%;">
       <h1 class="h4 mb-4 text-center">Inicia sesión</h1>
 
+      <!-- Logo circular -->
+      <div class="text-center mb-4">
+        <img src="img/rexjabra.png" alt="Logo RexJabra" class="login-logo">
+      </div>
+
       <!-- Botón Google -->
       <button class="btn btn-primary w-100 mb-3 d-flex align-items-center justify-content-center" onclick="loginGoogle()">
         <img src="img/google.png" alt="Google logo" class="me-2 login-icon">
@@ -37,18 +42,13 @@
 
       <!-- Botón Meta -->
       <button class="btn btn-info w-100 d-flex align-items-center justify-content-center" onclick="loginMeta()">
-        <img src="img/Meta_Platforms_Inc._logo.svg" alt="Meta logo" class="me-2 login-icon">
-        Login con Meta
+        Login con 
+        <img src="img/Meta_Platforms_Inc._logo.svg" alt="Meta logo" class="ms-2 login-icon">
       </button>
 
       <div class="user-info mt-3 text-center" id="userInfo"></div>
     </div>
   </main>
-
-  <footer class="text-center py-3">
-    © 2025 Jabrascan
-  </footer>
-
   <!-- Script condicional para Bootstrap JS -->
   <script>
     if (!window.bootstrap) {
