@@ -76,7 +76,7 @@ function logout() {
   // Mostrar el botón de login y ocultar el nombre del usuario
   showLoginButton();
   // Opcional: redirigir al inicio o a la página de login
-  window.location.href = "/index.html";
+  window.location.href = "/";
 }
 // Enganchar el listener al enlace de logout
 document.addEventListener("DOMContentLoaded", () => {
