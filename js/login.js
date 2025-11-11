@@ -79,3 +79,13 @@ function logout() {
   // Opcional: redirigir al inicio o a la página de login
   window.location.href = "/index.html";
 }
+// Enganchar el listener al enlace de logout
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutLink = document.getElementById("logout-link");
+  if (logoutLink) {
+    logoutLink.addEventListener("click", (e) => {
+      e.preventDefault(); // evita que navegue al "#"
+      logout();           // ejecuta tu función logout()
+    });
+  }
+});
