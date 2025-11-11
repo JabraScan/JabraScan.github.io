@@ -1,7 +1,5 @@
 User-agent: *
 Disallow: /.github/
-Disallow: /css/
-Disallow: /js/
 Disallow: /node_modules/
 Disallow: /scripts/
 Disallow: /*.pdf$
