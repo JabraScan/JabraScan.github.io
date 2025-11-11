@@ -34,13 +34,19 @@ function showUserNick(name) {
 (function initSessionFromUrl() {
   const params = new URLSearchParams(window.location.search);
   const tokenFromUrl = params.get("token");
+
+  console.log("URL actual:", window.location.href);        // 👈 log 1
+  console.log("Token capturado:", tokenFromUrl);           // 👈 log 2
+
   if (tokenFromUrl) {
     localStorage.setItem("jwt", tokenFromUrl);
-    window.history.replaceState({}, document.title, window.location.pathname);
+    console.log("Token guardado en localStorage:", tokenFromUrl); // 👈 log 3
 
-    window.location.href = "/index.html";
+    window.history.replaceState({}, document.title, window.location.pathname);
+    window.location.href = "/index.html"; // o "/" según tu hosting
   }
 })();
+
 // Estado de sesión al cargar index
 (async function checkSessionOnLoad() {
   const token = localStorage.getItem("jwt");
