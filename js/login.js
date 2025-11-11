@@ -34,12 +34,12 @@ function showUserNick(name) {
   const params = new URLSearchParams(window.location.search);
   const tokenFromUrl = params.get("token");
 
-  console.log("URL actual:", window.location.href);        // 👈 log 1
-  console.log("Token capturado:", tokenFromUrl);           // 👈 log 2
+  //console.log("URL actual:", window.location.href);        // 👈 log 1
+  //console.log("Token capturado:", tokenFromUrl);           // 👈 log 2
 
   if (tokenFromUrl) {
     localStorage.setItem("jwt", tokenFromUrl);
-    console.log("Token guardado en localStorage:", tokenFromUrl); // 👈 log 3
+    //console.log("Token guardado en localStorage:", tokenFromUrl); // 👈 log 3
 
     window.history.replaceState({}, document.title, window.location.pathname);
     window.location.href = "/index.html"; // o "/" según tu hosting
