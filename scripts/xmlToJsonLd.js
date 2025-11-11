@@ -53,7 +53,7 @@ function parseXML(xmlText) {
 }
 
 function insertJsonLdIntoHtml(html, jsonLdString) {
-  const scriptTag = `<script type="application/ld+json">\n${jsonLdString}\n</script>\n`;
+  const scriptTag = `<script type="application/ld+json">\n${jsonLdString}\n</script>`;
   // Si ya existe un bloque JSON-LD previo, lo reemplazamos; si no, lo insertamos antes de </head>
   const hasJsonLd = html.includes('type="application/ld+json"');
   if (hasJsonLd) {
@@ -74,3 +74,4 @@ function main() {
 }
 
 main();
+
