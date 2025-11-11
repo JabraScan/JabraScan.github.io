@@ -11,22 +11,21 @@ function loginMeta() {
 
 // UI helpers
 function showLoginButton() {
-  const btn = document.querySelector(".btn-login");
-  if (btn) btn.style.display = "";
-
-  const wrapper = document.getElementById("user-nick-wrapper");
-  if (wrapper) wrapper.classList.add("d-none");
+  const loginWrapper = document.getElementById("login-wrapper");
+  const userWrapper = document.getElementById("user-nick-wrapper");
+  if (loginWrapper) loginWrapper.classList.remove("d-none"); // 👈 muestra el LI de login
+  if (userWrapper) userWrapper.classList.add("d-none");      // 👈 oculta el LI de usuario
 }
 
 function showUserNick(name) {
-  const btn = document.querySelector(".btn-login");
-  if (btn) btn.style.display = "none";
-
-  const wrapper = document.getElementById("user-nick-wrapper");
+  const loginWrapper = document.getElementById("login-wrapper");
+  const userWrapper = document.getElementById("user-nick-wrapper");
   const nick = document.getElementById("user-nick");
-  if (wrapper && nick) {
+
+  if (loginWrapper) loginWrapper.classList.add("d-none");    // 👈 oculta el LI de login
+  if (userWrapper && nick) {
     nick.textContent = name;
-    wrapper.classList.remove("d-none");
+    userWrapper.classList.remove("d-none");                  // 👈 muestra el LI de usuario
   }
 }
 
