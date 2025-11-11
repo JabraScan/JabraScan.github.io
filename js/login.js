@@ -42,7 +42,7 @@ function showUserNick(name) {
     //console.log("Token guardado en localStorage:", tokenFromUrl); // 👈 log 3
 
     window.history.replaceState({}, document.title, window.location.pathname);
-    window.location.href = "/index.html"; // o "/" según tu hosting
+    window.location.href = "/"; // o "/" según tu hosting
   }
 })();
 
