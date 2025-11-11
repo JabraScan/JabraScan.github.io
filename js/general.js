@@ -150,6 +150,10 @@ function cargarVista(url) {
           script.src = "js/login.js";
           document.body.appendChild(script);
         }
+        const btnGoogle = document.querySelector("#btnGoogle");
+          if (btnGoogle) {  btnGoogle.addEventListener("click", loginGoogle);  }
+        const btnMeta = document.querySelector("#btnMeta");
+          if (btnMeta) {  btnMeta.addEventListener("click", loginMeta);  }
       }
 
       // Puedes añadir más inicializaciones aquí si lo necesitas
@@ -265,6 +269,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
