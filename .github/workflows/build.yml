@@ -1,35 +1,49 @@
-name: Generar JSON-LD e insertar en index.html
+name: Generar sitio completo (index + obras + sitemap)
 
 on:
   push:
-    branches:
-      - main   # cambia si tu rama publicada es otra
+    branches: [ main ]   # Se ejecuta al hacer push en la rama main
+  workflow_dispatch:     # Permite lanzarlo manualmente desde la interfaz de GitHub
 
 permissions:
-  contents: write   # 🔑 Permite al workflow hacer commit/push
+  contents: write        # 🔑 Permite al workflow hacer commit y push de cambios
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout del repositorio
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
+      # 2️⃣ Configurar Node.js
       - name: Configurar Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      - name: Ejecutar script de build
+      # 3️⃣ Instalar dependencias necesarias
+      # (fast-xml-parser y cualquier otra que uses en tus scripts)
+      - name: Instalar dependencias
+        run: |
+          npm install fast-xml-parser --no-save
+
+      # 4️⃣ Bloque A: Generar JSON-LD e insertarlo en index.html
+      # Este bloque ejecuta tu script xmlToJsonLd.js
+      - name: Generar JSON-LD en index.html
         run: node scripts/xmlToJsonLd.js
 
+      # 5️⃣ Bloque B: Generar HTML de obras y sitemap
+      # Este bloque ejecuta tu script buildPages.js
+      - name: Generar HTML de obras y sitemap
+        run: node scripts/buildPages.js
+
+      # 6️⃣ Commit y push de todos los cambios generados
       - name: Commit y push cambios
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git diff --cached --quiet || git commit -m "Build: insertar JSON-LD en index.html"
+          git add -A
+          git diff --cached --quiet || git commit -m "Build: actualizar index y obras"
           git push
