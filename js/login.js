@@ -12,21 +12,21 @@ function loginMeta() {
 // UI helpers
 function showLoginButton() {
   const btn = document.querySelector(".btn-login");
-  const nick = document.getElementById("user-nick");
   if (btn) btn.style.display = "";
-  if (nick) {
-    nick.style.display = "none";
-    nick.textContent = "";
-  }
+
+  const wrapper = document.getElementById("user-nick-wrapper");
+  if (wrapper) wrapper.classList.add("d-none");
 }
 
 function showUserNick(name) {
   const btn = document.querySelector(".btn-login");
-  const nick = document.getElementById("user-nick");
   if (btn) btn.style.display = "none";
-  if (nick) {
-    nick.style.display = "";
+
+  const wrapper = document.getElementById("user-nick-wrapper");
+  const nick = document.getElementById("user-nick");
+  if (wrapper && nick) {
     nick.textContent = name;
+    wrapper.classList.remove("d-none");
   }
 }
 
@@ -70,3 +70,13 @@ function showUserNick(name) {
     showLoginButton();
   }
 })();
+
+//cerrar sesion
+function logout() {
+  // Eliminar el token guardado
+  localStorage.removeItem("jwt");
+  // Mostrar el botón de login y ocultar el nombre del usuario
+  showLoginButton();
+  // Opcional: redirigir al inicio o a la página de login
+  window.location.href = "/index.html";
+}
