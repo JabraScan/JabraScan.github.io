@@ -75,7 +75,7 @@ export function leerVisitas(idvisitado) {
 //@param {number} valor Valor numérico entre 0 y 5
 //@returns {Promise<string>} "OK" si se registró correctamente
 //
-/*export function valorarRecurso(idvisitado, valor) {
+export function valorarRecurso(idvisitado, valor) {
   const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=valorar&valor=${valor}`;
   return fetch(url)
     .then(res => res.text())
@@ -83,31 +83,6 @@ export function leerVisitas(idvisitado) {
       console.error("Error valorando recurso:", err);
       return "ERROR";
     });
-}*/
-export function valorarRecurso(idvisitado, valor) {
-  const urlGoogle = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=valorar&valor=${valor}`;
-
-  // Recuperamos el user_id guardado por checkSessionOnLoad
-  const usuarioId = localStorage.getItem("user_id") || "null";
-  const urlCloudflare = `${URL_CLOUDFLARE}?id=${encodeURIComponent(idvisitado)}&accion=valorar&valor=${valor}&usuario_id=${encodeURIComponent(usuarioId)}`;
-
-  // Lanzamos ambas en paralelo
-  const promGoogle = fetch(urlGoogle).then(res => res.text()).catch(err => {
-    console.error("Error valorando recurso en Google:", err);
-    return null;
-  });
-
-  const promCloudflare = fetch(urlCloudflare).then(res => res.text()).catch(err => {
-    console.error("Error valorando recurso en Cloudflare:", err);
-    return null;
-  });
-
-  // Decidimos qué devolver: primero Google, si no responde usamos Cloudflare
-  return Promise.all([promGoogle, promCloudflare]).then(([resGoogle, resCloudflare]) => {
-    if (resGoogle) return resGoogle;
-    if (resCloudflare) return resCloudflare;
-    return "ERROR";
-  });
 }
 
 //
