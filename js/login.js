@@ -37,12 +37,12 @@ function initSessionFromUrl() {
   const params = new URLSearchParams(window.location.search);
   const tokenFromUrl = params.get("token");
 
-  console.log("URL actual:", window.location.href);        // 👈 log 1
-  console.log("Token capturado:", tokenFromUrl);           // 👈 log 2
+  //console.log("URL actual:", window.location.href);        // 👈 log 1
+  //console.log("Token capturado:", tokenFromUrl);           // 👈 log 2
 
   if (tokenFromUrl) {
     localStorage.setItem("jwt", tokenFromUrl);               // 👈 guarda el JWT en localStorage
-    console.log("Token guardado en localStorage:", tokenFromUrl); // 👈 log 3
+    //console.log("Token guardado en localStorage:", tokenFromUrl); // 👈 log 3
 
     // 🔎 Nuevo: ya no decodificamos el JWT porque solo lleva sub/iat/exp
     // Los datos del usuario se obtienen siempre desde /me
