@@ -80,7 +80,7 @@ export function valorarRecurso(idvisitado, valor) {
   // Recuperamos el user_id guardado en localStorage (si no hay sesión será "null")
   const usuarioId = localStorage.getItem("user_id") || "null";
   const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=valorar&valor=${valor}&usuario_id=${encodeURIComponent(usuarioId)}`;
-console.log(url);   
+//console.log(url);   
   return fetch(url)
     .then(res => res.text())
     .catch(err => {
