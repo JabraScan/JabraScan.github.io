@@ -644,10 +644,12 @@
               
               <!-- Bloque de usuario con dropdown (oculto por defecto) -->
               <li class="nav-item dropdown position-relative d-none" id="user-nick-wrapper">
-                <img id="user-avatar"></img>
-                <a class="nav-link dropdown-toggle" href="#" id="user-nick" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                <!-- Avatar como botón del dropdown -->
+                <a class="nav-link dropdown-toggle p-0" href="#" id="user-nick" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img class="user-avatar" id="user-avatar" alt="avatar">
+                </a>
+                <!-- Menú desplegable -->
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-nick">
-                  <img id="user-avatar"></img>
                   <li><a class="dropdown-item btn-perfil" href="#" id="perfil-link">Perfil</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item btn-logout" href="#" id="logout-link">Logout</a></li>
@@ -698,6 +700,7 @@
     <script src="./js/login.js"></script>
   </body>
 </html>
+
 
 
 
