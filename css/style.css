@@ -858,7 +858,8 @@ footer {
 
   /* Ajustar carrusel para pantallas pequeñas */
   .custom-carousel-item {
-    height: 280px;
+    min-height: 280px;
+    height: auto;
   }
 
   .custom-carousel-item .imagen-contenedor {
@@ -873,6 +874,7 @@ footer {
   .carousel-info-overlay {
     font-size: 0.85em;
     padding: 0.8em 1em;
+    justify-content: flex-start;
   }
 
   .carousel-info-title {
@@ -901,7 +903,8 @@ footer {
 
   /* Ajustar carrusel para móviles pequeños */
   .custom-carousel-item {
-    height: 240px;
+    min-height: 250px;
+    height: auto;
   }
 
   .custom-carousel-item .imagen-contenedor {
@@ -912,6 +915,7 @@ footer {
   .carousel-info-overlay {
     font-size: 0.75em;
     padding: 0.6em 0.8em;
+    justify-content: flex-start;
   }
 
   .carousel-info-title {
