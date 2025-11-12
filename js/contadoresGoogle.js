@@ -16,7 +16,8 @@
    ============================ */
 
 // URL original de Google Apps Script (tu hoja de cálculo)
-const URL_GOOGLE = "https://script.google.com/macros/s/AKfycbzd0PXifcGV1nG1gNucm_9DB7UI_YLdOS4qEYZm_8CcW-W4jBkh3PNZiQ2qK4tqgok6Bg/exec";
+//const URL_GOOGLE = "https://script.google.com/macros/s/AKfycbzd0PXifcGV1nG1gNucm_9DB7UI_YLdOS4qEYZm_8CcW-W4jBkh3PNZiQ2qK4tqgok6Bg/exec"; //v19
+const URL_GOOGLE = "https://script.google.com/macros/s/AKfycbwQNm88siN8ASQXXbNYe-J7klvE0SGWJrih_Tia9wRyzitWYPelCz6dlrJIhNuYRFXg3Q/exec"; //v24
 
 // URL del Cloudflare Worker que replica el flujo (ajusta al tuyo)
 const URL_CLOUDFLARE = "https://jabrascan.net/registros"; // TODO: cambia por tu ruta real
