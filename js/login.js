@@ -79,7 +79,10 @@ async function checkSessionOnLoad() {
     showUserNick(nickname, avatar); // 👈 pinta nickname y avatar en la UI
   } catch (e) {
     console.warn("Sesión no válida:", e.message);
-    localStorage.clear(); // 👈 borra todo si el token no es válido
+    localStorage.removeItem("jwt");       // borra solo el token
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("user_nickname");
+    localStorage.removeItem("user_avatar");
     showLoginButton();
   }
 }
