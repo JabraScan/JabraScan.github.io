@@ -76,7 +76,10 @@ export function leerVisitas(idvisitado) {
 //@returns {Promise<string>} "OK" si se registró correctamente
 //
 export function valorarRecurso(idvisitado, valor) {
-  const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=valorar&valor=${valor}`;
+  // Recuperamos el user_id guardado en localStorage (si no hay sesión será "null")
+  const usuarioId = localStorage.getItem("user_id") || "null";
+  const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=valorar&valor=${valor}&usuario_id=${encodeURIComponent(usuarioId)}`;
+   
   return fetch(url)
     .then(res => res.text())
     .catch(err => {
