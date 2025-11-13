@@ -69,8 +69,8 @@ async function checkSessionOnLoad() {
 
     // 🔎 Nuevo: ahora /me devuelve id, nickname y avatar
     const nickname = (data.usuario && data.usuario.nickname) || "Usuario";
-    const avatar = (data.usuario && data.usuario.avatar) || "/img/default-avatar.png";
-
+    const avatar = (data.usuario && data.usuario.avatar) || "/img/avatar/default.png";
+console.log(data);
     // Guardar datos mínimos en localStorage
     localStorage.setItem("user_id", data.usuario.id);
     localStorage.setItem("user_nickname", nickname);
