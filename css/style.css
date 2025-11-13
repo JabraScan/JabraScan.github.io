@@ -1443,6 +1443,9 @@ canvas#graficaObras {
   background: transparent;
   border: none;
 }
+.user-avatar {
+  max-width: 4em;
+}
 /* Evita problemas de fondo en móvil */
 /* Ajustes SOLO en móvil (pantallas <= 768px) */
 @media (max-width: 768px) {
@@ -1454,6 +1457,7 @@ canvas#graficaObras {
     font-size: 0.9em;   /* más pequeño en móvil */
     margin-left: 0.3rem;
   }
+  .user-avatar {
+    max-width: 3em;
+  }
 }
-
-
