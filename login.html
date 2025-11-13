@@ -7,12 +7,15 @@
   <link rel="stylesheet" href="css/login.css">
 
   <script>
-    // Si index.css no está cargado, lo añadimos
-    if (!document.querySelector('link[href*="css/style.css"]')) {
-      const indexCss = document.createElement("link");
-      indexCss.rel = "stylesheet";
-      indexCss.href = "css/style.css";
-      document.head.appendChild(indexCss);
+    // Si los CSS modulares no están cargados, los añadimos
+    if (!document.querySelector('link[href*="css/variables.css"]')) {
+      const cssModules = ['variables.css', 'header.css', 'utilities.css'];
+      cssModules.forEach(module => {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = `css/${module}`;
+        document.head.appendChild(link);
+      });
     }
 
     // Si Bootstrap CSS no está cargado, lo añadimos
