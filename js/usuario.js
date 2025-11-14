@@ -38,7 +38,9 @@ if (!usuario_id) {
 // API Worker
 // -------------------------
 async function cargarPerfil() {
+    console.log('carga');
   if (!usuario_id) return;
+  console.log(  usuario_id);
   const res = await fetch(`${API_BASE}/usuarios/get?usuario_id=${usuario_id}`);
   const data = await res.json();
 
