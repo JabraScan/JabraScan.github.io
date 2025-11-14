@@ -37,7 +37,7 @@ if (!usuario_id) {
 // -------------------------
 // API Worker
 // -------------------------
-async function cargarPerfil() {
+export async function cargarPerfil() {
     console.log('carga');
   if (!usuario_id) return;
   console.log(  usuario_id);
@@ -53,7 +53,7 @@ async function cargarPerfil() {
   if (avatarEl) avatarEl.src = data.avatar || "https://via.placeholder.com/80";
 }
 
-async function cargarBiblioteca() {
+export async function cargarBiblioteca() {
   if (!usuario_id) return;
   const res = await fetch(`${API_BASE}/biblioteca/list?usuario_id=${usuario_id}`);
   const data = await res.json();
@@ -72,7 +72,7 @@ async function cargarBiblioteca() {
   cont.innerHTML = html;
 }
 
-async function cargarObras() {
+export async function cargarObras() {
   if (!usuario_id) return;
   const perfilRes = await fetch(`${API_BASE}/usuarios/get?usuario_id=${usuario_id}`);
   const perfil = await perfilRes.json();
@@ -102,7 +102,7 @@ async function cargarObras() {
 // -------------------------
 // Inicialización idempotente (no bloquea si ya cargaste Bootstrap antes)
 // -------------------------
-function initUsuario() {
+export function initUsuario() {
   /*
   if (window.usuarioInitialized) return;
   window.usuarioInitialized = true;
