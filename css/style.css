@@ -1437,6 +1437,9 @@ canvas#graficaObras {
   .user-avatar {
     max-width: 3em;
   }
+  .carousel-info-row-tags {
+    display: none;
+  }
 }
 @media (max-width: 991px) {
   .navbar-jabrascan {
