@@ -103,12 +103,22 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
   const tuValoracion = document.createElement("div");
   tuValoracion.className = "your-rating";
 
+  // 🔐 Verificamos si el usuario está logueado
+  const usuarioId = localStorage.getItem("user_id");
+  const estaLogueado = usuarioId && usuarioId !== "null";
+
   // 🔐 Verificamos si el usuario ya ha votado usando localStorage
   const claveLocal = clave;
   const yaVotado = localStorage.getItem(claveLocal);
 
-  // 🧠 Si ya votó, mostramos agradecimiento; si no, invitamos a votar
-  tuValoracion.textContent = yaVotado ? "¡Gracias por tu voto!" : "¿Tu valoración?";
+  // 🧠 Mensaje según el estado del usuario
+  if (!estaLogueado) {
+    tuValoracion.textContent = "Inicia sesión para valorar";
+  } else if (yaVotado) {
+    tuValoracion.textContent = "¡Gracias por tu voto!";
+  } else {
+    tuValoracion.textContent = "¿Tu valoración?";
+  }
 
   // 🔄 Generamos las 5 estrellas
   for (let i = 1; i <= 5; i++) {
@@ -118,11 +128,12 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
     // 🎨 Color según la valoración promedio
     estrella.style.color = i <= Math.round(valoracionPromedio) ? "orange" : "lightgray";
 
-    // 🖱️ Interacción: solo si el usuario no ha votado
-    estrella.style.cursor = yaVotado ? "default" : "pointer";
+    // 🖱️ Interacción: solo si el usuario está logueado y no ha votado
+    const puedeVotar = estaLogueado && !yaVotado;
+    estrella.style.cursor = puedeVotar ? "pointer" : "default";
 
-    // 🗳️ Evento de click para votar
-    if (!yaVotado) {
+    // 🗳️ Evento de click para votar (solo si está logueado y no ha votado)
+    if (puedeVotar) {
       estrella.addEventListener("click", () => {
         valorarRecurso(clave, i).then(res => {
     //console.log(`${clave} - ${i} - ${res}`);
