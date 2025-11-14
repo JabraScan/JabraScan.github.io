@@ -101,6 +101,10 @@ header.scrolled {
     margin-right: 0.1rem;
     margin-left: 0.1rem;
   }
+
+  .carousel-info-row-tags {
+    display: none;
+  }
 }
 
 .navbar-jabrascan .navbar-brand {
@@ -1461,3 +1465,4 @@ canvas#graficaObras {
     max-width: 3em;
   }
 }
+
