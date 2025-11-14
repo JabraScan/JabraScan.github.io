@@ -80,33 +80,6 @@ header.scrolled {
   box-shadow: 0 0 0 0.15rem rgba(252, 163, 17, 0.25);
 }
 
-@media (max-width: 991px) {
-  .navbar-jabrascan {
-    padding: 0.7rem 0.7rem 0.7rem 0.7rem;
-  }
-
-  .navbar-jabrascan .navbar-nav {
-    gap: 0.2rem;
-  }
-
-  .navbar-jabrascan .nav-search.form-control {
-    min-width: 100%;
-    margin-bottom: 0.5rem;
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .navbar-jabrascan .nav-item {
-    margin-bottom: 0.3rem;
-    margin-right: 0.1rem;
-    margin-left: 0.1rem;
-  }
-
-  .carousel-info-row-tags {
-    display: none;
-  }
-}
-
 .navbar-jabrascan .navbar-brand {
   font-size: 2rem;
   font-weight: 700;
@@ -1465,4 +1438,29 @@ canvas#graficaObras {
     max-width: 3em;
   }
 }
+@media (max-width: 991px) {
+  .navbar-jabrascan {
+    padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+  }
 
+  .navbar-jabrascan .navbar-nav {
+    gap: 0.2rem;
+  }
+
+  .navbar-jabrascan .nav-search.form-control {
+    min-width: 100%;
+    margin-bottom: 0.5rem;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .navbar-jabrascan .nav-item {
+    margin-bottom: 0.3rem;
+    margin-right: 0.1rem;
+    margin-left: 0.1rem;
+  }
+
+  .carousel-info-row-tags {
+    display: none;
+  }
+}
