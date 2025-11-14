@@ -249,10 +249,9 @@ export function mostrarurl(obra, capitulo = null) {
   const nuevaHash = `#${obra}${capitulo !== null ? `/Chapter${capitulo}` : ""}`;
 
   // 🧼 Elimina "index.html" si está presente en la URL actual
-  const baseUrl = window.location.origin + window.location.pathname.replace(/index\.html$/, "");
-  const baseUrl = window.location.origin + window.location.pathname.replace(/login\.html$/, "");
-  const baseUrl = window.location.origin + window.location.pathname.replace(/ultimoscapitulos\.html$/, "");
-  const baseUrl = window.location.origin + window.location.pathname.replace(/usuario\.html$/, "");
+  //const baseUrl = window.location.origin + window.location.pathname.replace(/index\.html$/, "");
+  const baseUrl = window.location.origin + window.location.pathname.replace(/(?:index|login|ultimoscapitulos|usuario)\.html$/, '');
+
 
   // 🧭 Construye la nueva URL completa con el hash
   const nuevaUrl = `${baseUrl}${nuevaHash}`;
@@ -279,4 +278,5 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
