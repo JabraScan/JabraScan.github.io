@@ -233,25 +233,10 @@ function abrirObraCapitulo(obra, capitulo = null) {
           .then(modulo => modulo.abrirLectorPDF())
           .catch(err => console.error('Error al cargar lector.js:', err));
       });
-    /*fetch(`books/capitulos/${obra}-capitulo${capitulo}.html`)
-      .then(response => {
-        if (!response.ok) throw new Error('Error al cargar el capítulo: ' + response.statusText);
-        return response.text();
-      })
-      .then(data => {
-        mainElement.innerHTML = data;
-        cargarCapitulo(obra, capitulo); // Función externa que carga los datos del capítulo
-      })
-      .catch(err => console.error('Error:', err));*/
   }
 }
-
-
 // 🔗 Actualiza la URL con hash para navegación semántica
-/*export function mostrarurl(obra, capitulo = null) {
-  const nuevaHash = `#${obra}${capitulo !== null ? `/Chapter${capitulo}` : ""}`;
-  location.hash = nuevaHash;
-}*/
+
 /**
  * 📍 Actualiza la URL con un nuevo hash basado en la obra y el capítulo.
  * 🧼 Elimina "index.html" de la ruta si está presente.
@@ -267,6 +252,9 @@ export function mostrarurl(obra, capitulo = null) {
 
   // 🧼 Elimina "index.html" si está presente en la URL actual
   const baseUrl = window.location.origin + window.location.pathname.replace(/index\.html$/, "");
+  const baseUrl = window.location.origin + window.location.pathname.replace(/login\.html$/, "");
+  const baseUrl = window.location.origin + window.location.pathname.replace(/ultimoscapitulos\.html$/, "");
+  const baseUrl = window.location.origin + window.location.pathname.replace(/usuario\.html$/, "");
 
   // 🧭 Construye la nueva URL completa con el hash
   const nuevaUrl = `${baseUrl}${nuevaHash}`;
@@ -293,11 +281,3 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
-
-
-
-
-
-
-
-
