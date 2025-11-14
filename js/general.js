@@ -170,7 +170,7 @@ function cargarVista(url) {
           }
       } else if (url === "usuario.html") {
         window.ocultarDisqus?.();
-        initUsuario();
+        //initUsuario();
       }
 /*
       else if (url === "usuario.html") {
@@ -289,6 +289,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
