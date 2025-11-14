@@ -103,9 +103,10 @@ async function cargarObras() {
 // Inicialización idempotente (no bloquea si ya cargaste Bootstrap antes)
 // -------------------------
 function initUsuario() {
+  /*
   if (window.usuarioInitialized) return;
   window.usuarioInitialized = true;
-
+  */
   cargarPerfil();
   cargarBiblioteca();
   cargarObras();
