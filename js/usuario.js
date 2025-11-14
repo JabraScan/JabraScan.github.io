@@ -6,11 +6,11 @@ const API_BASE = "https://jabrascan.net";
 // -------------------------
 // Redirección si no hay login (no bloquea el resto del código)
 // -------------------------
-/*const usuario_id = localStorage.getItem("usuario_id");
+const usuario_id = localStorage.getItem("usuario_id");
 if (!usuario_id) {
   // si no hay usuario, redirige a la raíz
   window.location.replace("/");
-}*/
+}
 
 // -------------------------
 // Verificar/inyectar Bootstrap solo si falta
