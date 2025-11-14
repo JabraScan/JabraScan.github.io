@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
               <div class="carousel-info-row">
                 <span class="carousel-info-label">Estado:</span> <span class="${estado}">${estado}</span>
               </div>
-              <div class="carousel-info-row-tags">${categoriaObj}</div><br>
+              <div class="carousel-info-row-tags d-none d-lg-flex">${categoriaObj}</div><br>
               <div class="carousel-info-row">${OKAutor}</div>
             </div>
             <div class="carousel-chapter-badge"></div>

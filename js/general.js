@@ -3,6 +3,7 @@ import { initUltimosCapitulos } from './ultimoscapitulos.js';
 import { abrirLectorPDF } from './lector.js';
 import { cargarlibro } from './libroficha.js';
 import { renderResumenObras } from './contador.js';
+//import { initUsuario } from './usuario.js';
 
 // Helper: carga un script externo sólo una vez y devuelve una Promise
 function loadScript(src, globalName) {
@@ -129,7 +130,7 @@ function cargarVista(url) {
 
       // 🛠️ Inicialización específica por vista
       if (url === "ultimosCapitulos.html") {
-          window.ocultarDisqus?.();
+        window.ocultarDisqus?.();
         initUltimosCapitulos();
       } else if (url === "counts.html") {
         // Cargar Chart.js y plugin antes de renderizar para evitar carga global innecesaria
@@ -167,8 +168,27 @@ function cargarVista(url) {
           } else {
             attachLoginListeners(); // listeners aunque ya esté cargado
           }
+      } else if (url === "usuario.html") {
+        window.ocultarDisqus?.();
+        //initUsuario();
       }
-
+/*
+      else if (url === "usuario.html") {
+        const existing = document.querySelector('script[src="/js/usuario.js"]');
+        if (!existing) {
+          const script = document.createElement("script");
+          script.src = "js/usuario.js";
+          script.onload = () => {
+            if (window.initUsuario) window.initUsuario();
+          };
+          script.onerror = () => console.error("Error cargando js/usuario.js");
+          document.body.appendChild(script);
+        } else {
+          // si el script ya estaba en la página, asumimos que ya se ejecutó y la función está disponible
+          if (window.initUsuario) window.initUsuario();
+        }
+      }
+*/
       // Puedes añadir más inicializaciones aquí si lo necesitas
     })
     .catch(err => console.error("Error:", err));
@@ -222,25 +242,10 @@ function abrirObraCapitulo(obra, capitulo = null) {
           .then(modulo => modulo.abrirLectorPDF())
           .catch(err => console.error('Error al cargar lector.js:', err));
       });
-    /*fetch(`books/capitulos/${obra}-capitulo${capitulo}.html`)
-      .then(response => {
-        if (!response.ok) throw new Error('Error al cargar el capítulo: ' + response.statusText);
-        return response.text();
-      })
-      .then(data => {
-        mainElement.innerHTML = data;
-        cargarCapitulo(obra, capitulo); // Función externa que carga los datos del capítulo
-      })
-      .catch(err => console.error('Error:', err));*/
   }
 }
-
-
 // 🔗 Actualiza la URL con hash para navegación semántica
-/*export function mostrarurl(obra, capitulo = null) {
-  const nuevaHash = `#${obra}${capitulo !== null ? `/Chapter${capitulo}` : ""}`;
-  location.hash = nuevaHash;
-}*/
+
 /**
  * 📍 Actualiza la URL con un nuevo hash basado en la obra y el capítulo.
  * 🧼 Elimina "index.html" de la ruta si está presente.
@@ -255,7 +260,9 @@ export function mostrarurl(obra, capitulo = null) {
   const nuevaHash = `#${obra}${capitulo !== null ? `/Chapter${capitulo}` : ""}`;
 
   // 🧼 Elimina "index.html" si está presente en la URL actual
-  const baseUrl = window.location.origin + window.location.pathname.replace(/index\.html$/, "");
+  //const baseUrl = window.location.origin + window.location.pathname.replace(/index\.html$/, "");
+  const baseUrl = window.location.origin + window.location.pathname.replace(/(?:index|login|ultimoscapitulos|usuario)\.html$/, '');
+
 
   // 🧭 Construye la nueva URL completa con el hash
   const nuevaUrl = `${baseUrl}${nuevaHash}`;
@@ -282,6 +289,8 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
+
 
 
 
