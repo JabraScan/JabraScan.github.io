@@ -168,7 +168,17 @@ function cargarVista(url) {
             attachLoginListeners(); // listeners aunque ya esté cargado
           }
       } else if (url === "usuario.html") {
-        const existing = document.querySelector('script[src="js/usuario.js"]');
+        const usuarios = '/js/usuario.js';
+        const datalabelsUrl = 'https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0';
+        loadScript(usuarios, 'Chart')
+          .then(() => initUsuario())
+          .catch(err => {
+            initUsuario(); // intentar cargar de todos modos
+          });
+      }
+/*
+      else if (url === "usuario.html") {
+        const existing = document.querySelector('script[src="/js/usuario.js"]');
         if (!existing) {
           const script = document.createElement("script");
           script.src = "js/usuario.js";
@@ -180,18 +190,6 @@ function cargarVista(url) {
         } else {
           // si el script ya estaba en la página, asumimos que ya se ejecutó y la función está disponible
           if (window.initUsuario) window.initUsuario();
-        }
-      }
-/*
-      }  else if (url === "usuario.html") {
-        const existing = document.querySelector('script[src="js/usuario.js"]');
-        if (!existing) {
-          const script = document.createElement("script");
-          script.src = "js/usuario.js";
-          script.onload = initUsuario();
-          document.body.appendChild(script);
-        } else {
-          initUsuario();
         }
       }
 */
@@ -295,6 +293,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
