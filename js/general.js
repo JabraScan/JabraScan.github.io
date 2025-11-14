@@ -3,6 +3,7 @@ import { initUltimosCapitulos } from './ultimoscapitulos.js';
 import { abrirLectorPDF } from './lector.js';
 import { cargarlibro } from './libroficha.js';
 import { renderResumenObras } from './contador.js';
+import { initUsuario } from './usuario.js';
 
 // Helper: carga un script externo sólo una vez y devuelve una Promise
 function loadScript(src, globalName) {
@@ -129,7 +130,7 @@ function cargarVista(url) {
 
       // 🛠️ Inicialización específica por vista
       if (url === "ultimosCapitulos.html") {
-          window.ocultarDisqus?.();
+        window.ocultarDisqus?.();
         initUltimosCapitulos();
       } else if (url === "counts.html") {
         // Cargar Chart.js y plugin antes de renderizar para evitar carga global innecesaria
@@ -167,21 +168,9 @@ function cargarVista(url) {
           } else {
             attachLoginListeners(); // listeners aunque ya esté cargado
           }
-     } else if (url === "usuario.html") {
-        // si no hay sesión, redirige y no cargas el script
-        //if (!localStorage.getItem('usuario_id')) { window.location.replace('/'); return; }
-      
-        const existing = document.querySelector('script[src="/js/usuario.js"], script[src="js/usuario.js"]');
-        if (!existing) {
-          const script = document.createElement('script');
-          script.src = '/js/usuario.js';
-          script.async = false;
-          script.onload = () => window.initUsuario();
-          script.onerror = () => console.error('Error cargando /js/usuario.js');
-          document.body.appendChild(script);
-        } else {
-          window.initUsuario();
-        }
+      } else if (url === "usuario.html") {
+        window.ocultarDisqus?.();
+        initUltimosCapitulos();
       }
 /*
       else if (url === "usuario.html") {
@@ -300,6 +289,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
