@@ -167,14 +167,21 @@ function cargarVista(url) {
           } else {
             attachLoginListeners(); // listeners aunque ya esté cargado
           }
-      } else if (url === "usuario.html") {
-        const usuarios = '/js/usuario.js';
-        const datalabelsUrl = 'https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0';
-        loadScript(usuarios, 'Chart')
-          .then(() => initUsuario())
-          .catch(err => {
-            initUsuario(); // intentar cargar de todos modos
-          });
+     } else if (url === "usuario.html") {
+        // si no hay sesión, redirige y no cargas el script
+        //if (!localStorage.getItem('usuario_id')) { window.location.replace('/'); return; }
+      
+        const existing = document.querySelector('script[src="/js/usuario.js"], script[src="js/usuario.js"]');
+        if (!existing) {
+          const script = document.createElement('script');
+          script.src = '/js/usuario.js';
+          script.async = false;
+          script.onload = () => window.initUsuario();
+          script.onerror = () => console.error('Error cargando /js/usuario.js');
+          document.body.appendChild(script);
+        } else {
+          window.initUsuario();
+        }
       }
 /*
       else if (url === "usuario.html") {
@@ -293,6 +300,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
