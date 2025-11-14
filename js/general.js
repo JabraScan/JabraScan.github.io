@@ -167,6 +167,22 @@ function cargarVista(url) {
           } else {
             attachLoginListeners(); // listeners aunque ya esté cargado
           }
+      } else if (url === "usuario.html") {
+        const existing = document.querySelector('script[src="js/usuario.js"]');
+        if (!existing) {
+          const script = document.createElement("script");
+          script.src = "js/usuario.js";
+          script.onload = () => {
+            if (window.initUsuario) window.initUsuario();
+          };
+          script.onerror = () => console.error("Error cargando js/usuario.js");
+          document.body.appendChild(script);
+        } else {
+          // si el script ya estaba en la página, asumimos que ya se ejecutó y la función está disponible
+          if (window.initUsuario) window.initUsuario();
+        }
+      }
+/*
       }  else if (url === "usuario.html") {
         const existing = document.querySelector('script[src="js/usuario.js"]');
         if (!existing) {
@@ -178,6 +194,7 @@ function cargarVista(url) {
           initUsuario();
         }
       }
+*/
       // Puedes añadir más inicializaciones aquí si lo necesitas
     })
     .catch(err => console.error("Error:", err));
@@ -278,5 +295,6 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
