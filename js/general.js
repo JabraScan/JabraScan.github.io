@@ -172,12 +172,10 @@ function cargarVista(url) {
         if (!existing) {
           const script = document.createElement("script");
           script.src = "js/usuario.js";
-          script.onload = () => {
-            if (typeof initUsuario === "function") initUsuario();
-          };
+          script.onload = initUsuario();
           document.body.appendChild(script);
         } else {
-          if (typeof initUsuario === "function") initUsuario();
+          initUsuario();
         }
       }
       // Puedes añadir más inicializaciones aquí si lo necesitas
@@ -281,3 +279,4 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
