@@ -14,7 +14,7 @@
 		<valoracion>9.0</valoracion>
 		<tipoobra>Novela Web</tipoobra>
 		<categoria>Drama, Romance, Acción, Comedia, Fantasía, Aventura, Ecchi, sobrenatural, Magia</categoria>
-		<imagen>CallateDragonaMalvada.webp</imagen>
+		<imagen>CallateDragonaMalvada/CallateDragonaMalvada.webp</imagen>
 		<imagen>shut-up-evil-dragon-i-dont-want-to-raise-a-child-with-v0_1.webp</imagen>
 		<imagen>shut-up-evil-dragon-i-dont-want-to-raise-a-child-with-v0_2.webp</imagen>
 		<fechaCreacion>24/08/2025</fechaCreacion>
@@ -422,7 +422,7 @@ He tardado diez años en escribir este libro.
 		<discord></discord>
 		<bannerOpcional></bannerOpcional>
 		<wiki></wiki>
-    </obra>
+	</obra>
 	<obra>
 		<visible>si</visible>
 		<clave>MyCollegeTeacherMyChildrenMom</clave>
@@ -497,8 +497,8 @@ He tardado diez años en escribir este libro.
 		<clave>ShadowSlave</clave>
 		<nombreobra>Shadow Slave</nombreobra>
 		<nombreobra>Esclavo de la Sombra</nombreobra>
-        <nombreobra>Nightmare Spell</nombreobra>
-        <nombreobra>Awakened Chronicles</nombreobra>
+		<nombreobra>Nightmare Spell</nombreobra>
+		<nombreobra>Awakened Chronicles</nombreobra>
 		<nombreobra>Slave of Shadows</nombreobra>
 		<autor>Guiltythree</autor>
 		<sinopsis>Creciendo en la pobreza, Sunny nunca esperó nada bueno de la vida. Sin embargo, ni siquiera él anticipó ser elegido por el Hechizo de la Pesadilla y convertirse en uno de los Despiertos, un grupo de élite de personas dotadas de poderes sobrenaturales. Transportado a un mundo mágico en ruinas, se encontró enfrentándose a terribles monstruos y a otros Despiertos en una batalla mortal por la supervivencia. Lo que es peor, el poder divino que recibió resultó tener un pequeño, pero potencialmente fatal efecto secundario...</sinopsis>
@@ -546,10 +546,10 @@ He tardado diez años en escribir este libro.
 		<visible>si</visible>
 		<clave>Suzume</clave>
 		<nombreobra>Suzume no Tojimari</nombreobra>
-        <nombreobra>すずめの戸締まり</nombreobra>
-    	<nombreobra>Suzume’s Journey</nombreobra>
-        <nombreobra>Suzume’s Locking Up of Doors</nombreobra>
-        <nombreobra>Suzume’s Door-Locking</nombreobra>
+		<nombreobra>すずめの戸締まり</nombreobra>
+		<nombreobra>Suzume’s Journey</nombreobra>
+		<nombreobra>Suzume’s Locking Up of Doors</nombreobra>
+		<nombreobra>Suzume’s Door-Locking</nombreobra>
 		<autor>Makoto Shinkai (新海 誠)</autor>
 		<sinopsis>Una joven de 17 años llamada Suzume ayuda a un misterioso joven a cerrar las puertas de otro mundo, que están provocando desastres en todo Japón.</sinopsis>
 		<valoracion>9.0</valoracion>
@@ -572,11 +572,11 @@ He tardado diez años en escribir este libro.
 		<clave>TheEminenceInShadow</clave>
 		<nombreobra>The Eminence in Shadow</nombreobra>
 		<nombreobra>La Eminencia en la Sombra</nombreobra>
-        <nombreobra>陰の実力者になりたくて!</nombreobra>
-        <nombreobra>Kage no Jitsuryokusha ni Naritakute!</nombreobra>
-        <nombreobra>TEIS</nombreobra>
-        <nombreobra>KageJitsu</nombreobra>
-        <nombreobra>Shadow-sama</nombreobra>
+		<nombreobra>陰の実力者になりたくて!</nombreobra>
+		<nombreobra>Kage no Jitsuryokusha ni Naritakute!</nombreobra>
+		<nombreobra>TEIS</nombreobra>
+		<nombreobra>KageJitsu</nombreobra>
+		<nombreobra>Shadow-sama</nombreobra>
 		<autor>逢沢大介, 坂野杏梨</autor>
 		<sinopsis>Tal cual como todos adoraban héroes en su niñez, cierto adolescente adoraba los poderes que se esconden en las sombras. Tras haber ocultado su fuerza y viviendo la vida mediocre de un mob durante el día y entrenando descontroladamente por la noche, él finalmente reencarna en un mundo diferente y gana el poder definitivo. El adolescente que solo juega a ser una eminencia en las sombras, sus subordinados confusos, y una gigante organización en las sombras que es pisoteada... Esta es la historia de un adolescente que adoraba esos poderes en las sombras y que posiblemente llegue a reinar en las sombras de otro mundo.</sinopsis>
 		<valoracion>9.0</valoracion>
