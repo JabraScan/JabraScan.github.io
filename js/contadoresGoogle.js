@@ -79,7 +79,7 @@ export function leerVisitas(idvisitado) {
 export function valorarRecurso(idvisitado, valor) {
   // Recuperamos el user_id guardado en localStorage (debe contener el token/JWT)
   const usuarioId = localStorage.getItem("user_id") || "null";
-  const token = localStorage.getItem("token") || "null";
+  const token = localStorage.getItem("jwt") || "null";
   // URL de Google (igual que antes)
   const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=valorar&valor=${encodeURIComponent(valor)}&usuario_id=${encodeURIComponent(usuarioId)}`;
   // URL y opciones para Cloudflare (POST)
