@@ -31,9 +31,53 @@ class ImageProcessor:
         self.base_dir = Path(base_dir) if base_dir else Path.cwd()
         self.img_dir = self.base_dir / 'img'
         
+    def convert_to_webp(self, image_path, output_dir):
+        """
+        Convierte una imagen a formato WebP si no lo es.
+
+        Args:
+            image_path: Ruta a la imagen original.
+            output_dir: Directorio donde se guardará la imagen convertida.
+
+        Returns:
+            Path: Ruta de la imagen convertida.
+        """
+        image_path = Path(image_path)
+        output_dir = Path(output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        # Verificar si la imagen ya es WebP
+        if image_path.suffix.lower() == '.webp':
+            return image_path
+
+        try:
+            with Image.open(image_path) as img:
+                # Convertir a RGB si es necesario
+                if img.mode in ('RGBA', 'P', 'LA'):
+                    background = Image.new('RGB', img.size, (255, 255, 255))
+                    if img.mode == 'P':
+                        img = img.convert('RGBA')
+                    if img.mode in ('RGBA', 'LA'):
+                        background.paste(img, mask=img.split()[-1])
+                        img = background
+                    else:
+                        img = img.convert('RGB')
+                elif img.mode != 'RGB':
+                    img = img.convert('RGB')
+
+                # Guardar como WebP
+                output_filename = f"{image_path.stem}.webp"
+                output_path = output_dir / output_filename
+                img.save(output_path, 'WebP', quality=80, method=6)
+                print(f"Convertido a WebP: {output_path}")
+                return output_path
+
+        except Exception as e:
+            raise Exception(f"Error al convertir {image_path} a WebP: {str(e)}")
+
     def process_image(self, image_path, output_dir=None):
         """
-        Procesa una imagen y genera las versiones responsivas
+        Procesa una imagen, la convierte a WebP si no lo es, y genera las versiones responsivas
         
         Args:
             image_path: Ruta a la imagen original
@@ -43,10 +87,10 @@ class ImageProcessor:
             dict: Rutas de las imágenes generadas
         """
         image_path = Path(image_path)
-        
+
         if not image_path.exists():
             raise FileNotFoundError(f"No se encontró la imagen: {image_path}")
-        
+
         # Crear directorio de salida si no existe
         if output_dir is None:
             # Crear carpeta con el nombre del archivo (sin extensión)
@@ -54,7 +98,11 @@ class ImageProcessor:
         
         output_dir = Path(output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
-        
+
+        # Convertir a WebP si no lo es
+        if image_path.suffix.lower() != '.webp':
+            image_path = self.convert_to_webp(image_path, output_dir)
+
         # Abrir imagen original
         try:
             with Image.open(image_path) as img:
