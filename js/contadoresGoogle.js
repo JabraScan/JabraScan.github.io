@@ -95,6 +95,7 @@ export function valorarRecurso(idvisitado, valor) {
       valoracion: valor
     })
   };
+   console.log(cfOptions);
   // Hacemos primero el POST a Cloudflare (no bloqueante respecto a la llamada a Google)
   fetch(urlCF, cfOptions)
     .then(res => res.json().catch(() => ({ ok: false, status: res.status })))
