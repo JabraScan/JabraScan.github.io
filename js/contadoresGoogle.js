@@ -92,8 +92,7 @@ export function valorarRecurso(idvisitado, valor) {
     },
     body: JSON.stringify({
       id_obra: idvisitado,
-      valoracion: valor,
-      origen: 'web'
+      valoracion: valor
     })
   };
   // Hacemos primero el POST a Cloudflare (no bloqueante respecto a la llamada a Google)
