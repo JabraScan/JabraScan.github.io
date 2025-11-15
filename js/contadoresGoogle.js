@@ -20,7 +20,7 @@
 const URL_GOOGLE = "https://script.google.com/macros/s/AKfycbwQNm88siN8ASQXXbNYe-J7klvE0SGWJrih_Tia9wRyzitWYPelCz6dlrJIhNuYRFXg3Q/exec"; //v24
 
 // URL del Cloudflare Worker que replica el flujo (ajusta al tuyo)
-const URL_CLOUDFLARE = "https://jabrascan.net/"; // TODO: cambia por tu ruta real
+const URL_CLOUDFLARE = "https://jabrascan.net"; // TODO: cambia por tu ruta real
 
 //const API_KEY = "X%B~ZiP?RJA5LUGVAU_9KgDp?7~rUX8KW2D9Q3Fgiyt=1.]Ww#a^FGEMFuM:}#WP4r2L!e9U?fA+qcUjReWV"; // Opcional, si tu backend lo requiere
 /*// 🔐 Genera un token temporal codificado en base64
