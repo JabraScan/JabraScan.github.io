@@ -271,6 +271,7 @@
 @media only screen and (max-width: 1200px) {
     body.ios .lista-libros {
         display: block;
+        padding: var(--spacing-md);
     }
 
     body.ios .book-list,
@@ -278,6 +279,22 @@
     body.ios .book-card-main,
     body.ios .book-card-main.libro-item {
         display: none !important;
+    }
+
+    /* Ajustes para la lista en pantallas pequeñas */
+    body.ios .item-libro {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+        background: var(--color-white);
+        border-radius: var(--border-radius-md);
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    body.ios .item-libro .imagen-contenedor {
+        width: 90px;
+        min-width: 90px;
+        height: 130px;
     }
 }
 
@@ -327,5 +344,21 @@
     .chapter-list,
     .book-detail {
         -webkit-overflow-scrolling: touch;
+    }
+
+    /* Fix para renderizado de imágenes en iOS Safari */
+    .book-card-main .imagen-contenedor,
+    .book-card-main .imagen-contenedor img,
+    .book-card-main .card-img-top {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    /* Asegurar que las imágenes no tengan espacios en blanco */
+    .book-card-main .imagen-contenedor img {
+        vertical-align: middle;
+        line-height: 0;
     }
 }

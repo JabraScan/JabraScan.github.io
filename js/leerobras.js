@@ -92,10 +92,11 @@ document.addEventListener("DOMContentLoaded", function () {
         img.alt = nombreobra;
         img.loading = "lazy"; // Lazy loading para mejorar rendimiento
         
-        // Establecer dimensiones intrínsecas para evitar layout shift (CLS)
-        // Proporción 4:5 (600x750) - el CSS controlará el tamaño final mostrado
-        img.width = 600;
-        img.height = 750;
+        // Establecer dimensiones intrínsecas que coincidan con el aspect ratio del CSS
+        // CSS usa height: 280px con width: 100%, aspecto ~4:3 o similar
+        // Usamos dimensiones proporcionales para evitar layout shift en iOS
+        img.width = 280;
+        img.height = 280;
 
         // Solo agregar srcset si la imagen tiene una estructura de carpeta (probablemente tiene versiones optimizadas)
         if (imagen.includes('/')) {
