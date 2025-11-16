@@ -2,9 +2,9 @@
 // Config y constantes
 // -------------------------
 const API_BASE = "https://jabrascan.net";
-let usuario_id = localStorage.getItem("user_id");
-let nickname = localStorage.getItem("user_nickname");
-let letavatar = localStorage.getItem("user_avatar");
+const usuario_id = localStorage.getItem("user_id");
+const nickname = localStorage.getItem("user_nickname");
+const avatar = localStorage.getItem("user_avatar");
 const token = localStorage.getItem("jwt");
 
 // -------------------------
@@ -64,7 +64,7 @@ export async function cargarPerfil() {
   const url = token
     ? `${API_BASE}/usuarios/get`
     : `${API_BASE}/usuarios/get?usuario_id=${encodeURIComponent(usuario_id)}`;
-  console.log(`url : ${url} - user ${usuario_id} - token ${!!token}`);
+  console.log(`url : ${url} - user ${usuario_id} - token ${token}`);
 
   const res = await authFetch(url);
   const data = await res.json();
