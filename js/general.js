@@ -3,7 +3,7 @@ import { initUltimosCapitulos } from './ultimoscapitulos.js';
 import { abrirLectorPDF } from './lector.js';
 import { cargarlibro } from './libroficha.js';
 import { renderResumenObras } from './contador.js';
-//import { initUsuario } from './usuario.js';
+import { initUsuario } from './usuario.js';
 
 // Helper: carga un script externo sólo una vez y devuelve una Promise
 function loadScript(src, globalName) {
@@ -170,10 +170,6 @@ function cargarVista(url) {
           }
       } else if (url === "usuario.html") {
         window.ocultarDisqus?.();
-        //initUsuario();
-      }
-/*
-      else if (url === "usuario.html") {
         const existing = document.querySelector('script[src="/js/usuario.js"]');
         if (!existing) {
           const script = document.createElement("script");
@@ -188,7 +184,6 @@ function cargarVista(url) {
           if (window.initUsuario) window.initUsuario();
         }
       }
-*/
       // Puedes añadir más inicializaciones aquí si lo necesitas
     })
     .catch(err => console.error("Error:", err));
@@ -289,6 +284,8 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
+
 
 
 
