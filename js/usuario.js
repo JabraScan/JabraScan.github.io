@@ -6,10 +6,12 @@ const API_BASE = "https://jabrascan.net";
 // -------------------------
 // Redirección si no hay login (no bloquea el resto del código)
 // -------------------------
-const usuario_id = localStorage.getItem("usuario_id");
-if (!usuario_id) {
-  // si no hay usuario, redirige a la raíz
-  window.location.replace("/");
+const path = window.location.pathname.split('/').pop(); // obtiene el nombre del archivo
+if (path === 'usuario.html' || path === 'login.html') {
+  const usuario_id = localStorage.getItem('usuario_id');
+  if (!usuario_id) {
+    window.location.replace('/');
+  }
 }
 
 // -------------------------
