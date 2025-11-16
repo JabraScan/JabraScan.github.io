@@ -57,7 +57,7 @@ export async function cargarPerfil() {
   const url = token
     ? `${API_BASE}/usuarios/get`
     : `${API_BASE}/usuarios/get?usuario_id=${encodeURIComponent(usuario_id)}`;
-
+console.log(url);
   const res = await authFetch(url);
   const data = await res.json();
 
@@ -67,7 +67,7 @@ export async function cargarPerfil() {
 
   if (idEl) idEl.textContent = data.usuario_id || usuario_id;
   if (nickEl) nickEl.textContent = data.nick || "(sin nick)";
-  if (avatarEl) avatarEl.src = data.avatar || "https://via.placeholder.com/80";
+  if (avatarEl) avatarEl.src = data.avatar || "/img/avatar/default.webp";
 }
 
 export async function cargarBiblioteca() {
