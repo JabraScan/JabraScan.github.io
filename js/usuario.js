@@ -2,7 +2,9 @@
 // Config y constantes
 // -------------------------
 const API_BASE = "https://jabrascan.net";
-const usuario_id = localStorage.getItem('usuario_id');
+let usuario_id = localStorage.setItem("user_id", userId);
+let nickname = localStorage.setItem("user_nickname", nickname);
+let letavatar = localStorage.setItem("user_avatar", avatar);
 const token = localStorage.getItem("jwt");
 const path = window.location.pathname.split('/').pop(); // obtiene el nombre del archivo
 
