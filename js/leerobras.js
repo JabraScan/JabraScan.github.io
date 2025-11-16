@@ -88,17 +88,30 @@ document.addEventListener("DOMContentLoaded", function () {
         const imagenPath = imagen.replace(/\.(jpg|jpeg|png|webp)$/i, '');
         
         // Usar imagen original como src principal (fallback)
-        img.src = `../img/${imagen}`;
+        img.src = `img/${imagen}`;
         img.alt = nombreobra;
+        img.loading = "lazy"; // Lazy loading para mejorar rendimiento
+        
+        // Establecer dimensiones intrínsecas para evitar layout shift (CLS)
+        // Proporción 4:5 (600x750) - el CSS controlará el tamaño final mostrado
+        img.width = 600;
+        img.height = 750;
 
         // Solo agregar srcset si la imagen tiene una estructura de carpeta (probablemente tiene versiones optimizadas)
         if (imagen.includes('/')) {
           const webpPath = imagenPath;
           // Aplicar srcset directamente - el navegador usará src como fallback si las versiones optimizadas no existen
-          img.srcset = `../img/${webpPath}-300w.webp 300w, ../img/${webpPath}-600w.webp 600w, ../img/${webpPath}-900w.webp 900w`;
-          // sizes adaptado al grid responsive de Bootstrap:
-          // móvil (100vw) → tablet-sm (50vw) → tablet-md (33vw) → desktop (25vw) → desktop-xl (20vw)
-          img.sizes = "(max-width: 576px) 100vw, (max-width: 768px) 50vw, (max-width: 992px) 33vw, (max-width: 1200px) 25vw, 20vw";
+          img.srcset = `img/${webpPath}-300w.webp 300w, img/${webpPath}-600w.webp 600w, img/${webpPath}-900w.webp 900w`;
+          // sizes optimizado considerando DPR (Device Pixel Ratio):
+          // En móvil, las cards ocupan ~180-200px → con DPR 2-3x necesitan 300w-600w
+          // En tablet, ocupan ~240-300px → con DPR 2x necesitan 600w
+          // En desktop, ocupan ~280-350px → necesitan 600w-900w
+          const dpr = window.devicePixelRatio || 1;
+          if (dpr > 2) {
+            img.sizes = "(max-width: 576px) 50vw, (max-width: 768px) 33vw, (max-width: 992px) 25vw, 20vw";
+          } else {
+            img.sizes = "(max-width: 576px) 100vw, (max-width: 768px) 50vw, (max-width: 992px) 33vw, (max-width: 1200px) 25vw, 20vw";
+          }
         }
 
         imagenContenedor.appendChild(img);
@@ -255,8 +268,21 @@ document.addEventListener("DOMContentLoaded", function () {
           .catch((err) => console.error("❌ Error cargando capítulos:", err));
         promesasCapitulos.push(promesaCapitulo);
 
-        const imagenContenedorA = imagenContenedor.cloneNode(true);
-        const imagenContenedorB = imagenContenedor.cloneNode(true);
+        // Función auxiliar para clonar imagen con srcset
+        const clonarImagenConSrcset = (contenedor) => {
+          const clone = contenedor.cloneNode(true);
+          const imgOriginal = contenedor.querySelector('img');
+          const imgClone = clone.querySelector('img');
+          if (imgOriginal && imgClone) {
+            // Copiar explícitamente los atributos srcset y sizes
+            if (imgOriginal.srcset) imgClone.srcset = imgOriginal.srcset;
+            if (imgOriginal.sizes) imgClone.sizes = imgOriginal.sizes;
+          }
+          return clone;
+        };
+
+        const imagenContenedorA = clonarImagenConSrcset(imagenContenedor);
+        const imagenContenedorB = clonarImagenConSrcset(imagenContenedor);
 
         // Agregar la imagen como card-img-top dentro del article
         const cardImg = imagenContenedorA.querySelector('img');
