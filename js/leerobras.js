@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
         itemBookNOpc.innerHTML = `
           <div class="info-libro">
             <p class="clave">${clave}</p>
-            <strong>${nombreobra}</strong><br>
+            <strong>${nombreobra}</strong>
             Autor: <span>${autor}</span><br>
             Estado: <span class="${estado}">${estado}</span><br>
           </div>
