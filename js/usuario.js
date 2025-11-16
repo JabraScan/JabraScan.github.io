@@ -57,7 +57,7 @@ export async function cargarPerfil() {
   const url = token
     ? `${API_BASE}/usuarios/get`
     : `${API_BASE}/usuarios/get?usuario_id=${encodeURIComponent(usuario_id)}`;
-console.log(url);
+console.log(`url : ${url} - user ${usuario_id} - token ${token}`);
   const res = await authFetch(url);
   const data = await res.json();
 
