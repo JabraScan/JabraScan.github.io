@@ -20,16 +20,43 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-.book-card-main .card-img-top {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    display: block;
-}
-
+/* Contenedor de imagen - define las dimensiones principales */
 .book-card-main .imagen-contenedor {
     position: relative;
     width: 100%;
+    height: 280px;
+    overflow: hidden;
+    display: block;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+    /* Fixes para iOS Safari */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* La imagen dentro del contenedor */
+.book-card-main .imagen-contenedor img,
+.book-card-main .card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: bottom;
+    /* Fixes para iOS Safari */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* Asegurar que el card no tenga espacios internos problemáticos */
+.book-card-main.card {
+    padding: 0;
+    margin: 0;
 }
 
 .book-card-main .card-title {
@@ -184,14 +211,31 @@
 .item-libro {
     display: flex;
     align-items: flex-start;
+    gap: var(--spacing-md);
     margin-bottom: var(--spacing-md);
     border-bottom: 1px solid #ccc;
     padding-bottom: var(--spacing-md);
     cursor: pointer;
 }
 
+/* Contenedor de imagen en la lista iOS */
+.item-libro .imagen-contenedor {
+    position: relative;
+    width: 100px;
+    min-width: 100px;
+    height: 140px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.item-libro .imagen-contenedor img,
 .item-libro img {
-    max-height: 8em;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .portada {
@@ -202,15 +246,29 @@
 }
 
 .info-libro {
-    margin-left: var(--spacing-sm);
+    flex: 1;
+    min-width: 0;
 }
 
 .info-libro p {
     margin: 0 0 5px;
+    font-size: var(--font-size-sm);
 }
 
 .info-libro strong {
     font-size: var(--font-size-lg);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5em;
+    line-height: 1.3;
+}
+
+.info-libro .clave {
+    display: none;
+}
+
+.info-libro span {
+    font-size: var(--font-size-md);
 }
 
 /* Efectos y etiquetas especiales */
