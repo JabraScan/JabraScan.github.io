@@ -6,17 +6,18 @@ let usuario_id = localStorage.setItem("user_id", user_id);
 let nickname = localStorage.setItem("user_nickname", nickname);
 let letavatar = localStorage.setItem("user_avatar", avatar);
 const token = localStorage.getItem("jwt");
-const path = window.location.pathname.split('/').pop(); // obtiene el nombre del archivo
 
 // -------------------------
 // Redirección si no hay login (no bloquea el resto del código)
 // -------------------------
-if (path === 'usuario.html' || path === 'login.html') {
-  if (!usuario_id) {
+  function getHashPage() {
+    return (location.hash || '').replace(/^#\/?/, '').split(/[?#]/, 1)[0].replace(/\/$/, '');
+  }
+  const protectedPages = new Set(['usuario', 'usuario.html', 'login', 'login.html']);
+  const page = getHashPage();
+  if (protectedPages.has(page) && !usuario_id) {
     window.location.replace('/');
   }
-}
-
 // -------------------------
 // Helpers
 // -------------------------
