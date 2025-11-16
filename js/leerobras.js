@@ -86,33 +86,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Extraer la ruta base y extensión de la imagen
         const imagenPath = imagen.replace(/\.(jpg|jpeg|png|webp)$/i, '');
-        const imagenExt = imagen.match(/\.(jpg|jpeg|png|webp)$/i)?.[0] || '.webp';
-
-        // Usar imagen original como src principal y fallback
+        
+        // Usar imagen original como src principal (fallback)
         img.src = `../img/${imagen}`;
         img.alt = nombreobra;
 
-        // Solo agregar srcset si la imagen tiene una estructura de carpeta
+        // Solo agregar srcset si la imagen tiene una estructura de carpeta (probablemente tiene versiones optimizadas)
         if (imagen.includes('/')) {
-          const webpPath = imagenPath.replace(/\.(jpg|jpeg|png)$/i, '');
-          const srcsetCandidates = [
-            `../img/${webpPath}-300w.webp 300w`,
-            `../img/${webpPath}-600w.webp 600w`,
-            `../img/${webpPath}-900w.webp 900w`
-          ];
-
-          // Intentar cargar la versión optimizada de menor tamaño para verificar existencia
-          const testImg = new Image();
-          testImg.onload = function () {
-            // Si se carga exitosamente, aplicar srcset completo
-            img.srcset = srcsetCandidates.join(', ');
-            img.sizes = "(max-width: 600px) 100vw, 257px";
-          };
-          testImg.onerror = function () {
-            // Si falla, mantener solo src original (ya asignado)
-            console.info(`Versiones optimizadas no disponibles para ${imagen}, usando imagen original`);
-          };
-          testImg.src = `../img/${webpPath}-300w.webp`;
+          const webpPath = imagenPath;
+          // Aplicar srcset directamente - el navegador usará src como fallback si las versiones optimizadas no existen
+          img.srcset = `../img/${webpPath}-300w.webp 300w, ../img/${webpPath}-600w.webp 600w, ../img/${webpPath}-900w.webp 900w`;
+          // sizes adaptado al grid responsive de Bootstrap:
+          // móvil (100vw) → tablet-sm (50vw) → tablet-md (33vw) → desktop (25vw) → desktop-xl (20vw)
+          img.sizes = "(max-width: 576px) 100vw, (max-width: 768px) 50vw, (max-width: 992px) 33vw, (max-width: 1200px) 25vw, 20vw";
         }
 
         imagenContenedor.appendChild(img);
