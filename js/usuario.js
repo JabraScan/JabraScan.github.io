@@ -153,3 +153,163 @@ window.usuarioAPI = {
   cargarBiblioteca,
   cargarObras
 };
+
+//carga de imagenes de avatar dinámica
+document.addEventListener('DOMContentLoaded', () => {
+  // Referencias al botón de la pestaña y al contenedor donde se mostrarán los avatares
+  const avatarTabBtn = document.querySelector('#avatar-tab');
+  const avatarResultEl = document.querySelector('#avatarResultado');
+  if (!avatarTabBtn || !avatarResultEl) return; // protección por si cambian IDs
+
+  // Flags para evitar recargas / reentradas
+  let avatarsLoaded = false;       // true una vez que ya se han renderizado (éxito o fallo)
+  let loadingInProgress = false;   // true mientras se está haciendo fetch/parsing
+
+  /**
+   * renderAvatars(list)
+   * list: array de { src: string, alt: string }
+   * Construye y sustituye el contenido de avatarResultEl por una rejilla Bootstrap.
+   */
+  function renderAvatars(list) {
+    const row = document.createElement('div');
+    row.className = 'row g-2';
+
+    list.forEach(item => {
+      const col = document.createElement('div');
+      col.className = 'col-6 col-sm-4 col-md-3 col-lg-2';
+
+      const card = document.createElement('div');
+      card.className = 'card p-1 text-center';
+
+      const img = document.createElement('img');
+      img.src = item.src;             // ruta relativa: img/avatar/<nombre>
+      img.alt = item.alt || '';
+      img.className = 'img-fluid rounded';
+      img.style.cursor = 'pointer';
+
+      // Click en imagen: marcar selección visualmente (no guarda nada por defecto)
+      img.addEventListener('click', () => {
+        // des-marcar cualquier selección previa
+        document.querySelectorAll('#avatarResultado img.selected')
+          .forEach(i => i.classList.remove('selected','border','border-primary'));
+        // marcar la seleccionada
+        img.classList.add('selected','border','border-primary');
+
+        // Aquí puedes llamar a tu función para persistir la selección (no incluida)
+        // ej: saveAvatarSelection(item.src);
+      });
+
+      const caption = document.createElement('div');
+      caption.className = 'small text-truncate mt-1';
+      caption.textContent = item.alt || '';
+
+      card.appendChild(img);
+      card.appendChild(caption);
+      col.appendChild(card);
+      row.appendChild(col);
+    });
+
+    // Reemplazar contenido del contenedor
+    avatarResultEl.innerHTML = '';
+    avatarResultEl.appendChild(row);
+  }
+
+  /**
+   * extractImageNamesFromHtml(htmlText)
+   * - Parsea el HTML de un listado de directorio (index) y extrae nombres de ficheros
+   * - Busca en <a href> y <img src>
+   * - Filtra sólo extensiones de imagen (webp|jpg|jpeg|png)
+   * - Ignora rutas externas absolutas
+   * - Devuelve array de nombres (sin ruta), orden estable y deduplicado
+   */
+  function extractImageNamesFromHtml(htmlText) {
+    const doc = new DOMParser().parseFromString(htmlText, 'text/html');
+    const candidates = new Set();
+
+    // Recoger posibles rutas desde enlaces y desde imágenes
+    Array.from(doc.querySelectorAll('a[href]')).forEach(a => {
+      const href = a.getAttribute('href');
+      if (href) candidates.add(href);
+    });
+    Array.from(doc.querySelectorAll('img[src]')).forEach(i => {
+      const src = i.getAttribute('src');
+      if (src) candidates.add(src);
+    });
+
+    // Filtrar y normalizar sólo ficheros de imagen locales
+    const imgs = [];
+    const IMG_RE = /\.(webp|jpe?g|png)$/i;
+
+    candidates.forEach(p => {
+      // ignorar URLs absolutas (externas)
+      if (/^https?:\/\//i.test(p)) return;
+      // extraer el nombre del fichero de la ruta (último segmento)
+      const name = p.split('/').filter(Boolean).pop();
+      if (name && IMG_RE.test(name)) imgs.push(name);
+    });
+
+    // Deduplicado y devolución como array estable
+    return Array.from(new Set(imgs));
+  }
+
+  /**
+   * loadAvatarsFromDirectoryIndex()
+   * - Intenta fetch GET /img/avatar/
+   * - Si recibe HTML con enlaces/imagenes, extrae nombres y renderiza
+   * - Si falla (respuesta no ok o no encuentra imágenes), marca como cargado y muestra mensaje
+   *
+   * Nota: según tu petición, **NO** realiza probing de ficheros ni llama a endpoints externos.
+   */
+  async function loadAvatarsFromDirectoryIndex() {
+    // evitar dobles llamadas
+    if (avatarsLoaded || loadingInProgress) return;
+    loadingInProgress = true;
+
+    // indicador visual de carga mientras se resuelve
+    avatarResultEl.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
+
+    try {
+      // Intentar obtener el índice de directorio que el servidor pueda servir
+      // (p.ej. Apache/Nginx con autoindex activo). No se asume otro endpoint.
+      const resp = await fetch('/img/avatar/', { cache: 'no-cache' });
+      if (!resp.ok) throw new Error('no directory index');
+
+      const text = await resp.text();
+      const names = extractImageNamesFromHtml(text);
+
+      // si no se encuentran nombres válidos, consideramos que no hay imágenes
+      if (!names.length) throw new Error('no images in index');
+
+      // Construir lista completa de objetos con ruta y alt
+      const list = names
+        .filter(n => /\.(webp|jpe?g|png)$/i.test(n))
+        .map(n => ({ src: `img/avatar/${n}`, alt: n.replace(/\.(webp|jpe?g|png)$/i, '') }));
+
+      // Renderizar y marcar cargado
+      renderAvatars(list);
+      avatarsLoaded = true;
+      loadingInProgress = false;
+      return;
+    } catch (e) {
+      // Si falla (no hay index, error de red, etc.), mostrar mensaje y no intentar más
+      avatarResultEl.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+      avatarsLoaded = true;         // evitar reintentos posteriores
+      loadingInProgress = false;
+      return;
+    }
+  }
+
+  // Disparadores para cargar una sola vez:
+  // - click en el botón de la pestaña (usuario interactúa)
+  // - shown.bs.tab por Bootstrap (si la pestaña se activa por JS u otros medios)
+  avatarTabBtn.addEventListener('click', () => loadAvatarsFromDirectoryIndex());
+  avatarTabBtn.addEventListener('shown.bs.tab', () => loadAvatarsFromDirectoryIndex());
+
+  // Caso especial: si la pestaña ya está activa al cargar el documento, cargar inmediatamente
+  const pane = document.querySelector('#avatar');
+  if (pane && pane.classList.contains('show') && pane.classList.contains('active')) {
+    loadAvatarsFromDirectoryIndex();
+  }
+});
+
+
