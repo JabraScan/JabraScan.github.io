@@ -7,6 +7,7 @@ const API_BASE = "https://jabrascan.net";
 // Redirección si no hay login (no bloquea el resto del código)
 // -------------------------
 const usuario_id = localStorage.getItem('usuario_id');
+const token = localStorage.getItem("jwt");
 const path = window.location.pathname.split('/').pop(); // obtiene el nombre del archivo
 if (path === 'usuario.html' || path === 'login.html') {
   if (!usuario_id) {
@@ -37,13 +38,27 @@ if (path === 'usuario.html' || path === 'login.html') {
 })();
 
 // -------------------------
+// Helper fetch que inyecta Authorization si hay token
+// -------------------------
+function authFetch(input, init = {}) {
+  const headers = new Headers(init.headers || {});
+  if (token) headers.set("Authorization", `Bearer ${token}`);
+  return fetch(input, { ...init, headers });
+}
+
+// -------------------------
 // API Worker
 // -------------------------
 export async function cargarPerfil() {
-    console.log('carga');
-  if (!usuario_id) return;
-  console.log(  usuario_id);
-  const res = await fetch(`${API_BASE}/usuarios/get?usuario_id=${usuario_id}`);
+  console.log('cargaPerfil');
+  if (!usuario_id && !token) return;
+
+  // Si hay token preferimos usarla (el Worker la toma como preferencia)
+  const url = token
+    ? `${API_BASE}/usuarios/get`
+    : `${API_BASE}/usuarios/get?usuario_id=${encodeURIComponent(usuario_id)}`;
+
+  const res = await authFetch(url);
   const data = await res.json();
 
   const idEl = document.getElementById("usuario_id");
@@ -56,8 +71,13 @@ export async function cargarPerfil() {
 }
 
 export async function cargarBiblioteca() {
-  if (!usuario_id) return;
-  const res = await fetch(`${API_BASE}/biblioteca/list?usuario_id=${usuario_id}`);
+  if (!usuario_id && !token) return;
+
+  const url = token
+    ? `${API_BASE}/biblioteca/list`
+    : `${API_BASE}/biblioteca/list?usuario_id=${encodeURIComponent(usuario_id)}`;
+
+  const res = await authFetch(url);
   const data = await res.json();
 
   const cont = document.getElementById("bibliotecaResultado");
@@ -75,8 +95,13 @@ export async function cargarBiblioteca() {
 }
 
 export async function cargarObras() {
-  if (!usuario_id) return;
-  const perfilRes = await fetch(`${API_BASE}/usuarios/get?usuario_id=${usuario_id}`);
+  if (!usuario_id && !token) return;
+
+  // Recuperar perfil (preferir token)
+  const perfilUrl = token
+    ? `${API_BASE}/usuarios/get`
+    : `${API_BASE}/usuarios/get?usuario_id=${encodeURIComponent(usuario_id)}`;
+  const perfilRes = await authFetch(perfilUrl);
   const perfil = await perfilRes.json();
 
   const cont = document.getElementById("obrasResultado");
@@ -87,13 +112,16 @@ export async function cargarObras() {
     return;
   }
 
-  const obrasRes = await fetch(`${API_BASE}/obras/search?visible=1&uploader=${usuario_id}`);
+  // Llamada al search; mantenemos el parámetro uploader por compatibilidad con clientes antiguos.
+  // El Worker preferirá el token si está presente.
+  const obrasUrl = `${API_BASE}/obras/search?visible=1&uploader=${encodeURIComponent(usuario_id || "")}`;
+  const obrasRes = await authFetch(obrasUrl);
   const obras = await obrasRes.json();
 
   let html = "<ul class='list-group'>";
   obras.forEach(o => {
     html += `<li class="list-group-item">
-      <strong>${o.titulo}</strong><br>
+      <strong>${o.titulo || o.nombreobra || ''}</strong><br>
       Categoría: ${o.categoria || "-"}
     </li>`;
   });
