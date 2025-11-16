@@ -83,8 +83,38 @@ document.addEventListener("DOMContentLoaded", function () {
         const imagenContenedor = document.createElement("div");
         imagenContenedor.classList.add("imagen-contenedor");
         const img = document.createElement("img");
-        img.src = "../img/" + imagen;
+
+        // Extraer la ruta base y extensión de la imagen
+        const imagenPath = imagen.replace(/\.(jpg|jpeg|png|webp)$/i, '');
+        const imagenExt = imagen.match(/\.(jpg|jpeg|png|webp)$/i)?.[0] || '.webp';
+
+        // Usar imagen original como src principal y fallback
+        img.src = `../img/${imagen}`;
         img.alt = nombreobra;
+
+        // Solo agregar srcset si la imagen tiene una estructura de carpeta
+        if (imagen.includes('/')) {
+          const webpPath = imagenPath.replace(/\.(jpg|jpeg|png)$/i, '');
+          const srcsetCandidates = [
+            `../img/${webpPath}-300w.webp 300w`,
+            `../img/${webpPath}-600w.webp 600w`,
+            `../img/${webpPath}-900w.webp 900w`
+          ];
+
+          // Intentar cargar la versión optimizada de menor tamaño para verificar existencia
+          const testImg = new Image();
+          testImg.onload = function () {
+            // Si se carga exitosamente, aplicar srcset completo
+            img.srcset = srcsetCandidates.join(', ');
+            img.sizes = "(max-width: 600px) 100vw, 257px";
+          };
+          testImg.onerror = function () {
+            // Si falla, mantener solo src original (ya asignado)
+            console.info(`Versiones optimizadas no disponibles para ${imagen}, usando imagen original`);
+          };
+          testImg.src = `../img/${webpPath}-300w.webp`;
+        }
+
         imagenContenedor.appendChild(img);
         if (contenido18 === "adulto") {
           imagenContenedor.classList.add("adulto");
@@ -94,12 +124,12 @@ document.addEventListener("DOMContentLoaded", function () {
           imagenContenedor.appendChild(indicador);
         }
         // 👻 generar bloque oculto con los alternativos
-        const hiddenNames = nombresAlternativos.length > 0 
+        const hiddenNames = nombresAlternativos.length > 0
           ? `<div class="hidden-alt-names" style="display:none;">
                ${nombresAlternativos.map(n => `<span style="display:flex;">${n}</span>`).join("")}
              </div>`
           : "";
-          
+
         const itemCarousel = document.createElement("div");
         itemCarousel.className = "custom-carousel-item";
         itemCarousel.innerHTML = `
