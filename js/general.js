@@ -170,9 +170,6 @@ function cargarVista(url) {
           }
       } else if (url === "usuario.html") {
         window.ocultarDisqus?.();
-        //initUsuario();
-      }
-      else if (url === "usuario.html") {
         const existing = document.querySelector('script[src="/js/usuario.js"]');
         if (!existing) {
           const script = document.createElement("script");
@@ -287,6 +284,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
