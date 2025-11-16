@@ -168,7 +168,7 @@ function cargarVista(url) {
           } else {
             attachLoginListeners(); // listeners aunque ya esté cargado
           }
-      } else if (url === "usuario.html") {
+      /*} else if (url === "usuario.html") {
         window.ocultarDisqus?.();
         const existing = document.querySelector('script[src="/js/usuario.js"]');
         if (!existing) {
@@ -183,7 +183,32 @@ function cargarVista(url) {
           // si el script ya estaba en la página, asumimos que ya se ejecutó y la función está disponible
           if (window.initUsuario) window.initUsuario();
         }
+      }*/
+      } else if (url === "usuario.html") {
+        window.ocultarDisqus?.();
+      
+        // Evita cargar dos veces: comprobamos un flag en window
+        if (!window.__usuario_loaded__) {
+          import("/js/usuario.js")
+            .then(module => {
+              if (typeof module.initUsuario === "function") {
+                module.initUsuario();
+              } else {
+                console.error("initUsuario no exportado desde /js/usuario.js");
+              }
+              window.__usuario_loaded__ = true;
+            })
+            .catch(err => console.error("Error importando /js/usuario.js", err));
+        } else {
+          // Ya cargado
+          if (window.initUsuario) window.initUsuario();
+          else {
+            // Si usas import dinámico y no expones en window, puedes mantener un flag
+            console.log("usuario ya cargado");
+          }
+        }
       }
+
       // Puedes añadir más inicializaciones aquí si lo necesitas
     })
     .catch(err => console.error("Error:", err));
@@ -284,6 +309,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
