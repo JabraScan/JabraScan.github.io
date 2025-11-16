@@ -77,7 +77,7 @@ export async function cargarPerfil() {
   if (nickEl) nickEl.textContent = data.nick || "(sin nick)";
   if (avatarEl) avatarEl.src = data.avatar || "/img/avatar/default.webp";
 }
-
+/*
 export async function cargarBiblioteca() {
   if (!usuario_id && !token) return;
 
@@ -100,6 +100,48 @@ export async function cargarBiblioteca() {
   });
   html += "</ul>";
   cont.innerHTML = html;
+}*/
+export async function cargarBiblioteca() {
+  if (!usuario_id && !token) return;
+
+  const url = token
+    ? `${API_BASE}/biblioteca/list`
+    : `${API_BASE}/biblioteca/list?usuario_id=${encodeURIComponent(usuario_id)}`;
+
+  const res = await authFetch(url);
+  const data = await res.json();
+
+  const cont = document.getElementById("bibliotecaResultado");
+  if (!cont) return;
+
+  const ul = document.createElement("ul");
+  ul.className = "list-group";
+    (Array.isArray(data) ? data : []).forEach(item => {
+      const li = document.createElement("li");
+      li.className = "list-group-item d-flex gap-3 align-items-start";
+      li.dataset.obraId = item.obra_id ?? "";
+  
+      // construimos src de imagen sólo si viene o si FALLBACK_IMG está definido
+      const srcCandidate = item.imagen || (item.obra_id ? `/books/${item.obra_id}/${item.imagen || ""}` : "");
+      const imgSrc = srcCandidate || FALLBACK_IMG || "";
+  
+      li.innerHTML = `
+        <img src="${imgSrc}" ${imgSrc ? `onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"` : ''} 
+             alt="${item.nombreobra || 'Portada'}" class="img-thumbnail" style="width:96px;height:128px;object-fit:cover;">
+        <div class="flex-grow-1">
+          <div class="d-flex justify-content-between">
+            <h5 class="mb-1">${item.nombreobra || ''}</h5>
+            <small class="text-muted">${item.estado ? `Estado: ${item.estado}` : ''}</small>
+          </div>
+          <p class="mb-1">Capítulo ${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}: ${item.nombreCapitulo || '-'}</p>
+          <small class="text-muted">Última lectura: ${item.fechaUltimaLectura || '-'}</small>
+          <input type="hidden" class="obra-id" value="${item.obra_id ?? ''}">
+        </div>
+      `;
+  
+      ul.appendChild(li);
+    });
+  cont.appendChild(ul);
 }
 
 export async function cargarObras() {
