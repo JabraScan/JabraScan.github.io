@@ -102,6 +102,14 @@ JabraScan.github.io/
 - **`libroficha.js`**: Visualización de páginas individuales de obras
 - **`ultimoscapitulos.js`**: Feed de últimos capítulos publicados
 
+## Optimización de Imágenes
+
+El proyecto incluye el script `scripts/generate_responsive_images.py` para generar imágenes responsivas en formato WebP y diferentes resoluciones.
+
+Para instrucciones detalladas y ejemplos de uso, consulta el archivo:
+
+- [`GUÍA_IMÁGENES_RESPONSIVAS.md`](scripts\GUÍA_IMÁGENES_RESPONSIVAS.md)
+
 ## Buenas Prácticas
 
 ### Evitar
