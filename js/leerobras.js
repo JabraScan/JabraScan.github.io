@@ -97,7 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // Usamos dimensiones proporcionales para evitar layout shift en iOS
         img.width = 280;
         img.height = 280;
-
+        // Mejora para paint: decodificación asíncrona (no altera loading ni comportamiento)
+        img.decoding = "async";
         // Solo agregar srcset si la imagen tiene una estructura de carpeta (probablemente tiene versiones optimizadas)
         if (imagen.includes('/')) {
           const webpPath = imagenPath;
@@ -114,6 +115,15 @@ document.addEventListener("DOMContentLoaded", function () {
             img.sizes = "(max-width: 576px) 100vw, (max-width: 768px) 50vw, (max-width: 992px) 33vw, (max-width: 1200px) 25vw, 20vw";
           }
         }
+        //Manejo de errores para evitar imagen rota
+        img.onerror = function () {
+          // 1er fallo: intentar la original
+          this.removeAttribute('srcset');
+          this.src = `img/${imagen}`;
+          // reemplaza el handler por el segundo paso
+          this.onerror = function () { this.onerror = null; this.style.display = 'none'; };
+        };
+
 
         imagenContenedor.appendChild(img);
         if (contenido18 === "adulto") {
