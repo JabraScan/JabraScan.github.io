@@ -1,297 +1,266 @@
 #!/usr/bin/env python3
 """
-Script para generar imágenes responsivas en múltiples resoluciones
-Procesa imágenes y genera versiones WebP optimizadas en 900w, 600w y 300w
+generate_responsive_images.py
+
+Script para generar imágenes responsivas en múltiples resoluciones (900w, 600w, 300w)
+Recorre recursivamente el árbol `img/` dentro del directorio base y, para cada imagen
+encontrada, crea una carpeta de salida junto al archivo original con las versiones
+WebP optimizadas únicamente si faltan (no re-genera versiones ya existentes).
+
+Principales características
+- Recorrido recursivo de img/ para encontrar todas las imágenes.
+- Conversión segura a WebP (tratamiento de transparencia y EXIF).
+- Generación únicamente de las versiones ausentes: `<name>-900w.webp`, `<name>-600w.webp`, `<name>-300w.webp`.
+- Evita sobrescribir archivos existentes; no hay opción --force en esta versión.
+- Mensajes informativos y manejo básico de errores para uso en CI (GitHub Actions).
 """
 
-import os
-import sys
 from pathlib import Path
-from PIL import Image
+import sys
 import argparse
+from PIL import Image, ImageOps, UnidentifiedImageError
+
+# ---------------------------------------------------------------------
+# Configuración de tamaños y extensiones
+# ---------------------------------------------------------------------
+SIZES = {
+    '900w': {'width': 900, 'quality': 80},
+    '600w': {'width': 600, 'quality': 75},
+    '300w': {'width': 300, 'quality': 70}
+}
+
+# Extensiones de entrada admitidas (se usan para detectar imágenes).
+IMAGE_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.webp', '.tif', '.tiff', '.bmp'}
 
 
-class ImageProcessor:
-    """Procesa imágenes para generar versiones responsivas"""
-    
-    # Configuraciones según la tabla de especificaciones
-    SIZES = {
-        '900w': {'width': 900, 'quality': 80},
-        '600w': {'width': 600, 'quality': 75},
-        '300w': {'width': 300, 'quality': 70}
-    }
-    
-    def __init__(self, base_dir=None):
-        """
-        Inicializa el procesador
-        
-        Args:
-            base_dir: Directorio base del proyecto (por defecto el actual)
-        """
-        self.base_dir = Path(base_dir) if base_dir else Path.cwd()
-        self.img_dir = self.base_dir / 'img'
-        
-    def convert_to_webp(self, image_path, output_dir):
-        """
-        Convierte una imagen a formato WebP si no lo es.
+# ---------------------------------------------------------------------
+# Utilidades de imagen
+# ---------------------------------------------------------------------
+def open_image_safe(path: Path) -> Image.Image:
+    """
+    Abre una imagen de forma segura aplicando la orientación EXIF si existe.
 
-        Args:
-            image_path: Ruta a la imagen original.
-            output_dir: Directorio donde se guardará la imagen convertida.
+    Args:
+        path: Ruta al archivo de imagen.
 
-        Returns:
-            Path: Ruta de la imagen convertida.
-        """
-        image_path = Path(image_path)
-        output_dir = Path(output_dir)
-        output_dir.mkdir(parents=True, exist_ok=True)
+    Returns:
+        Objeto PIL.Image abierto y con la orientación exif aplicada.
 
-        # Verificar si la imagen ya es WebP
-        if image_path.suffix.lower() == '.webp':
-            return image_path
+    Lanza:
+        Exception con mensaje descriptivo si ocurre un error al abrir o si el
+        formato no es reconocido.
+    """
+    try:
+        img = Image.open(path)
+        # Aplica orientación basada en EXIF (rotaciones automáticas)
+        img = ImageOps.exif_transpose(img)
+        return img
+    except UnidentifiedImageError:
+        raise Exception(f"Formato de imagen no reconocido: {path}")
+    except Exception as e:
+        raise Exception(f"Error abriendo imagen {path}: {e}")
 
+
+def ensure_rgb_for_saving(img: Image.Image) -> Image.Image:
+    """
+    Asegura que la imagen esté en modo RGB listo para guardar en WebP.
+
+    - Si la imagen tiene canal alfa (RGBA/LA) o paleta (P) crea un fondo blanco
+      y aplasta la transparencia para obtener RGB.
+    - Si la imagen ya es RGB la devuelve sin cambios.
+    """
+    if img.mode in ('RGBA', 'LA', 'P'):
+        # Crear un fondo blanco del mismo tamaño
+        background = Image.new('RGB', img.size, (255, 255, 255))
+        # Si la imagen está en paleta, convertimos primero a RGBA para manejar la transparencia
+        if img.mode == 'P':
+            img = img.convert('RGBA')
+        # Si tiene transparencia, pegamos sobre el fondo usando la máscara alfa
+        if img.mode in ('RGBA', 'LA'):
+            background.paste(img, mask=img.split()[-1])
+            img = background
+        else:
+            img = img.convert('RGB')
+    elif img.mode != 'RGB':
+        img = img.convert('RGB')
+    return img
+
+
+def convert_to_webp_if_needed(src_path: Path, output_dir: Path) -> Path:
+    """
+    Convierte la imagen fuente a WebP si no lo es y guarda la versión WebP en
+    output_dir con nombre <stem>.webp.
+
+    - Si la fuente ya es .webp, devuelve la ruta original (no la copia).
+    - Crea output_dir si no existe.
+
+    Args:
+        src_path: Ruta a la imagen original.
+        output_dir: Directorio donde guardar la conversión WebP.
+
+    Returns:
+        Path a la imagen WebP que deberá usarse para redimensionar versiones.
+    """
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Si ya es webp no la convertimos ni copiamos: usaremos el archivo tal cual.
+    if src_path.suffix.lower() == '.webp':
+        return src_path
+
+    webp_path = output_dir / f"{src_path.stem}.webp"
+
+    # Si ya existe la conversión WebP en output_dir la usamos (no sobrescribimos)
+    if webp_path.exists():
+        return webp_path
+
+    # Abrir, procesar y convertir
+    with open_image_safe(src_path) as img:
+        img = ensure_rgb_for_saving(img)
+        # Guardar en WebP con calidad razonable y método de compresión
+        img.save(webp_path, 'WEBP', quality=80, method=6)
+    return webp_path
+
+
+# ---------------------------------------------------------------------
+# Lógica de procesamiento por imagen
+# ---------------------------------------------------------------------
+def process_image(src_path: Path):
+    """
+    Procesa una imagen individual:
+    - Crea un directorio de salida junto a la imagen: <parent>/<stem>/
+    - Convierte la imagen a WebP en ese directorio si no existe la conversión.
+    - Genera únicamente las versiones WebP faltantes: <stem>-900w.webp, <stem>-600w.webp, <stem>-300w.webp.
+    - Si las tres versiones ya existen se omite el procesamiento por completo.
+
+    Args:
+        src_path: Ruta a la imagen origen (archivo).
+    """
+    # Validaciones iniciales
+    if not src_path.exists() or not src_path.is_file():
+        print(f" Saltado (no existe o no es archivo): {src_path}")
+        return
+
+    # Directorio donde se dejarán las salidas (una carpeta por imagen)
+    output_dir = src_path.parent / src_path.stem
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Rutas esperadas para las versiones responsivas
+    expected_paths = {name: (output_dir / f"{src_path.stem}-{name}.webp") for name in SIZES.keys()}
+
+    # Si ya existen todas las versiones, saltamos
+    if all(p.exists() for p in expected_paths.values()):
+        print(f" Omitido (todas las versiones existen): {src_path.relative_to(Path.cwd())}")
+        return
+
+    # Convertir la fuente a WebP si hace falta y usar esa imagen como base para redimensionar
+    try:
+        base_webp = convert_to_webp_if_needed(src_path, output_dir)
+    except Exception as e:
+        print(f" Error convirtiendo a WebP {src_path}: {e}")
+        return
+
+    # Abrimos la imagen base (puede ser la conversión recién creada o el webp original)
+    try:
+        with open_image_safe(base_webp) as img:
+            img = ensure_rgb_for_saving(img)
+            orig_w, orig_h = img.size
+            # Evitar división por cero si archivo corrupto con ancho 0
+            aspect = (orig_h / orig_w) if orig_w else 1
+
+            # Generar sólo las versiones que faltan
+            for size_name, cfg in SIZES.items():
+                target_path = expected_paths[size_name]
+                # Si existe, no re-generar
+                if target_path.exists():
+                    print(f"  Omitido (existe): {target_path.relative_to(Path.cwd())}")
+                    continue
+
+                target_w = cfg['width']
+                quality = cfg['quality']
+
+                # Mantener dimensiones si la imagen es más pequeña que el objetivo
+                if orig_w <= target_w:
+                    new_w, new_h = orig_w, orig_h
+                else:
+                    new_w = target_w
+                    new_h = int(round(target_w * aspect))
+
+                # Redimensionar con LANCZOS para buena calidad
+                resized = img.resize((new_w, new_h), Image.Resampling.LANCZOS)
+                # Guardar WebP (Pillow sobrescribe si ya existe, pero ya comprobamos existencia)
+                try:
+                    resized.save(target_path, 'WEBP', quality=quality, method=6)
+                    print(f"  Generado: {target_path.relative_to(Path.cwd())} ({new_w}x{new_h}, {quality}%)")
+                except Exception as e:
+                    print(f"  Error guardando {target_path}: {e}")
+
+    except Exception as e:
+        print(f" Error procesando base WebP {base_webp}: {e}")
+
+
+# ---------------------------------------------------------------------
+# Recorrido de árbol y ejecución global
+# ---------------------------------------------------------------------
+def process_all_images(base_dir: Path):
+    """
+    Recorre recursivamente base_dir/img y procesa todas las imágenes encontradas.
+
+    - Detecta archivos con extensiones definidas en IMAGE_EXTENSIONS.
+    - Para cada archivo llama a process_image que sólo generará las versiones faltantes.
+    - Imprime resúmenes para facilitar auditoría en logs de CI.
+    """
+    img_root = base_dir / 'img'
+    if not img_root.exists() or not img_root.is_dir():
+        print(f"No se encontró el directorio de imágenes: {img_root}")
+        return
+
+    # Buscar recursivamente todas las imágenes admitidas
+    all_images = [p for p in img_root.rglob('*') if p.is_file() and p.suffix.lower() in IMAGE_EXTENSIONS]
+
+    if not all_images:
+        print(f"No se encontraron imágenes en: {img_root}")
+        return
+
+    print(f"Iniciando procesamiento de {len(all_images)} imágenes en {img_root}\n")
+
+    # Procesar una a una; en CI es preferible evitar paralelismo automático a menos que se controle I/O
+    for img_path in all_images:
+        # Mensaje por imagen (ruta relativa para logs más claros)
         try:
-            with Image.open(image_path) as img:
-                # Convertir a RGB si es necesario
-                if img.mode in ('RGBA', 'P', 'LA'):
-                    background = Image.new('RGB', img.size, (255, 255, 255))
-                    if img.mode == 'P':
-                        img = img.convert('RGBA')
-                    if img.mode in ('RGBA', 'LA'):
-                        background.paste(img, mask=img.split()[-1])
-                        img = background
-                    else:
-                        img = img.convert('RGB')
-                elif img.mode != 'RGB':
-                    img = img.convert('RGB')
+            rel = img_path.relative_to(base_dir)
+        except Exception:
+            rel = img_path
+        print(f" Procesando: {rel}")
+        process_image(img_path)
 
-                # Guardar como WebP
-                output_filename = f"{image_path.stem}.webp"
-                output_path = output_dir / output_filename
-                img.save(output_path, 'WebP', quality=80, method=6)
-                print(f"Convertido a WebP: {output_path}")
-                return output_path
-
-        except Exception as e:
-            raise Exception(f"Error al convertir {image_path} a WebP: {str(e)}")
-
-    def process_image(self, image_path, output_dir=None):
-        """
-        Procesa una imagen, la convierte a WebP si no lo es, y genera las versiones responsivas
-        
-        Args:
-            image_path: Ruta a la imagen original
-            output_dir: Directorio de salida (por defecto crea carpeta automática)
-        
-        Returns:
-            dict: Rutas de las imágenes generadas
-        """
-        image_path = Path(image_path)
-
-        if not image_path.exists():
-            raise FileNotFoundError(f"No se encontró la imagen: {image_path}")
-
-        # Crear directorio de salida si no existe
-        if output_dir is None:
-            # Crear carpeta con el nombre del archivo (sin extensión)
-            output_dir = image_path.parent / image_path.stem
-        
-        output_dir = Path(output_dir)
-        output_dir.mkdir(parents=True, exist_ok=True)
-
-        # Convertir a WebP si no lo es
-        if image_path.suffix.lower() != '.webp':
-            image_path = self.convert_to_webp(image_path, output_dir)
-
-        # Abrir imagen original
-        try:
-            with Image.open(image_path) as img:
-                # Convertir a RGB si es necesario (para WebP)
-                if img.mode in ('RGBA', 'P', 'LA'):
-                    # Crear fondo blanco para transparencias
-                    background = Image.new('RGB', img.size, (255, 255, 255))
-                    if img.mode == 'P':
-                        img = img.convert('RGBA')
-                    if img.mode in ('RGBA', 'LA'):
-                        background.paste(img, mask=img.split()[-1])
-                        img = background
-                    else:
-                        img = img.convert('RGB')
-                elif img.mode != 'RGB':
-                    img = img.convert('RGB')
-                
-                original_width, original_height = img.size
-                aspect_ratio = original_height / original_width
-                
-                generated_files = {}
-                
-                # Generar cada tamaño
-                for size_name, config in self.SIZES.items():
-                    target_width = config['width']
-                    quality = config['quality']
-                    
-                    # Solo redimensionar si la imagen original es más grande
-                    if original_width <= target_width:
-                        # Si la imagen es más pequeña, usar dimensiones originales
-                        new_width = original_width
-                        new_height = original_height
-                    else:
-                        new_width = target_width
-                        new_height = int(target_width * aspect_ratio)
-                    
-                    # Redimensionar imagen
-                    resized_img = img.resize(
-                        (new_width, new_height),
-                        Image.Resampling.LANCZOS
-                    )
-                    
-                    # Guardar como WebP
-                    output_filename = f"{image_path.stem}-{size_name}.webp"
-                    output_path = output_dir / output_filename
-                    
-                    resized_img.save(
-                        output_path,
-                        'WebP',
-                        quality=quality,
-                        method=6  # Mejor compresión
-                    )
-                    
-                    generated_files[size_name] = output_path
-                    print(f"Generado: {output_path} ({new_width}x{new_height}, {quality}%)")
-                
-                return generated_files
-                
-        except Exception as e:
-            raise Exception(f"Error procesando {image_path}: {str(e)}")
-    
-    def process_book_images(self, book_name):
-        """
-        Procesa todas las imágenes de un libro específico
-        
-        Args:
-            book_name: Nombre del libro (carpeta)
-        """
-        book_img_dir = self.img_dir / book_name
-        
-        if not book_img_dir.exists():
-            print(f"No se encontró el directorio: {book_img_dir}")
-            return
-        
-        # Buscar todas las imágenes
-        image_extensions = {'.jpg', '.jpeg', '.png', '.webp'}
-        images = [
-            f for f in book_img_dir.iterdir()
-            if f.is_file() and f.suffix.lower() in image_extensions
-        ]
-        
-        if not images:
-            print(f"No se encontraron imágenes en: {book_img_dir}")
-            return
-        
-        print(f"\nProcesando libro: {book_name}")
-        print(f" Directorio: {book_img_dir}")
-        print(f" Imágenes encontradas: {len(images)}\n")
-        
-        for image_path in images:
-            try:
-                print(f"\nProcesando: {image_path.name}")
-                self.process_image(image_path)
-            except Exception as e:
-                print(f"Error: {e}")
-    
-    def process_all_books(self):
-        """Procesa todas las imágenes de todos los libros"""
-        if not self.img_dir.exists():
-            print(f"No se encontró el directorio de imágenes: {self.img_dir}")
-            return
-        
-        # Obtener todos los subdirectorios (libros)
-        book_dirs = [d for d in self.img_dir.iterdir() if d.is_dir()]
-        
-        if not book_dirs:
-            print("No se encontraron carpetas de libros")
-            return
-        
-        print(f"\nIniciando procesamiento de {len(book_dirs)} libros...\n")
-        
-        for book_dir in book_dirs:
-            self.process_book_images(book_dir.name)
-        
-        print("\nProcesamiento completado!")
+    print("\nProcesamiento finalizado.")
 
 
+# ---------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------
 def main():
-    """Función principal del script"""
+    """
+    Punto de entrada del script:
+    - Acepta --dir para establecer directorio base (por defecto: directorio de trabajo).
+    - Ejecuta el recorrido y procesamiento completo de img/.
+    """
     parser = argparse.ArgumentParser(
-        description='Genera imágenes responsivas en múltiples resoluciones (900w, 600w, 300w)',
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Ejemplos de uso:
-  # Procesar una imagen específica
-  python generate_responsive_images.py -i img/MiLibro/portada.jpg
-  
-  # Procesar todas las imágenes de un libro
-  python generate_responsive_images.py -b MiLibro
-  
-  # Procesar todos los libros
-  python generate_responsive_images.py -a
-        """
+        description='Genera versiones WebP responsivas (900w/600w/300w) para todas las imágenes en img/.'
     )
-    
-    parser.add_argument(
-        '-i', '--image',
-        help='Ruta a una imagen específica para procesar'
-    )
-    
-    parser.add_argument(
-        '-b', '--book',
-        help='Nombre del libro (carpeta) para procesar todas sus imágenes'
-    )
-    
-    parser.add_argument(
-        '-a', '--all',
-        action='store_true',
-        help='Procesar todas las imágenes de todos los libros'
-    )
-    
     parser.add_argument(
         '-d', '--dir',
-        help='Directorio base del proyecto (por defecto: directorio actual)'
+        help='Directorio base del proyecto (por defecto: directorio actual)',
+        default='.'
     )
-    
+
     args = parser.parse_args()
-    
-    # Validar que se proporcionó al menos una opción
-    if not (args.image or args.book or args.all):
-        parser.print_help()
-        sys.exit(1)
-    
-    # Crear procesador
-    processor = ImageProcessor(args.dir)
-    
-    try:
-        if args.image:
-            # Procesar imagen individual
-            print(f"\n Procesando imagen individual...\n")
-            processor.process_image(args.image)
-            print("\nImagen procesada exitosamente!")
-            
-        elif args.book:
-            # Procesar libro específico
-            processor.process_book_images(args.book)
-            print("\nLibro procesado exitosamente!")
-            
-        elif args.all:
-            # Procesar todos los libros
-            processor.process_all_books()
-    
-    except KeyboardInterrupt:
-        print("\n\nProcesamiento cancelado por el usuario")
-        sys.exit(1)
-    except Exception as e:
-        print(f"\n✗ Error: {e}")
-        sys.exit(1)
+    base = Path(args.dir).resolve()
+
+    # Ejecutar procesamiento general; imprimir errores no fatales para que el job CI no falle por imágenes individuales
+    process_all_images(base)
 
 
 if __name__ == '__main__':
+    # Salida controlada para uso en GitHub Actions: códigos de salida 0 en ejecución normal
     main()
