@@ -2,60 +2,43 @@
 """
 generate_responsive_images.py
 
-Procesa:
-- Imágenes generales en img/ creando versiones WebP responsivas (900w, 600w, 300w)
-  en subcarpetas por imagen: <stem>/<stem>-900w.webp etc.
-- Avatares en img/avatar/ creando versiones cuadradas WebP (256x256, 64x64, 32x32)
-  en la misma convención de subcarpeta por imagen: <stem>/<stem>-256x256.webp etc.
-
-Reglas comunes:
+- Procesa recursivamente img/
+- Para img/avatar/ genera versiones cuadradas WebP: 256x256, 64x64, 32x32
+- Para el resto genera WebP responsivos: 900w, 600w, 300w
+- NO crea subcarpetas; guarda las versiones junto al archivo original:
+    imagen-900w.webp, imagen-600w.webp, imagen-300w.webp
+    avatar-256x256.webp, avatar-64x64.webp, avatar-32x32.webp
 - No sobrescribe archivos existentes; solo crea las versiones faltantes.
-- No realiza upscaling: si la imagen es más pequeña que un target, usa su tamaño original.
-- Manejo de EXIF (orientación) y transparencias (aplana sobre fondo blanco antes de guardar).
+- No hace upscaling; gestiona EXIF y aplana transparencia sobre fondo blanco.
 """
-
 from pathlib import Path
 import sys
-import argparse
-import os
 from PIL import Image, ImageOps, UnidentifiedImageError
 
-# ---------------------------------------------------------------------
 # Configuración
-# ---------------------------------------------------------------------
 RESPONSIVE_SIZES = {
     '900w': {'width': 900, 'quality': 80},
     '600w': {'width': 600, 'quality': 75},
     '300w': {'width': 300, 'quality': 70}
 }
-
-AVATAR_SQUARE_SIZES = [256, 64, 32]  # Integrado: solo estos tamaños para avatares
-
+AVATAR_SIZES = [256, 64, 32]
 IMAGE_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.webp', '.tif', '.tiff', '.bmp'}
 
-
-# ---------------------------------------------------------------------
-# Utilidades de imagen
-# ---------------------------------------------------------------------
 def open_image_safe(path: Path) -> Image.Image:
     try:
         img = Image.open(path)
         return ImageOps.exif_transpose(img)
     except UnidentifiedImageError:
-        raise Exception(f"Formato de imagen no reconocido: {path}")
+        raise Exception(f"Formato no reconocido: {path}")
     except Exception as e:
-        raise Exception(f"Error abriendo imagen {path}: {e}")
+        raise Exception(f"Error abriendo {path}: {e}")
 
-
-def ensure_rgb_for_saving(img: Image.Image) -> Image.Image:
-    """
-    Aplana transparencia sobre fondo blanco y asegura modo RGB para guardar en WebP.
-    """
+def ensure_rgb_for_saving(img: Image.Image, bg=(255,255,255)) -> Image.Image:
     if img.mode in ('RGBA', 'LA', 'P'):
         if img.mode == 'P':
             img = img.convert('RGBA')
-        background = Image.new('RGB', img.size, (255, 255, 255))
-        if img.mode in ('RGBA', 'LA'):
+        background = Image.new('RGB', img.size, bg)
+        if 'A' in img.getbands():
             background.paste(img, mask=img.split()[-1])
         else:
             background.paste(img)
@@ -64,88 +47,6 @@ def ensure_rgb_for_saving(img: Image.Image) -> Image.Image:
         return img.convert('RGB')
     return img
 
-
-# ---------------------------------------------------------------------
-# Conversión base a WebP (útil para imágenes no-webp)
-# ---------------------------------------------------------------------
-def convert_to_webp_if_needed(src_path: Path, output_dir: Path) -> Path:
-    """
-    Convierte la fuente a un .webp base en output_dir/<stem>.webp si la fuente no es ya webp.
-    Devuelve la Path del webp a usar como base (sea la original si ya era webp).
-    No sobrescribe conversiones ya existentes.
-    """
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    if src_path.suffix.lower() == '.webp':
-        return src_path
-
-    webp_path = output_dir / f"{src_path.stem}.webp"
-    if webp_path.exists():
-        return webp_path
-
-    with open_image_safe(src_path) as img:
-        img = ensure_rgb_for_saving(img)
-        img.save(webp_path, 'WEBP', quality=80, method=6)
-    return webp_path
-
-
-# ---------------------------------------------------------------------
-# Procesamiento de imágenes responsivas (general)
-# ---------------------------------------------------------------------
-def process_image_responsive(src_path: Path):
-    if not src_path.exists() or not src_path.is_file():
-        return
-
-    output_dir = src_path.parent / src_path.stem
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    expected_paths = {name: (output_dir / f"{src_path.stem}-{name}.webp") for name in RESPONSIVE_SIZES.keys()}
-
-    if all(p.exists() for p in expected_paths.values()):
-        print(f"Omitido (todas las versiones existen): {src_path.relative_to(Path.cwd())}")
-        return
-
-    try:
-        base_webp = convert_to_webp_if_needed(src_path, output_dir)
-    except Exception as e:
-        print(f"Error convirtiendo a WebP {src_path}: {e}")
-        return
-
-    try:
-        with open_image_safe(base_webp) as img:
-            img = ensure_rgb_for_saving(img)
-            orig_w, orig_h = img.size
-            aspect = (orig_h / orig_w) if orig_w else 1
-
-            for size_name, cfg in RESPONSIVE_SIZES.items():
-                target_path = expected_paths[size_name]
-                if target_path.exists():
-                    print(f"  Omitido (existe): {target_path.relative_to(Path.cwd())}")
-                    continue
-
-                target_w = cfg['width']
-                quality = cfg['quality']
-
-                if orig_w <= target_w:
-                    new_w, new_h = orig_w, orig_h
-                else:
-                    new_w = target_w
-                    new_h = int(round(target_w * aspect))
-
-                resized = img.resize((new_w, new_h), Image.Resampling.LANCZOS)
-                try:
-                    resized.save(target_path, 'WEBP', quality=quality, method=6)
-                    print(f"  Generado: {target_path.relative_to(Path.cwd())} ({new_w}x{new_h}, {quality}%)")
-                except Exception as e:
-                    print(f"  Error guardando {target_path}: {e}")
-
-    except Exception as e:
-        print(f"Error procesando base WebP {base_webp}: {e}")
-
-
-# ---------------------------------------------------------------------
-# Procesamiento de avatares (cuadrados)
-# ---------------------------------------------------------------------
 def center_crop_to_square(img: Image.Image) -> Image.Image:
     w, h = img.size
     if w == h:
@@ -155,14 +56,13 @@ def center_crop_to_square(img: Image.Image) -> Image.Image:
     top = (h - side) // 2
     return img.crop((left, top, left + side, top + side))
 
+def save_webp_if_missing(img: Image.Image, out_path: Path, quality: int):
+    if out_path.exists():
+        return False
+    img.save(out_path, 'WEBP', quality=quality, method=6)
+    return True
 
-def process_avatar_file(src_path: Path):
-    if not src_path.exists() or not src_path.is_file():
-        return
-
-    output_dir = src_path.parent / src_path.stem
-    output_dir.mkdir(parents=True, exist_ok=True)
-
+def process_avatar(src_path: Path):
     try:
         img = open_image_safe(src_path)
     except Exception as e:
@@ -170,15 +70,15 @@ def process_avatar_file(src_path: Path):
         return
 
     img = center_crop_to_square(img)
-    orig_w, orig_h = img.size
+    orig_w, _ = img.size
 
-    for size in AVATAR_SQUARE_SIZES:
-        out_path = output_dir / f"{src_path.stem}-{size}x{size}.webp"
+    for size in AVATAR_SIZES:
+        out_name = f"{src_path.stem}-{size}x{size}.webp"
+        out_path = src_path.parent / out_name  # guarda junto al original
         if out_path.exists():
-            print(f"  Omitido (existe): {out_path.relative_to(Path.cwd())}")
+            print(f"  Omitido (existe): {out_path}")
             continue
 
-        # No upscaling: si la imagen original (tras recorte) es menor, usamos su tamaño
         if orig_w <= size:
             to_save = ensure_rgb_for_saving(img)
         else:
@@ -186,70 +86,88 @@ def process_avatar_file(src_path: Path):
             to_save = ensure_rgb_for_saving(resized)
 
         try:
-            to_save.save(out_path, 'WEBP', quality=85, method=6)
-            print(f"  Generado avatar: {out_path.relative_to(Path.cwd())} ({size}x{size})")
+            saved = save_webp_if_missing(to_save, out_path, quality=85)
+            if saved:
+                print(f"  Generado avatar: {out_path} ({size}x{size})")
         except Exception as e:
             print(f"  Error guardando avatar {out_path}: {e}")
 
+def process_responsive_image(src_path: Path):
+    try:
+        img = open_image_safe(src_path)
+    except Exception as e:
+        print(f"Skip imagen {src_path}: {e}")
+        return
 
-# ---------------------------------------------------------------------
-# Recorrido y ejecución general
-# ---------------------------------------------------------------------
-def process_all_images(base_dir: Path):
-    base_dir = base_dir.resolve()
+    img = ensure_rgb_for_saving(img)
+    orig_w, orig_h = img.size
+    aspect = orig_h / orig_w if orig_w else 1
 
-    # 1) Primero procesar avatares en img/avatar
-    avatar_dir = base_dir / 'img' / 'avatar'
+    for name, cfg in RESPONSIVE_SIZES.items():
+        out_name = f"{src_path.stem}-{name}.webp"
+        out_path = src_path.parent / out_name  # guarda junto al original
+        if out_path.exists():
+            print(f"  Omitido (existe): {out_path}")
+            continue
+
+        target_w = cfg['width']
+        quality = cfg['quality']
+
+        if orig_w <= target_w:
+            new_w, new_h = orig_w, orig_h
+        else:
+            new_w = target_w
+            new_h = int(round(target_w * aspect))
+
+        resized = img.resize((new_w, new_h), Image.Resampling.LANCZOS)
+        try:
+            saved = save_webp_if_missing(resized, out_path, quality=quality)
+            if saved:
+                print(f"  Generado: {out_path} ({new_w}x{new_h}, {quality}%)")
+        except Exception as e:
+            print(f"  Error guardando {out_path}: {e}")
+
+def should_ignore_path(p: Path) -> bool:
+    parts = [part.lower() for part in p.parts]
+    if '.git' in parts:
+        return True
+    if any(part.startswith('.') for part in parts):
+        return True
+    return False
+
+def process_all(base_dir: Path):
+    base = base_dir.resolve()
+    img_root = base / 'img'
+    if not img_root.exists() or not img_root.is_dir():
+        print(f"No existe carpeta img/: {img_root}")
+        return
+
+    # Avatares (directamente en img/avatar/)
+    avatar_dir = img_root / 'avatar'
     if avatar_dir.exists() and avatar_dir.is_dir():
         avatar_files = [p for p in avatar_dir.iterdir() if p.is_file() and p.suffix.lower() in IMAGE_EXTENSIONS]
         if avatar_files:
             print(f"Procesando {len(avatar_files)} avatares en {avatar_dir}")
             for f in avatar_files:
                 print(f" Procesando avatar: {f.name}")
-                process_avatar_file(f)
-            print("Procesamiento de avatares finalizado.\n")
-    else:
-        print(f"No existe carpeta de avatares: {avatar_dir} (se omite)\n")
+                process_avatar(f)
+            print("Avatares procesados.\n")
 
-    # 2) Luego procesar el resto de imágenes en img/ (excluyendo /img/avatar)
-    img_root = base_dir / 'img'
-    if not img_root.exists() or not img_root.is_dir():
-        print(f"No se encontró el directorio de imágenes: {img_root}")
-        return
-
-    # Buscar recursivamente todas las imágenes, ignorando la carpeta avatar
-    all_images = [p for p in img_root.rglob('*') if p.is_file() and p.suffix.lower() in IMAGE_EXTENSIONS and 'img' + os.sep + 'avatar' not in str(p)]
-    # Alternative safe check: ensure 'avatar' isn't a parent
-    all_images = [p for p in all_images if 'avatar' not in [part.lower() for part in p.parts]]
+    # Luego todas las demás imágenes bajo img/ (recursivo), excluyendo img/avatar
+    all_images = [p for p in img_root.rglob('*') if p.is_file() and p.suffix.lower() in IMAGE_EXTENSIONS]
+    all_images = [p for p in all_images if 'avatar' not in [part.lower() for part in p.relative_to(img_root).parts]]
+    all_images = [p for p in all_images if not should_ignore_path(p)]
 
     if not all_images:
-        print(f"No se encontraron imágenes generales en: {img_root}")
+        print("No hay imágenes generales para procesar.")
         return
 
-    print(f"Iniciando procesamiento de {len(all_images)} imágenes generales en {img_root}\n")
+    print(f"Iniciando procesamiento de {len(all_images)} imágenes generales bajo {img_root}")
     for img_path in all_images:
-        try:
-            rel = img_path.relative_to(base_dir)
-        except Exception:
-            rel = img_path
-        print(f" Procesando: {rel}")
-        process_image_responsive(img_path)
+        print(f" Procesando: {img_path.relative_to(base)}")
+        process_responsive_image(img_path)
+    print("Procesamiento general finalizado.")
 
-    print("\nProcesamiento general finalizado.")
-
-
-# ---------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------
-def main():
-    parser = argparse.ArgumentParser(
-        description='Genera WebP responsivos para img/ y versiones cuadradas para img/avatar'
-    )
-    parser.add_argument('-d', '--dir', help='Directorio base del proyecto (por defecto: directorio actual)', default='.')
-    args = parser.parse_args()
-    base = Path(args.dir)
-    process_all_images(base)
-
-
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    base = Path('.') if len(sys.argv) == 1 else Path(sys.argv[1])
+    process_all(base)
