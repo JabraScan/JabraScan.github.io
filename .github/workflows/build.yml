@@ -25,8 +25,8 @@ jobs:
         with:
           node-version: '18'
 
-      # 3️⃣ Instalar dependencias necesarias
-      - name: Instalar dependencias
+      # 3️⃣ Instalar dependencias necesarias (Node)
+      - name: Instalar dependencias Node
         run: npm install fast-xml-parser --no-save
 
       # 4️⃣ Bloque A: Generar JSON-LD e insertarlo en index.html
@@ -38,26 +38,19 @@ jobs:
         run: node scripts/buildPages.js
 
       # --------------------------
-      # Paso añadido: ejecutar el script Python que genera versiones WebP responsivas
-      # - Ejecuta generate_responsive_images.py desde la raíz del repo.
-      # - El script recorre img/ y crea versiones optimizadas en subcarpetas por imagen.
-      # - No re-genera versiones ya existentes; solo crea las que falten.
-      # - Asegúrate de que generate_responsive_images.py esté en la rama main.
+      # 6️⃣ Set up Python, instalar dependencias Python y ejecutar el script de imágenes
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      - name: Instalar Pillow
-        run: python scripts/generate_responsive_images.py -d .
+      - name: Instalar dependencias Python
+        run: python -m pip install --upgrade pip Pillow
 
       - name: Ejecutar generador de imágenes responsivas
-        run: |
-          # Ejecuta el script que crea <imagen>-900w.webp, -600w.webp, -300w.webp dentro de carpetas por imagen.
-          # El script evita sobrescribir archivos existentes y gestiona EXIF y transparencia.
-          python generate_responsive_images.py -d .
+        run: python scripts/generate_responsive_images.py -d .
 
-      # 6️⃣ Commit y push de todos los cambios generados
+      # 7️⃣ Commit y push de todos los cambios generados
       - name: Commit y push cambios
         run: |
           git config --global user.name "github-actions[bot]"
