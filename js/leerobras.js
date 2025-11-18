@@ -261,6 +261,14 @@ document.addEventListener("DOMContentLoaded", function () {
               const bloqueC = bloque.cloneNode(true);
               itemBook.querySelector(".card-body").appendChild(bloque);
               itemBookNOpc.querySelector(".info-libro").appendChild(bloqueB);
+              // Si el bloque tiene el badge 'hoy', muévelo justo después de la imagen
+              const imagenContenedorB = itemBookNOpc.querySelector('.imagen-contenedor');
+              if (imagenContenedorB) {
+                const hoyTag = itemBookNOpc.querySelector('.tag-capitulo.hoy');
+                if (hoyTag) {
+                  imagenContenedorB.insertAdjacentElement('afterend', hoyTag);
+                }
+              }
 
               // Agregar el último capítulo al carrusel
               const carouselChapterBadge = itemCarousel.querySelector(".carousel-chapter-badge");
@@ -302,7 +310,18 @@ document.addEventListener("DOMContentLoaded", function () {
           itemBook.querySelector('.card').prepend(imagenContenedorA);
         }
 
-        itemBookNOpc.prepend(imagenContenedorB);
+        // Crear bloque contenedor para imagen y badge
+        const imgBadgeBlock = document.createElement('div');
+        imgBadgeBlock.className = 'img-badge-block';
+        imgBadgeBlock.appendChild(imagenContenedorB);
+        // Mover todos los badges .tag-capitulo dentro del bloque debajo de la imagen
+        setTimeout(() => {
+          const badges = itemBookNOpc.querySelectorAll('.tag-capitulo');
+          badges.forEach(badge => {
+            imgBadgeBlock.appendChild(badge);
+          });
+        }, 0);
+        itemBookNOpc.prepend(imgBadgeBlock);
 
         // Almacenar para paginación; render diferido
         allCardsDesktop.push(itemBook);
@@ -463,7 +482,17 @@ function renderPage(page) {
   booklistContainernopc.innerHTML = '';
   (filteredItemsMobile.length ? filteredItemsMobile : allItemsMobile)
     .slice(start, end)
-    .forEach(node => booklistContainernopc.appendChild(node));
+    .forEach(node => {
+      // Antes de agregar, mover todos los badges .tag-capitulo al bloque img-badge-block
+      const imgBadgeBlock = node.querySelector('.img-badge-block');
+      if (imgBadgeBlock) {
+        const badges = node.querySelectorAll('.tag-capitulo');
+        badges.forEach(badge => {
+          imgBadgeBlock.appendChild(badge);
+        });
+      }
+      booklistContainernopc.appendChild(node);
+    });
 
   // Actualizar hash sin romper otras partes (#...&page=2 o #page=2)
   const baseHash = (window.location.hash || '').replace(/([&?#])?page=\d+/i, '').replace(/^#?/, '');

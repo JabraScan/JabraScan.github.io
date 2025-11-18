@@ -1,3 +1,11 @@
+/* Centrar imagen y badge en lista móvil */
+.lista-libros .img-badge-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
 /* ====== Utilidades y Clases Auxiliares ====== */
 
 /* Paginación */
@@ -138,6 +146,18 @@
 
 .tag-capitulo.hoy {
     background-color: var(--color-success);
+}
+
+/* Mostrar el badge 'hoy' debajo de la imagen solo en la lista de libros del index */
+.lista-libros .tag-capitulo {
+    display: block;
+    margin: 8px auto 0 auto;
+    position: relative;
+    left: unset;
+    right: unset;
+    width: fit-content;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .tag-capitulo.nuevo {
