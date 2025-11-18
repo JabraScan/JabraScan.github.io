@@ -35,9 +35,17 @@ function loadScript(src, globalName) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 📱 Detección de iOS para aplicar estilos específicos
-  if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) && !window.MSStream) {
+  // 📱 Detección de iOS y Android para aplicar estilos específicos (mismo diseño para ambos)
+  const userAgent = navigator.userAgent;
+  const isIOS = /iPad|iPhone|iPod|Macintosh/.test(userAgent) && !window.MSStream;
+  const isAndroid = /Android/.test(userAgent);
+  
+  if (isIOS) {
     document.body.classList.add('ios');
+  }
+  
+  if (isAndroid) {
+    document.body.classList.add('android');
   }
 
   // 📅 Inserta el año actual en el pie de página
