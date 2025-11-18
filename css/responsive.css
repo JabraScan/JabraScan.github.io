@@ -267,9 +267,10 @@
     }
 }
 
-/* iOS - tablets y móviles (hasta 1200px) */
+/* iOS y Android - tablets y móviles (hasta 1200px) */
 @media only screen and (max-width: 1200px) {
-    body.ios .lista-libros {
+    body.ios .lista-libros,
+    body.android .lista-libros {
         display: block;
         padding: var(--spacing-md);
     }
@@ -277,7 +278,11 @@
     body.ios .book-list,
     body.ios .libro-item,
     body.ios .book-card-main,
-    body.ios .book-card-main.libro-item {
+    body.ios .book-card-main.libro-item,
+    body.android .book-list,
+    body.android .libro-item,
+    body.android .book-card-main,
+    body.android .book-card-main.libro-item {
         display: none !important;
     }
 
@@ -322,7 +327,8 @@
     }
 
     /* Ajustes para la lista en pantallas pequeñas */
-    body.ios .item-libro {
+    body.ios .item-libro,
+    body.android .item-libro {
         padding: var(--spacing-md);
         margin-bottom: var(--spacing-md);
         background: var(--color-white);
@@ -331,7 +337,8 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    body.ios .item-libro .imagen-contenedor {
+    body.ios .item-libro .imagen-contenedor,
+    body.android .item-libro .imagen-contenedor {
         width: 160px;
         min-width: 160px;
         height: 240px;
