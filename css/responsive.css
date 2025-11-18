@@ -281,6 +281,46 @@
         display: none !important;
     }
 
+    /* Navbar móvil: centrar logo/texto y mover hamburguesa a la derecha */
+    @media (max-width: 700px) {
+        .navbar-jabrascan {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .navbar-jabrascan .navbar-brand {
+            margin: 0 auto;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            white-space: nowrap;
+            padding-right: 3.5rem;
+            /* espacio para el menú */
+        }
+
+        .navbar-jabrascan .navbar-toggler {
+            position: absolute;
+            right: 0.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            margin: 0;
+            z-index: 2;
+        }
+
+        .navbar-jabrascan img {
+            height: 2rem;
+            width: auto;
+            margin-right: 0.5rem;
+        }
+    }
+
     /* Ajustes para la lista en pantallas pequeñas */
     body.ios .item-libro {
         padding: var(--spacing-md);
