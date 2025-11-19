@@ -270,7 +270,7 @@ async function run() {
         // Almacenar para paginación; render diferido
         allCardsDesktop.push(itemBook);
         allItemsMobile.push(itemBookNOpc);
-      });
+      }
 
       Promise.all(promesasCapitulos).then(() => {
         // Ordenar por fecha más reciente primero
