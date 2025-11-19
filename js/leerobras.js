@@ -321,8 +321,11 @@ async function run() {
           searchInput.addEventListener('input', doFilter);
         }
       });
-    })
-    .catch(err => console.error("Error al cargar el XML:", err));
+    }
+    run().catch(err => {
+      console.error("Error:", err.message || err);
+      process.exitCode = 1;
+    });
 });
 
 function onLibroClick(libroId) {
