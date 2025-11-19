@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const imagenPath = imagen.replace(/\.(jpg|jpeg|png|webp)$/i, '');
         
         // Usar imagen original como src principal (fallback)
-        img.src = `img/${imagen}`;
+        img.src = `img/${imagen}?v=20251119`;
         img.alt = nombreobra;
         img.loading = "lazy"; // Lazy loading para mejorar rendimiento
         
