@@ -170,13 +170,35 @@ export function truncarTexto(texto, maxLength = 40) {
 }
 // 🖼️ Selecciona la imagen correcta para que TODAS se muestren en un año
 export function seleccionarImagen(nodosImagen) {
-  const totalImagenes = nodosImagen.length;
+  // Normalización de la entrada:
+  // - Soporta NodeList/HTMLCollection (XML original)
+  // - Soporta Array de strings (endpoint JSON)
+  // - Soporta un string simple
+  // - Si es null/undefined devuelve cadena vacía
+  if (!nodosImagen) return "";
+
+  // Si nos pasan directamente un string único, devolverlo ya limpio
+  if (typeof nodosImagen === "string") return nodosImagen.trim();
+
+  // Convertir Array de strings en una "pseudo-NodeList" con textContent para mantener tu lógica
+  let lista;
+  if (Array.isArray(nodosImagen)) {
+    // nuevo: mapear elementos no string también para ser tolerante
+    lista = nodosImagen.map(item => {
+      return { textContent: typeof item === "string" ? item : (item?.textContent || "") };
+    });
+  } else {
+    // Asumimos que es un NodeList o colección similar (tu caso original)
+    lista = Array.from(nodosImagen);
+  }
+
+  const totalImagenes = lista.length;
 
   // 🚫 Sin imágenes → vacío
   if (totalImagenes === 0) return "";
 
   // ⚡ Solo 1 imagen → siempre la misma
-  if (totalImagenes === 1) return nodosImagen[0].textContent.trim();
+  if (totalImagenes === 1) return (lista[0].textContent || "").trim();
 
   // 📅 Fecha actual
   const hoy = new Date();
@@ -199,8 +221,10 @@ export function seleccionarImagen(nodosImagen) {
 
   // ✅ Seguridad: no pasarse del array
   if (indice >= totalImagenes) indice = totalImagenes - 1;
+  if (indice < 0) indice = 0;
 
-  return nodosImagen[indice].textContent.trim();
+  // Devolver el texto limpiado del nodo seleccionado
+  return (lista[indice].textContent || "").trim();
 }
 
 /**
@@ -225,5 +249,6 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
