@@ -1,6 +1,6 @@
 import { cargarlibro } from './libroficha.js';
 import { crearUltimoCapituloDeObra } from './capitulos.js';
-import { parseFecha, seleccionarImagen, obtenerNombreObra } from './utils.js';
+import { parseFecha, toDDMMYYYY, seleccionarImagen, obtenerNombreObra } from './utils.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
 
 // ===== Estado de paginación (ámbito de módulo) =====
@@ -180,7 +180,7 @@ fetch('https://jabrascan.net/obras/carrousel')
         if (obj.UltimoCapNom || obj.UltimoCapFecha || obj.UltimoCapNum) {
           caps.push({
             nombreCapitulo: obj.UltimoCapNom || '',
-            Fecha: obj.UltimoCapFecha || '',
+            Fecha: toDDMMYYYY(obj.UltimoCapFecha || ''),
             num: obj.UltimoCapNum || '',
             obra: clave
           });
