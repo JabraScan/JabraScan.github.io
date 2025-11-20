@@ -181,7 +181,7 @@ fetch('https://jabrascan.net/obras/carrousel')
           caps.push({
             nombreCapitulo: obj.UltimoCapNom || '',
             Fecha: toDDMMYYYY(obj.UltimoCapFecha || ''),
-            num: obj.UltimoCapNum || '',
+            numCapitulo: obj.UltimoCapNum || '',
             obra: clave
           });
         }
