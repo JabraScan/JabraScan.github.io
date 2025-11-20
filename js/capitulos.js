@@ -48,10 +48,12 @@ export function crearUltimoCapituloDeObra(data, claveObra) {
   divsection.className = "book-latest-chapter";
   divsection.setAttribute('data-fecha', ultimo.Fecha);
   divsection.innerHTML = `
-    <span>Último cap.</span>  
-    <span class="cap">${ultimo.numCapitulo}</span>
-    <span class="fecha">( ${formatDateEs(fechaUltimo)} )</span>
-    ${generarEtiquetaNuevo(fechaUltimo)}
+      <a href="#" data-pdf-obra="${claveObra}" data-pdf-capitulo="${ultimo.numCapitulo}" class="pdf-link">
+          <span>Último cap.</span>  
+          <span class="cap">${ultimo.numCapitulo}</span>
+          <span class="fecha">( ${formatDateEs(fechaUltimo)} )</span>
+          ${generarEtiquetaNuevo(fechaUltimo)}
+      </a>
   `;
   return divsection;
 }
@@ -310,3 +312,4 @@ export function formatCDATA(raw) {
 
   return serializer(wrapper);
 }
+
