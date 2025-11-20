@@ -178,7 +178,7 @@ export function obtenerCapitulos(clave) {
     });
 }
 
-export function sinopsisParaTemplate(raw) {
+export function formatCDATA(raw) {
   if (raw == null) return '';
   let s = String(raw);
   // Si viene escapado como &lt;...&gt; lo decodificamos
@@ -196,4 +196,5 @@ export function sinopsisParaTemplate(raw) {
   s = s.replace(/\r\n?/g, '\n').replace(/\n/g, '<br>');
   return s;
 }
+
 
