@@ -177,7 +177,7 @@ export function obtenerCapitulos(clave) {
       return [];
     });
 }
-
+/*
 export function formatCDATA(raw) {
   if (raw == null) return '';
   let s = String(raw);
@@ -195,6 +195,118 @@ export function formatCDATA(raw) {
   // convertimos saltos de línea a <br> para que se muestren igual que antes
   s = s.replace(/\r\n?/g, '\n').replace(/\n/g, '<br>');
   return s;
+}*/
+// Reemplaza tu formatCDATA por esta versión
+export function formatCDATA(raw) {
+  if (raw == null) return '';
+
+  // Normalizar a string
+  let s = String(raw);
+
+  // Si viene escapado como &lt;...&gt; lo decodificamos
+  if (s.includes('&lt;') || s.includes('&gt;')) {
+    const t = document.createElement('textarea');
+    t.innerHTML = s;
+    s = t.value;
+  }
+
+  // Extraer contenido CDATA si existe
+  s = s.replace(/<!\[CDATA\[(.*?)\]\]>/gs, '$1').trim();
+
+  // Si no parece contener tags HTML, escapar y convertir saltos a <br>
+  if (!/[<>]/.test(s)) {
+    s = s.replace(/&/g,'&amp;')
+         .replace(/</g,'&lt;')
+         .replace(/>/g,'&gt;')
+         .replace(/"/g,'&quot;')
+         .replace(/'/g,'&#39;')
+         .replace(/\r\n?/g, '\n')
+         .replace(/\n/g, '<br>');
+    return s;
+  }
+
+  // Si contiene HTML, sanitizar permitiendo solo etiquetas/atributos seguros
+  const allowedTags = new Set(['a','br','strong','em','b','i','u','span']);
+  const allowedAttrs = {
+    'a': new Set(['href','target','rel','title'])
+  };
+
+  // Parsear en DOM y filtrar nodos/atributos
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = s;
+
+  (function sanitizeNode(node) {
+    const children = Array.from(node.childNodes);
+    for (const child of children) {
+      if (child.nodeType === Node.TEXT_NODE) {
+        continue;
+      }
+      if (child.nodeType === Node.ELEMENT_NODE) {
+        const tag = child.tagName.toLowerCase();
+        if (!allowedTags.has(tag)) {
+          // Reemplazar el nodo por su contenido textual (sin etiquetas)
+          const text = document.createTextNode(child.textContent || '');
+          node.replaceChild(text, child);
+          continue;
+        }
+        // Filtrar atributos
+        const attrs = Array.from(child.attributes);
+        for (const at of attrs) {
+          const name = at.name.toLowerCase();
+          const val = at.value;
+          if (!(allowedAttrs[tag] && allowedAttrs[tag].has(name))) {
+            child.removeAttribute(at.name);
+            continue;
+          }
+          // Atributos de enlace: validar esquema y evitar javascript:
+          if (tag === 'a' && name === 'href') {
+            try {
+              const url = val.trim();
+              // Rechazar javascript: y datos peligrosos
+              if (/^\s*(javascript:|data:)/i.test(url)) {
+                child.removeAttribute('href');
+              } else {
+                // Forzar target y rel si no vienen
+                child.setAttribute('href', url);
+              }
+            } catch (e) {
+              child.removeAttribute('href');
+            }
+          }
+        }
+        // Forzar relaciones seguras para enlaces externos
+        if (tag === 'a') {
+          if (!child.hasAttribute('target')) child.setAttribute('target', '_blank');
+          child.setAttribute('rel', 'noopener noreferrer');
+        }
+        // Recursivo
+        sanitizeNode(child);
+      } else {
+        // Otros tipos (comentarios etc) se eliminan
+        node.removeChild(child);
+      }
+    }
+  })(wrapper);
+
+  // Convertir saltos de línea en <br> dentro de los textos
+  const serializer = (root) => {
+    const clone = root.cloneNode(true);
+    const walker = document.createTreeWalker(clone, NodeFilter.SHOW_TEXT, null, false);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    for (const t of nodes) {
+      if (t.nodeValue.includes('\n')) {
+        const parts = t.nodeValue.replace(/\r\n?/g, '\n').split('\n');
+        const frag = document.createDocumentFragment();
+        for (let i = 0; i < parts.length; i++) {
+          frag.appendChild(document.createTextNode(parts[i]));
+          if (i < parts.length - 1) frag.appendChild(document.createElement('br'));
+        }
+        t.parentNode.replaceChild(frag, t);
+      }
+    }
+    return clone.innerHTML;
+  };
+
+  return serializer(wrapper);
 }
-
-
