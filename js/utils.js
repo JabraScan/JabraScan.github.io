@@ -1,5 +1,13 @@
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
 
+// transformar "YYYY-MM-DD" o "YYYY-MM-DD HH:MM:SS" -> "DD-MM-YYYY"
+export function toDDMMYYYY(fechaStr) {
+  if (!fechaStr) return "";
+  const m = fechaStr.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!m) return fechaStr; // si ya está en otro formato, lo dejamos
+  return `${m[3]}-${m[2]}-${m[1]}`;
+}
+
 export function parseDateDMY(fechaStr) {
   if (!fechaStr) return null;
 
@@ -249,6 +257,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
