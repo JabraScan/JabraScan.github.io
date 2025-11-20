@@ -1,5 +1,5 @@
 import { cargarlibro } from './libroficha.js';
-import { crearUltimoCapituloDeObra } from './capitulos.js';
+import { crearUltimoCapituloDeObra, sinopsisParaTemplate } from './capitulos.js';
 import { parseFecha, toDDMMYYYY, seleccionarImagen, obtenerNombreObra } from './utils.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
 
@@ -46,7 +46,7 @@ fetch('https://jabrascan.net/obras/carrousel')
       const contenido18 = obj.adulto || '';
       const discord = obj.discord || '';
       const aprobadaAutor = obj.aprobadaAutor || '';
-      const sinopsis = obj.sinopsis || '';
+      const sinopsis = sinopsisParaTemplate(obj.sinopsis || '');
       
       // Mantener la lógica original de mostrar último leído en el header
       const ultimaObra = localStorage.getItem("ultimaObra");
