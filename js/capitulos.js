@@ -188,15 +188,7 @@ export function sinopsisParaTemplate(raw) {
     s = t.value;
   }
   // Quitamos etiquetas CDATA visibles
-  s = s.replace(/<!
-
-\[CDATA
-
-\[(.*?)\]
-
-\]
-
->/gs, '$1').trim();
+  s = s.replace(/<!\[CDATA\[(.*?)\]\]>/gs, '$1').trim();
   // Escape seguro del HTML para evitar XSS
   s = s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
   // Permitir que quien ya tenga <br> en el contenido no doble los saltos:
@@ -204,3 +196,4 @@ export function sinopsisParaTemplate(raw) {
   s = s.replace(/\r\n?/g, '\n').replace(/\n/g, '<br>');
   return s;
 }
+
