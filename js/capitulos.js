@@ -177,3 +177,30 @@ export function obtenerCapitulos(clave) {
       return [];
     });
 }
+
+export function sinopsisParaTemplate(raw) {
+  if (raw == null) return '';
+  let s = String(raw);
+  // Si viene escapado como &lt;...&gt; lo decodificamos
+  if (s.includes('&lt;') || s.includes('&gt;')) {
+    const t = document.createElement('textarea');
+    t.innerHTML = s;
+    s = t.value;
+  }
+  // Quitamos etiquetas CDATA visibles
+  s = s.replace(/<!
+
+\[CDATA
+
+\[(.*?)\]
+
+\]
+
+>/gs, '$1').trim();
+  // Escape seguro del HTML para evitar XSS
+  s = s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  // Permitir que quien ya tenga <br> en el contenido no doble los saltos:
+  // convertimos saltos de línea a <br> para que se muestren igual que antes
+  s = s.replace(/\r\n?/g, '\n').replace(/\n/g, '<br>');
+  return s;
+}
