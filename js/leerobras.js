@@ -1,6 +1,6 @@
 import { cargarlibro } from './libroficha.js';
 import { crearUltimoCapituloDeObra, formatCDATA } from './capitulos.js';
-import { parseFecha, toDDMMYYYY, seleccionarImagen, obtenerNombreObra } from './utils.js';
+import { parseFecha, toDDMMYYYY, seleccionarImagen, obtenerNombreObra, createImg } from './utils.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
 
 // ===== Estado de paginación (ámbito de módulo) =====
@@ -80,31 +80,7 @@ fetch('https://jabrascan.net/obras/carrousel')
 
       const imagenContenedor = document.createElement("div");
       imagenContenedor.classList.add("imagen-contenedor");
-      const img = document.createElement("img");
-
-      const imagenPath = (Array.isArray(imagen) ? (imagen[0] || '') : imagen).replace(/\.(jpg|jpeg|png|webp)$/i, '');
-
-      img.src = `img/${Array.isArray(imagen) ? (imagen[0] || '') : imagen}?v=20251119`;
-      img.alt = nombreobra;
-      img.loading = "lazy";
-      img.width = 280;
-      img.height = 280;
-      img.decoding = "async";
-      if ((Array.isArray(imagen) ? imagen[0] : imagen).includes('/')) {
-        const webpPath = imagenPath;
-        img.srcset = `img/${webpPath}-300w.webp 300w, img/${webpPath}-600w.webp 600w, img/${webpPath}-900w.webp 900w`;
-        const dpr = window.devicePixelRatio || 1;
-        if (dpr > 2) {
-          img.sizes = "(max-width: 576px) 50vw, (max-width: 768px) 33vw, (max-width: 992px) 25vw, 20vw";
-        } else {
-          img.sizes = "(max-width: 576px) 100vw, (max-width: 768px) 50vw, (max-width: 992px) 33vw, (max-width: 1200px) 25vw, 20vw";
-        }
-      }
-      img.onerror = function () {
-        this.removeAttribute('srcset');
-        this.src = `img/${Array.isArray(imagen) ? (imagen[0] || '') : imagen}`;
-        this.onerror = function () { this.onerror = null; this.style.display = 'none'; };
-      };
+      const img = createImg(imagen, nombreobra, 'main');
 
       imagenContenedor.appendChild(img);
       if (contenido18 === "adulto") {
