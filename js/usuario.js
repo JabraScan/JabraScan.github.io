@@ -123,6 +123,7 @@ export async function cargarBiblioteca() {
       li.dataset.obraId = item.obra_id ?? "";
   
       // construimos src de imagen sólo si viene o si FALLBACK_IMG está definido
+console.log(item);
       const srcCandidate = item.imagen || (item.obra_id ? `/books/${item.obra_id}/${item.imagen || ""}` : "");
       const imgSrc = srcCandidate || FALLBACK_IMG || "";
   
