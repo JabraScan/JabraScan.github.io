@@ -176,7 +176,7 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
 export function truncarTexto(texto, maxLength = 40) {
   return texto.length > maxLength ? texto.slice(0, maxLength) + "…" : texto;
 }
-// 🖼️ Selecciona la imagen correcta para que TODAS se muestren en un año
+// seleccionarImagen: normaliza NodeList, Array o string y devuelve la imagen que toca hoy
 export function seleccionarImagen(nodosImagen) {
   // Normalización de la entrada:
   // - Soporta NodeList/HTMLCollection (XML original)
@@ -185,20 +185,30 @@ export function seleccionarImagen(nodosImagen) {
   // - Si es null/undefined devuelve cadena vacía
   if (!nodosImagen) return "";
 
-  // Si nos pasan directamente un string único, devolverlo ya limpio
-  if (typeof nodosImagen === "string") return nodosImagen.trim();
-
-  // Convertir Array de strings en una "pseudo-NodeList" con textContent para mantener tu lógica
+  // Construimos 'lista' como array de objetos con textContent para mantener tu lógica original
   let lista;
-  if (Array.isArray(nodosImagen)) {
-    // nuevo: mapear elementos no string también para ser tolerante
+
+  // Si nos pasan directamente un string único, convertirlo a lista con un objeto que tenga textContent
+  if (typeof nodosImagen === "string") {
+    lista = [{ textContent: nodosImagen.trim() }];
+  } else if (Array.isArray(nodosImagen)) {
+    // Si nos pasan un array (endpoint JSON): mapear a objetos con textContent
     lista = nodosImagen.map(item => {
-      return { textContent: typeof item === "string" ? item : (item?.textContent || "") };
+      if (typeof item === "string") return { textContent: item.trim() };
+      if (item && typeof item.textContent === "string") return { textContent: item.textContent.trim() };
+      return { textContent: "" };
     });
   } else {
-    // Asumimos que es un NodeList o colección similar (tu caso original)
-    lista = Array.from(nodosImagen);
+    // Asumimos NodeList / HTMLCollection u objeto similar (tu caso original)
+    lista = Array.from(nodosImagen).map(node => {
+      if (!node) return { textContent: "" };
+      if (typeof node === "string") return { textContent: node.trim() };
+      return { textContent: (node.textContent || "").trim() };
+    });
   }
+
+  // Filtrar vacíos y mantener orden (evita que elementos vacíos cambien totalImagenes)
+  lista = lista.filter(item => (item.textContent || "").length > 0);
 
   const totalImagenes = lista.length;
 
@@ -235,7 +245,7 @@ export function seleccionarImagen(nodosImagen) {
   return (lista[indice].textContent || "").trim();
 }
 
-// Crea y devuelve un elemento <img> configurado para la obra
+
 // Crea y devuelve un elemento <img> configurado para la obra (imagen es string)
   export function createImg(imagen, nombreobra, tipo) {
     // Crear el elemento imagen
@@ -305,6 +315,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
