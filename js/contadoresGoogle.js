@@ -82,7 +82,7 @@ export function valorarRecurso(idvisitado, valor) {
   const token = localStorage.getItem("jwt") || "null";
   // URL de Google (igual que antes)
   const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=valorar&valor=${encodeURIComponent(valor)}&usuario_id=${encodeURIComponent(usuarioId)}`;
-   console.log = (usuarioId && usuarioId !== "null" ? { 'Authorization': `Bearer ${token}` } : {});
+   console.log(`Authorization: Bearer ${token} \n id: ${idvisitado} \n val: ${valor}`);
   // URL y opciones para Cloudflare (POST)
   const urlCF = `${URL_CLOUDFLARE}/valoraciones/votar`;
   const cfOptions = {
