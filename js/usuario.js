@@ -242,7 +242,7 @@ export async function cargarObras() {
       return Array.from(new Set(imgs));
     }
 
-    async function loadAvatarsFromDirectoryIndex() {
+/*    async function loadAvatars() {
       if (avatarsLoaded || loadingInProgress) return;
       loadingInProgress = true;
       avatarResultEl.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
@@ -265,14 +265,50 @@ export async function cargarObras() {
         loadingInProgress = false;
         return;
       }
+    }*/
+    //loadAvatars
+    async function loadAvatars() {
+      if (avatarsLoaded || loadingInProgress) return;
+      loadingInProgress = true;
+      avatarResultEl.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
+    
+      try {
+        const resp = await fetch('https://jabrascan.net/avatars', { cache: 'no-cache' });
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        const payload = await resp.json();
+        const rows = Array.isArray(payload) ? payload : (payload.items || []);
+    
+        const list = rows
+          .map(r => {
+            if (!r || r.avatar_path == null) return null;
+            const src = String(r.avatar_path);
+            const alt = r.descripcion; // valor directo, sin controles ni normalizaciones
+            return { src, alt };
+          })
+          .filter(Boolean);
+          if (list.length) {
+            renderAvatars(list);
+          } else {
+            avatarResultEl.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+          }
+        avatarsLoaded = true;
+        loadingInProgress = false;
+        return;
+      } catch (e) {
+        avatarResultEl.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+        avatarsLoaded = true;
+        loadingInProgress = false;
+        return;
+      }
     }
+    //fin loadAvatars
 
-    avatarTabBtn.addEventListener('click', () => loadAvatarsFromDirectoryIndex());
-    avatarTabBtn.addEventListener('shown.bs.tab', () => loadAvatarsFromDirectoryIndex());
+    avatarTabBtn.addEventListener('click', () => loadAvatars());
+    avatarTabBtn.addEventListener('shown.bs.tab', () => loadAvatars());
 
     const pane = document.querySelector('#avatar');
     if (pane && pane.classList.contains('show') && pane.classList.contains('active')) {
-      loadAvatarsFromDirectoryIndex();
+      loadAvatars();
     }
   }
 
