@@ -82,7 +82,6 @@ export function valorarRecurso(idvisitado, valor) {
   const token = localStorage.getItem("jwt") || "null";
   // URL de Google (igual que antes)
   const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=valorar&valor=${encodeURIComponent(valor)}&usuario_id=${encodeURIComponent(usuarioId)}`;
-   console.log(`Authorization: Bearer ${token} \n id: ${idvisitado} \n val: ${valor}`);
   // URL y opciones para Cloudflare (POST)
   const urlCF = `${URL_CLOUDFLARE}/valoraciones`;
   const cfOptions = {
@@ -97,6 +96,9 @@ export function valorarRecurso(idvisitado, valor) {
       valoracion: valor
     })
   };
+   //console.log(`Authorization: Bearer ${token} \n id: ${idvisitado} \n val: ${valor}`);
+   console.log(urlCF);
+   console.log(cfOptions);
   // Hacemos primero el POST a Cloudflare (no bloqueante respecto a la llamada a Google)
   fetch(urlCF, cfOptions)
     .then(res => res.json().catch(() => ({ ok: false, status: res.status })))
