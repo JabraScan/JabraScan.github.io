@@ -84,7 +84,7 @@ export function valorarRecurso(idvisitado, valor) {
   const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=valorar&valor=${encodeURIComponent(valor)}&usuario_id=${encodeURIComponent(usuarioId)}`;
    console.log(`Authorization: Bearer ${token} \n id: ${idvisitado} \n val: ${valor}`);
   // URL y opciones para Cloudflare (POST)
-  const urlCF = `${URL_CLOUDFLARE}/valoraciones/votar`;
+  const urlCF = `${URL_CLOUDFLARE}/valoraciones`;
   const cfOptions = {
     method: 'POST',
     headers: {
