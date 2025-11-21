@@ -298,9 +298,9 @@ export async function cargarObras() {
 // -------------------------
 export function initUsuario() {
   function onPageLoaded() {
-    //cargarPerfil();
-    //cargarBiblioteca();
-    //cargarObras();
+    cargarPerfil();
+    cargarBiblioteca();
+    cargarObras();
   }
 
   if (document.readyState === 'complete') {
