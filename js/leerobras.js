@@ -39,7 +39,7 @@ fetch('https://jabrascan.net/obras/carrousel')
         : (obj.nombresAlternativos ? [obj.nombresAlternativos] : []);
       const autor = obj.autor || '';
       const imagenField = obj.imagen || [];
-      const imagen = imagenField; // pasar array o string tal cual a seleccionarImagen
+      const imagen = seleccionarImagen(obj.imagen || []); // pasar array o string tal cual a seleccionarImagen
       const estado = obj.estado || '';
       const Categoria = Array.isArray(obj.categoria) ? obj.categoria.join(', ') : (obj.categoria || '');
       const traduccion = formatCDATA(obj.traductor || '');
