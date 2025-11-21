@@ -241,9 +241,9 @@ export function seleccionarImagen(nodosImagen) {
     // Crear el elemento imagen
     const img = document.createElement("img");  
     // Extraer la ruta base sin extensión (.jpg .jpeg .png .webp)
-    const imagenPath = imagen.replace(/\.(jpg|jpeg|png|webp)$/i, '');
+    const imagenPath = (Array.isArray(imagen) ? (imagen[0] || '') : imagen).replace(/\.(jpg|jpeg|png|webp)$/i, '');
     // Src principal con cache-busting; sirve como fallback si no hay versiones optimizadas
-    img.src = `img/${imagen}?v=20251121`;  
+    img.src = `img/${Array.isArray(imagen) ? (imagen[0] || '') : imagen}?v=20251121`;
     // Texto alternativo accesible
     img.alt = nombreobra;  
     // Carga perezosa por defecto para evitar bloquear el render inicial
@@ -304,6 +304,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
