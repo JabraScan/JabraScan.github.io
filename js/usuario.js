@@ -180,8 +180,6 @@ export async function cargarObras() {
 
 // -------------------------
 // Avatar loader (lee índice de directorio /img/avatar/)
-// - intenta GET /img/avatar/ y parsea el HTML índice si existe
-// - si no hay índice, muestra mensaje y no reintenta
 // - carga una sola vez al activarse la pestaña
 // -------------------------
 (function setupAvatarLoader() {
@@ -243,32 +241,6 @@ export async function cargarObras() {
       });
       return Array.from(new Set(imgs));
     }
-
-/*    async function loadAvatars() {
-      if (avatarsLoaded || loadingInProgress) return;
-      loadingInProgress = true;
-      avatarResultEl.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
-      try {
-        const resp = await fetch('/img/avatar/', { cache: 'no-cache' });
-        if (!resp.ok) throw new Error('no directory index');
-        const text = await resp.text();
-        const names = extractImageNamesFromHtml(text);
-        if (!names.length) throw new Error('no images in index');
-        const list = names
-          .filter(n => /\.(webp|jpe?g|png)$/i.test(n))
-          .map(n => ({ src: `img/avatar/${n}`, alt: n.replace(/\.(webp|jpe?g|png)$/i, '') }));
-        renderAvatars(list);
-        avatarsLoaded = true;
-        loadingInProgress = false;
-        return;
-      } catch (e) {
-        avatarResultEl.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
-        avatarsLoaded = true;
-        loadingInProgress = false;
-        return;
-      }
-    }*/
-    //loadAvatars
     async function loadAvatars() {
       if (avatarsLoaded || loadingInProgress) return;
       loadingInProgress = true;
@@ -304,7 +276,7 @@ export async function cargarObras() {
       }
     }
     //fin loadAvatars
-
+    loadAvatars
     avatarTabBtn.addEventListener('click', () => loadAvatars());
     avatarTabBtn.addEventListener('shown.bs.tab', () => loadAvatars());
 
@@ -329,7 +301,6 @@ export function initUsuario() {
     //cargarPerfil();
     //cargarBiblioteca();
     //cargarObras();
-    setupAvatarLoader();
   }
 
   if (document.readyState === 'complete') {
