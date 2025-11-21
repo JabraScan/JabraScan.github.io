@@ -237,7 +237,7 @@ export function seleccionarImagen(nodosImagen) {
 
 // Crea y devuelve un elemento <img> configurado para la obra
 // Crea y devuelve un elemento <img> configurado para la obra (imagen es string)
-  function createImg(imagen, nombreobra, tipo) {
+  export function createImg(imagen, nombreobra, tipo) {
     // Crear el elemento imagen
     const img = document.createElement("img");  
     // Extraer la ruta base sin extensión (.jpg .jpeg .png .webp)
@@ -304,6 +304,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
