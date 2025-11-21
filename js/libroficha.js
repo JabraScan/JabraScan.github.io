@@ -1,5 +1,5 @@
 import { obtenerCapitulos } from './capitulos.js';
-import { parseDateDMY, parseChapterNumber, compareCapNumDesc, crearBloqueValoracion, seleccionarImagen, obtenerNombreObra } from './utils.js';
+import { parseDateDMY, parseChapterNumber, compareCapNumDesc, crearBloqueValoracion, seleccionarImagen, obtenerNombreObra, createImg } from './utils.js';
 import { activarLinksPDF, activarPaginacion } from './eventos.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
 import { mostrarurl } from './general.js';
@@ -59,32 +59,7 @@ export function cargarlibro(libroId) {
 
       const imagenContenedor = document.createElement("div");
       imagenContenedor.classList.add("imagen-contenedor");
-      const img = document.createElement("img");
-
-      // Extraer la ruta base y extensión de la imagen
-      const imagenPath = imagen.replace(/\.(jpg|jpeg|png|webp)$/i, '');
-
-      // Usar imagen original como src principal (fallback)
-      img.src = "/img/" + imagen;
-      img.alt = nombreobra;
-      img.loading = "lazy"; // Lazy loading para mejorar rendimiento
-
-      // Establecer dimensiones intrínsecas para evitar layout shift (CLS)
-      // Proporción 4:5 (600x750) - el CSS controlará el tamaño final mostrado
-      img.width = 600;
-      img.height = 750;
-
-      // Solo agregar srcset si la imagen tiene una estructura de carpeta (probablemente tiene versiones optimizadas)
-      if (imagen.includes('/')) {
-        const webpPath = imagenPath;
-        // Aplicar srcset directamente - el navegador usará src como fallback si las versiones optimizadas no existen
-        img.srcset = `../img/${webpPath}-300w.webp 300w, ../img/${webpPath}-600w.webp 600w, ../img/${webpPath}-900w.webp 900w`;
-        // sizes para la página de ficha (imagen más grande)
-        // En móvil la imagen ocupa ~300px → con DPR 3x necesita 900w
-        // En tablet ocupa ~350px → con DPR 2x necesita 600w-900w  
-        // En desktop ocupa ~400px → necesita 900w
-        img.sizes = "(max-width: 768px) 300px, (max-width: 1200px) 350px, 400px";
-      }
+      const img = createImg(imagen, nombreobra, 'libroficha');
 
       imagenContenedor.appendChild(img);
 
@@ -293,6 +268,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
