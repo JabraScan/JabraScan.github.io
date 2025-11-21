@@ -112,7 +112,7 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
         .filter(cap => cap._fecha <= hoy); // ✅ solo capítulos con fecha <= hoy
         const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
         if (idx === -1) return;
-        
+console.log(cap);        
         mostrarurl(clave, capitulo); //actualizar barra de direcciones
         const cap = capitulosObra[idx];
         actualizarTituloObra(cap.tituloObra, clave);
