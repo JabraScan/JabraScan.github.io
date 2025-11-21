@@ -243,7 +243,8 @@ export function seleccionarImagen(nodosImagen) {
     // Extraer la ruta base sin extensión (.jpg .jpeg .png .webp)
     const imagenPath = (Array.isArray(imagen) ? (imagen[0] || '') : imagen).replace(/\.(jpg|jpeg|png|webp)$/i, '');
     // Src principal con cache-busting; sirve como fallback si no hay versiones optimizadas
-    img.src = `img/${Array.isArray(imagen) ? (imagen[0] || '') : imagen}?v=20251121`;
+    const version = '?v=20251131';
+    img.src = `img/${Array.isArray(imagen) ? (imagen[0] || '') : imagen}${version}`;
     // Texto alternativo accesible
     img.alt = nombreobra;  
     // Carga perezosa por defecto para evitar bloquear el render inicial
@@ -263,7 +264,7 @@ export function seleccionarImagen(nodosImagen) {
     if (imagen.includes('/')) {
       const webpPath = imagenPath;
       // srcset con varias anchuras en webp; el navegador elegirá la mejor y usará src como fallback
-      img.srcset = `img/${webpPath}-300w.webp 300w, img/${webpPath}-600w.webp 600w, img/${webpPath}-900w.webp 900w`;
+      img.srcset = `img/${webpPath}-300w.webp${version} 300w, img/${webpPath}-600w.webp${version} 600w, img/${webpPath}-900w.webp${version} 900w`;
       // Ajuste de sizes según device pixel ratio para evitar descargar imágenes sobredimensionadas
       const dpr = window.devicePixelRatio || 1;
       if (dpr > 2) {
@@ -304,6 +305,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
