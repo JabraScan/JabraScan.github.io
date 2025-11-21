@@ -235,6 +235,53 @@ export function seleccionarImagen(nodosImagen) {
   return (lista[indice].textContent || "").trim();
 }
 
+// Crea y devuelve un elemento <img> configurado para la obra
+// Crea y devuelve un elemento <img> configurado para la obra (imagen es string)
+  function createImg(imagen, nombreobra, tipo) {
+    // Crear el elemento imagen
+    const img = document.createElement("img");  
+    // Extraer la ruta base sin extensión (.jpg .jpeg .png .webp)
+    const imagenPath = imagen.replace(/\.(jpg|jpeg|png|webp)$/i, '');
+    // Src principal con cache-busting; sirve como fallback si no hay versiones optimizadas
+    img.src = `img/${imagen}?v=20251121`;  
+    // Texto alternativo accesible
+    img.alt = nombreobra;  
+    // Carga perezosa por defecto para evitar bloquear el render inicial
+    img.loading = "lazy";  
+    // Si no es main, solo aplicar el cambio de dimensiones que pediste (600x750)
+    if (tipo !== 'main') {
+      img.width = 600; // ancho intrínseco solicitado
+      img.height = 750; // alto intrínseco solicitado
+    } else {
+      // Dimensiones intrínsecas iniciales para evitar CLS (se ajustan según tipo más abajo)
+      img.width = 280;
+      img.height = 280;
+    }
+    // Decodificación asíncrona para evitar bloquear el hilo de render
+    img.decoding = "async";  
+    // Si la ruta incluye carpeta, asumimos que hay versiones webp optimizadas
+    if (imagen.includes('/')) {
+      const webpPath = imagenPath;
+      // srcset con varias anchuras en webp; el navegador elegirá la mejor y usará src como fallback
+      img.srcset = `img/${webpPath}-300w.webp 300w, img/${webpPath}-600w.webp 600w, img/${webpPath}-900w.webp 900w`;
+      // Ajuste de sizes según device pixel ratio para evitar descargar imágenes sobredimensionadas
+      const dpr = window.devicePixelRatio || 1;
+      if (dpr > 2) {
+        // En pantallas de alta densidad reducimos el ancho efectivo solicitado
+        img.sizes = "(max-width: 576px) 50vw, (max-width: 768px) 33vw, (max-width: 992px) 25vw, 20vw";
+      } else {
+        // Comportamiento por defecto para densidades normales
+        img.sizes = "(max-width: 576px) 100vw, (max-width: 768px) 50vw, (max-width: 992px) 33vw, (max-width: 1200px) 25vw, 20vw";
+      }
+    }
+    // Manejo de error en carga: quitar srcset y reintentar con el src sin query; si falla, ocultar
+    img.onerror = function () {
+      this.removeAttribute('srcset');
+      this.src = `img/${imagen}`;
+      this.onerror = function () { this.onerror = null; this.style.display = 'none'; };
+    };  
+    return img;
+  }
 /**
  * 📚 Función para obtener los nombres de obra
  * Recibe directamente la lista de nodos <nombreobra>
@@ -257,6 +304,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
