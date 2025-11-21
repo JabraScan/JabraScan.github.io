@@ -329,6 +329,7 @@ export function initUsuario() {
     cargarPerfil();
     cargarBiblioteca();
     cargarObras();
+    setupAvatarLoader();
   }
 
   if (document.readyState === 'complete') {
