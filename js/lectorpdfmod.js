@@ -112,7 +112,7 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
         .filter(cap => cap._fecha <= hoy); // ✅ solo capítulos con fecha <= hoy
         const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
         if (idx === -1) return;
-console.log(cap);        
+        //console.log(cap);        
         mostrarurl(clave, capitulo); //actualizar barra de direcciones
         const cap = capitulosObra[idx];
         actualizarTituloObra(cap.tituloObra, clave);
@@ -138,8 +138,7 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
       // Esto evita sumas si 'clave' es numérica.
       const claveFinal = String(clave) + extra;
       // Construimos la ruta final del PDF, codificando el nombre del archivo para URLs válidas.
-      const pdfPath = `books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
-  //const pdfPath = `books/${clave}/${encodeURIComponent(nombreArchivo)}`;
+      const pdfPath = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
   pdfjsLib.getDocument(pdfPath).promise.then(doc => {
     pdfDoc = doc;
     pageNum = paginaInicial;
