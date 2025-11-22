@@ -112,10 +112,24 @@ export function generarEtiquetaNuevo(fechaInput) {
  * Return:
  *   - HTMLElement DIV con class "book-rating" que contiene los elementos descritos.
  */
-    // crearEstrellas: función mínima
-    // - Solo crea el contenedor .stars con 5 <i>.
-    // - Si puedeVotar === true añade el listener que llama a valorarRecurso y guarda en localStorage tal como antes.
-      export function crearEstrellas(clave, valoracion, puedeVotar = false) {
+      // repinta las estrellas según el voto del usuario (1..5)
+      function pintarSegunVoto(estrellasEl, voto) {
+        const nodos = estrellasEl.querySelectorAll('i');
+        nodos.forEach((nodo, idx) => {
+          const posicion = idx + 1;
+          nodo.style.color = posicion <= voto ? 'orange' : 'lightgray';
+          nodo.setAttribute('aria-pressed', posicion <= voto ? 'true' : 'false');
+        });
+      }
+      /**
+       * crearEstrellas
+       *
+       * @param {string} clave
+       * @param {number} valoracion
+       * @param {boolean} puedeVotar        // si true se añaden listeners
+       * @param {boolean} actualizarVoto    // si true tras cada OK se repintan las estrellas y se permite votar de nuevo
+       */
+      export function crearEstrellas(clave, valoracion, puedeVotar = false, actualizarVoto = false) {
         const claveLocal = clave;
         const estrellas = document.createElement("div");
           estrellas.className = "stars";
@@ -130,10 +144,18 @@ export function generarEtiquetaNuevo(fechaInput) {
               valorarRecurso(clave, i).then(res => {
                 if (res && res.trim().startsWith("OK")) {
                   localStorage.setItem(claveLocal, i);
-                  // Actualización del DOM (texto de agradecimiento / recálculo de medias)
-                  // la realiza quien creó el bloque, como antes.
+                    if (actualizarVoto) {
+                      // Repintamos las estrellas con el voto del usuario
+                      pintarSegunVoto(estrellas, i);
+                      // Mantenemos los listeners activos para permitir votar de nuevo
+                    } else {
+                      // Comportamiento clásico: bloquear futuros clicks
+                      // ejemplo simple: deshabilitar puntero para todos los íconos
+                      const nodos = estrellas.querySelectorAll('i');
+                      nodos.forEach(n => n.style.pointerEvents = 'none');
+                    }
                 } else {
-                  // Manejo de error igual que antes.
+                  // Manejo de errores
                 }
               });
             });
@@ -146,7 +168,7 @@ export function generarEtiquetaNuevo(fechaInput) {
        * crearBloqueValoracion
        * Crea y devuelve un bloque DOM que representa la valoración de un recurso.
        **/
-        export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0, soloEstrellas = false) {
+        export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0, opciones = {} ) {
           // Contenedor principal
           const bloque = document.createElement("div");
           bloque.className = "book-rating";
@@ -166,7 +188,7 @@ export function generarEtiquetaNuevo(fechaInput) {
           const estrellas = crearEstrellas(clave, valoracionPromedio, puedeVotar);
         
           // Si el llamador solo quiere las estrellas, devolvemos ese bloque mínimo
-          if (soloEstrellas === true) {
+          if (opciones.soloEstrellas === true) {
             bloque.appendChild(estrellas);
             return bloque;
           } else {
@@ -416,6 +438,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
