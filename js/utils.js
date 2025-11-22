@@ -88,12 +88,113 @@ export function generarEtiquetaNuevo(fechaInput) {
  * Genera dinámicamente un bloque HTML para mostrar la valoración de un recurso
  * y permitir al usuario votar si no lo ha hecho antes.
  *
- * @param {string} clave - Identificador del recurso (sin el prefijo "obra_")
- * @param {number} valoracionPromedio - Valoración promedio del recurso (0–5)
- * @param {number} votos - Número total de votos registrados
- * @returns {HTMLElement} - Bloque HTML listo para insertar en el DOM
+ * Firma:
+ *   crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0, opciones = {})
+ *
+ * Parámetros:
+ *   - clave (string)               : identificador único del recurso (clave usada en localStorage y en la llamada a valorarRecurso) (sin el prefijo "obra_").
+ *   - valoracionPromedio (number)  : promedio actual de valoración. Se muestra y se usa para pintar estrellas.
+ *   - votos (number)               : número de votos registradps.
+ *   - soloEstrellas (boolean)      : si true, la función devuelve un bloque que solo contiene las estrellas.
+ *
+ * Comportamiento principal:
+ *   - Lee localStorage("user_id") para saber si hay usuario logueado.
+ *   - Lee localStorage(clave) para saber si el usuario ya ha votado ese recurso.
+ *   - Calcula puedeVotar = (usuario logueado) && (no ha votado).
+ *   - Crea las estrellas delegando en crearEstrellas(clave, valoracionPromedio, puedeVotar).
+ *     crearEstrellas asume que el permiso viene del llamador y NO vuelve a comprobar user_id ni localStorage.
+ *   - Si opciones.soloEstrellas === true devuelve un bloque con solo las estrellas.
+ *   - Si no, añade el texto de promedio/votos y el texto de interacción del usuario:
+ *       - "Inicia sesión para valorar" si no hay usuario.
+ *       - "¡Gracias por tu voto!" si ya votó.
+ *       - "¿Tu valoración?" si puede votar.
+ *
+ * Return:
+ *   - HTMLElement DIV con class "book-rating" que contiene los elementos descritos.
  */
-export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) {
+    // crearEstrellas: función mínima
+    // - Solo crea el contenedor .stars con 5 <i>.
+    // - Si puedeVotar === true añade el listener que llama a valorarRecurso y guarda en localStorage tal como antes.
+      export function crearEstrellas(clave, valoracion, puedeVotar = false) {
+        const claveLocal = clave;
+        const estrellas = document.createElement("div");
+          estrellas.className = "stars";
+        const puntuacionEntera = Math.round(valoracion);
+        for (let i = 1; i <= 5; i++) {
+          const estrella = document.createElement("i");
+            estrella.className = "fa-solid fa-star";
+            estrella.style.color = i <= puntuacionEntera ? "orange" : "lightgray";
+            estrella.style.cursor = puedeVotar ? "pointer" : "default";
+          if (puedeVotar) {
+            estrella.addEventListener("click", () => {
+              valorarRecurso(clave, i).then(res => {
+                if (res && res.trim().startsWith("OK")) {
+                  localStorage.setItem(claveLocal, i);
+                  // Actualización del DOM (texto de agradecimiento / recálculo de medias)
+                  // la realiza quien creó el bloque, como antes.
+                } else {
+                  // Manejo de error igual que antes.
+                }
+              });
+            });
+          }      
+          estrellas.appendChild(estrella);
+        }      
+        return estrellas;
+      }      
+      /**
+       * crearBloqueValoracion
+       * Crea y devuelve un bloque DOM que representa la valoración de un recurso.
+       **/
+        export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0, soloEstrellas = false) {
+          // Contenedor principal
+          const bloque = document.createElement("div");
+          bloque.className = "book-rating";
+        
+          // Comprobación de login (misma lógica que antes)
+          const usuarioId = localStorage.getItem("user_id");
+          const estaLogueado = usuarioId && usuarioId !== "null";
+        
+          // Comprobación de voto previo (misma lógica que antes)
+          const claveLocal = clave;
+          const yaVotado = localStorage.getItem(claveLocal);
+        
+          // Decisión centralizada sobre si se permite votar
+          const puedeVotar = estaLogueado && !yaVotado;
+        
+          // Delegamos la creación de las estrellas; PASAMOS el flag calculado para evitar duplicar comprobaciones
+          const estrellas = crearEstrellas(clave, valoracionPromedio, puedeVotar);
+        
+          // Si el llamador solo quiere las estrellas, devolvemos ese bloque mínimo
+          if (soloEstrellas === true) {
+            bloque.appendChild(estrellas);
+            return bloque;
+          } else {
+            // Texto con promedio y número de votos (formato original)
+            const textoValoracion = document.createElement("div");
+              textoValoracion.className = "rating-text";
+              textoValoracion.textContent = `${valoracionPromedio.toFixed(1)} / 5 (${votos} votos)`;
+        
+          // Texto de interacción/estado para el usuario (mismos mensajes que antes)
+            const tuValoracion = document.createElement("div");
+              tuValoracion.className = "your-rating";
+          
+            function mensajeEstado(estaLogueado, yaVotado) {
+              if (!estaLogueado) return "Inicia sesión para valorar";
+              if (yaVotado) return "¡Gracias por tu voto!";
+              return "¿Tu valoración?";
+            }
+            tuValoracion.textContent = mensajeEstado(estaLogueado, yaVotado);
+            // Ensamblado final del bloque
+              bloque.appendChild(estrellas);
+              bloque.appendChild(textoValoracion);
+              bloque.appendChild(tuValoracion);
+            return bloque;
+          }
+        }
+
+
+/*export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) {
   // 🧱 Contenedor principal del bloque
   const bloque = document.createElement("div");
   bloque.className = "book-rating";
@@ -171,7 +272,7 @@ export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) 
   bloque.appendChild(tuValoracion);
 
   return bloque;
-}
+}*/
 
 export function truncarTexto(texto, maxLength = 40) {
   return texto.length > maxLength ? texto.slice(0, maxLength) + "…" : texto;
@@ -315,6 +416,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
