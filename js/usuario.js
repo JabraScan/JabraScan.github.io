@@ -102,15 +102,15 @@ function authFetch(input, init = {}) {
       // Buscar elementos en el DOM
       const nickEl = document.getElementById(nickSelector);
       const avatarEl = document.getElementById(avatarSelector);    
-        //crear imagen avatar
-          const newavatar = createImg(data.avatar || avatarFallback, data.nick, "perfilUsuario");
-            newImg.id = avatarEl.id;
-            newImg.className = "rounded-circle me-3";
+        //crear imagen avatar (cuando este activa la opcion con diferentes tamaños
+        //  const newavatar = createImg(data.avatar || avatarFallback, data.nick, "perfilUsuario");
+        //    newImg.id = avatarEl.id;
+        //    newImg.className = "rounded-circle me-3";
         // reemplazar en el DOM (mantiene la posición original)
-        avatarEl.parentNode.replaceChild(newImg, avatarEl);
+        //avatarEl.parentNode.replaceChild(newImg, avatarEl);
       // Asignaciones seguras
       if (nickEl) nickEl.textContent = data.nick || "(sin nick)";
-      //if (avatarEl) avatarEl.src = data.avatar || avatarFallback;
+      if (avatarEl) avatarEl.src = data.avatar || avatarFallback;
     }    
     // Orquestadora: usa fetchPerfil y renderPerfil (solo autenticado)
     // opts permite pasar selectors opcionales: { loadingSelector, errorSelector, nickSelector, avatarSelector }
@@ -166,10 +166,13 @@ export async function cargarBiblioteca() {
 console.log(item);
       const srcCandidate = item.imagen || (item.obra_id ? `/books/${item.obra_id}/${item.imagen || ""}` : "");
       const imgSrc = srcCandidate || FALLBACK_IMG || "";
+
+      const newImg = createImg(`"${imgSrc}"`, item.obra_id, "BibliotecaUsuario");
+          newImg.className = "img-thumbnail";
   
       li.innerHTML = `
-        <img src="${imgSrc}" ${imgSrc ? `onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"` : ''} 
-             alt="${item.nombreobra || 'Portada'}" class="img-thumbnail" style="width:96px;height:128px;object-fit:cover;">
+        <!--<img src="${imgSrc}" ${imgSrc ? `onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"` : ''} 
+             alt="${item.nombreobra || 'Portada'}" class="img-thumbnail" style="width:96px;height:128px;object-fit:cover;">-->
         <div class="flex-grow-1">
           <div class="d-flex justify-content-between">
             <h5 class="mb-1">${item.nombreobra || ''}</h5>
@@ -180,6 +183,7 @@ console.log(item);
           <input type="hidden" class="obra-id" value="${item.obra_id ?? ''}">
         </div>
       `;
+      li.prepend(newImg);
   
       ul.appendChild(li);
     });
