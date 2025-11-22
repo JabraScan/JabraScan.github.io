@@ -194,30 +194,31 @@ function cargarVista(url) {
       } else if (url === "usuario.html") {
         window.ocultarDisqus?.();
       
-        // Evita cargar dos veces: comprobamos un flag en window
-        if (!window.__usuario_loaded__) {
-          import("/js/usuario.js")
-            .then(module => {
-              if (typeof module.initUsuario === "function") {
-                // Llamamos al init del módulo una vez que el HTML ya fue insertado
-                module.initUsuario();
-              } else {
-                console.error("initUsuario no exportado desde /js/usuario.js");
-              }
-              window.__usuario_loaded__ = true;
-            })
-            .catch(err => console.error("Error importando /js/usuario.js", err));
-        } else {
-          // Ya cargado: intentamos reutilizar la API expuesta en window.usuarioAPI
-          if (window.usuarioAPI && typeof window.usuarioAPI.initUsuario === "function") {
-            window.usuarioAPI.initUsuario();
-          } else if (typeof window.initUsuario === "function") {
-            // fallback por compatibilidad si expones initUsuario globalmente
-            window.initUsuario();
+          // Evita cargar dos veces: comprobamos un flag en window
+          if (!window.__usuario_loaded__) {
+            import("/js/usuario.js")
+              .then(module => {
+                if (typeof module.initUsuario === "function") {
+                  // Llamamos al init del módulo una vez que el HTML ya fue insertado
+                  module.initUsuario();
+                } else {
+                  console.error("initUsuario no exportado desde /js/usuario.js");
+                }
+                window.__usuario_loaded__ = true;
+              })
+              .catch(err => console.error("Error importando /js/usuario.js", err));
           } else {
-            console.log("usuario ya cargado (no hay initUsuario expuesto)");
+            // Ya cargado: intentamos reutilizar la API expuesta en window.usuarioAPI
+            if (window.usuarioAPI && typeof window.usuarioAPI.initUsuario === "function") {
+              window.usuarioAPI.initUsuario();
+            } else if (typeof window.initUsuario === "function") {
+              // fallback por compatibilidad si expones initUsuario globalmente
+              window.initUsuario();
+            } else {
+              console.log("usuario ya cargado (no hay initUsuario expuesto)");
+            }
           }
-        }
+      }
 
 
       // Puedes añadir más inicializaciones aquí si lo necesitas
@@ -320,6 +321,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
