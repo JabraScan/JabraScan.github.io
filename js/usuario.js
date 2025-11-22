@@ -58,50 +58,68 @@ function authFetch(input, init = {}) {
 // -------------------------
 // API Worker: funciones que consultan el backend
 // -------------------------
-export async function cargarPerfil() {
-  //console.log('cargaPerfil');
-  if (!usuario_id && !token) return;
+  //CARGA PERFIL USUARIO
+    // Llama al endpoint autenticado y devuelve los datos del perfil en JSON
+    export async function fetchPerfil() {
+      // URL sin query: el servidor debe extraer el usuario desde el token
+      const url = `${API_BASE}/usuarios/get`;
+      // authFetch debe añadir el header Authorization o el mecanismo de autenticación que uses
+      const res = await authFetch(url);    
+      // Lanzar error si la respuesta no es 2xx
+      if (!res.ok) {
+        const text = await res.text().catch(() => res.statusText);
+        const err = new Error(`Error ${res.status}: ${text}`);
+        err.status = res.status;
+        throw err;
+      }    
+      // Devolver JSON parseado (se espera { nick, avatar, rol, ... } sin usuario_id)
+      return res.json();
+    }    
+    // Actualiza el DOM con los datos del perfil
+    export function renderPerfil(data, opts = {}) {
+      // Opciones para los ids de los elementos del DOM (no hay id de usuario en los datos)
+      const {
+        nickSelector = "nick",
+        avatarSelector = "avatar",
+        avatarFallback = "/img/avatar/default.webp"
+      } = opts;    
+      // Buscar elementos en el DOM
+      const nickEl = document.getElementById(nickSelector);
+      const avatarEl = document.getElementById(avatarSelector);    
+      // Asignaciones seguras: no se hace referencia a usuario_id en ningún momento
+      if (nickEl) nickEl.textContent = data.nick || "(sin nick)";
+      if (avatarEl) avatarEl.src = data.avatar || avatarFallback;
+    }    
+    // Orquestadora: usa fetchPerfil y renderPerfil (solo autenticado)
+    // opts permite pasar selectors opcionales: { loadingSelector, errorSelector, nickSelector, avatarSelector }
+    export async function cargarPerfil(opts = {}) {
+      // Solo autenticado: si no hay token no intentamos nada
+      if (!token) return;    
+      // Mostrar indicador de carga si se proporcionó selector
+      let loadingEl;
+      if (opts.loadingSelector) {
+        loadingEl = document.getElementById(opts.loadingSelector);
+        if (loadingEl) loadingEl.style.display = ""; // mostrar
+      }    
+      try {
+        // Obtener datos del servidor
+        const data = await fetchPerfil();    
+        // Renderizar en el DOM
+        renderPerfil(data, opts);
+      } catch (err) {
+        // Manejo centralizado de errores
+        console.error("No se pudo cargar perfil:", err);
+        if (opts.errorSelector) {
+          const errEl = document.getElementById(opts.errorSelector);
+          if (errEl) errEl.textContent = "Error al cargar perfil";
+        }
+      } finally {
+        // Ocultar indicador de carga si se usó
+        if (loadingEl) loadingEl.style.display = "none";
+      }
+    }
+  //FIN CARGA PERFIL USUARIO
 
-  const url = token
-    ? `${API_BASE}/usuarios/get`
-    : `${API_BASE}/usuarios/get?usuario_id=${encodeURIComponent(usuario_id)}`;
-  //console.log(`url : ${url} - user ${usuario_id} - token ${token}`);
-
-  const res = await authFetch(url);
-  const data = await res.json();
-
-  const idEl = document.getElementById("usuario_id");
-  const nickEl = document.getElementById("nick");
-  const avatarEl = document.getElementById("avatar");
-
-  if (idEl) idEl.textContent = data.usuario_id || usuario_id;
-  if (nickEl) nickEl.textContent = data.nick || "(sin nick)";
-  if (avatarEl) avatarEl.src = data.avatar || "/img/avatar/default.webp";
-}
-/*
-export async function cargarBiblioteca() {
-  if (!usuario_id && !token) return;
-
-  const url = token
-    ? `${API_BASE}/biblioteca/list`
-    : `${API_BASE}/biblioteca/list?usuario_id=${encodeURIComponent(usuario_id)}`;
-
-  const res = await authFetch(url);
-  const data = await res.json();
-
-  const cont = document.getElementById("bibliotecaResultado");
-  if (!cont) return;
-
-  let html = "<ul class='list-group'>";
-  (Array.isArray(data) ? data : []).forEach(o => {
-    html += `<li class="list-group-item">
-      <strong>${o.nombreobra || ''}</strong> (Estado: ${o.estado || '-'})<br>
-      Última lectura: ${o.fechaUltimaLectura || "-"}
-    </li>`;
-  });
-  html += "</ul>";
-  cont.innerHTML = html;
-}*/
 export async function cargarBiblioteca() {
   if (!usuario_id && !token) return;
 
