@@ -226,12 +226,12 @@ function authFetch(input, init = {}) {
     if (!token) return;
   
     const url = `${API_BASE}/obras/traductores`;
-  
     // Petición usando authFetch (se asume que authFetch añade Authorization cuando corresponde)
     const res = await authFetch(url);
+console.log(res);
     if (!res || !res.ok) return;
     const data = await res.json();
-  
+console.log(data);
     const cont = document.getElementById("obrasResultado");
     if (!cont) return;
   
