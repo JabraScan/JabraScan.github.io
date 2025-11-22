@@ -113,7 +113,7 @@ export function generarEtiquetaNuevo(fechaInput) {
  *   - HTMLElement DIV con class "book-rating" que contiene los elementos descritos.
  */
       // repinta las estrellas según el voto del usuario (1..5)
-      function pintarSegunVoto(estrellasEl, voto) {
+      function actualizarEstrellas(estrellasEl, voto) {
         const nodos = estrellasEl.querySelectorAll('i');
         nodos.forEach((nodo, idx) => {
           const posicion = idx + 1;
@@ -146,7 +146,7 @@ export function generarEtiquetaNuevo(fechaInput) {
                   localStorage.setItem(claveLocal, i);
                     if (actualizarVoto) {
                       // Repintamos las estrellas con el voto del usuario
-                      pintarSegunVoto(estrellas, i);
+                      actualizarEstrellas(estrellas, i);
                       // Mantenemos los listeners activos para permitir votar de nuevo
                     } else {
                       // Comportamiento clásico: bloquear futuros clicks
@@ -438,6 +438,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
