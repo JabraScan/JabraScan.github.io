@@ -1,4 +1,4 @@
-import { createImg } from './utils.js';
+import { crearBloqueValoracion, createImg } from './utils.js';
 
 // -------------------------
 // /js/usuario.js
@@ -175,23 +175,29 @@ export async function cargarBiblioteca() {
       const imgSrc = srcCandidate || FALLBACK_IMG || "";
       li.innerHTML = `
         <img src="${imgSrc}" ${imgSrc ? `onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"` : ''} 
-             alt="${item.nombreobra || ''}" class="img-thumbnail" style="width:96px;height:128px;object-fit:cover;">
+             alt="${item.nombreobra || ''}" class="img-thumbnail user-image" style="width:96px;height:128px;object-fit:cover;">
         <div class="flex-grow-1">
-          <div class="d-flex justify-content-between">
+          <div class="d-flex justify-content-between user-main">
             <h5 class="mb-1">${item.nombreobra || ''}</h5>
             <small class="text-muted">${item.estado ? `Estado: ${item.estado}` : ''}</small>
           </div>
-          <p class="mb-1">Capítulo ${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}: ${item.nombreCapitulo || '-'}</p>
-          <small class="text-muted">${item.numCapitulo || '-'} / ${item.maxCapitulos || '-'} ( ${item.porcenLeido || '-'}% )</small>
+          <div class="d-flex justify-content-between user-lastChapter">
+            <p class="mb-1">Capítulo ${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}: ${item.nombreCapitulo || '-'}</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <small class="text-muted user-progresion">${item.numCapitulo || '-'} / ${item.maxCapitulos || '-'} ( ${item.porcenLeido || '-'}% )</small>
+          </div>
           <input type="hidden" class="obra-id" value="${item.obra_id ?? ''}">
         </div>
       `;
-      //prueba para insertar imagen con diferentes versiones
-      //const imgSrc = srcCandidate || FALLBACK_IMG || "";
-        //const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
-        //newImg.className = "img-thumbnail";
-      //li.prepend(newImg);
-  
+      //añadimos valoraciones para usuario
+      const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora);
+      li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
+      //prueba para insertar imagen con diferentes tamaños
+        //const imgSrc = srcCandidate || FALLBACK_IMG || "";
+          //const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
+          //newImg.className = "img-thumbnail";
+        //li.prepend(newImg);  
       ul.appendChild(li);
     });
   cont.appendChild(ul);
