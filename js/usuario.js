@@ -167,7 +167,7 @@ console.log(item);
       const srcCandidate = item.imagen || (item.obra_id ? `/books/${item.obra_id}/${item.imagen || ""}` : "");
       const imgSrc = srcCandidate || FALLBACK_IMG || "";
 
-      const newImg = createImg(`"${imgSrc}"`, item.obra_id, "BibliotecaUsuario");
+      const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
           newImg.className = "img-thumbnail";
   
       li.innerHTML = `
