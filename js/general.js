@@ -199,6 +199,7 @@ function cargarVista(url) {
           import("/js/usuario.js")
             .then(module => {
               if (typeof module.initUsuario === "function") {
+                // Llamamos al init del módulo una vez que el HTML ya fue insertado
                 module.initUsuario();
               } else {
                 console.error("initUsuario no exportado desde /js/usuario.js");
@@ -207,14 +208,17 @@ function cargarVista(url) {
             })
             .catch(err => console.error("Error importando /js/usuario.js", err));
         } else {
-          // Ya cargado
-          if (window.initUsuario) window.initUsuario();
-          else {
-            // Si usas import dinámico y no expones en window, puedes mantener un flag
-            console.log("usuario ya cargado");
+          // Ya cargado: intentamos reutilizar la API expuesta en window.usuarioAPI
+          if (window.usuarioAPI && typeof window.usuarioAPI.initUsuario === "function") {
+            window.usuarioAPI.initUsuario();
+          } else if (typeof window.initUsuario === "function") {
+            // fallback por compatibilidad si expones initUsuario globalmente
+            window.initUsuario();
+          } else {
+            console.log("usuario ya cargado (no hay initUsuario expuesto)");
           }
         }
-      }
+
 
       // Puedes añadir más inicializaciones aquí si lo necesitas
     })
@@ -316,6 +320,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
