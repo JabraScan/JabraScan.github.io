@@ -99,7 +99,7 @@ function authFetch(input, init = {}) {
           <img id="avatar-img" src="${data.avatar || FALLBACK_IMG}" alt="avatar" class="rounded-circle me-3" style="width:80px;height:80px;">
           <div id="datos-user">
             <h3 id="nick">${data.nick || "(sin nick)"}</h3>
-            <p class="text-muted">Puntos: <span id="user_puntos">${puntos}</span></p>
+            <p class="text-muted">Puntos: <span id="user_puntos">${data.puntos}</span></p>
           </div>
         `;
 
