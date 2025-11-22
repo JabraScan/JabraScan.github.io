@@ -1,4 +1,18 @@
 // -------------------------
+// /js/usuario.js
+// Módulo responsable de cargar y renderizar datos del usuario.
+// No contiene auto-ejecución: general.js debe importar y llamar initUsuario
+// -------------------------
+
+// Funciones existentes que ya tienes (se asume que ya están definidas en este archivo)
+// - fetchPerfil
+// - renderPerfil
+// - cargarPerfil
+// - cargarBiblioteca
+// - cargarObras
+
+
+// -------------------------
 // Config y constantes
 // -------------------------
 const API_BASE = "https://jabrascan.net";
@@ -311,33 +325,34 @@ export async function cargarObras() {
   }
 })();
 
-// -------------------------
-// Inicialización pública y auto-ejecución segura
-// -------------------------
-export function initUsuario() {
-  function onPageLoaded() {
-    cargarPerfil();
-    cargarBiblioteca();
-    cargarObras();
+// -------------------------------------------------
+// initUsuario
+// Orquestador que arranca la carga de datos asumiendo que
+// el HTML de usuario ya fue insertado en el DOM por general.js.
+// -------------------------------------------------
+  export function initUsuario() {
+    // Registro ligero para diagnóstico (puedes quitarlo cuando esté ok)
+    console.log('initUsuario: inicializando cargas de usuario');
+  
+    // Llamadas a las funciones que manipulan el DOM / datos.
+    // Se asume que cargarPerfil y las demás gestionan sus propios errores y fallbacks.
+    try {
+      cargarPerfil();
+      cargarBiblioteca();
+      cargarObras();
+    } catch (err) {
+      // Error de orquestación: registrar para depuración
+      console.error('initUsuario: error al arrancar cargas', err);
+    }
   }
-
-  if (document.readyState === 'complete') {
-    onPageLoaded();
-  } else {
-    window.addEventListener('load', onPageLoaded, { once: true });
-  }
-}
-
-// Auto-ejecución si se incluye el script sin llamar desde general.js
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initUsuario, { once: true });
-} else {
-  initUsuario();
-}
-
-// Exponer API global
-window.usuarioAPI = {
-  cargarPerfil,
-  cargarBiblioteca,
-  cargarObras
-};
+  
+  // -------------------------------------------------
+  // API pública (opcional) que expone funciones para uso desde la consola
+  // o desde otros módulos. Esto no sustituye la llamada directa desde general.js.
+  // -------------------------------------------------
+  window.usuarioAPI = {
+    cargarPerfil,
+    cargarBiblioteca,
+    cargarObras,
+    initUsuario
+  };
