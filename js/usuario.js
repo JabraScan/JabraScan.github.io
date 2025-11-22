@@ -94,7 +94,7 @@ function authFetch(input, init = {}) {
       // Opciones para los ids de los elementos del DOM (no hay id de usuario en los datos)
       const {
         nickSelector = "nick",
-        avatarSelector = "avatar",
+        avatarSelector = "avatar-img",
         avatarFallback = "/img/avatar/default.webp"
       } = opts;    
       // Buscar elementos en el DOM
