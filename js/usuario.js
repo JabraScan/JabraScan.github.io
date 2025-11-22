@@ -222,11 +222,12 @@ function authFetch(input, init = {}) {
    * - Renderiza en #obrasResultado usando innerHTML (mínimo código extra).
    */
   export async function cargarObras() {
-    // Requisito: solo funciona si hay token (no se hace llamada cuando no hay token)
-    if (!token) return;
-  
+console.log("Cobras");
+    if (!usuario_id && !token) return;
+console.log("pre-url");
     const url = `${API_BASE}/obras/traductores`;
     // Petición usando authFetch (se asume que authFetch añade Authorization cuando corresponde)
+console.log(url);
     const res = await authFetch(url);
 console.log(res);
     if (!res || !res.ok) return;
