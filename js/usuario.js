@@ -1,3 +1,4 @@
+import { activarLinksPDF } from './eventos.js';
 import { crearBloqueValoracion, createImg } from './utils.js';
 
 // -------------------------
@@ -182,7 +183,10 @@ export async function cargarBiblioteca() {
             <small class="text-muted">${item.estado ? `Estado: ${item.estado}` : ''}</small>
           </div>
           <div class="d-flex justify-content-between user-lastChapter">
-            <p class="mb-1">Capítulo ${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}: ${item.nombreCapitulo || '-'}</p>
+            <a href="#" data-pdf-obra="${item.obra_id}" data-pdf-capitulo="${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}" class="pdf-link">
+              <span>${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}: ${item.nombreCapitulo || '-'}</span>
+            </a>
+            <!--<p class="mb-1">Capítulo ${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}: ${item.nombreCapitulo || '-'}</p>-->
           </div>
           <div class="d-flex justify-content-between">
             <small class="text-muted user-progresion">${item.numCapitulo || '-'} / ${item.maxCapitulos || '-'} ( ${item.porcenLeido || '-'}% )</small>
@@ -201,6 +205,7 @@ export async function cargarBiblioteca() {
       ul.appendChild(li);
     });
   cont.appendChild(ul);
+  activarLinksPDF();
 }
 
 export async function cargarObras() {
