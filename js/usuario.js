@@ -205,7 +205,7 @@ export async function cargarBiblioteca() {
         </div>
       `;
       //añadimos valoraciones para usuario
-      const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora);
+      const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, true);
       li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
       //prueba para insertar imagen con diferentes tamaños
         //const imgSrc = srcCandidate || FALLBACK_IMG || "";
