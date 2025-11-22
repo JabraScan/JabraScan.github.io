@@ -167,15 +167,13 @@ export async function cargarBiblioteca() {
         .replace(/^"+|"+$/g, '')           // quitar comillas literales alrededor
         .replace(/\\/g, '/')               // convertir backslashes a slash
         .replace(/^\/+/, '')               // quitar slashes iniciales
-        .replace(/^img\/+/i, '');          // quitar prefijo img/ si existe
+        .replace(/^img\/+/i, '')          // quitar prefijo img/ si existe
+        .replace(/\.webp(\?.*)?$/i, '-300w.webp$1'); // reemplaza .webp por -300w.webp
       // construimos src de imagen sólo si viene o si FALLBACK_IMG está definido
       const imgSrc = srcCandidate || FALLBACK_IMG || "";
-      const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
-          newImg.className = "img-thumbnail";
-  
       li.innerHTML = `
-        <!--<img src="${imgSrc}" ${imgSrc ? `onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"` : ''} 
-             alt="${item.nombreobra || 'Portada'}" class="img-thumbnail" style="width:96px;height:128px;object-fit:cover;">-->
+        <img src="${imgSrc}" ${imgSrc ? `onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"` : ''} 
+             alt="${item.nombreobra || ''}" class="img-thumbnail" style="width:96px;height:128px;object-fit:cover;">
         <div class="flex-grow-1">
           <div class="d-flex justify-content-between">
             <h5 class="mb-1">${item.nombreobra || ''}</h5>
@@ -186,7 +184,11 @@ export async function cargarBiblioteca() {
           <input type="hidden" class="obra-id" value="${item.obra_id ?? ''}">
         </div>
       `;
-      li.prepend(newImg);
+      //prueba para insertar imagen con diferentes versiones
+      //const imgSrc = srcCandidate || FALLBACK_IMG || "";
+        //const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
+        //newImg.className = "img-thumbnail";
+      //li.prepend(newImg);
   
       ul.appendChild(li);
     });
