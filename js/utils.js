@@ -113,7 +113,7 @@ export function generarEtiquetaNuevo(fechaInput) {
  *   - HTMLElement DIV con class "book-rating" que contiene los elementos descritos.
  */
       // repinta las estrellas según el voto del usuario (1..5)
-      function actualizarEstrellas(estrellasEl, voto) {
+      export function actualizarEstrellas(estrellasEl, voto) {
         const nodos = estrellasEl.querySelectorAll('i');
         nodos.forEach((nodo, idx) => {
           const posicion = idx + 1;
@@ -440,6 +440,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
