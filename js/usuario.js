@@ -94,7 +94,7 @@ function authFetch(input, init = {}) {
     }    
     // Actualiza el DOM con los datos del perfil
     export function renderPerfil(data, opts = {}) {
-      const usermain = document.getElementById("user-main");
+      const usermain = document.getElementById("perfil-info");
         usermain.innerHTML = `
           <img id="avatar-img" src="${data.avatar || FALLBACK_IMG}" alt="avatar" class="rounded-circle me-3" style="width:80px;height:80px;">
           <div id="datos-user">
@@ -371,9 +371,6 @@ export async function cargarObras() {
 // el HTML de usuario ya fue insertado en el DOM por general.js.
 // -------------------------------------------------
   export function initUsuario() {
-    // Registro ligero para diagnóstico (puedes quitarlo cuando esté ok)
-    console.log('initUsuario: inicializando cargas de usuario');
-  
     // Llamadas a las funciones que manipulan el DOM / datos.
     // Se asume que cargarPerfil y las demás gestionan sus propios errores y fallbacks.
     try {
