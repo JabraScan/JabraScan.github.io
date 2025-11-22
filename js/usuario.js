@@ -168,7 +168,6 @@ console.log(item);
             <small class="text-muted">${item.estado ? `Estado: ${item.estado}` : ''}</small>
           </div>
           <p class="mb-1">Capítulo ${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}: ${item.nombreCapitulo || '-'}</p>
-          <small class="text-muted">${item.numCapitulo || '-'} / ${item.maxCapitulos || '-'} ( ${item.porcenLeido || '-'} )</small>
           <input type="hidden" class="obra-id" value="${item.obra_id ?? ''}">
         </div>
       `;
