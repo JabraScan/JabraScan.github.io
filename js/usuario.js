@@ -163,12 +163,14 @@ export async function cargarBiblioteca() {
       li.dataset.obraId = item.obra_id ?? "";
 //console.log(item);     
       // normalizar item.imagen y limpiar comillas, backslashes, prefijos img/ y slashes iniciales
-      let srcCandidate = String(item.imagen ?? '')
-        .replace(/^"+|"+$/g, '')           // quitar comillas literales alrededor
-        .replace(/\\/g, '/')               // convertir backslashes a slash
-        .replace(/^\/+/, '')               // quitar slashes iniciales
-        .replace(/^img\/+/i, '')          // quitar prefijo img/ si existe
-        .replace(/\.webp(\?.*)?$/i, '-300w.webp$1'); // reemplaza .webp por -300w.webp
+      let srcCandidate = '/img/' + (
+                          String(item.imagen ?? '')
+                            .replace(/^"+|"+$/g, '')           // quitar comillas literales alrededor
+                            .replace(/\\/g, '/')               // convertir backslashes a slash
+                            .replace(/^\/+/, '')               // quitar slashes iniciales
+                            .replace(/^img\/+/i, '')          // quitar prefijo img/ si existe
+                            .replace(/\.webp(\?.*)?$/i, '-300w.webp$1')
+                          ); 
       // construimos src de imagen sólo si viene o si FALLBACK_IMG está definido
       const imgSrc = srcCandidate || FALLBACK_IMG || "";
       li.innerHTML = `
