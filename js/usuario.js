@@ -94,15 +94,25 @@ function authFetch(input, init = {}) {
     }    
     // Actualiza el DOM con los datos del perfil
     export function renderPerfil(data, opts = {}) {
+      const usermain = document.getElementById("user-main");
+        usermain.innerHTML = `
+          <img id="avatar-img" src="${data.avatar || FALLBACK_IMG}" alt="avatar" class="rounded-circle me-3" style="width:80px;height:80px;">
+          <div id="datos-user">
+            <h3 id="nick">${data.nick || "(sin nick)"}</h3>
+            <p class="text-muted">Puntos: <span id="user_puntos">${puntos}</span></p>
+          </div>
+        `;
+
       // Opciones para los ids de los elementos del DOM (no hay id de usuario en los datos)
-      const {
-        nickSelector = "nick",
-        avatarSelector = "avatar-img",
-        avatarFallback = "/img/avatar/default.webp"
-      } = opts;
+      //const {
+      //  nickSelector = "nick",
+      //  avatarSelector = "avatar-img",
+      //  avatarFallback = "/img/avatar/default.webp"
+      //} = opts;
       // Buscar elementos en el DOM
-      const nickEl = document.getElementById(nickSelector);
-      const avatarEl = document.getElementById(avatarSelector);    
+      //const nickEl = document.getElementById(nickSelector);
+      //const avatarEl = document.getElementById(avatarSelector);
+
         //crear imagen avatar (cuando este activa la opcion con diferentes tamaños
         //  const newavatar = createImg(data.avatar || avatarFallback, data.nick, "perfilUsuario");
         //    newImg.id = avatarEl.id;
@@ -110,8 +120,8 @@ function authFetch(input, init = {}) {
         // reemplazar en el DOM (mantiene la posición original)
         //avatarEl.parentNode.replaceChild(newImg, avatarEl);
       // Asignaciones seguras
-      if (nickEl) nickEl.textContent = data.nick || "(sin nick)";
-      if (avatarEl) avatarEl.src = data.avatar || avatarFallback;
+      //if (nickEl) nickEl.textContent = data.nick || "(sin nick)";
+      //if (avatarEl) avatarEl.src = data.avatar || avatarFallback;
     }    
     // Orquestadora: usa fetchPerfil y renderPerfil (solo autenticado)
     // opts permite pasar selectors opcionales: { loadingSelector, errorSelector, nickSelector, avatarSelector }
