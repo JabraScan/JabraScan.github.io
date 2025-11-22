@@ -169,6 +169,8 @@ export function generarEtiquetaNuevo(fechaInput) {
        * Crea y devuelve un bloque DOM que representa la valoración de un recurso.
        **/
         export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0, opciones = {} ) {
+          //leer opciones, si las hay, y asignar valores, por defecto false
+          const { soloEstrellas = false, actualizarVoto = false } = opciones || {};
           // Contenedor principal
           const bloque = document.createElement("div");
           bloque.className = "book-rating";
@@ -185,10 +187,10 @@ export function generarEtiquetaNuevo(fechaInput) {
           const puedeVotar = estaLogueado && !yaVotado;
         
           // Delegamos la creación de las estrellas; PASAMOS el flag calculado para evitar duplicar comprobaciones
-          const estrellas = crearEstrellas(clave, valoracionPromedio, puedeVotar);
+          const estrellas = crearEstrellas(clave, valoracionPromedio, puedeVotar, actualizarVoto );
         
           // Si el llamador solo quiere las estrellas, devolvemos ese bloque mínimo
-          if (opciones.soloEstrellas === true) {
+          if (soloEstrellas === true) {
             bloque.appendChild(estrellas);
             return bloque;
           } else {
@@ -438,6 +440,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
