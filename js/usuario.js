@@ -1,5 +1,5 @@
 import { activarLinksPDF } from './eventos.js';
-import { crearBloqueValoracion, createImg } from './utils.js';
+import { actualizarEstrellas, crearBloqueValoracion, createImg } from './utils.js';
 
 // -------------------------
 // /js/usuario.js
@@ -205,7 +205,7 @@ export async function cargarBiblioteca() {
         </div>
       `;
       //añadimos valoraciones para usuario
-      const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, true);
+      const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, { soloEstrellas: true, actualizarVoto: true });
       li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
       //prueba para insertar imagen con diferentes tamaños
         //const imgSrc = srcCandidate || FALLBACK_IMG || "";
