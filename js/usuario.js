@@ -1,3 +1,5 @@
+import { createImg } from './utils.js';
+
 // -------------------------
 // /js/usuario.js
 // Módulo responsable de cargar y renderizar datos del usuario.
@@ -96,13 +98,19 @@ function authFetch(input, init = {}) {
         nickSelector = "nick",
         avatarSelector = "avatar-img",
         avatarFallback = "/img/avatar/default.webp"
-      } = opts;    
+      } = opts;
       // Buscar elementos en el DOM
       const nickEl = document.getElementById(nickSelector);
       const avatarEl = document.getElementById(avatarSelector);    
-      // Asignaciones seguras: no se hace referencia a usuario_id en ningún momento
+        //crear imagen avatar
+          const newavatar = createImg(data.avatar || avatarFallback, data.nick, "perfilUsuario");
+            newImg.id = avatarEl.id;
+            newImg.className = "rounded-circle me-3";
+        // reemplazar en el DOM (mantiene la posición original)
+        avatarEl.parentNode.replaceChild(newImg, avatarEl);
+      // Asignaciones seguras
       if (nickEl) nickEl.textContent = data.nick || "(sin nick)";
-      if (avatarEl) avatarEl.src = data.avatar || avatarFallback;
+      //if (avatarEl) avatarEl.src = data.avatar || avatarFallback;
     }    
     // Orquestadora: usa fetchPerfil y renderPerfil (solo autenticado)
     // opts permite pasar selectors opcionales: { loadingSelector, errorSelector, nickSelector, avatarSelector }
