@@ -161,12 +161,15 @@ export async function cargarBiblioteca() {
       const li = document.createElement("li");
       li.className = "list-group-item d-flex gap-3 align-items-start";
       li.dataset.obraId = item.obra_id ?? "";
-  
+//console.log(item);     
+      // normalizar item.imagen y limpiar comillas, backslashes, prefijos img/ y slashes iniciales
+      let srcCandidate = String(item.imagen ?? '')
+        .replace(/^"+|"+$/g, '')           // quitar comillas literales alrededor
+        .replace(/\\/g, '/')               // convertir backslashes a slash
+        .replace(/^\/+/, '')               // quitar slashes iniciales
+        .replace(/^img\/+/i, '');          // quitar prefijo img/ si existe
       // construimos src de imagen sólo si viene o si FALLBACK_IMG está definido
-console.log(item);
-      const srcCandidate = item.imagen || (item.obra_id ? `/books/${item.obra_id}/${item.imagen || ""}` : "");
       const imgSrc = srcCandidate || FALLBACK_IMG || "";
-
       const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
           newImg.className = "img-thumbnail";
   
