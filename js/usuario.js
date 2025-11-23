@@ -78,7 +78,6 @@ function authFetch(input, init = {}) {
   //CARGA PERFIL USUARIO
     // Llama al endpoint autenticado y devuelve los datos del perfil en JSON
     export async function fetchPerfil() {
-      // URL sin query: el servidor debe extraer el usuario desde el token
       const url = `${API_BASE}/usuarios/get`;
       // authFetch debe añadir el header Authorization o el mecanismo de autenticación que uses
       const res = await authFetch(url);    
@@ -222,20 +221,20 @@ function authFetch(input, init = {}) {
    * - Renderiza en #obrasResultado usando innerHTML (mínimo código extra).
    */
   export async function cargarObras() {
-console.log("Cobras");
+console.log("obras");
     if (!usuario_id && !token) return;
-console.log("pre-url");
+console.log(`${token}`);
     const perfilUrl = token
       ? `${API_BASE}/obras/traductores`
       : `${API_BASE}/obras/traductores?user_id=${encodeURIComponent(usuario_id)}`;
-console.log(perfilUrl);
+console.log(`url1: ${perfilUrl}`);
     const perfilRes = await authFetch(perfilUrl);
-console.log(perfilRes);
+console.log(`url2: ${perfilRes}`);
     const res = await perfilRes.json();
-console.log(res);
+console.log(`res: ${res}`);
     if (!res || !res.ok) return;
     const data = await res.json();
-console.log(data);
+console.log(`data: ${data}`);
     const cont = document.getElementById("obrasResultado");
     if (!cont) return;
   
