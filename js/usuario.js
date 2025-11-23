@@ -221,21 +221,17 @@ function authFetch(input, init = {}) {
    * - Renderiza en #obrasResultado usando innerHTML (mínimo código extra).
    */
   export async function cargarObras() {
-console.log("obras");
     if (!usuario_id && !token) return;
-console.log(`${token}`);
     const perfilUrl = token
       ? `${API_BASE}/obras/traductores`
       : `${API_BASE}/obras/traductores?user_id=${encodeURIComponent(usuario_id)}`;
-console.log(`url1: ${perfilUrl}`);
     const perfilRes = await authFetch(perfilUrl);
-console.log(`url2: ${perfilRes}`);
     const res = await perfilRes.json();
-console.log(`res: ${res}`);
     if (!res || !res.ok) return;
     const data = await res.json();
 console.log(`data: ${data}`);
     const cont = document.getElementById("obrasResultado");
+console.log(`cont: ${cont}`);
     if (!cont) return;
   
     const ul = document.createElement("ul");
@@ -256,7 +252,7 @@ console.log(`data: ${data}`);
           .replace(/\.webp(\?.*)?$/i, '-300w.webp$1')
       );
       const imgSrc = srcCandidate || FALLBACK_IMG || "";
-  
+console.log(imgSrc);
       li.innerHTML = `
         <img src="${imgSrc}" ${imgSrc ? `onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"` : ''} 
              alt="${item.nombreobra || ''}" class="img-thumbnail obra-image" style="width:96px;height:128px;object-fit:cover;">
@@ -277,10 +273,10 @@ console.log(`data: ${data}`);
           <input type="hidden" class="obra-id" value="${item.obra_id ?? ''}">
         </div>
       `;
-  
+console.log(li.innerHTML);
       // Insertar valoración exactamente como en biblioteca
-        const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, { soloEstrellas: true, actualizarVoto: true });
-        li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
+        //const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, { soloEstrellas: true, actualizarVoto: true });
+        //li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
   
       ul.appendChild(li);
     });
