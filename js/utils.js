@@ -145,9 +145,9 @@ export function generarEtiquetaNuevo(fechaInput) {
                 console.log(res);
                 if (res && /\bOK\b/.test(res)) {
                   localStorage.setItem(claveLocal, i);
-                    console.log(`avoto: ${actualizarVoto} - estrellas: ${estrelas} - i ${i}`);
+                    console.log(`avoto: ${actualizarVoto} - estrellas: ${estrellas} - i ${i}`);
                     if (actualizarVoto) {
-                      console.log(`estrellas: ${estrelas} - i ${i}`);
+                      console.log(`estrellas: ${estrellas} - i ${i}`);
                       // Repintamos las estrellas con el voto del usuario
                       actualizarEstrellas(estrellas, i);
                       // Mantenemos los listeners activos para permitir votar de nuevo
@@ -362,6 +362,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
