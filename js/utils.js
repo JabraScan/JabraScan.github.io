@@ -141,26 +141,51 @@ export function generarEtiquetaNuevo(fechaInput) {
             estrella.style.cursor = puedeVotar ? "pointer" : "default";
           if (puedeVotar) {
             estrella.addEventListener("click", () => {
-              valorarRecurso(clave, i).then(res => {
-                console.log(res);
-                if (res && /\bOK\b/.test(res)) {
-                  localStorage.setItem(claveLocal, i);
-                    console.log(`avoto: ${actualizarVoto} - estrellas: ${estrellas} - i ${i}`);
-                    if (actualizarVoto) {
-                      console.log(`estrellas: ${estrellas} - i ${i}`);
-                      // Repintamos las estrellas con el voto del usuario
-                      actualizarEstrellas(estrellas, i);
-                      // Mantenemos los listeners activos para permitir votar de nuevo
-                    } else {
-                      // Comportamiento clásico: bloquear futuros clicks
-                      // ejemplo simple: deshabilitar puntero para todos los íconos
-                      const nodos = estrellas.querySelectorAll('i');
-                      nodos.forEach(n => n.style.pointerEvents = 'none');
-                    }
-                } else {
-                  // Manejo de errores
-                }
-              });
+              // crear placeholder y ocultar solo este widget
+                const placeholder = document.createElement('div');
+                  placeholder.className = 'voting-placeholder';
+                  placeholder.textContent = 'Registrando voto...';            
+              // ocultar solo este widget usando display (no hace falta bloquear)
+                estrellas.style.display = 'none';
+                estrellas.parentNode.insertBefore(placeholder, 
+              // valoracion
+              valorarRecurso(clave, i)
+                .then(res => {
+                  placeholder.remove();
+                  if (res && /\bOK\b/.test(res)) {
+                    localStorage.setItem(claveLocal, i);
+                      if (actualizarVoto) {
+                        // Repintamos las estrellas con el voto del usuario
+                        actualizarEstrellas(estrellas, i);
+                        // Mantenemos los listeners activos para permitir votar de nuevo
+                      } else {
+                        // Comportamiento clásico: bloquear futuros clicks
+                        // ejemplo simple: deshabilitar puntero para todos los íconos
+                        const nodos = estrellas.querySelectorAll('i');
+                        nodos.forEach(n => n.style.pointerEvents = 'none');
+                      }
+                    estrellas.style.display = '';
+                  } else {
+                    // Manejo de errores
+                      // fallo: mostrar mensaje breve y volver a mostrar el widget sin cambios
+                      const err = document.createElement('div');
+                        err.className = 'voting-error';
+                        err.textContent = 'No se pudo registrar el voto';
+                        estrellas.parentNode.insertBefore(err, placeholder ? placeholder.nextSibling : estrellas.nextSibling);
+                        setTimeout(() => err.remove(), 3000);
+                      estrellas.style.display = '';
+                  }
+                });
+              .catch(() => {
+                  // error de red: limpiar y restaurar
+                  placeholder.remove();
+                  const err = document.createElement('div');
+                    err.className = 'voting-error';
+                    err.textContent = 'No se pudo registrar el voto';
+                    estrellas.parentNode.insertBefore(err, estrellas.nextSibling);
+                    setTimeout(() => err.remove(), 3000);
+                  estrellas.style.display = '';
+                });
             });
           }      
           estrellas.appendChild(estrella);
@@ -362,6 +387,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
