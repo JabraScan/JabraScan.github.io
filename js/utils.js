@@ -175,7 +175,7 @@ export function generarEtiquetaNuevo(fechaInput) {
                         setTimeout(() => err.remove(), 3000);
                       estrellas.style.display = '';
                   }
-                });
+                })
               .catch(() => {
                   // error de red: limpiar y restaurar
                   placeholder.remove();
@@ -387,6 +387,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
