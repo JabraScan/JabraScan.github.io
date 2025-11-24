@@ -1,7 +1,7 @@
 import { obtenerCapitulos } from './capitulos.js';
 import { parseDateDMY, parseChapterNumber, compareCapNumDesc, crearBloqueValoracion, seleccionarImagen, obtenerNombreObra, createImg } from './utils.js';
 import { activarLinksPDF, activarPaginacion } from './eventos.js';
-import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
+import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso, consultarVotos } from './contadoresGoogle.js';
 import { mostrarurl } from './general.js';
 /**
  * Carga los datos de una obra y renderiza sus capítulos.
@@ -119,7 +119,7 @@ export function cargarlibro(libroId) {
                   const booklinks  = mainDataBook.querySelector('.book-links');
                     booklinks.appendChild(numVisitas);
         });*/
-      //modulo valoracion y visitas
+      /*//modulo valoracion y visitas
       obtenerInfo(`obra_${clave}`).then(info => {
         //console.log(info);
         const visitCap = info.visitas === -1 ? 0 : info.numVisitasCapitulo;
@@ -133,6 +133,25 @@ export function cargarlibro(libroId) {
         const claveValoracion = `obra_${clave}`;
         //console.log(info);
         const bloqueValoracion = crearBloqueValoracion(claveValoracion, info.valoracion, info.votos);
+        mainDataBook.querySelector(".book-info-container").appendChild(bloqueValoracion);
+      });
+      consultarVotos*/
+      // obtener y mostrar visitas
+      obtenerInfo(`obra_${clave}`).then(info => {
+        const visitCap = info.visitas === -1 ? 0 : info.numVisitasCapitulo;
+        const visitObra = info.visitas === -1 ? 1 : info.visitas + 1;
+        const visitas = visitCap + visitObra;
+      
+        const numVisitas = document.createElement("a");
+        numVisitas.innerHTML = `<a href="#"><i class="fa-solid fa-eye"></i> ${visitas} veces</a>`;
+      
+        const booklinks = mainDataBook.querySelector('.book-links');
+        booklinks.appendChild(numVisitas);
+      });      
+      // consultar y mostrar valoración/votos
+      consultarVotos(clave).then(({ valoracion, votos }) => {
+        const claveValoracion = `obra_${clave}`;
+        const bloqueValoracion = crearBloqueValoracion(claveValoracion, valoracion, votos);
         mainDataBook.querySelector(".book-info-container").appendChild(bloqueValoracion);
       });
 
@@ -268,6 +287,7 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
     renderCapitulos(listacapitulos, clave, "", nuevoOrden);
   });
 }
+
 
 
 
