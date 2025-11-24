@@ -151,6 +151,7 @@ export function generarEtiquetaNuevo(fechaInput) {
               // valoracion
               valorarRecurso(clave, i)
                 .then(res => {
+                  // quitar placeholder siempre
                   placeholder.remove();
                   if (res && /\bOK\b/.test(res)) {
                     localStorage.setItem(claveLocal, i);
@@ -171,7 +172,7 @@ export function generarEtiquetaNuevo(fechaInput) {
                       const err = document.createElement('div');
                         err.className = 'voting-error';
                         err.textContent = 'No se pudo registrar el voto';
-                        estrellas.parentNode.insertBefore(err, placeholder ? placeholder.nextSibling : estrellas.nextSibling);
+                        estrellas.parentNode.insertBefore(err, estrellas.nextSibling);
                         setTimeout(() => err.remove(), 3000);
                       estrellas.style.display = '';
                   }
@@ -387,6 +388,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
