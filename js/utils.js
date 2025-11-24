@@ -145,6 +145,7 @@ export function generarEtiquetaNuevo(fechaInput) {
                 if (res && res.trim().startsWith("OK")) {
                   localStorage.setItem(claveLocal, i);
                     if (actualizarVoto) {
+                      console.log(`estrellas: ${estrelas} - i ${i}`);
                       // Repintamos las estrellas con el voto del usuario
                       actualizarEstrellas(estrellas, i);
                       // Mantenemos los listeners activos para permitir votar de nuevo
@@ -216,87 +217,6 @@ export function generarEtiquetaNuevo(fechaInput) {
             return bloque;
           }
         }
-
-
-/*export function crearBloqueValoracion(clave, valoracionPromedio = 0, votos = 0) {
-  // 🧱 Contenedor principal del bloque
-  const bloque = document.createElement("div");
-  bloque.className = "book-rating";
-
-  // ⭐ Contenedor de estrellas
-  const estrellas = document.createElement("div");
-  estrellas.className = "stars";
-
-  // 📝 Texto con la valoración promedio y número de votos
-  const textoValoracion = document.createElement("div");
-  textoValoracion.className = "rating-text";
-  textoValoracion.textContent = `${valoracionPromedio.toFixed(1)} / 5 (${votos} votos)`;
-
-  // 💬 Texto para mostrar interacción del usuario
-  const tuValoracion = document.createElement("div");
-  tuValoracion.className = "your-rating";
-
-  // 🔐 Verificamos si el usuario está logueado
-  const usuarioId = localStorage.getItem("user_id");
-  const estaLogueado = usuarioId && usuarioId !== "null";
-
-  // 🔐 Verificamos si el usuario ya ha votado usando localStorage
-  const claveLocal = clave;
-  const yaVotado = localStorage.getItem(claveLocal);
-
-  // 🧠 Mensaje según el estado del usuario
-  if (!estaLogueado) {
-    tuValoracion.textContent = "Inicia sesión para valorar";
-  } else if (yaVotado) {
-    tuValoracion.textContent = "¡Gracias por tu voto!";
-  } else {
-    tuValoracion.textContent = "¿Tu valoración?";
-  }
-
-  // 🔄 Generamos las 5 estrellas
-  for (let i = 1; i <= 5; i++) {
-    const estrella = document.createElement("i");
-    estrella.className = "fa-solid fa-star";
-
-    // 🎨 Color según la valoración promedio
-    estrella.style.color = i <= Math.round(valoracionPromedio) ? "orange" : "lightgray";
-
-    // 🖱️ Interacción: solo si el usuario está logueado y no ha votado
-    const puedeVotar = estaLogueado && !yaVotado;
-    estrella.style.cursor = puedeVotar ? "pointer" : "default";
-
-    // 🗳️ Evento de click para votar (solo si está logueado y no ha votado)
-    if (puedeVotar) {
-      estrella.addEventListener("click", () => {
-        valorarRecurso(clave, i).then(res => {
-    //console.log(`${clave} - ${i} - ${res}`);
-          if (res && res.trim().startsWith("OK")) {
-            // 🗂️ Guardamos el voto en localStorage
-            localStorage.setItem(claveLocal, i);
-
-            // ✅ Actualizamos el texto de agradecimiento
-            tuValoracion.textContent = `Has votado: ${i} estrella${i > 1 ? "s" : ""}`;
-            textoValoracion.textContent = "¡Gracias por tu voto!";
-
-            // 🔄 Opcional: recargar datos desde obtenerInfo(clave) si se desea actualizar el promedio
-          } else {
-            tuValoracion.textContent = "Error al enviar tu voto";
-          }
-        });
-      });
-    }
-
-    // 📌 Añadimos la estrella al contenedor
-    estrellas.appendChild(estrella);
-  }
-
-  // 🧩 Ensamblamos el bloque completo
-  bloque.appendChild(estrellas);
-  bloque.appendChild(textoValoracion);
-  bloque.appendChild(tuValoracion);
-
-  return bloque;
-}*/
 
 export function truncarTexto(texto, maxLength = 40) {
   return texto.length > maxLength ? texto.slice(0, maxLength) + "…" : texto;
@@ -440,6 +360,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
