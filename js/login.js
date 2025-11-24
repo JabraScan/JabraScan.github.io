@@ -29,6 +29,9 @@ function loginGoogle() {
 function loginMeta() {
   window.location.href = `${WORKER_URL}/auth/meta`;
 }
+function loginTwitter() {
+  window.location.href = `${WORKER_URL}/auth/twitter`;
+}
 
 // --- captura token de la URL sin recargar y notifica la app ---
 function initSessionFromUrl() {
@@ -129,6 +132,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const metaBtn = document.getElementById("login-meta");
   if (metaBtn) metaBtn.addEventListener("click", (e) => { e.preventDefault(); loginMeta(); });
 
+  const twitterBtn = document.getElementById("login-twitter");
+  if (twitterBtn) twitterBtn.addEventListener("click", (e) => { e.preventDefault(); loginTwitter(); });
+
   const logoutLink = document.getElementById("logout-link");
   if (logoutLink) {
     logoutLink.addEventListener("click", (e) => { e.preventDefault(); logout(); });
@@ -155,5 +161,6 @@ window.appAuth = {
   checkSessionOnLoad,
   loginGoogle,
   loginMeta,
+  loginTwitter,
   logout
 };
