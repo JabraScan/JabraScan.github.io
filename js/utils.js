@@ -142,6 +142,7 @@ export function generarEtiquetaNuevo(fechaInput) {
           if (puedeVotar) {
             estrella.addEventListener("click", () => {
               valorarRecurso(clave, i).then(res => {
+                console.log(res);
                 if (res && res.trim().startsWith("OK")) {
                   localStorage.setItem(claveLocal, i);
                     if (actualizarVoto) {
@@ -360,6 +361,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
