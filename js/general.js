@@ -164,6 +164,11 @@ function cargarVista(url) {
               btnMeta.removeEventListener("click", loginMeta);
               btnMeta.addEventListener("click", loginMeta);
             }
+            const btnMeta = document.querySelector("#btnTwitter");
+            if (btnMeta) {
+              btnMeta.removeEventListener("click", loginTwitter);
+              btnMeta.addEventListener("click", loginTwitter);
+            }
           };
         
           const existing = document.querySelector('script[src="js/login.js"]');
@@ -321,6 +326,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
