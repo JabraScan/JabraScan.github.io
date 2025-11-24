@@ -162,3 +162,41 @@ export function obtenerResumenObras() {
       return [];
     });
 }
+
+   /**
+    * Consulta la media y el número de votos para una obra
+    *
+    * @param {string} obra - Identificador de la obra a consultar
+    * @returns {Promise<{valoracion: number|null, votos: number}>} - Objeto con:
+    *    - valoracion: media de las valoraciones (o null si no hay datos).
+    *    - votos: número total de votos (0 si no hay datos).
+    *
+    * Comportamiento:
+    *  - Construye los parámetros de consulta con URLSearchParams.
+    *  - Realiza una petición GET al endpoint `${URL_CLOUDFLARE}/valoraciones/media`.
+    *  - Lanza un Error si la respuesta HTTP no es OK.
+    *  - Parsea la respuesta JSON y normaliza nombres de campos para compatibilidad.
+    */
+   export async function consultarVotos(obra) {
+     // Construye la query string
+     const params = new URLSearchParams({ obra });
+     // Petición GET al endpoint. Se solicita JSON en Accept.
+     const resp = await fetch(
+       `${URL_CLOUDFLARE}/valoraciones/media?${params.toString()}`,
+       {
+         method: 'GET',
+         headers: { 'Accept': 'application/json' }
+       }
+     );
+     // Si el servidor responde con un estado distinto de 2xx, lanzamos un error
+     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+     // Parseamos el cuerpo como JSON
+     const data = await resp.json();
+     // Normalizamos la respuesta para devolver siempre los mismos campos:
+     // - valoracion: puede venir como 'valvotos' o 'media' (aquí usamos valvotos si existe)
+     // - votos: puede venir como 'numvotos', 'total' o 'totalvotos'
+     return {
+       valoracion: data?.valvotos ?? data?.media ?? null,
+       votos: data?.numvotos ?? data?.total ?? data?.totalvotos ?? 0
+     };
+   }
