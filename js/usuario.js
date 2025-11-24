@@ -185,8 +185,9 @@ function authFetch(input, init = {}) {
           <img src="${imgSrc}" ${imgSrc ? `onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"` : ''} 
                alt="${item.nombreobra || ''}" class="img-thumbnail user-image" style="width:96px;height:128px;object-fit:cover;">
           <div class="flex-grow-1">
+            <p class="clave d-none">${item.obra_id}</p>
             <div class="d-flex justify-content-between user-main">
-              <h5 class="mb-1">${item.nombreobra || ''}</h5>
+              <h5 class="mb-1 biblio-obra" >${item.nombreobra || ''}</h5>
               <small class="text-muted">${item.estado ? `Estado: ${item.estado}` : ''}</small>
             </div>
             <div class="d-flex justify-content-between user-lastChapter">
@@ -203,6 +204,7 @@ function authFetch(input, init = {}) {
         //añadimos valoraciones para usuario
         const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, { soloEstrellas: true, actualizarVoto: true });
         li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
+        li.querySelector('.biblio-obra').onclick = () => onLibroClick(item.obra_id);
         //prueba para insertar imagen con diferentes tamaños
           //const imgSrc = srcCandidate || FALLBACK_IMG || "";
             //const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
