@@ -132,66 +132,74 @@ export function generarEtiquetaNuevo(fechaInput) {
       export function crearEstrellas(clave, valoracion, puedeVotar = false, actualizarVoto = false) {
         const claveLocal = clave;
         const estrellas = document.createElement("div");
-          estrellas.className = "stars";
+        estrellas.className = "stars";
         const puntuacionEntera = Math.round(valoracion);
+      
         for (let i = 1; i <= 5; i++) {
           const estrella = document.createElement("i");
-            estrella.className = "fa-solid fa-star";
-            estrella.style.color = i <= puntuacionEntera ? "orange" : "lightgray";
-            estrella.style.cursor = puedeVotar ? "pointer" : "default";
+          estrella.className = "fa-solid fa-star";
+          estrella.style.color = i <= puntuacionEntera ? "orange" : "lightgray";
+          estrella.style.cursor = puedeVotar ? "pointer" : "default";
+      
           if (puedeVotar) {
             estrella.addEventListener("click", () => {
               // crear placeholder y ocultar solo este widget
-                const placeholder = document.createElement('div');
-                  placeholder.className = 'voting-placeholder';
-                  placeholder.textContent = 'Registrando voto...';            
+              const placeholder = document.createElement('div');
+              placeholder.className = 'voting-placeholder';
+              placeholder.textContent = 'Registrando voto...';
+      
               // ocultar solo este widget usando display (no hace falta bloquear)
-                estrellas.style.display = 'none';
-                estrellas.parentNode.insertBefore(placeholder, estrellas);
+              estrellas.style.display = 'none';
+              estrellas.parentNode.insertBefore(placeholder, estrellas);
+      
               // valoracion
               valorarRecurso(clave, i)
                 .then(res => {
                   // quitar placeholder siempre
                   placeholder.remove();
+      
                   if (res && /\bOK\b/.test(res)) {
                     localStorage.setItem(claveLocal, i);
-                      if (actualizarVoto) {
-                        // Repintamos las estrellas con el voto del usuario
-                        actualizarEstrellas(estrellas, i);
-                        // Mantenemos los listeners activos para permitir votar de nuevo
-                      } else {
-                        // Comportamiento clásico: bloquear futuros clicks
-                        // ejemplo simple: deshabilitar puntero para todos los íconos
-                        estrellas.querySelectorAll('i').forEach(n => n.style.pointerEvents = 'none');
-                      }
+      
+                    if (actualizarVoto) {
+                      // Repintamos las estrellas con el voto del usuario
+                      actualizarEstrellas(estrellas, i);
+                      // Mantenemos los listeners activos para permitir votar de nuevo
+                    } else {
+                      // Comportamiento clásico: bloquear futuros clicks
+                      // ejemplo simple: deshabilitar puntero para todos los íconos
+                      estrellas.querySelectorAll('i').forEach(n => n.style.pointerEvents = 'none');
+                    }
+      
+                    // mostrar el widget actualizado o bloqueado
                     estrellas.style.display = '';
                   } else {
                     // Manejo de errores
-                      // fallo: mostrar mensaje breve y volver a mostrar el widget sin cambios
-                      const err = document.createElement('div');
-                        err.className = 'voting-error';
-                        err.textContent = 'No se pudo registrar el voto';
-                        estrellas.parentNode.insertBefore(err, estrellas.nextSibling);
-                        setTimeout(() => err.remove(), 3000);
-                      estrellas.style.display = '';
-                  }
-                })
-              .catch(() => {
-                  // error de red: limpiar y restaurar
-                  placeholder.remove();
-                  const err = document.createElement('div');
+                    // fallo: mostrar mensaje breve y volver a mostrar el widget sin cambios
+                    const err = document.createElement('div');
                     err.className = 'voting-error';
                     err.textContent = 'No se pudo registrar el voto';
                     estrellas.parentNode.insertBefore(err, estrellas.nextSibling);
                     setTimeout(() => err.remove(), 3000);
+                    estrellas.style.display = '';
+                  }
+                })
+                .catch(() => {
+                  // error de red: limpiar y restaurar
+                  placeholder.remove();
+                  const err = document.createElement('div');
+                  err.className = 'voting-error';
+                  err.textContent = 'No se pudo registrar el voto';
+                  estrellas.parentNode.insertBefore(err, estrellas.nextSibling);
+                  setTimeout(() => err.remove(), 3000);
                   estrellas.style.display = '';
                 });
             });
-          }      
+          }
           estrellas.appendChild(estrella);
-        }      
+        }
         return estrellas;
-      }      
+      }
       /**
        * crearBloqueValoracion
        * Crea y devuelve un bloque DOM que representa la valoración de un recurso.
@@ -387,6 +395,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
