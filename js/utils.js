@@ -159,13 +159,12 @@ export function generarEtiquetaNuevo(fechaInput) {
                   placeholder.remove();
       
                   if (res && /\bOK\b/.test(res)) {
-                    localStorage.setItem(claveLocal, i);
-      
                     if (actualizarVoto) {
                       // Repintamos las estrellas con el voto del usuario
                       actualizarEstrellas(estrellas, i);
                       // Mantenemos los listeners activos para permitir votar de nuevo
                     } else {
+                      localStorage.setItem(claveLocal, i);
                       // Comportamiento clásico: bloquear futuros clicks
                       // ejemplo simple: deshabilitar puntero para todos los íconos
                       estrellas.querySelectorAll('i').forEach(n => n.style.pointerEvents = 'none');
@@ -395,6 +394,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
