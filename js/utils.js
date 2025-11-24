@@ -147,7 +147,7 @@ export function generarEtiquetaNuevo(fechaInput) {
                   placeholder.textContent = 'Registrando voto...';            
               // ocultar solo este widget usando display (no hace falta bloquear)
                 estrellas.style.display = 'none';
-                estrellas.parentNode.insertBefore(placeholder, 
+                estrellas.parentNode.insertBefore(placeholder, estrellas);
               // valoracion
               valorarRecurso(clave, i)
                 .then(res => {
@@ -162,8 +162,7 @@ export function generarEtiquetaNuevo(fechaInput) {
                       } else {
                         // Comportamiento clásico: bloquear futuros clicks
                         // ejemplo simple: deshabilitar puntero para todos los íconos
-                        const nodos = estrellas.querySelectorAll('i');
-                        nodos.forEach(n => n.style.pointerEvents = 'none');
+                        estrellas.querySelectorAll('i').forEach(n => n.style.pointerEvents = 'none');
                       }
                     estrellas.style.display = '';
                   } else {
@@ -388,6 +387,7 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
+
 
 
 
