@@ -370,20 +370,6 @@ function authFetch(input, init = {}) {
         if (!resp.ok) throw new Error('HTTP ' + resp.status);
         const payload = await resp.json();
         const rows = Array.isArray(payload) ? payload : (payload.items || []);
-    //
-        const list = rows
-          .map(r => {
-            if (!r || r.avatar_path == null) return null;
-            let src = String(r.avatar_path).trim();
-            if (!/^https?:\/\//i.test(src)) {
-              src = src.replace(/^\/+/, '');      // quitar slashes iniciales
-              src = `${API_BASE}/${src}`;         // convertir a URL absoluta
-            }
-            const alt = r.descripcion || '';
-            return { src, alt };
-          })
-          .filter(Boolean);
-
 //
         const list = rows
           .map(r => {
