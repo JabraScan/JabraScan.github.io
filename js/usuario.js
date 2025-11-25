@@ -223,12 +223,16 @@ function authFetch(input, init = {}) {
    * - Renderiza en #obrasResultado usando innerHTML (mínimo código extra).
    */
   export async function cargarObras() {
+console.log("Obras");
     if (!usuario_id && !token) return;
     const perfilUrl = token
       ? `${API_BASE}/obras/traductores`
       : `${API_BASE}/obras/traductores?user_id=${encodeURIComponent(usuario_id)}`;
+console.log(`Url: ${perfilUrl}`);
     const perfilRes = await authFetch(perfilUrl);
+console.log(`perfilR: ${perfilRes}`);
     const res = await perfilRes.json();
+console.log(`res: ${res}`);
     if (!res || !res.ok) return;
     const data = await res.json();
 console.log(`data: ${data}`);
