@@ -223,31 +223,19 @@ function authFetch(input, init = {}) {
    * - Renderiza en #obrasResultado usando innerHTML (mínimo código extra).
    */
   export async function cargarObras() {
-    console.log("Obras");
     if (!usuario_id && !token) return;
-  
+    
     const perfilUrl = token
       ? `${API_BASE}/obras/traductores`
       : `${API_BASE}/obras/traductores?user_id=${encodeURIComponent(usuario_id)}`;
-    console.log(`Url: ${perfilUrl}`);
-  
-    const perfilRes = await authFetch(perfilUrl);
-    console.log('perfilRes:', perfilRes);
-  
-    // Comprobar la Response antes de parsear
-    if (!perfilRes || !perfilRes.ok) {
-      console.error('cargarObras: respuesta inválida', perfilRes);
-      return;
-    }
-  
-    // Parsear una sola vez
-    const data = await perfilRes.json();
-    console.log('data:', data);
-  
-    const cont = document.getElementById("obrasResultado");
-    console.log(`cont: ${cont}`);
-    if (!cont) return;
-  
+      const perfilRes = await authFetch(perfilUrl);
+      // Comprobar la Response antes de parsear
+      if (!perfilRes || !perfilRes.ok) {        return;      }
+      // Parsear
+      const data = await perfilRes.json();
+      const cont = document.getElementById("obrasResultado");
+        if (!cont) return;
+    
     const ul = document.createElement("ul");
     ul.className = "list-group";
   
@@ -266,7 +254,6 @@ function authFetch(input, init = {}) {
           .replace(/\.webp(\?.*)?$/i, '-300w.webp$1')
       );
       const imgSrc = srcCandidate || FALLBACK_IMG || "";
-console.log(imgSrc);
       li.innerHTML = `
         <img src="${imgSrc}" ${imgSrc ? `onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"` : ''} 
              alt="${item.nombreobra || ''}" class="img-thumbnail obra-image" style="width:96px;height:128px;object-fit:cover;">
@@ -287,10 +274,9 @@ console.log(imgSrc);
           <input type="hidden" class="obra-id" value="${item.obra_id ?? ''}">
         </div>
       `;
-console.log(li.innerHTML);
       // Insertar valoración exactamente como en biblioteca
-        //const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, { soloEstrellas: true, actualizarVoto: true });
-        //li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
+        const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, { soloEstrellas: true, actualizarVoto: true });
+        li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
   
       ul.appendChild(li);
     });
@@ -310,40 +296,6 @@ console.log(li.innerHTML);
       });
     });*/
   }
-
-
-
-/*export async function cargarObras() {
-  if (!usuario_id && !token) return;
-
-  const perfilUrl = token
-    ? `${API_BASE}/usuarios/get`
-    : `${API_BASE}/usuarios/get?usuario_id=${encodeURIComponent(usuario_id)}`;
-  const perfilRes = await authFetch(perfilUrl);
-  const perfil = await perfilRes.json();
-
-  const cont = document.getElementById("obrasResultado");
-  if (!cont) return;
-
-  if (perfil.rol !== "uploader" && perfil.rol !== "admin") {
-    cont.innerHTML = "<div class='alert alert-info'>No eres uploader, no tienes obras propias.</div>";
-    return;
-  }
-
-  const obrasUrl = `${API_BASE}/obras/search?visible=1&uploader=${encodeURIComponent(usuario_id || "")}`;
-  const obrasRes = await authFetch(obrasUrl);
-  const obras = await obrasRes.json();
-
-  let html = "<ul class='list-group'>";
-  (Array.isArray(obras) ? obras : []).forEach(o => {
-    html += `<li class="list-group-item">
-      <strong>${o.titulo || o.nombreobra || ''}</strong><br>
-      Categoría: ${o.categoria || "-"}
-    </li>`;
-  });
-  html += "</ul>";
-  cont.innerHTML = html;
-}*/
 
 // -------------------------
 // Avatar loader (lee índice de directorio /img/avatar/)
