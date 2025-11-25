@@ -370,7 +370,21 @@ function authFetch(input, init = {}) {
         if (!resp.ok) throw new Error('HTTP ' + resp.status);
         const payload = await resp.json();
         const rows = Array.isArray(payload) ? payload : (payload.items || []);
-    
+    //
+        const list = rows
+          .map(r => {
+            if (!r || r.avatar_path == null) return null;
+            let src = String(r.avatar_path).trim();
+            if (!/^https?:\/\//i.test(src)) {
+              src = src.replace(/^\/+/, '');      // quitar slashes iniciales
+              src = `${API_BASE}/${src}`;         // convertir a URL absoluta
+            }
+            const alt = r.descripcion || '';
+            return { src, alt };
+          })
+          .filter(Boolean);
+
+//
         const list = rows
           .map(r => {
             if (!r || r.avatar_path == null) return null;
@@ -395,9 +409,22 @@ function authFetch(input, init = {}) {
       }
     }
     //fin loadAvatars
-    loadAvatars
+    //loadAvatars
     avatarTabBtn.addEventListener('click', () => loadAvatars());
     avatarTabBtn.addEventListener('shown.bs.tab', () => loadAvatars());
+
+    const pane = document.querySelector('#avatar');
+    if (pane && pane.classList.contains('show') && pane.classList.contains('active')) {
+      loadAvatars();
+    }
+
+  } // fin init()
+
+  // arrancar el init del IIFE
+  init();
+})();
+
+    //
 
     const pane = document.querySelector('#avatar');
     if (pane && pane.classList.contains('show') && pane.classList.contains('active')) {
