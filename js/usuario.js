@@ -457,13 +457,16 @@ console.log(li.innerHTML);
 // Orquestador que arranca la carga de datos asumiendo que
 // el HTML de usuario ya fue insertado en el DOM por general.js.
 // -------------------------------------------------
-  export function initUsuario() {
+  export async function initUsuario() {
     // Llamadas a las funciones que manipulan el DOM / datos.
     // Se asume que cargarPerfil y las demás gestionan sus propios errores y fallbacks.
     try {
-      cargarPerfil();
-      cargarBiblioteca();
-      cargarObras();
+      // 1. Ejecutar las tres funciones async al mismo tiempo
+        const perfilPromise = cargarPerfil();
+        const bibliotecaPromise = cargarBiblioteca();
+        const obrasPromise = cargarObras();
+      // 2. Usar Promise.all() para esperar a que las tres promesas se resuelvan
+        await Promise.all([perfilPromise, bibliotecaPromise, obrasPromise]);
     } catch (err) {
       // Error de orquestación: registrar para depuración
       console.error('initUsuario: error al arrancar cargas', err);
