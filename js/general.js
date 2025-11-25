@@ -152,25 +152,34 @@ function cargarVista(url) {
             renderResumenObras(); // intentar renderizar de todos modos (mostrará error internamente si falta Chart)
           });
       } else if (url === "login.html") {
-          const attachLoginListeners = () => {
+          /*const attachLoginListeners = () => {
             const btnGoogle = document.querySelector("#btnGoogle");
             if (btnGoogle) {
               btnGoogle.removeEventListener("click", loginGoogle);
               btnGoogle.addEventListener("click", loginGoogle);
             }
-        
             const btnMeta = document.querySelector("#btnMeta");
             if (btnMeta) {
               btnMeta.removeEventListener("click", loginMeta);
               btnMeta.addEventListener("click", loginMeta);
             }
-            const btnMeta = document.querySelector("#btnTwitter");
-            if (btnMeta) {
-              btnMeta.removeEventListener("click", loginTwitter);
-              btnMeta.addEventListener("click", loginTwitter);
+            const btnTwitter = document.querySelector("#btnTwitter");
+            if (btnTwitter) {
+              btnTwitter.removeEventListener("click", loginTwitter);
+              btnTwitter.addEventListener("click", loginTwitter);
             }
-          };
-        
+          };*/
+          const attachLoginListeners = () => {
+              [
+                { sel: "#btnGoogle", fn: loginGoogle },
+                { sel: "#btnMeta", fn: loginMeta },
+                { sel: "#btnTwitter", fn: loginTwitter }
+              ].forEach(({ sel, fn }) => {
+                const el = document.querySelector(sel);
+                el?.removeEventListener("click", fn);
+                el?.addEventListener("click", fn);
+              });
+            };        
           const existing = document.querySelector('script[src="js/login.js"]');
           if (!existing) {
             const script = document.createElement("script");
@@ -326,6 +335,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
