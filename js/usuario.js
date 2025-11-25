@@ -223,21 +223,29 @@ function authFetch(input, init = {}) {
    * - Renderiza en #obrasResultado usando innerHTML (mínimo código extra).
    */
   export async function cargarObras() {
-console.log("Obras");
+    console.log("Obras");
     if (!usuario_id && !token) return;
+  
     const perfilUrl = token
       ? `${API_BASE}/obras/traductores`
       : `${API_BASE}/obras/traductores?user_id=${encodeURIComponent(usuario_id)}`;
-console.log(`Url: ${perfilUrl}`);
+    console.log(`Url: ${perfilUrl}`);
+  
     const perfilRes = await authFetch(perfilUrl);
-console.log(`perfilR: ${perfilRes}`);
-    const res = await perfilRes.json();
-console.log(`res: ${res}`);
-    if (!res || !res.ok) return;
-    const data = await res.json();
-console.log(`data: ${data}`);
+    console.log('perfilRes:', perfilRes);
+  
+    // Comprobar la Response antes de parsear
+    if (!perfilRes || !perfilRes.ok) {
+      console.error('cargarObras: respuesta inválida', perfilRes);
+      return;
+    }
+  
+    // Parsear una sola vez
+    const data = await perfilRes.json();
+    console.log('data:', data);
+  
     const cont = document.getElementById("obrasResultado");
-console.log(`cont: ${cont}`);
+    console.log(`cont: ${cont}`);
     if (!cont) return;
   
     const ul = document.createElement("ul");
@@ -466,7 +474,7 @@ console.log(li.innerHTML);
         const bibliotecaPromise = cargarBiblioteca();
         const obrasPromise = cargarObras();
       // 2. Usar Promise.all() para esperar a que las tres promesas se resuelvan
-        await Promise.all([obrasPromise]);
+        await Promise.all([perfilPromise, bibliotecaPromise, obrasPromise]);
     } catch (err) {
       // Error de orquestación: registrar para depuración
       console.error('initUsuario: error al arrancar cargas', err);
