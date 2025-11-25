@@ -466,7 +466,7 @@ console.log(li.innerHTML);
         const bibliotecaPromise = cargarBiblioteca();
         const obrasPromise = cargarObras();
       // 2. Usar Promise.all() para esperar a que las tres promesas se resuelvan
-        await Promise.all([perfilPromise, bibliotecaPromise, obrasPromise]);
+        await Promise.all([obrasPromise]);
     } catch (err) {
       // Error de orquestación: registrar para depuración
       console.error('initUsuario: error al arrancar cargas', err);
