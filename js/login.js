@@ -124,28 +124,58 @@ function logout() {
 }
 
 // --- enganchar eventos del DOM y del sistema ---
-document.addEventListener("DOMContentLoaded", async () => {
-  // botones de login (si existen en login.html)
-  const googleBtn = document.getElementById("login-google");
-  if (googleBtn) googleBtn.addEventListener("click", (e) => { e.preventDefault(); loginGoogle(); });
-
-  const metaBtn = document.getElementById("login-meta");
-  if (metaBtn) metaBtn.addEventListener("click", (e) => { e.preventDefault(); loginMeta(); });
-
-  const twitterBtn = document.getElementById("login-twitter");
-  if (twitterBtn) twitterBtn.addEventListener("click", (e) => { e.preventDefault(); loginTwitter(); });
-
-  const logoutLink = document.getElementById("logout-link");
-  if (logoutLink) {
-    logoutLink.addEventListener("click", (e) => { e.preventDefault(); logout(); });
-  }
-
-  // si la URL trae token, guárdalo y notifica
+  document.addEventListener("DOMContentLoaded", async () => {
+    // botones de login (si existen en login.html)
+    const googleBtn = document.getElementById("login-google");
+    if (googleBtn) googleBtn.addEventListener("click", (e) => { e.preventDefault(); loginGoogle(); });
+  
+    const metaBtn = document.getElementById("login-meta");
+    if (metaBtn) metaBtn.addEventListener("click", (e) => { e.preventDefault(); loginMeta(); });
+  
+    const twitterBtn = document.getElementById("login-twitter");
+    if (twitterBtn) twitterBtn.addEventListener("click", (e) => { e.preventDefault(); loginTwitter(); });
+  
+    const logoutLink = document.getElementById("logout-link");
+    if (logoutLink) {
+      logoutLink.addEventListener("click", (e) => { e.preventDefault(); logout(); });
+    }
+  
+    // si la URL trae token, guárdalo y notifica
+    initSessionFromUrl();
+  
+    // validar sesión y pintar UI en base a /me
+    await checkSessionOnLoad();
+  });
+// --- enganchar eventos del DOM y del sistema ---
+document.addEventListener("DOMContentLoaded", async function () {
+  var items = [
+    { id: "btnGoogle"     , fn: loginGoogle  , preventDefault: true },
+    { id: "btnMeta"       , fn: loginMeta    , preventDefault: true },
+    { id: "btnTwitter"    , fn: loginTwitter , preventDefault: true },
+    { id: "login-google"  , fn: loginGoogle  , preventDefault: true },
+    { id: "login-meta"    , fn: loginMeta    , preventDefault: true },
+    { id: "login-twitter" , fn: loginTwitter , preventDefault: true },
+    { id: "logout-link"   , fn: logout       , preventDefault: true }
+  ];
+  var handlers = {};
+    items.forEach(function (it) {
+      var el = document.getElementById(it.id);
+      if (!el) return;
+  
+      // crear y guardar la misma referencia de handler para poder eliminarla luego
+      if (!handlers[it.id]) {
+        handlers[it.id] = function (e) {
+          if (it.preventDefault) e.preventDefault();
+          it.fn(e);
+        };
+      }
+    el.removeEventListener("click", handlers[it.id]);
+    el.addEventListener("click", handlers[it.id]);
+  });
   initSessionFromUrl();
-
-  // validar sesión y pintar UI en base a /me
   await checkSessionOnLoad();
 });
+
 
 // Si otra parte de la app guarda el token en localStorage (ej. otro iframe o flujo), reaccionamos
 window.addEventListener("storage", (e) => {
