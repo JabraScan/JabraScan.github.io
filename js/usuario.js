@@ -403,19 +403,6 @@ function authFetch(input, init = {}) {
     if (pane && pane.classList.contains('show') && pane.classList.contains('active')) {
       loadAvatars();
     }
-
-  } // fin init()
-
-  // arrancar el init del IIFE
-  init();
-})();
-
-    //
-
-    const pane = document.querySelector('#avatar');
-    if (pane && pane.classList.contains('show') && pane.classList.contains('active')) {
-      loadAvatars();
-    }
   }
 
   if (document.readyState === 'loading') {
