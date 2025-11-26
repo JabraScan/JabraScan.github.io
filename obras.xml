@@ -536,8 +536,11 @@ He tardado diez años en escribir este libro.
 	</sinopsis>
 		<valoracion>9.0</valoracion>
 		<tipoobra>Novela Web</tipoobra>
-		<categoria>Acción, Artes Marciales, Aventura, Drama, Fantasía, Renacimiento, Transmigración</categoria>
-		<imagen>StarInstructorMasterBaek.webp</imagen>
+		<categoria>Acción, Artes Marciales, Aventura, Drama, Fantasía, Renacimiento, Transmigración, Wuxia</categoria>
+		<imagen>StarInstructorMasterBaek/StarInstructorMasterBaek.webp</imagen>
+		<imagen>StarInstructorMasterBaek/StarInstructorMasterBaek1.webp</imagen>
+		<imagen>StarInstructorMasterBaek/StarInstructorMasterBaek2.webp</imagen>
+		<imagen>StarInstructorMasterBaek/StarInstructorMasterBaek3.webp</imagen>
 		<fechaCreacion>26/11/2025</fechaCreacion>
 		<ubicacion>Novela Coreana</ubicacion>
 		<estado>Activo</estado>
