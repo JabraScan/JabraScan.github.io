@@ -1,0 +1,9 @@
+{
+    "StarInstructorMasterBaek": [
+		{ "Fecha" : "26-11-2025", "NombreArchivo" : "StarInstructorMasterBaek-0001_JabraScan.pdf", "numCapitulo" :    "1", "nombreCapitulo" : "Master!"                                                               	, "tituloObra" : "Instructor Estelar Maestro Baek" },
+		{ "Fecha" : "27-11-2025", "NombreArchivo" : "StarInstructorMasterBaek-0002_JabraScan.pdf", "numCapitulo" :    "2", "nombreCapitulo" : "¿Qué debo hacer ahora?"                                                	, "tituloObra" : "Instructor Estelar Maestro Baek" },
+		{ "Fecha" : "28-11-2025", "NombreArchivo" : "StarInstructorMasterBaek-0003_JabraScan.pdf", "numCapitulo" :    "3", "nombreCapitulo" : "Suspiro, ¿Por qué está pasando esto?"                                  	, "tituloObra" : "Instructor Estelar Maestro Baek" },
+		{ "Fecha" : "29-11-2025", "NombreArchivo" : "StarInstructorMasterBaek-0004_JabraScan.pdf", "numCapitulo" :    "4", "nombreCapitulo" : "Los muertos no cuentan cuentos"                                        	, "tituloObra" : "Instructor Estelar Maestro Baek" },
+		{ "Fecha" : "30-11-2025", "NombreArchivo" : "StarInstructorMasterBaek-0005_JabraScan.pdf", "numCapitulo" :    "5", "nombreCapitulo" : "¡Maestro Baek! ¡Eres el mejor!"                                        	, "tituloObra" : "Instructor Estelar Maestro Baek" }
+	]
+}
