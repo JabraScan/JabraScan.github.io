@@ -61,7 +61,6 @@ function cargarObrasDesdeXML() {
 
 // Cargar obras desde endpoint (método para producción)
 function cargarObrasDesdeEndpoint() {
-  console.log('endpoint');
   return fetch('https://jabrascan.net/obras/carrousel')
     .then(res => res.json());
 }
@@ -256,7 +255,6 @@ document.addEventListener("DOMContentLoaded", function () {
           })
           .catch((err) => console.error("❌ Error cargando capítulos:", err));
       } else {
-        console.log('carga endp');
         // Método producción: usar datos ya cargados del endpoint
         promesaCapitulo = new Promise((resolve) => {
           const caps = [];
