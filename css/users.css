@@ -1,0 +1,24 @@
+/* CSS (añádelo a tu hoja de estilos) */
+.list-group-item.align-items-stretch { align-items: stretch; }
+
+.biblioteca-acciones {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .5rem;
+  align-self: stretch;
+}
+
+.biblioteca-acciones .btn {
+  width: 44px; /* opcional: ancho fijo */
+  padding: .35rem .4rem;
+}
+
+/* Estilos específicos para la versión móvil (fila horizontal) */
+.biblioteca-acciones-mobile {
+  display: flex;               /* se activará en xs por utilidades d-sm-none */
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: .5rem;
+  width: 100%;
+}
