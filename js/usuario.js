@@ -155,7 +155,7 @@ function authFetch(input, init = {}) {
     const data = await res.json();
   
     const cont = document.getElementById("bibliotecaResultado");
-    const contfinal = document.getElementById("biblioteca-fin-Resultado");
+    const contfinal = document.getElementById("bibliotecafin_Resultado");
     if (!cont) return;
   
     const ul = document.createElement("ul");
