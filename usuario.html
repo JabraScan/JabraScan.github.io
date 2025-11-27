@@ -16,28 +16,34 @@
     
       <!-- Pestañas -->
       <ul class="nav nav-tabs" id="usuarioTabs" role="tablist">
-        <li class="nav-item" role="presentation">
+        <li class="nav-item biblioteca" role="presentation">
           <button class="nav-link active" id="biblioteca-tab" data-bs-toggle="tab" data-bs-target="#biblioteca" type="button" role="tab">Biblioteca</button>
         </li>
-        <li class="nav-item" role="presentation">
+        <li class="nav-item biblioteca-fin d-none" role="presentation">
+          <button class="nav-link active" id="biblioteca-tab" data-bs-toggle="tab" data-bs-target="#biblioteca" type="button" role="tab">Biblioteca</button>
+        </li>
+        <li class="nav-item obras d-none" role="presentation">
           <button class="nav-link" id="obras-tab" data-bs-toggle="tab" data-bs-target="#obras" type="button" role="tab">Mis Obras</button>
         </li>
-        <li class="nav-item" role="presentation">
+        <li class="nav-item tienda" role="presentation">
           <button class="nav-link" id="avatar-tab" data-bs-toggle="tab" data-bs-target="#avatar" type="button" role="tab">Tienda</button>
         </li>
       </ul>
     
       <div class="tab-content mt-3">
         <!-- Biblioteca -->
-        <div class="tab-pane fade show active" id="biblioteca" role="tabpanel">
+        <div class="tab-pane fade show active biblioteca" id="biblioteca" role="tabpanel">
+          <div id="bibliotecaResultado"></div>
+        </div>
+        <div class="tab-pane fade show biblioteca-fin d-none" id="biblioteca" role="tabpanel">
           <div id="bibliotecaResultado"></div>
         </div>
         <!-- Obras -->
-        <div class="tab-pane fade" id="obras" role="tabpanel">
+        <div class="tab-pane fade obras d-none" id="obras" role="tabpanel">
           <div id="obrasResultado"></div>
         </div>
         <!-- Avatares -->
-        <div class="tab-pane fade" id="avatar" role="tabpanel">
+        <div class="tab-pane fade tienda" id="avatar" role="tabpanel">
           <div id="avatarResultado"></div>
         </div>
       </div>
