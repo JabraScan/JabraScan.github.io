@@ -124,13 +124,13 @@ function authFetch(input, init = {}) {
       if (opts.loadingSelector) {
         loadingEl = document.getElementById(opts.loadingSelector);
         if (loadingEl) loadingEl.style.display = ""; // mostrar
-      }    
+      }
+      let data = null;
       try {
         // Obtener datos del servidor
-        const data = await fetchPerfil();    
+        data = await fetchPerfil();    
         // Renderizar en el DOM
         renderPerfil(data, opts);
-        console.log(data);
       } catch (err) {
         // Manejo centralizado de errores
         console.error("No se pudo cargar perfil:", err);
@@ -142,6 +142,7 @@ function authFetch(input, init = {}) {
         // Ocultar indicador de carga si se usó
         if (loadingEl) loadingEl.style.display = "none";
       }
+      return data;
     }
   //FIN CARGA PERFIL USUARIO
 
@@ -497,7 +498,12 @@ console.log(authFetch(url, {
         const bibliotecaPromise = cargarBiblioteca();
         const obrasPromise = cargarObras();
       // 2. Usar Promise.all() para esperar a que las tres promesas se resuelvan
-        await Promise.all([perfilPromise, bibliotecaPromise, obrasPromise]);
+        const [perfil, biblioteca, obras] = await Promise.all([perfilPromise, bibliotecaPromise, obrasPromise]);
+      //mostrar tab obras si perfil.rol no es user
+        const ocultar = perfil && perfil.rol === 'user';
+        document.querySelectorAll('.biblioteca-fin').forEach(el =>
+          el.classList.toggle('d-none', ocultar)
+        );
     } catch (err) {
       // Error de orquestación: registrar para depuración
       console.error('initUsuario: error al arrancar cargas', err);
