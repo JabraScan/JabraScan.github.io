@@ -130,6 +130,7 @@ function authFetch(input, init = {}) {
         const data = await fetchPerfil();    
         // Renderizar en el DOM
         renderPerfil(data, opts);
+        console.log(data);
       } catch (err) {
         // Manejo centralizado de errores
         console.error("No se pudo cargar perfil:", err);
@@ -141,7 +142,6 @@ function authFetch(input, init = {}) {
         // Ocultar indicador de carga si se usó
         if (loadingEl) loadingEl.style.display = "none";
       }
-      console.log(data);
     }
   //FIN CARGA PERFIL USUARIO
 
