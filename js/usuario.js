@@ -411,7 +411,28 @@ function authFetch(input, init = {}) {
     init();
   }
 })();
-
+  // Añadir a la biblioteca
+  export async function addToBiblio(clave) {
+    if (!clave) return { ok: false, error: "obra NO válida" };
+  
+    const url = `${API_BASE}/biblioteca/add`;
+    try {
+      const res = await authFetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ obra_id: clave })
+      });
+  
+      if (!res) return { ok: false, error: "sin respuesta del servidor" };
+      const data = await res.json().catch(() => ({ ok: false, error: "JSON inválido" }));
+  
+      if (!res.ok) return { ok: false, status: res.status, error: data.error || data };
+  
+      return { ok: true, data };
+    } catch (err) {
+      return { ok: false, error: err?.message || String(err) };
+    }
+  }
 // -------------------------------------------------
 // initUsuario
 // Orquestador que arranca la carga de datos asumiendo que
