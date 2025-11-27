@@ -222,7 +222,7 @@ function authFetch(input, init = {}) {
               </button>
             </div>
             <!--
-            <div class="btn-group ms-auto biblioteca-acciones align-self-center" role="group" aria-label="Acciones Biblioteca">
+            <div class="btn-group-vertical ms-auto biblioteca-acciones align-self-center" role="group" aria-label="Acciones Biblioteca">
               <button
                 type="button"
                 class="btn btn-sm btn-outline-danger delete-obra"
@@ -247,7 +247,7 @@ function authFetch(input, init = {}) {
           const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, { soloEstrellas: true, actualizarVoto: true });
           li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
           li.querySelector('.biblio-obra').onclick = () => onLibroClick(item.obra_id);
-          li.querySelector(".libro-item").onclick = () => onLibroClick(clave);
+          li.querySelector(".libro-item").onclick = () => onLibroClick(item.obra_id);
           //prueba para insertar imagen con diferentes tamaños
             //const imgSrc = srcCandidate || FALLBACK_IMG || "";
               //const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
