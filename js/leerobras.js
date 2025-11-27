@@ -384,7 +384,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //FIN fetch('obras.xml')
 });
 
-function onLibroClick(libroId) {
+export function onLibroClick(libroId) {
   localStorage.setItem('libroSeleccionado', libroId);
   fetch('books/libro-ficha.html')
     .then(response => {
