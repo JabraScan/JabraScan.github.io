@@ -7,14 +7,6 @@ import { actualizarEstrellas, crearBloqueValoracion, createImg } from './utils.j
 // No contiene auto-ejecución: general.js debe importar y llamar initUsuario
 // -------------------------
 
-// Funciones existentes que ya tienes (se asume que ya están definidas en este archivo)
-// - fetchPerfil
-// - renderPerfil
-// - cargarPerfil
-// - cargarBiblioteca
-// - cargarObras
-
-
 // -------------------------
 // Config y constantes
 // -------------------------
