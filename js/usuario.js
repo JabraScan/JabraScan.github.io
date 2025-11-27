@@ -211,7 +211,6 @@ function authFetch(input, init = {}) {
                   </button>
                 </div>
               </div>
-              </div>
               <div class="d-flex justify-content-between">
                 <small class="text-muted user-progresion">${item.numCapitulo || '-'} / ${item.maxCapitulos || '-'} ( ${item.porcenLeido || '-'}% )</small>
               </div>
