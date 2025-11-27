@@ -155,58 +155,67 @@ function authFetch(input, init = {}) {
     const data = await res.json();
   
     const cont = document.getElementById("bibliotecaResultado");
+    const cont-final = document.getElementById("biblioteca-fin-Resultado");
     if (!cont) return;
   
     const ul = document.createElement("ul");
-    ul.className = "list-group";
-      (Array.isArray(data) ? data : []).forEach(item => {
-        const li = document.createElement("li");
-        li.className = "list-group-item d-flex gap-3 align-items-start";
-        li.dataset.obraId = item.obra_id ?? "";
-  //console.log(item);     
-        // normalizar item.imagen y limpiar comillas, backslashes, prefijos img/ y slashes iniciales
-        let srcCandidate = '/img/' + (
-                            String(item.imagen ?? '')
-                              .replace(/^"+|"+$/g, '')           // quitar comillas literales alrededor
-                              .replace(/\\/g, '/')               // convertir backslashes a slash
-                              .replace(/^\/+/, '')               // quitar slashes iniciales
-                              .replace(/^img\/+/i, '')          // quitar prefijo img/ si existe
-                              .replace(/\.webp(\?.*)?$/i, '-300w.webp$1')
-                            ); 
-        // construimos src de imagen sólo si viene o si FALLBACK_IMG está definido
-        const imgSrc = srcCandidate || FALLBACK_IMG || "";
-        li.innerHTML = `
-          <img src="${imgSrc}" ${imgSrc ? `onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"` : ''} 
-               alt="${item.nombreobra || ''}" class="img-thumbnail user-image" style="width:96px;height:128px;object-fit:cover;">
-          <div class="flex-grow-1">
-            <p class="clave d-none">${item.obra_id}</p>
-            <div class="d-flex justify-content-between user-main">
-              <h5 class="mb-1 biblio-obra" >${item.nombreobra || ''}</h5>
-              <small class="text-muted">${item.estado ? `Estado: ${item.estado}` : ''}</small>
+      ul.className = "list-group";
+    const ul-final = document.createElement("ul");
+      ul-final.className = "list-group";
+    
+        (Array.isArray(data) ? data : []).forEach(item => {
+          const li = document.createElement("li");
+          li.className = "list-group-item d-flex gap-3 align-items-start";
+          li.dataset.obraId = item.obra_id ?? "";
+    //console.log(item);     
+          // normalizar item.imagen y limpiar comillas, backslashes, prefijos img/ y slashes iniciales
+          let srcCandidate = '/img/' + (
+                              String(item.imagen ?? '')
+                                .replace(/^"+|"+$/g, '')           // quitar comillas literales alrededor
+                                .replace(/\\/g, '/')               // convertir backslashes a slash
+                                .replace(/^\/+/, '')               // quitar slashes iniciales
+                                .replace(/^img\/+/i, '')          // quitar prefijo img/ si existe
+                                .replace(/\.webp(\?.*)?$/i, '-300w.webp$1')
+                              ); 
+          // construimos src de imagen sólo si viene o si FALLBACK_IMG está definido
+          const imgSrc = srcCandidate || FALLBACK_IMG || "";
+          li.innerHTML = `
+            <img src="${imgSrc}" ${imgSrc ? `onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"` : ''} 
+                 alt="${item.nombreobra || ''}" class="img-thumbnail user-image" style="width:96px;height:128px;object-fit:cover;">
+            <div class="flex-grow-1">
+              <p class="clave d-none">${item.obra_id}</p>
+              <div class="d-flex justify-content-between user-main">
+                <h5 class="mb-1 biblio-obra" >${item.nombreobra || ''}</h5>
+                <small class="text-muted">${item.estado ? `Estado: ${item.estado}` : ''}</small>
+              </div>
+              <div class="d-flex justify-content-between user-lastChapter">
+                <a href="#" data-pdf-obra="${item.obra_id}" data-pdf-capitulo="${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}" class="pdf-link">
+                  <span>${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}: ${item.nombreCapitulo || '-'}</span>
+                </a>
+              </div>
+              <div class="d-flex justify-content-between">
+                <small class="text-muted user-progresion">${item.numCapitulo || '-'} / ${item.maxCapitulos || '-'} ( ${item.porcenLeido || '-'}% )</small>
+              </div>
+              <input type="hidden" class="obra-id" value="${item.obra_id ?? ''}">
             </div>
-            <div class="d-flex justify-content-between user-lastChapter">
-              <a href="#" data-pdf-obra="${item.obra_id}" data-pdf-capitulo="${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}" class="pdf-link">
-                <span>${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}: ${item.nombreCapitulo || '-'}</span>
-              </a>
-            </div>
-            <div class="d-flex justify-content-between">
-              <small class="text-muted user-progresion">${item.numCapitulo || '-'} / ${item.maxCapitulos || '-'} ( ${item.porcenLeido || '-'}% )</small>
-            </div>
-            <input type="hidden" class="obra-id" value="${item.obra_id ?? ''}">
-          </div>
-        `;
-        //añadimos valoraciones para usuario
-        const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, { soloEstrellas: true, actualizarVoto: true });
-        li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
-        li.querySelector('.biblio-obra').onclick = () => onLibroClick(item.obra_id);
-        //prueba para insertar imagen con diferentes tamaños
-          //const imgSrc = srcCandidate || FALLBACK_IMG || "";
-            //const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
-            //newImg.className = "img-thumbnail";
-          //li.prepend(newImg);  
-        ul.appendChild(li);
-      });
+          `;
+          //añadimos valoraciones para usuario
+          const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, { soloEstrellas: true, actualizarVoto: true });
+          li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
+          li.querySelector('.biblio-obra').onclick = () => onLibroClick(item.obra_id);
+          //prueba para insertar imagen con diferentes tamaños
+            //const imgSrc = srcCandidate || FALLBACK_IMG || "";
+              //const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
+              //newImg.className = "img-thumbnail";
+            //li.prepend(newImg);  
+          if (item.finalizado === 0 ) {
+            ul.appendChild(li);
+          } else {
+            ul-final.appendChild(li);
+          }
+        });
     cont.appendChild(ul);
+    cont-final.appendChild(ul-final);
     activarLinksPDF();
   }
   /**
@@ -500,10 +509,10 @@ console.log(authFetch(url, {
       // 2. Usar Promise.all() para esperar a que las tres promesas se resuelvan
         const [perfil, biblioteca, obras] = await Promise.all([perfilPromise, bibliotecaPromise, obrasPromise]);
       //mostrar tab obras si perfil.rol no es user
-        const ocultar = perfil && perfil.rol === 'user';
+      /*  const ocultar = perfil && perfil.rol === 'user';
         document.querySelectorAll('.biblioteca-fin').forEach(el =>
           el.classList.toggle('d-none', ocultar)
-        );
+        );*/
     } catch (err) {
       // Error de orquestación: registrar para depuración
       console.error('initUsuario: error al arrancar cargas', err);
