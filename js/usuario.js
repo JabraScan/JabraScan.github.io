@@ -560,8 +560,9 @@ console.log(authFetch(url, {
         const perfilPromise = cargarPerfil();
         const bibliotecaPromise = cargarBiblioteca();
         const obrasPromise = cargarObras();
+        const avatarPromise = setupAvatarLoader();
       // 2. Usar Promise.all() para esperar a que las tres promesas se resuelvan
-        const results = await Promise.allSettled([perfilPromise, bibliotecaPromise, obrasPromise]);
+        const results = await Promise.allSettled([perfilPromise, bibliotecaPromise, obrasPromise, avatarPromise]);
     
         const perfil = results[0].status === 'fulfilled' ? results[0].value : undefined;
         const biblioteca = results[1].status === 'fulfilled' ? results[1].value : undefined;
