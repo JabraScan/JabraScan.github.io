@@ -213,32 +213,11 @@ function authFetch(input, init = {}) {
             </div>
           
             <!-- Botones para pantallas >= sm: (vertical) -->
-            <!--
             <div class="biblioteca-acciones d-none d-sm-flex flex-column ms-auto align-self-stretch justify-content-center gap-2" role="group" aria-label="Acciones Biblioteca">
               <button type="button" class="btn btn-sm btn-outline-danger delete-obra" data-obra-id="${item.obra_id ?? ''}" title="Quitar de la Biblioteca" aria-label="Quitar de la Biblioteca">
                 <i class="fa fa-trash" aria-hidden="true"></i>
               </button>
               <button type="button" class="btn btn-sm btn-outline-success marcar-finalizado" data-obra-id="${item.obra_id ?? ''}" title="Marcar como finalizado" aria-label="Marcar como finalizado">
-                <i class="fa fa-check" aria-hidden="true"></i>
-              </button>
-            </div>
-            -->
-            <div class="btn-group-vertical ms-auto biblioteca-acciones align-self-center" role="group" aria-label="Acciones Biblioteca">
-              <button
-                type="button"
-                class="btn btn-sm btn-outline-danger delete-obra"
-                data-obra-id="${item.obra_id}"
-                title="Quitar de la Biblioteca"
-                aria-label="Quitar de la Biblioteca">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-              </button>
-          
-              <button
-                type="button"
-                class="btn btn-sm btn-outline-success marcar-finalizado"
-                data-obra-id="${item.obra_id}"
-                title="Marcar como finalizado"
-                aria-label="Marcar como finalizado">
                 <i class="fa fa-check" aria-hidden="true"></i>
               </button>
             </div>
