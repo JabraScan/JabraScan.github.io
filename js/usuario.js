@@ -413,9 +413,16 @@ function authFetch(input, init = {}) {
 })();
   // Añadir a la biblioteca
   export async function addToBiblio(clave) {
+    if (!usuario_id && !token) return;
     if (!clave) return { ok: false, error: "obra NO válida" };
   
     const url = `${API_BASE}/biblioteca/add`;
+console.log(`url: ${url}`);
+console.log(authFetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ obra_id: clave })
+      }));
     try {
       const res = await authFetch(url, {
         method: "POST",
