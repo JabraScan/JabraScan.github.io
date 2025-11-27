@@ -94,26 +94,6 @@ function authFetch(input, init = {}) {
             <p class="text-muted">Puntos: <span id="user_puntos">${data.puntos}</span></p>
           </div>
         `;
-
-      // Opciones para los ids de los elementos del DOM (no hay id de usuario en los datos)
-      //const {
-      //  nickSelector = "nick",
-      //  avatarSelector = "avatar-img",
-      //  avatarFallback = "/img/avatar/default.webp"
-      //} = opts;
-      // Buscar elementos en el DOM
-      //const nickEl = document.getElementById(nickSelector);
-      //const avatarEl = document.getElementById(avatarSelector);
-
-        //crear imagen avatar (cuando este activa la opcion con diferentes tamaños
-        //  const newavatar = createImg(data.avatar || avatarFallback, data.nick, "perfilUsuario");
-        //    newImg.id = avatarEl.id;
-        //    newImg.className = "rounded-circle me-3";
-        // reemplazar en el DOM (mantiene la posición original)
-        //avatarEl.parentNode.replaceChild(newImg, avatarEl);
-      // Asignaciones seguras
-      //if (nickEl) nickEl.textContent = data.nick || "(sin nick)";
-      //if (avatarEl) avatarEl.src = data.avatar || avatarFallback;
     }    
     // Orquestadora: usa fetchPerfil y renderPerfil (solo autenticado)
     // opts permite pasar selectors opcionales: { loadingSelector, errorSelector, nickSelector, avatarSelector }
@@ -312,23 +292,117 @@ function authFetch(input, init = {}) {
     cont.appendChild(ul);
   
     if (typeof activarLinksPDF === "function") activarLinksPDF();
-  
-    /*document.querySelectorAll('#obrasResultado .obra-link').forEach(a => {
-      a.addEventListener('click', (e) => {
-        e.preventDefault();
-        const obraId = a.dataset.obra;
-        if (!obraId) return;
-        if (typeof abrirFichaObra === 'function') abrirFichaObra(obraId);
-        else console.log('Abrir obra', obraId);
-      });
-    });*/
   }
+
+/**
+ * cargarTienda
+ *
+ * Realiza una petición al endpoint de avatares y renderiza las imágenes dentro
+ * del contenedor '#avatarResultado'.
+ *
+ * Comportamiento:
+ * - NO auto-inicia. Llamar manualmente: cargarTienda();
+ * - NO añade listeners ni verifica si un panel está visible.
+ * - Muestra un mensaje de carga y un mensaje genérico si no hay avatares o hay error.
+ *
+ * Requisitos del JSON esperado:
+ * - Puede ser un array directamente o un objeto con { items: [...] }.
+ * - Cada elemento debe contener al menos la propiedad `avatar_path`.
+ *
+ * Seguridad / notas:
+ * - `img.src` se asigna directamente desde `avatar_path`. Si el endpoint puede
+ *   devolver URLs no deseadas, valida/normaliza antes de asignar.
+ * - `alt` se rellena con `descripcion` para accesibilidad; asegúrate de que ese
+ *   campo sea descriptivo en el backend.
+ *
+ * @returns {Promise<void>} Promise que resuelve cuando termina la carga/render.
+ */
+async function cargarTienda() {
+  // --- Configuración fija (simple y directa)
+  const ENDPOINT = 'https://jabrascan.net/avatars'; // URL del endpoint que devuelve JSON
+  const CONTAINER_SELECTOR = '#avatarResultado';    // selector del contenedor donde insertar avatares
+
+  // Obtener referencia al contenedor en el momento de la llamada
+  const container = document.querySelector(CONTAINER_SELECTOR);
+  if (!container) return; // si no existe el contenedor, salir silenciosamente
+
+  // Mostrar mensaje de carga mientras se realiza la petición
+  container.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
+
+  try {
+    // Petición al endpoint (sin cache para forzar datos frescos)
+    const res = await fetch(ENDPOINT, { cache: 'no-cache' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+
+    // Normalizar respuesta: array o { items: [...] }
+    const data = await res.json();
+    const rows = Array.isArray(data) ? data : (data.items || []);
+
+    // Extraer lista usable: { src, alt }
+    const list = rows
+      .filter(r => r && r.avatar_path) // ignorar entradas inválidas
+      .map(r => ({ src: String(r.avatar_path), alt: r.descripcion || '' }));
+
+    // Si no hay avatares, mostrar mensaje informativo
+    if (!list.length) {
+      container.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+      return;
+    }
+
+    // Construir la fila de tarjetas con imágenes
+    const row = document.createElement('div');
+    row.className = 'row g-2';
+
+    list.forEach(item => {
+      // Columna responsiva
+      const col = document.createElement('div');
+      col.className = 'col-6 col-sm-4 col-md-3 col-lg-2';
+
+      // Tarjeta contenedora
+      const card = document.createElement('div');
+      card.className = 'card p-1 text-center';
+
+      // Imagen: asignamos src y alt directamente
+      const img = document.createElement('img');
+      img.src = item.src;       // validar si el origen puede ser inseguro
+      img.alt = item.alt;
+      img.className = 'img-fluid rounded';
+      img.style.cursor = 'pointer';
+
+      // Pie con la descripción (texto seguro usando textContent)
+      const caption = document.createElement('div');
+      caption.className = 'small text-truncate mt-1';
+      caption.textContent = item.alt;
+
+      // Comportamiento de selección (opcional; se puede quitar)
+      img.addEventListener('click', () => {
+        // Desmarcar otras imágenes seleccionadas dentro del contenedor
+        container.querySelectorAll('img.selected').forEach(i => i.classList.remove('selected','border','border-primary'));
+        // Marcar la clicada
+        img.classList.add('selected','border','border-primary');
+      });
+
+      // Montaje del DOM
+      card.appendChild(img);
+      card.appendChild(caption);
+      col.appendChild(card);
+      row.appendChild(col);
+    });
+
+    // Reemplazar el contenido del contenedor por la fila construida
+    container.innerHTML = '';
+    container.appendChild(row);
+  } catch (err) {
+    // En caso de error (network, JSON inválido, etc.) mostramos mensaje genérico
+    container.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+  }
+}
 
 // -------------------------
 // Avatar loader (lee índice de directorio /img/avatar/)
 // - carga una sola vez al activarse la pestaña
 // -------------------------
-(function setupAvatarLoader() {
+/*(function setupAvatarLoader() {
   function init() {
     const avatarTabBtn = document.querySelector('#avatar-tab');
     const avatarResultEl = document.querySelector('#avatarResultado');
@@ -437,7 +511,7 @@ function authFetch(input, init = {}) {
   } else {
     init();
   }
-})();
+})();*/
 /**/
       function bindTabsSelect() {
 console.log("tabs");
@@ -560,9 +634,9 @@ console.log(authFetch(url, {
         const perfilPromise = cargarPerfil();
         const bibliotecaPromise = cargarBiblioteca();
         const obrasPromise = cargarObras();
-        const avatarPromise = setupAvatarLoader();
+        const tiendaPromise = cargarTienda();
       // 2. Usar Promise.all() para esperar a que las tres promesas se resuelvan
-        const results = await Promise.allSettled([perfilPromise, bibliotecaPromise, obrasPromise, avatarPromise]);
+        const results = await Promise.allSettled([perfilPromise, bibliotecaPromise, obrasPromise, tiendaPromise]);
     
         const perfil = results[0].status === 'fulfilled' ? results[0].value : undefined;
         const biblioteca = results[1].status === 'fulfilled' ? results[1].value : undefined;
