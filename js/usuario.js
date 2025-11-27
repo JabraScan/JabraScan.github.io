@@ -411,6 +411,7 @@ function authFetch(input, init = {}) {
     init();
   }
 })();
+/*
   // Añadir a la biblioteca
   export async function addToBiblio(clave) {
     if (!usuario_id && !token) return;
@@ -439,7 +440,56 @@ console.log(authFetch(url, {
     } catch (err) {
       return { ok: false, error: err?.message || String(err) };
     }
+  }*/
+  // Añadir a la biblioteca (usa authFetch que añade Authorization automáticamente)
+  // Devuelve siempre un objeto con la forma: { ok: boolean, data?, error?, status? }
+  export async function addToBiblio(clave, { timeout = 8000 } = {}) {
+    // Validación básica de entrada: clave debe ser una cadena no vacía
+    if (!clave || typeof clave !== "string") {  return { ok: false, error: "obra NO válida" };      }  
+    // Comprobación de autorización en cliente: evita llamadas sin token
+    // (authFetch añade el header Authorization si la variable token está presente)
+    if (!token) {  return { ok: false, error: "no autorizado" };    }
+  
+    const url = `${API_BASE}/biblioteca/add`;
+    // AbortController para poder cancelar la petición si excede el timeout
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+      try {
+        // Realiza la petición POST
+        const res = await authFetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ obra_id: clave }),
+          signal: controller.signal
+        });
+        // Limpiar el timeout una vez recibida la respuesta
+        clearTimeout(id);
+        // Si no hay respuesta (caso raro), devolver error consistente
+        if (!res) return { ok: false, error: "sin respuesta del servidor" };  
+        // Intentar parsear la respuesta como JSON de forma segura
+        let data;
+        try {
+          data = await res.json();
+        } catch {
+          // Si la respuesta no es JSON, devolvemos un error claro con el status
+          return { ok: false, status: res.status, error: "Respuesta no JSON" };
+        }  
+        // Si el servidor devolvió un status de error, normalizamos la respuesta
+        if (!res.ok) {  return { ok: false, status: res.status, error: data?.error || data };  }  
+        // Éxito: devolvemos el payload recibido
+        return { ok: true, data };
+      } catch (err) {
+          // Aseguramos limpiar el timeout en caso de excepción
+          clearTimeout(id);
+          // Tratamiento específico para cancelación por timeout
+          if (err && err.name === "AbortError") {
+            return { ok: false, error: "La petición fue cancelada (timeout)" };
+          }
+          // Error genérico: devolvemos mensaje legible
+          return { ok: false, error: err?.message || String(err) };
+      }
   }
+
 // -------------------------------------------------
 // initUsuario
 // Orquestador que arranca la carga de datos asumiendo que
