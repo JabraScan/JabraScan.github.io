@@ -574,6 +574,8 @@ console.log(authFetch(url, {
   export async function initUsuario() {
     // Llamadas a las funciones que manipulan el DOM / datos.
     // Se asume que cargarPerfil y las demás gestionan sus propios errores y fallbacks.
+      //sincronizar el select
+        bindTabsSelect();
     try {
       // 1. Ejecutar las tres funciones async al mismo tiempo
         const perfilPromise = cargarPerfil();
@@ -585,8 +587,6 @@ console.log(authFetch(url, {
         const perfil = results[0].status === 'fulfilled' ? results[0].value : undefined;
         const biblioteca = results[1].status === 'fulfilled' ? results[1].value : undefined;
         const obras = results[2].status === 'fulfilled' ? results[2].value : undefined;
-      //actualizacion de tabs 
-        bindTabsSelect();
     } catch (err) {
       // Error de orquestación: registrar para depuración
       console.error('initUsuario: error al arrancar cargas', err);
