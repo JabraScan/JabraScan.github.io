@@ -192,29 +192,30 @@ function authFetch(input, init = {}) {
                 <a href="#" data-pdf-obra="${item.obra_id}" data-pdf-capitulo="${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}" class="pdf-link">
                   <span>${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}: ${item.nombreCapitulo || '-'}</span>
                 </a>
-                <div class="btn-group ms-3 biblioteca-acciones" role="group" aria-label="Acciones Biblioteca">
-                  <button
-                    type="button"
-                    class="btn btn-sm btn-outline-danger delete-obra"
-                    data-obra-id="${item.obra_id ?? ''}"
-                    title="Quitar de la Biblioteca"
-                    aria-label="Quitar de la Biblioteca">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                  </button>              
-                  <button
-                    type="button"
-                    class="btn btn-sm btn-outline-success marcar-finalizado"
-                    data-obra-id="${item.obra_id ?? ''}"
-                    title="Marcar como finalizado"
-                    aria-label="Marcar como finalizado">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                  </button>
-                </div>
               </div>
               <div class="d-flex justify-content-between">
                 <small class="text-muted user-progresion">${item.numCapitulo || '-'} / ${item.maxCapitulos || '-'} ( ${item.porcenLeido || '-'}% )</small>
               </div>
               <input type="hidden" class="d-none obra-id" value="${item.obra_id ?? ''}">
+            </div>
+            <div class="btn-group ms-auto biblioteca-acciones align-self-center" role="group" aria-label="Acciones Biblioteca">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger delete-obra"
+                data-obra-id="${item.obra_id}"
+                title="Quitar de la Biblioteca"
+                aria-label="Quitar de la Biblioteca">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+          
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-success marcar-finalizado"
+                data-obra-id="${item.obra_id}"
+                title="Marcar como finalizado"
+                aria-label="Marcar como finalizado">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
             </div>
           `;
           //añadimos valoraciones para usuario
