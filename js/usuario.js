@@ -185,24 +185,44 @@ function authFetch(input, init = {}) {
             <div class="flex-grow-1">
               <p class="clave d-none">${item.obra_id}</p>
               <div class="d-flex justify-content-between user-main">
-                <h5 class="mb-1 biblio-obra" >${item.nombreobra || ''}</h5>
-                <small class="text-muted">${item.estado ? `Estado: ${item.estado}` : ''}</small>
+                <h5 class="mb-1 biblio-obra libro-item" >${item.nombreobra || ''}</h5>
+                <small class="text-muted">${item.estado ? `${item.estado}` : ''}</small>
               </div>
               <div class="d-flex justify-content-between user-lastChapter">
                 <a href="#" data-pdf-obra="${item.obra_id}" data-pdf-capitulo="${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}" class="pdf-link">
                   <span>${item.numCapitulo ?? item.ultimoCapituloLeido ?? '-'}: ${item.nombreCapitulo || '-'}</span>
                 </a>
+                <div class="btn-group ms-3 biblioteca-acciones" role="group" aria-label="Acciones Biblioteca">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-outline-danger delete-obra"
+                    data-obra-id="${item.obra_id ?? ''}"
+                    title="Quitar de la Biblioteca"
+                    aria-label="Quitar de la Biblioteca">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>              
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-outline-success marcar-finalizado"
+                    data-obra-id="${item.obra_id ?? ''}"
+                    title="Marcar como finalizado"
+                    aria-label="Marcar como finalizado">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
               </div>
               <div class="d-flex justify-content-between">
                 <small class="text-muted user-progresion">${item.numCapitulo || '-'} / ${item.maxCapitulos || '-'} ( ${item.porcenLeido || '-'}% )</small>
               </div>
-              <input type="hidden" class="obra-id" value="${item.obra_id ?? ''}">
+              <input type="hidden" class="d-none obra-id" value="${item.obra_id ?? ''}">
             </div>
           `;
           //añadimos valoraciones para usuario
           const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, { soloEstrellas: true, actualizarVoto: true });
           li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
           li.querySelector('.biblio-obra').onclick = () => onLibroClick(item.obra_id);
+          li.querySelector(".libro-item").onclick = () => onLibroClick(clave);
           //prueba para insertar imagen con diferentes tamaños
             //const imgSrc = srcCandidate || FALLBACK_IMG || "";
               //const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
