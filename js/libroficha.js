@@ -3,6 +3,7 @@ import { parseDateDMY, parseChapterNumber, compareCapNumDesc, crearBloqueValorac
 import { activarLinksPDF, activarPaginacion } from './eventos.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso, consultarVotos } from './contadoresGoogle.js';
 import { mostrarurl } from './general.js';
+import { addToBiblio } from './usuario.js';
 /**
  * Carga los datos de una obra y renderiza sus capítulos.
  * @param {string} libroId - Clave identificadora de la obra.
@@ -111,31 +112,6 @@ export function cargarlibro(libroId) {
                 </div>
               </div>
             `;
-
-      /*leerVisitas(`obra_${clave}`).then(vis => {
-          const visitas = vis === -1 ? 1 : vis+1;
-            const numVisitas = document.createElement("a");
-                  numVisitas.innerHTML = `<a href="#"><i class="fa-solid fa-eye"  ></i> ${visitas} veces</a>`;
-                  const booklinks  = mainDataBook.querySelector('.book-links');
-                    booklinks.appendChild(numVisitas);
-        });*/
-      /*//modulo valoracion y visitas
-      obtenerInfo(`obra_${clave}`).then(info => {
-        //console.log(info);
-        const visitCap = info.visitas === -1 ? 0 : info.numVisitasCapitulo;
-        const visitObra = info.visitas === -1 ? 1 : info.visitas + 1;
-        const visitas = visitCap + visitObra;
-        const numVisitas = document.createElement("a");
-        numVisitas.innerHTML = `<a href="#"><i class="fa-solid fa-eye"  ></i> ${visitas} veces</a>`;
-        const booklinks = mainDataBook.querySelector('.book-links');
-        booklinks.appendChild(numVisitas);
-
-        const claveValoracion = `obra_${clave}`;
-        //console.log(info);
-        const bloqueValoracion = crearBloqueValoracion(claveValoracion, info.valoracion, info.votos);
-        mainDataBook.querySelector(".book-info-container").appendChild(bloqueValoracion);
-      });
-      consultarVotos*/
       // obtener y mostrar visitas
       obtenerInfo(`obra_${clave}`).then(info => {
         const visitCap = info.visitas === -1 ? 0 : info.numVisitasCapitulo;
@@ -147,13 +123,25 @@ export function cargarlibro(libroId) {
       
         const booklinks = mainDataBook.querySelector('.book-links');
         booklinks.appendChild(numVisitas);
-      });      
+      });
       // consultar y mostrar valoración/votos
       consultarVotos(clave).then(({ valoracion, votos }) => {
         const claveValoracion = `obra_${clave}`;
         const bloqueValoracion = crearBloqueValoracion(claveValoracion, valoracion, votos);
         mainDataBook.querySelector(".book-info-container").appendChild(bloqueValoracion);
       });
+      // Inserta un botón "+ Añadir a la biblioteca" como primer hijo de .book-rating
+      const btnBiblioteca = addToLibrary(clave);
+        mainDataBook.querySelector('.book-rating').insertBefore(btnBiblioteca, container.firstChild);
+
+      <button class="btn btn-primary" type="button" aria-label="Añadir a la biblioteca" title="Añadir a la biblioteca">
+        <!-- Icono decorativo; aria-hidden para que no lo lea el screen reader -->
+        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+        <!-- Fallback visual si la fuente no carga -->
+        <span class="fallback-plus visually-hidden">+</span>
+        <!-- Texto visible solo en pantallas >= sm -->
+        <span class="d-none d-sm-inline ms-2">Añadir a la biblioteca</span>
+      </button>
 
       DataBook.prepend(mainDataBook);
       DataBook.prepend(headerDataBook);
@@ -288,9 +276,25 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
   });
 }
 
-
-
-
-
-
-
+// Crea botón "+ Añadir a la biblioteca" 
+function addToLibrary(clave) {
+  const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn btn-primary btn-sm d-inline-flex align-items-center';
+    btn.setAttribute('data-role', 'add-to-library');
+    btn.setAttribute('aria-label', 'Añadir a la biblioteca');
+    btn.title = 'Añadir a la biblioteca';
+    btn.innerHTML = `
+      <span class="me-1" aria-hidden="true">+</span>
+      <i class="fa-solid fa-plus" aria-hidden="true"></i>
+      <span class="d-none d-sm-inline ms-2">Añadir a la biblioteca</span>
+    `;
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      btn.classList.add('disabled');
+      setTimeout(() => btn.classList.remove('disabled'), 700);
+      addToBiblio(clave);
+    });
+  
+  return btn;
+}
