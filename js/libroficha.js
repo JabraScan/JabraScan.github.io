@@ -107,8 +107,10 @@ export function cargarlibro(libroId) {
                   <b><i class="fa-solid fa-info-circle"></i> Sinopsis:</b>
                   <p id="sinopsis-obra" class="ficha-obra-sinopsis">${sinopsis}</p>
                 </div>
-                <div class="book_extras">
+                <div class="book-extras">
                   ${wiki}
+                </div>
+                <div class="book-useraction">
                 </div>
               </div>
             `;
@@ -128,11 +130,12 @@ export function cargarlibro(libroId) {
       consultarVotos(clave).then(({ valoracion, votos }) => {
         const claveValoracion = `obra_${clave}`;
         const bloqueValoracion = crearBloqueValoracion(claveValoracion, valoracion, votos);
-        mainDataBook.querySelector(".book-info-container").appendChild(bloqueValoracion);
+        //mainDataBook.querySelector(".book-info-container").appendChild(bloqueValoracion);
+        mainDataBook.querySelector('.book-useraction').appendChild(bloqueValoracion);
       });
       // Inserta un botón "+ Añadir a la biblioteca" como primer hijo de .book-rating
       const btnBiblioteca = addToLibrary(clave);
-        mainDataBook.querySelector('.book-rating').insertBefore(btnBiblioteca, container.firstChild);
+        mainDataBook.querySelector('.book-useraction').insertAdjacentElement('afterbegin', btnBiblioteca);
 /*
       <button class="btn btn-primary" type="button" aria-label="Añadir a la biblioteca" title="Añadir a la biblioteca">
         <!-- Icono decorativo; aria-hidden para que no lo lea el screen reader -->
@@ -298,4 +301,5 @@ function addToLibrary(clave) {
   
   return btn;
 }
+
 
