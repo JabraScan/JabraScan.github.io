@@ -133,7 +133,7 @@ export function cargarlibro(libroId) {
       // Inserta un botón "+ Añadir a la biblioteca" como primer hijo de .book-rating
       const btnBiblioteca = addToLibrary(clave);
         mainDataBook.querySelector('.book-rating').insertBefore(btnBiblioteca, container.firstChild);
-
+/*
       <button class="btn btn-primary" type="button" aria-label="Añadir a la biblioteca" title="Añadir a la biblioteca">
         <!-- Icono decorativo; aria-hidden para que no lo lea el screen reader -->
         <i class="fa-solid fa-plus" aria-hidden="true"></i>
@@ -142,7 +142,7 @@ export function cargarlibro(libroId) {
         <!-- Texto visible solo en pantallas >= sm -->
         <span class="d-none d-sm-inline ms-2">Añadir a la biblioteca</span>
       </button>
-
+*/
       DataBook.prepend(mainDataBook);
       DataBook.prepend(headerDataBook);
       mainDataBook.querySelector(".book-image").prepend(imagenContenedor);
@@ -298,3 +298,4 @@ function addToLibrary(clave) {
   
   return btn;
 }
+
