@@ -14,9 +14,18 @@
       <!-- Perfil básico -->
       <div class="d-flex align-items-center mb-4" id="perfil-info">
       </div>
-    
+
+      <div class="d-block d-sm-none mb-2">
+        <select id="tabsSelect" class="form-select">
+          <option value="#biblioteca" selected>Biblioteca</option>
+          <option value="#biblioteca-fin">Finalizado</option>
+          <option value="#obras">Mis Obras</option>
+          <option value="#avatar">Tienda</option>
+        </select>
+      </div>
       <!-- Pestañas -->
-      <ul class="nav nav-tabs  flex-column flex-sm-row" id="usuarioTabs" role="tablist">
+      <ul class="nav nav-tabs d-none d-sm-flex" id="usuarioTabs" role="tablist">
+      <!--<ul class="nav nav-tabs  flex-column flex-sm-row" id="usuarioTabs" role="tablist">-->
         <li class="nav-item biblioteca" role="presentation">
           <button class="nav-link active" id="biblioteca-tab" data-bs-toggle="tab" data-bs-target="#biblioteca" type="button" role="tab">Biblioteca</button>
         </li>
