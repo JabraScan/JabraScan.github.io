@@ -155,13 +155,13 @@ function authFetch(input, init = {}) {
     const data = await res.json();
   
     const cont = document.getElementById("bibliotecaResultado");
-    const cont-final = document.getElementById("biblioteca-fin-Resultado");
+    const contfinal = document.getElementById("biblioteca-fin-Resultado");
     if (!cont) return;
   
     const ul = document.createElement("ul");
       ul.className = "list-group";
-    const ul-final = document.createElement("ul");
-      ul-final.className = "list-group";
+    const ulfinal = document.createElement("ul");
+      ulfinal.className = "list-group";
     
         (Array.isArray(data) ? data : []).forEach(item => {
           const li = document.createElement("li");
@@ -211,11 +211,11 @@ function authFetch(input, init = {}) {
           if (item.finalizado === 0 ) {
             ul.appendChild(li);
           } else {
-            ul-final.appendChild(li);
+            ulfinal.appendChild(li);
           }
         });
     cont.appendChild(ul);
-    cont-final.appendChild(ul-final);
+    contfinal.appendChild(ulfinal);
     activarLinksPDF();
   }
   /**
