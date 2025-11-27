@@ -1,3 +1,4 @@
+import { onLibroClick } from'./leerobras.js';
 import { activarLinksPDF } from './eventos.js';
 import { actualizarEstrellas, crearBloqueValoracion, createImg, managerTabs } from './utils.js';
 
