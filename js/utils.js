@@ -1,4 +1,4 @@
-import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
+import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso, sesionActiva } from './contadoresGoogle.js';
 
 // transformar "YYYY-MM-DD" o "YYYY-MM-DD HH:MM:SS" -> "DD-MM-YYYY"
 export function toDDMMYYYY(fechaStr) {
@@ -394,28 +394,11 @@ export function obtenerNombreObra(nodosNombreObra) {
   // 📦 devolver ambos parámetros
   return { nombreobra, nombresAlternativos };
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Devuelve true si hay token en localStorage.
+ * @param {string} [tokenKey='jwt']
+ * @returns {boolean}
+ */
+function isLoggedIn(tokenKey = 'jwt') {
+  return !!localStorage.getItem(tokenKey);
+}
