@@ -402,4 +402,228 @@ export function obtenerNombreObra(nodosNombreObra) {
 function isLoggedIn(tokenKey = 'jwt') {
   return !!localStorage.getItem(tokenKey);
 }
-
+/**
+ * managerTabs
+ *
+ * Crea y gestiona una estructura de pestañas dentro del contenedor indicado.
+ *
+ * - Inserta (si no existen) los elementos necesarios .nav.nav-tabs y .tab-content dentro del contenedor.
+ * - Por cada entrada en `tabs` crea un nav item (<li> + <a>) y su pane asociado (<div class="tab-pane">).
+ * - Evita duplicados en el DOM al añadir pestañas con el mismo id.
+ * - Proporciona métodos para obtener la lista de pestañas, activar una pestaña, añadir y eliminar pestañas.
+ *
+ * Parámetros:
+ * - containerSelector {string} Selector CSS del contenedor donde montar la estructura.
+ * - tabs {Array<Object>} Array de definiciones de pestañas. Cada objeto puede contener:
+ *     - id {string}
+ *     - title {string}
+ *     - render {function(): HTMLElement|string|null|undefined}
+ * - options {Object} Opciones:
+ *     - activeId {string}
+ *
+ * Devuelve:
+ *   - { getTabs, setActive, addTab, removeTab }
+ *
+ * Uso de la API (ejemplos)
+ *     manager.getTabs();
+ *     manager.setActive('obras');
+ *     manager.addTab({ id: 'otra', title: 'Otra', render: () => '<p>Contenido</p>' });
+ *     manager.removeTab('avatar');
+ */
+  export function managerTabs(containerSelector, tabs = [], options = {}) {
+    const container = document.querySelector(containerSelector);
+    if (!container) throw new Error(`Contenedor no encontrado: ${containerSelector}`);
+  
+    // Buscar o crear nav y tab-content
+    let nav = container.querySelector(".nav.nav-tabs");
+    if (!nav) {
+      nav = document.createElement("ul");
+      nav.className = "nav nav-tabs";
+      nav.setAttribute("role", "tablist");
+      container.appendChild(nav);
+    }
+  
+    let content = container.querySelector(".tab-content");
+    if (!content) {
+      content = document.createElement("div");
+      content.className = "tab-content";
+      container.appendChild(content);
+    }
+  
+    const state = {
+      tabs: [...tabs],
+      activeId: options.activeId || (tabs[0] && tabs[0].id) || null
+    };
+  
+    /**
+     * createNavItem
+     *
+     * Crea el <li> y el <a> para la pestaña.
+     * - No añade listeners de click.
+     *
+     * Devuelve:
+     * - { li: HTMLLIElement, a: HTMLAnchorElement }
+     */
+      function createNavItem(tab, isActive) {
+        const paneId = `tab-pane-${tab.id}`;
+        const linkId = `tab-link-${tab.id}`;
+    
+        const li = document.createElement("li");
+        li.className = "nav-item";
+        li.setAttribute("role", "presentation");
+    
+        const a = document.createElement("a");
+        a.className = "nav-link";
+        a.setAttribute("data-bs-toggle", "tab");
+        a.setAttribute("role", "tab");
+        a.setAttribute("aria-controls", paneId);
+        a.href = `#${paneId}`;
+        a.dataset.tabId = tab.id;
+        a.id = linkId;
+        a.textContent = tab.title || tab.id;
+        if (isActive) a.classList.add("active");
+    
+        li.appendChild(a);
+        return { li, a };
+      }
+  
+    /**
+     * createPane
+     *
+     * Crea el pane asociado a la pestaña.
+     * - Añade contenido solo si tab.render es función y devuelve HTMLElement o string.
+     *
+     * Devuelve:
+     * - HTMLDivElement
+     */
+      function createPane(tab, isActive) {
+        const paneId = `tab-pane-${tab.id}`;
+        const pane = document.createElement("div");
+        pane.className = "tab-pane fade";
+        pane.id = paneId;
+        pane.setAttribute("role", "tabpanel");
+        pane.setAttribute("aria-labelledby", `tab-link-${tab.id}`);
+        if (isActive) pane.classList.add("show", "active");
+    
+        if (typeof tab.render === "function") {
+          const result = tab.render();
+          if (result instanceof HTMLElement) {
+            pane.appendChild(result);
+          } else if (result != null) {
+            pane.innerHTML = String(result);
+          }
+        }
+    
+        return pane;
+      }
+  
+    /**
+     * renderAll
+     *
+     * Renderiza todas las pestañas y panes a partir de state.tabs.
+     */
+      function renderAll() {
+        nav.innerHTML = "";
+        content.innerHTML = "";
+        state.tabs.forEach((tab, index) => {
+          const isActive = tab.id === state.activeId || (state.activeId == null && index === 0);
+          const { li } = createNavItem(tab, isActive);
+          nav.appendChild(li);
+          const pane = createPane(tab, isActive);
+          content.appendChild(pane);
+        });
+        if (!state.activeId && state.tabs[0]) state.activeId = state.tabs[0].id;
+      }
+  
+    /**
+     * setActive
+     *
+     * Activa la pestaña con id dado.
+     * - Si la API de Bootstrap está disponible usa bootstrap.Tab(link).show(); si no, aplica clases como fallback.
+     */
+      function setActive(id) {
+        state.activeId = id;
+    
+        const link = nav.querySelector(`.nav-link[data-tab-id="${id}"]`);
+        if (typeof window.bootstrap === "object" && typeof window.bootstrap.Tab === "function" && link) {
+          try {
+            const tabInstance = new window.bootstrap.Tab(link);
+            tabInstance.show();
+            return;
+          } catch (e) {
+            // fallback a manipulación de clases si la API falla
+          }
+        }
+    
+        nav.querySelectorAll(".nav-link").forEach(n => n.classList.remove("active"));
+        content.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("show", "active"));
+        if (link) link.classList.add("active");
+        const pane = content.querySelector(`#tab-pane-${id}`);
+        if (pane) pane.classList.add("show", "active");
+      }
+  
+    /**
+     * addTab
+     *
+     * Añade una nueva pestaña y su pane asociado.
+     * - No crea duplicados en el DOM.
+     */
+      function addTab(tabDef) {
+        if (!tabDef || !tabDef.id) throw new Error("tabDef.id required");
+    
+        if (nav.querySelector(`.nav-link[data-tab-id="${tabDef.id}"]`) || content.querySelector(`#tab-pane-${tabDef.id}`)) {
+          if (!state.tabs.find(t => t.id === tabDef.id)) state.tabs.push(tabDef);
+          return;
+        }
+    
+        state.tabs.push(tabDef);
+    
+        let isActive = false;
+        if (!state.activeId) {
+          state.activeId = tabDef.id;
+          isActive = true;
+        }
+    
+        const { li } = createNavItem(tabDef, isActive);
+        nav.appendChild(li);
+        const pane = createPane(tabDef, isActive);
+        content.appendChild(pane);
+    
+        if (isActive) {
+          setActive(tabDef.id);
+        }
+      }
+  
+    /**
+     * removeTab
+     *
+     * Elimina la pestaña y su pane asociado.
+     * - Si la pestaña eliminada estaba activa, activa la primera pestaña restante (si existe).
+     */
+      function removeTab(id) {
+        const idx = state.tabs.findIndex(t => t.id === id);
+        if (idx === -1) return;
+        state.tabs.splice(idx, 1);
+    
+        const link = nav.querySelector(`.nav-link[data-tab-id="${id}"]`);
+        if (link && link.parentElement) link.parentElement.remove();
+        const pane = content.querySelector(`#tab-pane-${id}`);
+        if (pane) pane.remove();
+    
+        if (state.activeId === id) {
+          state.activeId = state.tabs[0] && state.tabs[0].id;
+          if (state.activeId) setActive(state.activeId);
+        }
+      }
+  
+    // Render inicial
+    renderAll();
+  
+    // API pública
+    return {
+      getTabs: () => state.tabs.map(t => t.id),
+      setActive,
+      addTab,
+      removeTab
+    };
+  }
