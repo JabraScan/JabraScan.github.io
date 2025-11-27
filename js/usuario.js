@@ -459,6 +459,32 @@ function authFetch(input, init = {}) {
     init();
   }
 })();
+/**/
+      function bindTabsSelect() {
+        const select = document.getElementById('tabsSelect');
+        if (!select) return;
+      
+        // Si ya había un listener, lo quitamos
+        if (select._tabsSelectHandler) {
+          select.removeEventListener('change', select._tabsSelectHandler);
+        }
+      
+        const handler = function () {
+          const target = this.value;
+          const tabButton = document.querySelector(`#usuarioTabs button[data-bs-target="${target}"]`);
+          if (tabButton && window.bootstrap && typeof bootstrap.Tab === 'function') {
+            new bootstrap.Tab(tabButton).show();
+          } else {
+            document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('show','active'));
+            document.querySelector(target)?.classList.add('show','active');
+          }
+        };
+      
+        select.addEventListener('change', handler);
+        // Guardamos la referencia para poder eliminarla la próxima vez
+        select._tabsSelectHandler = handler;
+      }
+
 /*
   // Añadir a la biblioteca
   export async function addToBiblio(clave) {
@@ -552,12 +578,13 @@ console.log(authFetch(url, {
         const bibliotecaPromise = cargarBiblioteca();
         const obrasPromise = cargarObras();
       // 2. Usar Promise.all() para esperar a que las tres promesas se resuelvan
-        const [perfil, biblioteca, obras] = await Promise.all([perfilPromise, bibliotecaPromise, obrasPromise]);
-      //mostrar tab obras si perfil.rol no es user
-      /*  const ocultar = perfil && perfil.rol === 'user';
-        document.querySelectorAll('.biblioteca-fin').forEach(el =>
-          el.classList.toggle('d-none', ocultar)
-        );*/
+        const results = await Promise.allSettled([perfilPromise, bibliotecaPromise, obrasPromise]);
+    
+        const perfil = results[0].status === 'fulfilled' ? results[0].value : undefined;
+        const biblioteca = results[1].status === 'fulfilled' ? results[1].value : undefined;
+        const obras = results[2].status === 'fulfilled' ? results[2].value : undefined;
+      //actualizacion de tabs 
+        bindTabsSelect();
     } catch (err) {
       // Error de orquestación: registrar para depuración
       console.error('initUsuario: error al arrancar cargas', err);
