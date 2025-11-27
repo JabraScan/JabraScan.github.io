@@ -461,6 +461,7 @@ function authFetch(input, init = {}) {
 })();
 /**/
       function bindTabsSelect() {
+console.log("tabs");
         const select = document.getElementById('tabsSelect');
         if (!select) return;
       
@@ -483,6 +484,7 @@ function authFetch(input, init = {}) {
         select.addEventListener('change', handler);
         // Guardamos la referencia para poder eliminarla la próxima vez
         select._tabsSelectHandler = handler;
+console.log("end tabs");
       }
 
 /*
