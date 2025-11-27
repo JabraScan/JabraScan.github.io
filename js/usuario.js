@@ -1,5 +1,5 @@
 import { activarLinksPDF } from './eventos.js';
-import { actualizarEstrellas, crearBloqueValoracion, createImg } from './utils.js';
+import { actualizarEstrellas, crearBloqueValoracion, createImg, managerTabs } from './utils.js';
 
 // -------------------------
 // /js/usuario.js
@@ -141,6 +141,7 @@ function authFetch(input, init = {}) {
         // Ocultar indicador de carga si se usó
         if (loadingEl) loadingEl.style.display = "none";
       }
+      console.log(data);
     }
   //FIN CARGA PERFIL USUARIO
 
@@ -508,8 +509,5 @@ console.log(authFetch(url, {
   // o desde otros módulos. Esto no sustituye la llamada directa desde general.js.
   // -------------------------------------------------
   window.usuarioAPI = {
-    cargarPerfil,
-    cargarBiblioteca,
-    cargarObras,
     initUsuario
   };
