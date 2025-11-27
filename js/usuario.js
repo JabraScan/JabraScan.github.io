@@ -317,86 +317,94 @@ function authFetch(input, init = {}) {
  *
  * @returns {Promise<void>} Promise que resuelve cuando termina la carga/render.
  */
+/**
+ * cargarTienda
+ * - Lee endpoint y renderiza avatares en '#avatarResultado'.
+ * - Inserta el campo numérico `precio` tal cual (sin formateo) en el card-footer.
+ * - NO auto-inicia ni añade listeners; llama a cargarTienda() manualmente.
+ */
 async function cargarTienda() {
-  // --- Configuración fija (simple y directa)
-  const ENDPOINT = 'https://jabrascan.net/avatars'; // URL del endpoint que devuelve JSON
-  const CONTAINER_SELECTOR = '#avatarResultado';    // selector del contenedor donde insertar avatares
+  const ENDPOINT = 'https://jabrascan.net/avatars';
+  const CONTAINER_SELECTOR = '#avatarResultado';
 
-  // Obtener referencia al contenedor en el momento de la llamada
   const container = document.querySelector(CONTAINER_SELECTOR);
-  if (!container) return; // si no existe el contenedor, salir silenciosamente
+  if (!container) return;
 
-  // Mostrar mensaje de carga mientras se realiza la petición
   container.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
 
   try {
-    // Petición al endpoint (sin cache para forzar datos frescos)
     const res = await fetch(ENDPOINT, { cache: 'no-cache' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
 
-    // Normalizar respuesta: array o { items: [...] }
     const data = await res.json();
     const rows = Array.isArray(data) ? data : (data.items || []);
 
-    // Extraer lista usable: { src, alt }
     const list = rows
-      .filter(r => r && r.avatar_path) // ignorar entradas inválidas
-      .map(r => ({ src: String(r.avatar_path), alt: r.descripcion || '' }));
+      .filter(r => r && r.avatar_path)
+      .map(r => ({
+        src: String(r.avatar_path),
+        alt: r.descripcion || '',
+        // Tomamos precio tal cual; se asume que es un número
+        precio: Object.prototype.hasOwnProperty.call(r, 'precio') ? r.precio : null
+      }));
 
-    // Si no hay avatares, mostrar mensaje informativo
     if (!list.length) {
       container.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
       return;
     }
 
-    // Construir la fila de tarjetas con imágenes
     const row = document.createElement('div');
     row.className = 'row g-2';
 
     list.forEach(item => {
-      // Columna responsiva
       const col = document.createElement('div');
-      col.className = 'col-6 col-sm-4 col-md-3 col-lg-2';
+      col.className = 'col-6 col-sm-4 col-md-3 col-lg-2 d-flex';
 
-      // Tarjeta contenedora
       const card = document.createElement('div');
-      card.className = 'card p-1 text-center';
-
-      // Imagen: asignamos src y alt directamente
+        card.className = 'card p-1 text-center d-flex flex-column w-100';
       const img = document.createElement('img');
-      img.src = item.src;       // validar si el origen puede ser inseguro
-      img.alt = item.alt;
-      img.className = 'img-fluid rounded';
-      img.style.cursor = 'pointer';
-
-      // Pie con la descripción (texto seguro usando textContent)
+        img.src = item.src;
+        img.alt = item.alt;
+        img.className = 'img-fluid rounded';
+        img.style.cursor = 'pointer';
       const caption = document.createElement('div');
-      caption.className = 'small text-truncate mt-1';
-      caption.textContent = item.alt;
-
-      // Comportamiento de selección (opcional; se puede quitar)
+        caption.className = 'small text-truncate mt-1';
+        caption.textContent = item.alt;
+      // Footer: insertar precio tal cual (sin formateo) si existe
+      let footer = null;
+        if (typeof item.precio === 'number' && Number.isFinite(item.precio)) {
+          footer = document.createElement('div');
+          footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
+          const icon = document.createElement('span');
+          icon.className = 'me-1';
+          icon.textContent = '💰';
+          const priceText = document.createElement('span');
+          // **Aquí no se aplica ningún formateo**: se inserta el número tal cual
+          priceText.textContent = String(item.precio);
+          footer.appendChild(icon);
+          footer.appendChild(priceText);
+        }
+      //listener para la imagen
       img.addEventListener('click', () => {
-        // Desmarcar otras imágenes seleccionadas dentro del contenedor
         container.querySelectorAll('img.selected').forEach(i => i.classList.remove('selected','border','border-primary'));
-        // Marcar la clicada
         img.classList.add('selected','border','border-primary');
       });
-
-      // Montaje del DOM
+      //
       card.appendChild(img);
-      card.appendChild(caption);
+        card.appendChild(caption);
+        if (footer) card.appendChild(footer);
+
       col.appendChild(card);
       row.appendChild(col);
     });
 
-    // Reemplazar el contenido del contenedor por la fila construida
     container.innerHTML = '';
     container.appendChild(row);
   } catch (err) {
-    // En caso de error (network, JSON inválido, etc.) mostramos mensaje genérico
     container.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
   }
 }
+
 
 // -------------------------
 // Avatar loader (lee índice de directorio /img/avatar/)
