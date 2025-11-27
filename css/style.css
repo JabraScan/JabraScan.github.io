@@ -7,6 +7,7 @@
 @import url('cards.css');
 @import url('utilities.css');
 @import url('responsive.css');
+@import url('users.css');
 
 /* ====== Estilos globales ====== */
 * {
@@ -28,4 +29,5 @@ body {
 }
 
 /* ====== Estilos que aún no se han modularizado ====== */
+
 /* Estos estilos permanecen en style.css hasta una futura reorganización */
