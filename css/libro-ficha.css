@@ -401,5 +401,8 @@ body {
   font-style: italic;
   color: #555;
 }
+/* Mostrar el fallback solo si el icono no se renderiza (opcional) */
+.fallback-plus { display: none; }
+/* Si Font Awesome no está disponible, fuerza mostrar el fallback */
+.fa-solid[aria-hidden="true"] { font-style: normal; } /* no rompe si existe */
 /*Fin valoracion obras*/
-
