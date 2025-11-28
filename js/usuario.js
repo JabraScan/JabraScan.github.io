@@ -368,7 +368,7 @@ async function cargarTienda() {
         card.className = 'card p-1 text-center d-flex flex-column w-100';
       //insertamos imagen
       const img = document.createElement('img');
-        img.src = item.src;
+        img.src = item.src?v=20251128;
         img.alt = item.alt;
         img.className = 'img-fluid rounded';
         img.style.cursor = 'pointer';
