@@ -1,6 +1,6 @@
 import { onLibroClick } from'./leerobras.js';
 import { activarLinksPDF } from './eventos.js';
-import { actualizarEstrellas, crearBloqueValoracion, createImg, managerTabs } from './utils.js';
+import { actualizarEstrellas, crearBloqueValoracion, createImg, managerTabs, imgSrcFromBlob } from './utils.js';
 
 // -------------------------
 // /js/usuario.js
@@ -66,31 +66,40 @@ function authFetch(input, init = {}) {
 }
 // Asigna img.src según path (string | Blob | ArrayBuffer/TypedArray)
 // img: elemento <img> o selector; path: string|Blob|ArrayBuffer|TypedArray
-function imgSrcFromBlob(img, path) {
-
-console.log('img', img);
-console.log('img instanceof HTMLImageElement', img instanceof HTMLImageElement);
-console.log('path type', typeof path, path && path.constructor && path.constructor.name);
-
-  // No DOM lookup: img must be an HTMLImageElement
-  if (!(img && img instanceof HTMLImageElement)) return;
-
-  if (typeof path === 'string') {
-    img.src = path;
+// img: HTMLImageElement (ya resuelto)
+// path: "82,73,70,70,..." | Array<number> | Uint8Array | Blob | string URL
+function assignNumericSrc(img, path) {
+  // detectar y convertir lista de bytes en string
+  let u8 = null;
+  if (typeof path === 'string' && /^\s*\d+(?:\s*,\s*\d+)+\s*$/.test(path)) {
+    const nums = path.split(',').map(s => Number(s.trim()));
+    u8 = new Uint8Array(nums);
+  } else if (Array.isArray(path)) {
+    u8 = new Uint8Array(path);
+  } else if (path instanceof Uint8Array) {
+    u8 = path;
   } else if (path instanceof Blob) {
     const url = URL.createObjectURL(path);
     img.src = url;
     img.onload = () => URL.revokeObjectURL(url);
-  } else if (path instanceof ArrayBuffer || ArrayBuffer.isView(path)) {
-    const ab = path instanceof ArrayBuffer ? path : path.buffer;
-    const blob = new Blob([ab]);
-    const url = URL.createObjectURL(blob);
-    img.src = url;
-    img.onload = () => URL.revokeObjectURL(url);
+    img.onerror = () => URL.revokeObjectURL(url);
+    return;
+  } else if (typeof path === 'string') {
+    img.src = path;
+    return;
   } else {
     img.src = String(path);
+    return;
   }
+
+  // crear blob y asignar URL
+  const blob = new Blob([u8], { type: 'image/webp' }); // ajusta MIME si sabes otro
+  const url = URL.createObjectURL(blob);
+  img.src = url;
+  img.onload = () => URL.revokeObjectURL(url);
+  img.onerror = () => URL.revokeObjectURL(url);
 }
+
 
 
 // -------------------------
