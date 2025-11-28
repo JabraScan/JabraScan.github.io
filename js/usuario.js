@@ -67,6 +67,11 @@ function authFetch(input, init = {}) {
 // Asigna img.src según path (string | Blob | ArrayBuffer/TypedArray)
 // img: elemento <img> o selector; path: string|Blob|ArrayBuffer|TypedArray
 function imgSrcFromBlob(img, path) {
+
+console.log('img', img);
+console.log('img instanceof HTMLImageElement', img instanceof HTMLImageElement);
+console.log('path type', typeof path, path && path.constructor && path.constructor.name);
+
   // No DOM lookup: img must be an HTMLImageElement
   if (!(img && img instanceof HTMLImageElement)) return;
 
