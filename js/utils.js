@@ -647,6 +647,7 @@ function isLoggedIn(tokenKey = 'jwt') {
    * Nota: la función no valida ni lanza errores; asume que `img` es un HTMLImageElement válido.
    */
     export function imgSrcFromBlob(img, path) {
+      console.log(path);
       // --- si path es una string URL, cargarla directamente (IMPORTANTE: antes de tratar listas de bytes) ---
         if (typeof path === 'string' && ( /^(https?:)?\/\//i.test(path) || path.startsWith('/') || path.startsWith('data:') )) {
           img.src = path;
@@ -694,8 +695,7 @@ function isLoggedIn(tokenKey = 'jwt') {
         else {
           img.src = String(path);
           return;
-        }
-    
+        }    
       // --- en este punto tenemos u8 (Uint8Array) con los bytes de la imagen ---
       // detectar MIME básico por las cabeceras más comunes
         let mime = 'application/octet-stream';
@@ -719,3 +719,4 @@ function isLoggedIn(tokenKey = 'jwt') {
           img.onload = () => URL.revokeObjectURL(url);
           img.onerror = () => URL.revokeObjectURL(url);
     }
+
