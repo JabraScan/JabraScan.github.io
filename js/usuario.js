@@ -333,14 +333,15 @@ async function cargarTienda() {
   if (!container) return;
 
   container.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
-
+console.log('tienda');
   try {
     const res = await authFetch(ENDPOINT, { cache: 'no-cache' });
+console.log('res');
     if (!res.ok) throw new Error('HTTP ' + res.status);
   
     const data = await res.json();
     const rows = Array.isArray(data) ? data : (data.items || []);
-
+console.log(rows);
     const list = rows
       .filter(r => r && r.avatar_path)
       .map(r => ({
@@ -406,125 +407,8 @@ async function cargarTienda() {
     container.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
   }
 }
-
-
-// -------------------------
-// Avatar loader (lee índice de directorio /img/avatar/)
-// - carga una sola vez al activarse la pestaña
-// -------------------------
-/*(function setupAvatarLoader() {
-  function init() {
-    const avatarTabBtn = document.querySelector('#avatar-tab');
-    const avatarResultEl = document.querySelector('#avatarResultado');
-    if (!avatarTabBtn || !avatarResultEl) return;
-
-    let avatarsLoaded = false;
-    let loadingInProgress = false;
-
-    function renderAvatars(list) {
-      const row = document.createElement('div');
-      row.className = 'row g-2';
-      list.forEach(item => {
-        const col = document.createElement('div');
-        col.className = 'col-6 col-sm-4 col-md-3 col-lg-2';
-        const card = document.createElement('div');
-        card.className = 'card p-1 text-center';
-        const img = document.createElement('img');
-        img.src = item.src;
-        img.alt = item.alt || '';
-        img.className = 'img-fluid rounded';
-        img.style.cursor = 'pointer';
-        img.addEventListener('click', () => {
-          document.querySelectorAll('#avatarResultado img.selected')
-            .forEach(i => i.classList.remove('selected','border','border-primary'));
-          img.classList.add('selected','border','border-primary');
-        });
-        const caption = document.createElement('div');
-        caption.className = 'small text-truncate mt-1';
-        caption.textContent = item.alt || '';
-        card.appendChild(img);
-        card.appendChild(caption);
-        col.appendChild(card);
-        row.appendChild(col);
-      });
-      avatarResultEl.innerHTML = '';
-      avatarResultEl.appendChild(row);
-    }
-
-    function extractImageNamesFromHtml(htmlText) {
-      const doc = new DOMParser().parseFromString(htmlText, 'text/html');
-      const candidates = new Set();
-      Array.from(doc.querySelectorAll('a[href]')).forEach(a => {
-        const href = a.getAttribute('href');
-        if (href) candidates.add(href);
-      });
-      Array.from(doc.querySelectorAll('img[src]')).forEach(i => {
-        const src = i.getAttribute('src');
-        if (src) candidates.add(src);
-      });
-      const imgs = [];
-      const IMG_RE = /\.(webp|jpe?g|png)$/i;
-      candidates.forEach(p => {
-        if (/^https?:\/\//i.test(p)) return;
-        const name = p.split('/').filter(Boolean).pop();
-        if (name && IMG_RE.test(name)) imgs.push(name);
-      });
-      return Array.from(new Set(imgs));
-    }
-    async function loadAvatars() {
-      if (avatarsLoaded || loadingInProgress) return;
-      loadingInProgress = true;
-      avatarResultEl.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
-    
-      try {
-        const resp = await fetch('https://jabrascan.net/avatars', { cache: 'no-cache' });
-        if (!resp.ok) throw new Error('HTTP ' + resp.status);
-        const payload = await resp.json();
-        const rows = Array.isArray(payload) ? payload : (payload.items || []);
-//
-        const list = rows
-          .map(r => {
-            if (!r || r.avatar_path == null) return null;
-            const src = String(r.avatar_path);
-            const alt = r.descripcion; // valor directo, sin controles ni normalizaciones
-            return { src, alt };
-          })
-          .filter(Boolean);
-          if (list.length) {
-            renderAvatars(list);
-          } else {
-            avatarResultEl.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
-          }
-        avatarsLoaded = true;
-        loadingInProgress = false;
-        return;
-      } catch (e) {
-        avatarResultEl.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
-        avatarsLoaded = true;
-        loadingInProgress = false;
-        return;
-      }
-    }
-    //fin loadAvatars
-    //loadAvatars
-    avatarTabBtn.addEventListener('click', () => loadAvatars());
-    avatarTabBtn.addEventListener('shown.bs.tab', () => loadAvatars());
-
-    const pane = document.querySelector('#avatar');
-    if (pane && pane.classList.contains('show') && pane.classList.contains('active')) {
-      loadAvatars();
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, { once: true });
-  } else {
-    init();
-  }
-})();*/
 /**/
       function bindTabsSelect() {
-console.log("tabs");
         const select = document.getElementById('tabsSelect');
         if (!select) return;
       
@@ -547,39 +431,7 @@ console.log("tabs");
         select.addEventListener('change', handler);
         // Guardamos la referencia para poder eliminarla la próxima vez
         select._tabsSelectHandler = handler;
-console.log("end tabs");
       }
-
-/*
-  // Añadir a la biblioteca
-  export async function addToBiblio(clave) {
-    if (!usuario_id && !token) return;
-    if (!clave) return { ok: false, error: "obra NO válida" };
-  
-    const url = `${API_BASE}/biblioteca/add`;
-console.log(`url: ${url}`);
-console.log(authFetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ obra_id: clave })
-      }));
-    try {
-      const res = await authFetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ obra_id: clave })
-      });
-  
-      if (!res) return { ok: false, error: "sin respuesta del servidor" };
-      const data = await res.json().catch(() => ({ ok: false, error: "JSON inválido" }));
-  
-      if (!res.ok) return { ok: false, status: res.status, error: data.error || data };
-  
-      return { ok: true, data };
-    } catch (err) {
-      return { ok: false, error: err?.message || String(err) };
-    }
-  }*/
   // Añadir a la biblioteca (usa authFetch que añade Authorization automáticamente)
   // Devuelve siempre un objeto con la forma: { ok: boolean, data?, error?, status? }
   export async function addToBiblio(clave, { timeout = 8000 } = {}) {
