@@ -1,4 +1,6 @@
+import { imgSrcFromBlob } from './utils.js';
 const WORKER_URL = "https://jabrascan.net";
+const FALLBACK_IMG = "/img/avatar/default.webp";
 
 // --- UI helpers (se esperan elementos en el DOM de login.html) ---
 function showLoginButton() {
@@ -17,7 +19,7 @@ function showUserNick(nickname, avatar) {
   if (loginWrapper) loginWrapper.classList.add("d-none");
   if (userWrapper && nick) {
     nick.textContent = nickname;
-    if (avatarImg) avatarImg.src = avatar;
+    if (avatarImg) imgSrcFromBlob(avatarImg, avatar, FALLBACK_IMG);
     userWrapper.classList.remove("d-none");
   }
 }
@@ -49,7 +51,7 @@ function initSessionFromUrl() {
 
 // --- utilidades ---
 function normalizeAvatarUrl(avatar) {
-  if (!avatar) return "/img/avatar/default.png";
+  if (!avatar) return FALLBACK_IMG;
   try {
     return new URL(avatar, window.location.origin).href;
   } catch {
