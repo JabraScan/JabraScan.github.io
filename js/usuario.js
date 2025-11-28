@@ -403,6 +403,7 @@ async function cargarTienda() {
         col.appendChild(card);
       //repartir entre adquiridos y no adquiridos
         if (item.adquirido === 'adquirido') {
+          attachAvatarOverlay(card, item, window.establecerAvatar);
           rowAvatares.appendChild(col);
         } else {
           rowTienda.appendChild(col);
@@ -416,9 +417,62 @@ async function cargarTienda() {
     tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
   }
 }
-
-
-/**/
+    /**
+     * Establece el avatar del usuario llamando al endpoint remoto y actualiza
+     * los elementos <img> en la página con la nueva ruta devuelta por el servidor.
+     *
+     * Requisitos previos (variables/funciones globales que debe haber en el entorno):
+     *  - usuario_id: identificador del usuario (o valor falsy si no hay sesión)
+     *  - token: token de autenticación (o valor falsy si no hay sesión)
+     *  - authFetch(input, init): función que añade el header Authorization con el token y llama a fetch
+     *
+     * Comportamiento:
+     *  - Si no hay usuario logueado (ni usuario_id ni token) sale sin hacer nada.
+     *  - Llama al endpoint POST /usuarios/edit/avatar usando authFetch.
+     *  - Si la respuesta HTTP no es OK devuelve un objeto { ok: false, status, error } con el cuerpo como texto.
+     *  - Si la respuesta es OK parsea el JSON, extrae `avatar_path`, actualiza los atributos `src` de:
+     *      - <img id="user-avatar" class="rounded-circle user-avatar">
+     *      - <img id="avatar-img" class="rounded-circle me-3">
+     *    y devuelve el objeto JSON recibido del servidor.
+     *
+     * Nota: no hay fallback en los cambios de src; se asigna directamente el valor devuelto.
+     *
+     * @param {string|number} avatarId - Id del avatar a establecer (se envía en el body JSON como { avatar: avatarId }).
+     * @returns {Promise<object>} - Si éxito devuelve el JSON del endpoint; si error devuelve { ok: false, status?, error }.
+     */
+      async function establecerAvatar(avatarId) {
+        // verificacion usuario logueado
+        if (!usuario_id && !token) return;
+        const ENDPOINT = 'https://jabrascan.net/usuarios/edit/avatar';
+        await authFetch(ENDPOINT, { cache: 'no-cache' });
+          try {
+            // llamada al endpoint con authFetch (que añade el Authorization)
+            const response = await authFetch(ENDPOINT, {
+              method: 'POST',
+              cache: 'no-cache',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ avatar: avatarId })
+            });
+            // manejo simple de errores
+            if (!response.ok) {
+              const text = await response.text().catch(() => response.statusText);
+              return { ok: false, status: response.status, error: text };
+            }      
+          // parsear respuesta exitosa
+          const data = await response.json();
+          // cambiar src de los elementos
+            const userAvatar = document.getElementById('user-avatar');
+              if (userAvatar) userAvatar.src = data.avatar_path;      
+            const avatarImg = document.getElementById('avatar-img');
+              if (avatarImg) avatarImg.src = data.avatar_path;
+          //
+          return data;
+        } catch (err) {
+          // error de red u otro fallo en la llamada
+          return { ok: false, error: err?.message || 'Error de red' };
+        }
+      }
+/* actualizar todos los tabs con un select para dispositivos moviles */
       function bindTabsSelect() {
         const select = document.getElementById('tabsSelect');
         if (!select) return;
@@ -491,6 +545,169 @@ async function cargarTienda() {
           return { ok: false, error: err?.message || String(err) };
       }
   }
+    /**
+     * Añade un overlay con botón "+ Establecer Avatar" a una tarjeta (card).
+     *
+     * @param {HTMLElement} card  Elemento .card donde se añadirá el overlay.
+     * @param {Object} item      Objeto asociado al avatar (se pasa a onSet).
+     * @param {Function} onSet   Función llamada cuando se pulsa el botón: onSet(item, card).
+     * @returns {Function}       Función de limpieza: llama para quitar listeners y elementos añadidos.
+     */
+      function attachAvatarOverlay(card, item = {}, onSet = () => {}) {
+        if (!card || !(card instanceof HTMLElement)) throw new TypeError('card debe ser un HTMLElement');
+      
+        // Si ya tiene overlay, actualizamos el item y devolvemos la función de cleanup existente
+        if (card._avatarOverlay) {
+          card._avatarOverlay.item = item;
+          card._avatarOverlay.onSet = onSet;
+          return card._avatarOverlay.cleanup;
+        }
+      
+        // Crear elementos
+        const backdrop = document.createElement('div');
+        const btn = document.createElement('button');
+      
+        // Marcar para evitar duplicados
+        card._avatarOverlay = { item, onSet, backdrop, btn, cleanup: null };
+      
+        // Clases/estilos mínimos y no intrusivos (puedes mover a CSS si prefieres)
+        backdrop.className = 'avatar-overlay-backdrop';
+        Object.assign(backdrop.style, {
+          position: 'absolute',
+          inset: '0',
+          background: 'rgba(0,0,0,0.25)',
+          display: 'none',
+          zIndex: '5',
+          pointerEvents: 'none'
+        });
+      
+        btn.type = 'button';
+        btn.className = 'avatar-overlay-btn';
+        btn.textContent = '+ Establecer Avatar';
+        btn.setAttribute('aria-label', 'Establecer avatar');
+        Object.assign(btn.style, {
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          display: 'none',
+          zIndex: '10',
+          padding: '0.35rem 0.6rem',
+          fontSize: '0.9rem',
+          borderRadius: '0.35rem',
+          border: 'none',
+          background: 'rgba(0, 123, 255, 0.95)',
+          color: '#fff',
+          cursor: 'pointer',
+          boxShadow: '0 4px 10px rgba(0,0,0,0.15)'
+        });
+      
+        // Asegurar que el card sea contenedor posicionado para overlay
+        const prevPosition = card.style.position || '';
+        if (getComputedStyle(card).position === 'static') {
+          card.style.position = 'relative';
+          card._avatarOverlay._restoredPosition = true;
+        }
+      
+        // Insertar al final del card para no interferir con tu estructura
+        card.appendChild(backdrop);
+        card.appendChild(btn);
+      
+        // Mostrar/ocultar helpers
+        function showOverlay() {
+          // ocultar otros overlays
+          document.querySelectorAll('.avatar-overlay-btn.show').forEach(b => {
+            b.classList.remove('show');
+            b.style.display = 'none';
+          });
+          document.querySelectorAll('.avatar-overlay-backdrop.show').forEach(d => {
+            d.classList.remove('show');
+            d.style.display = 'none';
+          });
+      
+          btn.classList.add('show');
+          backdrop.classList.add('show');
+          btn.style.display = 'inline-block';
+          backdrop.style.display = 'block';
+        }
+        function hideOverlay() {
+          btn.classList.remove('show');
+          backdrop.classList.remove('show');
+          btn.style.display = 'none';
+          backdrop.style.display = 'none';
+        }
+      
+        // Click en el botón: ejecutar callback con item y card
+        function onBtnClick(ev) {
+          ev.stopPropagation();
+          try {
+            // permitir que el callback maneje la lógica (petición, UI, etc.)
+            card._avatarOverlay.onSet(card._avatarOverlay.item, card);
+          } finally {
+            // opcional: ocultar overlay tras pulsar
+            hideOverlay();
+          }
+        }
+      
+        // Click en la tarjeta: mostrar overlay (si el click no fue sobre el botón)
+        function onCardClick(ev) {
+          // Si el click fue sobre el botón, el handler del botón ya lo gestiona
+          if (btn.contains(ev.target)) return;
+          showOverlay();
+      
+          // mantener la selección visual si hay imágenes dentro
+          const img = card.querySelector('img');
+          if (img) {
+            document.querySelectorAll('#tiendaResultado img.selected, #avatarResultado img.selected')
+              .forEach(i => i.classList.remove('selected', 'border', 'border-primary'));
+            img.classList.add('selected', 'border', 'border-primary');
+          }
+        }
+      
+        // Click global fuera de cualquier card: ocultar overlays
+        function onDocClick(ev) {
+          // si el click está dentro de algún .avatar-overlay-btn o .avatar-card, no ocultar
+          if (ev.target.closest('.avatar-overlay-btn') || ev.target.closest('.avatar-card')) return;
+          // ocultar todos
+          document.querySelectorAll('.avatar-overlay-btn.show').forEach(b => {
+            b.classList.remove('show');
+            b.style.display = 'none';
+          });
+          document.querySelectorAll('.avatar-overlay-backdrop.show').forEach(d => {
+            d.classList.remove('show');
+            d.style.display = 'none';
+          });
+        }
+      
+        // Añadir listeners
+        btn.addEventListener('click', onBtnClick);
+        card.addEventListener('click', onCardClick);
+        document.addEventListener('click', onDocClick, true);
+      
+        // Guardar cleanup para poder eliminar todo si se necesita
+        function cleanup() {
+          btn.removeEventListener('click', onBtnClick);
+          card.removeEventListener('click', onCardClick);
+          document.removeEventListener('click', onDocClick, true);
+          if (btn.parentNode === card) card.removeChild(btn);
+          if (backdrop.parentNode === card) card.removeChild(backdrop);
+          if (card._avatarOverlay && card._avatarOverlay._restoredPosition) {
+            card.style.position = prevPosition;
+          }
+          delete card._avatarOverlay;
+        }
+      
+        card._avatarOverlay.cleanup = cleanup;
+      
+        // Exponer método para actualizar item/onSet si es necesario
+        card._avatarOverlay.update = function (newItem, newOnSet) {
+          card._avatarOverlay.item = newItem;
+          if (typeof newOnSet === 'function') card._avatarOverlay.onSet = newOnSet;
+        };
+      
+        return cleanup;
+      }
+
 
 // -------------------------------------------------
 // initUsuario
