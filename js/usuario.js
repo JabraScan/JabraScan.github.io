@@ -465,7 +465,7 @@ function authFetch(input, init = {}) {
         // verificacion usuario logueado
         if (!usuario_id && !token) return;
         const ENDPOINT = 'https://jabrascan.net/usuarios/edit/avatar';
-        await authFetch(ENDPOINT, { cache: 'no-cache' });
+        
           try {
             // llamada al endpoint con authFetch (que añade el Authorization)
             const response = await authFetch(ENDPOINT, {
@@ -483,9 +483,9 @@ function authFetch(input, init = {}) {
           const data = await response.json();
           // cambiar src de los elementos
             const userAvatar = document.getElementById('user-avatar');
-              if (userAvatar) userAvatar.src = data.avatar_path;      
+              if (userAvatar) userAvatar.src = data.ruta;      
             const avatarImg = document.getElementById('avatar-img');
-              if (avatarImg) avatarImg.src = data.avatar_path;
+              if (avatarImg) avatarImg.src = data.ruta;
           //
           return data;
         } catch (err) {
