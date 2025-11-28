@@ -85,7 +85,7 @@ function authFetch(input, init = {}) {
       return res.json();
     }    
     // Actualiza el DOM con los datos del perfil
-    export function renderPerfil(data, opts = {}) {
+    /*export function renderPerfil(data, opts = {}) {
       const usermain = document.getElementById("perfil-info");
         usermain.innerHTML = `
           <img id="avatar-img" src="${data.avatar || FALLBACK_IMG}" alt="avatar" class="rounded-circle me-3" style="width:80px;height:80px;">
@@ -94,7 +94,23 @@ function authFetch(input, init = {}) {
             <p class="text-muted">Puntos: <span id="user_puntos">${data.puntos}</span></p>
           </div>
         `;
-    }    
+    }*/
+      const usermain = document.getElementById("perfil-info");
+        const img = document.createElement('img');
+            img.id = 'avatar-img';
+            imgSrcFromBlob( img, data.avatar, FALLBACK_IMG);
+            img.alt = 'avatar';
+            img.className = 'rounded-circle me-3';
+            img.style.width = '80px';
+            img.style.height = '80px';
+        const datosUser = document.createElement('div');
+            datosUser.id = 'datos-user';
+            datosUser.innerHTML = `
+                <h3 id="nick">${data.nick || "(sin nick)"}</h3>
+                <p class="text-muted">Puntos: <span id="user_puntos">${data.puntos}</span></p>
+              `;      
+        usermain.appendChild(img);
+        usermain.appendChild(datosUser);
     // Orquestadora: usa fetchPerfil y renderPerfil (solo autenticado)
     // opts permite pasar selectors opcionales: { loadingSelector, errorSelector, nickSelector, avatarSelector }
     export async function cargarPerfil(opts = {}) {
