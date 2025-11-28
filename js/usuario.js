@@ -64,43 +64,6 @@ function authFetch(input, init = {}) {
   if (token) headers.set("Authorization", `Bearer ${token}`);
   return fetch(input, { ...init, headers });
 }
-// Asigna img.src según path (string | Blob | ArrayBuffer/TypedArray)
-// img: elemento <img> o selector; path: string|Blob|ArrayBuffer|TypedArray
-// img: HTMLImageElement (ya resuelto)
-// path: "82,73,70,70,..." | Array<number> | Uint8Array | Blob | string URL
-function assignNumericSrc(img, path) {
-  // detectar y convertir lista de bytes en string
-  let u8 = null;
-  if (typeof path === 'string' && /^\s*\d+(?:\s*,\s*\d+)+\s*$/.test(path)) {
-    const nums = path.split(',').map(s => Number(s.trim()));
-    u8 = new Uint8Array(nums);
-  } else if (Array.isArray(path)) {
-    u8 = new Uint8Array(path);
-  } else if (path instanceof Uint8Array) {
-    u8 = path;
-  } else if (path instanceof Blob) {
-    const url = URL.createObjectURL(path);
-    img.src = url;
-    img.onload = () => URL.revokeObjectURL(url);
-    img.onerror = () => URL.revokeObjectURL(url);
-    return;
-  } else if (typeof path === 'string') {
-    img.src = path;
-    return;
-  } else {
-    img.src = String(path);
-    return;
-  }
-
-  // crear blob y asignar URL
-  const blob = new Blob([u8], { type: 'image/webp' }); // ajusta MIME si sabes otro
-  const url = URL.createObjectURL(blob);
-  img.src = url;
-  img.onload = () => URL.revokeObjectURL(url);
-  img.onerror = () => URL.revokeObjectURL(url);
-}
-
-
 
 // -------------------------
 // API Worker: funciones que consultan el backend
@@ -413,7 +376,7 @@ function assignNumericSrc(img, path) {
               // Imagen del avatar
               const img = document.createElement('img');
                 //img.src = item.src;               // ruta de la imagen
-                imgSrcFromBlob(img, item.src);
+                imgSrcFromBlob(img, item.src, FALLBACK_IMG);
                 img.alt = item.alt;               // texto alternativo
                 img.className = 'img-fluid rounded';
                 img.style.cursor = 'pointer';
@@ -540,7 +503,7 @@ function assignNumericSrc(img, path) {
             const userAvatar = document.getElementById('user-avatar');
               if (userAvatar) userAvatar.src = data.ruta;      
             const avatarImg = document.getElementById('avatar-img');
-              if (avatarImg) avatarImg.src = data.ruta;
+              if (avatarImg) imgSrcFromBlob(avatarImg, data.ruta, FALLBACK_IMG);
           //
           return data;
         } catch (err) {
