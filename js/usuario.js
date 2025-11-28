@@ -317,106 +317,127 @@ function authFetch(input, init = {}) {
  *
  * @returns {Promise<void>} Promise que resuelve cuando termina la carga/render.
  */
-/**
- * cargarTienda
- * - Lee endpoint y renderiza avatares en '#avatarResultado'.
- * - Inserta el campo numérico `precio` tal cual (sin formateo) en el card-footer.
- * - NO auto-inicia ni añade listeners; llama a cargarTienda() manualmente.
- */
-async function cargarTienda() {
-  if (!usuario_id && !token) return;
-    const ENDPOINT = 'https://jabrascan.net/avatars';
-    const tienda = document.querySelector('#tiendaResultado');
-    const avatares = document.querySelector('#avatarResultado');
-  if (!tienda || !avatares) return;
-    tienda.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
-    avatares.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
-
-  try {
-    const res = await authFetch(ENDPOINT, { cache: 'no-cache' });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-
-    const data = await res.json();
-    const rows = Array.isArray(data) ? data : (data.items || []);
-
-    if (!rows.length) {
-      avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
-      tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
-      return;
-    }
-
-    // limpiar contenedores y crear filas
-    tienda.innerHTML = '';
-      const rowTienda = document.createElement('div');
-        rowTienda.className = 'row g-2';
-    avatares.innerHTML = '';
-      const rowAvatares = document.createElement('div');
-        rowAvatares.className = 'row g-2';
-
-    rows.forEach(r => {
-      const item = {
-        src: String(r.avatar_path),
-        alt: r.descripcion || '',
-        precio: Object.prototype.hasOwnProperty.call(r, 'precio') ? r.precio : null,
-        adquirido: r.adquirido
-      };
+      async function cargarTienda() {
+        if (!usuario_id && !token) return;
+        const ENDPOINT = 'https://jabrascan.net/avatars';
+        const tienda = document.querySelector('#tiendaResultado');
+        const avatares = document.querySelector('#avatarResultado');
+        if (!tienda || !avatares) return;
+        tienda.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
+        avatares.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
       
-      const col = document.createElement('div');
-        col.className = 'col-6 col-sm-4 col-md-3 col-lg-2 d-flex';
-      // Clases de card
-      const card = document.createElement('div');
-        card.className = 'card p-1 text-center d-flex flex-column w-100';
-      //insertamos imagen
-      const img = document.createElement('img');
-        img.src = item.src;
-        img.alt = item.alt;
-        img.className = 'img-fluid rounded';
-        img.style.cursor = 'pointer';
-        img.loading = 'lazy';
-        img.decoding = 'async';
-        img.addEventListener('click', () => {
-          document.querySelectorAll('#tiendaResultado img.selected, #avatarResultado img.selected')
-            .forEach(i => i.classList.remove('selected', 'border', 'border-primary'));
-          img.classList.add('selected', 'border', 'border-primary');
-        });
-      //caption del avatar
-      const caption = document.createElement('div');
-        caption.className = 'small text-truncate mt-1';
-        caption.textContent = item.alt;
-      // No insertar footer si ya está adquirido
-      let footer = null;
-        if (item.adquirido !== 'adquirido' && typeof item.precio === 'number' && Number.isFinite(item.precio)) {
-          footer = document.createElement('div');
-          footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
-          const icon = document.createElement('span');
-          icon.className = 'me-1';
-          icon.textContent = '💰';
-          const priceText = document.createElement('span');
-          priceText.textContent = String(item.precio);
-          footer.appendChild(icon);
-          footer.appendChild(priceText);
+        try {
+          const res = await authFetch(ENDPOINT, { cache: 'no-cache' });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+      
+          const data = await res.json();
+          const rows = Array.isArray(data) ? data : (data.items || []);
+      
+          if (!rows.length) {
+            avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+            tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+            return;
+          }
+      
+          tienda.innerHTML = '';
+          const rowTienda = document.createElement('div');
+          rowTienda.className = 'row g-2';
+          avatares.innerHTML = '';
+          const rowAvatares = document.createElement('div');
+          rowAvatares.className = 'row g-2';
+      
+          rows.forEach(r => {
+            const item = {
+              id: r.id, // siempre viene con valor
+              src: String(r.avatar_path),
+              alt: r.descripcion || '',
+              precio: Object.prototype.hasOwnProperty.call(r, 'precio') ? r.precio : null,
+              adquirido: r.adquirido
+            };
+      
+            const col = document.createElement('div');
+            col.className = 'col-6 col-sm-4 col-md-3 col-lg-2 d-flex';
+      
+            const card = document.createElement('div');
+            card.className = 'card p-1 text-center d-flex flex-column w-100';
+      
+            const img = document.createElement('img');
+            img.src = item.src;
+            img.alt = item.alt;
+            img.className = 'img-fluid rounded';
+            img.style.cursor = 'pointer';
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.addEventListener('click', () => {
+              document.querySelectorAll('#tiendaResultado img.selected, #avatarResultado img.selected')
+                .forEach(i => i.classList.remove('selected', 'border', 'border-primary'));
+              img.classList.add('selected', 'border', 'border-primary');
+            });
+      
+            const caption = document.createElement('div');
+            caption.className = 'small text-truncate mt-1';
+            caption.textContent = item.alt;
+      
+            // Footer variable
+            let footer = null;
+      
+            if (item.adquirido === 'adquirido') {
+              // Footer para avatares ya adquiridos: botón +Establecer que llama a establecerAvatar(id)
+              footer = document.createElement('div');
+              footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
+              const btnSet = document.createElement('button');
+              btnSet.type = 'button';
+              btnSet.className = 'btn btn-sm btn-primary';
+              btnSet.textContent = '+Establecer';
+              btnSet.addEventListener('click', (ev) => {
+                ev.stopPropagation();
+                establecerAvatar(item.id);
+              });
+              footer.appendChild(btnSet);
+            } else {
+              // Footer para tienda (no adquirido): mostrar precio y onclick comprarAvatar(id) si hay precio numérico
+              if (typeof item.precio === 'number' && Number.isFinite(item.precio)) {
+                footer = document.createElement('div');
+                footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
+                const icon = document.createElement('span');
+                icon.className = 'me-1';
+                icon.textContent = '💰';
+                const priceText = document.createElement('span');
+                priceText.textContent = String(item.precio);
+                const buyBtn = document.createElement('button');
+                buyBtn.type = 'button';
+                buyBtn.className = 'btn btn-sm btn-outline-primary ms-2';
+                buyBtn.textContent = 'Comprar';
+                buyBtn.addEventListener('click', (ev) => {
+                  ev.stopPropagation();
+                  comprarAvatar(item.id);
+                });
+                footer.appendChild(icon);
+                footer.appendChild(priceText);
+                footer.appendChild(buyBtn);
+              }
+            }
+      
+            card.appendChild(img);
+            card.appendChild(caption);
+            if (footer) card.appendChild(footer);
+            col.appendChild(card);
+      
+            if (item.adquirido === 'adquirido') {
+              rowAvatares.appendChild(col);
+            } else {
+              rowTienda.appendChild(col);
+            }
+          });
+      
+          tienda.appendChild(rowTienda);
+          avatares.appendChild(rowAvatares);
+        } catch (err) {
+          avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+          tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
         }
-      //agregamos a las cards
-      card.appendChild(img);
-        card.appendChild(caption);
-        if (footer) card.appendChild(footer);
-        col.appendChild(card);
-      //repartir entre adquiridos y no adquiridos
-        if (item.adquirido === 'adquirido') {
-          attachAvatarOverlay(card, item, window.establecerAvatar);
-          rowAvatares.appendChild(col);
-        } else {
-          rowTienda.appendChild(col);
-        }
-    });
-    //añadimos a los respectivos tabs
-      tienda.appendChild(rowTienda);
-      avatares.appendChild(rowAvatares);
-  } catch (err) {
-    avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
-    tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
-  }
-}
+      }
+
     /**
      * Establece el avatar del usuario llamando al endpoint remoto y actualiza
      * los elementos <img> en la página con la nueva ruta devuelta por el servidor.
@@ -545,170 +566,6 @@ async function cargarTienda() {
           return { ok: false, error: err?.message || String(err) };
       }
   }
-    /**
-     * Añade un overlay con botón "+ Establecer Avatar" a una tarjeta (card).
-     *
-     * @param {HTMLElement} card  Elemento .card donde se añadirá el overlay.
-     * @param {Object} item      Objeto asociado al avatar (se pasa a onSet).
-     * @param {Function} onSet   Función llamada cuando se pulsa el botón: onSet(item, card).
-     * @returns {Function}       Función de limpieza: llama para quitar listeners y elementos añadidos.
-     */
-      function attachAvatarOverlay(card, item = {}, onSet = () => {}) {
-        if (!card || !(card instanceof HTMLElement)) throw new TypeError('card debe ser un HTMLElement');
-      
-        // Si ya tiene overlay, actualizamos el item y devolvemos la función de cleanup existente
-        if (card._avatarOverlay) {
-          card._avatarOverlay.item = item;
-          card._avatarOverlay.onSet = onSet;
-          return card._avatarOverlay.cleanup;
-        }
-      
-        // Crear elementos
-        const backdrop = document.createElement('div');
-        const btn = document.createElement('button');
-      
-        // Marcar para evitar duplicados
-        card._avatarOverlay = { item, onSet, backdrop, btn, cleanup: null };
-      
-        // Clases/estilos mínimos y no intrusivos (puedes mover a CSS si prefieres)
-        backdrop.className = 'avatar-overlay-backdrop';
-        Object.assign(backdrop.style, {
-          position: 'absolute',
-          inset: '0',
-          background: 'rgba(0,0,0,0.25)',
-          display: 'none',
-          zIndex: '5',
-          pointerEvents: 'none'
-        });
-      
-        btn.type = 'button';
-        btn.className = 'avatar-overlay-btn';
-        btn.textContent = '+ Establecer Avatar';
-        btn.setAttribute('aria-label', 'Establecer avatar');
-        Object.assign(btn.style, {
-          position: 'absolute',
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%, -50%)',
-          display: 'none',
-          zIndex: '10',
-          padding: '0.35rem 0.6rem',
-          fontSize: '0.9rem',
-          borderRadius: '0.35rem',
-          border: 'none',
-          background: 'rgba(0, 123, 255, 0.95)',
-          color: '#fff',
-          cursor: 'pointer',
-          boxShadow: '0 4px 10px rgba(0,0,0,0.15)'
-        });
-      
-        // Asegurar que el card sea contenedor posicionado para overlay
-        const prevPosition = card.style.position || '';
-        if (getComputedStyle(card).position === 'static') {
-          card.style.position = 'relative';
-          card._avatarOverlay._restoredPosition = true;
-        }
-      
-        // Insertar al final del card para no interferir con tu estructura
-        card.appendChild(backdrop);
-        card.appendChild(btn);
-      
-        // Mostrar/ocultar helpers
-        function showOverlay() {
-          // ocultar otros overlays
-          document.querySelectorAll('.avatar-overlay-btn.show').forEach(b => {
-            b.classList.remove('show');
-            b.style.display = 'none';
-          });
-          document.querySelectorAll('.avatar-overlay-backdrop.show').forEach(d => {
-            d.classList.remove('show');
-            d.style.display = 'none';
-          });
-      
-          btn.classList.add('show');
-          backdrop.classList.add('show');
-          btn.style.display = 'inline-block';
-          backdrop.style.display = 'block';
-        }
-        function hideOverlay() {
-          btn.classList.remove('show');
-          backdrop.classList.remove('show');
-          btn.style.display = 'none';
-          backdrop.style.display = 'none';
-        }
-      
-        // Click en el botón: ejecutar callback con item y card
-        function onBtnClick(ev) {
-          ev.stopPropagation();
-          try {
-            // permitir que el callback maneje la lógica (petición, UI, etc.)
-            card._avatarOverlay.onSet(card._avatarOverlay.item, card);
-          } finally {
-            // opcional: ocultar overlay tras pulsar
-            hideOverlay();
-          }
-        }
-      
-        // Click en la tarjeta: mostrar overlay (si el click no fue sobre el botón)
-        function onCardClick(ev) {
-          // Si el click fue sobre el botón, el handler del botón ya lo gestiona
-          if (btn.contains(ev.target)) return;
-          showOverlay();
-      
-          // mantener la selección visual si hay imágenes dentro
-          const img = card.querySelector('img');
-          if (img) {
-            document.querySelectorAll('#tiendaResultado img.selected, #avatarResultado img.selected')
-              .forEach(i => i.classList.remove('selected', 'border', 'border-primary'));
-            img.classList.add('selected', 'border', 'border-primary');
-          }
-        }
-      
-        // Click global fuera de cualquier card: ocultar overlays
-        function onDocClick(ev) {
-          // si el click está dentro de algún .avatar-overlay-btn o .avatar-card, no ocultar
-          if (ev.target.closest('.avatar-overlay-btn') || ev.target.closest('.avatar-card')) return;
-          // ocultar todos
-          document.querySelectorAll('.avatar-overlay-btn.show').forEach(b => {
-            b.classList.remove('show');
-            b.style.display = 'none';
-          });
-          document.querySelectorAll('.avatar-overlay-backdrop.show').forEach(d => {
-            d.classList.remove('show');
-            d.style.display = 'none';
-          });
-        }
-      
-        // Añadir listeners
-        btn.addEventListener('click', onBtnClick);
-        card.addEventListener('click', onCardClick);
-        document.addEventListener('click', onDocClick, true);
-      
-        // Guardar cleanup para poder eliminar todo si se necesita
-        function cleanup() {
-          btn.removeEventListener('click', onBtnClick);
-          card.removeEventListener('click', onCardClick);
-          document.removeEventListener('click', onDocClick, true);
-          if (btn.parentNode === card) card.removeChild(btn);
-          if (backdrop.parentNode === card) card.removeChild(backdrop);
-          if (card._avatarOverlay && card._avatarOverlay._restoredPosition) {
-            card.style.position = prevPosition;
-          }
-          delete card._avatarOverlay;
-        }
-      
-        card._avatarOverlay.cleanup = cleanup;
-      
-        // Exponer método para actualizar item/onSet si es necesario
-        card._avatarOverlay.update = function (newItem, newOnSet) {
-          card._avatarOverlay.item = newItem;
-          if (typeof newOnSet === 'function') card._avatarOverlay.onSet = newOnSet;
-        };
-      
-        return cleanup;
-      }
-
-
 // -------------------------------------------------
 // initUsuario
 // Orquestador que arranca la carga de datos asumiendo que
