@@ -627,3 +627,91 @@ function isLoggedIn(tokenKey = 'jwt') {
       removeTab
     };
   }
+
+  /**
+   * Asigna un src válido a un <img> a partir de distintos formatos de `path`.
+   * - No realiza búsquedas en el DOM: `img` debe ser ya el HTMLImageElement.
+   * - Acepta:
+   *    - string URL o data URL (ej. "/img/x.webp" o "data:image/png;base64,...")
+   *    - string con lista de bytes "82,73,70,70,..." (como el adjunto que mostraste)
+   *    - Array<number> (lista de bytes)
+   *    - Uint8Array, ArrayBuffer, TypedArray
+   *    - Blob
+   *
+   * Comportamiento:
+   *  - Si recibe bytes (string numérica, Array, TypedArray, ArrayBuffer) los convierte a Uint8Array,
+   *    detecta MIME básico por cabecera (WebP/PNG/JPEG) y crea un Blob con ese MIME.
+   *  - Crea una object URL con URL.createObjectURL(blob) y la asigna a img.src.
+   *  - Revoca la object URL en onload y onerror para evitar fugas de memoria.
+   *
+   * Nota: la función no valida ni lanza errores; asume que `img` es un HTMLImageElement válido.
+   */
+    export function imgSrcFromBlob(img, path) {
+      // --- convertir distintos formatos a Uint8Array cuando proceda ---
+      let u8 = null;
+    
+      // 1) cadena que representa una lista de bytes "82,73,70,70,..."
+        if (typeof path === 'string' && /^\s*\d+(?:\s*,\s*\d+)+\s*$/.test(path)) {
+          // dividir por comas, parsear a Number y crear Uint8Array
+          const nums = path.split(',').map(s => Number(s.trim()));
+          u8 = new Uint8Array(nums);
+        }
+      // 2) Array<number>
+        else if (Array.isArray(path)) {
+          u8 = new Uint8Array(path);
+        }
+      // 3) Uint8Array ya listo
+        else if (path instanceof Uint8Array) {
+          u8 = path;
+        }
+      // 4) ArrayBuffer
+        else if (path instanceof ArrayBuffer) {
+          u8 = new Uint8Array(path);
+        }
+      // 5) cualquier TypedArray (Int8Array, Float32Array, etc.)
+        else if (ArrayBuffer.isView(path)) {
+          u8 = new Uint8Array(path.buffer);
+        }
+      // 6) Blob -> asignar directamente como object URL
+        else if (path instanceof Blob) {
+          const url = URL.createObjectURL(path);
+          img.src = url;
+          // revocar cuando termine o falle la carga
+          img.onload = () => URL.revokeObjectURL(url);
+          img.onerror = () => URL.revokeObjectURL(url);
+          return;
+        }
+      // 7) string que no es lista de bytes -> tratar como URL/data URL
+        else if (typeof path === 'string') {
+          img.src = path;
+          return;
+        }
+      // 8) fallback: forzar a string
+        else {
+          img.src = String(path);
+          return;
+        }
+    
+      // --- en este punto tenemos u8 (Uint8Array) con los bytes de la imagen ---
+      // detectar MIME básico por las cabeceras más comunes
+        let mime = 'application/octet-stream';
+        if (u8.length >= 4 && u8[0] === 0x52 && u8[1] === 0x49 && u8[2] === 0x46 && u8[3] === 0x46) {
+          // "RIFF" -> suele indicar WebP (RIFF + WEBP)
+          mime = 'image/webp';
+        } else if (u8.length >= 8 && u8[0] === 0x89 && u8[1] === 0x50 && u8[2] === 0x4E && u8[3] === 0x47) {
+          // PNG signature
+          mime = 'image/png';
+        } else if (u8.length >= 3 && u8[0] === 0xFF && u8[1] === 0xD8 && u8[2] === 0xFF) {
+          // JPEG start of image
+          mime = 'image/jpeg';
+        }
+    
+      // crear Blob con el MIME detectado y generar object URL
+        const blob = new Blob([u8], { type: mime });
+        const url = URL.createObjectURL(blob);
+      
+      // asignar al elemento img y revocar la URL cuando termine o falle la carga
+        img.src = url;
+          img.onload = () => URL.revokeObjectURL(url);
+          img.onerror = () => URL.revokeObjectURL(url);
+    }
