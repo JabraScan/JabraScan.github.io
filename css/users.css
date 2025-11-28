@@ -22,3 +22,68 @@
   gap: .5rem;
   width: 100%;
 }
+/* compatibilidad iOS */
+    /* Fallback para gap en flex (Safari antiguo no soporta gap en flex) */
+    .row.g-2 {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: -0.5rem;
+      margin-right: -0.5rem;
+    }
+    .row.g-2 > .col-6,
+    .row.g-2 > .col-sm-4,
+    .row.g-2 > .col-md-3,
+    .row.g-2 > .col-lg-2 {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      margin-bottom: 0.75rem; /* separación vertical consistente */
+    }
+    
+    /* Asegurar que las columnas respeten el ancho responsive de Bootstrap */
+    .row.g-2 > .col-6 { flex: 0 0 50%; max-width: 50%; }
+    @media (min-width: 576px) { .row.g-2 > .col-sm-4 { flex: 0 0 33.333333%; max-width: 33.333333%; } }
+    @media (min-width: 768px) { .row.g-2 > .col-md-3 { flex: 0 0 25%; max-width: 25%; } }
+    @media (min-width: 992px) { .row.g-2 > .col-lg-2 { flex: 0 0 16.666667%; max-width: 16.666667%; } }
+    
+    /* Imágenes: evitar espacios en línea y problemas de render en iOS */
+    .card img,
+    .card .img-fluid {
+      display: block;
+      width: 100%;
+      height: auto;
+      -webkit-user-drag: none;
+      image-rendering: -webkit-optimize-contrast;
+    }
+    
+    /* Forzar que la tarjeta mantenga su flujo y el footer quede abajo si existe */
+    .card {
+      /* no cambiamos tu markup; esto solo asegura consistencia en navegadores */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+    }
+    
+    /* Footer empujado abajo (funciona también en Safari) */
+    .card .card-footer {
+      margin-top: auto;
+    }
+    
+    /* Evitar comportamiento táctil que pueda afectar layout en iOS */
+    html, body {
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+    
+    /* Si usas gap en otros sitios, añade fallback visual */
+    @supports (gap: 1rem) {
+      .row.g-2 {
+        gap: 0.5rem;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      .row.g-2 > * { padding-left: 0; padding-right: 0; margin-bottom: 0; }
+    }
