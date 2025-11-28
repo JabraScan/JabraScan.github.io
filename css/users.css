@@ -22,6 +22,41 @@
   gap: .5rem;
   width: 100%;
 }
+/* CSS: cards avatar */
+  .avatar-card {
+    position: relative; /* necesario para posicionar el overlay */
+    overflow: hidden;
+  }
+  .avatar-overlay-btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 10;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.9rem;
+    border-radius: 0.35rem;
+    border: none;
+    background: rgba(0, 123, 255, 0.95);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+  .avatar-overlay-btn.show {
+    display: inline-block;
+  }
+  .avatar-overlay-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.25);
+    display: none;
+    z-index: 5;
+  }
+  .avatar-overlay-backdrop.show {
+    display: block;
+  }
+
 /* compatibilidad iOS */
     /* Fallback para gap en flex (Safari antiguo no soporta gap en flex) */
     .row.g-2 {
