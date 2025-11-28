@@ -647,9 +647,13 @@ function isLoggedIn(tokenKey = 'jwt') {
    * Nota: la función no valida ni lanza errores; asume que `img` es un HTMLImageElement válido.
    */
     export function imgSrcFromBlob(img, path) {
+      // --- si path es una string URL, cargarla directamente (IMPORTANTE: antes de tratar listas de bytes) ---
+        if (typeof path === 'string' && ( /^(https?:)?\/\//i.test(path) || path.startsWith('/') || path.startsWith('data:') )) {
+          img.src = path;
+          return;
+        }
       // --- convertir distintos formatos a Uint8Array cuando proceda ---
-      let u8 = null;
-    
+        let u8 = null;    
       // 1) cadena que representa una lista de bytes "82,73,70,70,..."
         if (typeof path === 'string' && /^\s*\d+(?:\s*,\s*\d+)+\s*$/.test(path)) {
           // dividir por comas, parsear a Number y crear Uint8Array
