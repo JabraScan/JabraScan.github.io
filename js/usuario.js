@@ -325,13 +325,12 @@ function authFetch(input, init = {}) {
  */
 async function cargarTienda() {
   if (!usuario_id && !token) return;
-  const ENDPOINT = 'https://jabrascan.net/avatars';
-  const tienda = document.querySelector('#tiendaResultado');
-  const avatares = document.querySelector('#avatarResultado');
+    const ENDPOINT = 'https://jabrascan.net/avatars';
+    const tienda = document.querySelector('#tiendaResultado');
+    const avatares = document.querySelector('#avatarResultado');
   if (!tienda || !avatares) return;
-
-  tienda.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
-  avatares.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
+    tienda.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
+    avatares.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
 
   try {
     const res = await authFetch(ENDPOINT, { cache: 'no-cache' });
@@ -339,48 +338,51 @@ async function cargarTienda() {
 
     const data = await res.json();
     const rows = Array.isArray(data) ? data : (data.items || []);
-    const filtered = rows.filter(r => r && r.avatar_path);
 
-    if (!filtered.length) {
+    if (!rows.length) {
       avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
       tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
       return;
     }
 
+    // limpiar contenedores y crear filas
     tienda.innerHTML = '';
+      const rowTienda = document.createElement('div');
+        rowTienda.className = 'row g-2';
     avatares.innerHTML = '';
+      const rowAvatares = document.createElement('div');
+        rowAvatares.className = 'row g-2';
 
-    filtered.forEach(r => {
+    rows.forEach(r => {
       const item = {
         src: String(r.avatar_path),
         alt: r.descripcion || '',
         precio: Object.prototype.hasOwnProperty.call(r, 'precio') ? r.precio : null,
         adquirido: r.adquirido
       };
-
+      
       const col = document.createElement('div');
-      col.className = 'col-6 col-sm-4 col-md-3 col-lg-2 d-flex';
-
+        col.className = 'col-6 col-sm-4 col-md-3 col-lg-2 d-flex';
+      // Clases de card
       const card = document.createElement('div');
-      card.className = 'card p-1 text-center d-flex flex-column w-100';
-
+        card.className = 'card p-1 text-center d-flex flex-column w-100';
+      //insertamos imagen
       const img = document.createElement('img');
-          img.src = item.src;
-          img.alt = item.alt;
-          img.className = 'img-fluid rounded';
-          img.style.cursor = 'pointer';
-            img.addEventListener('click', () => {
-              document.querySelectorAll('#tiendaResultado img.selected, #avatarResultado img.selected')
-                .forEach(i => i.classList.remove('selected', 'border', 'border-primary'));
-              img.classList.add('selected', 'border', 'border-primary');
-            });
-
+        img.src = item.src;
+        img.alt = item.alt;
+        img.className = 'img-fluid rounded';
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+          document.querySelectorAll('#tiendaResultado img.selected, #avatarResultado img.selected')
+            .forEach(i => i.classList.remove('selected', 'border', 'border-primary'));
+          img.classList.add('selected', 'border', 'border-primary');
+        });
+      //caption del avatar
       const caption = document.createElement('div');
         caption.className = 'small text-truncate mt-1';
         caption.textContent = item.alt;
-
+      // No insertar footer si ya está adquirido
       let footer = null;
-        // Solo crear footer si NO está adquirido y existe precio numérico
         if (item.adquirido !== 'adquirido' && typeof item.precio === 'number' && Number.isFinite(item.precio)) {
           footer = document.createElement('div');
           footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
@@ -392,23 +394,27 @@ async function cargarTienda() {
           footer.appendChild(icon);
           footer.appendChild(priceText);
         }
-      //añadimos elementos al card
-        card.appendChild(img);
+      //agregamos a las cards
+      card.appendChild(img);
         card.appendChild(caption);
         if (footer) card.appendChild(footer);
         col.appendChild(card);
-      // Insertar inmediatamente en la columna correspondiente
+      //repartir entre adquiridos y no adquiridos
         if (item.adquirido === 'adquirido') {
-          avatares.appendChild(col);
+          rowAvatares.appendChild(col);
         } else {
-          tienda.appendChild(col);
+          rowTienda.appendChild(col);
         }
     });
+    //añadimos a los respectivos tabs
+      tienda.appendChild(rowTienda);
+      avatares.appendChild(rowAvatares);
   } catch (err) {
     avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
     tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
   }
 }
+
 
 /**/
       function bindTabsSelect() {
