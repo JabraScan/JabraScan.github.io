@@ -64,6 +64,28 @@ function authFetch(input, init = {}) {
   if (token) headers.set("Authorization", `Bearer ${token}`);
   return fetch(input, { ...init, headers });
 }
+// Asigna img.src según path (string | Blob | ArrayBuffer/TypedArray)
+// img: elemento <img> o selector; path: string|Blob|ArrayBuffer|TypedArray
+  function imgSrcFromBlob(img, path) {
+    if (typeof img === 'string') img = document.querySelector(img);
+    if (!img) return;
+  
+    if (typeof path === 'string') {
+      img.src = path;
+    } else if (path instanceof Blob) {
+      const url = URL.createObjectURL(path);
+      img.src = url;
+      img.onload = () => URL.revokeObjectURL(url);
+    } else if (path instanceof ArrayBuffer || ArrayBuffer.isView(path)) {
+      const ab = path instanceof ArrayBuffer ? path : path.buffer;
+      const blob = new Blob([ab]);
+      const url = URL.createObjectURL(blob);
+      img.src = url;
+      img.onload = () => URL.revokeObjectURL(url);
+    } else {
+      img.src = String(path);
+    }
+  }
 
 // -------------------------
 // API Worker: funciones que consultan el backend
@@ -375,7 +397,8 @@ function authFetch(input, init = {}) {
         
               // Imagen del avatar
               const img = document.createElement('img');
-                img.src = item.src;               // ruta de la imagen
+                //img.src = item.src;               // ruta de la imagen
+                imgSrcFromBlob(img, item.src);
                 img.alt = item.alt;               // texto alternativo
                 img.className = 'img-fluid rounded';
                 img.style.cursor = 'pointer';
