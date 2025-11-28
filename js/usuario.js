@@ -372,6 +372,8 @@ async function cargarTienda() {
         img.alt = item.alt;
         img.className = 'img-fluid rounded';
         img.style.cursor = 'pointer';
+        img.loading = 'lazy';
+        img.decoding = 'async';
         img.addEventListener('click', () => {
           document.querySelectorAll('#tiendaResultado img.selected, #avatarResultado img.selected')
             .forEach(i => i.classList.remove('selected', 'border', 'border-primary'));
