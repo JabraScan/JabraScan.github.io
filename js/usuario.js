@@ -381,7 +381,7 @@ function authFetch(input, init = {}) {
               // Normalizar objeto item con los campos que usamos
               const item = {
                 id: r.id, // el backend siempre devuelve id
-                src: String(r.avatar_path),
+                src: r.avatar_path,
                 alt: r.descripcion || '',
                 precio: Object.prototype.hasOwnProperty.call(r, 'precio') ? r.precio : null,
                 adquirido: r.adquirido
