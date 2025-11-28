@@ -324,6 +324,8 @@ function authFetch(input, init = {}) {
  * - NO auto-inicia ni añade listeners; llama a cargarTienda() manualmente.
  */
 async function cargarTienda() {
+  if (!usuario_id && !token) return;
+  
   const ENDPOINT = 'https://jabrascan.net/avatars';
   const CONTAINER_SELECTOR = '#avatarResultado';
 
@@ -333,9 +335,9 @@ async function cargarTienda() {
   container.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
 
   try {
-    const res = await fetch(ENDPOINT, { cache: 'no-cache' });
+    const res = await authFetch(ENDPOINT, { cache: 'no-cache' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
-
+  
     const data = await res.json();
     const rows = Array.isArray(data) ? data : (data.items || []);
 
