@@ -325,88 +325,91 @@ function authFetch(input, init = {}) {
  */
 async function cargarTienda() {
   if (!usuario_id && !token) return;
-  
   const ENDPOINT = 'https://jabrascan.net/avatars';
-  const CONTAINER_SELECTOR = '#avatarResultado';
+  const tienda = document.querySelector('#tiendaResultado');
+  const avatares = document.querySelector('#avatarResultado');
+  if (!tienda || !avatares) return;
 
-  const container = document.querySelector(CONTAINER_SELECTOR);
-  if (!container) return;
+  tienda.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
+  avatares.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
 
-  container.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
-console.log('tienda');
   try {
     const res = await authFetch(ENDPOINT, { cache: 'no-cache' });
-console.log('res');
     if (!res.ok) throw new Error('HTTP ' + res.status);
-  
+
     const data = await res.json();
     const rows = Array.isArray(data) ? data : (data.items || []);
-console.log(rows);
-    const list = rows
-      .filter(r => r && r.avatar_path)
-      .map(r => ({
-        src: String(r.avatar_path),
-        alt: r.descripcion || '',
-        // Tomamos precio tal cual; se asume que es un número
-        precio: Object.prototype.hasOwnProperty.call(r, 'precio') ? r.precio : null
-      }));
+    const filtered = rows.filter(r => r && r.avatar_path);
 
-    if (!list.length) {
-      container.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+    if (!filtered.length) {
+      avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+      tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
       return;
     }
 
-    const row = document.createElement('div');
-    row.className = 'row g-2';
+    tienda.innerHTML = '';
+    avatares.innerHTML = '';
 
-    list.forEach(item => {
+    filtered.forEach(r => {
+      const item = {
+        src: String(r.avatar_path),
+        alt: r.descripcion || '',
+        precio: Object.prototype.hasOwnProperty.call(r, 'precio') ? r.precio : null,
+        adquirido: r.adquirido
+      };
+
       const col = document.createElement('div');
       col.className = 'col-6 col-sm-4 col-md-3 col-lg-2 d-flex';
 
       const card = document.createElement('div');
-        card.className = 'card p-1 text-center d-flex flex-column w-100';
+      card.className = 'card p-1 text-center d-flex flex-column w-100';
+
       const img = document.createElement('img');
-        img.src = item.src;
-        img.alt = item.alt;
-        img.className = 'img-fluid rounded';
-        img.style.cursor = 'pointer';
+          img.src = item.src;
+          img.alt = item.alt;
+          img.className = 'img-fluid rounded';
+          img.style.cursor = 'pointer';
+            img.addEventListener('click', () => {
+              document.querySelectorAll('#tiendaResultado img.selected, #avatarResultado img.selected')
+                .forEach(i => i.classList.remove('selected', 'border', 'border-primary'));
+              img.classList.add('selected', 'border', 'border-primary');
+            });
+
       const caption = document.createElement('div');
         caption.className = 'small text-truncate mt-1';
         caption.textContent = item.alt;
-      // Footer: insertar precio tal cual (sin formateo) si existe
+
       let footer = null;
-        if (typeof item.precio === 'number' && Number.isFinite(item.precio)) {
+        // Solo crear footer si NO está adquirido y existe precio numérico
+        if (item.adquirido !== 'adquirido' && typeof item.precio === 'number' && Number.isFinite(item.precio)) {
           footer = document.createElement('div');
           footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
           const icon = document.createElement('span');
           icon.className = 'me-1';
           icon.textContent = '💰';
           const priceText = document.createElement('span');
-          // **Aquí no se aplica ningún formateo**: se inserta el número tal cual
           priceText.textContent = String(item.precio);
           footer.appendChild(icon);
           footer.appendChild(priceText);
         }
-      //listener para la imagen
-      img.addEventListener('click', () => {
-        container.querySelectorAll('img.selected').forEach(i => i.classList.remove('selected','border','border-primary'));
-        img.classList.add('selected','border','border-primary');
-      });
-      //
-      card.appendChild(img);
+      //añadimos elementos al card
+        card.appendChild(img);
         card.appendChild(caption);
         if (footer) card.appendChild(footer);
-
-      col.appendChild(card);
-      row.appendChild(col);
+        col.appendChild(card);
+      // Insertar inmediatamente en la columna correspondiente
+        if (item.adquirido === 'adquirido') {
+          avatares.appendChild(col);
+        } else {
+          tienda.appendChild(col);
+        }
     });
-
-    container.innerHTML = '';
-    container.appendChild(row);
   } catch (err) {
-    container.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+    avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+    tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
   }
 }
+
 /**/
       function bindTabsSelect() {
         const select = document.getElementById('tabsSelect');
