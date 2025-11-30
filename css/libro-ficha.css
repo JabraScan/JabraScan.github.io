@@ -1,6 +1,6 @@
 /* === BASE === */
 body {
-  background: #f5f7fa;
+  background: var(--color-light-background);
   font-family: 'Segoe UI', Arial, sans-serif;
 }
 .ficha-obra-sinopsis {
@@ -8,9 +8,9 @@ body {
 }
 
 .book-card-caps {
-  background: #fff;
+  background: var(--color-white);
   border-radius: 8px;
-  box-shadow: 0 4px 16px #0001;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
   padding: 1.5rem;
   /*margin: 2rem auto;*/
   max-width: 100%;
@@ -21,7 +21,7 @@ body {
     .book-header {
       margin-bottom: 1rem;
       font-weight: bold;
-      color: #f8b400;
+      color: var(--color-secondary);
       font-size: 1.1em;
     
       /* Añadido para alinear título e icono */
@@ -36,13 +36,13 @@ body {
       border: none;
       cursor: pointer;
       font-size: 1.2em;
-      color: #f8b400;
+      color: var(--color-secondary);
       padding: 0;
       margin: 0;
     }
     
     .order-toggle:hover {
-      color: #ffd966;
+      color: var(--color-secondary-light);
     }
 
 /* === MAIN STRUCTURE === */
@@ -53,7 +53,7 @@ body {
 
 .book-image {
   font-size: 0.75em;
-  color: #4e4e4e;
+  color: var(--color-dark-gray);
 }
 
 .book-image img {
@@ -61,7 +61,7 @@ body {
   height: 210px;
   object-fit: cover;
   border-radius: 6px;
-  box-shadow: 0 2px 8px #0002;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.13);
   display: block;
   margin-bottom: 0.7em;
 }
@@ -80,7 +80,7 @@ body {
 
 .book-author {
   font-size: 0.9em;
-  color: #888;
+  color: var(--color-text-muted);
   margin-left: 0.8em;
 }
 
@@ -93,20 +93,20 @@ body {
 }
 
 .stars {
-  color: #f8b400;
+  color: var(--color-secondary);
   font-size: 1.2em;
   letter-spacing: 2px;
 }
 
 .rating-value, .rating-votes {
-  color: #888;
+  color: var(--color-text-muted);
   font-size: 0.97em;
 }
 
 .rate-btns button {
   background: none;
   border: none;
-  color: #bbb;
+  color: var(--color-medium-gray-alt);
   font-size: 1em;
   cursor: pointer;
   transition: color 0.2s;
@@ -115,14 +115,14 @@ body {
 
 .rate-btns button.rated,
 .rate-btns button:hover {
-  color: #f8b400;
+  color: var(--color-secondary);
 }
 
 /* === SYNOPSIS & BUTTONS === */
 .book-synopsis {
   margin-bottom: 1em;
   font-size: 0.75em;
-  color: #4e4e4e;
+  color: var(--color-dark-gray);
 }
 
 .book-buttons button {
@@ -130,8 +130,8 @@ body {
   padding: 0.45em 1.2em;
   border: none;
   border-radius: 4px;
-  background: #f8b400;
-  color: #fff;
+  background: var(--color-secondary);
+  color: var(--color-white);
   font-weight: bold;
   cursor: pointer;
   font-size: 1em;
@@ -139,7 +139,7 @@ body {
 }
 
 .book-buttons button:hover {
-  background: #f39800;
+  background: var(--color-secondary-hover);
 }
 
 /* === GENRES & LINKS === */
@@ -150,13 +150,13 @@ body {
 
 .book-genres span, .book-links a {
   display: block;
-  color: #444;
+  color: var(--color-dark-gray);
   margin-bottom: 0.2em;
   text-decoration: none;
 }
 
 .book-links a:hover {
-  color: #f8b400;
+  color: var(--color-secondary);
 }
 
 /* === CHAPTERS === */
@@ -166,7 +166,7 @@ body {
 
 .book-latest-chapters h3, .book-chapters-list h3 {
   font-size: 1.1em;
-  color: #333;
+  color: var(--color-darker-gray);
   margin-bottom: 0.5em;
 }
 
@@ -184,12 +184,12 @@ body {
 .book-latest-chapters li,
 .book-chapters-list li {
   padding: 0.3em 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border-light);
   font-size: 1em;
 }
 
 .book-chapters-list .chapter-columns li {
-  border-bottom: 1px dotted #eee;
+  border-bottom: 1px dotted var(--color-border-light);
   padding: 0.2em 0;
 }
 
@@ -213,8 +213,8 @@ body {
 
 .pagination button {
   padding: 0.3em 0.8em;
-  background: #eee;
-  border: 1px solid #ccc;
+  background: var(--color-border-light);
+  border: 1px solid var(--color-medium-gray);
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.2s;
@@ -222,8 +222,8 @@ body {
 }
 
 .pagination button:disabled {
-  background: #ddd;
-  color: #bbb;
+  background: var(--color-medium-gray-alt);
+  color: var(--color-medium-gray-alt);
   cursor: not-allowed;
   margin-bottom: 0.3em;
 }
@@ -231,7 +231,7 @@ body {
 .pagination span {
   margin: 0 0.5em;
   font-weight: bold;
-  color: #555;
+  color: var(--color-text-dark);
 }
 
 /* === RESPONSIVE === */
@@ -324,7 +324,7 @@ body {
       align-items: center;
       text-align: center;
       background-color: transparent;
-      color: black;
+      color: var(--color-black);
       padding: 0.5em 1em;
       gap: 0.5em;
       flex-wrap: wrap;
@@ -337,8 +337,8 @@ body {
       padding: 0.4em 0.6em;
       font-size: 0.9em;
       background-color: transparent;
-      border: 1px solid #ccc;
-      color: black;
+      border: 1px solid var(--color-medium-gray);
+      color: var(--color-black);
       cursor: pointer;
       text-align: center;
       border-radius: 6px;
@@ -356,7 +356,7 @@ body {
       text-align: center;
       font-weight: bold;
       font-size: 0.95em;
-      color: black;
+      color: var(--color-black);
     }
 /*===fin botones de paginacion===*/
 
@@ -399,7 +399,7 @@ body {
 .your-rating {
   margin-top: 5px;
   font-style: italic;
-  color: #555;
+  color: var(--color-text-dark);
 }
 /* Mostrar el fallback solo si el icono no se renderiza (opcional) */
 .fallback-plus { display: none; }
