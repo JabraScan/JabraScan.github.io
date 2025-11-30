@@ -88,7 +88,7 @@
 
 .book-sinopsis {
     font-size: 0.98em;
-    color: #444;
+    color: var(--color-dark-gray);
 }
 
 .book-estado {
@@ -144,7 +144,7 @@
 
 /* Cards de últimos capítulos */
 .chapter-card {
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--color-border);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: all var(--transition-slow) ease;
     border-radius: var(--border-radius-md);
@@ -193,8 +193,8 @@
 }
 
 .chapter-card .btn-primary:hover {
-    background-color: #e8920d;
-    border-color: #e8920d;
+    background-color: var(--color-secondary-hover);
+    border-color: var(--color-secondary-hover);
     color: var(--color-primary);
     transform: none;
     box-shadow: 0 2px 4px rgba(252, 163, 17, 0.3);
@@ -213,7 +213,7 @@
     align-items: flex-start;
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-md);
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--color-medium-gray);
     padding-bottom: var(--spacing-md);
     cursor: pointer;
 }

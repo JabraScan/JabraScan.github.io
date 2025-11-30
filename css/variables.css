@@ -20,6 +20,34 @@
     --color-teal: #20B2AA;
     --color-gray: #a9a9a9;
 
+    /* Colores adicionales UI */
+    --color-light-gray: #f5f5f5;
+    --color-light-gray-alt: #f1f1f1;
+    --color-light-gray-bg: #f9f9f9;
+    --color-medium-gray: #ccc;
+    --color-medium-gray-alt: #ddd;
+    --color-dark-gray: #444;
+    --color-darker-gray: #333;
+    --color-text-muted: #888;
+    --color-text-dark: #555;
+    --color-border: #e0e0e0;
+    --color-border-light: #eee;
+    --color-blue: #0f1a33;
+    --color-light-blue: #4285F4;
+    --color-facebook: #1877F2;
+    --color-red: red;
+    --color-wheat: #ffebcd;
+    --color-dark-mode-bg: #121212;
+    --color-dark-mode-text: #eee;
+    --color-dark-mode-canvas: #1e1e1e;
+    --color-light-mode-bg: #fff;
+    --color-light-mode-text: #000;
+    --color-secondary-hover: #e8920d;
+    --color-secondary-dark: #d99a00;
+    --color-secondary-darker: #c98e00;
+    --color-secondary-light: #ffd966;
+    --color-light-background: #f5f7fa;
+
     /* Sombras */
     --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.1);

@@ -65,9 +65,9 @@
     width: 30px;
     height: 30px;
     border-radius: var(--border-radius-full);
-    border: 2px solid red;
+    border: 2px solid var(--color-red);
     background-color: var(--color-white);
-    color: red;
+    color: var(--color-red);
     font-size: var(--font-size-xs);
     font-weight: bold;
     display: flex;
@@ -89,7 +89,7 @@
 .etiqueta {
     font-size: 0.8em;
     border-radius: 50px;
-    background: blue;
+    background: var(--color-info);
     color: var(--color-white);
     padding: 0 20px;
     font-weight: bold;
@@ -248,7 +248,7 @@
 }
 
 .pdf-link:hover {
-    background: #f0f0f0;
+    background: var(--color-background);
 }
 
 .pdf-link span:first-child {
@@ -269,7 +269,7 @@
     padding: 10px;
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
-    background: #ffebcd;
+    background: var(--color-wheat);
 }
 
 .buscador select,
@@ -291,7 +291,7 @@
 .loader {
     text-align: center;
     font-size: 1.2rem;
-    color: #555;
+    color: var(--color-text-dark);
     margin-bottom: var(--spacing-md);
     animation: parpadeo 1s infinite;
 }
@@ -319,7 +319,7 @@ canvas#graficaObras {
 /* Footer */
 footer {
     text-align: center;
-    color: #888;
+    color: var(--color-text-muted);
     font-size: 0.95em;
     padding: 2em 0 var(--spacing-md) 0;
     margin-top: 4em;

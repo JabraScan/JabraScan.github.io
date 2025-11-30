@@ -39,7 +39,7 @@
     border-radius: 0.35rem;
     border: none;
     background: rgba(0, 123, 255, 0.95);
-    color: #fff;
+    color: var(--color-white);
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   }
