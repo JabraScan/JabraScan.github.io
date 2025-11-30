@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
       itemCarousel.className = "custom-carousel-item";
       itemCarousel.innerHTML = `
           <div class="carousel-info-overlay">
-            <div class="carousel-info-title libro-item">${nombreobra}</div>
+            <div class="carousel-info-title">${nombreobra}</div>
             ${hiddenNames}
             <div class="carousel-info-sinopsis">${sinopsis}</div>
             <div class="carousel-info-row">
