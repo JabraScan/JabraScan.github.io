@@ -1,0 +1,698 @@
+/* === DISEÑO MODERNO DE FICHA DE LIBRO === */
+
+/* === CONTROL DE VISIBILIDAD === */
+/* Por defecto, mostrar diseño clásico */
+body:not(.modern-layout) .modern-layout-wrapper {
+    display: none;
+}
+
+/* En modo moderno, ocultar diseño clásico */
+body.modern-layout .book-card-caps>.book-header,
+body.modern-layout .book-card-caps>.book-main,
+body.modern-layout .book-card-caps>.book-section {
+    display: none;
+}
+
+body.modern-layout .modern-layout-wrapper {
+    display: block;
+}
+
+/* === BASE === */
+.modern-layout-wrapper {
+    min-height: 100vh;
+    background: var(--color-background);
+    font-family: var(--font-family-base);
+}
+
+body.modern-layout {
+    background: var(--color-background);
+}
+
+body.modern-layout .book-card-caps {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    max-width: 100%;
+}
+
+/* === HEADER STICKY === */
+.modern-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-index-header);
+    border-bottom: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.modern-header-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+}
+
+.modern-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.modern-logo-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--border-radius-sm);
+    background: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+}
+
+.modern-logo-text {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.modern-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.modern-nav a {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition-normal);
+}
+
+.modern-nav a:hover {
+    color: var(--color-text);
+}
+
+.modern-btn-read {
+    background: var(--color-secondary);
+    color: var(--color-white);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-sm);
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background var(--transition-normal);
+}
+
+.modern-btn-read:hover {
+    background: var(--color-secondary-hover);
+}
+
+/* === HERO SECTION === */
+.modern-hero {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-white);
+}
+
+.modern-hero-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+}
+
+.modern-hero-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 300px 1fr;
+}
+
+/* === COVER === */
+.modern-cover {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modern-cover-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    transition: transform var(--transition-normal);
+}
+
+.modern-cover-wrapper:hover {
+    transform: scale(1.02);
+}
+
+.modern-cover-wrapper img {
+    aspect-ratio: 3/4;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--transition-slow);
+}
+
+.modern-cover-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+.modern-btn-library {
+    width: 100%;
+    background: var(--color-secondary);
+    color: var(--color-white);
+    padding: 1rem;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.modern-btn-library:hover {
+    background: var(--color-secondary-hover);
+}
+
+/* === INFO === */
+.modern-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Title Section */
+.modern-title-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.modern-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.modern-subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+}
+
+/* Meta Information */
+.modern-meta-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.modern-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.modern-meta-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+}
+
+.modern-meta-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+/* Stats Cards */
+.modern-stats {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "rating rating"
+        "views status";
+}
+
+.modern-stat-card {
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    padding: 1rem;
+}
+
+.modern-stat-card[data-stat="rating"] {
+    grid-area: rating;
+}
+
+.modern-stat-card[data-stat="views"] {
+    grid-area: views;
+}
+
+.modern-stat-card[data-stat="status"] {
+    grid-area: status;
+}
+
+.modern-stat-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.modern-stat-header i {
+    font-size: 1.25rem;
+}
+
+.modern-stat-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.modern-stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+.modern-stat-votes {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-left: 0.25rem;
+}
+
+/* Rating Display with Stars */
+.modern-rating-display {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.modern-stars {
+    display: flex;
+    gap: 0.25rem;
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+}
+
+.modern-stars i.fa-regular {
+    color: var(--color-border);
+}
+
+.modern-rating-text {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    margin: 0;
+}
+
+.modern-rating-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+.modern-rating-separator {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+}
+
+.modern-rating-max {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+}
+
+/* Extra Info (Approved translation, Discord, Wiki) */
+.modern-extra-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(252, 163, 17, 0.05);
+    border-left: 3px solid var(--color-secondary);
+    border-radius: var(--border-radius-sm);
+}
+
+.modern-approved-translation {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.modern-badge-approved {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-success);
+}
+
+.modern-badge-approved i {
+    font-size: 1.125rem;
+}
+
+.modern-discord-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+}
+
+.modern-discord-link i {
+    color: #5865F2;
+    font-size: 1rem;
+}
+
+.modern-discord-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-normal);
+}
+
+.modern-discord-link a:hover {
+    color: var(--color-secondary);
+    text-decoration: underline;
+}
+
+.modern-wiki-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all var(--transition-normal);
+    align-self: flex-start;
+}
+
+.modern-wiki-link:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modern-wiki-link i:last-child {
+    font-size: 0.75rem;
+}
+
+/* Genres */
+.modern-genres-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.modern-genres-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+}
+
+.modern-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.modern-genre-tag {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.modern-genre-tag:hover {
+    background: rgba(252, 163, 17, 0.1);
+    color: var(--color-primary);
+    border-color: var(--color-secondary);
+}
+
+/* === SYNOPSIS SECTION === */
+.modern-section {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-white);
+}
+
+.modern-section-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+}
+
+.modern-section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-text);
+    margin: 0 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.modern-section-title i {
+    color: var(--color-primary);
+}
+
+.modern-synopsis-text {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: var(--color-text);
+    max-width: 48rem;
+    white-space: pre-line;
+}
+
+/* === CHAPTERS SECTION === */
+.modern-chapters-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.modern-chapter-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    padding: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-decoration: none;
+    color: inherit;
+}
+
+.modern-chapter-item:hover {
+    border-color: rgba(252, 163, 17, 0.5);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.modern-chapter-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.modern-chapter-number {
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    min-width: 2rem;
+}
+
+.modern-chapter-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.modern-chapter-title {
+    font-weight: 600;
+    color: var(--color-text);
+    transition: color var(--transition-normal);
+}
+
+.modern-chapter-item:hover .modern-chapter-title {
+    color: var(--color-primary);
+}
+
+.modern-chapter-date {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+}
+
+.modern-chapter-arrow {
+    color: var(--color-text-muted);
+    transition: color var(--transition-normal);
+}
+
+.modern-chapter-item:hover .modern-chapter-arrow {
+    color: var(--color-primary);
+}
+
+.modern-btn-all-chapters {
+    width: 100%;
+    margin-top: 1.5rem;
+    background: var(--color-secondary);
+    color: var(--color-white);
+    padding: 1rem;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background var(--transition-normal);
+}
+
+.modern-btn-all-chapters:hover {
+    background: var(--color-secondary-hover);
+}
+
+/* All Chapters List */
+.modern-all-chapters {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.modern-all-chapters::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modern-all-chapters::-webkit-scrollbar-track {
+    background: var(--color-border);
+    border-radius: 4px;
+}
+
+.modern-all-chapters::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 4px;
+}
+
+.modern-all-chapters::-webkit-scrollbar-thumb:hover {
+    background: var(--color-secondary);
+}
+
+/* === TOGGLE BUTTON === */
+.design-toggle {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 9999px;
+    padding: 1rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: all var(--transition-normal);
+}
+
+.design-toggle:hover {
+    transform: scale(1.1);
+    background: var(--color-secondary);
+}
+
+.design-toggle i {
+    font-size: 1.25rem;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+    .modern-hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modern-title {
+        font-size: 2rem;
+    }
+
+    .modern-nav {
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .modern-hero-content {
+        padding: 1.5rem 1rem;
+    }
+
+    .modern-hero-grid {
+        gap: 1rem;
+    }
+
+    .modern-cover-wrapper img {
+        max-width: 200px;
+        margin: 0 auto;
+    }
+
+    .modern-title {
+        font-size: 1.5rem;
+    }
+
+    .modern-subtitle {
+        font-size: 1rem;
+    }
+
+    .modern-meta-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modern-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .modern-extra-info {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .modern-discord-link {
+        justify-content: center;
+    }
+
+    .modern-synopsis-text {
+        font-size: 1rem;
+    }
+
+    .design-toggle {
+        bottom: 1rem;
+        right: 1rem;
+    }
+}

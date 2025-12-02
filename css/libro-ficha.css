@@ -3,6 +3,7 @@ body {
   background: var(--color-light-background);
   font-family: 'Segoe UI', Arial, sans-serif;
 }
+
 .ficha-obra-sinopsis {
   white-space: pre-line;
 }
@@ -18,32 +19,32 @@ body {
 }
 
 /* === HEADER === */
-    .book-header {
-      margin-bottom: 1rem;
-      font-weight: bold;
-      color: var(--color-secondary);
-      font-size: 1.1em;
-    
-      /* Añadido para alinear título e icono */
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    /* Botón de orden ascendente/descendente */
-    .order-toggle {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2em;
-      color: var(--color-secondary);
-      padding: 0;
-      margin: 0;
-    }
-    
-    .order-toggle:hover {
-      color: var(--color-secondary-light);
-    }
+.book-header {
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: var(--color-secondary);
+  font-size: 1.1em;
+
+  /* Añadido para alinear título e icono */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Botón de orden ascendente/descendente */
+.order-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  color: var(--color-secondary);
+  padding: 0;
+  margin: 0;
+}
+
+.order-toggle:hover {
+  color: var(--color-secondary-light);
+}
 
 /* === MAIN STRUCTURE === */
 .book-main {
@@ -73,9 +74,21 @@ body {
   width: 100%;
 }
 
+.book-info {
+  margin-bottom: 0.5em;
+}
+
 .book-info h2 {
   margin: 0 0 0.2em 0;
   font-size: 1.5em;
+}
+
+.book-extras {
+  margin-bottom: 0.5em;
+}
+
+.book-useraction {
+  margin-top: 0.5em;
 }
 
 .book-author {
@@ -98,7 +111,8 @@ body {
   letter-spacing: 2px;
 }
 
-.rating-value, .rating-votes {
+.rating-value,
+.rating-votes {
   color: var(--color-text-muted);
   font-size: 0.97em;
 }
@@ -143,12 +157,14 @@ body {
 }
 
 /* === GENRES & LINKS === */
-.book-genres, .book-links {
+.book-genres,
+.book-links {
   margin-top: 0.3em;
   font-size: 0.95em;
 }
 
-.book-genres span, .book-links a {
+.book-genres span,
+.book-links a {
   display: block;
   color: var(--color-dark-gray);
   margin-bottom: 0.2em;
@@ -160,11 +176,13 @@ body {
 }
 
 /* === CHAPTERS === */
-.book-latest-chapters, .book-chapters-list {
+.book-latest-chapters,
+.book-chapters-list {
   margin-top: 2em;
 }
 
-.book-latest-chapters h3, .book-chapters-list h3 {
+.book-latest-chapters h3,
+.book-chapters-list h3 {
   font-size: 1.1em;
   color: var(--color-darker-gray);
   margin-bottom: 0.5em;
@@ -176,6 +194,7 @@ body {
   padding: 0;
   margin: 0 0 0.7em 0;
 }
+
 /*
 .book-chapters-list ul {
   height: 3.5em
@@ -242,9 +261,11 @@ body {
     max-width: 98vw;
     padding: 1rem;
   }
+
   .book-main {
     gap: 1rem;
   }
+
   .book-header {
     font-size: 1em;
   }
@@ -259,24 +280,30 @@ body {
     border-radius: 0;
     box-shadow: none;
   }
+
   .book-main {
     flex-direction: column;
     gap: 0.3rem;
     align-items: center;
   }
+
   .book-image img {
     width: 120px;
     height: 170px;
   }
+
   .book-info h2 {
     font-size: 1.1em;
   }
+
   .book-author {
     font-size: 0.8em;
   }
+
   .book-chapters-list ul {
     column-count: 1;
   }
+
   .book-buttons button {
     font-size: 1em;
     width: 98%;
@@ -284,6 +311,7 @@ body {
     padding: 0.7em 0;
     display: block;
   }
+
   .pagination {
     justify-content: center;
     font-size: 0.98em;
@@ -294,6 +322,7 @@ body {
 .chapter-list.pdf-link {
   display: block;
 }
+
 /* Tablets pequeñas entre 601px y 700px */
 @media (max-width: 700px) and (min-width: 601px) {
   .book-main {
@@ -301,10 +330,12 @@ body {
     align-items: center;
     gap: 1.5rem;
   }
+
   .book-chapters-list ul {
     column-count: 1;
   }
 }
+
 /* Responsive: en pantallas pequeñas, apilar los spans */
 @media (max-width: 700px) {
   .pdf-link {
@@ -317,67 +348,74 @@ body {
     text-align: left;
   }
 }
+
 /*===botones de paginacion===*/
-    .pagination-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-align: center;
-      background-color: transparent;
-      color: var(--color-black);
-      padding: 0.5em 1em;
-      gap: 0.5em;
-      flex-wrap: wrap;
-      border-radius: 6px;
-    }
-    
-    /* Botones de paginación */
-    .pagina-btn {
-      flex: 0 0 100px; /* Todos los botones del mismo ancho */
-      padding: 0.4em 0.6em;
-      font-size: 0.9em;
-      background-color: transparent;
-      border: 1px solid var(--color-medium-gray);
-      color: var(--color-black);
-      cursor: pointer;
-      text-align: center;
-      border-radius: 6px;
-    }
-    
-    /* Botón deshabilitado */
-    .pagina-btn:disabled {
-      opacity: 0.5;
-      cursor: default;
-    }
-    
-    /* Rango centrado entre los botones */
-    .pagination-range {
-      flex: 1 1 auto;
-      text-align: center;
-      font-weight: bold;
-      font-size: 0.95em;
-      color: var(--color-black);
-    }
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  background-color: transparent;
+  color: var(--color-black);
+  padding: 0.5em 1em;
+  gap: 0.5em;
+  flex-wrap: wrap;
+  border-radius: 6px;
+}
+
+/* Botones de paginación */
+.pagina-btn {
+  flex: 0 0 100px;
+  /* Todos los botones del mismo ancho */
+  padding: 0.4em 0.6em;
+  font-size: 0.9em;
+  background-color: transparent;
+  border: 1px solid var(--color-medium-gray);
+  color: var(--color-black);
+  cursor: pointer;
+  text-align: center;
+  border-radius: 6px;
+}
+
+/* Botón deshabilitado */
+.pagina-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Rango centrado entre los botones */
+.pagination-range {
+  flex: 1 1 auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.95em;
+  color: var(--color-black);
+}
+
 /*===fin botones de paginacion===*/
 
 .chapter-page ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 1em; /* Espacio entre columnas y filas */
+  gap: 1em;
+  /* Espacio entre columnas y filas */
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
 .chapter-page ul li {
-  flex: 0 0 calc(50% - 0.5em); /* Dos columnas horizontales */
+  flex: 0 0 calc(50% - 0.5em);
+  /* Dos columnas horizontales */
   box-sizing: border-box;
 }
+
 @media (max-width: 700px) {
   .chapter-page ul li {
     flex: 0 0 100%;
   }
 }
+
 /*Valoracion obras*/
 .book-rating {
   margin-top: 10px;
@@ -401,8 +439,16 @@ body {
   font-style: italic;
   color: var(--color-text-dark);
 }
+
 /* Mostrar el fallback solo si el icono no se renderiza (opcional) */
-.fallback-plus { display: none; }
+.fallback-plus {
+  display: none;
+}
+
 /* Si Font Awesome no está disponible, fuerza mostrar el fallback */
-.fa-solid[aria-hidden="true"] { font-style: normal; } /* no rompe si existe */
+.fa-solid[aria-hidden="true"] {
+  font-style: normal;
+}
+
+/* no rompe si existe */
 /*Fin valoracion obras*/
