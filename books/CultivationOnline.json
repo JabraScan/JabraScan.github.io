@@ -2218,6 +2218,12 @@
 		{ "Fecha" : "01-12-2025", "NombreArchivo" : "CultivationOnline-2216_JabraScan.pdf", "numCapitulo" : "2216", "nombreCapitulo" : "La Amenaza de Saaruk"                                                  				, "tituloObra" : "Cultivation Online" },
 		{ "Fecha" : "02-12-2025", "NombreArchivo" : "CultivationOnline-2217_JabraScan.pdf", "numCapitulo" : "2217", "nombreCapitulo" : "El Nuevo Recipiente de Xiao Hua"                                       				, "tituloObra" : "Cultivation Online" },
 		{ "Fecha" : "03-12-2025", "NombreArchivo" : "CultivationOnline-2218_JabraScan.pdf", "numCapitulo" : "2218", "nombreCapitulo" : "El Verdadero Linaje Del Dios Malvado"                                  				, "tituloObra" : "Cultivation Online" },
-		{ "Fecha" : "04-12-2025", "NombreArchivo" : "CultivationOnline-2219_JabraScan.pdf", "numCapitulo" : "2219", "nombreCapitulo" : "Árbol espiritual"                                                      				, "tituloObra" : "Cultivation Online" }
+		{ "Fecha" : "04-12-2025", "NombreArchivo" : "CultivationOnline-2219_JabraScan.pdf", "numCapitulo" : "2219", "nombreCapitulo" : "Árbol Espiritual (1)"                                                  	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "05-12-2025", "NombreArchivo" : "CultivationOnline-2220_JabraScan.pdf", "numCapitulo" : "2220", "nombreCapitulo" : "Árbol Espiritual (2)"                                                  	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "06-12-2025", "NombreArchivo" : "CultivationOnline-2221_JabraScan.pdf", "numCapitulo" : "2221", "nombreCapitulo" : "Árbol Espiritual (3)"                                                  	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "07-12-2025", "NombreArchivo" : "CultivationOnline-2222_JabraScan.pdf", "numCapitulo" : "2222", "nombreCapitulo" : "Árbol Espiritual (4)"                                                  	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "08-12-2025", "NombreArchivo" : "CultivationOnline-2223_JabraScan.pdf", "numCapitulo" : "2223", "nombreCapitulo" : "El Despertar de Xiao Hua"                                              	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "09-12-2025", "NombreArchivo" : "CultivationOnline-2224_JabraScan.pdf", "numCapitulo" : "2224", "nombreCapitulo" : "Luchando Contra Xiao Hua (1)"                                          	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "10-12-2025", "NombreArchivo" : "CultivationOnline-2225_JabraScan.pdf", "numCapitulo" : "2225", "nombreCapitulo" : "Luchando Contra Xiao Hua (2)"                                          	, "tituloObra" : "Cultivation Online" }
   ]
 }
