@@ -562,7 +562,7 @@ export function toggleDesignMode() {
         body.classList.remove('modern-layout');
 
         if (toggleBtn) {
-            toggleBtn.innerHTML = '<i class="fa-solid fa-sparkles"></i>';
+            toggleBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i>';
             toggleBtn.title = 'Cambiar a Diseño Moderno';
         }
 
@@ -646,7 +646,7 @@ export function initDesignToggle() {
     toggleBtn.id = 'design-toggle-btn';
     toggleBtn.className = 'design-toggle';
     toggleBtn.title = 'Cambiar a Diseño Moderno';
-    toggleBtn.innerHTML = '<i class="fa-solid fa-sparkles"></i>';
+    toggleBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i>';
 
     toggleBtn.addEventListener('click', toggleDesignMode);
 
