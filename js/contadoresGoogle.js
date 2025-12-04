@@ -1,4 +1,4 @@
-import { authFetch } from'./usuarios.js';
+import { authFetch } from'./usuario.js';
 /**
  * 🧙‍♂️ API Web para gestionar visitas, valoraciones y obtener información
  * sobre obras y capítulos.
