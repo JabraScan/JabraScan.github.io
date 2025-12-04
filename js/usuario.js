@@ -144,7 +144,7 @@ function authFetch(input, init = {}) {
   //FIN CARGA PERFIL USUARIO
 
   export async function cargarBiblioteca() {
-    if (!usuario_id && !token) return;
+    if (!token) return;
   
     const url = `${API_BASE}/biblioteca/list?usuario_id=${encodeURIComponent(usuario_id)}`;
   
@@ -153,7 +153,7 @@ function authFetch(input, init = {}) {
   
     const cont = document.getElementById("bibliotecaResultado");
     const contfinal = document.getElementById("bibliotecafin_Resultado");
-    if (!cont) return;
+    if (!cont || !contfinal) return;
   
     const ul = document.createElement("ul");
       ul.className = "list-group";
@@ -221,8 +221,38 @@ function authFetch(input, init = {}) {
           //añadimos valoraciones para usuario
           const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, { soloEstrellas: true, actualizarVoto: true });
           li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
-          li.querySelector('.biblio-obra').onclick = () => onLibroClick(item.obra_id);
-          li.querySelector(".libro-item").onclick = () => onLibroClick(item.obra_id);
+          li.querySelectorAll('.delete-obra').forEach(btn => {
+            btn.addEventListener('click', async (event) => {
+              const button = event.currentTarget;
+              button.disabled = true;
+              try {
+                const res = await addToBiblio(String(item.obra_id), { remove: true });
+                if (res.ok) {
+                  li.remove();
+                } else {
+                  console.error('Error eliminando obra:', res.error || res.status);
+                }
+              } catch (err) {
+                console.error('Error en la petición:', err);
+              } finally {
+                button.disabled = false;
+              }
+            });
+          });
+          li.querySelector(".marcar-finalizado").addEventListener("click", async () => {
+              const btn = li.querySelector(".marcar-finalizado");
+                btn.disabled = true;
+                  const res = await updateFinalizado(String(item.obra_id), item.finalizado);
+                btn.disabled = false;
+              
+                if (res.ok) {
+                  // actualizar UI, mover elemento de la lista
+                  li.remove();
+                } else {
+                  // mostrar error al usuario
+                  console.error("Error marcando obra:", res.error || res.status);
+                }
+            };                
           //prueba para insertar imagen con diferentes tamaños
             //const imgSrc = srcCandidate || FALLBACK_IMG || "";
               //const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
@@ -235,9 +265,65 @@ function authFetch(input, init = {}) {
           }
         });
     cont.appendChild(ul);
+        cont.addEventListener('click', (event) => {
+          const btn = event.target.closest('.biblio-obra');
+          if (!btn) return;
+          event.preventDefault();
+          // obtener obra_id preferiblemente desde el dataset del li
+          const liEl = btn.closest('li');
+          const obraId = liEl?.dataset.obraId ?? btn.dataset.obraId ?? null;
+          if (obraId) onLibroClick(obraId);
+        });
     contfinal.appendChild(ulfinal);
+        contfinal.addEventListener('click', (event) => {
+          const btn = event.target.closest('.biblio-obra');
+          if (!btn) return;
+          event.preventDefault();
+          // obtener obra_id preferiblemente desde el dataset del li
+          const liEl = btn.closest('li');
+          const obraId = liEl?.dataset.obraId ?? btn.dataset.obraId ?? null;
+          if (obraId) onLibroClick(obraId);
+        });
+
     activarLinksPDF();
   }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /**
+   * Llama a POST ${API_BASE}/biblioteca/finalizado
+   * Envía el campo finalizado tal cual (sin normalizar).
+   * @param {string} obraId - obra_id (string)
+   * @param {number|boolean|string} finalizado - 1|0|true|false o "1"|"0"
+   * @returns {Promise<boolean>} - true si el endpoint devuelve ok/true, false en caso contrario
+   */
+  async function updateFinalizado(obraId, finalizado) {
+    if (!usuario_id && !token) return;
+    if (!obraId) return;
+  
+    const url = `${API_BASE}/biblioteca/finalizado`;
+    const resp = await authFetch(url, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ obra_id: obraId, finalizado })
+                          });
+  
+      const text = await resp.text().catch(() => "");
+        if (!text) return false;
+        try {
+          const parsed = JSON.parse(text);
+          if (typeof parsed === "boolean") return parsed;
+          if (parsed && typeof parsed === "object" && typeof parsed.ok === "boolean") return parsed.ok;
+        } catch {
+          // no JSON
+        }
+    
+        const t = text.trim().toLowerCase();
+          if (t === "true") return true;
+          if (t === "false") return false;
+      return false;
+  }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   /**
    * cargarObras
    *
@@ -558,14 +644,13 @@ function authFetch(input, init = {}) {
       }
   // Añadir a la biblioteca (usa authFetch que añade Authorization automáticamente)
   // Devuelve siempre un objeto con la forma: { ok: boolean, data?, error?, status? }
-  export async function addToBiblio(clave, { timeout = 8000 } = {}) {
+  export async function addToBiblio(clave, { timeout = 8000, remove = false } = {}) {
     // Validación básica de entrada: clave debe ser una cadena no vacía
     if (!clave || typeof clave !== "string") {  return { ok: false, error: "obra NO válida" };      }  
     // Comprobación de autorización en cliente: evita llamadas sin token
-    // (authFetch añade el header Authorization si la variable token está presente)
     if (!token) {  return { ok: false, error: "no autorizado" };    }
   
-    const url = `${API_BASE}/biblioteca/add`;
+    const url = remove ? `${API_BASE}/biblioteca/remove` : `${API_BASE}/biblioteca/add`;
     // AbortController para poder cancelar la petición si excede el timeout
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
