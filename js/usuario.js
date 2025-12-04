@@ -59,7 +59,7 @@ const token = localStorage.getItem("jwt");
  * authFetch(input, init)
  * Wrapper de fetch que añade Authorization Bearer si existe token
  */
-function authFetch(input, init = {}) {
+export function authFetch(input, init = {}) {
   const headers = new Headers(init.headers || {});
   if (token) headers.set("Authorization", `Bearer ${token}`);
   return fetch(input, { ...init, headers });
