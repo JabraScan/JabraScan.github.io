@@ -23,6 +23,8 @@ const URL_GOOGLE = "https://script.google.com/macros/s/AKfycbwQNm88siN8ASQXXbNYe
 // URL del Cloudflare Worker que replica el flujo (ajusta al tuyo)
 const URL_CLOUDFLARE = "https://jabrascan.net"; // TODO: cambia por tu ruta real
 
+const token = localStorage.getItem("jwt");
+const usuario_id = localStorage.getItem("user_id");
 //const API_KEY = "X%B~ZiP?RJA5LUGVAU_9KgDp?7~rUX8KW2D9Q3Fgiyt=1.]Ww#a^FGEMFuM:}#WP4r2L!e9U?fA+qcUjReWV"; // Opcional, si tu backend lo requiere
 /*// 🔐 Genera un token temporal codificado en base64
 export function generarToken() {
@@ -46,7 +48,9 @@ const API_KEY = "";
 // @returns {Promise<string>} "OK" si se actualizó correctamente
 //
 export function incrementarVisita(idvisitado) {
-   console.log(idvisitado);
+   // Iniciar la actualización en paralelo (prioridad a la llamada de visitas)
+     startUpdateUltimoCapituloIfNeeded(idvisitado);
+   //Incremento de visitas
   const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=incrementar`;
   return fetch(url)
     .then(res => res.text())
@@ -55,6 +59,34 @@ export function incrementarVisita(idvisitado) {
       return "ERROR";
     });
 }
+   /**
+    * Actualización del último capítulo leido  para usuarios logueados
+    * - idvisitado puede ser "obra_<obraId>" o "<obraId>_<capitulo>"
+    * - Si detecta capítulo, lanza updateUltimoCapitulo(obraId, capitulo) en background.
+    * - Errores de la llamada se capturan para no afectar al flujo llamador.
+    */
+   function startUpdateUltimoCapituloIfNeeded(idvisitado) {
+      if (!token) return;  
+        try {
+          // No procesamos los ids con prefijo "obra_"
+          if (typeof idvisitado !== 'string' || idvisitado.startsWith('obra_')) return;      
+             const sepIndex = idvisitado.indexOf('_');
+             if (sepIndex === -1) return;
+      
+             const obraId = idvisitado.slice(0, sepIndex);
+             const capitulo = idvisitado.slice(sepIndex + 1);      
+          if (!obraId || !capitulo) return;
+          // Fire-and-forget: iniciar en paralelo y silenciar errores
+          updateUltimoCapitulo(obraId, capitulo).catch(err => {
+            // Logueamos para depuración pero no propagamos el error
+            console.error('updateUltimoCapitulo failed (ignored):', err);
+          });
+        } catch (e) {
+          // Cualquier fallo en el parsing no debe romper el flujo principal
+          console.error("Capitulo no incrementado");
+        }
+   }
+
 
 //
 //Consulta el número de visitas para un ID
@@ -217,7 +249,7 @@ export function obtenerResumenObras() {
     */
       async function updateUltimoCapitulo(obraId, capitulo) {
         // Si no hay ni usuario ni token, no intentamos nada (autenticación ausente)
-        if (!usuario_id && !token) return;
+        if (!token) return;
         // Validación de obraId: si falta, no tiene sentido continuar
         if (obraId == null || obraId === '') return;
         // Validación de capítulo: si falta, no hay nada que actualizar
