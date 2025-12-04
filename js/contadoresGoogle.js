@@ -263,11 +263,7 @@ export function obtenerResumenObras() {
           capitulo: capitulo == null ? null : String(capitulo)
         };
 
-         console.log(authFetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          }));
+         console.log(token);
 
         try {
           const resp = await authFetch(url, {
