@@ -252,7 +252,7 @@ function authFetch(input, init = {}) {
                   // mostrar error al usuario
                   console.error("Error marcando obra:", res.error || res.status);
                 }
-            };                
+            });                
           //prueba para insertar imagen con diferentes tamaños
             //const imgSrc = srcCandidate || FALLBACK_IMG || "";
               //const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
