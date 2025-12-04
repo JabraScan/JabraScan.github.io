@@ -200,7 +200,7 @@ function authFetch(input, init = {}) {
                 <button type="button" class="btn btn-sm btn-outline-danger delete-obra" data-obra-id="${item.obra_id ?? ''}" title="Quitar de la Biblioteca" aria-label="Quitar de la Biblioteca">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-success marcar-finalizado" data-obra-id="${item.obra_id ?? ''}" title="Marcar como finalizado" aria-label="Marcar como finalizado">
+                <button type="button" class="btn btn-sm btn-outline-success marcar-finalizado" data-obra-id="${item.obra_id ?? ''}" title="${item.finalizado == 0 ? 'Marcar como finalizado' : 'Mover a Biblioteca'}" aria-label="${item.finalizado == 0 ? 'Marcar como finalizado' : 'Mover a Biblioteca'}">
                   <i class="fa fa-check" aria-hidden="true"></i>
                 </button>
               </div>
@@ -213,7 +213,7 @@ function authFetch(input, init = {}) {
               <button type="button" class="btn btn-sm btn-outline-danger delete-obra" data-obra-id="${item.obra_id ?? ''}" title="Quitar de la Biblioteca" aria-label="Quitar de la Biblioteca">
                 <i class="fa fa-trash" aria-hidden="true"></i>
               </button>
-              <button type="button" class="btn btn-sm btn-outline-success marcar-finalizado" data-obra-id="${item.obra_id ?? ''}" title="Marcar como finalizado" aria-label="Marcar como finalizado">
+              <button type="button" class="btn btn-sm btn-outline-success marcar-finalizado" data-obra-id="${item.obra_id ?? ''}" title="${item.finalizado == 0 ? 'Marcar como finalizado' : 'Mover a Biblioteca'}" aria-label="${item.finalizado == 0 ? 'Marcar como finalizado' : 'Mover a Biblioteca'}">
                 <i class="fa fa-check" aria-hidden="true"></i>
               </button>
             </div>
@@ -221,6 +221,7 @@ function authFetch(input, init = {}) {
           //añadimos valoraciones para usuario
           const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, { soloEstrellas: true, actualizarVoto: true });
           li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
+          //boton borrar obra
           li.querySelectorAll('.delete-obra').forEach(btn => {
             btn.addEventListener('click', async (event) => {
               const button = event.currentTarget;
@@ -239,20 +240,44 @@ function authFetch(input, init = {}) {
               }
             });
           });
-          li.querySelector(".marcar-finalizado").addEventListener("click", async () => {
-              const btn = li.querySelector(".marcar-finalizado");
-                btn.disabled = true;
-                  const res = await updateFinalizado(String(item.obra_id), item.finalizado);
-                btn.disabled = false;
-              
-                if (res.ok) {
-                  // actualizar UI, mover elemento de la lista
-                  li.remove();
+          //boton marcar finalizado / mover a biblioteca
+          li.querySelectorAll('.marcar-finalizado').forEach(btn => {
+            btn.addEventListener('click', async (event) => {
+              const button = event.currentTarget;
+              button.disabled = true;
+              try {
+                const liEl = button.closest('li');
+                const enPrincipal = !!liEl.closest('#bibliotecaResultado');
+                const valorOppuesto = enPrincipal ? 1 : 0; // si está en bibliotecaResultado enviamos 1, si está en bibliotecafin_Resultado enviamos 0
+                const res = await updateFinalizado(String(item.obra_id), valorOppuesto);
+          
+                // comprobar éxito de forma genérica
+                const success = !!res && (res.ok || res.success || res === true);
+                if (success) {
+                  // mover el li al UL contrario
+                  liEl.remove();
+                  const destinoCont = document.getElementById(enPrincipal ? 'bibliotecafin_Resultado' : 'bibliotecaResultado');
+                  const destinoUl = destinoCont && destinoCont.querySelector('ul.list-group');
+                  if (destinoUl) destinoUl.appendChild(liEl);
+          
+                  // actualizar dataset y títulos de los botones dentro del li
+                  liEl.dataset.finalizado = String(valorOppuesto);
+                  const titleText = valorOppuesto == 1 ? 'Mover a la biblioteca' : 'Marcar como finalizado';
+                  liEl.querySelectorAll('.marcar-finalizado').forEach(b => {
+                    b.title = titleText;
+                    b.setAttribute('aria-label', titleText);
+                  });
                 } else {
-                  // mostrar error al usuario
-                  console.error("Error marcando obra:", res.error || res.status);
+                  console.error('Error finalizando obra:', res);
                 }
-            });                
+              } catch (err) {
+                console.error('Error en la petición:', err);
+              } finally {
+                button.disabled = false;
+              }
+            });
+          });
+            
           //prueba para insertar imagen con diferentes tamaños
             //const imgSrc = srcCandidate || FALLBACK_IMG || "";
               //const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
