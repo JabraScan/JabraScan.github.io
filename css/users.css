@@ -94,21 +94,17 @@
       image-rendering: -webkit-optimize-contrast;
     }
     /* tabs corregir comportamiento en iOS */
+    /*
     .tab-pane { display: none; }
     .tab-pane.active { display: block !important; }
     .tab-pane { -webkit-backface-visibility: hidden; transform: translateZ(0); }
-      /* Forzar que d-none oculte por defecto */
       .d-none {
         display: none !important;
       }
-      
-      /* Restaurar d-sm-flex en pantallas >= 576px */
       @media (min-width: 576px) {
         .d-sm-flex {
           display: flex !important;
         }
-      
-        /* Si un elemento tiene ambas clases, forzamos que en sm+ se muestre como flex */
         .d-none.d-sm-flex,
         .d-sm-flex.d-none {
           display: flex !important;
@@ -118,14 +114,13 @@
           display: none !important;
         }
       }
-      /* Opcional: forzar re-pint en iOS si hay problemas de render */
       .d-none,
       .d-sm-flex {
         -webkit-backface-visibility: hidden;
         -webkit-transform: translateZ(0);
         transform: translateZ(0);
       }
-
+    */
     /* Forzar que la tarjeta mantenga su flujo y el footer quede abajo si existe */
     .card {
       /* no cambiamos tu markup; esto solo asegura consistencia en navegadores */
