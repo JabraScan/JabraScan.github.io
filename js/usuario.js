@@ -498,9 +498,10 @@ export function authFetch(input, init = {}) {
         
               // Card principal (estructura vertical)
               const card = document.createElement('div');
-                card.className = 'card p-1 text-center d-flex flex-column w-100';              
-                  const extra = (item.precio >= 100 ? 'border-gold' : (item.precio >= 50 ? 'border-silver' : ''));
-                  if (extra) addClass(card, extra);        
+                card.className = 'card p-1 text-center d-flex flex-column w-100';
+                  if (item.precio >= 100)     { card.addClass('border-premium'); }
+                  else if (item.precio >= 50) { card.addClass('border-silver');  }
+                  else if (item.precio >= 25) { card.addClass('border-bronze');  }
               // Imagen del avatar
               const img = document.createElement('img');
                 //img.src = item.src;               // ruta de la imagen
