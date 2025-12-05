@@ -100,15 +100,15 @@
       -webkit-box-direction: normal;
       -ms-flex-direction: column;
       flex-direction: column;
-    }
-    .card-premium { border: 3px solid #D4AF37;   }
-    .card-silver  { border: 2px solid #C0C0C0;   }
-    .card-bronze  { border: 2px solid #CD7F32;   }
-    
+    }   
     /* Footer empujado abajo (funciona también en Safari) */
     .card .card-footer {
       margin-top: auto;
     }
+    /* Colores para niveles de avatares */
+    .card .card-premium { border: 3px solid #D4AF37;   }
+    .card .card-silver  { border: 2px solid #C0C0C0;   }
+    .card .card-bronze  { border: 2px solid #CD7F32;   }
     
     /* Evitar comportamiento táctil que pueda afectar layout en iOS */
     html, body {
