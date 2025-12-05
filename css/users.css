@@ -101,8 +101,9 @@
       -ms-flex-direction: column;
       flex-direction: column;
     }
-    .card-premium { border: 3px solid gold;   }
-    .card-silver  { border: 2px solid silver; }
+    .card-premium { border: 3px solid #D4AF37;   }
+    .card-silver  { border: 2px solid #C0C0C0;   }
+    .card-bronze  { border: 2px solid #CD7F32;   }
     
     /* Footer empujado abajo (funciona también en Safari) */
     .card .card-footer {
