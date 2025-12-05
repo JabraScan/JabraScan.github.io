@@ -217,9 +217,35 @@ async function fetchWithTimeout(url, options = {}, timeout = 8000) {
     throw e;
   }
 }
+// --- comprobar sesion usando cookies ---
+      async function checkSessionOnLoad() {
+        try {
+          const res = await fetch(`${WORKER_URL}/me`, {
+            method: "GET",
+            credentials: "include"   // <-- importante: envía la cookie access_token
+          });
+      
+          if (!res.ok) {
+            // No hay sesión válida
+            document.dispatchEvent(new CustomEvent("auth:unauthenticated"));
+            return;
+          }
+      
+          const data = await res.json();
+          if (data.usuario) {
+            // Sesión válida, dispara evento con datos del usuario
+            document.dispatchEvent(new CustomEvent("auth:ready", { detail: data.usuario }));
+          } else {
+            document.dispatchEvent(new CustomEvent("auth:unauthenticated"));
+          }
+        } catch (err) {
+          console.error("Error comprobando sesión:", err);
+          document.dispatchEvent(new CustomEvent("auth:unauthenticated"));
+        }
+      }
 
 // --- comprobar sesión y actualizar UI --- 
-async function checkSessionOnLoad() {
+async function checkSessionOnLoad_old() {
   const token = localStorage.getItem("jwt");
   if (!token) {
     showLoginButton();
@@ -258,9 +284,26 @@ async function checkSessionOnLoad() {
     document.dispatchEvent(new CustomEvent("auth:unauthenticated", { detail: { reason: e.message || e } }));
   }
 }
-
+// --- logout con cookies
+      async function logout() {
+        try {
+          const res = await fetch(`${WORKER_URL}/auth/logout`, {
+            method: "POST",
+            credentials: "include"   // <-- importante: envía la cookie al backend
+          });
+      
+          if (res.ok) {
+            // Borra la sesión en el backend y dispara evento en el frontend
+            document.dispatchEvent(new CustomEvent("auth:loggedOut"));
+          } else {
+            console.error("Error al cerrar sesión:", await res.text());
+          }
+        } catch (err) {
+          console.error("Error en logout:", err);
+        }
+      }
 // --- logout --- 
-function logout() {
+function logout_old() {
   localStorage.removeItem("jwt");
   localStorage.removeItem("user_id");
   localStorage.removeItem("user_nickname");
