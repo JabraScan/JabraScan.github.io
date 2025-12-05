@@ -106,9 +106,9 @@
       margin-top: auto;
     }
     /* Colores para niveles de avatares */
-    .card-premium { border: 23px solid #D4AF37;   }
-    .card-silver  { border: 22px solid #C0C0C0;   }
-    .card-bronze  { border: 22px solid #CD7F32;   }
+    .card-premium { border: 23px solid #D4AF37 !important;   }
+    .card-silver  { border: 22px solid #C0C0C0 !important;   }
+    .card-bronze  { border: 22px solid #CD7F32 !important;   }
     
     /* Evitar comportamiento táctil que pueda afectar layout en iOS */
     html, body {
