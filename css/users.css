@@ -56,6 +56,11 @@
   .avatar-overlay-backdrop.show {
     display: block;
   }
+  /* Colores para niveles de avatares */
+  .avatar-gold    { border: 3px solid #D4AF37 !important;   }
+  .avatar-silver  { border: 2px solid #C0C0C0 !important;   }
+  .avatar-bronze  { border: 2px solid #CD7F32 !important;   }
+
 
 /* compatibilidad iOS */
     /* Fallback para gap en flex (Safari antiguo no soporta gap en flex) */
@@ -104,12 +109,7 @@
     /* Footer empujado abajo (funciona también en Safari) */
     .card .card-footer {
       margin-top: auto;
-    }
-    /* Colores para niveles de avatares */
-    .card-premium { border: 23px solid #D4AF37 !important;   }
-    .card-silver  { border: 22px solid #C0C0C0 !important;   }
-    .card-bronze  { border: 22px solid #CD7F32 !important;   }
-    
+    }    
     /* Evitar comportamiento táctil que pueda afectar layout en iOS */
     html, body {
       -webkit-text-size-adjust: 100%;
