@@ -181,7 +181,7 @@ function loginTwitter() {
   window.location.href = `${WORKER_URL}/auth/twitter`;
 }
 // -- version con cookies
-      // estado global usuario en memoria
+/*      // estado global usuario en memoria
       let currentUser = null;      
       async function initSessionFromUrl() {
         // si ya tenemos usuario en memoria, no llamamos al backend
@@ -213,10 +213,10 @@ function loginTwitter() {
           document.dispatchEvent(new CustomEvent("auth:unauthenticated"));
           return false;
         }
-      }
+      }*/
 
 // --- captura token de la URL sin recargar y notifica la app ---
-function initSessionFromUrl2() {
+function initSessionFromUrl() {
   const params = new URLSearchParams(window.location.search);
   const tokenFromUrl = params.get("token");
   if (!tokenFromUrl) return false;
@@ -252,7 +252,7 @@ async function fetchWithTimeout(url, options = {}, timeout = 8000) {
   }
 }
 // --- comprobar sesion usando cookies ---
-      async function checkSessionOnLoad() {
+/*      async function checkSessionOnLoad() {
         try {
           const res = await fetch(`${WORKER_URL}/me`, {
             method: "GET",
@@ -277,9 +277,9 @@ async function fetchWithTimeout(url, options = {}, timeout = 8000) {
           document.dispatchEvent(new CustomEvent("auth:unauthenticated"));
         }
       }
-
+*/
 // --- comprobar sesión y actualizar UI --- 
-async function checkSessionOnLoad_old() {
+async function checkSessionOnLoad() {
   const token = localStorage.getItem("jwt");
   if (!token) {
     showLoginButton();
@@ -319,7 +319,7 @@ async function checkSessionOnLoad_old() {
   }
 }
 // --- logout con cookies
-      async function logout() {
+/*      async function logout() {
         try {
           const res = await fetch(`${WORKER_URL}/auth/logout`, {
             method: "POST",
@@ -335,9 +335,9 @@ async function checkSessionOnLoad_old() {
         } catch (err) {
           console.error("Error en logout:", err);
         }
-      }
+      }*/
 // --- logout --- 
-function logout_old() {
+function logout() {
   localStorage.removeItem("jwt");
   localStorage.removeItem("user_id");
   localStorage.removeItem("user_nickname");
