@@ -56,9 +56,9 @@
     display: block;
   }
   /* Colores para niveles de avatares */
-  .avatar-gold    { border: 3px solid #D4AF37 !important;   }
-  .avatar-silver  { border: 2px solid #C0C0C0 !important;   }
-  .avatar-bronze  { border: 2px solid #CD7F32 !important;   }
+  .card-gold    { border: 3px solid #D4AF37 !important;   }
+  .card-silver  { border: 3px solid #C0C0C0 !important;   }
+  .card-bronze  { border: 2px solid #CD7F32 !important;   }
 
 
 /* compatibilidad iOS */
