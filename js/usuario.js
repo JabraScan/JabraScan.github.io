@@ -498,8 +498,9 @@ export function authFetch(input, init = {}) {
         
               // Card principal (estructura vertical)
               const card = document.createElement('div');
-                card.className = 'card p-1 text-center d-flex flex-column w-100';
-        
+                card.className = 'card p-1 text-center d-flex flex-column w-100';              
+                  const extra = (item.precio >= 100 ? 'border-gold' : (item.precio >= 50 ? 'border-silver' : ''));
+                  if (extra) addClass(card, extra);        
               // Imagen del avatar
               const img = document.createElement('img');
                 //img.src = item.src;               // ruta de la imagen
@@ -518,8 +519,8 @@ export function authFetch(input, init = {}) {
         
               // Pie de foto / descripción corta
               const caption = document.createElement('div');
-              caption.className = 'small text-truncate mt-1';
-              caption.textContent = item.alt;
+                caption.className = 'small text-truncate mt-1';
+                caption.textContent = item.alt;
         
               // Footer (se crea según estado: adquirido o en tienda)
               let footer = null;
