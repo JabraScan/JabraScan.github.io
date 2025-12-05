@@ -180,9 +180,43 @@ function loginMeta() {
 function loginTwitter() {
   window.location.href = `${WORKER_URL}/auth/twitter`;
 }
+// -- version con cookies
+      // estado global usuario en memoria
+      let currentUser = null;      
+      async function initSessionFromUrl() {
+        // si ya tenemos usuario en memoria, no llamamos al backend
+        if (currentUser) {
+          document.dispatchEvent(new CustomEvent("auth:ready", { detail: currentUser }));
+          return true;
+        }
+      
+        // si no, pedimos al backend
+        try {
+          const res = await fetch(`${WORKER_URL}/me`, {
+            method: "GET",
+            credentials: "include"
+          });
+      
+          if (res.ok) {
+            const data = await res.json();
+            if (data.usuario) {
+              currentUser = data.usuario; // guardamos en memoria
+              document.dispatchEvent(new CustomEvent("auth:ready", { detail: currentUser }));
+              return true;
+            }
+          }
+      
+          document.dispatchEvent(new CustomEvent("auth:unauthenticated"));
+          return false;
+        } catch (err) {
+          console.error("Error comprobando sesión:", err);
+          document.dispatchEvent(new CustomEvent("auth:unauthenticated"));
+          return false;
+        }
+      }
 
 // --- captura token de la URL sin recargar y notifica la app ---
-function initSessionFromUrl() {
+function initSessionFromUrl2() {
   const params = new URLSearchParams(window.location.search);
   const tokenFromUrl = params.get("token");
   if (!tokenFromUrl) return false;
