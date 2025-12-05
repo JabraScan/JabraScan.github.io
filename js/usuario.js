@@ -497,12 +497,11 @@ export function authFetch(input, init = {}) {
                 col.className = 'col-6 col-sm-4 col-md-3 col-lg-2 d-flex';
               // Card principal (estructura vertical)
               const card = document.createElement('div');
-                card.className = 'card p-1 text-center d-flex flex-column w-100';
-                  /*
-                  if (item.precio >= 100)     { card.addClass('card-premium'); }
-                  else if (item.precio >= 50) { card.addClass('card-silver');  }
-                  else if (item.precio >= 25) { card.addClass('card-bronze');  }
-                  */
+                let extra = '';
+                    if (item.precio >= 100)     { extra = 'card-premium'; }
+                    else if (item.precio >= 50) { extra = 'card-silver';  }
+                    else if (item.precio >= 25) { extra = 'card-bronze';  }
+                card.className = `card p-1 text-center d-flex flex-column w-100 ${extra}`;
               // Imagen del avatar
               const img = document.createElement('img');
                 //img.src = item.src;               // ruta de la imagen
