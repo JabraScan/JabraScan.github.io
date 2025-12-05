@@ -495,13 +495,14 @@ export function authFetch(input, init = {}) {
               // Columna que contendrá la card
               const col = document.createElement('div');
                 col.className = 'col-6 col-sm-4 col-md-3 col-lg-2 d-flex';
-        
               // Card principal (estructura vertical)
               const card = document.createElement('div');
                 card.className = 'card p-1 text-center d-flex flex-column w-100';
+                  /*
                   if (item.precio >= 100)     { card.addClass('card-premium'); }
                   else if (item.precio >= 50) { card.addClass('card-silver');  }
                   else if (item.precio >= 25) { card.addClass('card-bronze');  }
+                  */
               // Imagen del avatar
               const img = document.createElement('img');
                 //img.src = item.src;               // ruta de la imagen
