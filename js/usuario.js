@@ -105,9 +105,21 @@ export function authFetch(input, init = {}) {
         const datosUser = document.createElement('div');
             datosUser.id = 'datos-user';
             datosUser.innerHTML = `
-                <h3 id="nick">${data.nick || "(sin nick)"}</h3>
+                <h3 id="nick">${data.nick || "(sin nick)"}</h3><i class="fa fa-pencil" id="edit-nick" style="cursor:pointer; font-size:0.8em; margin-left:8px;"></i>
                 <p class="text-muted">Puntos: <span id="user_puntos">${data.puntos}</span></p>
-              `;      
+              `;
+
+            const editNick = datosUser.querySelector("#edit-nick");
+              editNick.addEventListener("click", async () => {
+                const nuevoNick = prompt("Introduce tu nuevo nick:");
+                  const data = await actualizarnick(nuevoNick);
+                    if (data && data.ok) {
+                      const nick = datosUser.querySelector("#nick");
+                      nick.textContent = data.nick; //cambio al nuevo nick
+                      nick.appendChild(editNick); // mantenemos el icono
+                    }
+              });
+
         usermain.appendChild(img);
         usermain.appendChild(datosUser);
     }
@@ -640,6 +652,23 @@ export function authFetch(input, init = {}) {
           return { ok: false, error: err?.message || 'Error de red' };
         }
       }
+    // Función asincrónica para actualizar el nick del usuario
+    async function actualizarnick(nuevoNick) {
+      if (!token) return;
+      if (!nuevoNick) return;
+        const url = `${API_BASE}/usuarios/edit/nick`;
+        // Se realiza la petición al servidor usando authFetch
+        const resp = await authFetch(url, {
+          method: "POST", // Método POST para enviar datos
+          headers: { "Content-Type": "application/json" }, // Se especifica que el cuerpo es JSON
+          body: JSON.stringify({ nick: nuevoNick }) // Se envía el nuevo nick en el cuerpo
+        });
+        // Si la respuesta no es correcta (status distinto de 200-299), se detiene
+        if (!resp.ok) return;
+      // Se devuelve la respuesta procesada
+      return await resp.json();
+    }
+
 //======================================================================
     function comprarAvatar(avatarId) {
       return true;
