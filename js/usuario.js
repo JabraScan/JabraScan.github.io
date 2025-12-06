@@ -111,16 +111,26 @@ export function authFetch(input, init = {}) {
                 </div>
                 <p class="text-muted">Puntos: <span id="user_puntos">${data.puntos}</span></p>
             `;
-
+            //listener para editar el nick de usuario
             const editNick = datosUser.querySelector("#edit-nick");
               editNick.addEventListener("click", async () => {
                 const nuevoNick = prompt("Introduce tu nuevo nick:");
-                  const data = await actualizarnick(nuevoNick);
-                    if (data && data.ok) {
-                      const nick = datosUser.querySelector("#nick");
-                      nick.textContent = data.nick; //cambio al nuevo nick
-                      nick.appendChild(editNick); // mantenemos el icono
-                    }
+                if (!nuevoNick) return;
+                // Deshabilitar mientras dura la operación
+                editNick.style.pointerEvents = "none";
+                  editNick.style.opacity = "0.5";
+                  try {
+                    const data = await actualizarnick(nuevoNick);
+                      if (data && data.ok) {
+                        const nick = datosUser.querySelector("#nick");
+                        nick.textContent = data.nick; // cambio al nuevo nick
+                        nick.appendChild(editNick);   // mantenemos el icono
+                      }
+                  } finally {
+                    // Rehabilitar siempre al terminar
+                    editNick.style.pointerEvents = "auto";
+                      editNick.style.opacity = "1";
+                  }
               });
 
         usermain.appendChild(img);
