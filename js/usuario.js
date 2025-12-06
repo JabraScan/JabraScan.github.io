@@ -105,9 +105,12 @@ export function authFetch(input, init = {}) {
         const datosUser = document.createElement('div');
             datosUser.id = 'datos-user';
             datosUser.innerHTML = `
-                <h3 id="nick">${data.nick || "(sin nick)"}</h3><i class="fa fa-pencil" id="edit-nick" style="cursor:pointer; font-size:0.8em; margin-left:8px;"></i>
+                <div style="display:flex; align-items:center;">
+                  <h3 id="nick"  style="margin:0; display:inline-block;">${data.nick || "(sin nick)"}</h3>
+                  <i class="fa fa-pencil" id="edit-nick" style="cursor:pointer; font-size:0.8em; margin-left:8px;"></i>
+                </div>
                 <p class="text-muted">Puntos: <span id="user_puntos">${data.puntos}</span></p>
-              `;
+            `;
 
             const editNick = datosUser.querySelector("#edit-nick");
               editNick.addEventListener("click", async () => {
