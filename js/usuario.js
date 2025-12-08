@@ -598,20 +598,21 @@ export function authFetch(input, init = {}) {
                             }
                           }
                         });
-              // Montar la card: imagen, caption y footer (si existe)
-              card.appendChild(img);
-              card.appendChild(caption);
-              if (footer) card.appendChild(footer);
-              col.appendChild(card);
-        
-              // Añadir la columna a la pestaña correspondiente
-              if (item.adquirido === 'adquirido') {
-                rowAvatares.appendChild(col); // pestaña "Avatares" (adquiridos)
-              } else {
-                rowTienda.appendChild(col);   // pestaña "Tienda" (disponibles para comprar)
-              }
-            };
-        //});
+                  }
+                }
+                // Montar la card: imagen, caption y footer (si existe)
+                card.appendChild(img);
+                card.appendChild(caption);
+                if (footer) card.appendChild(footer);
+                col.appendChild(card);
+          
+                // Añadir la columna a la pestaña correspondiente
+                if (item.adquirido === 'adquirido') {
+                  rowAvatares.appendChild(col); // pestaña "Avatares" (adquiridos)
+                } else {
+                  rowTienda.appendChild(col);   // pestaña "Tienda" (disponibles para comprar)
+                }
+            });
             // Insertar filas en los contenedores del DOM
             tienda.appendChild(rowTienda);
             avatares.appendChild(rowAvatares);
