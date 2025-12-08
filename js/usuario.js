@@ -610,8 +610,8 @@ export function authFetch(input, init = {}) {
               } else {
                 rowTienda.appendChild(col);   // pestaña "Tienda" (disponibles para comprar)
               }
-            });
-        
+            };
+        //});
             // Insertar filas en los contenedores del DOM
             tienda.appendChild(rowTienda);
             avatares.appendChild(rowAvatares);
