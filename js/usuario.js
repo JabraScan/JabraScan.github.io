@@ -598,7 +598,7 @@ export function authFetch(input, init = {}) {
                             }
                           }
                         });
-                      footer.addChild(buyBtn);
+                      footer.appendChild(buyBtn);
                   }
                 }
                 // Montar la card: imagen, caption y footer (si existe)
