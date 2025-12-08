@@ -579,7 +579,7 @@ export function authFetch(input, init = {}) {
                       // Evitar burbujeo y llamar a comprarAvatar con el id
                       //buyBtn.addEventListener('click', (ev) => {
                       //  ev.stopPropagation();
-                      //  comprarAvatar(item.id);
+                      //  comprarAvatar(item.id); 
                       //});
                         buyBtn.addEventListener('click', async (ev) => {
                           ev.stopPropagation();                        
