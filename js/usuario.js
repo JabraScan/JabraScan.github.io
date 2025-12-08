@@ -681,12 +681,26 @@ export function authFetch(input, init = {}) {
       // Se devuelve la respuesta procesada
       return await resp.json();
     }
-
 //======================================================================
-    function comprarAvatar(avatarId) {
-      return true;
-    }
-/* actualizar todos los tabs con un select para dispositivos moviles */
+  // Función asincrónica para comprar un avatar
+  async function comprarAvatar(avatarId) {
+    if (!token) return;              // Si no hay token, no se puede autenticar
+    if (!avatarId) return;           // Si no se pasa un id de avatar, se detiene
+  
+    const url = `${API_BASE}/usuarios/buy/avatar`;
+    // Se realiza la petición al servidor usando authFetch
+    const resp = await authFetch(url, {
+      method: "POST",                                // Método POST para enviar datos
+      headers: { "Content-Type": "application/json" }, // Se especifica que el cuerpo es JSON
+      body: JSON.stringify({ idavatar: avatarId })     // Se envía el id del avatar en el cuerpo
+    });  
+    // Si la respuesta no es correcta (status distinto de 200-299), se detiene
+    if (!resp.ok) return;  
+    // Se devuelve la respuesta procesada
+    return await resp.json();
+  }
+//======================================================================
+  /* actualizar todos los tabs con un select para dispositivos moviles */
       function bindTabsSelect() {
         const select = document.getElementById('tabsSelect');
         if (!select) return;
