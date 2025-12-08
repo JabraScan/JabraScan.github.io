@@ -577,14 +577,27 @@ export function authFetch(input, init = {}) {
                       // El botón contiene el icono y el importe en lugar del texto "Comprar"
                       buyBtn.innerHTML = '💰 ' + String(item.precio);
                       // Evitar burbujeo y llamar a comprarAvatar con el id
-                      buyBtn.addEventListener('click', (ev) => {
-                        ev.stopPropagation();
-                        comprarAvatar(item.id);
-                      });
-                    footer.appendChild(buyBtn);
-                }
-              }
-        
+                      //buyBtn.addEventListener('click', (ev) => {
+                      //  ev.stopPropagation();
+                      //  comprarAvatar(item.id);
+                      //});
+                        buyBtn.addEventListener('click', async (ev) => {
+                          ev.stopPropagation();                        
+                          const data = await comprarAvatar(item.id);
+                          // Si la compra fue correcta, mover el card
+                          if (data && data.ok) {
+                            // Localizar el card actual
+                            const card = buyBtn.closest(".col-6.col-sm-4.col-md-3.col-lg-2");
+                            if (card) {
+                              // Quitar el footer con el botón de compra
+                              const footer = card.querySelector(".card-footer");
+                              if (footer) footer.remove();
+                              // Mover el card al contenedor de avatares
+                              const avatarResultado = document.getElementById("avatarResultado");
+                              avatarResultado.querySelector(".row.g-2").appendChild(card);
+                            }
+                          }
+                        });        
               // Montar la card: imagen, caption y footer (si existe)
               card.appendChild(img);
               card.appendChild(caption);
@@ -686,7 +699,7 @@ export function authFetch(input, init = {}) {
   async function comprarAvatar(avatarId) {
     if (!token) return;              // Si no hay token, no se puede autenticar
     if (!avatarId) return;           // Si no se pasa un id de avatar, se detiene
-console.log(token);
+
     const url = `${API_BASE}/usuarios/buy/avatar`;
     // Se realiza la petición al servidor usando authFetch
     const resp = await authFetch(url, {
@@ -694,7 +707,6 @@ console.log(token);
       headers: { "Content-Type": "application/json" }, // Se especifica que el cuerpo es JSON
       body: JSON.stringify({ idavatar: avatarId })     // Se envía el id del avatar en el cuerpo
     });
-console.log(resp.ok);
     // Si la respuesta no es correcta (status distinto de 200-299), se detiene
     if (!resp.ok) return;  
     // Se devuelve la respuesta procesada
