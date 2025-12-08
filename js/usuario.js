@@ -686,14 +686,15 @@ export function authFetch(input, init = {}) {
   async function comprarAvatar(avatarId) {
     if (!token) return;              // Si no hay token, no se puede autenticar
     if (!avatarId) return;           // Si no se pasa un id de avatar, se detiene
-  
+console.log(token);
     const url = `${API_BASE}/usuarios/buy/avatar`;
     // Se realiza la petición al servidor usando authFetch
     const resp = await authFetch(url, {
       method: "POST",                                // Método POST para enviar datos
       headers: { "Content-Type": "application/json" }, // Se especifica que el cuerpo es JSON
       body: JSON.stringify({ idavatar: avatarId })     // Se envía el id del avatar en el cuerpo
-    });  
+    });
+console.log(resp.ok);
     // Si la respuesta no es correcta (status distinto de 200-299), se detiene
     if (!resp.ok) return;  
     // Se devuelve la respuesta procesada
