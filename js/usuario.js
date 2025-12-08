@@ -597,7 +597,7 @@ export function authFetch(input, init = {}) {
                               avatarResultado.querySelector(".row.g-2").appendChild(card);
                             }
                           }
-                        });        
+                        });
               // Montar la card: imagen, caption y footer (si existe)
               card.appendChild(img);
               card.appendChild(caption);
