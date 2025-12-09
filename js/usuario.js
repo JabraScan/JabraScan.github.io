@@ -448,6 +448,7 @@ export function authFetch(input, init = {}) {
 
 //------------------------------------------------------------------------
       function avatarPieEstablecer (itemid) {
+        console.log(item.id);
           let footer = document.createElement('div');
             footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
             const btnSet = document.createElement('button');
@@ -465,8 +466,11 @@ export function authFetch(input, init = {}) {
       }
 
     function avatarPieComprar(item) {
+          console.log(item);
+
           // --- Avatar no adquirido: mostrar precio y botón Comprar (si hay precio numérico)
-          if (typeof item.precio === 'number' && Number.isFinite(item.precio)) {
+          //if (typeof item.precio === 'number' && Number.isFinite(item.precio)) {
+          if (item.precio != null) {
             let footer = document.createElement('div');
               footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
               const buyBtn = document.createElement('button');
@@ -609,7 +613,8 @@ export function authFetch(input, init = {}) {
                 caption.textContent = item.alt;
         
               // Footer (se crea según estado: adquirido o en tienda)
-              let footer = null;        
+              console.log("footer");console.log(item);
+              let footer = null;      
                 if (item.adquirido === 'adquirido') {
                   // --- Avatar ya adquirido: mostrar botón "+Establecer"
                   footer = avatarPieEstablecer(item.id);
