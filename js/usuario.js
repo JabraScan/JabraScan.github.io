@@ -447,8 +447,8 @@ export function authFetch(input, init = {}) {
   }
 
 //------------------------------------------------------------------------
-      function avatarPieEstablecer (item) {
-          footer = document.createElement('div');
+      function avatarPieEstablecer (itemid) {
+          let footer = document.createElement('div');
             footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
             const btnSet = document.createElement('button');
               btnSet.type = 'button';
@@ -457,7 +457,7 @@ export function authFetch(input, init = {}) {
               // Evitar que el click burbujee y llamar a establecerAvatar con el id
               btnSet.addEventListener('click', (ev) => {
                 ev.stopPropagation();
-                establecerAvatar(item.id);
+                establecerAvatar(itemid);
               });
             footer.appendChild(btnSet);
 
@@ -467,7 +467,7 @@ export function authFetch(input, init = {}) {
     function avatarPieComprar(item) {
           // --- Avatar no adquirido: mostrar precio y botón Comprar (si hay precio numérico)
           if (typeof item.precio === 'number' && Number.isFinite(item.precio)) {
-            footer = document.createElement('div');
+            let footer = document.createElement('div');
               footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
               const buyBtn = document.createElement('button');
                 buyBtn.type = 'button';
@@ -489,8 +489,9 @@ export function authFetch(input, init = {}) {
                       const card = buyBtn.closest(".col-6.col-sm-4.col-md-3.col-lg-2");
                       if (card) {
                         // Quitar el footer con el botón de compra
-                        const footer = card.querySelector(".card-footer");
+                        let footer = card.querySelector(".card-footer");
                         if (footer) footer.remove();
+                        footer = avatarPieEstablecer(item.id);
                         // Mover el card al contenedor de avatares
                         const avatarResultado = document.getElementById("avatarResultado");
                           avatarResultado.querySelector(".row.g-2").appendChild(card);
@@ -611,7 +612,7 @@ export function authFetch(input, init = {}) {
               let footer = null;        
                 if (item.adquirido === 'adquirido') {
                   // --- Avatar ya adquirido: mostrar botón "+Establecer"
-                  footer = avatarPieEstablecer(item);
+                  footer = avatarPieEstablecer(item.id);
                 } else {
                   footer = avatarPieComprar(item);
                 }
