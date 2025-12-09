@@ -578,7 +578,8 @@ export function authFetch(input, init = {}) {
                 src: r.avatar_path,
                 alt: r.descripcion || '',
                 precio: Object.prototype.hasOwnProperty.call(r, 'precio') ? r.precio : null,
-                adquirido: r.adquirido
+                adquirido: r.adquirido,
+                tipo: r.tipo || 'web'
               };
         
               // Columna que contendrá la card
