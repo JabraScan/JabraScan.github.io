@@ -301,7 +301,8 @@ async function checkSessionOnLoad() {
     const usuario = data && data.usuario ? data.usuario : {};
     const nickname = usuario.nickname || "Usuario";
     //const avatar = normalizeAvatarUrl(usuario.avatar || "/img/avatar/default.png");
-    const avatar = showUserNick(nickname, avatar);
+console.log(usuario.avatar);
+    const avatar = showUserNick(nickname, usuario.avatar);
     const userId = usuario.id || "";
 
     if (userId) localStorage.setItem("user_id", userId);
