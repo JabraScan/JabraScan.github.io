@@ -167,7 +167,7 @@ function showUserNick(nickname, avatar) {
     nick.textContent = nickname;
     if (avatarImg) imgSrcFromBlobCopia(avatarImg, avatar, FALLBACK_IMG);
     userWrapper.classList.remove("d-none");
-console.log(avatarImg.src);
+
     return avatarImg.src;
   }
 }
@@ -301,7 +301,6 @@ async function checkSessionOnLoad() {
     const usuario = data && data.usuario ? data.usuario : {};
     const nickname = usuario.nickname || "Usuario";
     //const avatar = normalizeAvatarUrl(usuario.avatar || "/img/avatar/default.png");
-console.log(usuario.avatar);
     const avatar = showUserNick(nickname, usuario.avatar);
     const userId = usuario.id || "";
 
