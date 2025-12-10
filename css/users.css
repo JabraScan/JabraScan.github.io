@@ -59,27 +59,31 @@
   .card-gold    { border: 3px solid #D4AF37 !important;   }
   .card-silver  { border: 3px solid #C0C0C0 !important;   }
   .card-bronze  { border: 2px solid #CD7F32 !important;   }
-  .card-premium {
-    border: 4px solid transparent;
-    border-image: linear-gradient(
-      90deg,
-      #ff4d4d,
-      #ffa64d,
-      #ffee4d,
-      #7dff4d,
-      #4dffe6,
-      #4d8aff,
-      #b34dff,
-      #ff4dd2
-    ) 1;
-    animation: card-premium-flow 4s linear infinite;
-    box-shadow: 0 0 12px rgba(255, 77, 210, 0.6); /* brillo extra */
-  }
-  
+  .card-premium::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: inherit;
+    padding: 2px; /* grosor del borde */
+    background: linear-gradient(
+      270deg,
+      #ff4d4d, #ffa64d, #ffee4d, #7dff4d,
+      #4dffe6, #4d8aff, #b34dff, #ff4dd2
+    );
+    background-size: 200% 200%;
+    animation: card-premium-flow 8s linear infinite;
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }  
   @keyframes card-premium-flow {
-    0%   { border-image-source: linear-gradient(90deg, #ff4d4d, #ffa64d, #ffee4d, #7dff4d, #4dffe6, #4d8aff, #b34dff, #ff4dd2); }
-    100% { border-image-source: linear-gradient(450deg, #ff4d4d, #ffa64d, #ffee4d, #7dff4d, #4dffe6, #4d8aff, #b34dff, #ff4dd2); }
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
+
 /*
   .card-premium {
       border: 4px solid transparent;
