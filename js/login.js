@@ -167,6 +167,8 @@ function showUserNick(nickname, avatar) {
     nick.textContent = nickname;
     if (avatarImg) imgSrcFromBlobCopia(avatarImg, avatar, FALLBACK_IMG);
     userWrapper.classList.remove("d-none");
+console.log(avatarImg.src);
+    return avatarImg.src;
   }
 }
 
@@ -298,14 +300,14 @@ async function checkSessionOnLoad() {
 
     const usuario = data && data.usuario ? data.usuario : {};
     const nickname = usuario.nickname || "Usuario";
-    const avatar = normalizeAvatarUrl(usuario.avatar || "/img/avatar/default.png");
+    //const avatar = normalizeAvatarUrl(usuario.avatar || "/img/avatar/default.png");
+    const avatar = showUserNick(nickname, avatar);
     const userId = usuario.id || "";
 
     if (userId) localStorage.setItem("user_id", userId);
     localStorage.setItem("user_nickname", nickname);
     localStorage.setItem("user_avatar", avatar);
 
-    showUserNick(nickname, avatar);
     // notifica que la auth está lista y pasa el usuario
     document.dispatchEvent(new CustomEvent("auth:ready", { detail: { user: usuario } }));
   } catch (e) {
