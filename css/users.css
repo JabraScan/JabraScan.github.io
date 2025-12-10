@@ -61,16 +61,16 @@
   .card-bronze  { border: 2px solid #CD7F32 !important;   }
   .card-premium {
       position: relative;
-      border: 4px solid transparent;
       border-radius: 12px;
+      border: 4px solid transparent;
+      z-index: 0;
     }
     
     .card-premium::before {
       content: "";
       position: absolute;
-      inset: 0;
+      inset: -4px; /* coincide con el grosor del borde */
       border-radius: inherit;
-      padding: 4px; /* grosor del borde */
       background: linear-gradient(
         90deg,
         #FFD700,   /* oro */
@@ -81,20 +81,14 @@
       );
       background-size: 300% 300%;
       animation: card-premium-flow 8s linear infinite;
-      -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
+      z-index: -1;
     }
-    
     @keyframes card-premium-flow {
       0%   { background-position: 0% 50%; }
       50%  { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
-    }
-    
-    /* Fallback: borde sólido dorado si no hay soporte */
+    }    
+    /* Fallback: borde platino si no hay soporte */
     @supports not (mask-composite: exclude) {
       .card-premium {
         border: 4px solid #E5E4E2;
