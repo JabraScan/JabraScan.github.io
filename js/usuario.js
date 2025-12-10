@@ -501,7 +501,8 @@ export function authFetch(input, init = {}) {
                           avatarResultado.querySelector(".row.g-2").appendChild(card);
                         //Actualizar nuevo saldo puntos
                         const saldoptos = document.getElementById("user_puntos");
-                          saldoptos.innerHTML = data.saldo;
+console.log(data);
+                          saldoptos.innerHTML = data.saldo || 0;
                       }
                     }
                   });
