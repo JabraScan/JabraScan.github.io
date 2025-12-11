@@ -559,18 +559,18 @@ export function authFetch(input, init = {}) {
         
             // Si no hay resultados, mostrar mensaje en ambas pestañas
             if (!rows.length) {
-              avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
-              tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+              avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares a la venta.</div>';
+              tienda.innerHTML = '<div class="text-center py-4 text-muted">No tienes avatares disponibles.</div>';
               return;
             }
         
             // Limpiar contenedores y crear filas (bootstrap grid)
             const rowTienda = document.createElement('div');
               rowTienda.className = 'row g-2';
-              tienda.innerHTML = '';
+              tienda.innerHTML = '<div class="text-center py-4 text-muted">Tienda de Avatares.</div>';
             const rowAvatares = document.createElement('div');
               rowAvatares.className = 'row g-2';
-              avatares.innerHTML = '';
+              avatares.innerHTML = '<div class="text-center py-4 text-muted">Tus avatares.</div>';
         
             // Recorrer cada avatar devuelto por el backend
             rows.forEach(r => {
