@@ -586,7 +586,7 @@ export function authFetch(input, init = {}) {
         
               // Columna que contendrá la card
               const col = document.createElement('div');
-                col.className = 'col col-xs-5 col-sm-4 col-md-3 col-lg-2 d-flex ficha-avatar';
+                col.className = 'col col-xs-5 col-sm-4 col-md-3 col-lg-2 d-flex card-avatar';
               // Card principal (estructura vertical)
               const card = document.createElement('div');
                 let extra = '';
@@ -594,7 +594,7 @@ export function authFetch(input, init = {}) {
                     else if (item.precio >= 100){ extra = 'card-gold';   }
                     else if (item.precio >= 50) { extra = 'card-silver'; }
                     else if (item.precio >= 25) { extra = 'card-bronze'; }
-                card.className = `card p-1 text-center d-flex flex-column w-100 ${extra}`;
+                card.className = `ficha-avatar card p-1 text-center d-flex flex-column w-100 ${extra}`;
               // Imagen del avatar
               const img = document.createElement('img');
                 //img.src = item.src;               // ruta de la imagen
