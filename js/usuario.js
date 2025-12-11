@@ -539,7 +539,7 @@ export function authFetch(input, init = {}) {
           // Si no hay sesión, salir
           if (!usuario_id && !token) return;
           // Endpoint para obtener la lista de avatares
-            const ENDPOINT = 'https://jabrascan.net/avatars';
+            const ENDPOINT = 'https://jabrascan.net/avatars/list';
           // Referencias a los contenedores DOM de las dos pestañas
             const tienda = document.querySelector('#tiendaResultado');
             const avatares = document.querySelector('#avatarResultado');
