@@ -13,6 +13,24 @@
     <div class="container py-5">
       <!-- Perfil básico -->
         <div class="d-flex align-items-center mb-4" id="perfil-info">
+            <!-- Navegador -->
+            <ul class="nav nav-pills d-none d-sm-flex" id="usuarioTabs" role="tablist">
+              <li class="nav-item biblioteca" role="presentation">
+                <button class="nav-link active" id="biblioteca-tab" data-bs-toggle="tab" data-bs-target="#biblioteca" type="button" role="tab" aria-controls="biblioteca">Biblioteca</button>
+              </li>
+              <li class="nav-item biblioteca-fin" role="presentation">
+                <button class="nav-link" id="biblioteca-fin-tab" data-bs-toggle="tab" data-bs-target="#biblioteca-fin" type="button" role="tab" aria-controls="biblioteca-fin">Finalizados</button>
+              </li>
+              <li class="nav-item tienda" role="presentation">
+                <button class="nav-link" id="tienda-tab" data-bs-toggle="tab" data-bs-target="#tienda" type="button" role="tab" aria-controls="tienda">Tienda</button>
+              </li>
+              <li class="nav-item tienda" role="presentation">
+                <button class="nav-link" id="avatar-tab" data-bs-toggle="tab" data-bs-target="#avatar" type="button" role="tab" aria-controls="avatar">Mis Avatares</button>
+              </li>
+              <li class="nav-item obras" role="presentation">
+                <button class="nav-link" id="obras-tab" data-bs-toggle="tab" data-bs-target="#obras" type="button" role="tab" aria-controls="obras">Mis Obras</button>
+              </li>
+            </ul>
         </div>
   
         <div class="d-block d-sm-none mb-2">
@@ -25,6 +43,7 @@
           </select>
         </div>
       <!-- Pestañas -->
+      <!--
         <ul class="nav nav-tabs d-none d-sm-flex" id="usuarioTabs" role="tablist">
           <li class="nav-item biblioteca" role="presentation">
             <button class="nav-link active" id="biblioteca-tab" data-bs-toggle="tab" data-bs-target="#biblioteca" type="button" role="tab" aria-controls="biblioteca">Biblioteca</button>
@@ -42,6 +61,7 @@
             <button class="nav-link" id="obras-tab" data-bs-toggle="tab" data-bs-target="#obras" type="button" role="tab" aria-controls="obras">Mis Obras</button>
           </li>
         </ul>
+      -->
       <!-- Tabs -->
         <div class="tab-content mt-3">
           <!-- Biblioteca -->
