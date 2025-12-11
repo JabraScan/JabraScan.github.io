@@ -490,18 +490,19 @@ export function authFetch(input, init = {}) {
                     // Si la compra fue correcta, mover el card
                     if (data && data.ok) {
                       // Localizar el card actual
-                      const card = buyBtn.closest(".col-6.col-sm-4.col-md-3.col-lg-2");
+                      const card = buyBtn.closest(".ficha-avatar");
                       if (card) {
                         // Quitar el footer con el botón de compra
-                        let footer = card.querySelector(".card-footer");
-                        if (footer) footer.remove();
-                        footer = avatarPieEstablecer(item.id);
+                          let nuevofooter = card.querySelector(".card-footer");
+                            if (nuevofooter) nuevofooter.remove();
+                        //establecemos nuevo contenido
+                          nuevofooter = avatarPieEstablecer(item.id);
+                            if (nuevofooter) card.appendChild(nuevofooter);
                         // Mover el card al contenedor de avatares
                         const avatarResultado = document.getElementById("avatarResultado");
                           avatarResultado.querySelector(".row.g-2").appendChild(card);
                         //Actualizar nuevo saldo puntos
                         const saldoptos = document.getElementById("user_puntos");
-console.log(data);
                           saldoptos.innerHTML = data.saldo || 0;
                       }
                     }
@@ -585,7 +586,7 @@ console.log(data);
         
               // Columna que contendrá la card
               const col = document.createElement('div');
-                col.className = 'col-6 col-sm-4 col-md-3 col-lg-2 d-flex';
+                col.className = 'col col-xs-5 col-sm-4 col-md-3 col-lg-2 d-flex ficha-avatar';
               // Card principal (estructura vertical)
               const card = document.createElement('div');
                 let extra = '';
