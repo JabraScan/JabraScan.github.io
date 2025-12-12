@@ -4,7 +4,7 @@ const WORKER_URL = "https://jabrascan.net";
 const FALLBACK_IMG = "/img/avatar/default.webp";
 
 //Funcion duplicada de utils
-      export function imgSrcFromBlobCopia(img, path, fallback) {
+      function imgSrcFromBlobCopia(img, path, fallback) {
         // variable que guardará la object URL creada (si procede) para poder revocarla
           let currentObjectUrl = null;
       
