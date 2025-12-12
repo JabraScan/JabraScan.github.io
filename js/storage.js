@@ -1,0 +1,56 @@
+// storage.js
+
+// --- utilidades internas ---
+function cookiesEnabled() {
+  try {
+    document.cookie = "testcookie=1; path=/";
+    const enabled = document.cookie.indexOf("testcookie=") !== -1;
+    // limpiar
+    document.cookie = "testcookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    return enabled;
+  } catch {
+    return false;
+  }
+}
+
+function setCookie(name, value, days = 360) {
+  const expires = new Date();
+  expires.setDate(expires.getDate() + days);
+  document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; expires=${expires.toUTCString()}; path=/; SameSite=Strict`;
+}
+
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp("(^|;)\\s*" + encodeURIComponent(name) + "=([^;]+)"));
+  return match ? decodeURIComponent(match[2]) : null;
+}
+
+function deleteCookie(name) {
+  document.cookie = `${encodeURIComponent(name)}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
+
+// --- API transparente ---
+const useCookies = cookiesEnabled();
+
+export function setItem(key, value) {
+  if (useCookies) {
+    setCookie(key, value);
+  } else {
+    localStorage.setItem(key, value);
+  }
+}
+
+export function getItem(key) {
+  if (useCookies) {
+    return getCookie(key);
+  } else {
+    return localStorage.getItem(key);
+  }
+}
+
+export function removeItem(key) {
+  if (useCookies) {
+    deleteCookie(key);
+  } else {
+    localStorage.removeItem(key);
+  }
+}
