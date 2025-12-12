@@ -32,6 +32,23 @@ function mostrarAvatarColeccion(idcoleccion) {
   return true;
 }
 
+  // Función asincrónica para comprar un avatar
+  async function comprarAvatar(avatarId) {
+    if (!token) return;              // Si no hay token, no se puede autenticar
+    if (!avatarId) return;           // Si no se pasa un id de avatar, se detiene
+
+    const url = `${API_BASE}/usuarios/buy/avatar`;
+    // Se realiza la petición al servidor usando authFetch
+    const resp = await authFetch(url, {
+      method: "POST",                                // Método POST para enviar datos
+      headers: { "Content-Type": "application/json" }, // Se especifica que el cuerpo es JSON
+      body: JSON.stringify({ idavatar: avatarId })     // Se envía el id del avatar en el cuerpo
+    });
+    // Si la respuesta no es correcta (status distinto de 200-299), se detiene
+    if (!resp.ok) return;  
+    // Se devuelve la respuesta procesada
+    return await resp.json();
+  }
 //------------------------------------------------------------------------
       function avatarPieEstablecer (itemid) {
         //console.log(item.id);
@@ -44,7 +61,7 @@ function mostrarAvatarColeccion(idcoleccion) {
               // Evitar que el click burbujee y llamar a establecerAvatar con el id
               btnSet.addEventListener('click', (ev) => {
                 ev.stopPropagation();
-                establecerAvatar(itemid);
+                //establecerAvatar(itemid);
               });
             footer.appendChild(btnSet);
 
