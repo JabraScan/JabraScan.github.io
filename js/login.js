@@ -1,4 +1,4 @@
-//import { imgSrcFromBlob } from './utils.js';
+import { imgSrcFromBlob } from './utils.js';
 
 const WORKER_URL = "https://jabrascan.net";
 const FALLBACK_IMG = "/img/avatar/default.webp";
