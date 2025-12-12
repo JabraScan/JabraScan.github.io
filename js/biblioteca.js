@@ -149,8 +149,13 @@ async function cargarTiendaAvatar() {
       card.className = 'card h-100';
 
       const header = document.createElement('div');
-      header.className = 'card-header d-flex justify-content-between align-items-center';
-      header.textContent = grupo.coleccion;
+        header.className = 'card-header d-flex justify-content-between align-items-center';        
+        const titleSpan = document.createElement('span');
+          titleSpan.className = 'text-truncate flex-grow-1';
+          titleSpan.textContent = grupo.coleccion;
+     
+      header.appendChild(titleSpan);
+      header.appendChild(btnMas);
 
       const btnMas = document.createElement('button');
       btnMas.type = 'button';
