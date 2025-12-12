@@ -2,7 +2,7 @@
 
 // --- utilidades internas ---
 function cookiesEnabled() {
-  return false;
+  //return false;
   try {
     document.cookie = "testcookie=1; path=/";
     const enabled = document.cookie.indexOf("testcookie=") !== -1;
@@ -16,11 +16,24 @@ function cookiesEnabled() {
   }
 }
 
-function setCookie(name, value, days = 360) {
+/*function setCookie(name, value, days = 360) {
   const expires = new Date();
   expires.setDate(expires.getDate() + days);
   document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; expires=${expires.toUTCString()}; path=/; SameSite=Strict`;
+}*/
+function setCookie(name, value, days = 360) {
+  const expires = new Date();
+  expires.setDate(expires.getDate() + days);
+  const isHttps = location.protocol === "https:";
+  const attrs = [
+    `expires=${expires.toUTCString()}`,
+    `path=/`,
+    `SameSite=Lax`,
+    isHttps ? `Secure` : null
+  ].filter(Boolean).join("; ");
+  document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; ${attrs}`;
 }
+
 
 function getCookie(name) {
   const match = document.cookie.match(new RegExp("(^|;)\\s*" + encodeURIComponent(name) + "=([^;]+)"));
