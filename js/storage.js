@@ -49,30 +49,29 @@ function deleteCookie(name) {
 const useCookies = cookiesEnabled();
 
 export function setItem(key, value) {
-  console.log("StorageAPI.setItem vía", cookiesEnabled() ? "cookie" : "localStorage", key, value);
-
-  if (useCookies) {
+  console.log("StorageAPI.setItem → guardando en cookie y localStorage", key, value);
+  if (cookiesEnabled()) {
     setCookie(key, value);
-  } else {
-    localStorage.setItem(key, value);
   }
+  localStorage.setItem(key, value);
 }
 
 export function getItem(key) {
-  if (useCookies) {
-    return getCookie(key);
-  } else {
-    return localStorage.getItem(key);
+  if (cookiesEnabled()) {
+    const val = getCookie(key);
+    if (val) return val;
   }
+  return localStorage.getItem(key);
 }
 
 export function removeItem(key) {
-  if (useCookies) {
+  // Borra en ambos lados para mantener consistencia
+  if (cookiesEnabled()) {
     deleteCookie(key);
-  } else {
-    localStorage.removeItem(key);
   }
+  localStorage.removeItem(key);
 }
+
 // --- expone como global para scripts clásicos ---
 /*if (typeof window !== "undefined") {
   window.StorageAPI = { setItem, getItem, removeItem };
