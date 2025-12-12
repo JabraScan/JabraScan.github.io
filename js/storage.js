@@ -2,6 +2,7 @@
 
 // --- utilidades internas ---
 function cookiesEnabled() {
+  return false;
   try {
     document.cookie = "testcookie=1; path=/";
     const enabled = document.cookie.indexOf("testcookie=") !== -1;
