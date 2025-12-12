@@ -28,6 +28,7 @@ function setCookie(name, value, days = 360) {
   const attrs = [
     `expires=${expires.toUTCString()}`,
     `path=/`,
+    `domain=jabrascan.net`,
     `SameSite=Lax`,
     isHttps ? `Secure` : null
   ].filter(Boolean).join("; ");
