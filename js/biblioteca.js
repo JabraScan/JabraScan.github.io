@@ -32,6 +32,73 @@ function mostrarAvatarColeccion(idcoleccion) {
   return true;
 }
 
+//------------------------------------------------------------------------
+      function avatarPieEstablecer (itemid) {
+        //console.log(item.id);
+          let footer = document.createElement('div');
+            footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
+            const btnSet = document.createElement('button');
+              btnSet.type = 'button';
+              btnSet.className = 'btn btn-sm btn-outline-primary';
+              btnSet.textContent = '+Establecer';
+              // Evitar que el click burbujee y llamar a establecerAvatar con el id
+              btnSet.addEventListener('click', (ev) => {
+                ev.stopPropagation();
+                establecerAvatar(itemid);
+              });
+            footer.appendChild(btnSet);
+
+          return footer
+      }
+
+    function avatarPieComprar(item) {
+          //console.log(item);
+
+          // --- Avatar no adquirido: mostrar precio y botón Comprar (si hay precio numérico)
+          //if (typeof item.precio === 'number' && Number.isFinite(item.precio)) {
+          if (item.precio != null) {
+            let footer = document.createElement('div');
+              footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
+              const buyBtn = document.createElement('button');
+                buyBtn.type = 'button';
+                buyBtn.className = 'btn btn-sm btn-outline-primary ms-2';
+                buyBtn.setAttribute('aria-label', `Comprar avatar por ${item.precio}`);
+                // El botón contiene el icono y el importe en lugar del texto "Comprar"
+                buyBtn.innerHTML = '💰 ' + String(item.precio);
+                // Evitar burbujeo y llamar a comprarAvatar con el id
+                //buyBtn.addEventListener('click', (ev) => {
+                //  ev.stopPropagation();
+                //  comprarAvatar(item.id); 
+                //});
+                  buyBtn.addEventListener('click', async (ev) => {
+                    ev.stopPropagation();                        
+                    const data = await comprarAvatar(item.id);
+                    // Si la compra fue correcta, mover el card
+                    if (data && data.ok) {
+                      // Localizar el card actual
+                      const card = buyBtn.closest(".ficha-avatar");
+                      if (card) {
+                        // Quitar el footer con el botón de compra
+                          let nuevofooter = card.querySelector(".card-footer");
+                            if (nuevofooter) nuevofooter.remove();
+                        //establecemos nuevo contenido
+                          nuevofooter = avatarPieEstablecer(item.id);
+                            if (nuevofooter) card.appendChild(nuevofooter);
+                        // Mover el card al contenedor de avatares
+                        const avatarResultado = document.getElementById("avatarResultado");
+                          avatarResultado.querySelector(".row.g-2").appendChild(card);
+                        //Actualizar nuevo saldo puntos
+                        const saldoptos = document.getElementById("user_puntos");
+                          saldoptos.innerHTML = data.saldo || 0;
+                      }
+                    }
+                  });
+                footer.appendChild(buyBtn);
+                return footer;
+            }
+        return null;
+    }
+
 async function cargarTienda() {
   if (!usuario_id && !token) return;
 
