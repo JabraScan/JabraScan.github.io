@@ -122,6 +122,7 @@ function mostrarAvatarColeccion(idcoleccion) {
     }
 
 async function cargarTienda() {
+console.log('entro');
   if (!usuario_id && !token) return;
 
   const ENDPOINT = 'https://jabrascan.net/avatars/demo'; // tu endpoint agrupado
@@ -131,16 +132,19 @@ async function cargarTienda() {
 
   tienda.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
   avatares.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
-
+console.log('antes res');
   try {
     const res = await authFetch(ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     });
+console.log(`res : ${res}`);
     if (!res.ok) throw new Error('HTTP ' + res.status);
 
     const data = await res.json();
+console.log(`data : ${data}`);
     const colecciones = Array.isArray(data) ? data : (data.items || []);
+console.log(`coleccion : ${colecciones}`);
 
     if (!colecciones.length) {
       tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares a la venta.</div>';
