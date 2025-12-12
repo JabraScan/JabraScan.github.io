@@ -49,6 +49,8 @@ function deleteCookie(name) {
 const useCookies = cookiesEnabled();
 
 export function setItem(key, value) {
+  console.log("StorageAPI.setItem vía", cookiesEnabled() ? "cookie" : "localStorage", key, value);
+
   if (useCookies) {
     setCookie(key, value);
   } else {
