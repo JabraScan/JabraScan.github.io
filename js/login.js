@@ -225,7 +225,7 @@ function initSessionFromUrl() {
   const tokenFromUrl = params.get("token");
   if (!tokenFromUrl) return false;
 
-  localStorage.setItem("jwt", tokenFromUrl);
+  window.StorageAPI.setItem("jwt", tokenFromUrl);
   // limpia la query string sin recargar
   window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
   // notifica al resto de la SPA que hay token nuevo
@@ -284,7 +284,7 @@ async function fetchWithTimeout(url, options = {}, timeout = 8000) {
 */
 // --- comprobar sesión y actualizar UI --- 
 async function checkSessionOnLoad() {
-  const token = localStorage.getItem("jwt");
+  const token = window.StorageAPI.getItem("jwt");
   if (!token) {
     showLoginButton();
     // notifica que no hay sesión activa
@@ -306,18 +306,18 @@ async function checkSessionOnLoad() {
     const avatar = showUserNick(nickname, usuario.avatar);
     const userId = usuario.id || "";
 
-    if (userId) localStorage.setItem("user_id", userId);
-    localStorage.setItem("user_nickname", nickname);
-    localStorage.setItem("user_avatar", avatar);
+    if (userId) window.StorageAPI.setItem("user_id", userId);
+    window.StorageAPI.setItem("user_nickname", nickname);
+    window.StorageAPI.setItem("user_avatar", avatar);
 
     // notifica que la auth está lista y pasa el usuario
     document.dispatchEvent(new CustomEvent("auth:ready", { detail: { user: usuario } }));
   } catch (e) {
     // sesión inválida: limpiar y notificar
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("user_id");
-    localStorage.removeItem("user_nickname");
-    localStorage.removeItem("user_avatar");
+    window.StorageAPI.removeItem("jwt");
+    window.StorageAPI.removeItem("user_id");
+    window.StorageAPI.removeItem("user_nickname");
+    window.StorageAPI.removeItem("user_avatar");
     showLoginButton();
     document.dispatchEvent(new CustomEvent("auth:unauthenticated", { detail: { reason: e.message || e } }));
   }
@@ -342,10 +342,10 @@ async function checkSessionOnLoad() {
       }*/
 // --- logout --- 
 function logout() {
-  localStorage.removeItem("jwt");
-  localStorage.removeItem("user_id");
-  localStorage.removeItem("user_nickname");
-  localStorage.removeItem("user_avatar");
+  window.StorageAPI.removeItem("jwt");
+  window.StorageAPI.removeItem("user_id");
+  window.StorageAPI.removeItem("user_nickname");
+  window.StorageAPI.removeItem("user_avatar");
 
   showLoginButton();
   // notifica a la SPA que el usuario ha cerrado sesión
