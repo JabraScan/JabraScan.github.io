@@ -166,7 +166,7 @@ function showUserNick(nickname, avatar) {
   if (loginWrapper) loginWrapper.classList.add("d-none");
   if (userWrapper && nick) {
     nick.textContent = nickname;
-console.log(`avatar : ${avatar} - fall ${FALLBACK_IMG}`);
+//console.log(`avatar : ${avatar} - fall ${FALLBACK_IMG}`);
     if (avatarImg) imgSrcFromBlobCopia(avatarImg, avatar, FALLBACK_IMG);
     userWrapper.classList.remove("d-none");
 
