@@ -3,7 +3,7 @@ import { initUltimosCapitulos } from './ultimoscapitulos.js';
 import { abrirLectorPDF } from './lector.js';
 import { cargarlibro } from './libroficha.js';
 import { renderResumenObras } from './contador.js';
-import { setItem, getItem, removeItem } from "./storage.js";
+import { syncLocalStorageToCookies, setItem, getItem, removeItem } from "./storage.js";
 // Helper: carga un script externo sólo una vez y devuelve una Promise
 function loadScript(src, globalName) {
   return new Promise((resolve, reject) => {
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       btnSeguir.onclick = null;
     }
   }
-
+  syncLocalStorageToCookies();
   // 🧭 Navegación inicial por hash al cargar la página
   manejarHash(location.hash);
 });
@@ -152,23 +152,9 @@ function cargarVista(url) {
             renderResumenObras(); // intentar renderizar de todos modos (mostrará error internamente si falta Chart)
           });
       } else if (url === "login.html") {
-          /*const attachLoginListeners = () => {
-            const btnGoogle = document.querySelector("#btnGoogle");
-            if (btnGoogle) {
-              btnGoogle.removeEventListener("click", loginGoogle);
-              btnGoogle.addEventListener("click", loginGoogle);
-            }
-            const btnMeta = document.querySelector("#btnMeta");
-            if (btnMeta) {
-              btnMeta.removeEventListener("click", loginMeta);
-              btnMeta.addEventListener("click", loginMeta);
-            }
-            const btnTwitter = document.querySelector("#btnTwitter");
-            if (btnTwitter) {
-              btnTwitter.removeEventListener("click", loginTwitter);
-              btnTwitter.addEventListener("click", loginTwitter);
-            }
-          };*/
+          // Al entrar en login, aseguramos que los datos críticos estén también en cookie
+          syncLocalStorageToCookies();
+          //
           const attachLoginListeners = () => {
               [
                 { sel: "#btnGoogle", fn: loginGoogle },
@@ -335,6 +321,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
