@@ -1,4 +1,5 @@
-//import { imgSrcFromBlob } from './utils.js';
+import { imgSrcFromBlob } from './utils.js';
+
 const WORKER_URL = "https://jabrascan.net";
 const FALLBACK_IMG = "/img/avatar/default.webp";
 
@@ -165,7 +166,8 @@ function showUserNick(nickname, avatar) {
   if (loginWrapper) loginWrapper.classList.add("d-none");
   if (userWrapper && nick) {
     nick.textContent = nickname;
-    if (avatarImg) imgSrcFromBlobCopia(avatarImg, avatar, FALLBACK_IMG);
+console.log(`avatar : ${avatar} - fall ${FALLBACK_IMG}`;
+    if (avatarImg) imgSrcFromBlob(avatarImg, avatar, FALLBACK_IMG);
     userWrapper.classList.remove("d-none");
 
     return avatarImg.src;
