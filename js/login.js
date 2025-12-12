@@ -1,3 +1,4 @@
+import { setItem, getItem, removeItem } from "./storage.js";
 import { imgSrcFromBlob } from './utils.js';
 
 const WORKER_URL = "https://jabrascan.net";
