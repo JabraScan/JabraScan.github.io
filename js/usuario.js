@@ -171,8 +171,8 @@ export function authFetch(input, init = {}) {
   export async function cargarBiblioteca() {
     if (!token) return;
   
-    const url = `${API_BASE}/biblioteca/list?usuario_id=${encodeURIComponent(usuario_id)}`;
-  
+    //const url = `${API_BASE}/biblioteca/list?usuario_id=${encodeURIComponent(usuario_id)}`;
+    const url = `${API_BASE}/biblioteca/list`;  
     const res = await authFetch(url);
     const data = await res.json();
   
