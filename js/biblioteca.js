@@ -17,10 +17,8 @@ const TARGET_USER = '74cabb4e-0835-4a85-b40d-6f2316083957';
 
 export function cargarTiendaTest () {
   if (usuario_id === TARGET_USER) {
-    const tienda = document.getElementById("demo-tienda");
-      tienda.show();
-    const avatar = document.getElementById("demo-avatar");
-      avatar.show();
+    document.getElementById("demo-tienda").classList.remove("d-none");
+    document.getElementById("demo-avatar").classList.remove("d-none");
     cargarTienda();
     return true;
   } else {
