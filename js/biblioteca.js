@@ -14,6 +14,7 @@ const avatar = getItem("user_avatar");
 const token = getItem("jwt");
 
 const TARGET_USER = '74cabb4e-0835-4a85-b40d-6f2316083957';
+const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
 
 function mostrarAvatarColeccion(idcoleccion) {
   return true;
@@ -103,94 +104,123 @@ function mostrarAvatarColeccion(idcoleccion) {
         return null;
     }
 
-  async function cargarTiendaAvatar() {
-    console.log('entro');
-    if (!usuario_id && !token) return;
-  
-    const ENDPOINT = `${API_BASE}/avatars/demo`;
-    const tienda = document.querySelector('#demo-tienda');
-    const avatares = document.querySelector('#demo-avatar');
-    if (!tienda || !avatares) return;
-  
-    tienda.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
-    avatares.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
-  
-    try {
-      const res = await authFetch(ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-  
-      const data = await res.json();
-      console.log("data:", data);
-  
-      const colecciones = Array.isArray(data) ? data : [];
-  
-      if (!colecciones.length) {
-        tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares a la venta.</div>';
-        avatares.innerHTML = '<div class="text-center py-4 text-muted">No tienes avatares disponibles.</div>';
-        return;
-      }
-  
-      tienda.innerHTML = '';
-      avatares.innerHTML = '';
-  
-      colecciones.forEach(grupo => {
-        const card = document.createElement('div');
-        card.className = 'card mb-3';
-  
-        const header = document.createElement('div');
-        header.className = 'card-header d-flex justify-content-between align-items-center';
-        header.textContent = grupo.coleccion;
-  
-        const btnMas = document.createElement('button');
-        btnMas.type = 'button';
-        btnMas.className = 'btn btn-sm btn-outline-primary';
-        btnMas.textContent = '+';
-        btnMas.addEventListener('click', () => {
-          const idcol = (grupo.adquiridos[0] || grupo.noAdquiridos[0])?.idcoleccion;
+async function cargarTiendaAvatar() {
+  console.log('entro');
+  if (!usuario_id && !token) return;
+
+  const ENDPOINT = `${API_BASE}/avatars/demo`;
+  const tienda = document.querySelector('#demo-tienda');
+  const avatares = document.querySelector('#demo-avatar');
+  if (!tienda || !avatares) return;
+
+  tienda.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
+  avatares.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
+
+  try {
+    const res = await authFetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+
+    const data = await res.json();
+    const colecciones = Array.isArray(data) ? data : [];
+
+    if (!colecciones.length) {
+      tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares a la venta.</div>';
+      avatares.innerHTML = '<div class="text-center py-4 text-muted">No tienes avatares disponibles.</div>';
+      return;
+    }
+
+    tienda.innerHTML = '';
+    avatares.innerHTML = '';
+
+    colecciones.forEach(grupo => {
+      const tieneNoAdquiridos = Array.isArray(grupo.noAdquiridos) && grupo.noAdquiridos.length > 0;
+      const tieneAdquiridos   = Array.isArray(grupo.adquiridos)   && grupo.adquiridos.length > 0;
+
+      // Crear card para TIENDA si hay no adquiridos
+      if (tieneNoAdquiridos) {
+        const cardTienda = document.createElement('div');
+        cardTienda.className = 'card mb-3';
+
+        const headerT = document.createElement('div');
+        headerT.className = 'card-header d-flex justify-content-between align-items-center';
+        headerT.textContent = grupo.coleccion;
+        const btnMasT = document.createElement('button');
+        btnMasT.type = 'button';
+        btnMasT.className = 'btn btn-sm btn-outline-primary';
+        btnMasT.textContent = '+';
+        btnMasT.addEventListener('click', () => {
+          const idcol = grupo.noAdquiridos[0]?.idcoleccion || grupo.adquiridos[0]?.idcoleccion;
           if (idcol) mostrarAvatarColeccion(idcol);
         });
-        header.appendChild(btnMas);
-  
-        card.appendChild(header);
-  
-        const body = document.createElement('div');
-        body.className = 'card-body d-flex flex-row flex-wrap';
-  
-        // Unificamos adquiridos + noAdquiridos
-        const todos = [...grupo.adquiridos, ...grupo.noAdquiridos];
-        todos.slice(0, 3).forEach(item => {
+        headerT.appendChild(btnMasT);
+        cardTienda.appendChild(headerT);
+
+        const bodyT = document.createElement('div');
+        bodyT.className = 'card-body d-flex flex-row flex-wrap';
+
+        grupo.noAdquiridos.slice(0, 3).forEach(item => {
           const img = document.createElement('img');
           imgSrcFromBlob(img, item.avatar_path, FALLBACK_IMG);
           img.alt = item.descripcion || '';
           img.className = 'img-thumbnail me-2 mb-2';
           img.style.width = '80px';
           img.style.height = '80px';
-          body.appendChild(img);
+          bodyT.appendChild(img);
         });
-  
-        card.appendChild(body);
-  
-        // decidir si va a tienda o avatares
-        if (grupo.adquiridos.length > 0) {
-          avatares.appendChild(card);
-        } else {
-          tienda.appendChild(card);
-        }
-      });
-    } catch (err) {
-      console.error("Error en cargarTiendaAvatar:", err);
-      avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
-      tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
-    }
-  }
 
+        cardTienda.appendChild(bodyT);
+        tienda.appendChild(cardTienda);
+      }
+
+      // Crear card para AVATARES si hay adquiridos
+      if (tieneAdquiridos) {
+        const cardAvatares = document.createElement('div');
+        cardAvatares.className = 'card mb-3';
+
+        const headerA = document.createElement('div');
+        headerA.className = 'card-header d-flex justify-content-between align-items-center';
+        headerA.textContent = grupo.coleccion;
+        const btnMasA = document.createElement('button');
+        btnMasA.type = 'button';
+        btnMasA.className = 'btn btn-sm btn-outline-primary';
+        btnMasA.textContent = '+';
+        btnMasA.addEventListener('click', () => {
+          const idcol = grupo.adquiridos[0]?.idcoleccion || grupo.noAdquiridos[0]?.idcoleccion;
+          if (idcol) mostrarAvatarColeccion(idcol);
+        });
+        headerA.appendChild(btnMasA);
+        cardAvatares.appendChild(headerA);
+
+        const bodyA = document.createElement('div');
+        bodyA.className = 'card-body d-flex flex-row flex-wrap';
+
+        grupo.adquiridos.slice(0, 3).forEach(item => {
+          const img = document.createElement('img');
+          imgSrcFromBlob(img, item.avatar_path, FALLBACK_IMG);
+          img.alt = item.descripcion || '';
+          img.className = 'img-thumbnail me-2 mb-2';
+          img.style.width = '80px';
+          img.style.height = '80px';
+          bodyA.appendChild(img);
+        });
+
+        cardAvatares.appendChild(bodyA);
+        avatares.appendChild(cardAvatares);
+      }
+    });
+  } catch (err) {
+    console.error("Error en cargarTiendaAvatar:", err);
+    avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+    tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+  }
+}
 
 
 export function cargarTiendaTest () {
-  if (usuario_id === TARGET_USER) {
+  if (usuario_id === TARGET_USER || usuario_id === TARGET_USER_TAVO) {
     // Mostrar el <li> padre del botón "DemoTienda"
       document.getElementById("demotienda-tab")
               .closest("li")
