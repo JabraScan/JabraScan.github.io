@@ -139,7 +139,7 @@ async function cargarTiendaAvatar() {
     rowAvatar.className = 'row g-3';
 
     // Función auxiliar para crear una card de colección
-    function crearCardColeccion(grupo, items, destino) {
+    function crearCardColeccion(grupo, items, destino, adquirido) {
       if (!items?.length) return;
 
       const col = document.createElement('div');
@@ -158,10 +158,54 @@ async function cargarTiendaAvatar() {
           btnMas.type = 'button';
           btnMas.className = 'btn btn-sm btn-outline-primary';
           btnMas.textContent = '+';
-          btnMas.addEventListener('click', () => {
-        const idcol = items[0]?.idcoleccion;
-        if (idcol) mostrarAvatarColeccion(idcol);
-      });
+          //btnMas.addEventListener('click', () => {
+          //  const idcol = items[0]?.idcoleccion;
+          //  if (idcol) mostrarAvatarColeccion(idcol);
+          //});
+          ///////////////////////////////////////////////////////////////
+            // Evento click con control de doble click y resultado
+            btnMas.addEventListener('click', async () => {
+              if (btnMas.disabled) return;
+              btnMas.disabled = true;
+      
+              try {
+                const idcol = items[0]?.idcoleccion;
+                if (!idcol) throw new Error('Colección sin id');
+      
+                const result = await mostrarAvatarColeccion(idcol, adquirido);
+      
+                if (!result || result.error) {
+                  btnMas.disabled = false;
+                  alert('Error al cargar la colección');
+                  return;
+                }
+      
+                // Expandir card a toda la fila
+                col.className = 'col-12';
+                btnMas.remove();
+      
+                const body = card.querySelector('.card-body');
+                if (body) body.innerHTML = '';
+      
+                // Insertar el contenido devuelto
+                if (Array.isArray(result)) {
+                  result.forEach(node => {
+                    if (node instanceof Node) body.appendChild(node);
+                  });
+                } else if (result instanceof Node) {
+                  body.appendChild(result);
+                } else {
+                  // Fallback si devuelve HTML string u objeto simple
+                  body.innerHTML = typeof result === 'string' ? result : '<div class="text-muted">Colección cargada</div>';
+                }
+              } catch (err) {
+                btnMas.disabled = false;
+                console.error(err);
+                alert('Error inesperado al cargar la colección');
+              }
+            });
+          ///////////////////////////////////////////////////////////////
+
       header.appendChild(titleSpan);
       header.appendChild(btnMas);
       card.appendChild(header);
@@ -186,8 +230,8 @@ async function cargarTiendaAvatar() {
 
     // Recorrer colecciones y crear cards según corresponda
     colecciones.forEach(grupo => {
-      crearCardColeccion(grupo, grupo.noAdquiridos, rowTienda);
-      crearCardColeccion(grupo, grupo.adquiridos, rowAvatar);
+      crearCardColeccion(grupo, grupo.noAdquiridos, rowTienda, false);
+      crearCardColeccion(grupo, grupo.adquiridos, rowAvatar, true);
     });
 
     tienda.appendChild(rowTienda);
