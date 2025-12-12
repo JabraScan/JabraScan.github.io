@@ -17,88 +17,79 @@ const TARGET_USER = '74cabb4e-0835-4a85-b40d-6f2316083957';
 const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
 
 
-// 🔹 Función que construye un card DOM a partir de un item avatar
-    function crearCardAvatar(item) {
-      // Columna que contendrá la card
-      const col = document.createElement('div');
-      col.className = 'col col-xs-5 col-sm-4 col-md-3 col-lg-2 d-flex card-avatar';
-    
-      // Card principal
-      const card = document.createElement('div');
-      let extra = '';
-      if (item.tipo === 'premium') extra = 'card-premium';
-      else if (item.precio >= 100) extra = 'card-gold';
-      else if (item.precio >= 50) extra = 'card-silver';
-      else if (item.precio >= 25) extra = 'card-bronze';
-      card.className = `ficha-avatar card p-1 text-center d-flex flex-column w-100 ${extra}`;
-    
-      // Imagen
-      const img = document.createElement('img');
-      imgSrcFromBlob(img, item.src, FALLBACK_IMG);
-      img.alt = item.alt;
-      img.className = 'img-fluid rounded';
-      img.loading = 'lazy';
-      img.decoding = 'async';
-    
-      // Caption
-      const caption = document.createElement('div');
-      caption.className = 'small text-truncate mt-1';
-      caption.textContent = item.alt;
-    
-      // Footer según estado
-      let footer = null;
-      if (item.adquirido === 'adquirido') {
-        footer = avatarPieEstablecer(item.id);
-      } else {
-        footer = avatarPieComprar(item);
-      }
-    
-      // Montar card
-      card.appendChild(img);
-      card.appendChild(caption);
-      if (footer) card.appendChild(footer);
-      col.appendChild(card);
-    
-      // Devolver objeto listo
-      return { col, card, item };
-    }
-
-    async function mostrarAvatarColeccion(idcoleccion, adquirido) {
-      const ENDPOINT = 'https://jabrascan.net/avatars/coleccion';
-      // Normalizar adquirido: boolean → 1/0, num → mantener
-      const adquiridoParam = adquirido ? 1 : 0;
-    
-      try {
-        const res = await authFetch(ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ idcoleccion, adquirido: adquiridoParam })
-        });
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-    
-        const data = await res.json();
-        const rows = Array.isArray(data) ? data : (data.items || []);
-        if (!rows.length) return [];
-    
-        // Mapear cada fila a un objeto {col, card, item}
-        return rows.map(r => {
-          const item = {
-            id: r.id,
-            src: r.avatar_path,
-            alt: r.descripcion || '',
-            precio: Object.prototype.hasOwnProperty.call(r, 'precio') ? r.precio : null,
-            adquirido: r.adquirido,
-            tipo: r.tipo || 'web'
-          };
-          return crearCardAvatar(item);
-        });
-      } catch (err) {
-        console.error("Error cargando colección:", err);
-        return [];
-      }
-    }
-
-
+    // 🔹 Función que construye un card DOM a partir de un item avatar
+        function crearCardAvatar(item) {
+          const col = document.createElement('div');
+          col.className = 'col col-xs-5 col-sm-4 col-md-3 col-lg-2 d-flex card-avatar';
+        
+          const card = document.createElement('div');
+          let extra = '';
+          if (item.tipo === 'premium') extra = 'card-premium';
+          else if (item.precio >= 100) extra = 'card-gold';
+          else if (item.precio >= 50) extra = 'card-silver';
+          else if (item.precio >= 25) extra = 'card-bronze';
+          card.className = `ficha-avatar card p-1 text-center d-flex flex-column w-100 ${extra}`;
+        
+          const img = document.createElement('img');
+          imgSrcFromBlob(img, item.src, FALLBACK_IMG);
+          img.alt = item.alt;
+          img.className = 'img-fluid rounded';
+          img.loading = 'lazy';
+          img.decoding = 'async';
+        
+          const caption = document.createElement('div');
+          caption.className = 'small text-truncate mt-1';
+          caption.textContent = item.alt;
+        
+          let footer = null;
+          if (item.adquirido === 'adquirido') {
+            footer = avatarPieEstablecer(item.id);
+          } else {
+            footer = avatarPieComprar(item);
+          }
+        
+          card.appendChild(img);
+          card.appendChild(caption);
+          if (footer) card.appendChild(footer);
+          col.appendChild(card);
+        
+          return col; // devolvemos directamente el nodo listo
+        }
+        
+        async function mostrarAvatarColeccion(idcoleccion, adquirido) {
+          if (!usuario_id && !token) return [];
+        
+          const ENDPOINT = 'https://jabrascan.net/avatars/coleccion';
+          const adquiridoParam = adquirido ? 1 : 0;
+        
+          try {
+            const res = await authFetch(ENDPOINT, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ idcoleccion, adquirido: adquiridoParam })
+            });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+        
+            const data = await res.json();
+            const rows = Array.isArray(data) ? data : (data.items || []);
+            if (!rows.length) return [];
+        
+            return rows.map(r => {
+              const item = {
+                id: r.id,
+                src: r.avatar_path,
+                alt: r.descripcion || '',
+                precio: Object.prototype.hasOwnProperty.call(r, 'precio') ? r.precio : null,
+                adquirido: r.adquirido,
+                tipo: r.tipo || 'web'
+              };
+              return crearCardAvatar(item);
+            });
+          } catch (err) {
+            console.error("Error cargando colección:", err);
+            return { error: err.message };
+          }
+        }
   // Función asincrónica para comprar un avatar
   async function comprarAvatar(avatarId) {
     if (!token) return;              // Si no hay token, no se puede autenticar
