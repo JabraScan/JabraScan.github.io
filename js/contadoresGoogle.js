@@ -1,4 +1,5 @@
 import { authFetch } from'./usuario.js';
+import { setItem, getItem, removeItem } from "./storage.js";
 /**
  * 🧙‍♂️ API Web para gestionar visitas, valoraciones y obtener información
  * sobre obras y capítulos.
@@ -23,8 +24,8 @@ const URL_GOOGLE = "https://script.google.com/macros/s/AKfycbwQNm88siN8ASQXXbNYe
 // URL del Cloudflare Worker que replica el flujo (ajusta al tuyo)
 const URL_CLOUDFLARE = "https://jabrascan.net"; // TODO: cambia por tu ruta real
 
-const token = localStorage.getItem("jwt");
-const usuario_id = localStorage.getItem("user_id");
+const token = getItem("jwt");
+const usuario_id = getItem("user_id");
 //const API_KEY = "X%B~ZiP?RJA5LUGVAU_9KgDp?7~rUX8KW2D9Q3Fgiyt=1.]Ww#a^FGEMFuM:}#WP4r2L!e9U?fA+qcUjReWV"; // Opcional, si tu backend lo requiere
 /*// 🔐 Genera un token temporal codificado en base64
 export function generarToken() {
@@ -112,8 +113,8 @@ export function leerVisitas(idvisitado) {
 //
 export function valorarRecurso(idvisitado, valor) {
   // Recuperamos el user_id guardado en localStorage (debe contener el token/JWT)
-  const usuarioId = localStorage.getItem("user_id") || "null";
-  const token = localStorage.getItem("jwt") || "null";
+  const usuarioId = getItem("user_id") || "null";
+  const token = getItem("jwt") || "null";
   // URL de Google (igual que antes)
   const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=valorar&valor=${encodeURIComponent(valor)}&usuario_id=${encodeURIComponent(usuarioId)}`;
   // URL y opciones para Cloudflare (POST)
