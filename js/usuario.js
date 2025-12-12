@@ -1,6 +1,7 @@
 import { onLibroClick } from'./leerobras.js';
 import { activarLinksPDF } from './eventos.js';
 import { actualizarEstrellas, crearBloqueValoracion, createImg, managerTabs, imgSrcFromBlob } from './utils.js';
+import { setItem, getItem, removeItem } from "./storage.js";
 
 // -------------------------
 // /js/usuario.js
@@ -13,10 +14,10 @@ import { actualizarEstrellas, crearBloqueValoracion, createImg, managerTabs, img
 // -------------------------
 const API_BASE = "https://jabrascan.net";
 const FALLBACK_IMG = "/img/avatar/default.webp";
-const usuario_id = localStorage.getItem("user_id");
-const nickname = localStorage.getItem("user_nickname");
-const avatar = localStorage.getItem("user_avatar");
-const token = localStorage.getItem("jwt");
+const usuario_id = getItem("user_id");
+const nickname = getItem("user_nickname");
+const avatar = getItem("user_avatar");
+const token = getItem("jwt");
 
 // -------------------------
 // Redirección si no hay login (no bloquea el resto del código)
