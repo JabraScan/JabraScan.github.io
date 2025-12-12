@@ -129,7 +129,6 @@ async function cargarTienda() {
     const res = await authFetch(ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ usuario_id }) // si necesitas enviar el id
     });
     if (!res.ok) throw new Error('HTTP ' + res.status);
 
