@@ -1,13 +1,24 @@
 // storage.js
 
-export function syncLocalStorageToCookies(keys) {
+// 📦 Claves críticas que deben estar tanto en cookie como en localStorage
+export const CRITICAL_KEYS = [  "jwt",
+                                "libroSeleccionado",
+                                "ultimaObra",
+                                "ultimaPagina",
+                                "ultimoCapitulo",
+                                "user_avatar",
+                                "user_id",
+                                "user_nickname"
+                              ];
+
+export function syncLocalStorageToCookies(keys = CRITICAL_KEYS) {
   if (!cookiesEnabled()) return;
 
   keys.forEach((key) => {
     const cookieVal = getCookie(key);
     const localVal = localStorage.getItem(key);
-
-    if (!cookieVal && localVal) {
+    // Copiar si la cookie no existe o si el valor es distinto
+    if (localVal && cookieVal !== localVal) {
       setCookie(key, localVal);
       //console.log(`StorageAPI.sync: copiado ${key} de localStorage → cookie`);
     }
