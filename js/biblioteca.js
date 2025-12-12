@@ -73,8 +73,10 @@ const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
             const data = await res.json();
             const rows = Array.isArray(data) ? data : (data.items || []);
             if (!rows.length) return [];
-        
-            return rows.map(r => {
+            // 🔹 Crear contenedor <div class="row g-2">
+            const rowDiv = document.createElement('div');
+            rowDiv.className = 'row g-2';
+            /*return rows.map(r => {
               const item = {
                 id: r.id,
                 src: r.avatar_path,
@@ -84,6 +86,17 @@ const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
                 tipo: r.tipo || 'web'
               };
               return crearCardAvatar(item);
+            });*/
+            rows.forEach(r => {
+              const item = {
+                id: r.id,
+                src: r.avatar_path,
+                alt: r.descripcion || '',
+                precio: Object.prototype.hasOwnProperty.call(r, 'precio') ? r.precio : null,
+                adquirido: r.adquirido,
+                tipo: r.tipo || 'web'
+              };
+              rowDiv.appendChild(crearCardAvatar(item));
             });
           } catch (err) {
             console.error("Error cargando colección:", err);
