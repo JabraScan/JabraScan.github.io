@@ -15,24 +15,6 @@ const token = getItem("jwt");
 
 const TARGET_USER = '74cabb4e-0835-4a85-b40d-6f2316083957';
 
-export function cargarTiendaTest () {
-  if (usuario_id === TARGET_USER) {
-    // Mostrar el <li> padre del botón "DemoTienda"
-      document.getElementById("demotienda-tab")
-              .closest("li")
-              .classList.remove("d-none");
-    // Mostrar el <li> padre del botón "Demoavatars"
-      document.getElementById("demoavatar-tab")
-              .closest("li")
-              .classList.remove("d-none");
-
-    cargarTienda();
-    return true;
-  } else {
-    return false;
-  }  
-}
-
 function mostrarAvatarColeccion(idcoleccion) {
   return true;
 }
@@ -121,7 +103,7 @@ function mostrarAvatarColeccion(idcoleccion) {
         return null;
     }
 
-async function cargarTienda() {
+async function cargarTiendaAvatar() {
 console.log('entro');
   if (!usuario_id && !token) return;
 
@@ -202,3 +184,21 @@ console.log(`coleccion : ${colecciones}`);
   }
 }
 
+
+export function cargarTiendaTest () {
+  if (usuario_id === TARGET_USER) {
+    // Mostrar el <li> padre del botón "DemoTienda"
+      document.getElementById("demotienda-tab")
+              .closest("li")
+              .classList.remove("d-none");
+    // Mostrar el <li> padre del botón "Demoavatars"
+      document.getElementById("demoavatar-tab")
+              .closest("li")
+              .classList.remove("d-none");
+
+    cargarTiendaAvatar();
+    return true;
+  } else {
+    return false;
+  }  
+}
