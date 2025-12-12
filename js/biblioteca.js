@@ -134,7 +134,11 @@ async function cargarTiendaAvatar() {
 
     tienda.innerHTML = '';
     avatares.innerHTML = '';
-
+    
+    const rowTienda = document.createElement('div');
+      rowTienda.className = 'd-flex g-2';
+    const rowAvatar = document.createElement('div');
+      rowAvatar.className = 'd-flex g-2';
     colecciones.forEach(grupo => {
       const tieneNoAdquiridos = Array.isArray(grupo.noAdquiridos) && grupo.noAdquiridos.length > 0;
       const tieneAdquiridos   = Array.isArray(grupo.adquiridos)   && grupo.adquiridos.length > 0;
@@ -142,7 +146,7 @@ async function cargarTiendaAvatar() {
       // Crear card para TIENDA si hay no adquiridos
       if (tieneNoAdquiridos) {
         const cardTienda = document.createElement('div');
-        cardTienda.className = 'card mb-3';
+        cardTienda.className = 'card col-4 mb-3';
 
         const headerT = document.createElement('div');
         headerT.className = 'card-header d-flex justify-content-between align-items-center';
@@ -170,15 +174,15 @@ async function cargarTiendaAvatar() {
           img.style.height = '80px';
           bodyT.appendChild(img);
         });
-
         cardTienda.appendChild(bodyT);
-        tienda.appendChild(cardTienda);
+        rowTienda.appendChild(cardTienda);
       }
+      
 
       // Crear card para AVATARES si hay adquiridos
       if (tieneAdquiridos) {
         const cardAvatares = document.createElement('div');
-        cardAvatares.className = 'card mb-3';
+        cardAvatares.className = 'card col-4 mb-3';
 
         const headerA = document.createElement('div');
         headerA.className = 'card-header d-flex justify-content-between align-items-center';
@@ -208,7 +212,7 @@ async function cargarTiendaAvatar() {
         });
 
         cardAvatares.appendChild(bodyA);
-        avatares.appendChild(cardAvatares);
+        rowAvatar.appendChild(cardAvatares);
       }
     });
   } catch (err) {
@@ -216,6 +220,8 @@ async function cargarTiendaAvatar() {
     avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
     tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
   }
+  tienda.appendChild(rowTienda);
+  avatares.appendChild(rowAvatar);
 }
 
 
