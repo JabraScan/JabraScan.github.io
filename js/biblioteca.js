@@ -2,7 +2,7 @@ import { onLibroClick } from'./leerobras.js';
 import { activarLinksPDF } from './eventos.js';
 import { actualizarEstrellas, crearBloqueValoracion, createImg, managerTabs, imgSrcFromBlob } from './utils.js';
 import { setItem, getItem, removeItem } from "./storage.js";
-import { cargarBibliotecaTest } from'./usuario.js';
+import { authFetch } from'./usuario.js';
 // -------------------------
 // Config y constantes
 // -------------------------
