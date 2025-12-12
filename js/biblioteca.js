@@ -98,6 +98,7 @@ const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
               };
               rowDiv.appendChild(crearCardAvatar(item));
             });
+            return rowDiv; // 🔹 Devuelve el div completo
           } catch (err) {
             console.error("Error cargando colección:", err);
             return { error: err.message };
