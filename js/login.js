@@ -1,10 +1,10 @@
-import { imgSrcFromBlob } from './utils.js';
+//import { imgSrcFromBlob } from './utils.js';
 
 const WORKER_URL = "https://jabrascan.net";
 const FALLBACK_IMG = "/img/avatar/default.webp";
 
 //Funcion duplicada de utils
-      function imgSrcFromBlobCopia(img, path, fallback) {
+      export function imgSrcFromBlobCopia(img, path, fallback) {
         // variable que guardará la object URL creada (si procede) para poder revocarla
           let currentObjectUrl = null;
       
@@ -167,7 +167,7 @@ function showUserNick(nickname, avatar) {
   if (userWrapper && nick) {
     nick.textContent = nickname;
 console.log(`avatar : ${avatar} - fall ${FALLBACK_IMG}`;
-    if (avatarImg) imgSrcFromBlob(avatarImg, avatar, FALLBACK_IMG);
+    if (avatarImg) imgSrcFromBlobCopia(avatarImg, avatar, FALLBACK_IMG);
     userWrapper.classList.remove("d-none");
 
     return avatarImg.src;
