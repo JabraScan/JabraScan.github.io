@@ -105,7 +105,6 @@ function mostrarAvatarColeccion(idcoleccion) {
     }
 
 async function cargarTiendaAvatar() {
-  console.log('entro');
   if (!usuario_id && !token) return;
 
   const ENDPOINT = `${API_BASE}/avatars/demo`;
@@ -134,94 +133,68 @@ async function cargarTiendaAvatar() {
 
     tienda.innerHTML = '';
     avatares.innerHTML = '';
-    
     const rowTienda = document.createElement('div');
-      rowTienda.className = 'd-flex g-2';
+    rowTienda.className = 'row g-3';
     const rowAvatar = document.createElement('div');
-      rowAvatar.className = 'd-flex g-2';
+    rowAvatar.className = 'row g-3';
+
+    // Función auxiliar para crear una card de colección
+    function crearCardColeccion(grupo, items, destino) {
+      if (!items?.length) return;
+
+      const col = document.createElement('div');
+      col.className = 'col-sm-6 col-md-4 col-lg-3';
+
+      const card = document.createElement('div');
+      card.className = 'card h-100';
+
+      const header = document.createElement('div');
+      header.className = 'card-header d-flex justify-content-between align-items-center';
+      header.textContent = grupo.coleccion;
+
+      const btnMas = document.createElement('button');
+      btnMas.type = 'button';
+      btnMas.className = 'btn btn-sm btn-outline-primary';
+      btnMas.textContent = '+';
+      btnMas.addEventListener('click', () => {
+        const idcol = items[0]?.idcoleccion;
+        if (idcol) mostrarAvatarColeccion(idcol);
+      });
+      header.appendChild(btnMas);
+      card.appendChild(header);
+
+      const body = document.createElement('div');
+      body.className = 'card-body d-flex flex-row flex-wrap';
+
+      items.forEach(item => {
+        const img = document.createElement('img');
+        imgSrcFromBlob(img, item.avatar_path, FALLBACK_IMG);
+        img.alt = item.descripcion || '';
+        img.className = 'img-thumbnail me-2 mb-2';
+        img.style.width = '80px';
+        img.style.height = '80px';
+        body.appendChild(img);
+      });
+
+      card.appendChild(body);
+      col.appendChild(card);
+      destino.appendChild(col);
+    }
+
+    // Recorrer colecciones y crear cards según corresponda
     colecciones.forEach(grupo => {
-      const tieneNoAdquiridos = Array.isArray(grupo.noAdquiridos) && grupo.noAdquiridos.length > 0;
-      const tieneAdquiridos   = Array.isArray(grupo.adquiridos)   && grupo.adquiridos.length > 0;
-
-      // Crear card para TIENDA si hay no adquiridos
-      if (tieneNoAdquiridos) {
-        const cardTienda = document.createElement('div');
-        cardTienda.className = 'card col-4 mb-3';
-
-        const headerT = document.createElement('div');
-        headerT.className = 'card-header d-flex justify-content-between align-items-center';
-        headerT.textContent = grupo.coleccion;
-        const btnMasT = document.createElement('button');
-        btnMasT.type = 'button';
-        btnMasT.className = 'btn btn-sm btn-outline-primary';
-        btnMasT.textContent = '+';
-        btnMasT.addEventListener('click', () => {
-          const idcol = grupo.noAdquiridos[0]?.idcoleccion || grupo.adquiridos[0]?.idcoleccion;
-          if (idcol) mostrarAvatarColeccion(idcol);
-        });
-        headerT.appendChild(btnMasT);
-        cardTienda.appendChild(headerT);
-
-        const bodyT = document.createElement('div');
-        bodyT.className = 'card-body d-flex flex-row flex-wrap';
-
-        grupo.noAdquiridos.slice(0, 3).forEach(item => {
-          const img = document.createElement('img');
-          imgSrcFromBlob(img, item.avatar_path, FALLBACK_IMG);
-          img.alt = item.descripcion || '';
-          img.className = 'img-thumbnail me-2 mb-2';
-          img.style.width = '80px';
-          img.style.height = '80px';
-          bodyT.appendChild(img);
-        });
-        cardTienda.appendChild(bodyT);
-        rowTienda.appendChild(cardTienda);
-      }
-      
-
-      // Crear card para AVATARES si hay adquiridos
-      if (tieneAdquiridos) {
-        const cardAvatares = document.createElement('div');
-        cardAvatares.className = 'card col-4 mb-3';
-
-        const headerA = document.createElement('div');
-        headerA.className = 'card-header d-flex justify-content-between align-items-center';
-        headerA.textContent = grupo.coleccion;
-        const btnMasA = document.createElement('button');
-        btnMasA.type = 'button';
-        btnMasA.className = 'btn btn-sm btn-outline-primary';
-        btnMasA.textContent = '+';
-        btnMasA.addEventListener('click', () => {
-          const idcol = grupo.adquiridos[0]?.idcoleccion || grupo.noAdquiridos[0]?.idcoleccion;
-          if (idcol) mostrarAvatarColeccion(idcol);
-        });
-        headerA.appendChild(btnMasA);
-        cardAvatares.appendChild(headerA);
-
-        const bodyA = document.createElement('div');
-        bodyA.className = 'card-body d-flex flex-row flex-wrap';
-
-        grupo.adquiridos.slice(0, 3).forEach(item => {
-          const img = document.createElement('img');
-          imgSrcFromBlob(img, item.avatar_path, FALLBACK_IMG);
-          img.alt = item.descripcion || '';
-          img.className = 'img-thumbnail me-2 mb-2';
-          img.style.width = '80px';
-          img.style.height = '80px';
-          bodyA.appendChild(img);
-        });
-
-        cardAvatares.appendChild(bodyA);
-        rowAvatar.appendChild(cardAvatares);
-      }
+      crearCardColeccion(grupo, grupo.noAdquiridos, rowTienda);
+      crearCardColeccion(grupo, grupo.adquiridos, rowAvatar);
     });
+
+    tienda.appendChild(rowTienda);
+    avatares.appendChild(rowAvatar);
+
   } catch (err) {
     console.error("Error en cargarTiendaAvatar:", err);
     avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
     tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
   }
-  tienda.appendChild(rowTienda);
-  avatares.appendChild(rowAvatar);
 }
 
 
