@@ -195,7 +195,7 @@ export function cargarTiendaTest () {
       document.getElementById("demoavatar-tab")
               .closest("li")
               .classList.remove("d-none");
-
+    console.log("typeof cargarTiendaAvatar:", typeof cargarTiendaAvatar);
     cargarTiendaAvatar();
     return true;
   } else {
