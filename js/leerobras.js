@@ -2,6 +2,7 @@ import { cargarlibro } from './libroficha.js';
 import { crearUltimoCapituloDeObra, formatCDATA } from './capitulos.js';
 import { parseFecha, toDDMMYYYY, seleccionarImagen, obtenerNombreObra, createImg } from './utils.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
+import { setItem, getItem, removeItem } from "./storage.js";
 
 // ===== Estado de paginación (ámbito de módulo) =====
 let PAGE_SIZE_DEFAULT = 15;
@@ -101,8 +102,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const sinopsis = formatCDATA(obj.sinopsis || '');
       
       // Mantener la lógica original de mostrar último leído en el header
-      const ultimaObra = localStorage.getItem("ultimaObra");
-      const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
+      const ultimaObra = getItem("ultimaObra");
+      const ultimoCapitulo = getItem("ultimoCapitulo");
       if (booklastread) {
         if (
           ultimaObra &&
@@ -385,7 +386,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 export function onLibroClick(libroId) {
-  localStorage.setItem('libroSeleccionado', libroId);
+  setItem('libroSeleccionado', libroId);
   fetch('books/libro-ficha.html')
     .then(response => {
       if (!response.ok) {
