@@ -7,8 +7,10 @@ function cookiesEnabled() {
     const enabled = document.cookie.indexOf("testcookie=") !== -1;
     // limpiar
     document.cookie = "testcookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    console.log('activadas cookies');
     return enabled;
   } catch {
+    console.log('NO cookies');
     return false;
   }
 }
