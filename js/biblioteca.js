@@ -17,8 +17,15 @@ const TARGET_USER = '74cabb4e-0835-4a85-b40d-6f2316083957';
 
 export function cargarTiendaTest () {
   if (usuario_id === TARGET_USER) {
-    document.getElementById("demo-tienda").classList.remove("d-none");
-    document.getElementById("demo-avatar").classList.remove("d-none");
+    // Mostrar el <li> padre del botón "DemoTienda"
+      document.getElementById("demotienda-tab")
+              .closest("li")
+              .classList.remove("d-none");
+    // Mostrar el <li> padre del botón "Demoavatars"
+      document.getElementById("demoavatar-tab")
+              .closest("li")
+              .classList.remove("d-none");
+
     cargarTienda();
     return true;
   } else {
