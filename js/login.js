@@ -224,8 +224,9 @@ function initSessionFromUrl() {
   const params = new URLSearchParams(window.location.search);
   const tokenFromUrl = params.get("token");
   if (!tokenFromUrl) return false;
-
+console.log("ANTES de guardar JWT");
   window.StorageAPI.setItem("jwt", tokenFromUrl);
+console.log("DESPUÉS de guardar JWT");
   // limpia la query string sin recargar
   window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
   // notifica al resto de la SPA que hay token nuevo
