@@ -3,7 +3,7 @@ import { initUltimosCapitulos } from './ultimoscapitulos.js';
 import { abrirLectorPDF } from './lector.js';
 import { cargarlibro } from './libroficha.js';
 import { renderResumenObras } from './contador.js';
-
+import { setItem, getItem, removeItem } from "./storage.js";
 // Helper: carga un script externo sólo una vez y devuelve una Promise
 function loadScript(src, globalName) {
   return new Promise((resolve, reject) => {
@@ -85,8 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 📖 Botón "Seguir leyendo" para reanudar lectura desde localStorage
-  const ultimaObra = localStorage.getItem("ultimaObra");
-  const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
+  const ultimaObra = getItem("ultimaObra");
+  const ultimoCapitulo = getItem("ultimoCapitulo");
   const btnSeguir = document.getElementById("btnSeguir");
 
   const tieneLecturaValida = (
@@ -244,7 +244,7 @@ function cargarVista(url) {
 // 📚 Carga una obra o capítulo dinámicamente
 function abrirObraCapitulo(obra, capitulo = null) {
   const mainElement = document.querySelector('main');
-  localStorage.setItem('libroSeleccionado', obra);
+  setItem('libroSeleccionado', obra);
 
   if (capitulo === null) {
     // 🔍 Carga la ficha de la obra
@@ -273,9 +273,9 @@ function abrirObraCapitulo(obra, capitulo = null) {
       .catch(err => console.error('Error:', err));
   } else {
     // 📖 Carga el capítulo específico
-    localStorage.setItem('ultimaObra', obra);
-    localStorage.setItem('ultimoCapitulo', capitulo);
-    localStorage.setItem("ultimaPagina", 1);
+    setItem('ultimaObra', obra);
+    setItem('ultimoCapitulo', capitulo);
+    setItem("ultimaPagina", 1);
     // Cargar dinámicamente lectorpdf.html
     fetch('lectorpdf.html')
       .then(r => r.text())
@@ -335,6 +335,7 @@ function manejarHash(hash) {
 
   if (obra) abrirObraCapitulo(obra, capitulo);
 }
+
 
 
 
