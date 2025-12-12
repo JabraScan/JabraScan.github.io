@@ -9,9 +9,9 @@ export function activarLinksPDF() {
       const clave = e.currentTarget.getAttribute("data-pdf-obra");
       const capitulo = e.currentTarget.getAttribute("data-pdf-capitulo");
 
-      localStorage.setItem('ultimaObra', clave);
-      localStorage.setItem('ultimoCapitulo', capitulo);
-      localStorage.setItem("ultimaPagina", 1);
+      setItem('ultimaObra', clave);
+      setItem('ultimoCapitulo', capitulo);
+      setItem("ultimaPagina", 1);
 
       mostrarurl(clave, capitulo);
       // Cargar dinámicamente lectorpdf.html
@@ -88,3 +88,4 @@ export function activarPaginacion(rangos) {
 
   mostrarPagina(1);
 }
+
