@@ -54,3 +54,8 @@ export function removeItem(key) {
     localStorage.removeItem(key);
   }
 }
+// --- expone como global para scripts clásicos ---
+if (typeof window !== "undefined") {
+  window.StorageAPI = { setItem, getItem, removeItem };
+}
+
