@@ -1,5 +1,5 @@
-import { setItem, getItem, removeItem } from "./storage.js";
-import { imgSrcFromBlob } from './utils.js';
+//import { setItem, getItem, removeItem } from "./storage.js";
+//import { imgSrcFromBlob } from './utils.js';
 
 const WORKER_URL = "https://jabrascan.net";
 const FALLBACK_IMG = "/img/avatar/default.webp";
@@ -403,9 +403,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     el.removeEventListener("click", handlers[it.id]);
     el.addEventListener("click", handlers[it.id]);
   });
-window.addEventListener("storageapi:ready", () => {
-  initSessionFromUrl();
-});
+      
+      if (window.StorageAPI) {
+        initSessionFromUrl();
+      } else {
+        window.addEventListener("storageapi:ready", () => {
+          initSessionFromUrl();
+        });
+      }
 
   await checkSessionOnLoad();
 });
