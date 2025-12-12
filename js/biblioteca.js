@@ -154,17 +154,15 @@ async function cargarTiendaAvatar() {
           titleSpan.className = 'text-truncate flex-grow-1';
           titleSpan.textContent = grupo.coleccion;
      
-      header.appendChild(titleSpan);
-      header.appendChild(btnMas);
-
-      const btnMas = document.createElement('button');
-      btnMas.type = 'button';
-      btnMas.className = 'btn btn-sm btn-outline-primary';
-      btnMas.textContent = '+';
-      btnMas.addEventListener('click', () => {
+        const btnMas = document.createElement('button');
+          btnMas.type = 'button';
+          btnMas.className = 'btn btn-sm btn-outline-primary';
+          btnMas.textContent = '+';
+          btnMas.addEventListener('click', () => {
         const idcol = items[0]?.idcoleccion;
         if (idcol) mostrarAvatarColeccion(idcol);
       });
+      header.appendChild(titleSpan);
       header.appendChild(btnMas);
       card.appendChild(header);
 
