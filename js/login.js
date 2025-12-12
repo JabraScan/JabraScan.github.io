@@ -402,7 +402,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     el.removeEventListener("click", handlers[it.id]);
     el.addEventListener("click", handlers[it.id]);
   });
+window.addEventListener("storageapi:ready", () => {
   initSessionFromUrl();
+});
+
   await checkSessionOnLoad();
 });
 
