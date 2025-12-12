@@ -71,7 +71,12 @@ export function removeItem(key) {
   }
 }
 // --- expone como global para scripts clásicos ---
+/*if (typeof window !== "undefined") {
+  window.StorageAPI = { setItem, getItem, removeItem };
+}*/
+
+// --- expone como global para scripts clásicos ---
 if (typeof window !== "undefined") {
   window.StorageAPI = { setItem, getItem, removeItem };
+  window.dispatchEvent(new Event("storageapi:ready"));
 }
-
