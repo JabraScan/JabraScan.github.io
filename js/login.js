@@ -353,7 +353,7 @@ function logout() {
 }
 
 // --- enganchar eventos del DOM y del sistema ---
-  document.addEventListener("DOMContentLoaded", async () => {
+/*  document.addEventListener("DOMContentLoaded", async () => {
     // botones de login (si existen en login.html)
     const googleBtn = document.getElementById("login-google");
     if (googleBtn) googleBtn.addEventListener("click", (e) => { e.preventDefault(); loginGoogle(); });
@@ -374,7 +374,7 @@ function logout() {
   
     // validar sesión y pintar UI en base a /me
     await checkSessionOnLoad();
-  });
+  });*/
 // --- enganchar eventos del DOM y del sistema ---
 document.addEventListener("DOMContentLoaded", async function () {
   var items = [
