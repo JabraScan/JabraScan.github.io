@@ -1,5 +1,6 @@
 import { abrirLectorPDF } from './lector.js';
 import { mostrarurl } from './general.js';
+import { setItem, getItem, removeItem } from "./storage.js";
 
 export function activarLinksPDF() {
   document.querySelectorAll('.pdf-link').forEach(link => {
@@ -88,4 +89,5 @@ export function activarPaginacion(rangos) {
 
   mostrarPagina(1);
 }
+
 
