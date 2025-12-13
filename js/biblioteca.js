@@ -15,7 +15,7 @@ const TARGET_USER = '74cabb4e-0835-4a85-b40d-6f2316083957';
 const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
 
 
-        function crearBotonesToggle(header, col, body) {
+        function crearBotonesToggle(header, col, bavatars, bdemo) {
           // Contenedor para los botones
           const contenedor = document.createElement('div');
           contenedor.className = 'd-flex justify-content-center gap-2';
@@ -25,7 +25,8 @@ const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
           btnOcultar.textContent = '–';
           btnOcultar.className = 'btn btn-sm btn-outline-secondary';
           btnOcultar.addEventListener('click', () => {
-            body.classList.add('d-none');
+            bavatars.classList.add('d-none');
+            bdemo.classList.remove('d-none');
             col.className = 'col-sm-6 col-md-4 col-lg-3';
             btnOcultar.style.display = 'none';
             btnMostrar.style.display = 'inline-block';
@@ -37,7 +38,8 @@ const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
           btnMostrar.className = 'btn btn-sm btn-outline-secondary';
           btnMostrar.style.display = 'none'; // empieza oculto
           btnMostrar.addEventListener('click', () => {
-            body.classList.remove('d-none');
+            bavatars.classList.remove('d-none');
+            bdemo.classList.add('d-none');
             col.className = 'col-12';
             btnMostrar.style.display = 'none';
             btnOcultar.style.display = 'inline-block';
@@ -365,23 +367,24 @@ async function cargarTiendaAvatar() {
                 btnMas.remove();
       
                 const body = card.querySelector('.card-body');
-                if (body) body.innerHTML = '';
+                      const bminiature =  body.querySelector('.card-miniatures');
+                if (bminiature) bminiature.classList.add('d-none');;
       
                 // Insertar el contenido devuelto
+                const bavatars = document.createElement('div');
+                  bavatars.className = 'card-avatars d-flex flex-row flex-wrap';
                 if (Array.isArray(result)) {
                   result.forEach(node => {
-                    if (node instanceof Node) body.appendChild(node);
+                    if (node instanceof Node) bavatars.appendChild(node);
                   });
                 } else if (result instanceof Node) {
-                  body.appendChild(result);
-                } else {
-                  // Fallback si devuelve HTML string u objeto simple
-                  body.innerHTML = typeof result === 'string' ? result : '<div class="text-muted">Colección cargada</div>';
+                  bavatars.appendChild(result);
                 }
+                body.appendChild(cavatars);
                 // 🔹 Crear los nuevos botones en el mismo sitio donde estaba el +
                 if (contenedorBoton && body) {
                   // Aquí está la llamada integrada
-                  crearBotonesToggle(contenedorBoton, col, body);
+                  crearBotonesToggle(contenedorBoton, col, bminiature, bavatars);
                 }
               } catch (err) {
                 btnMas.disabled = false;
@@ -395,9 +398,11 @@ async function cargarTiendaAvatar() {
       header.appendChild(btnMas);
       card.appendChild(header);
 
+      const cbody = document.createElement('div');
+        cbody.className = 'card-body d-flex flex-row flex-wrap';
       const body = document.createElement('div');
-      body.className = 'card-body d-flex flex-row flex-wrap';
-
+        body.className = 'card-miniatures d-flex flex-row flex-wrap';
+              
       items.forEach(item => {
         const img = document.createElement('img');
         imgSrcFromBlob(img, item.avatar_path, FALLBACK_IMG);
@@ -408,7 +413,8 @@ async function cargarTiendaAvatar() {
         body.appendChild(img);
       });
 
-      card.appendChild(body);
+      cbody.appendChild(body);
+      card.appendChild(cbody);
       col.appendChild(card);
       destino.appendChild(col);
     }
