@@ -17,6 +17,42 @@ const TARGET_USER = '74cabb4e-0835-4a85-b40d-6f2316083957';
 const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
 
 
+        function crearBotonesToggle(header, col, body) {
+          // Contenedor para los botones
+          const contenedor = document.createElement('div');
+          contenedor.className = 'd-flex justify-content-center gap-2';
+        
+          // Botón ocultar (–)
+          const btnOcultar = document.createElement('button');
+          btnOcultar.textContent = '–';
+          btnOcultar.className = 'btn btn-sm btn-outline-secondary';
+          btnOcultar.addEventListener('click', () => {
+            body.classList.add('d-none');
+            col.className = 'col-sm-6 col-md-4 col-lg-3';
+            btnOcultar.style.display = 'none';
+            btnMostrar.style.display = 'inline-block';
+          });
+        
+          // Botón mostrar (+)
+          const btnMostrar = document.createElement('button');
+          btnMostrar.textContent = '+';
+          btnMostrar.className = 'btn btn-sm btn-outline-secondary';
+          btnMostrar.style.display = 'none'; // empieza oculto
+          btnMostrar.addEventListener('click', () => {
+            body.classList.remove('d-none');
+            col.className = 'col-12';
+            btnMostrar.style.display = 'none';
+            btnOcultar.style.display = 'inline-block';
+          });
+        
+          // Insertar botones en el contenedor
+          contenedor.appendChild(btnOcultar);
+          contenedor.appendChild(btnMostrar);
+        
+          // Insertar en el header de la colección
+          header.appendChild(contenedor);
+        }
+
     // 🔹 Función que construye un card DOM a partir de un item avatar
         function crearCardAvatar(item) {
           const col = document.createElement('div');
@@ -266,6 +302,8 @@ async function cargarTiendaAvatar() {
       
                 // Expandir card a toda la fila
                 col.className = 'col-12';
+                // Guardar el contenedor donde estaba el botón +
+                const contenedorBoton = btnMas.parentNode;
                 btnMas.remove();
       
                 const body = card.querySelector('.card-body');
@@ -281,6 +319,11 @@ async function cargarTiendaAvatar() {
                 } else {
                   // Fallback si devuelve HTML string u objeto simple
                   body.innerHTML = typeof result === 'string' ? result : '<div class="text-muted">Colección cargada</div>';
+                }
+                // 🔹 Crear los nuevos botones en el mismo sitio donde estaba el +
+                if (contenedorBoton && body) {
+                  // Aquí está la llamada integrada
+                  crearBotonesToggle(contenedorBoton, col, body);
                 }
               } catch (err) {
                 btnMas.disabled = false;
