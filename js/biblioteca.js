@@ -380,7 +380,7 @@ async function cargarTiendaAvatar() {
                 } else if (result instanceof Node) {
                   bavatars.appendChild(result);
                 }
-                body.appendChild(cavatars);
+                body.appendChild(bavatars);
                 // 🔹 Crear los nuevos botones en el mismo sitio donde estaba el +
                 if (contenedorBoton && body) {
                   // Aquí está la llamada integrada
