@@ -1,6 +1,4 @@
-import { onLibroClick } from'./leerobras.js';
-import { activarLinksPDF } from './eventos.js';
-import { actualizarEstrellas, crearBloqueValoracion, createImg, managerTabs, imgSrcFromBlob } from './utils.js';
+import { imgSrcFromBlob } from './utils.js';
 import { setItem, getItem, removeItem } from "./storage.js";
 import { authFetch } from'./usuario.js';
 // -------------------------
@@ -112,17 +110,7 @@ const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
             // 🔹 Crear contenedor <div class="row g-2">
             const rowDiv = document.createElement('div');
             rowDiv.className = 'row g-2';
-            /*return rows.map(r => {
-              const item = {
-                id: r.id,
-                src: r.avatar_path,
-                alt: r.descripcion || '',
-                precio: Object.prototype.hasOwnProperty.call(r, 'precio') ? r.precio : null,
-                adquirido: r.adquirido,
-                tipo: r.tipo || 'web'
-              };
-              return crearCardAvatar(item);
-            });*/
+
             rows.forEach(r => {
               const item = {
                 id: r.id,
@@ -140,6 +128,78 @@ const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
             return { error: err.message };
           }
         }
+    /**
+     * Establece el avatar del usuario llamando al endpoint remoto y actualiza
+     * los elementos <img> en la página con la nueva ruta devuelta por el servidor.
+     *
+     * Requisitos previos (variables/funciones globales que debe haber en el entorno):
+     *  - usuario_id: identificador del usuario (o valor falsy si no hay sesión)
+     *  - token: token de autenticación (o valor falsy si no hay sesión)
+     *  - authFetch(input, init): función que añade el header Authorization con el token y llama a fetch
+     *
+     * Comportamiento:
+     *  - Si no hay usuario logueado (ni usuario_id ni token) sale sin hacer nada.
+     *  - Llama al endpoint POST /usuarios/edit/avatar usando authFetch.
+     *  - Si la respuesta HTTP no es OK devuelve un objeto { ok: false, status, error } con el cuerpo como texto.
+     *  - Si la respuesta es OK parsea el JSON, extrae `avatar_path`, actualiza los atributos `src` de:
+     *      - <img id="user-avatar" class="rounded-circle user-avatar">
+     *      - <img id="avatar-img" class="rounded-circle me-3">
+     *    y devuelve el objeto JSON recibido del servidor.
+     *
+     * Nota: no hay fallback en los cambios de src; se asigna directamente el valor devuelto.
+     *
+     * @param {string|number} avatarId - Id del avatar a establecer (se envía en el body JSON como { avatar: avatarId }).
+     * @returns {Promise<object>} - Si éxito devuelve el JSON del endpoint; si error devuelve { ok: false, status?, error }.
+     */
+      async function establecerAvatar(avatarId) {
+        // verificacion usuario logueado
+        if (!usuario_id && !token) return;
+        const ENDPOINT = 'https://jabrascan.net/usuarios/edit/avatar';
+        
+          try {
+            // llamada al endpoint con authFetch (que añade el Authorization)
+            const response = await authFetch(ENDPOINT, {
+              method: 'POST',
+              cache: 'no-cache',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ avatar: avatarId })
+            });
+            // manejo simple de errores
+            if (!response.ok) {
+              const text = await response.text().catch(() => response.statusText);
+              return { ok: false, status: response.status, error: text };
+            }      
+          // parsear respuesta exitosa
+          const data = await response.json();
+          // cambiar src de los elementos
+            const userAvatar = document.getElementById('user-avatar');
+              if (userAvatar) userAvatar.src = data.ruta;      
+            const avatarImg = document.getElementById('avatar-img');
+              if (avatarImg) imgSrcFromBlob(avatarImg, data.ruta, FALLBACK_IMG);
+          //
+          return data;
+        } catch (err) {
+          // error de red u otro fallo en la llamada
+          return { ok: false, error: err?.message || 'Error de red' };
+        }
+      }
+    // Función asincrónica para actualizar el nick del usuario
+    async function actualizarnick(nuevoNick) {
+      if (!token) return;
+      if (!nuevoNick) return;
+        const url = `${API_BASE}/usuarios/edit/nick`;
+        // Se realiza la petición al servidor usando authFetch
+        const resp = await authFetch(url, {
+          method: "POST", // Método POST para enviar datos
+          headers: { "Content-Type": "application/json" }, // Se especifica que el cuerpo es JSON
+          body: JSON.stringify({ nick: nuevoNick }) // Se envía el nuevo nick en el cuerpo
+        });
+        // Si la respuesta no es correcta (status distinto de 200-299), se detiene
+        if (!resp.ok) return;
+      // Se devuelve la respuesta procesada
+      return await resp.json();
+    }
+//======================================================================
   // Función asincrónica para comprar un avatar
   async function comprarAvatar(avatarId) {
     if (!token) return;              // Si no hay token, no se puede autenticar
@@ -169,7 +229,7 @@ const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
               // Evitar que el click burbujee y llamar a establecerAvatar con el id
               btnSet.addEventListener('click', (ev) => {
                 ev.stopPropagation();
-                //establecerAvatar(itemid);
+                establecerAvatar(itemid);
               });
             footer.appendChild(btnSet);
 
@@ -191,10 +251,6 @@ const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
                 // El botón contiene el icono y el importe en lugar del texto "Comprar"
                 buyBtn.innerHTML = '💰 ' + String(item.precio);
                 // Evitar burbujeo y llamar a comprarAvatar con el id
-                //buyBtn.addEventListener('click', (ev) => {
-                //  ev.stopPropagation();
-                //  comprarAvatar(item.id); 
-                //});
                   buyBtn.addEventListener('click', async (ev) => {
                     ev.stopPropagation();                        
                     const data = await comprarAvatar(item.id);
@@ -228,8 +284,10 @@ async function cargarTiendaAvatar() {
   if (!usuario_id && !token) return;
 
   const ENDPOINT = `${API_BASE}/avatars/demo`;
-  const tienda = document.querySelector('#demo-tienda');
-  const avatares = document.querySelector('#demo-avatar');
+  const tienda = document.querySelector('#tiendaResultado');
+  const avatares = document.querySelector('#avatarResultado');
+  //const tienda = document.querySelector('#demo-tienda');
+  //const avatares = document.querySelector('#demo-avatar');
   if (!tienda || !avatares) return;
 
   tienda.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
@@ -372,17 +430,16 @@ async function cargarTiendaAvatar() {
 }
 
 
-export function cargarTiendaTest () {
+export function cargarTiendaDemo () {
   if (usuario_id === TARGET_USER || usuario_id === TARGET_USER_TAVO) {
     // Mostrar el <li> padre del botón "DemoTienda"
-      document.getElementById("demotienda-tab")
+      /*document.getElementById("demotienda-tab")
               .closest("li")
               .classList.remove("d-none");
     // Mostrar el <li> padre del botón "Demoavatars"
       document.getElementById("demoavatar-tab")
               .closest("li")
-              .classList.remove("d-none");
-    console.log("typeof cargarTiendaAvatar:", typeof cargarTiendaAvatar);
+              .classList.remove("d-none");*/
     cargarTiendaAvatar();
     return true;
   } else {
