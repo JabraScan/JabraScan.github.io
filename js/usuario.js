@@ -841,8 +841,7 @@ export function authFetch(input, init = {}) {
       // Error de orquestación: registrar para depuración
       console.error('initUsuario: error al arrancar cargas', err);
     }
-  }
-  
+  }  
   // -------------------------------------------------
   // API pública (opcional) que expone funciones para uso desde la consola
   // o desde otros módulos. Esto no sustituye la llamada directa desde general.js.
