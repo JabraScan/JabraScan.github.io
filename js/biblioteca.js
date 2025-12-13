@@ -25,6 +25,8 @@ const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
           btnOcultar.textContent = '–';
           btnOcultar.className = 'btn btn-sm btn-outline-secondary';
           btnOcultar.addEventListener('click', () => {
+            bavatars.classList.add('d-none');
+            bdemo.classList.remove('d-none');
             col.className = 'col-sm-6 col-md-4 col-lg-3';
             btnOcultar.style.display = 'none';
             btnMostrar.style.display = 'inline-block';
@@ -36,8 +38,6 @@ const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
           btnMostrar.className = 'btn btn-sm btn-outline-secondary';
           btnMostrar.style.display = 'none'; // empieza oculto
           btnMostrar.addEventListener('click', () => {
-            bavatars.classList.add('d-none');
-            bdemo.classList.remove('d-none');
             bavatars.classList.remove('d-none');
             bdemo.classList.add('d-none');
             col.className = 'col-12';
