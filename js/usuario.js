@@ -2,7 +2,7 @@ import { onLibroClick } from'./leerobras.js';
 import { activarLinksPDF } from './eventos.js';
 import { actualizarEstrellas, crearBloqueValoracion, createImg, managerTabs, imgSrcFromBlob } from './utils.js';
 import { setItem, getItem, removeItem } from "./storage.js";
-import { cargarTiendaTest } from'./biblioteca.js';
+import { cargarTiendaDemo } from'./biblioteca.js';
 // -------------------------
 // /js/usuario.js
 // Módulo responsable de cargar y renderizar datos del usuario.
@@ -537,6 +537,7 @@ export function authFetch(input, init = {}) {
  * @returns {Promise<void>} Promise que resuelve cuando termina la carga/render.
  */
         async function cargarTienda() {
+          return;
           // Si no hay sesión, salir
           if (!usuario_id && !token) return;
           // Endpoint para obtener la lista de avatares
@@ -827,11 +828,11 @@ export function authFetch(input, init = {}) {
         const perfilPromise = cargarPerfil();
         const bibliotecaPromise = cargarBiblioteca();
         const obrasPromise = cargarObras();
-        const tiendaPromise = cargarTienda();
+        //const tiendaPromise = cargarTienda();
         // test
-        const demotiendaPromise = cargarTiendaTest();;
+        const tiendaPromise = cargarTiendaDemo();;
       // 2. Usar Promise.all() para esperar a que las tres promesas se resuelvan
-        const results = await Promise.allSettled([perfilPromise, bibliotecaPromise, obrasPromise, tiendaPromise, demotiendaPromise]);
+        const results = await Promise.allSettled([perfilPromise, bibliotecaPromise, obrasPromise, tiendaPromise);
     
         const perfil = results[0].status === 'fulfilled' ? results[0].value : undefined;
         const biblioteca = results[1].status === 'fulfilled' ? results[1].value : undefined;
