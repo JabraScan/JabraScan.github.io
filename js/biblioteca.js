@@ -268,8 +268,8 @@ const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
                           nuevofooter = avatarPieEstablecer(item.id);
                             if (nuevofooter) card.appendChild(nuevofooter);
                         // Mover el card al contenedor de avatares
-                        const avatarResultado = document.getElementById("avatarResultado");
-                          avatarResultado.querySelector(".row.g-2").appendChild(card);
+                        //const avatarResultado = document.getElementById("avatarResultado");
+                        //  avatarResultado.querySelector(".row.g-2").appendChild(card);
                         //Actualizar nuevo saldo puntos
                         const saldoptos = document.getElementById("user_puntos");
                           saldoptos.innerHTML = data.saldo || 0;
