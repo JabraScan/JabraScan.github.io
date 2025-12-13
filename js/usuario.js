@@ -832,7 +832,7 @@ export function authFetch(input, init = {}) {
         // test
         const tiendaPromise = cargarTiendaDemo();
       // 2. Usar Promise.all() para esperar a que las tres promesas se resuelvan
-        const results = await Promise.allSettled([perfilPromise, bibliotecaPromise, obrasPromise, tiendaPromise);
+        const results = await Promise.allSettled([perfilPromise, bibliotecaPromise, obrasPromise, tiendaPromise]);
     
         const perfil = results[0].status === 'fulfilled' ? results[0].value : undefined;
         const biblioteca = results[1].status === 'fulfilled' ? results[1].value : undefined;
