@@ -186,6 +186,6 @@
       .row.g-2 > * { padding-left: 0; padding-right: 0; margin-bottom: 0; }
     }
 
-  .card-avatar {
+  .card-avatar, ficha-avatar {
     min-width : 160px;
   }
