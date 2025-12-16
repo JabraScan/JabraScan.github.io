@@ -399,7 +399,7 @@ export function authFetch(input, init = {}) {
       // Parsear
       const data = await perfilRes.json();
       const cont = document.getElementById("obrasResultado");
-        if (!cont) return;
+        if (!cont) return undefined;
     
     const ul = document.createElement("ul");
     ul.className = "list-group";
