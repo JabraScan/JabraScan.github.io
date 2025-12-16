@@ -168,9 +168,25 @@ export function authFetch(input, init = {}) {
       return data;
     }
   //FIN CARGA PERFIL USUARIO
-
+  // CONTROL DIVs VACIO
+    function actualizarAviso(cont, ul, claseAviso, mensaje) {
+      // busca si ya existe el div de aviso
+      let aviso = cont.querySelector(`.${claseAviso}`);
+      if (ul.children.length === 0) {
+        if (!aviso) {
+          aviso = document.createElement("div");
+          aviso.className = `alert alert-info ${claseAviso}`;
+          aviso.textContent = mensaje;
+          cont.insertBefore(aviso, ul);
+        }
+        aviso.style.display = "";
+      } else {
+        if (aviso) aviso.style.display = "none";
+      }
+    }
+  // FIN CONTROL DIVs VACIOS
   export async function cargarBiblioteca() {
-    if (!token) return undefined;
+    if (!token) {  return undefined;  }
   
     //const url = `${API_BASE}/biblioteca/list?usuario_id=${encodeURIComponent(usuario_id)}`;
     const url = `${API_BASE}/biblioteca/list`;
@@ -263,6 +279,9 @@ export function authFetch(input, init = {}) {
                 const res = await addToBiblio(String(item.obra_id), { remove: true });
                 if (res.ok) {
                   li.remove();
+                  // actualizar avisos en ambos contenedores
+                  actualizarAviso(cont, ul, "alerta-bvacia", "No tienes obras en la biblioteca");
+                  actualizarAviso(contfinal, ulfinal, "alerta-bvaciafin", "No tienes obras finalizadas");
                 } else {
                   console.error('Error eliminando obra:', res.error || res.status);
                 }
@@ -300,6 +319,9 @@ export function authFetch(input, init = {}) {
                     b.title = titleText;
                     b.setAttribute('aria-label', titleText);
                   });
+                  // actualizar avisos en ambos contenedores
+                  actualizarAviso(cont, ul, "alerta-bvacia", "No tienes obras en la biblioteca");
+                  actualizarAviso(contfinal, ulfinal, "alerta-bvaciafin", "No tienes obras finalizadas");
                 } else {
                   console.error('Error finalizando obra:', res);
                 }
@@ -322,26 +344,40 @@ export function authFetch(input, init = {}) {
             ulfinal.appendChild(li);
           }
         });
-    cont.appendChild(ul);
-        cont.addEventListener('click', (event) => {
-          const btn = event.target.closest('.biblio-obra');
-          if (!btn) return;
-          event.preventDefault();
-          // obtener obra_id preferiblemente desde el dataset del li
-          const liEl = btn.closest('li');
-          const obraId = liEl?.dataset.obraId ?? btn.dataset.obraId ?? null;
-          if (obraId) onLibroClick(obraId);
-        });
-    contfinal.appendChild(ulfinal);
-        contfinal.addEventListener('click', (event) => {
-          const btn = event.target.closest('.biblio-obra');
-          if (!btn) return;
-          event.preventDefault();
-          // obtener obra_id preferiblemente desde el dataset del li
-          const liEl = btn.closest('li');
-          const obraId = liEl?.dataset.obraId ?? btn.dataset.obraId ?? null;
-          if (obraId) onLibroClick(obraId);
-        });
+        // Biblioteca principal
+          cont.innerHTML = "";
+          if (ul.children.length === 0) {
+            cont.innerHTML = "<div class='alert alert-info alerta-bvacia'>No tienes obras en la biblioteca</div>";
+            cont.appendChild(ul);
+          } else {
+            cont.appendChild(ul);
+                cont.addEventListener('click', (event) => {
+                  const btn = event.target.closest('.biblio-obra');
+                  if (!btn) return;
+                  event.preventDefault();
+                  // obtener obra_id preferiblemente desde el dataset del li
+                  const liEl = btn.closest('li');
+                  const obraId = liEl?.dataset.obraId ?? btn.dataset.obraId ?? null;
+                  if (obraId) onLibroClick(obraId);
+                });
+          }
+        // Biblioteca finalizados  
+          contfinal.innerHTML = "";
+          if (ulfinal.children.length === 0) {
+              contfinal.innerHTML = "<div class='alert alert-info alerta-bvaciafin'>No tienes obras finalizadas</div>";
+              contfinal.appendChild(ulfinal);
+          } else {
+              contfinal.appendChild(ulfinal);
+                contfinal.addEventListener('click', (event) => {
+                  const btn = event.target.closest('.biblio-obra');
+                  if (!btn) return;
+                  event.preventDefault();
+                  // obtener obra_id preferiblemente desde el dataset del li
+                  const liEl = btn.closest('li');
+                  const obraId = liEl?.dataset.obraId ?? btn.dataset.obraId ?? null;
+                  if (obraId) onLibroClick(obraId);
+                });        
+          }
 
     activarLinksPDF();
   }
@@ -396,7 +432,7 @@ export function authFetch(input, init = {}) {
    * - Renderiza en #obrasResultado usando innerHTML (mínimo código extra).
    */
   export async function cargarObras() {
-    if (!usuario_id && !token) return;
+    if (!usuario_id && !token) return undefined;
     
     const perfilUrl = token
       ? `${API_BASE}/obras/traductores`
@@ -562,7 +598,7 @@ export function authFetch(input, init = {}) {
  * @returns {Promise<void>} Promise que resuelve cuando termina la carga/render.
  */
         async function cargarTienda() {
-          return;
+          return undefined;
           // Si no hay sesión, salir
           if (!usuario_id && !token) return;
           // Endpoint para obtener la lista de avatares
