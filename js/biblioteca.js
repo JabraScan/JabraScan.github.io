@@ -283,14 +283,15 @@ const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
     }
 
 async function cargarTiendaAvatar() {
-  if (!usuario_id && !token) return;
-
+console.log('tienda 0');
+  if (!token) return undefined;
+console.log('tienda');
   const ENDPOINT = `${API_BASE}/avatars/demo`;
   const tienda = document.querySelector('#tiendaResultado');
   const avatares = document.querySelector('#avatarResultado');
   //const tienda = document.querySelector('#demo-tienda');
   //const avatares = document.querySelector('#demo-avatar');
-  if (!tienda || !avatares) return;
+  if (!tienda || !avatares) return undefined;
 
   tienda.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
   avatares.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
@@ -428,17 +429,19 @@ async function cargarTiendaAvatar() {
     tienda.appendChild(rowTienda);
     avatares.appendChild(rowAvatar);
 
+    return true;
   } catch (err) {
     console.error("Error en cargarTiendaAvatar:", err);
     avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
     tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+
+    return false;
   }
 }
 
 
 export function cargarTiendaDemo () {
-  cargarTiendaAvatar();
-  return true;      
+  return cargarTiendaAvatar();
   //if (usuario_id === TARGET_USER || usuario_id === TARGET_USER_TAVO) {
     // Mostrar el <li> padre del botón "DemoTienda"
       /*document.getElementById("demotienda-tab")
