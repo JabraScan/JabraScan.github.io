@@ -173,14 +173,17 @@ export function authFetch(input, init = {}) {
     if (!token) return undefined;
   
     //const url = `${API_BASE}/biblioteca/list?usuario_id=${encodeURIComponent(usuario_id)}`;
-    const url = `${API_BASE}/biblioteca/list`;  
-    try {
-      const res = await authFetch(url);
-    } catch (err) {
-      return undefined; // no cortar: cumplir la promesa
-    }
+    const url = `${API_BASE}/biblioteca/list`;
+    let res;
+      try {
+        const res = await authFetch(url);
+      } catch (err) {
+        return undefined; // no cortar: cumplir la promesa
+      }
+    if (!res || !res.ok) { return undefined; }
+    
     const data = await res.json();
-  
+    
     const cont = document.getElementById("bibliotecaResultado");
     const contfinal = document.getElementById("bibliotecafin_Resultado");
     if (!cont || !contfinal) return undefined;
