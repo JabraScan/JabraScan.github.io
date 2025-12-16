@@ -65,9 +65,21 @@ function getCookie(name) {
   return match ? decodeURIComponent(match[2]) : null;
 }
 
+//function deleteCookie(name) {
+//  document.cookie = `${encodeURIComponent(name)}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+//}
 function deleteCookie(name) {
-  document.cookie = `${encodeURIComponent(name)}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  const isHttps = location.protocol === "https:";
+  const attrs = [
+    "expires=Thu, 01 Jan 1970 00:00:00 UTC",
+    "path=/",
+    "domain=jabrascan.net",
+    "SameSite=Lax",
+    isHttps ? "Secure" : null
+  ].filter(Boolean).join("; ");
+  document.cookie = `${encodeURIComponent(name)}=; ${attrs}`;
 }
+
 
 // --- API transparente ---
 const useCookies = cookiesEnabled();
