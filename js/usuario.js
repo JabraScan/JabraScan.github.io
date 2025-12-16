@@ -141,7 +141,7 @@ export function authFetch(input, init = {}) {
     // opts permite pasar selectors opcionales: { loadingSelector, errorSelector, nickSelector, avatarSelector }
     export async function cargarPerfil(opts = {}) {
       // Solo autenticado: si no hay token no intentamos nada
-      if (!token) return;    
+      if (!token) return undefined;    
       // Mostrar indicador de carga si se proporcionó selector
       let loadingEl;
       if (opts.loadingSelector) {
@@ -170,7 +170,7 @@ export function authFetch(input, init = {}) {
   //FIN CARGA PERFIL USUARIO
 
   export async function cargarBiblioteca() {
-    if (!token) return;
+    if (!token) return undefined;
   
     //const url = `${API_BASE}/biblioteca/list?usuario_id=${encodeURIComponent(usuario_id)}`;
     const url = `${API_BASE}/biblioteca/list`;  
@@ -179,7 +179,7 @@ export function authFetch(input, init = {}) {
   
     const cont = document.getElementById("bibliotecaResultado");
     const contfinal = document.getElementById("bibliotecafin_Resultado");
-    if (!cont || !contfinal) return;
+    if (!cont || !contfinal) return undefined;
   
     const ul = document.createElement("ul");
       ul.className = "list-group";
@@ -388,9 +388,14 @@ export function authFetch(input, init = {}) {
     const perfilUrl = token
       ? `${API_BASE}/obras/traductores`
       : `${API_BASE}/obras/traductores?user_id=${encodeURIComponent(usuario_id)}`;
-      const perfilRes = await authFetch(perfilUrl);
+      try {
+        perfilRes = await authFetch(perfilUrl);
+      } catch (err) {
+        console.error("cargarObras: authFetch lanzó excepción", err);
+        return undefined; // no cortar: cumplir la promesa
+      }
       // Comprobar la Response antes de parsear
-      if (!perfilRes || !perfilRes.ok) {        return;      }
+      if (!perfilRes || !perfilRes.ok) {        return undefined;      }
       // Perfil válido, mostrar obras
         // Selecciona todos los elementos con la clase "obras"
         document.querySelectorAll('.obras').forEach(el => {
