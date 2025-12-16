@@ -174,7 +174,11 @@ export function authFetch(input, init = {}) {
   
     //const url = `${API_BASE}/biblioteca/list?usuario_id=${encodeURIComponent(usuario_id)}`;
     const url = `${API_BASE}/biblioteca/list`;  
-    const res = await authFetch(url);
+    try {
+      const res = await authFetch(url);
+    } catch (err) {
+      return undefined; // no cortar: cumplir la promesa
+    }
     const data = await res.json();
   
     const cont = document.getElementById("bibliotecaResultado");
@@ -351,12 +355,15 @@ export function authFetch(input, init = {}) {
     if (!obraId) return;
   
     const url = `${API_BASE}/biblioteca/finalizado`;
-    const resp = await authFetch(url, {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ obra_id: obraId, finalizado })
-                          });
-  
+      try {
+        const resp = await authFetch(url, {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ obra_id: obraId, finalizado })
+                              });
+      } catch (err) {
+        return undefined; // no cortar: cumplir la promesa
+      }
       const text = await resp.text().catch(() => "");
         if (!text) return false;
         try {
@@ -843,7 +850,7 @@ export function authFetch(input, init = {}) {
         const tiendaPromise = cargarTiendaDemo();
       // 2. Usar Promise.all() para esperar a que las tres promesas se resuelvan
         const results = await Promise.allSettled([perfilPromise, bibliotecaPromise, obrasPromise, tiendaPromise]);
-    
+console.log("Resultados de initUsuario:", results);    
         const perfil = results[0].status === 'fulfilled' ? results[0].value : undefined;
         const biblioteca = results[1].status === 'fulfilled' ? results[1].value : undefined;
         const obras = results[2].status === 'fulfilled' ? results[2].value : undefined;
