@@ -176,7 +176,7 @@ export function authFetch(input, init = {}) {
     const url = `${API_BASE}/biblioteca/list`;
     let res;
       try {
-        const res = await authFetch(url);
+        res = await authFetch(url);
       } catch (err) {
         return undefined; // no cortar: cumplir la promesa
       }
@@ -358,8 +358,9 @@ export function authFetch(input, init = {}) {
     if (!obraId) return;
   
     const url = `${API_BASE}/biblioteca/finalizado`;
+    let resp;
       try {
-        const resp = await authFetch(url, {
+        resp = await authFetch(url, {
                                 method: "POST",
                                 headers: { "Content-Type": "application/json" },
                                 body: JSON.stringify({ obra_id: obraId, finalizado })
@@ -367,6 +368,8 @@ export function authFetch(input, init = {}) {
       } catch (err) {
         return undefined; // no cortar: cumplir la promesa
       }
+      if (!resp || !resp.ok) {  return undefined;  }
+    
       const text = await resp.text().catch(() => "");
         if (!text) return false;
         try {
@@ -398,8 +401,10 @@ export function authFetch(input, init = {}) {
     const perfilUrl = token
       ? `${API_BASE}/obras/traductores`
       : `${API_BASE}/obras/traductores?user_id=${encodeURIComponent(usuario_id)}`;
+    
+    let perfilRes;
       try {
-        const perfilRes = await authFetch(perfilUrl);
+        perfilRes = await authFetch(perfilUrl);
       } catch (err) {
         console.error("cargarObras: authFetch lanzó excepción", err);
         return undefined; // no cortar: cumplir la promesa
