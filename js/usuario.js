@@ -396,7 +396,7 @@ export function authFetch(input, init = {}) {
       ? `${API_BASE}/obras/traductores`
       : `${API_BASE}/obras/traductores?user_id=${encodeURIComponent(usuario_id)}`;
       try {
-        perfilRes = await authFetch(perfilUrl);
+        const perfilRes = await authFetch(perfilUrl);
       } catch (err) {
         console.error("cargarObras: authFetch lanzó excepción", err);
         return undefined; // no cortar: cumplir la promesa
