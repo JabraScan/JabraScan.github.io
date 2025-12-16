@@ -291,7 +291,6 @@ export function seleccionarImagen(nodosImagen) {
   lista = lista.filter(item => (item.textContent || "").length > 0);
 
   const totalImagenes = lista.length;
-
   // 🚫 Sin imágenes → vacío
   if (totalImagenes === 0) return "";
 
@@ -317,6 +316,7 @@ export function seleccionarImagen(nodosImagen) {
   // 🎯 Índice de la imagen
   let indice = Math.floor(diaDelAño / diasPorImagen);
 
+console.log(`imegenes ${totalImagenes} dias ${diasPorImagen} ind ${indice} lista ${lista}`);
   // ✅ Seguridad: no pasarse del array
   if (indice >= totalImagenes) indice = totalImagenes - 1;
   if (indice < 0) indice = 0;
@@ -798,4 +798,5 @@ export function imgSrcFromBlob(img, path, fallback) {
       img.addEventListener('load', onLoad, { once: true });
     img.src = url;
 }
+
 
