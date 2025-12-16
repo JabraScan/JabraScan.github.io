@@ -437,7 +437,9 @@ async function cargarTiendaAvatar() {
 
 
 export function cargarTiendaDemo () {
-  if (usuario_id === TARGET_USER || usuario_id === TARGET_USER_TAVO) {
+  cargarTiendaAvatar();
+  return true;      
+  //if (usuario_id === TARGET_USER || usuario_id === TARGET_USER_TAVO) {
     // Mostrar el <li> padre del botón "DemoTienda"
       /*document.getElementById("demotienda-tab")
               .closest("li")
@@ -446,9 +448,9 @@ export function cargarTiendaDemo () {
       document.getElementById("demoavatar-tab")
               .closest("li")
               .classList.remove("d-none");*/
-    cargarTiendaAvatar();
-    return true;
-  } else {
-    return false;
-  }  
+    
+  //  return true;
+  //} else {
+  //  return false;
+  //}  
 }
