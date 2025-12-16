@@ -447,14 +447,15 @@ export function authFetch(input, init = {}) {
       }
       // Comprobar la Response antes de parsear
       if (!perfilRes || !perfilRes.ok) {        return undefined;      }
-      // Perfil válido, mostrar obras
+      // Parsear
+      const data = await perfilRes.json();
+        if (!data || (Array.isArray(data) && data.length === 0)) {  return undefined;  }
+      // Perfil válido y con datos, mostrar
         // Selecciona todos los elementos con la clase "obras"
         document.querySelectorAll('.obras').forEach(el => {
           el.classList.remove('d-none');
         });
-      // Parsear
-      const data = await perfilRes.json();
-        if (!data || (Array.isArray(data) && data.length === 0)) {  return undefined;  }
+
       const cont = document.getElementById("obrasResultado");
         if (!cont) return undefined;
     
