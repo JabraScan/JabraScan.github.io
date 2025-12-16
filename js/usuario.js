@@ -447,6 +447,7 @@ export function authFetch(input, init = {}) {
       }
       // Comprobar la Response antes de parsear
       if (!perfilRes || !perfilRes.ok) {        return undefined;      }
+console.log(perfilRes);
       // Perfil válido, mostrar obras
         // Selecciona todos los elementos con la clase "obras"
         document.querySelectorAll('.obras').forEach(el => {
@@ -894,7 +895,7 @@ export function authFetch(input, init = {}) {
         const tiendaPromise = cargarTiendaDemo();
       // 2. Usar Promise.all() para esperar a que las tres promesas se resuelvan
         const results = await Promise.allSettled([perfilPromise, bibliotecaPromise, obrasPromise, tiendaPromise]);
-console.log("Resultados de initUsuario:", results);    
+      //console.log("Resultados de initUsuario:", results);    
         const perfil = results[0].status === 'fulfilled' ? results[0].value : undefined;
         const biblioteca = results[1].status === 'fulfilled' ? results[1].value : undefined;
         const obras = results[2].status === 'fulfilled' ? results[2].value : undefined;
