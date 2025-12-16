@@ -29,7 +29,7 @@
               <li class="nav-item tienda" role="presentation">
                 <button class="nav-link" id="avatar-tab" data-bs-toggle="tab" data-bs-target="#avatar" type="button" role="tab" aria-controls="avatar">Mis Avatares</button>
               </li>
-              <li class="nav-item obras" role="presentation">
+              <li class="d-none nav-item obras" role="presentation">
                 <button class="nav-link" id="obras-tab" data-bs-toggle="tab" data-bs-target="#obras" type="button" role="tab" aria-controls="obras">Mis Obras</button>
               </li>
               <li class="d-none nav-item tienda" role="presentation">
@@ -43,11 +43,11 @@
   
         <div class="d-block d-sm-none mb-2">
           <select id="tabsSelect" class="form-select">
-            <option value="#biblioteca" selected>Biblioteca</option>
-            <option value="#biblioteca-fin">Finalizados</option>
-            <option value="#tienda">Tienda</option>
-            <option value="#avatar">Mis avatares</option>
-            <option value="#obras">Mis Obras</option>
+            <option class="biblioteca"     value="#biblioteca" selected>Biblioteca</option>
+            <option class="biblioteca-fin" value="#biblioteca-fin">Finalizados</option>
+            <option class="tienda"         value="#tienda">Tienda</option>
+            <option class="tienda"         value="#avatar">Mis avatares</option>
+            <option class="d-none obras"   value="#obras">Mis Obras</option>
           </select>
         </div>
       <!-- Pestañas -->
