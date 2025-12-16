@@ -391,6 +391,11 @@ export function authFetch(input, init = {}) {
       const perfilRes = await authFetch(perfilUrl);
       // Comprobar la Response antes de parsear
       if (!perfilRes || !perfilRes.ok) {        return;      }
+      // Perfil válido, mostrar obras
+        // Selecciona todos los elementos con la clase "obras"
+        document.querySelectorAll('.obras').forEach(el => {
+          el.classList.remove('d-none');
+        });
       // Parsear
       const data = await perfilRes.json();
       const cont = document.getElementById("obrasResultado");
