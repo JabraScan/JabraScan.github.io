@@ -36,6 +36,7 @@ export function cargarlibro(libroId) {
       //const nombreobra = get("nombreobra");
       //const imagen = get("imagen");
       const { nombreobra, nombresAlternativos } = obtenerNombreObra(obra.querySelectorAll("nombreobra"));
+      console.log(obra.querySelectorAll("imagen"));
       const imagen = seleccionarImagen(obra.querySelectorAll("imagen"));
       const autor = get("autor");
       const sinopsis = get("sinopsis");
@@ -300,3 +301,4 @@ function addToLibrary(clave) {
   
   return btn;
 }
+
