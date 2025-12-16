@@ -449,6 +449,9 @@ export function authFetch(input, init = {}) {
       if (!perfilRes || !perfilRes.ok) {        return undefined;      }
       // Parsear
       const data = await perfilRes.json();
+      // Si el servidor devuelve { ok: false }, cortar aquí
+        if (data && typeof data === "object" && data.ok === false) {  return undefined;  }
+      // Solo continuar si data es un array con elementos
         if (!data || (Array.isArray(data) && data.length === 0)) {  return undefined;  }
       // Perfil válido y con datos, mostrar
         // Selecciona todos los elementos con la clase "obras"
