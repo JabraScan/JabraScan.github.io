@@ -9,6 +9,8 @@
   "ImperfectGirl":                 {  "icono": "🪞", "descripcion": "Imperfect Girl"                          },
   "LaLeyendaDeLaEspadaDelNorte":   {  "icono": "⚔️", "descripcion": "La Leyenda de la Espada del Norte"       },
   "MadamePleaseBehave":            {  "icono": "💃", "descripcion": "Señora, por favor comportese"            },
+  "MeComiAUnArbolDelMundo":        {  "icono": "🌱", "descripcion": "Me comí a un Árbol del Mundo"            },
+  "MeConvertiEnPatronVillanos":    {  "icono": "🕴️", "descripcion": "Me convertí en el patrón de los villanos"},
   "MeConvertiEnPatronVillanos":    {  "icono": "🕴️", "descripcion": "Me convertí en el patrón de los villanos"},
   "MLHSB":                         {  "icono": "👑", "descripcion": "¡El héroe de nivel máximo ha regresado!" },
   "MyCollegeTeacherMyChildrenMom": {  "icono": "👶", "descripcion": "Mi Maestra de la Universidad es la Mamá de Mis Hijos"         },
