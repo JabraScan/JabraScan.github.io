@@ -283,9 +283,8 @@ const TARGET_USER_TAVO = 'dcffc6ac-c4e5-4ab7-86da-5e55c982ad97';
     }
 
 async function cargarTiendaAvatar() {
-console.log('tienda 0');
   if (!token) return undefined;
-console.log('tienda');
+
   const ENDPOINT = `${API_BASE}/avatars/demo`;
   const tienda = document.querySelector('#tiendaResultado');
   const avatares = document.querySelector('#avatarResultado');
