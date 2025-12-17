@@ -24,7 +24,19 @@ export function syncLocalStorageToCookies(keys = CRITICAL_KEYS) {
     }
   });
 }
+
 // --- utilidades internas ---
+function getAttrs(expires) {
+  const isHttps = location.protocol === "https:";
+  return [
+    `expires=${expires}`,
+    "path=/",
+    "domain=jabrascan.net",
+    "SameSite=Lax",
+    isHttps ? "Secure" : null
+  ].filter(Boolean).join("; ");
+}
+
 function cookiesEnabled() {
   //return false;
   try {
@@ -48,14 +60,7 @@ function cookiesEnabled() {
 function setCookie(name, value, days = 360) {
   const expires = new Date();
   expires.setDate(expires.getDate() + days);
-  const isHttps = location.protocol === "https:";
-  const attrs = [
-    `expires=${expires.toUTCString()}`,
-    `path=/`,
-    `domain=jabrascan.net`,
-    `SameSite=Lax`,
-    isHttps ? `Secure` : null
-  ].filter(Boolean).join("; ");
+  const attrs = getAttrs(expires.toUTCString());
   document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; ${attrs}`;
 }
 
@@ -69,14 +74,7 @@ function getCookie(name) {
 //  document.cookie = `${encodeURIComponent(name)}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 //}
 function deleteCookie(name) {
-  const isHttps = location.protocol === "https:";
-  const attrs = [
-    "expires=Thu, 01 Jan 1970 00:00:00 UTC",
-    "path=/",
-    "domain=jabrascan.net",
-    "SameSite=Lax",
-    isHttps ? "Secure" : null
-  ].filter(Boolean).join("; ");
+  const attrs = getAttrs("Thu, 01 Jan 1970 00:00:00 UTC");
   document.cookie = `${encodeURIComponent(name)}=; ${attrs}`;
 }
 
