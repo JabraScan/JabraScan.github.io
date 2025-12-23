@@ -2251,6 +2251,12 @@
 		{ "Fecha" : "20-12-2025", "NombreArchivo" : "CultivationOnline-2249_JabraScan.pdf", "numCapitulo" : "2249", "nombreCapitulo" : "¡Hacia el Noveno Cielo!"                                               	, "tituloObra" : "Cultivation Online" },
 		{ "Fecha" : "20-12-2025", "NombreArchivo" : "CultivationOnline-2250_JabraScan.pdf", "numCapitulo" : "2250", "nombreCapitulo" : "El Primer Juicio"                                                      	, "tituloObra" : "Cultivation Online" },
 		{ "Fecha" : "21-12-2025", "NombreArchivo" : "CultivationOnline-2251_JabraScan.pdf", "numCapitulo" : "2251", "nombreCapitulo" : "Ciudad Mamut Colosal"                                                  	, "tituloObra" : "Cultivation Online" },
-		{ "Fecha" : "21-12-2025", "NombreArchivo" : "CultivationOnline-2252_JabraScan.pdf", "numCapitulo" : "2252", "nombreCapitulo" : "Enfermedad Desconocida"                                                	, "tituloObra" : "Cultivation Online" }
+		{ "Fecha" : "21-12-2025", "NombreArchivo" : "CultivationOnline-2252_JabraScan.pdf", "numCapitulo" : "2252", "nombreCapitulo" : "Enfermedad Desconocida (1)"                                             , "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "23-12-2025", "NombreArchivo" : "CultivationOnline-2253_JabraScan.pdf", "numCapitulo" : "2253", "nombreCapitulo" : "Enfermedad Desconocida (2)"                                            	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "24-12-2025", "NombreArchivo" : "CultivationOnline-2254_JabraScan.pdf", "numCapitulo" : "2254", "nombreCapitulo" : "Curando a Kulas"                                                       	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "24-12-2025", "NombreArchivo" : "CultivationOnline-2255_JabraScan.pdf", "numCapitulo" : "2255", "nombreCapitulo" : "El Segundo Juicio"                                                     	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "25-12-2025", "NombreArchivo" : "CultivationOnline-2256_JabraScan.pdf", "numCapitulo" : "2256", "nombreCapitulo" : "Asalto al Palacio Celestial"                                           	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "25-12-2025", "NombreArchivo" : "CultivationOnline-2257_JabraScan.pdf", "numCapitulo" : "2257", "nombreCapitulo" : "Luchando Contra el Primer Emperador Celestial"                         	, "tituloObra" : "Cultivation Online" }
+
   ]
 }
