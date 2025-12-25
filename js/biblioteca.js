@@ -291,9 +291,21 @@ async function cargarTiendaAvatar() {
   //const tienda = document.querySelector('#demo-tienda');
   //const avatares = document.querySelector('#demo-avatar');
   if (!tienda || !avatares) return undefined;
-
-  tienda.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
-  avatares.innerHTML = '<div class="text-center py-4">Cargando avatares…</div>';
+        // Generar número aleatorio entre 1 y 4
+        const randomImg = Math.floor(Math.random() * 4) + 1;
+        // Crear el HTML con la imagen
+        const loadingHTML = `
+          <div class="text-center py-4">
+            Cargando avatares…
+            <br>
+            <img src="/img_especial/loading/loading${randomImg}.webp" 
+                 alt="Cargando…" 
+                 style="width:80px; margin-top:10px;">
+          </div>
+        `;
+        // Insertar en ambos contenedores
+        tienda.innerHTML = loadingHTML;
+        avatares.innerHTML = loadingHTML;
 
   try {
     const res = await authFetch(ENDPOINT, {
