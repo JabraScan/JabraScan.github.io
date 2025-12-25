@@ -292,7 +292,7 @@ async function cargarTiendaAvatar() {
   //const avatares = document.querySelector('#demo-avatar');
   if (!tienda || !avatares) return undefined;
         // Generar número aleatorio entre 1 y 4
-        const randomImg = Math.floor(Math.random() * 4) + 1;
+        const randomImg = Math.floor(Math.random() * 5) + 1;
         // Crear el HTML con la imagen
         const loadingHTML = `
           <div class="text-center py-4">
@@ -380,7 +380,7 @@ async function cargarTiendaAvatar() {
       
                 const body = card.querySelector('.card-body');
                       const bminiature =  body.querySelector('.card-miniatures');
-                if (bminiature) bminiature.classList.add('d-none');;
+                if (bminiature) bminiature.classList.add('d-none');
       
                 // Insertar el contenido devuelto
                 const bavatars = document.createElement('div');
@@ -400,7 +400,9 @@ async function cargarTiendaAvatar() {
                 }
               } catch (err) {
                 btnMas.disabled = false;
-                console.error(err);
+                const bminiature =  body.querySelector('.card-miniatures');
+                  if (bminiature) bminiature.classList.add('d-none');
+                    console.error(err);
                 alert('Error inesperado al cargar la colección');
               }
             });
