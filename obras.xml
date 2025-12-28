@@ -121,12 +121,6 @@
 		<nombreobra>City of Witches</nombreobra>
 		<nombreobra>Ciudad de Brujas</nombreobra>
 		<nombreobra>마녀의 도시</nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
 		<autor>Wilted Flower (섦게지는꽃)</autor>
 		<sinopsis><![CDATA[Tras permanecer cinco años secuestrado y esclavizado en la Ciudad de Brujas.
             Se convirtió en el único Brujo del mundo.
@@ -150,7 +144,7 @@
 		<observaciones></observaciones>
 		<discord></discord>
 		<bannerOpcional></bannerOpcional>
-		<wiki></wiki>
+		<wiki>https://city-of-witches.fandom.com/wiki/City_Of_Witches_Wiki</wiki>
 	</obra>	
 	<obra>
 		<visible>si</visible>
