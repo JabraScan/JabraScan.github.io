@@ -115,6 +115,40 @@
 		<bannerOpcional></bannerOpcional>
 		<wiki></wiki>
 	</obra>
+	<obra>	
+		<visible>si</visible>
+		<clave>CityOfWitches</clave>
+		<nombreobra>City of Witches</nombreobra>
+		<nombreobra>Ciudad de Brujas</nombreobra>
+		<nombreobra>마녀의 도시</nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<autor>Wilted Flower (섦게지는꽃)</autor>
+		<sinopsis><![CDATA[Tras permanecer cinco años secuestrado y esclavizado en la Ciudad de Brujas.
+            Se convirtió en el único Brujo del mundo.
+
+            «Un genio matemático hasta que un día sufrió un accidente y de pronto apareció secuestrado en Gehenna, la Ciudad de Brujas, un mundo dentro del mundo actual.»
+                ]]>
+        </sinopsis>
+		<valoracion>9.0</valoracion>
+		<tipoobra>Novela Web</tipoobra>
+		<categoria>Acción, Adulto, Ecchi, Fantasía, Harem, Maduro, R18, Romance</categoria>
+		<imagen>CityOfWitches/CityOfWitches.webp</imagen>
+		<fechaCreacion>28/12/2025</fechaCreacion>
+		<ubicacion>Novela Coreana</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Gran Maestro</traductor>
+		<adulto>adulto</adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki></wiki>
+	</obra>	
 	<obra>
 		<visible>si</visible>
 		<clave>DanmachiArgonauta</clave>
