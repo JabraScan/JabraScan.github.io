@@ -2257,6 +2257,10 @@
 		{ "Fecha" : "24-12-2025", "NombreArchivo" : "CultivationOnline-2255_JabraScan.pdf", "numCapitulo" : "2255", "nombreCapitulo" : "El Segundo Juicio"                                                     	, "tituloObra" : "Cultivation Online" },
 		{ "Fecha" : "25-12-2025", "NombreArchivo" : "CultivationOnline-2256_JabraScan.pdf", "numCapitulo" : "2256", "nombreCapitulo" : "Asalto al Palacio Celestial"                                           	, "tituloObra" : "Cultivation Online" },
 		{ "Fecha" : "25-12-2025", "NombreArchivo" : "CultivationOnline-2257_JabraScan.pdf", "numCapitulo" : "2257", "nombreCapitulo" : "Luchando Contra el Primer Emperador Celestial"                         	, "tituloObra" : "Cultivation Online" },
-		{ "Fecha" : "29-12-2025", "NombreArchivo" : "CultivationOnline-2258_JabraScan.pdf", "numCapitulo" : "2258", "nombreCapitulo" : "El Verdadero Demonio en el Gallinero"                                  	, "tituloObra" : "Cultivation Online" }
+		{ "Fecha" : "29-12-2025", "NombreArchivo" : "CultivationOnline-2258_JabraScan.pdf", "numCapitulo" : "2258", "nombreCapitulo" : "El Verdadero Demonio en el Gallinero"                                  	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "30-12-2025", "NombreArchivo" : "CultivationOnline-2259_JabraScan.pdf", "numCapitulo" : "2259", "nombreCapitulo" : "El Tercer Juicio (1)"                                  					, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "31-12-2025", "NombreArchivo" : "CultivationOnline-2260_JabraScan.pdf", "numCapitulo" : "2260", "nombreCapitulo" : "El Tercer Juicio (2)"                                  					, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "01-01-2026", "NombreArchivo" : "CultivationOnline-2261_JabraScan.pdf", "numCapitulo" : "2261", "nombreCapitulo" : "El Tercer Juicio (3)"                                  					, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "01-01-2026", "NombreArchivo" : "CultivationOnline-2262_JabraScan.pdf", "numCapitulo" : "2262", "nombreCapitulo" : "Prueba Única"                                  							, "tituloObra" : "Cultivation Online" }
   ]
 }
