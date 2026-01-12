@@ -1,4 +1,6 @@
+//import { setItem, getItem, removeItem } from "./storage.js";
 //import { imgSrcFromBlob } from './utils.js';
+
 const WORKER_URL = "https://jabrascan.net";
 const FALLBACK_IMG = "/img/avatar/default.webp";
 
@@ -165,8 +167,11 @@ function showUserNick(nickname, avatar) {
   if (loginWrapper) loginWrapper.classList.add("d-none");
   if (userWrapper && nick) {
     nick.textContent = nickname;
+//console.log(`avatar : ${avatar} - fall ${FALLBACK_IMG}`);
     if (avatarImg) imgSrcFromBlobCopia(avatarImg, avatar, FALLBACK_IMG);
     userWrapper.classList.remove("d-none");
+
+    return avatarImg.src;
   }
 }
 
@@ -180,14 +185,49 @@ function loginMeta() {
 function loginTwitter() {
   window.location.href = `${WORKER_URL}/auth/twitter`;
 }
+// -- version con cookies
+/*      // estado global usuario en memoria
+      let currentUser = null;      
+      async function initSessionFromUrl() {
+        // si ya tenemos usuario en memoria, no llamamos al backend
+        if (currentUser) {
+          document.dispatchEvent(new CustomEvent("auth:ready", { detail: currentUser }));
+          return true;
+        }
+      
+        // si no, pedimos al backend
+        try {
+          const res = await fetch(`${WORKER_URL}/me`, {
+            method: "GET",
+            credentials: "include"
+          });
+      
+          if (res.ok) {
+            const data = await res.json();
+            if (data.usuario) {
+              currentUser = data.usuario; // guardamos en memoria
+              document.dispatchEvent(new CustomEvent("auth:ready", { detail: currentUser }));
+              return true;
+            }
+          }
+      
+          document.dispatchEvent(new CustomEvent("auth:unauthenticated"));
+          return false;
+        } catch (err) {
+          console.error("Error comprobando sesión:", err);
+          document.dispatchEvent(new CustomEvent("auth:unauthenticated"));
+          return false;
+        }
+      }*/
 
 // --- captura token de la URL sin recargar y notifica la app ---
 function initSessionFromUrl() {
   const params = new URLSearchParams(window.location.search);
   const tokenFromUrl = params.get("token");
   if (!tokenFromUrl) return false;
-
-  localStorage.setItem("jwt", tokenFromUrl);
+console.log("ANTES de guardar JWT");
+  window.StorageAPI.setItem("jwt", tokenFromUrl);
+console.log("DESPUÉS de guardar JWT");
   // limpia la query string sin recargar
   window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
   // notifica al resto de la SPA que hay token nuevo
@@ -217,10 +257,36 @@ async function fetchWithTimeout(url, options = {}, timeout = 8000) {
     throw e;
   }
 }
-
+// --- comprobar sesion usando cookies ---
+/*      async function checkSessionOnLoad() {
+        try {
+          const res = await fetch(`${WORKER_URL}/me`, {
+            method: "GET",
+            credentials: "include"   // <-- importante: envía la cookie access_token
+          });
+      
+          if (!res.ok) {
+            // No hay sesión válida
+            document.dispatchEvent(new CustomEvent("auth:unauthenticated"));
+            return;
+          }
+      
+          const data = await res.json();
+          if (data.usuario) {
+            // Sesión válida, dispara evento con datos del usuario
+            document.dispatchEvent(new CustomEvent("auth:ready", { detail: data.usuario }));
+          } else {
+            document.dispatchEvent(new CustomEvent("auth:unauthenticated"));
+          }
+        } catch (err) {
+          console.error("Error comprobando sesión:", err);
+          document.dispatchEvent(new CustomEvent("auth:unauthenticated"));
+        }
+      }
+*/
 // --- comprobar sesión y actualizar UI --- 
 async function checkSessionOnLoad() {
-  const token = localStorage.getItem("jwt");
+  const token = window.StorageAPI.getItem("jwt");
   if (!token) {
     showLoginButton();
     // notifica que no hay sesión activa
@@ -238,33 +304,50 @@ async function checkSessionOnLoad() {
 
     const usuario = data && data.usuario ? data.usuario : {};
     const nickname = usuario.nickname || "Usuario";
-    const avatar = normalizeAvatarUrl(usuario.avatar || "/img/avatar/default.png");
+    //const avatar = normalizeAvatarUrl(usuario.avatar || "/img/avatar/default.png");
+    const avatar = showUserNick(nickname, usuario.avatar);
     const userId = usuario.id || "";
 
-    if (userId) localStorage.setItem("user_id", userId);
-    localStorage.setItem("user_nickname", nickname);
-    localStorage.setItem("user_avatar", avatar);
+    if (userId) window.StorageAPI.setItem("user_id", userId);
+    window.StorageAPI.setItem("user_nickname", nickname);
+    window.StorageAPI.setItem("user_avatar", avatar);
 
-    showUserNick(nickname, avatar);
     // notifica que la auth está lista y pasa el usuario
     document.dispatchEvent(new CustomEvent("auth:ready", { detail: { user: usuario } }));
   } catch (e) {
     // sesión inválida: limpiar y notificar
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("user_id");
-    localStorage.removeItem("user_nickname");
-    localStorage.removeItem("user_avatar");
+    window.StorageAPI.removeItem("jwt");
+    window.StorageAPI.removeItem("user_id");
+    window.StorageAPI.removeItem("user_nickname");
+    window.StorageAPI.removeItem("user_avatar");
     showLoginButton();
     document.dispatchEvent(new CustomEvent("auth:unauthenticated", { detail: { reason: e.message || e } }));
   }
 }
-
+// --- logout con cookies
+/*      async function logout() {
+        try {
+          const res = await fetch(`${WORKER_URL}/auth/logout`, {
+            method: "POST",
+            credentials: "include"   // <-- importante: envía la cookie al backend
+          });
+      
+          if (res.ok) {
+            // Borra la sesión en el backend y dispara evento en el frontend
+            document.dispatchEvent(new CustomEvent("auth:loggedOut"));
+          } else {
+            console.error("Error al cerrar sesión:", await res.text());
+          }
+        } catch (err) {
+          console.error("Error en logout:", err);
+        }
+      }*/
 // --- logout --- 
 function logout() {
-  localStorage.removeItem("jwt");
-  localStorage.removeItem("user_id");
-  localStorage.removeItem("user_nickname");
-  localStorage.removeItem("user_avatar");
+  window.StorageAPI.removeItem("jwt");
+  window.StorageAPI.removeItem("user_id");
+  window.StorageAPI.removeItem("user_nickname");
+  window.StorageAPI.removeItem("user_avatar");
 
   showLoginButton();
   // notifica a la SPA que el usuario ha cerrado sesión
@@ -272,7 +355,7 @@ function logout() {
 }
 
 // --- enganchar eventos del DOM y del sistema ---
-  document.addEventListener("DOMContentLoaded", async () => {
+/*  document.addEventListener("DOMContentLoaded", async () => {
     // botones de login (si existen en login.html)
     const googleBtn = document.getElementById("login-google");
     if (googleBtn) googleBtn.addEventListener("click", (e) => { e.preventDefault(); loginGoogle(); });
@@ -293,7 +376,7 @@ function logout() {
   
     // validar sesión y pintar UI en base a /me
     await checkSessionOnLoad();
-  });
+  });*/
 // --- enganchar eventos del DOM y del sistema ---
 document.addEventListener("DOMContentLoaded", async function () {
   var items = [
@@ -320,7 +403,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     el.removeEventListener("click", handlers[it.id]);
     el.addEventListener("click", handlers[it.id]);
   });
-  initSessionFromUrl();
+      
+      if (window.StorageAPI) {
+        initSessionFromUrl();
+      } else {
+        window.addEventListener("storageapi:ready", () => {
+          initSessionFromUrl();
+        });
+      }
+
   await checkSessionOnLoad();
 });
 

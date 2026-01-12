@@ -1,3 +1,5 @@
+import { authFetch } from'./usuario.js';
+import { setItem, getItem, removeItem } from "./storage.js";
 /**
  * 🧙‍♂️ API Web para gestionar visitas, valoraciones y obtener información
  * sobre obras y capítulos.
@@ -22,6 +24,8 @@ const URL_GOOGLE = "https://script.google.com/macros/s/AKfycbwQNm88siN8ASQXXbNYe
 // URL del Cloudflare Worker que replica el flujo (ajusta al tuyo)
 const URL_CLOUDFLARE = "https://jabrascan.net"; // TODO: cambia por tu ruta real
 
+const token = getItem("jwt");
+const usuario_id = getItem("user_id");
 //const API_KEY = "X%B~ZiP?RJA5LUGVAU_9KgDp?7~rUX8KW2D9Q3Fgiyt=1.]Ww#a^FGEMFuM:}#WP4r2L!e9U?fA+qcUjReWV"; // Opcional, si tu backend lo requiere
 /*// 🔐 Genera un token temporal codificado en base64
 export function generarToken() {
@@ -45,6 +49,9 @@ const API_KEY = "";
 // @returns {Promise<string>} "OK" si se actualizó correctamente
 //
 export function incrementarVisita(idvisitado) {
+   // Iniciar la actualización en paralelo (prioridad a la llamada de visitas)
+     startUpdateUltimoCapituloIfNeeded(idvisitado);
+   //Incremento de visitas
   const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=incrementar`;
   return fetch(url)
     .then(res => res.text())
@@ -53,6 +60,34 @@ export function incrementarVisita(idvisitado) {
       return "ERROR";
     });
 }
+   /**
+    * Actualización del último capítulo leido  para usuarios logueados
+    * - idvisitado puede ser "obra_<obraId>" o "<obraId>_<capitulo>"
+    * - Si detecta capítulo, lanza updateUltimoCapitulo(obraId, capitulo) en background.
+    * - Errores de la llamada se capturan para no afectar al flujo llamador.
+    */
+   function startUpdateUltimoCapituloIfNeeded(idvisitado) {
+      if (!token) return;  
+        try {
+          // No procesamos los ids con prefijo "obra_"
+          if (typeof idvisitado !== 'string' || idvisitado.startsWith('obra_')) return;      
+             const sepIndex = idvisitado.indexOf('_');
+             if (sepIndex === -1) return;
+      
+             const obraId = idvisitado.slice(0, sepIndex);
+             const capitulo = idvisitado.slice(sepIndex + 1);      
+          if (!obraId || !capitulo) return;
+          // Fire-and-forget: iniciar en paralelo y silenciar errores
+          updateUltimoCapitulo(obraId, capitulo).catch(err => {
+            // Logueamos para depuración pero no propagamos el error
+            console.error('updateUltimoCapitulo failed (ignored):', err);
+          });
+        } catch (e) {
+          // Cualquier fallo en el parsing no debe romper el flujo principal
+          console.error("Capitulo no incrementado");
+        }
+   }
+
 
 //
 //Consulta el número de visitas para un ID
@@ -78,8 +113,8 @@ export function leerVisitas(idvisitado) {
 //
 export function valorarRecurso(idvisitado, valor) {
   // Recuperamos el user_id guardado en localStorage (debe contener el token/JWT)
-  const usuarioId = localStorage.getItem("user_id") || "null";
-  const token = localStorage.getItem("jwt") || "null";
+  const usuarioId = getItem("user_id") || "null";
+  const token = getItem("jwt") || "null";
   // URL de Google (igual que antes)
   const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=valorar&valor=${encodeURIComponent(valor)}&usuario_id=${encodeURIComponent(usuarioId)}`;
   // URL y opciones para Cloudflare (POST)
@@ -200,3 +235,52 @@ export function obtenerResumenObras() {
        votos: data?.numvotos ?? data?.total ?? data?.totalvotos ?? 0
      };
    }
+   /**
+    * updateUltimoCapitulo
+    *
+    * Actualiza en el servidor el último capítulo leído de una obra.
+    * Devuelve `true` si la actualización fue exitosa, `false` en cualquier otro caso.
+    *
+    * Requisitos previos (comprobados aquí):
+    * - Existe `usuario_id` o `token` (si ambos faltan, no se intenta la petición).
+    * - `obraId` no es nulo ni cadena vacía.
+    * - `capitulo` no es nulo ni cadena vacía (si falta, no tiene sentido actualizar).
+    *
+    * Nota: la función no lanza excepciones hacia el llamador; en caso de error devuelve `false`.
+    */
+      async function updateUltimoCapitulo(obraId, capitulo) {
+        // Si no hay ni usuario ni token, no intentamos nada (autenticación ausente)
+        if (!token) return;
+        // Validación de obraId: si falta, no tiene sentido continuar
+        if (obraId == null || obraId === '') return;
+        // Validación de capítulo: si falta, no hay nada que actualizar
+        if (capitulo == null || capitulo === '') return;
+        // URL del endpoint que actualiza el progreso
+        const url = `${URL_CLOUDFLARE}/biblioteca/progreso`;
+        // Payload que se enviará al servidor.
+        // Convertimos obra_id a string; capitulo se normaliza a string si no es null.
+        const payload = {
+          obra_id: String(obraId),
+          capitulo: capitulo == null ? null : String(capitulo)
+        };
+
+         console.log(token);
+
+        try {
+          const resp = await authFetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          // Intentamos parsear JSON del cuerpo; si falla, data será null.
+          const data = await (resp && resp.json ? resp.json().catch(() => null) : null);
+          // Consideramos éxito si la respuesta HTTP es OK (2xx) o si el body contiene { ok: true }
+          if ((resp && resp.ok) || (data && data.ok)) return true;
+          // En cualquier otro caso devolvemos false (fallo controlado por servidor)
+          return false;
+        } catch (err) {
+          // Fallo de red u otro error en runtime: devolvemos false para que el llamador
+          // reciba un resultado booleano consistente sin excepciones.
+          return false;
+        }
+      }

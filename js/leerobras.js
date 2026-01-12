@@ -2,6 +2,7 @@ import { cargarlibro } from './libroficha.js';
 import { crearUltimoCapituloDeObra, formatCDATA } from './capitulos.js';
 import { parseFecha, toDDMMYYYY, seleccionarImagen, obtenerNombreObra, createImg } from './utils.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
+import { setItem, getItem, removeItem } from "./storage.js";
 
 // ===== Estado de paginación (ámbito de módulo) =====
 let PAGE_SIZE_DEFAULT = 15;
@@ -101,8 +102,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const sinopsis = formatCDATA(obj.sinopsis || '');
       
       // Mantener la lógica original de mostrar último leído en el header
-      const ultimaObra = localStorage.getItem("ultimaObra");
-      const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
+      const ultimaObra = getItem("ultimaObra");
+      const ultimoCapitulo = getItem("ultimoCapitulo");
       if (booklastread) {
         if (
           ultimaObra &&
@@ -352,6 +353,21 @@ document.addEventListener("DOMContentLoaded", function () {
     setupPagination();
 
     if (searchInput) {
+      // Función para búsqueda fuzzy (acepta coincidencias parciales)
+      const fuzzyMatch = (text, query) => {
+        // Primero intenta coincidencia exacta para mejor rendimiento
+        if (text.includes(query)) return true;
+        
+        // Búsqueda fuzzy: cada carácter de la búsqueda debe aparecer en orden
+        let queryIndex = 0;
+        for (let i = 0; i < text.length && queryIndex < query.length; i++) {
+          if (text[i] === query[queryIndex]) {
+            queryIndex++;
+          }
+        }
+        return queryIndex === query.length;
+      };
+
       const doFilter = () => {
         const q = searchInput.value.trim().toLowerCase();
         if (!q) {
@@ -362,14 +378,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const title = el.querySelector('.card-title')?.textContent?.toLowerCase() || '';
             const autor = el.querySelector('.book-author-name')?.textContent?.toLowerCase() || '';
             const clave = el.querySelector('.clave')?.textContent?.toLowerCase() || '';
-            return title.includes(q) || autor.includes(q) || clave.includes(q);
+            return fuzzyMatch(title, q) || fuzzyMatch(autor, q) || fuzzyMatch(clave, q);
           };
           filteredCardsDesktop = allCardsDesktop.filter(match);
           const matchMobile = (el) => {
             const t = el.querySelector('strong')?.textContent?.toLowerCase() || '';
             const autor = el.querySelector('.info-libro span')?.textContent?.toLowerCase() || '';
             const clave = el.querySelector('.clave')?.textContent?.toLowerCase() || '';
-            return t.includes(q) || autor.includes(q) || clave.includes(q);
+            return fuzzyMatch(t, q) || fuzzyMatch(autor, q) || fuzzyMatch(clave, q);
           };
           filteredItemsMobile = allItemsMobile.filter(matchMobile);
         }
@@ -385,7 +401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 export function onLibroClick(libroId) {
-  localStorage.setItem('libroSeleccionado', libroId);
+  setItem('libroSeleccionado', libroId);
   fetch('books/libro-ficha.html')
     .then(response => {
       if (!response.ok) {

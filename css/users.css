@@ -1,4 +1,3 @@
-/* CSS (añádelo a tu hoja de estilos) */
 .list-group-item.align-items-stretch { align-items: stretch; }
 
 .biblioteca-acciones {
@@ -56,6 +55,45 @@
   .avatar-overlay-backdrop.show {
     display: block;
   }
+  /* Colores para niveles de avatares */
+  .card-gold    { border: 3px solid #D4AF37 !important;   }
+  .card-silver  { border: 3px solid #C0C0C0 !important;   }
+  .card-bronze  { border: 2px solid #CD7F32 !important;   }
+  .card-premium {
+      position: relative;
+      border-radius: 12px;
+      border: 4px solid transparent;
+      z-index: 0;
+    }
+    
+    .card-premium::before {
+      content: "";
+      position: absolute;
+      inset: -4px; /* coincide con el grosor del borde */
+      border-radius: inherit;
+      background: linear-gradient(
+        90deg,
+        #FFD700,   /* oro */
+        #F5E1A4,   /* champagne */
+        #E5E4E2,   /* platino */
+        #FFFFFF,   /* blanco brillante */
+        #FFD700    /* oro otra vez */
+      );
+      background-size: 300% 300%;
+      animation: card-premium-flow 8s linear infinite;
+      z-index: -1;
+    }
+    @keyframes card-premium-flow {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }    
+    /* Fallback: borde platino si no hay soporte */
+    @supports not (mask-composite: exclude) {
+      .card-premium {
+        border: 4px solid #E5E4E2;
+      }
+    }
 
 /* compatibilidad iOS */
     /* Fallback para gap en flex (Safari antiguo no soporta gap en flex) */
@@ -89,7 +127,34 @@
       -webkit-user-drag: none;
       image-rendering: -webkit-optimize-contrast;
     }
-    
+    /* tabs corregir comportamiento en iOS */
+    /*
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block !important; }
+    .tab-pane { -webkit-backface-visibility: hidden; transform: translateZ(0); }
+      .d-none {
+        display: none !important;
+      }
+      @media (min-width: 576px) {
+        .d-sm-flex {
+          display: flex !important;
+        }
+        .d-none.d-sm-flex,
+        .d-sm-flex.d-none {
+          display: flex !important;
+        }
+        .d-sm-flex.d-none,
+        .d-none.d-sm-flex {
+          display: none !important;
+        }
+      }
+      .d-none,
+      .d-sm-flex {
+        -webkit-backface-visibility: hidden;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+      }
+    */
     /* Forzar que la tarjeta mantenga su flujo y el footer quede abajo si existe */
     .card {
       /* no cambiamos tu markup; esto solo asegura consistencia en navegadores */
@@ -100,13 +165,11 @@
       -webkit-box-direction: normal;
       -ms-flex-direction: column;
       flex-direction: column;
-    }
-    
+    }   
     /* Footer empujado abajo (funciona también en Safari) */
     .card .card-footer {
       margin-top: auto;
-    }
-    
+    }    
     /* Evitar comportamiento táctil que pueda afectar layout en iOS */
     html, body {
       -webkit-text-size-adjust: 100%;
@@ -122,3 +185,7 @@
       }
       .row.g-2 > * { padding-left: 0; padding-right: 0; margin-bottom: 0; }
     }
+
+  .card-avatar, ficha-avatar {
+    min-width : 160px;
+  }

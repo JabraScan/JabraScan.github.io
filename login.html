@@ -6,6 +6,7 @@
   <!-- CSS específico del login -->
   <link rel="stylesheet" href="css/login.css">
 
+  <script type="module" src="./js/storage.js"></script>
   <script>
     // Si los CSS modulares no están cargados, los añadimos
     if (!document.querySelector('link[href*="css/variables.css"]')) {
@@ -34,7 +35,7 @@
       window.location.href = "/"; // redirige al inicio ya con token guardado
     }
   </script>
-  <script src="js/login.js"></script>
+  <script src="js/login.js" defer></script>
 </head>
 <body>
   <main class="d-flex justify-content-center">
@@ -80,6 +81,6 @@
   </script>
 
   <!-- Script de login -->
-  <script src="js/login.js"></script>
+  <script src="js/login.js" defer></script>
 </body>
 </html>

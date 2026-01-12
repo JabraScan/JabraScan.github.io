@@ -1,7 +1,8 @@
 import { onLibroClick } from'./leerobras.js';
 import { activarLinksPDF } from './eventos.js';
 import { actualizarEstrellas, crearBloqueValoracion, createImg, managerTabs, imgSrcFromBlob } from './utils.js';
-
+import { setItem, getItem, removeItem } from "./storage.js";
+import { cargarTiendaDemo } from'./biblioteca.js';
 // -------------------------
 // /js/usuario.js
 // Módulo responsable de cargar y renderizar datos del usuario.
@@ -13,10 +14,10 @@ import { actualizarEstrellas, crearBloqueValoracion, createImg, managerTabs, img
 // -------------------------
 const API_BASE = "https://jabrascan.net";
 const FALLBACK_IMG = "/img/avatar/default.webp";
-const usuario_id = localStorage.getItem("user_id");
-const nickname = localStorage.getItem("user_nickname");
-const avatar = localStorage.getItem("user_avatar");
-const token = localStorage.getItem("jwt");
+const usuario_id = getItem("user_id");
+const nickname = getItem("user_nickname");
+const avatar = getItem("user_avatar");
+const token = getItem("jwt");
 
 // -------------------------
 // Redirección si no hay login (no bloquea el resto del código)
@@ -59,7 +60,7 @@ const token = localStorage.getItem("jwt");
  * authFetch(input, init)
  * Wrapper de fetch que añade Authorization Bearer si existe token
  */
-function authFetch(input, init = {}) {
+export function authFetch(input, init = {}) {
   const headers = new Headers(init.headers || {});
   if (token) headers.set("Authorization", `Bearer ${token}`);
   return fetch(input, { ...init, headers });
@@ -105,9 +106,34 @@ function authFetch(input, init = {}) {
         const datosUser = document.createElement('div');
             datosUser.id = 'datos-user';
             datosUser.innerHTML = `
-                <h3 id="nick">${data.nick || "(sin nick)"}</h3>
+                <div style="display:flex; align-items:center;">
+                  <h3 id="nick"  style="margin:0; display:inline-block;">${data.nick || "(sin nick)"}</h3>
+                  <i class="fa fa-pencil" id="edit-nick" style="cursor:pointer; font-size:0.8em; margin-left:8px;"></i>
+                </div>
                 <p class="text-muted">Puntos: <span id="user_puntos">${data.puntos}</span></p>
-              `;      
+            `;
+            //listener para editar el nick de usuario
+            const editNick = datosUser.querySelector("#edit-nick");
+              editNick.addEventListener("click", async () => {
+                const nuevoNick = prompt("Introduce tu nuevo nick:");
+                if (!nuevoNick) return;
+                // Deshabilitar mientras dura la operación
+                editNick.style.pointerEvents = "none";
+                  editNick.style.opacity = "0.5";
+                  try {
+                    const data = await actualizarnick(nuevoNick);
+                      if (data && data.ok) {
+                        const nick = datosUser.querySelector("#nick");
+                        nick.textContent = data.nick; // cambio al nuevo nick
+                        nick.appendChild(editNick);   // mantenemos el icono
+                      }
+                  } finally {
+                    // Rehabilitar siempre al terminar
+                    editNick.style.pointerEvents = "auto";
+                      editNick.style.opacity = "1";
+                  }
+              });
+
         usermain.appendChild(img);
         usermain.appendChild(datosUser);
     }
@@ -115,7 +141,7 @@ function authFetch(input, init = {}) {
     // opts permite pasar selectors opcionales: { loadingSelector, errorSelector, nickSelector, avatarSelector }
     export async function cargarPerfil(opts = {}) {
       // Solo autenticado: si no hay token no intentamos nada
-      if (!token) return;    
+      if (!token) return undefined;    
       // Mostrar indicador de carga si se proporcionó selector
       let loadingEl;
       if (opts.loadingSelector) {
@@ -142,18 +168,41 @@ function authFetch(input, init = {}) {
       return data;
     }
   //FIN CARGA PERFIL USUARIO
-
+  // CONTROL DIVs VACIO
+    function actualizarAviso(cont, ul, claseAviso, mensaje) {
+      // busca si ya existe el div de aviso
+      let aviso = cont.querySelector(`.${claseAviso}`);
+      if (ul.children.length === 0) {
+        if (!aviso) {
+          aviso = document.createElement("div");
+          aviso.className = `alert alert-info ${claseAviso}`;
+          aviso.textContent = mensaje;
+          cont.insertBefore(aviso, ul);
+        }
+        aviso.style.display = "";
+      } else {
+        if (aviso) aviso.style.display = "none";
+      }
+    }
+  // FIN CONTROL DIVs VACIOS
   export async function cargarBiblioteca() {
-    if (!usuario_id && !token) return;
+    if (!token) {  return undefined;  }
   
-    const url = `${API_BASE}/biblioteca/list?usuario_id=${encodeURIComponent(usuario_id)}`;
-  
-    const res = await authFetch(url);
+    //const url = `${API_BASE}/biblioteca/list?usuario_id=${encodeURIComponent(usuario_id)}`;
+    const url = `${API_BASE}/biblioteca/list`;
+    let res;
+      try {
+        res = await authFetch(url);
+      } catch (err) {
+        return undefined; // no cortar: cumplir la promesa
+      }
+    if (!res || !res.ok) { return undefined; }
+    
     const data = await res.json();
-  
+    
     const cont = document.getElementById("bibliotecaResultado");
     const contfinal = document.getElementById("bibliotecafin_Resultado");
-    if (!cont) return;
+    if (!cont || !contfinal) return undefined;
   
     const ul = document.createElement("ul");
       ul.className = "list-group";
@@ -200,7 +249,7 @@ function authFetch(input, init = {}) {
                 <button type="button" class="btn btn-sm btn-outline-danger delete-obra" data-obra-id="${item.obra_id ?? ''}" title="Quitar de la Biblioteca" aria-label="Quitar de la Biblioteca">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-success marcar-finalizado" data-obra-id="${item.obra_id ?? ''}" title="Marcar como finalizado" aria-label="Marcar como finalizado">
+                <button type="button" class="btn btn-sm btn-outline-success marcar-finalizado" data-obra-id="${item.obra_id ?? ''}" title="${item.finalizado == 0 ? 'Marcar como finalizado' : 'Mover a Biblioteca'}" aria-label="${item.finalizado == 0 ? 'Marcar como finalizado' : 'Mover a Biblioteca'}">
                   <i class="fa fa-check" aria-hidden="true"></i>
                 </button>
               </div>
@@ -213,7 +262,7 @@ function authFetch(input, init = {}) {
               <button type="button" class="btn btn-sm btn-outline-danger delete-obra" data-obra-id="${item.obra_id ?? ''}" title="Quitar de la Biblioteca" aria-label="Quitar de la Biblioteca">
                 <i class="fa fa-trash" aria-hidden="true"></i>
               </button>
-              <button type="button" class="btn btn-sm btn-outline-success marcar-finalizado" data-obra-id="${item.obra_id ?? ''}" title="Marcar como finalizado" aria-label="Marcar como finalizado">
+              <button type="button" class="btn btn-sm btn-outline-success marcar-finalizado" data-obra-id="${item.obra_id ?? ''}" title="${item.finalizado == 0 ? 'Marcar como finalizado' : 'Mover a Biblioteca'}" aria-label="${item.finalizado == 0 ? 'Marcar como finalizado' : 'Mover a Biblioteca'}">
                 <i class="fa fa-check" aria-hidden="true"></i>
               </button>
             </div>
@@ -221,8 +270,69 @@ function authFetch(input, init = {}) {
           //añadimos valoraciones para usuario
           const valoracion = crearBloqueValoracion(item.obra_id, item.valoracion, item.cantvalora, { soloEstrellas: true, actualizarVoto: true });
           li.querySelector('.user-progresion').insertAdjacentElement('afterend', valoracion);
-          li.querySelector('.biblio-obra').onclick = () => onLibroClick(item.obra_id);
-          li.querySelector(".libro-item").onclick = () => onLibroClick(item.obra_id);
+          //boton borrar obra
+          li.querySelectorAll('.delete-obra').forEach(btn => {
+            btn.addEventListener('click', async (event) => {
+              const button = event.currentTarget;
+              button.disabled = true;
+              try {
+                const res = await addToBiblio(String(item.obra_id), { remove: true });
+                if (res.ok) {
+                  li.remove();
+                  // actualizar avisos en ambos contenedores
+                  actualizarAviso(cont, ul, "alerta-bvacia", "No tienes obras en la biblioteca");
+                  actualizarAviso(contfinal, ulfinal, "alerta-bvaciafin", "No tienes obras finalizadas");
+                } else {
+                  console.error('Error eliminando obra:', res.error || res.status);
+                }
+              } catch (err) {
+                console.error('Error en la petición:', err);
+              } finally {
+                button.disabled = false;
+              }
+            });
+          });
+          //boton marcar finalizado / mover a biblioteca
+          li.querySelectorAll('.marcar-finalizado').forEach(btn => {
+            btn.addEventListener('click', async (event) => {
+              const button = event.currentTarget;
+              button.disabled = true;
+              try {
+                const liEl = button.closest('li');
+                const enPrincipal = !!liEl.closest('#bibliotecaResultado');
+                const valorOppuesto = enPrincipal ? 1 : 0; // si está en bibliotecaResultado enviamos 1, si está en bibliotecafin_Resultado enviamos 0
+                const res = await updateFinalizado(String(item.obra_id), valorOppuesto);
+          
+                // comprobar éxito de forma genérica
+                const success = !!res && (res.ok || res.success || res === true);
+                if (success) {
+                  // mover el li al UL contrario
+                  liEl.remove();
+                  const destinoCont = document.getElementById(enPrincipal ? 'bibliotecafin_Resultado' : 'bibliotecaResultado');
+                  const destinoUl = destinoCont && destinoCont.querySelector('ul.list-group');
+                  if (destinoUl) destinoUl.appendChild(liEl);
+          
+                  // actualizar dataset y títulos de los botones dentro del li
+                  liEl.dataset.finalizado = String(valorOppuesto);
+                  const titleText = valorOppuesto == 1 ? 'Mover a la biblioteca' : 'Marcar como finalizado';
+                  liEl.querySelectorAll('.marcar-finalizado').forEach(b => {
+                    b.title = titleText;
+                    b.setAttribute('aria-label', titleText);
+                  });
+                  // actualizar avisos en ambos contenedores
+                  actualizarAviso(cont, ul, "alerta-bvacia", "No tienes obras en la biblioteca");
+                  actualizarAviso(contfinal, ulfinal, "alerta-bvaciafin", "No tienes obras finalizadas");
+                } else {
+                  console.error('Error finalizando obra:', res);
+                }
+              } catch (err) {
+                console.error('Error en la petición:', err);
+              } finally {
+                button.disabled = false;
+              }
+            });
+          });
+            
           //prueba para insertar imagen con diferentes tamaños
             //const imgSrc = srcCandidate || FALLBACK_IMG || "";
               //const newImg = createImg(imgSrc, item.obra_id, "BibliotecaUsuario");
@@ -234,10 +344,86 @@ function authFetch(input, init = {}) {
             ulfinal.appendChild(li);
           }
         });
-    cont.appendChild(ul);
-    contfinal.appendChild(ulfinal);
+        // Biblioteca principal
+          cont.innerHTML = "";
+          if (ul.children.length === 0) {
+            cont.innerHTML = "<div class='alert alert-info alerta-bvacia'>No tienes obras en la biblioteca</div>";
+            cont.appendChild(ul);
+          } else {
+            cont.appendChild(ul);
+                cont.addEventListener('click', (event) => {
+                  const btn = event.target.closest('.biblio-obra');
+                  if (!btn) return;
+                  event.preventDefault();
+                  // obtener obra_id preferiblemente desde el dataset del li
+                  const liEl = btn.closest('li');
+                  const obraId = liEl?.dataset.obraId ?? btn.dataset.obraId ?? null;
+                  if (obraId) onLibroClick(obraId);
+                });
+          }
+        // Biblioteca finalizados  
+          contfinal.innerHTML = "";
+          if (ulfinal.children.length === 0) {
+              contfinal.innerHTML = "<div class='alert alert-info alerta-bvaciafin'>No tienes obras finalizadas</div>";
+              contfinal.appendChild(ulfinal);
+          } else {
+              contfinal.appendChild(ulfinal);
+                contfinal.addEventListener('click', (event) => {
+                  const btn = event.target.closest('.biblio-obra');
+                  if (!btn) return;
+                  event.preventDefault();
+                  // obtener obra_id preferiblemente desde el dataset del li
+                  const liEl = btn.closest('li');
+                  const obraId = liEl?.dataset.obraId ?? btn.dataset.obraId ?? null;
+                  if (obraId) onLibroClick(obraId);
+                });        
+          }
+
     activarLinksPDF();
   }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /**
+   * Llama a POST ${API_BASE}/biblioteca/finalizado
+   * Envía el campo finalizado tal cual (sin normalizar).
+   * @param {string} obraId - obra_id (string)
+   * @param {number|boolean|string} finalizado - 1|0|true|false o "1"|"0"
+   * @returns {Promise<boolean>} - true si el endpoint devuelve ok/true, false en caso contrario
+   */
+  async function updateFinalizado(obraId, finalizado) {
+    if (!usuario_id && !token) return;
+    if (!obraId) return;
+  
+    const url = `${API_BASE}/biblioteca/finalizado`;
+    let resp;
+      try {
+        resp = await authFetch(url, {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ obra_id: obraId, finalizado })
+                              });
+      } catch (err) {
+        return undefined; // no cortar: cumplir la promesa
+      }
+      if (!resp || !resp.ok) {  return undefined;  }
+    
+      const text = await resp.text().catch(() => "");
+        if (!text) return false;
+        try {
+          const parsed = JSON.parse(text);
+          if (typeof parsed === "boolean") return parsed;
+          if (parsed && typeof parsed === "object" && typeof parsed.ok === "boolean") return parsed.ok;
+        } catch {
+          // no JSON
+        }
+    
+        const t = text.trim().toLowerCase();
+          if (t === "true") return true;
+          if (t === "false") return false;
+      return false;
+  }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   /**
    * cargarObras
    *
@@ -246,18 +432,35 @@ function authFetch(input, init = {}) {
    * - Renderiza en #obrasResultado usando innerHTML (mínimo código extra).
    */
   export async function cargarObras() {
-    if (!usuario_id && !token) return;
+    if (!usuario_id && !token) return undefined;
     
     const perfilUrl = token
       ? `${API_BASE}/obras/traductores`
       : `${API_BASE}/obras/traductores?user_id=${encodeURIComponent(usuario_id)}`;
-      const perfilRes = await authFetch(perfilUrl);
+    
+    let perfilRes;
+      try {
+        perfilRes = await authFetch(perfilUrl);
+      } catch (err) {
+        console.error("cargarObras: authFetch lanzó excepción", err);
+        return undefined; // no cortar: cumplir la promesa
+      }
       // Comprobar la Response antes de parsear
-      if (!perfilRes || !perfilRes.ok) {        return;      }
+      if (!perfilRes || !perfilRes.ok) {        return undefined;      }
       // Parsear
       const data = await perfilRes.json();
+      // Si el servidor devuelve { ok: false }, cortar aquí
+        if (data && typeof data === "object" && data.ok === false) {  return undefined;  }
+      // Solo continuar si data es un array con elementos
+        if (!data || (Array.isArray(data) && data.length === 0)) {  return undefined;  }
+      // Perfil válido y con datos, mostrar
+        // Selecciona todos los elementos con la clase "obras"
+        document.querySelectorAll('.obras').forEach(el => {
+          el.classList.remove('d-none');
+        });
+
       const cont = document.getElementById("obrasResultado");
-        if (!cont) return;
+        if (!cont) return undefined;
     
     const ul = document.createElement("ul");
     ul.className = "list-group";
@@ -310,6 +513,72 @@ function authFetch(input, init = {}) {
     if (typeof activarLinksPDF === "function") activarLinksPDF();
   }
 
+//------------------------------------------------------------------------
+      function avatarPieEstablecer (itemid) {
+        //console.log(item.id);
+          let footer = document.createElement('div');
+            footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
+            const btnSet = document.createElement('button');
+              btnSet.type = 'button';
+              btnSet.className = 'btn btn-sm btn-outline-primary';
+              btnSet.textContent = '+Establecer';
+              // Evitar que el click burbujee y llamar a establecerAvatar con el id
+              btnSet.addEventListener('click', (ev) => {
+                ev.stopPropagation();
+                establecerAvatar(itemid);
+              });
+            footer.appendChild(btnSet);
+
+          return footer
+      }
+
+    function avatarPieComprar(item) {
+          //console.log(item);
+
+          // --- Avatar no adquirido: mostrar precio y botón Comprar (si hay precio numérico)
+          //if (typeof item.precio === 'number' && Number.isFinite(item.precio)) {
+          if (item.precio != null) {
+            let footer = document.createElement('div');
+              footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
+              const buyBtn = document.createElement('button');
+                buyBtn.type = 'button';
+                buyBtn.className = 'btn btn-sm btn-outline-primary ms-2';
+                buyBtn.setAttribute('aria-label', `Comprar avatar por ${item.precio}`);
+                // El botón contiene el icono y el importe en lugar del texto "Comprar"
+                buyBtn.innerHTML = '💰 ' + String(item.precio);
+                // Evitar burbujeo y llamar a comprarAvatar con el id
+                //buyBtn.addEventListener('click', (ev) => {
+                //  ev.stopPropagation();
+                //  comprarAvatar(item.id); 
+                //});
+                  buyBtn.addEventListener('click', async (ev) => {
+                    ev.stopPropagation();                        
+                    const data = await comprarAvatar(item.id);
+                    // Si la compra fue correcta, mover el card
+                    if (data && data.ok) {
+                      // Localizar el card actual
+                      const card = buyBtn.closest(".ficha-avatar");
+                      if (card) {
+                        // Quitar el footer con el botón de compra
+                          let nuevofooter = card.querySelector(".card-footer");
+                            if (nuevofooter) nuevofooter.remove();
+                        //establecemos nuevo contenido
+                          nuevofooter = avatarPieEstablecer(item.id);
+                            if (nuevofooter) card.appendChild(nuevofooter);
+                        // Mover el card al contenedor de avatares
+                        const avatarResultado = document.getElementById("avatarResultado");
+                          avatarResultado.querySelector(".row.g-2").appendChild(card);
+                        //Actualizar nuevo saldo puntos
+                        const saldoptos = document.getElementById("user_puntos");
+                          saldoptos.innerHTML = data.saldo || 0;
+                      }
+                    }
+                  });
+                footer.appendChild(buyBtn);
+                return footer;
+            }
+        return null;
+    }
 /**
  * cargarTienda
  *
@@ -334,10 +603,11 @@ function authFetch(input, init = {}) {
  * @returns {Promise<void>} Promise que resuelve cuando termina la carga/render.
  */
         async function cargarTienda() {
+          return undefined;
           // Si no hay sesión, salir
           if (!usuario_id && !token) return;
           // Endpoint para obtener la lista de avatares
-            const ENDPOINT = 'https://jabrascan.net/avatars';
+            const ENDPOINT = 'https://jabrascan.net/avatars/list';
           // Referencias a los contenedores DOM de las dos pestañas
             const tienda = document.querySelector('#tiendaResultado');
             const avatares = document.querySelector('#avatarResultado');
@@ -357,18 +627,18 @@ function authFetch(input, init = {}) {
         
             // Si no hay resultados, mostrar mensaje en ambas pestañas
             if (!rows.length) {
-              avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
-              tienda.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares disponibles.</div>';
+              avatares.innerHTML = '<div class="text-center py-4 text-muted">No hay avatares a la venta.</div>';
+              tienda.innerHTML = '<div class="text-center py-4 text-muted">No tienes avatares disponibles.</div>';
               return;
             }
         
             // Limpiar contenedores y crear filas (bootstrap grid)
             const rowTienda = document.createElement('div');
               rowTienda.className = 'row g-2';
-              tienda.innerHTML = '';
+              tienda.innerHTML = '<div class="text-center py-4 text-muted">Tienda de Avatares.</div>';
             const rowAvatares = document.createElement('div');
               rowAvatares.className = 'row g-2';
-              avatares.innerHTML = '';
+              avatares.innerHTML = '<div class="text-center py-4 text-muted">Tus avatares.</div>';
         
             // Recorrer cada avatar devuelto por el backend
             rows.forEach(r => {
@@ -378,17 +648,21 @@ function authFetch(input, init = {}) {
                 src: r.avatar_path,
                 alt: r.descripcion || '',
                 precio: Object.prototype.hasOwnProperty.call(r, 'precio') ? r.precio : null,
-                adquirido: r.adquirido
+                adquirido: r.adquirido,
+                tipo: r.tipo || 'web'
               };
         
               // Columna que contendrá la card
               const col = document.createElement('div');
-                col.className = 'col-6 col-sm-4 col-md-3 col-lg-2 d-flex';
-        
+                col.className = 'col col-xs-5 col-sm-4 col-md-3 col-lg-2 d-flex card-avatar';
               // Card principal (estructura vertical)
               const card = document.createElement('div');
-                card.className = 'card p-1 text-center d-flex flex-column w-100';
-        
+                let extra = '';
+                    if (item.tipo === 'premium'){ extra = 'card-premium';}
+                    else if (item.precio >= 100){ extra = 'card-gold';   }
+                    else if (item.precio >= 50) { extra = 'card-silver'; }
+                    else if (item.precio >= 25) { extra = 'card-bronze'; }
+                card.className = `ficha-avatar card p-1 text-center d-flex flex-column w-100 ${extra}`;
               // Imagen del avatar
               const img = document.createElement('img');
                 //img.src = item.src;               // ruta de la imagen
@@ -407,60 +681,31 @@ function authFetch(input, init = {}) {
         
               // Pie de foto / descripción corta
               const caption = document.createElement('div');
-              caption.className = 'small text-truncate mt-1';
-              caption.textContent = item.alt;
+                caption.className = 'small text-truncate mt-1';
+                caption.textContent = item.alt;
         
               // Footer (se crea según estado: adquirido o en tienda)
-              let footer = null;
-        
-              if (item.adquirido === 'adquirido') {
-                // --- Avatar ya adquirido: mostrar botón "+Establecer"
-                footer = document.createElement('div');
-                  footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
-                  const btnSet = document.createElement('button');
-                    btnSet.type = 'button';
-                    btnSet.className = 'btn btn-sm btn-outline-primary';
-                    btnSet.textContent = '+Establecer';
-                    // Evitar que el click burbujee y llamar a establecerAvatar con el id
-                    btnSet.addEventListener('click', (ev) => {
-                      ev.stopPropagation();
-                      establecerAvatar(item.id);
-                    });
-                  footer.appendChild(btnSet);
-              } else {
-                // --- Avatar no adquirido: mostrar precio y botón Comprar (si hay precio numérico)
-                if (typeof item.precio === 'number' && Number.isFinite(item.precio)) {
-                  footer = document.createElement('div');
-                    footer.className = 'card-footer mt-auto bg-transparent border-0 small text-muted d-flex justify-content-center align-items-center';
-                    const buyBtn = document.createElement('button');
-                      buyBtn.type = 'button';
-                      buyBtn.className = 'btn btn-sm btn-outline-primary ms-2';
-                      buyBtn.setAttribute('aria-label', `Comprar avatar por ${item.precio}`);
-                      // El botón contiene el icono y el importe en lugar del texto "Comprar"
-                      buyBtn.innerHTML = '💰 ' + String(item.precio);
-                      // Evitar burbujeo y llamar a comprarAvatar con el id
-                      buyBtn.addEventListener('click', (ev) => {
-                        ev.stopPropagation();
-                        comprarAvatar(item.id);
-                      });
-                    footer.appendChild(buyBtn);
+              //console.log("footer");console.log(item);
+              let footer = null;      
+                if (item.adquirido === 'adquirido') {
+                  // --- Avatar ya adquirido: mostrar botón "+Establecer"
+                  footer = avatarPieEstablecer(item.id);
+                } else {
+                  footer = avatarPieComprar(item);
                 }
-              }
-        
               // Montar la card: imagen, caption y footer (si existe)
-              card.appendChild(img);
-              card.appendChild(caption);
-              if (footer) card.appendChild(footer);
-              col.appendChild(card);
-        
-              // Añadir la columna a la pestaña correspondiente
-              if (item.adquirido === 'adquirido') {
-                rowAvatares.appendChild(col); // pestaña "Avatares" (adquiridos)
-              } else {
-                rowTienda.appendChild(col);   // pestaña "Tienda" (disponibles para comprar)
-              }
+                card.appendChild(img);
+                card.appendChild(caption);
+                if (footer) card.appendChild(footer);
+                col.appendChild(card);
+          
+                // Añadir la columna a la pestaña correspondiente
+                if (item.adquirido === 'adquirido') {
+                  rowAvatares.appendChild(col); // pestaña "Avatares" (adquiridos)
+                } else {
+                  rowTienda.appendChild(col);   // pestaña "Tienda" (disponibles para comprar)
+                }
             });
-        
             // Insertar filas en los contenedores del DOM
             tienda.appendChild(rowTienda);
             avatares.appendChild(rowAvatares);
@@ -527,11 +772,42 @@ function authFetch(input, init = {}) {
           return { ok: false, error: err?.message || 'Error de red' };
         }
       }
-//======================================================================
-    function comprarAvatar(avatarId) {
-      return true;
+    // Función asincrónica para actualizar el nick del usuario
+    async function actualizarnick(nuevoNick) {
+      if (!token) return;
+      if (!nuevoNick) return;
+        const url = `${API_BASE}/usuarios/edit/nick`;
+        // Se realiza la petición al servidor usando authFetch
+        const resp = await authFetch(url, {
+          method: "POST", // Método POST para enviar datos
+          headers: { "Content-Type": "application/json" }, // Se especifica que el cuerpo es JSON
+          body: JSON.stringify({ nick: nuevoNick }) // Se envía el nuevo nick en el cuerpo
+        });
+        // Si la respuesta no es correcta (status distinto de 200-299), se detiene
+        if (!resp.ok) return;
+      // Se devuelve la respuesta procesada
+      return await resp.json();
     }
-/* actualizar todos los tabs con un select para dispositivos moviles */
+//======================================================================
+  // Función asincrónica para comprar un avatar
+  async function comprarAvatar(avatarId) {
+    if (!token) return;              // Si no hay token, no se puede autenticar
+    if (!avatarId) return;           // Si no se pasa un id de avatar, se detiene
+
+    const url = `${API_BASE}/usuarios/buy/avatar`;
+    // Se realiza la petición al servidor usando authFetch
+    const resp = await authFetch(url, {
+      method: "POST",                                // Método POST para enviar datos
+      headers: { "Content-Type": "application/json" }, // Se especifica que el cuerpo es JSON
+      body: JSON.stringify({ idavatar: avatarId })     // Se envía el id del avatar en el cuerpo
+    });
+    // Si la respuesta no es correcta (status distinto de 200-299), se detiene
+    if (!resp.ok) return;  
+    // Se devuelve la respuesta procesada
+    return await resp.json();
+  }
+//======================================================================
+  /* actualizar todos los tabs con un select para dispositivos moviles */
       function bindTabsSelect() {
         const select = document.getElementById('tabsSelect');
         if (!select) return;
@@ -558,14 +834,13 @@ function authFetch(input, init = {}) {
       }
   // Añadir a la biblioteca (usa authFetch que añade Authorization automáticamente)
   // Devuelve siempre un objeto con la forma: { ok: boolean, data?, error?, status? }
-  export async function addToBiblio(clave, { timeout = 8000 } = {}) {
+  export async function addToBiblio(clave, { timeout = 8000, remove = false } = {}) {
     // Validación básica de entrada: clave debe ser una cadena no vacía
     if (!clave || typeof clave !== "string") {  return { ok: false, error: "obra NO válida" };      }  
     // Comprobación de autorización en cliente: evita llamadas sin token
-    // (authFetch añade el header Authorization si la variable token está presente)
     if (!token) {  return { ok: false, error: "no autorizado" };    }
   
-    const url = `${API_BASE}/biblioteca/add`;
+    const url = remove ? `${API_BASE}/biblioteca/remove` : `${API_BASE}/biblioteca/add`;
     // AbortController para poder cancelar la petición si excede el timeout
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
@@ -619,10 +894,12 @@ function authFetch(input, init = {}) {
         const perfilPromise = cargarPerfil();
         const bibliotecaPromise = cargarBiblioteca();
         const obrasPromise = cargarObras();
-        const tiendaPromise = cargarTienda();
+        //const tiendaPromise = cargarTienda();
+        // test
+        const tiendaPromise = cargarTiendaDemo();
       // 2. Usar Promise.all() para esperar a que las tres promesas se resuelvan
         const results = await Promise.allSettled([perfilPromise, bibliotecaPromise, obrasPromise, tiendaPromise]);
-    
+      //console.log("Resultados de initUsuario:", results);    
         const perfil = results[0].status === 'fulfilled' ? results[0].value : undefined;
         const biblioteca = results[1].status === 'fulfilled' ? results[1].value : undefined;
         const obras = results[2].status === 'fulfilled' ? results[2].value : undefined;
@@ -630,8 +907,7 @@ function authFetch(input, init = {}) {
       // Error de orquestación: registrar para depuración
       console.error('initUsuario: error al arrancar cargas', err);
     }
-  }
-  
+  }  
   // -------------------------------------------------
   // API pública (opcional) que expone funciones para uso desde la consola
   // o desde otros módulos. Esto no sustituye la llamada directa desde general.js.

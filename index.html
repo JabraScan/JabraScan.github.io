@@ -21,8 +21,10 @@
     <link rel="stylesheet" href="css/libro-ficha.css">
     <link rel="stylesheet" href="css/libro-ficha-modern.css">
     <link rel="stylesheet" href="css/tooltip.css">
+    <link rel="stylesheet" href="css/users.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+    <script type="module" src="./js/storage.js"></script>
     <script type="module" src="./js/general.js"></script>
     <script type="module" src="./js/leerobras.js"></script>
     <script type="module" src="./js/libroficha.js"></script>
@@ -33,6 +35,34 @@
 {
   "@context": "https://schema.org",
   "@graph": [
+    {
+      "@type": "Book",
+      "name": [
+        "Arifureta: De ordinario al más fuerte del mundo",
+        "Arifureta Shokugyō de Sekai Saikyō",
+        "ありふれた職業で世界最強?",
+        "Arifureta: From Commonplace to World's Strongest"
+      ],
+      "author": {
+        "@type": "Person",
+        "name": "Ryo Shirakome"
+      },
+      "description": "<![CDATA[Hajime Nagumo, estudiante de secundaria, es víctima del acoso de sus compañeros por su relación con la idol de la clase, Kaori.\n\t\t\tCierto día, toda su clase fue transportada a un nuevo y desconocido mundo de fantasía, cuando tomaron conciencia, todos sus compañeros habían obtenido poderosas habilidades mágicas, mientras que Hajime lo único que obtiene es la magia de alquimia básica, la cual sirve para transmutar materiales sólidos, una habilidad común y corriente que mayormente la suelen usar los artesanos y herreros.\n\t\t\tDurante una incursión en una mazmorra, Hajime es traicionado por uno de sus compañeros en medio de una feroz batalla y por desgracia cae al fondo de la mazmorra. Milagrosamente sobrevive a la caída, y ante la desesperación, el peligro que lo rodea, y la falta de habilidad de supervivencia, crea armas para sobrevivir y escapar de la mazmorra y hacerse más fuerte para vivir sin molestias.\n\t\t\t      ]]>",
+      "identifier": "Arifureta",
+      "dateCreated": "2025-12-28",
+      "genre": [
+        "Acción",
+        "Aventura",
+        "Drama",
+        "Ecchi",
+        "Fantasía",
+        "Harem",
+        "Isekai",
+        "Maduro",
+        "Misterio",
+        "Sobrenatural"
+      ]
+    },
     {
       "@type": "Book",
       "name": [
@@ -109,6 +139,31 @@
         "Adultos",
         "Fantasía",
         "Harén",
+        "Romance"
+      ]
+    },
+    {
+      "@type": "Book",
+      "name": [
+        "City of Witches",
+        "Ciudad de Brujas",
+        "마녀의 도시"
+      ],
+      "author": {
+        "@type": "Person",
+        "name": "Wilted Flower (섦게지는꽃)"
+      },
+      "description": "<![CDATA[Tras permanecer cinco años secuestrado y esclavizado en la Ciudad de Brujas.\n            Se convirtió en el único Brujo del mundo.\n\n            «Un genio matemático hasta que un día sufrió un accidente y de pronto apareció secuestrado en Gehenna, la Ciudad de Brujas, un mundo dentro del mundo actual.»\n                ]]>",
+      "identifier": "CityOfWitches",
+      "dateCreated": "2025-12-28",
+      "genre": [
+        "Acción",
+        "Adulto",
+        "Ecchi",
+        "Fantasía",
+        "Harem",
+        "Maduro",
+        "R18",
         "Romance"
       ]
     },
@@ -275,6 +330,39 @@
         "Aventura",
         "Fantasia",
         "Harén"
+      ]
+    },
+    {
+      "@type": "Book",
+      "name": [
+        "Me comí a un Árbol del Mundo",
+        "Fucked the World Tree",
+        "세계수를 따먹다",
+        "I Ate the World Tree",
+        "Potential Husband of The World Tree",
+        "Árbol del Mundo",
+        "Comer del árbol del mundo",
+        "Eat the World Tree",
+        "Devouring the World Tree",
+        "Fked the World Tree"
+      ],
+      "author": {
+        "@type": "Person",
+        "name": "Mang Moong Ming, Yam Yeong"
+      },
+      "description": "<![CDATA[Al amanecer, subí a la montaña de atrás y me comí un increible árbol … ¡Resultó que el árbol era un Árbol del Mundo de otro mundo! Así fue como fui secuestrado a otro mundo. ¡¿Y ahora tengo que calificar para ser el novio del árbol?!\n\t      ]]>",
+      "identifier": "MeComiAUnArbolDelMundo",
+      "dateCreated": "2025-11-29",
+      "genre": [
+        "Aventura",
+        "Drama",
+        "Romance",
+        "Harem",
+        "Isekai",
+        "Acción",
+        "Ecchi",
+        "Comedia",
+        "Fantasía"
       ]
     },
     {
@@ -815,6 +903,6 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"></script>
-    <script src="./js/login.js"></script>
+    <script src="./js/login.js" defer></script>
   </body>
 </html>

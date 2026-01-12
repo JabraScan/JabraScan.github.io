@@ -1,4 +1,5 @@
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso } from './contadoresGoogle.js';
+import { setItem, getItem, removeItem } from "./storage.js";
 
 // transformar "YYYY-MM-DD" o "YYYY-MM-DD HH:MM:SS" -> "DD-MM-YYYY"
 export function toDDMMYYYY(fechaStr) {
@@ -211,12 +212,12 @@ export function generarEtiquetaNuevo(fechaInput) {
           bloque.className = "book-rating";
         
           // Comprobación de login (misma lógica que antes)
-          const usuarioId = localStorage.getItem("user_id");
+          const usuarioId = getItem("user_id");
           const estaLogueado = usuarioId && usuarioId !== "null";
         
           // Comprobación de voto previo (misma lógica que antes)
           const claveLocal = clave;
-          const yaVotado = localStorage.getItem(claveLocal);
+          const yaVotado = getItem(claveLocal);
         
           // Decisión centralizada sobre si se permite votar
           const puedeVotar = estaLogueado && !yaVotado;
@@ -290,7 +291,6 @@ export function seleccionarImagen(nodosImagen) {
   lista = lista.filter(item => (item.textContent || "").length > 0);
 
   const totalImagenes = lista.length;
-
   // 🚫 Sin imágenes → vacío
   if (totalImagenes === 0) return "";
 
@@ -316,6 +316,7 @@ export function seleccionarImagen(nodosImagen) {
   // 🎯 Índice de la imagen
   let indice = Math.floor(diaDelAño / diasPorImagen);
 
+//console.log(`imagenes ${totalImagenes} dias ${diasPorImagen} ind ${indice} lista ${lista}`);
   // ✅ Seguridad: no pasarse del array
   if (indice >= totalImagenes) indice = totalImagenes - 1;
   if (indice < 0) indice = 0;
@@ -400,7 +401,7 @@ export function obtenerNombreObra(nodosNombreObra) {
  * @returns {boolean}
  */
 function isLoggedIn(tokenKey = 'jwt') {
-  return !!localStorage.getItem(tokenKey);
+  return !!getItem(tokenKey);
 }
 /**
  * managerTabs
@@ -797,3 +798,6 @@ export function imgSrcFromBlob(img, path, fallback) {
       img.addEventListener('load', onLoad, { once: true });
     img.src = url;
 }
+
+
+

@@ -1,6 +1,7 @@
 import { parseDateDMY, parseChapterNumber } from './utils.js';
 import { incrementarVisita, leerVisitas } from './contadoresGoogle.js';
 import { mostrarurl } from './general.js';
+import { setItem, getItem, removeItem } from "./storage.js";
 
 // Variables globales para el lector PDF
 let pdfDoc = null;
@@ -79,7 +80,7 @@ export function renderPage(num) {
       el.textContent = `Página ${num} de ${pdfDoc.numPages}`;
     });
     speechSynthesis.cancel();
-    localStorage.setItem("ultimaPagina", num);
+    setItem("ultimaPagina", num);
 
     // Guarda el ancho para evitar re-render innecesario
     lastContainerWidth = containerWidth;
@@ -189,8 +190,8 @@ function configurarSelectorCapitulos(capituloActual, capitulosObra, clave) {
 
   chapterSelect.onchange = () => {
     const nuevoCap = chapterSelect.value;
-    localStorage.setItem("ultimaObra", clave);
-    localStorage.setItem("ultimoCapitulo", nuevoCap);
+    setItem("ultimaObra", clave);
+    setItem("ultimoCapitulo", nuevoCap);
     cargarCapitulo(clave, nuevoCap, 1);
   };
 }
@@ -244,10 +245,10 @@ function configurarModoOscuro() {
         icon.classList.add('fa-moon','fa-regular');
       }
     }
-    localStorage.setItem("modoNocturno", body.classList.contains("dark-mode") ? "true" : "false");
+    setItem("modoNocturno", body.classList.contains("dark-mode") ? "true" : "false");
   };
 
-  if (localStorage.getItem("modoNocturno") === "true") {
+  if (getItem("modoNocturno") === "true") {
     body.classList.add("dark-mode");
     body.classList.remove("light-mode");
     const icon = toggleMode.querySelector('.theme-icon');
@@ -364,8 +365,8 @@ function configurarEnlacesPDF() {
       event.preventDefault();
       const clave = event.currentTarget.getAttribute("data-pdf-obra");
       const capitulo = event.currentTarget.getAttribute("data-pdf-capitulo");
-      localStorage.setItem("ultimaObra", clave);
-      localStorage.setItem("ultimoCapitulo", capitulo);
+      setItem("ultimaObra", clave);
+      setItem("ultimoCapitulo", capitulo);
       cargarCapitulo(clave, capitulo, 1);
     });
   });
@@ -375,9 +376,9 @@ function configurarEnlacesPDF() {
  * Carga la última lectura guardada en localStorage.
  */
 function cargarUltimaLectura() {
-  const ultimaObra = localStorage.getItem("ultimaObra");
-  const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
-  const ultimaPagina = parseInt(localStorage.getItem("ultimaPagina"), 10);
+  const ultimaObra = getItem("ultimaObra");
+  const ultimoCapitulo = getItem("ultimoCapitulo");
+  const ultimaPagina = parseInt(getItem("ultimaPagina"), 10);
   if (ultimaObra && ultimoCapitulo) {
     cargarCapitulo(ultimaObra, ultimoCapitulo, !isNaN(ultimaPagina) ? ultimaPagina : 1);
   }
@@ -387,7 +388,7 @@ function cargarUltimaLectura() {
  * Redirige a la ficha del libro correspondiente.
  */
 function onLibroClick(libroId) {
-  localStorage.setItem('libroSeleccionado', libroId);
+  setItem('libroSeleccionado', libroId);
   fetch('books/libro-ficha.html')
     .then(response => {
       if (!response.ok) {
@@ -416,9 +417,9 @@ function configurarBotonesCapitulo(idx, capitulosObra, clave) {
     const prevCap = capitulosObra[idx - 1];
     btnPrev.disabled = false;
     btnPrev.onclick = () => {
-      localStorage.setItem("ultimaPagina", 1);
-      localStorage.setItem("ultimaObra", clave);
-      localStorage.setItem("ultimoCapitulo", prevCap.numCapitulo);
+      setItem("ultimaPagina", 1);
+      setItem("ultimaObra", clave);
+      setItem("ultimoCapitulo", prevCap.numCapitulo);
       cargarCapitulo(clave, prevCap.numCapitulo, 1);
     };
   } else {
@@ -432,9 +433,9 @@ function configurarBotonesCapitulo(idx, capitulosObra, clave) {
     const nextCap = capitulosObra[idx + 1];
     btnNext.disabled = false;
     btnNext.onclick = () => {
-      localStorage.setItem("ultimaPagina", 1);
-      localStorage.setItem("ultimaObra", clave);
-      localStorage.setItem("ultimoCapitulo", nextCap.numCapitulo);
+      setItem("ultimaPagina", 1);
+      setItem("ultimaObra", clave);
+      setItem("ultimoCapitulo", nextCap.numCapitulo);
       cargarCapitulo(clave, nextCap.numCapitulo, 1);
     };
   } else {

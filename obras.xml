@@ -1,4 +1,32 @@
 <obras>
+	<obra>	
+		<visible>si</visible>
+		<clave>Arifureta</clave>
+		<nombreobra>Arifureta: De ordinario al más fuerte del mundo</nombreobra>
+		<nombreobra>Arifureta Shokugyō de Sekai Saikyō</nombreobra>
+		<nombreobra>ありふれた職業で世界最強?</nombreobra>
+		<nombreobra>Arifureta: From Commonplace to World's Strongest</nombreobra>
+		<autor>Ryo Shirakome</autor>
+		<sinopsis><![CDATA[Hajime Nagumo, estudiante de secundaria, es víctima del acoso de sus compañeros por su relación con la idol de la clase, Kaori.
+			Cierto día, toda su clase fue transportada a un nuevo y desconocido mundo de fantasía, cuando tomaron conciencia, todos sus compañeros habían obtenido poderosas habilidades mágicas, mientras que Hajime lo único que obtiene es la magia de alquimia básica, la cual sirve para transmutar materiales sólidos, una habilidad común y corriente que mayormente la suelen usar los artesanos y herreros.
+			Durante una incursión en una mazmorra, Hajime es traicionado por uno de sus compañeros en medio de una feroz batalla y por desgracia cae al fondo de la mazmorra. Milagrosamente sobrevive a la caída, y ante la desesperación, el peligro que lo rodea, y la falta de habilidad de supervivencia, crea armas para sobrevivir y escapar de la mazmorra y hacerse más fuerte para vivir sin molestias.
+			      ]]>
+		</sinopsis>
+		<valoracion>9.0</valoracion>
+		<tipoobra>Novela Ligera</tipoobra>
+		<categoria>Acción, Aventura, Drama, Ecchi, Fantasía, Harem, Isekai, Maduro, Misterio, Sobrenatural</categoria>
+		<imagen>Arifureta/Arifureta-LN-JP-Cover-v01.webp</imagen>
+		<fechaCreacion>28/12/2025</fechaCreacion>
+		<ubicacion>Novela Japonesa</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Morlan</traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki>https://arifureta.fandom.com/wiki/Arifureta_(Main_Series)</wiki>
+	</obra>
 	<obra>
 		<visible>si</visible>
 		<clave>CDMNQTMHC</clave>
@@ -75,6 +103,7 @@
 		<tipoobra>Novela Web</tipoobra>
 		<categoria>Acción , Adultos , Fantasía, Harén, Romance</categoria>
 		<imagen>CDREdRSSelMdC/CDREdRSSelMdC.webp</imagen>
+			<imagen>CDREdRSSelMdC/CDREdRSSelMdC_1.webp</imagen>
 		<fechaCreacion>12/10/2025</fechaCreacion>
 		<ubicacion>Novela Inglesa</ubicacion>
 		<estado>Activo</estado>
@@ -86,6 +115,37 @@
 		<bannerOpcional></bannerOpcional>
 		<wiki></wiki>
 	</obra>
+	<obra>	
+		<visible>si</visible>
+		<clave>CityOfWitches</clave>
+		<nombreobra>City of Witches</nombreobra>
+		<nombreobra>Ciudad de Brujas</nombreobra>
+		<nombreobra>마녀의 도시</nombreobra>
+		<autor>Wilted Flower (섦게지는꽃)</autor>
+		<sinopsis><![CDATA[Tras permanecer cinco años secuestrado y esclavizado en la Ciudad de Brujas.
+            Se convirtió en el único Brujo del mundo.
+
+            «Un genio matemático hasta que un día sufrió un accidente y de pronto apareció secuestrado en Gehenna, la Ciudad de Brujas, un mundo dentro del mundo actual.»
+                ]]>
+        </sinopsis>
+		<valoracion>9.0</valoracion>
+		<tipoobra>Novela Web</tipoobra>
+		<categoria>Acción, Adulto, Ecchi, Fantasía, Harem, Maduro, R18, Romance</categoria>
+		<imagen>CityOfWitches/CityOfWitches.webp</imagen>
+		<imagen>CityOfWitches/CityOfWitches_2.webp</imagen>
+		<imagen>CityOfWitches/CityOfWitches_3.webp</imagen>
+		<imagen>CityOfWitches/CityOfWitches_4.webp</imagen>
+		<fechaCreacion>28/12/2025</fechaCreacion>
+		<ubicacion>Novela Coreana</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Gran Maestro</traductor>
+		<adulto>adulto</adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki>https://city-of-witches.fandom.com/wiki/City_Of_Witches_Wiki</wiki>
+	</obra>	
 	<obra>
 		<visible>si</visible>
 		<clave>DanmachiArgonauta</clave>
@@ -359,6 +419,42 @@ He tardado diez años en escribir este libro.
 		<bannerOpcional></bannerOpcional>
 		<wiki>https://the-max-level-hero-strikes-back.fandom.com/wiki/The_Max_Level_Hero_Strikes_Back_Wiki</wiki>
 	</obra>
+	<obra>	
+		<visible>si</visible>
+		<clave>MeComiAUnArbolDelMundo</clave>
+		<nombreobra>Me comí a un Árbol del Mundo</nombreobra>
+		<nombreobra>Fucked the World Tree</nombreobra>
+		<nombreobra>세계수를 따먹다</nombreobra>
+		<nombreobra>I Ate the World Tree</nombreobra>
+		<nombreobra>Potential Husband of The World Tree</nombreobra>
+		<nombreobra>Árbol del Mundo</nombreobra>
+		<nombreobra>Comer del árbol del mundo</nombreobra>
+		<nombreobra>Eat the World Tree</nombreobra>
+		<nombreobra>Devouring the World Tree</nombreobra>
+		<nombreobra>Fked the World Tree</nombreobra>
+		<autor>Mang Moong Ming, Yam Yeong</autor>
+		<sinopsis><![CDATA[Al amanecer, subí a la montaña de atrás y me comí un increible árbol … ¡Resultó que el árbol era un Árbol del Mundo de otro mundo! Así fue como fui secuestrado a otro mundo. ¡¿Y ahora tengo que calificar para ser el novio del árbol?!
+	      ]]>
+		</sinopsis>
+		<valoracion>9.0</valoracion>
+		<tipoobra>Novela Web</tipoobra>
+		<categoria>Aventura, Drama, Romance, Harem, Isekai, Acción, Ecchi, Comedia, Fantasía</categoria>
+		<imagen>MeComiAUnArbolDelMundo/MeComiAUnArbolDelMundo.webp</imagen>
+			<imagen>MeComiAUnArbolDelMundo/Potential_Husband_of_The_World_Tree.webp</imagen>
+			<imagen>MeComiAUnArbolDelMundo/fucked-the-world-treem.webp</imagen>
+			<imagen>MeComiAUnArbolDelMundo/Fucked_the_World_Tree.webp</imagen>
+		<fechaCreacion>29/11/2025</fechaCreacion>
+		<ubicacion>Novela Coreana</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Tavo</traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki></wiki>
+	</obra>	
+
 	<obra>
 		<visible>si</visible>
 		<clave>Mis3EsposasSonHermosasVampiros</clave>
@@ -552,7 +648,19 @@ He tardado diez años en escribir este libro.
 		<valoracion>9.0</valoracion>
 		<tipoobra>Novela Ligera</tipoobra>
 		<categoria>Academia, Comedia, Recuentos de Vida</categoria>
-		<imagen>Roshidere/Roshidere.webp</imagen>
+		<imagen>Roshidere/Roshidere_Light_Novel_Volume_1_Inner_Cover.webp</imagen>
+			<imagen>Roshidere/Roshidere_Light_Novel_Volume_1_Cover.webp</imagen>
+			<imagen>Roshidere/Roshidere_Light_Novel_Volume_2_Cover.webp</imagen>
+			<imagen>Roshidere/Roshidere_Light_Novel_Volume_3_Cover.webp</imagen>
+			<imagen>Roshidere/Roshidere_Light_Novel_Volume_4.0_Cover.webp</imagen>
+			<imagen>Roshidere/Roshidere_Light_Novel_Volume_4.5_Cover.webp</imagen>
+			<imagen>Roshidere/Roshidere_Light_Novel_Volume_5_Cover.webp</imagen>
+			<imagen>Roshidere/Roshidere_Light_Novel_Volume_6_Cover.webp</imagen>
+			<imagen>Roshidere/Roshidere_Light_Novel_Volume_7_Cover.webp</imagen>
+			<imagen>Roshidere/Roshidere_Light_Novel_Volume_8_Cover.webp</imagen>
+			<imagen>Roshidere/Roshidere_Light_Novel_Volume_9_Cover.webp</imagen>
+			<imagen>Roshidere/Roshidere_Light_Novel_Volume_10_Cover.webp</imagen>
+			<imagen>Roshidere/Roshidere_Light_Novel_Volume_11_Cover.webp</imagen>
 		<fechaCreacion>22/10/2025</fechaCreacion>
 		<ubicacion>Novela Japonesa</ubicacion>
 		<estado>Activo</estado>
@@ -715,6 +823,12 @@ He tardado diez años en escribir este libro.
 		<tipoobra>Novela</tipoobra>
 		<categoria>Academia, Acción, Artes Marciales, Aventura, Comedia, Drama, fantasía, Magia, Reencarnación</categoria>
 		<imagen>TheEminenceInShadow/TheEminenceInShadow.webp</imagen>
+		<imagen>TheEminenceInShadow/TheEminenceInShadowCover-LN-V1-JP.webp</imagen>
+		<imagen>TheEminenceInShadow/TheEminenceInShadowCover-LN-V2-JP.webp</imagen>
+		<imagen>TheEminenceInShadow/TheEminenceInShadowCover-LN-V3-JP.webp</imagen>
+		<imagen>TheEminenceInShadow/TheEminenceInShadowCover-LN-V4-JP.webp</imagen>
+		<imagen>TheEminenceInShadow/TheEminenceInShadowCover-LN-V5-JP.webp</imagen>
+		<imagen>TheEminenceInShadow/TheEminenceInShadowCover-LN-V6-JP.webp</imagen>
 		<fechaCreacion>01/07/2025</fechaCreacion>
 		<ubicacion>Novela Japonesa</ubicacion>
 		<estado>Activo</estado>
@@ -724,7 +838,7 @@ He tardado diez años en escribir este libro.
 		<observaciones></observaciones>
 		<discord></discord>
 		<bannerOpcional></bannerOpcional>
-		<wiki></wiki>
+		<wiki>https://the-eminence-in-shadow.fandom.com/wiki/The_Eminence_in_Shadow_Wiki</wiki>
 	</obra>
 	<obra>
 		<visible>si</visible>
@@ -838,6 +952,10 @@ He tardado diez años en escribir este libro.
 		<tipoobra>Novela Web</tipoobra>
 		<categoria>Fantasía , Acción , Romance , Aventura , Adultos , Comedia , Harén , Recuentos de Vida</categoria>
 		<imagen>MyWivesAreBeautifulDemons/MyWivesAreBeautifulDemons.webp</imagen>
+			<imagen>MyWivesAreBeautifulDemons/MyWivesAreBeautifulDemons1.webp</imagen>
+			<imagen>MyWivesAreBeautifulDemons/MyWivesAreBeautifulDemons2.webp</imagen>
+			<imagen>MyWivesAreBeautifulDemons/MyWivesAreBeautifulDemons3.webp</imagen>
+			<imagen>MyWivesAreBeautifulDemons/MyWivesAreBeautifulDemons4.webp</imagen>
 		<fechaCreacion>09/10/2025</fechaCreacion>
 		<ubicacion>Novela Inglesa</ubicacion>
 		<estado>Activo</estado>

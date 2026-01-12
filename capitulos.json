@@ -1,5 +1,7 @@
 {
+  "Arifureta": "books/Arifureta.json",
   "CDMNQTMHC": "books/CDMNQTMHC.json",
+  "CityOfWitches": "books/CityOfWitches.json",
   "CultivationOnline": "books/CultivationOnline.json",
   "CDREdRSSelMdC" : "books/CDREdRSSelMdC.json",
   "DualCultivation": "books/DualCultivation.json",
@@ -7,6 +9,7 @@
   "ImperfectGirl": "books/ImperfectGirl.json",
   "LaLeyendaDeLaEspadaDelNorte": "books/LaLeyendaDeLaEspadaDelNorte.json",
   "MadamePleaseBehave" : "books/MadamePleaseBehave.json",
+  "MeComiAUnArbolDelMundo": "books/MeComiAUnArbolDelMundo.json",
   "MeConvertiEnPatronVillanos": "books/MeConvertiEnPatronVillanos.json",
   "MLHSB" : "books/MLHSB.json",
   "MyCollegeTeacherMyChildrenMom": "books/MyCollegeTeacherMyChildrenMom.json",
