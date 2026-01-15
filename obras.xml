@@ -992,5 +992,35 @@ He tardado diez años en escribir este libro.
 		<discord></discord>
 		<bannerOpcional></bannerOpcional>
 		<wiki></wiki>
-	</obra>	
+	</obra>
+	<obra>	
+		<visible>si</visible>
+		<clave>TheMartialArtsProdigyWhoGrowsThroughDevouring</clave>
+		<nombreobra>El Prodigio de las Artes Marciales que Crece Devorando</nombreobra>
+		<nombreobra>The Martial Arts Prodigy Who Grows Through Devouring</nombreobra>
+		<nombreobra>포식으로 성장하는 무공천재</nombreobra>
+		<nombreobra>El Prodigio Marcial Que Crece Mediante La Depredación</nombreobra>
+		<autor></autor>
+		<sinopsis><![CDATA[Aunque mi dantian había sido destruido y me habían llevado hasta las puertas de la muerte, estaba bien.
+			Porque tarde o temprano tenía que aparecer una oportunidad.
+			
+			[¿Deseas depredar?]
+			Sí, mientras no me rinda.
+			      ]]>
+		</sinopsis>
+		<valoracion>9.0</valoracion>
+		<tipoobra>Novela Web</tipoobra>
+		<categoria>Acción, Artes Marciales, Aventura, Fantasía, Wuxia</categoria>
+		<imagen>TheMartialArtsProdigyWhoGrowsThroughDevouring/TheMartialArtsProdigyWhoGrowsThroughDevouring.webp</imagen>
+		<fechaCreacion>15/1/2026</fechaCreacion>
+		<ubicacion>Novela Coreana</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Leo</traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki></wiki>
+	</obra>
 </obras>
