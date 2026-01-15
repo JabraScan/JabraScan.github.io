@@ -1,0 +1,14 @@
+{
+  "BadBornBlood" : [
+		{ "Fecha" : "15-01-2026", "NombreArchivo" : "BadBornBlood-0001_JabraScan.pdf", "numCapitulo" :   "1", "nombreCapitulo" : "Capítulo 1"                                                            	, "tituloObra" : "Bad Born Blood" },
+		{ "Fecha" : "15-01-2026", "NombreArchivo" : "BadBornBlood-0002_JabraScan.pdf", "numCapitulo" :   "2", "nombreCapitulo" : "Capítulo 2"                                                            	, "tituloObra" : "Bad Born Blood" },
+		{ "Fecha" : "16-01-2026", "NombreArchivo" : "BadBornBlood-0003_JabraScan.pdf", "numCapitulo" :   "3", "nombreCapitulo" : "Capítulo 3"                                                            	, "tituloObra" : "Bad Born Blood" },
+		{ "Fecha" : "16-01-2026", "NombreArchivo" : "BadBornBlood-0004_JabraScan.pdf", "numCapitulo" :   "4", "nombreCapitulo" : "Capítulo 4"                                                            	, "tituloObra" : "Bad Born Blood" },
+		{ "Fecha" : "17-01-2026", "NombreArchivo" : "BadBornBlood-0005_JabraScan.pdf", "numCapitulo" :   "5", "nombreCapitulo" : "Capítulo 5"                                                            	, "tituloObra" : "Bad Born Blood" },
+		{ "Fecha" : "17-01-2026", "NombreArchivo" : "BadBornBlood-0006_JabraScan.pdf", "numCapitulo" :   "6", "nombreCapitulo" : "Capítulo 6"                                                            	, "tituloObra" : "Bad Born Blood" },
+		{ "Fecha" : "18-01-2026", "NombreArchivo" : "BadBornBlood-0007_JabraScan.pdf", "numCapitulo" :   "7", "nombreCapitulo" : "Capítulo 7"                                                            	, "tituloObra" : "Bad Born Blood" },
+		{ "Fecha" : "18-01-2026", "NombreArchivo" : "BadBornBlood-0008_JabraScan.pdf", "numCapitulo" :   "8", "nombreCapitulo" : "Capítulo 8"                                                            	, "tituloObra" : "Bad Born Blood" },
+		{ "Fecha" : "19-01-2026", "NombreArchivo" : "BadBornBlood-0009_JabraScan.pdf", "numCapitulo" :   "9", "nombreCapitulo" : "Capítulo 9"                                                            	, "tituloObra" : "Bad Born Blood" },
+		{ "Fecha" : "19-01-2026", "NombreArchivo" : "BadBornBlood-0010_JabraScan.pdf", "numCapitulo" :  "10", "nombreCapitulo" : "Capítulo 10"                                                           	, "tituloObra" : "Bad Born Blood" }
+  ]  
+}
