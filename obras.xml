@@ -967,4 +967,30 @@ He tardado diez años en escribir este libro.
 		<bannerOpcional></bannerOpcional>
 		<wiki>https://my-wives-are-beautiful-demons.fandom.com/wiki/My_Wives_are_Beautiful_Demons_Wiki</wiki>
 	</obra>
+	<obra>	
+		<visible>si</visible>
+		<clave>BadBornBlood</clave>
+		<nombreobra>Bad Born Blood</nombreobra>
+		<nombreobra>배드 본 블러드</nombreobra>
+		<autor>백수귀족 (Baeksu Noble)</autor>
+		<sinopsis><![CDATA[El hogar de la humanidad ya no es la Tierra. Los viajes interestelares son ahora comunes, y la tecnología ha reemplazado a la sangre y la carne.
+			Luka, quien creció en los barrios bajos, cumplió quince años y se presentó a los exámenes de selección, donde descubre que su aptitud es la de la «Guardia Imperial».
+		      ]]>
+		</sinopsis>
+		<valoracion>9.0</valoracion>
+		<tipoobra>Novela Web</tipoobra>
+		<categoria>Acción, Aventura, Drama, Espionaje, Sci-fi, Militar</categoria>
+		<imagen>BadBornBlood/Bad-Born-Blood.webp</imagen>
+		<imagen>BadBornBlood/Bad-Born-Blood2.webp</imagen>
+		<fechaCreacion>15/1/2026</fechaCreacion>
+		<ubicacion>Novela Coreana</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Leo</traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki></wiki>
+	</obra>	
 </obras>
