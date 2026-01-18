@@ -100,6 +100,20 @@
         { "Fecha" : "07-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0098.pdf", "numCapitulo" :  "98", "nombreCapitulo" : "Capítulo 98"                         , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
         { "Fecha" : "08-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0099.pdf", "numCapitulo" :  "99", "nombreCapitulo" : "Capítulo 99"                         , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
         { "Fecha" : "09-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0100.pdf", "numCapitulo" : "100", "nombreCapitulo" : "Capítulo 100"                        , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
-        { "Fecha" : "17-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0101.pdf", "numCapitulo" : "101", "nombreCapitulo" : "Capítulo 101"                        , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" }
+        { "Fecha" : "17-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0101.pdf", "numCapitulo" : "101", "nombreCapitulo" : "Capítulo 101"                        , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "18-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0102.pdf"  , "numCapitulo" : "102"   , "nombreCapitulo" : "Capítulo 102"                   , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "19-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0103.pdf"  , "numCapitulo" : "103"   , "nombreCapitulo" : "Capítulo 103"                   , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "20-01-2026", "NombreArchivo" : "MLHSB_JabraScan_103.1.pdf" , "numCapitulo" : "103.1" , "nombreCapitulo" : "Capítulo 103.1"                 , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "21-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0104.pdf"  , "numCapitulo" : "104"   , "nombreCapitulo" : "Capítulo 104"                   , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "22-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0105.pdf"  , "numCapitulo" : "105"   , "nombreCapitulo" : "Capítulo 105"                   , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "23-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0106.pdf"  , "numCapitulo" : "106"   , "nombreCapitulo" : "Capítulo 106"                   , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "24-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0107.pdf"  , "numCapitulo" : "107"   , "nombreCapitulo" : "Capítulo 107"                   , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "25-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0108.pdf"  , "numCapitulo" : "108"   , "nombreCapitulo" : "Capítulo 108"                   , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "26-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0109.pdf"  , "numCapitulo" : "109"   , "nombreCapitulo" : "Capítulo 109"                   , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "27-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0110.pdf"  , "numCapitulo" : "110"   , "nombreCapitulo" : "Capítulo 110"                   , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "28-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0111.pdf"  , "numCapitulo" : "111"   , "nombreCapitulo" : "Capítulo 111"                   , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "29-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0112.pdf"  , "numCapitulo" : "112"   , "nombreCapitulo" : "Capítulo 112"                   , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "30-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0113.pdf"  , "numCapitulo" : "113"   , "nombreCapitulo" : "Capítulo 113"                   , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" },
+        { "Fecha" : "31-01-2026", "NombreArchivo" : "MLHSB_JabraScan_0114.pdf"  , "numCapitulo" : "114"   , "nombreCapitulo" : "Capítulo 114"                   , "tituloObra" : "¡El héroe de nivel máximo ha regresado!" }
     ]
 }
