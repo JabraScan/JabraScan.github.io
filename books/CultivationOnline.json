@@ -2284,6 +2284,12 @@
 		{ "Fecha" : "24-01-2026", "NombreArchivo" : "CultivationOnline-2282_JabraScan.pdf", "numCapitulo" : "2282", "nombreCapitulo" : "Un Nuevo Descubrimiento"                                               	, "tituloObra" : "Cultivation Online" },
 		{ "Fecha" : "25-01-2026", "NombreArchivo" : "CultivationOnline-2283_JabraScan.pdf", "numCapitulo" : "2283", "nombreCapitulo" : "El Iluminado"                                                          	, "tituloObra" : "Cultivation Online" },
 		{ "Fecha" : "26-01-2026", "NombreArchivo" : "CultivationOnline-2284_JabraScan.pdf", "numCapitulo" : "2284", "nombreCapitulo" : "El Descubrimiento del Qi Celestial"                                    	, "tituloObra" : "Cultivation Online" },
-		{ "Fecha" : "27-01-2026", "NombreArchivo" : "CultivationOnline-2285_JabraScan.pdf", "numCapitulo" : "2285", "nombreCapitulo" : "Sintiendo el Qi Celestial"                                             	, "tituloObra" : "Cultivation Online" }
+		{ "Fecha" : "27-01-2026", "NombreArchivo" : "CultivationOnline-2285_JabraScan.pdf", "numCapitulo" : "2285", "nombreCapitulo" : "Sintiendo el Qi Celestial (1)"                                         	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "30-01-2026", "NombreArchivo" : "CultivationOnline-2286_JabraScan.pdf", "numCapitulo" : "2286", "nombreCapitulo" : "Sintiendo el Qi Celestial (2)"                                         	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "31-01-2026", "NombreArchivo" : "CultivationOnline-2287_JabraScan.pdf", "numCapitulo" : "2287", "nombreCapitulo" : "Cambios de Humor (1)"                                                  	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "01-02-2026", "NombreArchivo" : "CultivationOnline-2288_JabraScan.pdf", "numCapitulo" : "2288", "nombreCapitulo" : "Cambios de Humor (2)"                                                  	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "02-02-2026", "NombreArchivo" : "CultivationOnline-2289_JabraScan.pdf", "numCapitulo" : "2289", "nombreCapitulo" : "Una Presencia Débil"                                                   	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "03-02-2026", "NombreArchivo" : "CultivationOnline-2290_JabraScan.pdf", "numCapitulo" : "2290", "nombreCapitulo" : "Encuentro con la Elder Sun"                                            	, "tituloObra" : "Cultivation Online" },
+		{ "Fecha" : "04-02-2026", "NombreArchivo" : "CultivationOnline-2291_JabraScan.pdf", "numCapitulo" : "2291", "nombreCapitulo" : "Sun Rouxi"                                                             	, "tituloObra" : "Cultivation Online" }
   ]
 }
