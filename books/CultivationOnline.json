@@ -2290,6 +2290,8 @@
 		{ "Fecha" : "01-02-2026", "NombreArchivo" : "CultivationOnline-2288_JabraScan.pdf", "numCapitulo" : "2288", "nombreCapitulo" : "Cambios de Humor (2)"                                                  	, "tituloObra" : "Cultivation Online" },
 		{ "Fecha" : "02-02-2026", "NombreArchivo" : "CultivationOnline-2289_JabraScan.pdf", "numCapitulo" : "2289", "nombreCapitulo" : "Una Presencia Débil"                                                   	, "tituloObra" : "Cultivation Online" },
 		{ "Fecha" : "03-02-2026", "NombreArchivo" : "CultivationOnline-2290_JabraScan.pdf", "numCapitulo" : "2290", "nombreCapitulo" : "Encuentro con la Elder Sun"                                            	, "tituloObra" : "Cultivation Online" },
-		{ "Fecha" : "04-02-2026", "NombreArchivo" : "CultivationOnline-2291_JabraScan.pdf", "numCapitulo" : "2291", "nombreCapitulo" : "Sun Rouxi"                                                             	, "tituloObra" : "Cultivation Online" }
+		{ "Fecha" : "04-02-2026", "NombreArchivo" : "CultivationOnline-2291_JabraScan.pdf", "numCapitulo" : "2291", "nombreCapitulo" : "Sun Rouxi (1)"                                                          , "tituloObra" : "Cultivation Online" },
+        { "Fecha" : "19-06-2026", "NombreArchivo" : "CultivationOnline-2292_JabraScan.pdf", "numCapitulo" : "2292", "nombreCapitulo" : "Sun Rouxi (2)"                                                         	, "tituloObra" : "Cultivation Online" },
+        { "Fecha" : "20-06-2026", "NombreArchivo" : "CultivationOnline-2293_JabraScan.pdf", "numCapitulo" : "2293", "nombreCapitulo" : "Comienza el Torneo de la Fuerza"                                       	, "tituloObra" : "Cultivation Online" }
   ]
 }
