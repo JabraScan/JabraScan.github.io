@@ -2292,6 +2292,12 @@
 		{ "Fecha" : "03-02-2026", "NombreArchivo" : "CultivationOnline-2290_JabraScan.pdf", "numCapitulo" : "2290", "nombreCapitulo" : "Encuentro con la Elder Sun"                                            	, "tituloObra" : "Cultivation Online" },
 		{ "Fecha" : "04-02-2026", "NombreArchivo" : "CultivationOnline-2291_JabraScan.pdf", "numCapitulo" : "2291", "nombreCapitulo" : "Sun Rouxi (1)"                                                          , "tituloObra" : "Cultivation Online" },
         { "Fecha" : "19-06-2026", "NombreArchivo" : "CultivationOnline-2292_JabraScan.pdf", "numCapitulo" : "2292", "nombreCapitulo" : "Sun Rouxi (2)"                                                         	, "tituloObra" : "Cultivation Online" },
-        { "Fecha" : "20-06-2026", "NombreArchivo" : "CultivationOnline-2293_JabraScan.pdf", "numCapitulo" : "2293", "nombreCapitulo" : "Comienza el Torneo de la Fuerza"                                       	, "tituloObra" : "Cultivation Online" }
+        { "Fecha" : "20-06-2026", "NombreArchivo" : "CultivationOnline-2293_JabraScan.pdf", "numCapitulo" : "2293", "nombreCapitulo" : "Comienza el Torneo de la Fuerza"                                       	, "tituloObra" : "Cultivation Online" },
+        { "Fecha" : "22-06-2026", "NombreArchivo" : "CultivationOnline-2295_JabraScan.pdf", "numCapitulo" : "2295", "nombreCapitulo" : "El Error de Kulas"                                                     	, "tituloObra" : "Cultivation Online" },
+        { "Fecha" : "23-06-2026", "NombreArchivo" : "CultivationOnline-2296_JabraScan.pdf", "numCapitulo" : "2296", "nombreCapitulo" : "Las Exigencias de los Tres Pilares del Cielo"                          	, "tituloObra" : "Cultivation Online" },
+        { "Fecha" : "24-06-2026", "NombreArchivo" : "CultivationOnline-2297_JabraScan.pdf", "numCapitulo" : "2297", "nombreCapitulo" : "Guerra con los Tres Pilares del Cielo (1)"                             	, "tituloObra" : "Cultivation Online" },
+        { "Fecha" : "25-06-2026", "NombreArchivo" : "CultivationOnline-2298_JabraScan.pdf", "numCapitulo" : "2298", "nombreCapitulo" : "Guerra con los Tres Pilares del Cielo (2)"                             	, "tituloObra" : "Cultivation Online" },
+        { "Fecha" : "26-06-2026", "NombreArchivo" : "CultivationOnline-2299_JabraScan.pdf", "numCapitulo" : "2299", "nombreCapitulo" : "Guerra con los Tres Pilares del Cielo (3)"                             	, "tituloObra" : "Cultivation Online" },
+        { "Fecha" : "27-06-2026", "NombreArchivo" : "CultivationOnline-2300_JabraScan.pdf", "numCapitulo" : "2300", "nombreCapitulo" : "Una Teoría Absurda"                                                    	, "tituloObra" : "Cultivation Online" }
   ]
 }
