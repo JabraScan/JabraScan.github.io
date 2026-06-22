@@ -212,6 +212,14 @@
         { "Fecha" : "17-11-2025", "NombreArchivo" : "TLOTNB-0210_JabraScan.pdf", "numCapitulo" : "210", "nombreCapitulo" : "Algunos Encuentros Desatan Una Tormenta (1)"                                   , "tituloObra" : "La Leyenda de la Espada del Norte" },
         { "Fecha" : "18-11-2025", "NombreArchivo" : "TLOTNB-0211_JabraScan.pdf", "numCapitulo" : "211", "nombreCapitulo" : "Algunos Encuentros Desatan Una Tormenta (2)"                                   , "tituloObra" : "La Leyenda de la Espada del Norte" },
         { "Fecha" : "19-01-2026", "NombreArchivo" : "TLOTNB-0212_JabraScan.pdf", "numCapitulo" : "212", "nombreCapitulo" : "Algunos Encuentros Desatan Una Tormenta (3)"                                   , "tituloObra" : "La Leyenda de la Espada del Norte" },
-        { "Fecha" : "22-06-2026", "NombreArchivo" : "TLOTNB-0213_JabraScan.pdf", "numCapitulo" : "213", "nombreCapitulo" : "Aun así, está bien (1)"                                                        , "tituloObra" : "La Leyenda de la Espada del Norte" }
+        { "Fecha" : "22-06-2026", "NombreArchivo" : "TLOTNB-0213_JabraScan.pdf", "numCapitulo" : "213", "nombreCapitulo" : "Aun así, está bien (1)"                                                        , "tituloObra" : "La Leyenda de la Espada del Norte" },
+        { "Fecha" : "24-06-2026", "NombreArchivo" : "TLOTNB-0214_JabraScan.pdf", "numCapitulo" : "214", "nombreCapitulo" : "Aun así, está bien (2)"                                                        , "tituloObra" : "La Leyenda de la Espada del Norte" },
+        { "Fecha" : "26-06-2026", "NombreArchivo" : "TLOTNB-0215_JabraScan.pdf", "numCapitulo" : "215", "nombreCapitulo" : "Aun así, está bien (3)"                                                        , "tituloObra" : "La Leyenda de la Espada del Norte" },
+        { "Fecha" : "29-06-2026", "NombreArchivo" : "TLOTNB-0216_JabraScan.pdf", "numCapitulo" : "216", "nombreCapitulo" : "El Mundo Cambia,Y La Gente Olvida Fácilmente El Pasado (1)"                    , "tituloObra" : "La Leyenda de la Espada del Norte" },
+        { "Fecha" : "01-07-2026", "NombreArchivo" : "TLOTNB-0217_JabraScan.pdf", "numCapitulo" : "217", "nombreCapitulo" : "El Mundo Cambia,Y La Gente Olvida Fácilmente El Pasado (2)"                    , "tituloObra" : "La Leyenda de la Espada del Norte" },
+        { "Fecha" : "03-07-2026", "NombreArchivo" : "TLOTNB-0218_JabraScan.pdf", "numCapitulo" : "218", "nombreCapitulo" : "El Mundo Cambia,Y La Gente Olvida Fácilmente El Pasado (3)"                    , "tituloObra" : "La Leyenda de la Espada del Norte" },
+        { "Fecha" : "06-07-2026", "NombreArchivo" : "TLOTNB-0219_JabraScan.pdf", "numCapitulo" : "219", "nombreCapitulo" : "Los Que Quieran Pelear, Que Entren; Los Que Quieran Vender, Que Se Vayan (1)"  , "tituloObra" : "La Leyenda de la Espada del Norte" },
+        { "Fecha" : "08-07-2026", "NombreArchivo" : "TLOTNB-0220_JabraScan.pdf", "numCapitulo" : "220", "nombreCapitulo" : "Los Que Quieran Pelear, Que Entren; Los Que Quieran Vender, Que Se Vayan (2)"  , "tituloObra" : "La Leyenda de la Espada del Norte" }
+
     ]
 }
