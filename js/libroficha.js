@@ -4,6 +4,7 @@ import { activarLinksPDF, activarPaginacion } from './eventos.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso, consultarVotos } from './contadoresGoogle.js';
 import { mostrarurl } from './general.js';
 import { addToBiblio } from './usuario.js';
+import { renderModernLayout, initDesignToggle } from './libroficha-modern.js';
 /**
  * Carga los datos de una obra y renderiza sus capítulos.
  * @param {string} libroId - Clave identificadora de la obra.
@@ -51,6 +52,26 @@ export function cargarlibro(libroId) {
 
       //actualizar url
       mostrarurl(clave);
+
+      // Guardar datos para el diseño moderno
+      window.currentBookData = {
+        clave,
+        nombreobra,
+        nombresAlternativos,
+        imagen,
+        autor,
+        sinopsis,
+        tipoobra,
+        Categoria,
+        estado,
+        ubicacion,
+        traduccion,
+        contenido18,
+        discord,
+        aprobadaAutor,
+        wikifan
+      };
+
       //generar contenido
       const OKAutor = aprobadaAutor === 'si' ? `
         <span class="carousel-info-label">Traducción aprobada por el autor</span><br>
@@ -119,10 +140,10 @@ export function cargarlibro(libroId) {
         const visitCap = info.visitas === -1 ? 0 : info.numVisitasCapitulo;
         const visitObra = info.visitas === -1 ? 1 : info.visitas + 1;
         const visitas = visitCap + visitObra;
-      
+
         const numVisitas = document.createElement("a");
         numVisitas.innerHTML = `<a href="#"><i class="fa-solid fa-eye"></i> ${visitas} veces</a>`;
-      
+
         const booklinks = mainDataBook.querySelector('.book-links');
         booklinks.appendChild(numVisitas);
       });
@@ -135,17 +156,17 @@ export function cargarlibro(libroId) {
       });
       // Inserta un botón "+ Añadir a la biblioteca" como primer hijo de .book-useraction
       const btnBiblioteca = addToLibrary(clave);
-        mainDataBook.querySelector('.book-useraction').insertAdjacentElement('afterbegin', btnBiblioteca);
-/*
-      <button class="btn btn-primary" type="button" aria-label="Añadir a la biblioteca" title="Añadir a la biblioteca">
-        <!-- Icono decorativo; aria-hidden para que no lo lea el screen reader -->
-        <i class="fa-solid fa-plus" aria-hidden="true"></i>
-        <!-- Fallback visual si la fuente no carga -->
-        <span class="fallback-plus visually-hidden">+</span>
-        <!-- Texto visible solo en pantallas >= sm -->
-        <span class="d-none d-sm-inline ms-2">Añadir a la biblioteca</span>
-      </button>
-*/
+      mainDataBook.querySelector('.book-useraction').insertAdjacentElement('afterbegin', btnBiblioteca);
+      /*
+            <button class="btn btn-primary" type="button" aria-label="Añadir a la biblioteca" title="Añadir a la biblioteca">
+              <!-- Icono decorativo; aria-hidden para que no lo lea el screen reader -->
+              <i class="fa-solid fa-plus" aria-hidden="true"></i>
+              <!-- Fallback visual si la fuente no carga -->
+              <span class="fallback-plus visually-hidden">+</span>
+              <!-- Texto visible solo en pantallas >= sm -->
+              <span class="d-none d-sm-inline ms-2">Añadir a la biblioteca</span>
+            </button>
+      */
       DataBook.prepend(mainDataBook);
       DataBook.prepend(headerDataBook);
       mainDataBook.querySelector(".book-image").prepend(imagenContenedor);
@@ -156,6 +177,9 @@ export function cargarlibro(libroId) {
       }
 
       obtenerCapitulos(clave).then(listacapitulos => {
+        // Guardar capítulos para el diseño moderno
+        window.currentChapters = listacapitulos;
+
         const ultimosCapitulos = listacapitulos
           .map(c => ({
             ...c,
@@ -187,6 +211,9 @@ export function cargarlibro(libroId) {
 
         renderCapitulos(listacapitulos, clave, seccionUltimos, "asc");
         incrementarVisita(`obra_${clave}`);
+
+        // Inicializar botón de alternancia de diseño después de que todo esté cargado
+        initDesignToggle();
       });
     });
 }
@@ -282,22 +309,22 @@ function renderCapitulos(listacapitulos, clave, seccionUltimos, ordenActual = "a
 // Crea botón "+ Añadir a la biblioteca" 
 function addToLibrary(clave) {
   const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'btn btn-primary btn-sm d-inline-flex align-items-center';
-    btn.setAttribute('data-role', 'add-to-library');
-    btn.setAttribute('aria-label', 'Añadir a la biblioteca');
-    btn.title = 'Añadir a la biblioteca';
-    btn.innerHTML = `
+  btn.type = 'button';
+  btn.className = 'btn btn-primary btn-sm d-inline-flex align-items-center';
+  btn.setAttribute('data-role', 'add-to-library');
+  btn.setAttribute('aria-label', 'Añadir a la biblioteca');
+  btn.title = 'Añadir a la biblioteca';
+  btn.innerHTML = `
       <i class="fa-solid fa-plus" aria-hidden="true"></i>
       <span class="d-none d-sm-inline ms-2">Añadir a la biblioteca</span>
     `;
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      btn.classList.add('disabled');
-      setTimeout(() => btn.classList.remove('disabled'), 700);
-      addToBiblio(clave);
-    });
-  
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    btn.classList.add('disabled');
+    setTimeout(() => btn.classList.remove('disabled'), 700);
+    addToBiblio(clave);
+  });
+
   return btn;
 }
 
