@@ -182,7 +182,6 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
               });
 }
 
-
 /**
  * Actualiza el título de la obra y muestra banner especial si aplica.
  */
