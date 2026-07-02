@@ -171,8 +171,12 @@ document.addEventListener("DOMContentLoaded", function () {
           <div class="carousel-chapter-badge"></div>
         `;
       itemCarousel.querySelector(".carousel-info-title").onclick = () => onLibroClick(clave);
-      itemCarousel.prepend(imagenContenedor);
-      carouselContainer.appendChild(itemCarousel);
+//      itemCarousel.prepend(imagenContenedor);
+//      carouselContainer.appendChild(itemCarousel);
+      requestAnimationFrame(() => {
+        itemCarousel.prepend(imagenContenedor);
+        carouselContainer.appendChild(itemCarousel);
+      });
 
       const itemBook = document.createElement("div");
       itemBook.classList.add("col");
