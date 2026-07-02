@@ -108,7 +108,8 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
           ...cap,
           _clave: clave,
           _fecha: parseDateDMY(cap.Fecha),
-          _num: parseChapterNumber(cap.numCapitulo)
+          _num: parseChapterNumber(cap.numCapitulo),
+          _server: cap.server
         }))
         .filter(cap => cap._fecha <= hoy); // ✅ solo capítulos con fecha <= hoy
         const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
@@ -203,6 +204,7 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
             async function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
             
               const numCapitulo = capitulosObra[idx].numCapitulo;
+              const server = capitulosObra[idx].server;
               const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
               const claveFinal = String(clave) + extra;
             
