@@ -133,7 +133,7 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
   //añadido el 09-09-2025 23:28 para gestionar los capitulos mas alla de 999
       // Extraemos el número de capítulo actual
       const numCapitulo = capitulosObra[idx].numCapitulo;
-      const server =  capitulosObra[idx].server;
+      const server = capitulosObra[idx]._server;
       // Si el número es mayor a 999, tomamos todos los dígitos excepto los tres últimos.
       // Ejemplo: 1203 → "1", 123653 → "123"
       const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
