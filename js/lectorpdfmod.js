@@ -182,32 +182,35 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
                   pdfjsLib.getDocument(pdfBackup).promise.then(iniciar);
               });
 }*/
-function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
+async function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
 
   const numCapitulo = capitulosObra[idx].numCapitulo;
   const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
   const claveFinal = String(clave) + extra;
 
-  const urlLocal = `https://jabrascan.net/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
-  const urlBackup = `https://jabrascan.github.io-pdfs/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+  // tus rutas EXACTAS
+  const pdfLocal  = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+  const pdfBackup = `https://jabrascan.github.io-pdfs/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
 
-  // comprobación mínima: ¿existe el local?
-  const img = new Image();
-  img.onload = () => cargar(urlLocal);     // si existe → cargar local
-  img.onerror = () => cargar(urlBackup);   // si no existe → cargar backup
-  img.src = urlLocal;                      // dispara la comprobación
+  const urlElegida = await existe(pdfLocal) ? pdfLocal : pdfBackup;
 
-  function cargar(url) {
-    pdfjsLib.getDocument(url).promise.then(doc => {
-      pdfDoc = doc;
-      pageNum = paginaInicial;
-      renderPage(pageNum);
-      actualizarBotonesNav(idx, capitulosObra, clave);
-      incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
-    });
+  pdfjsLib.getDocument(urlElegida).promise.then(doc => {
+    pdfDoc = doc;
+    pageNum = paginaInicial;
+    renderPage(pageNum);
+    actualizarBotonesNav(idx, capitulosObra, clave);
+    incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
+  });
+
+  async function existe(url) {
+    try {
+      const res = await fetch(url, { method: "HEAD" });
+      return res.ok;
+    } catch {
+      return false;
+    }
   }
 }
-
 
 /**
  * Actualiza el título de la obra y muestra banner especial si aplica.
