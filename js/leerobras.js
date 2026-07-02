@@ -63,6 +63,7 @@ function cargarObrasDesdeXML() {
           discord: obra.querySelector("discord").textContent.trim(),
           aprobadaAutor: obra.querySelector("aprobadaAutor").textContent.trim(),
           sinopsis: obra.querySelector("sinopsis")?.textContent.trim() || "",
+          server:  obra.querySelector("server")?.textContent.trim() || "",
           // Para localhost, necesitamos cargar capítulos después
           requiresChapterFetch: true
         });
@@ -112,6 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const discord = obj.discord || '';
       const aprobadaAutor = obj.aprobadaAutor || '';
       const sinopsis = formatCDATA(obj.sinopsis || '');
+      const server = obj.server || '';
       
       // Mantener la lógica original de mostrar último leído en el header
       const ultimaObra = getItem("ultimaObra");
