@@ -165,6 +165,7 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
           const pdfLocal = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
         // ruta en el repo de PDFs
           const pdfBackup = `https://jabrascan.github.io-pdfs/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+  console.log(nombreArchivo);
         //carga de los pdf
           function iniciar(doc) {
             pdfDoc = doc;
