@@ -134,17 +134,16 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
       // Extraemos el número de capítulo actual
       const numCapitulo = capitulosObra[idx].numCapitulo;
       //const server = (capitulosObra[idx]._server || "io-pdfs"); 
-      /*const server = (
+      const server = (
                         ["CDMNQTMHC", "CultivationOnline", "DualCultivation", "PathtoDualCultivation"]
                           .includes(clave)
                       ) ? "local" : "io-pdfs";
-      */
-      const server = ["local", "io-pdfs"].includes(capitulosObra[idx]._server)
+      /*const server = ["local", "io-pdfs"].includes(capitulosObra[idx]._server)
         ? capitulosObra[idx]._server
         : (["CDMNQTMHC","CultivationOnline","DualCultivation","PathtoDualCultivation"].includes(clave)
             ? "local"
             : "io-pdfs");
-
+      */
       // Si el número es mayor a 999, tomamos todos los dígitos excepto los tres últimos.
       // Ejemplo: 1203 → "1", 123653 → "123"
       const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
@@ -163,7 +162,7 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
           const pdfPath = (server === "local") ? pdfLocal : pdfBackup;
 
   console.log(`server = ${server}`);
-  console.log(`pdfPath = ${pdfPath}`);
+  return console.log(`pdfPath = ${pdfPath}`);
               
       pdfjsLib.getDocument(pdfPath).promise.then(doc => {
         pdfDoc = doc;
