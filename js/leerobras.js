@@ -21,7 +21,19 @@ function isLocalhost() {
          window.location.hostname === '127.0.0.1' || 
          window.location.hostname === '';
 }
-
+function esperarYMontarCarrusel(itemCarousel, imagenContenedor) {
+  const intentar = () => {
+    const container = document.querySelector(".custom-carousel-track");
+    if (container) {
+      itemCarousel.prepend(imagenContenedor);
+      container.appendChild(itemCarousel);
+    } else {
+      // si aún no existe, vuelve a intentarlo SIN ABORTAR
+      requestAnimationFrame(intentar);
+    }
+  };
+  intentar();
+}
 // Cargar obras desde XML (método legacy para localhost)
 function cargarObrasDesdeXML() {
   return fetch('obras.xml')
@@ -173,15 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
       itemCarousel.querySelector(".carousel-info-title").onclick = () => onLibroClick(clave);
       //itemCarousel.prepend(imagenContenedor);
       //carouselContainer.appendChild(itemCarousel);
-      requestAnimationFrame(() => {
-        const container = document.querySelector(".custom-carousel-track");
-        if (!container) {
-          console.error("custom-carousel-track no existe en este DOM");
-          return;
-        }
-        itemCarousel.prepend(imagenContenedor);
-        container.appendChild(itemCarousel);
-      });
+      esperarYMontarCarrusel(itemCarousel, imagenContenedor);
       
       const itemBook = document.createElement("div");
       itemBook.classList.add("col");
