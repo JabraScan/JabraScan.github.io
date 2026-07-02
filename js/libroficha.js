@@ -48,6 +48,7 @@ export function cargarlibro(libroId) {
       const discord = get("discord");
       const aprobadaAutor = get("aprobadaAutor");
       const wikifan = get("wiki");
+      const server = get('server');
 
       //actualizar url
       mostrarurl(clave);
