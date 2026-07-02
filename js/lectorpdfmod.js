@@ -149,7 +149,7 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
     incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
   });
 }*/
-
+/*
 function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
   //añadido el 09-09-2025 23:28 para gestionar los capitulos mas alla de 999
       // Extraemos el número de capítulo actual
@@ -181,7 +181,39 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
                 // intenta cargar primero del repo backup
                   pdfjsLib.getDocument(pdfBackup).promise.then(iniciar);
               });
+}*/
+function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
+
+  const numCapitulo = capitulosObra[idx].numCapitulo;
+  const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
+  const claveFinal = String(clave) + extra;
+
+  const pdfLocal = `https://jabrascan.net/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+  const pdfBackup = `https://jabrascan.github.io-pdfs/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+
+  function iniciar(doc) {
+    pdfDoc = doc;
+    pageNum = paginaInicial;
+    renderPage(pageNum);
+    actualizarBotonesNav(idx, capitulosObra, clave);
+    incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
+  }
+
+  // PRUEBA si el PDF local es REAL antes de pasarlo a pdf.js
+  fetch(pdfLocal, { method: "HEAD" })
+    .then(resp => {
+      if (!resp.ok) throw new Error("NO_EXISTE_LOCAL");
+      return pdfjsLib.getDocument(pdfLocal).promise;
+    })
+    .catch(() => {
+      return pdfjsLib.getDocument(pdfBackup).promise;
+    })
+    .then(iniciar)
+    .catch(err => {
+      console.error("ERROR CARGANDO PDF:", err);
+    });
 }
+
 
 /**
  * Actualiza el título de la obra y muestra banner especial si aplica.
