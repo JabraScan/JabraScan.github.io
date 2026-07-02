@@ -182,38 +182,45 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
                   pdfjsLib.getDocument(pdfBackup).promise.then(iniciar);
               });
 }*/
-function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
-
-  const numCapitulo = capitulosObra[idx].numCapitulo;
-  const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
-  const claveFinal = String(clave) + extra;
-
-  const pdfLocal = `https://jabrascan.net/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
-  const pdfBackup = `https://jabrascan.github.io-pdfs/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
-
-  function iniciar(doc) {
-    pdfDoc = doc;
-    pageNum = paginaInicial;
-    renderPage(pageNum);
-    actualizarBotonesNav(idx, capitulosObra, clave);
-    incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
+  async function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
+  
+    const numCapitulo = capitulosObra[idx].numCapitulo;
+    const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
+    const claveFinal = String(clave) + extra;
+  
+    const pdfLocal = `https://jabrascan.net/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+    const pdfBackup = `https://jabrascan.github.io-pdfs/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+  
+    function iniciar(doc) {
+      pdfDoc = doc;
+      pageNum = paginaInicial;
+      renderPage(pageNum);
+      actualizarBotonesNav(idx, capitulosObra, clave);
+      incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
+    }
+  
+    // PRIMERO comprobamos si el PDF local existe
+    let usarLocal = false;
+    try {
+      const resp = await fetch(pdfLocal, { method: "HEAD" });
+      usarLocal = resp.ok;
+    } catch (e) {
+      usarLocal = false;
+    }
+  
+    // SI existe → cargar local
+    if (usarLocal) {
+      pdfjsLib.getDocument(pdfLocal).promise
+        .then(iniciar)
+        .catch(() => {
+          pdfjsLib.getDocument(pdfBackup).promise.then(iniciar);
+        });
+      return;
+    }
+  
+    // SI NO existe → cargar backup directamente
+    pdfjsLib.getDocument(pdfBackup).promise.then(iniciar);
   }
-
-  // PRUEBA si el PDF local es REAL antes de pasarlo a pdf.js
-  fetch(pdfLocal, { method: "HEAD" })
-    .then(resp => {
-      if (!resp.ok) throw new Error("NO_EXISTE_LOCAL");
-      return pdfjsLib.getDocument(pdfLocal).promise;
-    })
-    .catch(() => {
-      return pdfjsLib.getDocument(pdfBackup).promise;
-    })
-    .then(iniciar)
-    .catch(err => {
-      console.error("ERROR CARGANDO PDF:", err);
-    });
-}
-
 
 /**
  * Actualiza el título de la obra y muestra banner especial si aplica.
