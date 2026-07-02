@@ -109,7 +109,7 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
           _clave: clave,
           _fecha: parseDateDMY(cap.Fecha),
           _num: parseChapterNumber(cap.numCapitulo),
-          _server: cap.server
+          _server: cap.server ?? "local"
         }))
         .filter(cap => cap._fecha <= hoy); // ✅ solo capítulos con fecha <= hoy
         const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
@@ -129,10 +129,11 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
 /**
  * Carga el archivo PDF y renderiza la página inicial.
  */
-/*function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
+function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
   //añadido el 09-09-2025 23:28 para gestionar los capitulos mas alla de 999
       // Extraemos el número de capítulo actual
       const numCapitulo = capitulosObra[idx].numCapitulo;
+      const server =  capitulosObra[idx].server;
       // Si el número es mayor a 999, tomamos todos los dígitos excepto los tres últimos.
       // Ejemplo: 1203 → "1", 123653 → "123"
       const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
@@ -140,16 +141,25 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
       // Esto evita sumas si 'clave' es numérica.
       const claveFinal = String(clave) + extra;
       // Construimos la ruta final del PDF, codificando el nombre del archivo para URLs válidas.
-      const pdfPath = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
-  pdfjsLib.getDocument(pdfPath).promise.then(doc => {
-    pdfDoc = doc;
-    pageNum = paginaInicial;
-    renderPage(pageNum);
-//console.log(`Capitulo ${capitulosObra[idx].numCapitulo}`);
-    actualizarBotonesNav(idx, capitulosObra, clave);
-    incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
-  });
-}*/
+        // ruta en el repo original
+          const pdfLocal = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+        // ruta en el repo de PDFs
+          const pdfBackup = `https://jabrascan.github.io-pdfs/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+        //
+          //const pdfPath = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+          // server = "local"  → usar pdfLocal
+          // server = "io-pdfs" → usar pdfBackup
+          const pdfPath = (server === "local") ? pdfLocal : pdfBackup;
+
+      pdfjsLib.getDocument(pdfPath).promise.then(doc => {
+        pdfDoc = doc;
+        pageNum = paginaInicial;
+        renderPage(pageNum);
+    //console.log(`Capitulo ${capitulosObra[idx].numCapitulo}`);
+        actualizarBotonesNav(idx, capitulosObra, clave);
+        incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
+      });
+}
 /*
 function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
   //añadido el 09-09-2025 23:28 para gestionar los capitulos mas alla de 999
@@ -183,44 +193,6 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
                   pdfjsLib.getDocument(pdfBackup).promise.then(iniciar);
               });
 }*/
-            async function existe(url) {
-              try {
-                const controller = new AbortController();
-                const signal = controller.signal;
-            
-                const res = await fetch(url, { method: "GET", signal });
-            
-                // si responde 200, existe
-                if (res.ok) {
-                  controller.abort(); // aborta antes de descargar el PDF
-                  return true;
-                }
-            
-                return false;
-              } catch {
-                return false;
-              }
-            }
-            async function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
-            
-              const numCapitulo = capitulosObra[idx].numCapitulo;
-              const server = capitulosObra[idx].server;
-              const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
-              const claveFinal = String(clave) + extra;
-            
-              const pdfLocal  = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
-              const pdfBackup = `https://jabrascan.github.io-pdfs/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
-            
-              const urlElegida = await existe(pdfLocal) ? pdfLocal : pdfBackup;
-            
-              pdfjsLib.getDocument(urlElegida).promise.then(doc => {
-                pdfDoc = doc;
-                pageNum = paginaInicial;
-                renderPage(pageNum);
-                actualizarBotonesNav(idx, capitulosObra, clave);
-                incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
-              });
-            }
 
 
 /**
