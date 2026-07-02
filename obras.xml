@@ -1023,6 +1023,40 @@ He tardado diez años en escribir este libro.
 		<bannerOpcional></bannerOpcional>
 		<wiki></wiki>
 	</obra>
+    <obra>	
+        <visible>si</visible>
+        <clave>ThouasMyKnight</clave>
+        <nombreobra>Thou, as My Knight</nombreobra>
+        <nombreobra>Kimi wa Boku no Kishi（君は僕の騎士）</nombreobra>
+        <nombreobra>You Are My Knight</nombreobra>
+        <nombreobra>My Knight and I</nombreobra>
+        <nombreobra>Eres mi caballero</nombreobra>
+        <nombreobra>Tú, como mi caballero</nombreobra>
+        <nombreobra>Mi caballero eres tú</nombreobra>
+        <autor>Rintaro Hatake</autor>
+        <sinopsis><![CDATA[En este mundo, las personas conocidas como informadores venden sus habilidades sobrenaturales para utilizarlas en conflictos armados. 
+
+            Cuando Tsuhima Rindou, un informático corriente, acepta ayudar a una noble caída en desgracia llamada Holly a desertar del Imperio Balga, no espera nada más que una típica misión de escolta. Pero su cliente es mucho más de lo que dice, y Balga está decidido a mantenerla dentro de sus fronteras, enviando a su ejército y a varios informadores de élite para atrapar al dúo por todos los medios. 
+
+            ¿Podrán estas dos almas, unidas únicamente por un acuerdo comercial, sobrevivir al agotador viaje y a la red de conspiraciones que les espera?
+            ]]>
+        </sinopsis>
+        <valoracion>9.0</valoracion>
+        <tipoobra>Light Web</tipoobra>
+        <categoria>Acción, Aventura, Fantasía, Comedia, Misterio, Romance, Sobrenatural</categoria>
+        <imagen>ThouasMyKnight/ThouasMyKnight1.webp</imagen>
+        <imagen>ThouasMyKnight/ThouasMyKnight2.webp</imagen>
+        <fechaCreacion>02/07/2026</fechaCreacion>
+        <ubicacion>Novela Japonesa</ubicacion>
+        <estado>Activo</estado>
+        <traductor>Gran Maestro</traductor>
+        <adulto></adulto>
+        <aprobadaAutor>no</aprobadaAutor>
+        <observaciones></observaciones>
+        <discord></discord>
+        <bannerOpcional></bannerOpcional>
+        <wiki>https://drama-radio-fanon.fandom.com/wiki/Thou,_as_my_knight</wiki>
+    </obra>	
 	<obra>	
 		<visible>si</visible>
 		<clave>OtonariNoTenshiSama</clave>
