@@ -399,7 +399,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //FIN fetch('obras.xml')
 });
-
+/*
 export function onLibroClick(libroId) {
   setItem('libroSeleccionado', libroId);
   fetch('books/libro-ficha.html')
@@ -415,7 +415,29 @@ export function onLibroClick(libroId) {
       cargarlibro(libroId);
     })
     .catch(err => console.error('Error:', err));
+}*/
+export function onLibroClick(libroId) {
+  setItem('libroSeleccionado', libroId);
+  fetch('books/libro-ficha.html')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error al cargar el archivo: ' + response.statusText);
+      }
+      return response.text();
+    })
+    .then(data => {
+      const mainElement = document.querySelector('main');
+      // 1) BORRAS EL DOM
+      mainElement.innerHTML = data;
+      // 2) *** ESPERAS A QUE EL NUEVO DOM SE MONTE ***
+      requestAnimationFrame(() => {
+        // 3) AHORA SÍ: EL DOM YA EXISTE
+        cargarlibro(libroId);
+      });
+    })
+    .catch(err => console.error('Error:', err));
 }
+
 /*
 function ordenarLibrosPorFecha() {
   const container = document.querySelector('.book-list');
