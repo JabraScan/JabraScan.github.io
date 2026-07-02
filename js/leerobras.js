@@ -171,9 +171,18 @@ document.addEventListener("DOMContentLoaded", function () {
           <div class="carousel-chapter-badge"></div>
         `;
       itemCarousel.querySelector(".carousel-info-title").onclick = () => onLibroClick(clave);
-      itemCarousel.prepend(imagenContenedor);
-      carouselContainer.appendChild(itemCarousel);
-
+      //itemCarousel.prepend(imagenContenedor);
+      //carouselContainer.appendChild(itemCarousel);
+      requestAnimationFrame(() => {
+        const container = document.querySelector(".custom-carousel-track");
+        if (!container) {
+          console.error("custom-carousel-track no existe en este DOM");
+          return;
+        }
+        itemCarousel.prepend(imagenContenedor);
+        container.appendChild(itemCarousel);
+      });
+      
       const itemBook = document.createElement("div");
       itemBook.classList.add("col");
       itemBook.innerHTML = `
