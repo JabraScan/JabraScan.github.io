@@ -18,10 +18,10 @@ export function abrirLectorPDF() {
       document.body.classList.add('reader-page');
       // Verifica si el canvas ya está presente
       const canvas = document.getElementById("pdfCanvas");
-      /*if (canvas) {
+      if (canvas) {
         cargarModuloLectorPDF();
         return;
-      }*/
+      }
 
       // Observa el DOM hasta que aparezca el canvas
       const observer = new MutationObserver((mutations, obs) => {
