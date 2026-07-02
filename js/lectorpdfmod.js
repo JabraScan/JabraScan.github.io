@@ -182,45 +182,32 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
                   pdfjsLib.getDocument(pdfBackup).promise.then(iniciar);
               });
 }*/
-  async function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
-  
-    const numCapitulo = capitulosObra[idx].numCapitulo;
-    const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
-    const claveFinal = String(clave) + extra;
-  
-    const pdfLocal = `https://jabrascan.net/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
-    const pdfBackup = `https://jabrascan.github.io-pdfs/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
-  
-    function iniciar(doc) {
+function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
+
+  const numCapitulo = capitulosObra[idx].numCapitulo;
+  const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
+  const claveFinal = String(clave) + extra;
+
+  const urlLocal = `https://jabrascan.net/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+  const urlBackup = `https://jabrascan.github.io-pdfs/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+
+  // comprobación mínima: ¿existe el local?
+  const img = new Image();
+  img.onload = () => cargar(urlLocal);     // si existe → cargar local
+  img.onerror = () => cargar(urlBackup);   // si no existe → cargar backup
+  img.src = urlLocal;                      // dispara la comprobación
+
+  function cargar(url) {
+    pdfjsLib.getDocument(url).promise.then(doc => {
       pdfDoc = doc;
       pageNum = paginaInicial;
       renderPage(pageNum);
       actualizarBotonesNav(idx, capitulosObra, clave);
       incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
-    }
-  
-    // PRIMERO comprobamos si el PDF local existe
-    let usarLocal = false;
-    try {
-      const resp = await fetch(pdfLocal, { method: "HEAD" });
-      usarLocal = resp.ok;
-    } catch (e) {
-      usarLocal = false;
-    }
-  
-    // SI existe → cargar local
-    if (usarLocal) {
-      pdfjsLib.getDocument(pdfLocal).promise
-        .then(iniciar)
-        .catch(() => {
-          pdfjsLib.getDocument(pdfBackup).promise.then(iniciar);
-        });
-      return;
-    }
-  
-    // SI NO existe → cargar backup directamente
-    pdfjsLib.getDocument(pdfBackup).promise.then(iniciar);
+    });
   }
+}
+
 
 /**
  * Actualiza el título de la obra y muestra banner especial si aplica.
