@@ -150,6 +150,39 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
   });
 }
 
+function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
+  //añadido el 09-09-2025 23:28 para gestionar los capitulos mas alla de 999
+      // Extraemos el número de capítulo actual
+        const numCapitulo = capitulosObra[idx].numCapitulo;
+      // Si el número es mayor a 999, tomamos todos los dígitos excepto los tres últimos.
+      // Ejemplo: 1203 → "1", 123653 → "123"
+        const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
+      // Concatenamos el fragmento extra a la clave, asegurándonos de que sea texto.
+      // Esto evita sumas si 'clave' es numérica.
+        const claveFinal = String(clave) + extra;
+      // Construimos la ruta final del PDF, codificando el nombre del archivo para URLs válidas.
+        // ruta en el repo original
+          const pdfLocal = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+        // ruta en el repo de PDFs
+          const pdfBackup = `https://jabrascan.github.io-pdfs/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+        //carga de los pdf
+          function iniciar(doc) {
+            pdfDoc = doc;
+            pageNum = paginaInicial;
+            renderPage(pageNum);
+            actualizarBotonesNav(idx, capitulosObra, clave);
+            incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
+          }
+          // intenta cargar primero del repo original
+            pdfjsLib.getDocument(pdfLocal).promise
+              .then(iniciar)
+              .catch(() => {
+                // intenta cargar primero del repo backup
+                  pdfjsLib.getDocument(pdfBackup).promise.then(iniciar);
+              });
+}
+
+
 /**
  * Actualiza el título de la obra y muestra banner especial si aplica.
  */
