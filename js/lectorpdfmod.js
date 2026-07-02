@@ -128,7 +128,7 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
 /**
  * Carga el archivo PDF y renderiza la página inicial.
  */
-function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
+/*function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
   //añadido el 09-09-2025 23:28 para gestionar los capitulos mas alla de 999
       // Extraemos el número de capítulo actual
       const numCapitulo = capitulosObra[idx].numCapitulo;
@@ -148,7 +148,7 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
     actualizarBotonesNav(idx, capitulosObra, clave);
     incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
   });
-}
+}*/
 
 function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
   //añadido el 09-09-2025 23:28 para gestionar los capitulos mas alla de 999
