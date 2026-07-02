@@ -109,7 +109,7 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
           _clave: clave,
           _fecha: parseDateDMY(cap.Fecha),
           _num: parseChapterNumber(cap.numCapitulo),
-          _server: cap.server ?? "local"
+          _server: cap.server ?? "io-pdfs"
         }))
         .filter(cap => cap._fecha <= hoy); // ✅ solo capítulos con fecha <= hoy
         const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
