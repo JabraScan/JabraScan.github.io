@@ -162,7 +162,8 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
           const pdfPath = (server === "local") ? pdfLocal : pdfBackup;
 
   console.log(`server = ${server}`);
-  return console.log(`pdfPath = ${pdfPath}`);
+  debugger;
+  console.log(`pdfPath = ${pdfPath}`);
               
       pdfjsLib.getDocument(pdfPath).promise.then(doc => {
         pdfDoc = doc;
