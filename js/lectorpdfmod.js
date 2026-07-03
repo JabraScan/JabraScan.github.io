@@ -154,7 +154,8 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
         // ruta en el repo original
           const pdfLocal = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
         // ruta en el repo de PDFs
-          const pdfBackup = `https://pdfs.jabrascan.net/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+          //const pdfBackup = `https://pdfs.jabrascan.net/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+          const pdfBackup = `https://raw.githubusercontent.com/JabraScan/JabraScan.github.io-pdfs/main/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
         //
           //const pdfPath = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
           // server = "local"  → usar pdfLocal
