@@ -1,6 +1,42 @@
 <obras>
 	<obra>	
 		<visible>si</visible>
+		<clave>IAmTheFatedVillain</clave>
+		<nombreobra>Yo Soy El Villano Predestinado</nombreobra>
+		<nombreobra>I Am the Fated Villain</nombreobra>
+		<nombreobra>天命反派</nombreobra>
+		<nombreobra>我！天命大反派</nombreobra>
+		<nombreobra>The Fated Villain</nombreobra>
+		<nombreobra>El Villano Predestinado</nombreobra>
+		<nombreobra>Tian Ming Fan Pai</nombreobra>
+		<nombreobra>Wo! Tianming Da Fanpai</nombreobra>
+		<nombreobra>I Am the Heavenly Destined Villain</nombreobra>
+		<autor>Lian Xi You Yu (恋悉语)</autor>
+		<sinopsis><![CDATA[Inmediatamente después de que Gu Changge se diera cuenta de que había reencarnado en un mundo de fantasía, el protagonista del mundo y elegido de la fortuna juró vengarse de él. Envidiado por todos, no solo tiene a la protagonista femenina enamorada de él, sino que también es tratado como un invitado distinguido dondequiera que va. Afortunadamente, el prestigio y el poder de Gu Changge son superiores a los de todos los demás, por lo que aplastar a un simple elegido de la fortuna debería ser fácil, ¿o no? Espera... ¿Hay un sistema dedicado a ordeñar y cosechar al protagonista? Gu Changge sonrió con suficiencia.]]>
+		</sinopsis>
+		<valoracion>9.3</valoracion>
+		<tipoobra>Novela Web</tipoobra>
+		<categoria>Harem, Psychological, Xuanhuan</categoria>
+		<imagen>IAmTheFatedVillain/IAmFatedVillain_1.webp</imagen>
+		<imagen>IAmTheFatedVillain/IAmFatedVillain_2.webp</imagen>
+		<imagen>IAmTheFatedVillain/IAmFatedVillain_3.webp</imagen>
+		<imagen>IAmTheFatedVillain/IAmFatedVillain_4.webp</imagen>
+		<imagen>IAmTheFatedVillain/IAmFatedVillain_5.webp</imagen>
+		<imagen>IAmTheFatedVillain/IAmFatedVillain_6.webp</imagen>
+		<fechaCreacion>24/09/2026</fechaCreacion>
+		<ubicacion>Novela China</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Leo</traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki></wiki>
+	</obra>	
+
+	<obra>	
+		<visible>si</visible>
 		<clave>TEASG</clave>
 		<nombreobra>Guía de Supervivencia del Extra de la Academia</nombreobra>
 		<nombreobra>The Extra's Academy Survival Guide</nombreobra>
@@ -11,7 +47,7 @@
 		<sinopsis><![CDATA[Un estudiante universitario normal posee el cuerpo de Ed Rothloristor, un villano extra de baja categoría en un juego de la compañía Sylvania Academy. Para sobrevivir en esta academia de élite llena de peligros, magia y personajes principales hostiles, debe utilizar su conocimiento del juego, su ingenio y habilidades de supervivencia para cambiar su destino trágico.]]>
 		</sinopsis>
 		<valoracion>9.5</valoracion>
-		<tipoobra>Novela Web Coreana</tipoobra>
+		<tipoobra>Novela Web</tipoobra>
 		<categoria>Acción, Aventura, Comedia, Drama, Fantasía, Harem, Romance, Shounen, Vida Escolar</categoria>
 		<imagen>TEASG/WebNovel_Cover_1.webp</imagen>
 		<imagen>TEASG/WebNovel_Cover_2.webp</imagen>
