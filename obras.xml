@@ -1,6 +1,63 @@
 <obras>
 	<obra>	
 		<visible>si</visible>
+		<clave>MushokuTensei</clave>
+		<nombreobra>Mushoku Tensei: Jobless Reincarnation</nombreobra>
+		<nombreobra>無職転生 ～異世界行ったら本気だす～</nombreobra>
+		<nombreobra>Mushoku Tensei: Isekai Ittara Honki Dasu</nombreobra>
+		<nombreobra>Mushoku Tensei</nombreobra>
+		<nombreobra>Jobless Reincarnation</nombreobra>
+		<nombreobra>Mushoku Tensei: Reencarnación de un desempleado</nombreobra>
+		<nombreobra>Jobless Reincarnation: I Will Seriously Try If I Go to Another World</nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra>Mushoku Tensei</nombreobra>
+		<autor>Rifujin na Magonote</autor>
+		<sinopsis><![CDATA[Un desempleado de 34 años es atropellado por un camión y muere. Su último pensamiento es que en realidad ha desperdiciado toda su vida. Pero, de repente, se despierta en un mundo mágico: ¡ha renacido como Rudeus Greyrat! ¿Sabrá aprovechar esta segunda oportunidad y hacerlo todo mejor esta vez? ¿Y qué aventuras le depara su nueva y mágica vida?]]>
+		</sinopsis>
+		<valoracion>9.1</valoracion>
+		<tipoobra>Novela Ligera</tipoobra>
+		<categoria>Aventura, Comedia, Drama, Fantasía, Harem, Isekai, Magia, Recuentos de la vida, Reencarnación, Romance, Sobrenatural, Tragedia</categoria>
+		<imagen>MushokuTensei/MushokuTensei01.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei02.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei03.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei04.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei05.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei06.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei07.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei08.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei09a.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei09b.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei10.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei11.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei12.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei13.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei14.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei15.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei16.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei17.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei18.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei19.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei20.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei21.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei22.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei23.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei24.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei25.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei26.webp</imagen>
+		<fechaCreacion>26/09/2026</fechaCreacion>
+		<ubicacion>Novela Japonesa</ubicacion>
+		<estado>Activo</estado>
+		<traductor></traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki></wiki>
+	</obra>	
+
+	<obra>	
+		<visible>si</visible>
 		<clave>TheHeroofHeavenSlayingSword</clave>
 		<nombreobra>The Hero of Heaven-Slaying Sword</nombreobra>
 		<nombreobra>천살검협</nombreobra>
