@@ -1,6 +1,40 @@
 <obras>
 	<obra>	
 		<visible>si</visible>
+		<clave>YernoNobleQuiereDivorcio</clave>
+		<nombreobra>El Yerno de la Prestigiosa Familia Quiere el Divorcio.</nombreobra>
+		<nombreobra>El Yerno de Una Familia Noble Quiere el Divorcio.</nombreobra>
+		<nombreobra>명문가 데릴사위는 이혼하고 싶다</nombreobra>
+		<nombreobra>고귀한 가문의 데릴사위는 이혼하고 싶다</nombreobra>
+		<nombreobra>The Son-In-Law Of A Noble Family Wants A Divorce.</nombreobra>
+		<nombreobra>The Prestigious Family's Son-in-Law Wants a Divorce.</nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<autor>_172</autor>
+		<sinopsis><![CDATA[El acoso por parte de mis familiares políticos que me menospreciaban por ser un plebeyo. Una esposa que me observaba con indiferencia. Han pasado 10 años desde que huí de ellos. Una familia arruinada. Pero mi esposa, incluso en su muerte, todavía llevaba puesta su alianza de boda.]]>
+		</sinopsis>
+		<meta>Diez años tras huir del desprecio de su familia política y su fría esposa, la tragedia golpea. Descubre esta intensa historia de drama y redención.</meta>
+		<valoracion>3</valoracion>
+		<tipoobra>Novela Web</tipoobra>
+		<categoria>Ambientación Europea, Fantasía, Harén, Malentendidos, Obsesión, Regresión, Romance</categoria>
+		<imagen>YernoNobleQuiereDivorcio/YernoNobleQuiereDivorcio1.webp</imagen>
+		<imagen>YernoNobleQuiereDivorcio/YernoNobleQuiereDivorcio2.webp</imagen>
+		<imagen>YernoNobleQuiereDivorcio/YernoNobleQuiereDivorcio3.webp</imagen>
+		<fechaCreacion>01/10/2026</fechaCreacion>
+		<ubicacion>Novela Coreana</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Leo</traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki></wiki>
+	</obra>	
+
+	<obra>	
+		<visible>si</visible>
 		<clave>TheDemonKingOverrun</clave>
 		<nombreobra>Demasiados Héroes para el Rey Demonio</nombreobra>
 		<nombreobra>The Demon King Overrun by Heroes</nombreobra>
@@ -14,6 +48,7 @@
 		<autor>Mirip (미립)</autor>
 		<sinopsis><![CDATA[¡Siguiendo las reglas del Rey Demonio, me preparé para gobernar secuestrando princesas y criando héroes... pero las cosas salieron mal! En un mundo donde los héroes superan en número y fuerza a cualquier amenaza, este aspirante a monarca demoníaco solo quiere sobrevivir al asedio constante.]]>
 		</sinopsis>
+		<meta>Secuestrar princesas parecía fácil hasta que los héroes superaron en número al Rey Demonio. Una hilarante historia de supervivencia y fantasía.</meta>
 		<valoracion>9.2</valoracion>
 		<tipoobra>Novela Web</tipoobra>
 		<categoria>Acción, Aventura, Comedia, Fantasía, Comedia,  Reencarnación</categoria>
