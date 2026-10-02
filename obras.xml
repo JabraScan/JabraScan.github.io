@@ -1,6 +1,48 @@
 <obras>
 	<obra>	
 		<visible>si</visible>
+		<clave>AbsoluteSwordSense</clave>
+		<nombreobra>Sentido Absoluto de la Espada</nombreobra>
+		<nombreobra>절대검감</nombreobra>
+		<nombreobra>Absolute Sword Sense</nombreobra>
+		<nombreobra>Sentido de la Espada Absoluta</nombreobra>
+		<nombreobra>Jeoldae Geomgam</nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<autor>Moonlight (한겨울달)</autor>
+		<sinopsis><![CDATA[Viviendo como un soldado de bajo rango, encontró una muerte patética. Justo antes de morir, una voz extraña resonó en su mente: [Sentido Absoluto de la Espada]. Al abrir los ojos, regresa al pasado, obteniendo una segunda oportunidad para desafiar su destino, corregir los errores de su vida anterior y alcanzar la cima a través del dominio absoluto de la espada]]></sinopsis>
+		<meta>Tras morir como soldado de bajo rango, regresa al pasado con el Sentido Absoluto de la Espada para cambiar su destino y alcanzar la cima.</meta>
+		<valoracion>8.8</valoracion>
+		<tipoobra>Novela Web</tipoobra>
+		<categoria>Acción, Artes Marciales, Drama, Fantasía, Murim, Regresión</categoria>
+		<imagen>AbsoluteSwordSense/AbsoluteSwordSense01.webp</imagen>
+		<imagen>AbsoluteSwordSense/AbsoluteSwordSense_Novel01.webp</imagen>
+		<imagen>AbsoluteSwordSense/AbsoluteSwordSense_Novel02.webp</imagen>
+		<imagen>AbsoluteSwordSense/AbsoluteSwordSense_Novel03.webp</imagen>
+		<imagen>AbsoluteSwordSense/AbsoluteSwordSense_Novel04.webp</imagen>
+		<imagen>AbsoluteSwordSense/AbsoluteSwordSense_Novel05.webp</imagen>
+		<imagen>AbsoluteSwordSense/AbsoluteSwordSense_Novel06.webp</imagen>
+		<imagen>AbsoluteSwordSense/AbsoluteSwordSense_Novel07.webp</imagen>
+		<imagen>AbsoluteSwordSense/AbsoluteSwordSense_Novel08.webp</imagen>
+		<imagen>AbsoluteSwordSense/AbsoluteSwordSense_Novel09.webp</imagen>
+		<imagen>AbsoluteSwordSense/AbsoluteSwordSense_Novel10.webp</imagen>
+		<fechaCreacion>01/10/2026</fechaCreacion>
+		<ubicacion>Novela Coreana</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Leo</traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki></wiki>
+	</obra>	
+
+
+	<obra>	
+		<visible>si</visible>
 		<clave>YernoNobleQuiereDivorcio</clave>
 		<nombreobra>El Yerno de la Prestigiosa Familia Quiere el Divorcio.</nombreobra>
 		<nombreobra>El Yerno de Una Familia Noble Quiere el Divorcio.</nombreobra>
