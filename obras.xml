@@ -1,6 +1,41 @@
 <obras>
 	<obra>	
 		<visible>si</visible>
+		<clave>MeCaseConLaDragonaQueMate</clave>
+		<nombreobra>Me Case con la Dragona que Maté</nombreobra>
+		<nombreobra>My Slain Dragon Bride</nombreobra>
+		<nombreobra>I Married the Dragon I Killed</nombreobra>
+		<nombreobra>Naega Jugin Deuraegon-gwa Gyeolhonhaetda</nombreobra>
+		<nombreobra>내가 죽인 드래곤과 결혼했다</nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<autor>Bonsai Tree (분재나무)</autor>
+		<sinopsis><![CDATA[Impulsado por el odio y el rencor como fuerza motriz, ascendió a la posición de archimago de noveno círculo, pero al final lo único que quedó fue el vacío. Ferda, quien cobró conciencia tarde, regresa al punto de partida de todo…]]>
+		</sinopsis>
+		<meta>Impulsado por el odio, el archimago de noveno círculo Ferda experimenta el vacío y regresa al punto de partida de todo.</meta>
+		<valoracion>9.8</valoracion>
+		<tipoobra>Novela Web</tipoobra>
+		<categoria>Acción, Aventura, Comedia, Drama, Fantasía,  Regresión, Romance, Vida Escolar</categoria>
+		<keywords>Adaptado a Manhwa, Ambiente Europeo, Caballeros, Comerciantes, Compromiso, Conflicto Familiar, De Débil a Fuerte, De Fuerte a Más Fuerte, Demonios, Dioses, Dragones, El Pasado Juega un Papel Importante, Falta de Sentido Común, Magia, Magos, Malentendidos, Mercenarios, Monstruos, Mundo de Fantasía, Pasado Trágico, Personajes Manipuladores, Protagonista Femenina Bella, Protagonista Frío, Protagonista Masculino, Protagonista Tranquilo, Puntos de Vista Múltiples, Reinos, Relación Forzada, Relación Humano-No Humano, Romance Lento, Segunda Oportunidad, Venganza</keywords>
+		<imagen>MeCaseConLaDragonaQueMate/MeCaseConLaDragonaQueMate01.webp</imagen>
+		<imagen>MeCaseConLaDragonaQueMate/MeCaseConLaDragonaQueMate02.webp</imagen>
+		<imagen>MeCaseConLaDragonaQueMate/MeCaseConLaDragonaQueMate03.webp</imagen>
+		<imagen>MeCaseConLaDragonaQueMate/MeCaseConLaDragonaQueMate04.webp</imagen>
+		<fechaCreacion>03/10/2026</fechaCreacion>
+		<ubicacion>Novela Coreana</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Leo</traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones>Novela Oficial : https://series.naver.com/novel/detail.series?productNo=11791946</observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki>https://i-married-the-dragon-i-killed.fandom.com/wiki/I_Married_the_Dragon_I_Killed_Wiki</wiki>
+	</obra>
+	<obra>	
+		<visible>si</visible>
 		<clave>ReencarneEnMangaDesconocido</clave>
 		<nombreobra>Me Reencarné en Un Manga Desconocido</nombreobra>
 		<nombreobra>Reencarné en Un Manga que No Conozco</nombreobra>
@@ -449,7 +484,7 @@
 		<meta>Encarcelado tras ofender al Emperador, Su Yang reencarna para reunirse con sus parejas y hallar nuevas en su camino de cultivador.</meta>
 		<valoracion>9.0</valoracion>
 		<tipoobra>Novela Web</tipoobra>
-		<categoria>Romance, Acción, Venganza, Harén, Fantasía, Cultivo</categoria>
+		<categoria> Acción, Cultivo, Fantasía, Harén, Romance, Venganza</categoria>
 		<imagen>DualCultivation/DualCultivation.webp</imagen>
 		<imagen>DualCultivation/DualCultivation_1.webp</imagen>
 		<imagen>DualCultivation/DualCultivation_2.webp</imagen>
