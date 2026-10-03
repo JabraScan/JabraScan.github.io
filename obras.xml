@@ -1,6 +1,41 @@
 <obras>
 	<obra>	
 		<visible>si</visible>
+		<clave>ReencarneEnMangaDesconocido</clave>
+		<nombreobra>Me Reencarné en Un Manga Desconocido</nombreobra>
+		<nombreobra>Reencarné en Un Manga que No Conozco</nombreobra>
+		<nombreobra>Fui Poseído Por Un Manga Desconocido</nombreobra>
+		<nombreobra>몰름 만화에 빙의했다</nombreobra>
+		<nombreobra>모르는 만화에 빙의했다</nombreobra>
+		<nombreobra>I Was Possessed By An Unknown Manga</nombreobra>
+		<nombreobra>I Was Thrown into an Unfamiliar Manga</nombreobra>
+		<nombreobra>I Was Reincarnated Into an Unknown Manga</nombreobra>
+		<nombreobra>Possessed in an Unknown Manga</nombreobra>
+		<autor>Teach / Tichi (티치)</autor>
+		<sinopsis><![CDATA[«Scramble Love» es un exitoso manga de comedia romántica escolar japonesa que ha superado los 10 millones de copias vendidas. Me vi arrojado dentro del mundo de ese manga... uno que jamás había leído en mi vida. Y lo peor es que no entré como el protagonista principal, sino como un extra prescindible y sin apenas relevancia en la historia.]]>
+		</sinopsis>
+		<meta>Reencarnado como un extra en un manga que jamás leyó, un estudiante intenta sobrevivir a los absurdos clichés de comedia romántica escolar.</meta>
+		<valoracion>8.2</valoracion>
+		<tipoobra>Novela Web</tipoobra>
+		<categoria>Academia, Comedia, Escolar, Harem, Parodia, Recuentos de la vida, Romance</categoria>
+		<imagen>ReencarneEnMangaDesconocido/ReencarneEnMangaDesconocido01.webp</imagen>
+		<imagen>ReencarneEnMangaDesconocido/ReencarneEnMangaDesconocido02.webp</imagen>
+		<imagen>ReencarneEnMangaDesconocido/ReencarneEnMangaDesconocido03.webp</imagen>
+		<imagen>ReencarneEnMangaDesconocido/ReencarneEnMangaDesconocido04.webp</imagen>
+		<fechaCreacion>03/10/2026</fechaCreacion>
+		<ubicacion>Novela Coreana</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Leo</traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki>https://en.namu.wiki/w/%EB%AA%A8%EB%A5%B4%EB%8A%94%20%EB%A7%8C%ED%99%94%EC%97%90%20%EB%B9%99%EC%9D%98%ED%96%88%EB%8B%A4</wiki>
+	</obra>	
+
+	<obra>	
+		<visible>si</visible>
 		<clave>AbsoluteSwordSense</clave>
 		<nombreobra>Sentido Absoluto de la Espada</nombreobra>
 		<nombreobra>절대검감</nombreobra>
@@ -108,65 +143,6 @@
 		<bannerOpcional></bannerOpcional>
 		<wiki></wiki>
 	</obra>	
-
-	<obra>	
-		<visible>si</visible>
-		<clave>MushokuTensei</clave>
-		<nombreobra>Mushoku Tensei: Jobless Reincarnation</nombreobra>
-		<nombreobra>無職転生 ～異世界行ったら本気だす～</nombreobra>
-		<nombreobra>Mushoku Tensei: Isekai Ittara Honki Dasu</nombreobra>
-		<nombreobra>Mushoku Tensei</nombreobra>
-		<nombreobra>Jobless Reincarnation</nombreobra>
-		<nombreobra>Mushoku Tensei: Reencarnación de un desempleado</nombreobra>
-		<nombreobra>Jobless Reincarnation: I Will Seriously Try If I Go to Another World</nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra>Mushoku Tensei</nombreobra>
-		<autor>Rifujin na Magonote</autor>
-		<sinopsis><![CDATA[Un desempleado de 34 años es atropellado por un camión y muere. Su último pensamiento es que en realidad ha desperdiciado toda su vida. Pero, de repente, se despierta en un mundo mágico: ¡ha renacido como Rudeus Greyrat! ¿Sabrá aprovechar esta segunda oportunidad y hacerlo todo mejor esta vez? ¿Y qué aventuras le depara su nueva y mágica vida?]]>
-		</sinopsis>
-		<meta>Un desempleado de 34 años muere atropellado y reencarna como Rudeus en un mundo mágico dispuesto a aprovechar esta segunda oportunidad.</meta>
-		<valoracion>9.1</valoracion>
-		<tipoobra>Novela Ligera</tipoobra>
-		<categoria>Aventura, Comedia, Drama, Fantasía, Harem, Isekai, Magia, Recuentos de la vida, Reencarnación, Romance, Sobrenatural, Tragedia</categoria>
-		<imagen>MushokuTensei/MushokuTensei01.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei02.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei03.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei04.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei05.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei06.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei07.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei08.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei09a.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei09b.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei10.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei11.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei12.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei13.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei14.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei15.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei16.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei17.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei18.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei19.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei20.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei21.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei22.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei23.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei24.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei25.webp</imagen>
-		<imagen>MushokuTensei/MushokuTensei26.webp</imagen>
-		<fechaCreacion>26/09/2026</fechaCreacion>
-		<ubicacion>Novela Japonesa</ubicacion>
-		<estado>Activo</estado>
-		<traductor></traductor>
-		<adulto></adulto>
-		<aprobadaAutor>no</aprobadaAutor>
-		<observaciones></observaciones>
-		<discord></discord>
-		<bannerOpcional></bannerOpcional>
-		<wiki></wiki>
-	</obra>	
-
 	<obra>	
 		<visible>si</visible>
 		<clave>TheHeroofHeavenSlayingSword</clave>
@@ -338,6 +314,63 @@
 		<wiki></wiki>
 		<server>io-pdfs</server>
 	</obra>
+	<obra>	
+		<visible>si</visible>
+		<clave>MushokuTensei</clave>
+		<nombreobra>Mushoku Tensei: Jobless Reincarnation</nombreobra>
+		<nombreobra>無職転生 ～異世界行ったら本気だす～</nombreobra>
+		<nombreobra>Mushoku Tensei: Isekai Ittara Honki Dasu</nombreobra>
+		<nombreobra>Mushoku Tensei</nombreobra>
+		<nombreobra>Jobless Reincarnation</nombreobra>
+		<nombreobra>Mushoku Tensei: Reencarnación de un desempleado</nombreobra>
+		<nombreobra>Jobless Reincarnation: I Will Seriously Try If I Go to Another World</nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra>Mushoku Tensei</nombreobra>
+		<autor>Rifujin na Magonote</autor>
+		<sinopsis><![CDATA[Un desempleado de 34 años es atropellado por un camión y muere. Su último pensamiento es que en realidad ha desperdiciado toda su vida. Pero, de repente, se despierta en un mundo mágico: ¡ha renacido como Rudeus Greyrat! ¿Sabrá aprovechar esta segunda oportunidad y hacerlo todo mejor esta vez? ¿Y qué aventuras le depara su nueva y mágica vida?]]>
+		</sinopsis>
+		<meta>Un desempleado de 34 años muere atropellado y reencarna como Rudeus en un mundo mágico dispuesto a aprovechar esta segunda oportunidad.</meta>
+		<valoracion>9.1</valoracion>
+		<tipoobra>Novela Ligera</tipoobra>
+		<categoria>Aventura, Comedia, Drama, Fantasía, Harem, Isekai, Magia, Recuentos de la vida, Reencarnación, Romance, Sobrenatural, Tragedia</categoria>
+		<imagen>MushokuTensei/MushokuTensei01.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei02.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei03.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei04.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei05.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei06.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei07.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei08.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei09a.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei09b.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei10.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei11.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei12.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei13.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei14.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei15.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei16.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei17.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei18.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei19.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei20.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei21.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei22.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei23.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei24.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei25.webp</imagen>
+		<imagen>MushokuTensei/MushokuTensei26.webp</imagen>
+		<fechaCreacion>26/09/2026</fechaCreacion>
+		<ubicacion>Novela Japonesa</ubicacion>
+		<estado>Activo</estado>
+		<traductor></traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki></wiki>
+	</obra>	
 	<obra>	
 		<visible>si</visible>
 		<clave>CityOfWitches</clave>
