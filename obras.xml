@@ -1,5 +1,41 @@
 <obras>
 	<obra>	
+		<visible>si</visible>
+		<clave>IBecameMarriedMan</clave>
+		<nombreobra>Cómo me convertí en un hombre casado en otro mundo</nombreobra>
+		<nombreobra>My Story of Becoming a Married Man in Another World</nombreobra>
+		<nombreobra>The Story of Becoming a Married Man in Another World</nombreobra>
+		<nombreobra>이세계서 유부남된 썰</nombreobra>
+		<nombreobra>I Became A Married Man in Another World</nombreobra>
+		<nombreobra>How I Became a Married Man in Another World</nombreobra>
+		<nombreobra>The Otherworldly Family Man</nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<autor>Berhera (베르헤라)</autor>
+		<sinopsis><![CDATA[Deseé tener una esposa tan adorable como un conejito y una hija tan encantadora como una mangosta.
+			...Y después de contarle ese deseo a Santa Claus, fui transportado a otro mundo.]]>
+		</sinopsis>"
+		<meta>Deseé una esposa como un conejito y una hija como una mangosta. Tras contarle ese deseo a Santa Claus, fui transportado a otro mundo.</meta>
+		<valoracion>7.6</valoracion>
+		<tipoobra>Novela Web</tipoobra>
+		<categoria>Drama, Fantasía, Isekai, Maduro, Romance, Recuentos de Vida, Seinen</categoria>
+		<keywords>Abuso infantil, Adaptado a manhwa, Amor temprano, Asuntos domésticos, Aventurero, Caballero, Cazador, Crianza de hijos, Crueldad, Esclavo, Espadas y magia, Familia, Familia encontrada, Fantasía medieval, Gremio de aventureros, Hechicero, Interés amoroso, Magia, Mago, Matrimonio, Matrimonio concertado, Mundo de fantasía, Niño adoptado, Niño adorable, Nobleza, Padre soltero, Papel importante del pasado, Pasado traumático, Poder excesivo del protagonista, Protagonista cariñoso, Protagonista masculino, Protagonista protector, Protagonista transportado a otro mundo, Reencarnación, Relación familiar, Representación de embarazo, Ser bestial, Sociedad de bestias, Transportado a otro mundo, Transporte múltiple de individuos, Trauma del pasado, Vida cotidiana, Vida familiar</keywords>
+		<imagen>IBecameMarriedMan/IBecameMarriedMan01.webp</imagen>
+		<imagen>IBecameMarriedMan/IBecameMarriedMan02.webp</imagen>
+		<imagen>IBecameMarriedMan/IBecameMarriedMan03.webp</imagen>
+		<fechaCreacion>06/10/2026</fechaCreacion>
+		<ubicacion>Novela Coreana</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Leo</traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki></wiki>
+	</obra>	
+
+	<obra>	
 		<visible>no</visible>
 		<clave>SoloSwordMaster</clave>
 		<nombreobra>Solo Swordmaster</nombreobra>
