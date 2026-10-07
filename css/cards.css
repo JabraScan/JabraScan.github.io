@@ -1,6 +1,7 @@
 /* ====== Cards y Tarjetas ====== */
 .book-list {
     justify-content: center;
+    min-height: 900px;
 }
 
 .book-card,
