@@ -10,7 +10,7 @@
 @import url('tooltip.css');
 @import url('users.css');
 @import url('responsive.css');
-/*@import url('all.min.css');*/
+/*@import url('all.min.css'); se elimina Awesome ... sustituyendolo por svgicons*/
 
 /* ====== Estilos globales ====== */
 * {
