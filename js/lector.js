@@ -39,8 +39,10 @@ export function abrirLectorPDF() {
 
 function cargarModuloLectorPDF() {
   // Cargar pdf.js dinámicamente antes de importar el módulo del lector
-  const pdfUrl = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-  const pdfWorker = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  //const pdfUrl    = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+  //const pdfWorker = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const pdfUrl    = './js/pdf.min.js';
+  const pdfWorker = './js/pdf.worker.min.js';
 
   function loadScript(src) {
     return new Promise((resolve, reject) => {
