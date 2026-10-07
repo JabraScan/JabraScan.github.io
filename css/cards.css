@@ -1,7 +1,7 @@
 /* ====== Cards y Tarjetas ====== */
 .book-list {
     justify-content: center;
-    min-height: 900px;
+    min-height: 500px;
 }
 
 .book-card,
@@ -141,6 +141,12 @@
 
 .libro-item {
     cursor: pointer;
+}
+
+span.Activo, .libro-item .Activo {
+    background-color: #1b6332; /* Un verde oscuro que cumple perfectamente el ratio 4.5:1 */
+    color: #ffffff;            /* Texto blanco nítido */
+    font-weight: bold;
 }
 
 /* Cards de últimos capítulos */
