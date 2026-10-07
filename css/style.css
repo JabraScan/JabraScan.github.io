@@ -2,6 +2,7 @@
 /* Importa todos los módulos CSS en el orden correcto */
 @import url('variables.css');
 @import url('header.css');
+@import url('svgicons.css');
 @import url('carousel.css');
 @import url('cards.css');
 @import url('utilities.css');
