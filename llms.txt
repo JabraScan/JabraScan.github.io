@@ -1,10 +1,11 @@
 # JabraScan - Catálogo de Novelas
 
 Actualizado: 2026-10-07
-Total de obras disponibles: 47
+Total de obras disponibles: 48
 
 ## Enlaces y Obras
 - [Cómo me convertí en un hombre casado en otro mundo](https://jabrascan.net/books/IBecameMarriedMan.html) (SPA: https://jabrascan.net/#IBecameMarriedMan) - Autor: Berhera (베르헤라)
+- [Solo Swordmaster](https://jabrascan.net/books/SoloSwordMaster.html) (SPA: https://jabrascan.net/#SoloSwordMaster) - Autor: Without Shadow (무영자) (Mooyeongja)
 - [Me Case con la Dragona que Maté](https://jabrascan.net/books/MeCaseConLaDragonaQueMate.html) (SPA: https://jabrascan.net/#MeCaseConLaDragonaQueMate) - Autor: Bonsai Tree (분재나무)
 - [Me Reencarné en Un Manga Desconocido](https://jabrascan.net/books/ReencarneEnMangaDesconocido.html) (SPA: https://jabrascan.net/#ReencarneEnMangaDesconocido) - Autor: Teach / Tichi (티치)
 - [Sentido Absoluto de la Espada](https://jabrascan.net/books/AbsoluteSwordSense.html) (SPA: https://jabrascan.net/#AbsoluteSwordSense) - Autor: Moonlight (한겨울달)

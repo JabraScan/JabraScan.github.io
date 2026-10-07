@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-07T19:59:02.096976Z",
-  "total_obras": 47,
+  "updated_at": "2026-10-07T20:01:37.769052Z",
+  "total_obras": 48,
   "obras": [
     {
       "clave": "IBecameMarriedMan",
@@ -17,6 +17,23 @@
       "sinopsis": "Deseé tener una esposa tan adorable como un conejito y una hija tan encantadora como una mangosta.\n\t\t\t...Y después de contarle ese deseo a Santa Claus, fui transportado a otro mundo.",
       "url_seo": "https://jabrascan.net/books/IBecameMarriedMan.html",
       "url_spa": "https://jabrascan.net/#IBecameMarriedMan"
+    },
+    {
+      "clave": "SoloSwordMaster",
+      "nombres": [
+        "Solo Swordmaster",
+        "Espadachín Solitario",
+        "El Último Maestro de la Espada",
+        "나 혼자 소드 마스터",
+        "The Last Swordmaster",
+        "나혼소",
+        "Na-hon-so",
+        "Na Honja Sodeu Maseuteo"
+      ],
+      "autor": "Without Shadow (무영자) (Mooyeongja)",
+      "sinopsis": "Los dragones y la magia se convirtieron en leyenda, y los héroes se desvanecieron en la historia. Un mundo dominado por los «jugadores» que se vuelven más fuertes pidiendo prestado el poder de las Constelaciones. \n\t\t\tPero, ¿es realmente grandioso ese poder? \n\t\t\tEl último «swordmaster», que ha luchado durante cientos de años por la humanidad, vuelve a tomar la espada. La era de las Constelaciones. Un hombre que alcanzó la cima únicamente con una espada. \n\t\t\tComienza la historia de Limon Asphelder.",
+      "url_seo": "https://jabrascan.net/books/SoloSwordMaster.html",
+      "url_spa": "https://jabrascan.net/#SoloSwordMaster"
     },
     {
       "clave": "MeCaseConLaDragonaQueMate",
