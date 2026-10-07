@@ -212,9 +212,3 @@
 .custom-carousel-btn.next {
     margin-right: var(--spacing-sm);
 }
-
-@media screen and (max-width: 768px) {
-    .custom-carousel {
-        min-height: 265px !important;
-    }
-}

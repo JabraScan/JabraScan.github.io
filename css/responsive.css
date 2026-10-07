@@ -61,7 +61,11 @@
     /* Altura del carrusel menor en moviles */
 
     .custom-carousel {
-        min-height: 265px !important;
+        /*min-height: 265px !important;*/
+        /* Eliminamos el min-height rígido y usamos una proporción fluida basada en el ancho */
+        min-height: unset !important;
+        aspect-ratio: 16 / 10; /* O la proporción que mejor encaje con tu diseño */
+        height: auto !important;
     }
 
     /* Botones del carrusel más pequeños en móviles */
