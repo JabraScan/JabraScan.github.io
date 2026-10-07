@@ -137,9 +137,11 @@
 }
 
 .tag-capitulo.hoy {
-    /*background-color: var(--color-success);*/
-    background-color: #1e6b3c; /* Un verde más oscuro y sólido Recomendacion Accesibilidad*/
-    color: #ffffff;
+    background-color: var(--color-success);
+    /*background-color: #28a745;*/ /* Un verde vibrante y sólido */
+    color: #ffffff;            /* Texto blanco nítido */
+    font-weight: bold;
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.6); /* Un resplandor estático en lugar de parpadeo */
 }
 
 
