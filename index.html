@@ -42,7 +42,7 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="preload" href="fonts/fa-solid-900.woff2"       as="font" type="font/woff2"  crossorigin fetchpriority="high">
-    
+
     <!--
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
@@ -85,7 +85,13 @@
       <nav class="navbar navbar-expand-lg navbar-dark navbar-jabrascan">
         <div class="container-fluid">
           <a class="navbar-brand d-flex align-items-center gap-2" href="#" data-target="index.html">
-            <img src="favicon.webp" alt="Logo de la comunidad JabraScan" fetchpriority="high" class="navbar-brand-logo">
+            <!--<img src="favicon32w.webp" alt="Logo de la comunidad JabraScan" fetchpriority="high" class="navbar-brand-logo">-->
+            <img src="favicon.webp" 
+                  srcset="favicon32w.webp 64w, favicon.webp 256w"
+                  sizes="(max-width: 576px) 36px, 80px"
+                  alt="Logo de la comunidad JabraScan" 
+                  fetchpriority="high" 
+                  class="navbar-brand-logo">
             <span class="brand-text">JabraScan Traducciones</span>
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
