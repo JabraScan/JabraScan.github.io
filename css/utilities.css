@@ -137,7 +137,9 @@
 }
 
 .tag-capitulo.hoy {
-    background-color: var(--color-success);
+    /*background-color: var(--color-success);*/
+    background-color: #1e6b3c; /* Un verde más oscuro y sólido Recomendacion Accesibilidad*/
+    color: #ffffff;
 }
 
 

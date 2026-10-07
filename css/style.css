@@ -30,6 +30,10 @@ body {
   color: var(--color-text);
 }
 
+footer p, #copyjabra {
+    color: #555555; /* Cambia a un gris bastante más oscuro que cumpla con el contraste */
+}
+
 /* ====== Estilos que aún no se han modularizado ====== */
 
 /* Estos estilos permanecen en style.css hasta una futura reorganización */
