@@ -38,6 +38,7 @@ export function cargarlibro(libroId) {
       const { nombreobra, nombresAlternativos } = obtenerNombreObra(obra.querySelectorAll("nombreobra"));
       const imagen = seleccionarImagen(obra.querySelectorAll("imagen"));
       const autor = get("autor");
+      const idioma = get("idioma") || 'es';
       const sinopsis = get("sinopsis");
       const tipoobra = get("tipoobra");
       const Categoria = get("categoria");
@@ -79,6 +80,7 @@ export function cargarlibro(libroId) {
           { obra_id: clave, propiedad: "nombreobra", valor: nombreobra },
           { obra_id: clave, propiedad: "nombresAlternativos", valor: nombresAlternativos },
           { obra_id: clave, propiedad: "imagen", valor: imagen },
+          { obra_id: clave, propiedad: "idioma", valor: idioma },
           { obra_id: clave, propiedad: "autor", valor: autor },
           { obra_id: clave, propiedad: "sinopsis", valor: sinopsis },
           { obra_id: clave, propiedad: "tipoobra", valor: tipoobra },
@@ -379,6 +381,47 @@ function textSEO(datos) {
             <meta name="twitter:description" content="${map.meta || ''}">
             <meta name="twitter:image" content="${primeraImagen}">
   `;
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": map.nombreobra || '',
+    "description": map.sinopsis || '',
+    "image": primeraImagen,
+    "url": urlIndexable,
+    "alternateName": map.nombresAlternativos || [],
+    "inLanguage": map.idioma,
+    "genre": arraycategorias,
+    "keywords": arraykeywords,
+    "publisher": {
+      "@type": "Organization",
+      "name": "Jabrascan"
+    },
+    "potentialAction": {
+      "@type": "ReadAction",
+      "target": urlAppHash
+    }
+  };
+  if (map.autor?.trim()) {
+    schema.author = {
+      "@type": "Person",
+      "name": map.autor
+    };
+  }
+
+  if (map.traductor?.trim()) {
+    schema.translator = {
+      "@type": "Person",
+      "name": map.traductor
+    };
+  }
+  const jsonld = `<!-- Datos estructurados ld+json -->
+                  <script type="application/ld+json">
+                    ${JSON.stringify(schema, null, 2)}
+                  </script>`;
+  /*
+  const author = map.autor?.trim()
+                ? `"author":{"@type":"Person","name":${JSON.stringify(map.autor)}},`
+                : '';
   const jsonld = `
             <!-- Datos estructurados ld+json -->
             <script type="application/ld+json">
@@ -386,10 +429,7 @@ function textSEO(datos) {
               "@context": "https://schema.org",
               "@type": "Book",
               "name": "${map.nombreobra}",
-              "author": {
-                  "@type": "Person",
-                  "name": "${map.autor || ''}"
-              },
+              ${author}
               "translator": {
                   "@type": "Person",
                   "name": "${map.traductor || ''}"
@@ -398,7 +438,7 @@ function textSEO(datos) {
               "image": "${primeraImagen}",
               "url": "${urlIndexable}",
               "alternateName": ${JSON.stringify(map.nombresAlternativos || [])},
-              "inLanguage": "es",
+              "inLanguage": "${map.idioma}",
               "genre": ${JSON.stringify(map.arraycategorias || [])},
               "keywords": ${JSON.stringify(map.arraykeywords || [])},
               "publisher": {
@@ -417,7 +457,7 @@ function textSEO(datos) {
               }
             }
             </script>
-      `;
+      `;*/
 
   return jsonld;
 }
