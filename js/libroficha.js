@@ -337,11 +337,24 @@ function textSEO(datos) {
   const map = Object.fromEntries(datos.map(item => [item.propiedad, item.valor]));
 
   // Obtenemos la primera imagen de forma segura (por si es un array)
-  const primeraImagen = Array.isArray(map.imagen) ? (map.imagen[0] || '') : map.imagen;
+  const primeraImagen = "https://jabrascan.net/img/" + (Array.isArray(map.imagen) ? (map.imagen[0] || '') : map.imagen);
   // URL limpia y permanente para que Google la indexe correctamente
   const urlIndexable = `https://jabrascan.net/books/${map.clave || ''}.html`;
   // URL con hash para la navegación interna de tu SPA
   const urlAppHash = `https://jabrascan.net/#${map.clave || ''}`;
+  //
+  const arraycategorias = Array.isArray(map.categoria)
+  ? map.categoria
+  : String(map.categoria || '')
+      .split(',')
+      .map(x => x.trim())
+      .filter(Boolean);
+  const arraykeywords = Array.isArray(map.keywords)
+    ? map.keywords
+    : String(map.keywords || '')
+        .split(',')
+        .map(x => x.trim())
+        .filter(Boolean);
 
   const texttitle = `
             <meta charset="utf-8">
@@ -370,20 +383,6 @@ function textSEO(datos) {
             <!-- Datos estructurados ld+json -->
             <script type="application/ld+json">
             {
-              "publisher": {
-                  "@type": "Organization",
-                  "name": "Jabrascan"
-              },
-              "offers": {
-                  "@type": "Offer",
-                  "price": "0",
-                  "priceCurrency": "USD",
-                  "availability": "https://schema.org/InStock"
-              },
-              "potentialAction": {
-                  "@type": "ReadAction",
-                  "target": "${urlAppHash}"
-              },
               "@context": "https://schema.org",
               "@type": "Book",
               "name": "${map.nombreobra}",
@@ -400,9 +399,22 @@ function textSEO(datos) {
               "url": "${urlIndexable}",
               "alternateName": ${JSON.stringify(map.nombresAlternativos || [])},
               "inLanguage": "es",
-              "genre": ${JSON.stringify(map.categoria || [])},
-              "keywords": ${JSON.stringify(map.keywords || [])},
-              "datePublished": "${new Date().toISOString().split('T')[0]}"
+              "genre": ${JSON.stringify(map.arraycategorias || [])},
+              "keywords": ${JSON.stringify(map.arraykeywords || [])},
+              "publisher": {
+                  "@type": "Organization",
+                  "name": "Jabrascan"
+              },
+              "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD",
+                  "availability": "https://schema.org/InStock"
+              },
+              "potentialAction": {
+                  "@type": "ReadAction",
+                  "target": "${urlAppHash}"
+              }
             }
             </script>
       `;
