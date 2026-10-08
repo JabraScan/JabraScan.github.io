@@ -1,6 +1,6 @@
 # JabraScan - Catálogo de Novelas
 
-Actualizado: 2026-10-07
+Actualizado: 2026-10-08
 Total de obras disponibles: 48
 
 ## Enlaces y Obras
