@@ -41,6 +41,8 @@ export function cargarlibro(libroId) {
       const sinopsis = get("sinopsis");
       const tipoobra = get("tipoobra");
       const Categoria = get("categoria");
+      const pClave = get("keywords");
+      const metatxt = get("meta");
       const estado = get("estado");
       const ubicacion = get("ubicacion");
       const traduccion = get("traductor");
@@ -72,6 +74,27 @@ export function cargarlibro(libroId) {
         indicador.textContent = "+18";
         imagenContenedor.appendChild(indicador);
       }
+      // estructura SEO + IA
+      const propiedadesObra = [
+          { obra_id: clave, propiedad: "nombreobra", valor: nombreobra },
+          { obra_id: clave, propiedad: "nombresAlternativos", valor: nombresAlternativos },
+          { obra_id: clave, propiedad: "imagen", valor: imagen },
+          { obra_id: clave, propiedad: "autor", valor: autor },
+          { obra_id: clave, propiedad: "sinopsis", valor: sinopsis },
+          { obra_id: clave, propiedad: "tipoobra", valor: tipoobra },
+          { obra_id: clave, propiedad: "categoria", valor: Categoria },
+          { obra_id: clave, propiedad: "keywords", valor: pClave },
+          { obra_id: clave, propiedad: "meta", valor: metatxt },
+          { obra_id: clave, propiedad: "estado", valor: estado },
+          { obra_id: clave, propiedad: "ubicacion", valor: ubicacion },
+          { obra_id: clave, propiedad: "traductor", valor: traduccion },
+          { obra_id: clave, propiedad: "adulto", valor: contenido18 },
+          { obra_id: clave, propiedad: "discord", valor: discord },
+          { obra_id: clave, propiedad: "aprobadaAutor", valor: aprobadaAutor },
+          { obra_id: clave, propiedad: "wiki", valor: wikifan },
+          { obra_id: clave, propiedad: "server", valor: server }
+      ];
+      const seotxt = textSEO(propiedadesObra);
 
       const DataBook = document.querySelector('.book-card-caps');
       const headerDataBook = document.createElement("div");
@@ -84,11 +107,11 @@ export function cargarlibro(libroId) {
                                   </nav>`;
 
       // 👻 generar bloque oculto con los alternativos
-      const hiddenNames = nombresAlternativos.length > 0
+      const hiddenNames = seotxt + (nombresAlternativos.length > 0
         ? `<div class="hidden-alt-names" style="display:none;">
              ${nombresAlternativos.map(n => `<span style="display:flex;">${n}</span>`).join("")}
            </div>`
-        : "";
+        : "");
 
       const mainDataBook = document.createElement("div");
       mainDataBook.className = "book-main";
@@ -309,34 +332,80 @@ function addToLibrary(clave) {
   return btn;
 }
 
-function jsonld () {
-  return `
-    <!-- Datos estructurados -->
-    <script type="application/ld+json">
-    {
-      "publisher": {
-          "@type": "Organization",
-          "name": "Jabrascan"
-      },
-      "@context": "https://schema.org",
-      "@type": "Book",
-      "name": "Sentido Absoluto de la Espada",
-      "author": {
-          "@type": "Person",
-          "name": "Moonlight (한겨울달)"
-      },
-      "translator": {
-          "@type": "Person",
-          "name": "Leo"
-      },
-      "description": "Tras morir como soldado de bajo rango, regresa al pasado con el Sentido Absoluto de la Espada para cambiar su destino y alcanzar la cima.",
-      "image": "https://jabrascan.net/img/AbsoluteSwordSense/AbsoluteSwordSense01-300w.webp",
-      "url": "https://jabrascan.net/books/AbsoluteSwordSense.html",
-      "alternateName": ["절대검감", "Absolute Sword Sense", "Sentido de la Espada Absoluta", "Jeoldae Geomgam"],
-      "inLanguage": "es",
-      "genre": ["Acción", "Artes Marciales", "Drama", "Fantasía", "Murim", "Regresión"],
-      "keywords": ["Novela Web", "Novela Coreana", "Adaptado a Manhwa", "Amor obsesivo", "Asesinos", "Consejero espiritual", "De débil a fuerte", "Discapacidades", "El pasado juega un papel importante", "Espías", "Objetos conscientes", "Ocultar habilidades verdaderas", "Organizaciones malvadas", "Planes y conspiraciones", "Poligamia", "Portador de espada", "Protagonista inteligente", "Protagonista masculino", "Protagonista tranquilo", "Reencarnación", "Regresión de edad", "Secuestros", "Segunda oportunidad", "Subtrama romántica", "Técnica de cultivo demoníaca", "Técnica de cultivo única", "Tiempos antiguos", "Traición"],
-      "datePublished": "2026-10-01"
-    }
-    </script>`;
+function textSEO(datos) {
+  // Convertimos el array de objetos en un diccionario clave-valor para facilitar su uso
+  const map = Object.fromEntries(datos.map(item => [item.propiedad, item.valor]));
+
+  // Obtenemos la primera imagen de forma segura (por si es un array)
+  const primeraImagen = Array.isArray(map.imagen) ? (map.imagen[0] || '') : map.imagen;
+  // URL limpia y permanente para que Google la indexe correctamente
+  const urlIndexable = `https://jabrascan.net/books/${map.clave || ''}.html`;
+  // URL con hash para la navegación interna de tu SPA
+  const urlAppHash = `https://jabrascan.net/#${map.clave || ''}`;
+
+  const texttitle = `
+            <meta charset="utf-8">
+            <title>${map.nombreobra || ''} | Jabrascan</title>
+            <meta name="description" content="${map.meta || ''}">
+            <link rel="canonical" href="${urlIndexable}">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+    `;
+  const opengraph = `
+            <!-- Open Graph -->
+            <meta property="og:type" content="book">
+            <meta property="og:title" content="${map.nombreobra || ''}">
+            <meta property="og:description" content="${map.meta || ''}">
+            <meta property="og:image" content="${primeraImagen}">
+            <meta property="og:url" content="https://jabrascan.net/books/${map.clave || ''}.html">
+            <meta property="og:locale" content="es_ES"> 
+    `;
+  const twittercards = `
+            <!-- Twitter Cards -->
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:title" content="${map.nombreobra || ''}">
+            <meta name="twitter:description" content="${map.meta || ''}">
+            <meta name="twitter:image" content="${primeraImagen}">
+  `;
+  const jsonld = `
+            <!-- Datos estructurados ld+json -->
+            <script type="application/ld+json">
+            {
+              "publisher": {
+                  "@type": "Organization",
+                  "name": "Jabrascan"
+              },
+              "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD",
+                  "availability": "https://schema.org/InStock"
+              },
+              "potentialAction": {
+                  "@type": "ReadAction",
+                  "target": "${urlAppHash}"
+              },
+              "@context": "https://schema.org",
+              "@type": "Book",
+              "name": "${map.nombreobra}",
+              "author": {
+                  "@type": "Person",
+                  "name": "${map.autor || ''}"
+              },
+              "translator": {
+                  "@type": "Person",
+                  "name": "${map.traductor || ''}"
+              },
+              "description": "${map.sinopsis || ''}",
+              "image": "${primeraImagen}",
+              "url": "${urlIndexable}",
+              "alternateName": ${JSON.stringify(map.nombresAlternativos || [])},
+              "inLanguage": "es",
+              "genre": ${JSON.stringify(map.categoria || [])},
+              "keywords": ${JSON.stringify(map.keywords || [])},
+              "datePublished": "${new Date().toISOString().split('T')[0]}"
+            }
+            </script>
+      `;
+
+  return jsonld;
 }
