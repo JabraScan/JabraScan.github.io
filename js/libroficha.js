@@ -77,7 +77,11 @@ export function cargarlibro(libroId) {
       const headerDataBook = document.createElement("div");
       headerDataBook.className = "book-header";
       //headerDataBook.innerHTML = `<i class="fa-solid fa-book"></i> ${nombreobra.toUpperCase()}`;
-      headerDataBook.innerHTML = `<i class="fa-solid fa-book"></i> ${nombreobra}`;
+      headerDataBook.innerHTML = `<nav class="breadcrumbs" aria-label="Migas de pan">
+                                    <a href="/">📖 Inicio</a>
+                                    <span>›</span>
+                                    <span>${nombreobra}</span>
+                                  </nav>`;
 
       // 👻 generar bloque oculto con los alternativos
       const hiddenNames = nombresAlternativos.length > 0
@@ -100,7 +104,7 @@ export function cargarlibro(libroId) {
               </div>
               <div class="book-info-container">
                 <div class="book-info">
-                  <!--<h2 id="obra_${nombreobra}" class="ficha-obra-nombre">${nombreobra}</h2>-->
+                  <h2 id="obra_${nombreobra}" class="ficha-obra-nombre">${nombreobra}</h2>
                   ${hiddenNames}
                   <div class="ficha-obra-autor"><b>Autor: </b> ${autor}</div>
                   <div class="ficha-obra-traductor"><b>Traducción: </b>${traduccion}</div>
@@ -305,4 +309,34 @@ function addToLibrary(clave) {
   return btn;
 }
 
-
+function jsonld () {
+  return `
+    <!-- Datos estructurados -->
+    <script type="application/ld+json">
+    {
+      "publisher": {
+          "@type": "Organization",
+          "name": "Jabrascan"
+      },
+      "@context": "https://schema.org",
+      "@type": "Book",
+      "name": "Sentido Absoluto de la Espada",
+      "author": {
+          "@type": "Person",
+          "name": "Moonlight (한겨울달)"
+      },
+      "translator": {
+          "@type": "Person",
+          "name": "Leo"
+      },
+      "description": "Tras morir como soldado de bajo rango, regresa al pasado con el Sentido Absoluto de la Espada para cambiar su destino y alcanzar la cima.",
+      "image": "https://jabrascan.net/img/AbsoluteSwordSense/AbsoluteSwordSense01-300w.webp",
+      "url": "https://jabrascan.net/books/AbsoluteSwordSense.html",
+      "alternateName": ["절대검감", "Absolute Sword Sense", "Sentido de la Espada Absoluta", "Jeoldae Geomgam"],
+      "inLanguage": "es",
+      "genre": ["Acción", "Artes Marciales", "Drama", "Fantasía", "Murim", "Regresión"],
+      "keywords": ["Novela Web", "Novela Coreana", "Adaptado a Manhwa", "Amor obsesivo", "Asesinos", "Consejero espiritual", "De débil a fuerte", "Discapacidades", "El pasado juega un papel importante", "Espías", "Objetos conscientes", "Ocultar habilidades verdaderas", "Organizaciones malvadas", "Planes y conspiraciones", "Poligamia", "Portador de espada", "Protagonista inteligente", "Protagonista masculino", "Protagonista tranquilo", "Reencarnación", "Regresión de edad", "Secuestros", "Segunda oportunidad", "Subtrama romántica", "Técnica de cultivo demoníaca", "Técnica de cultivo única", "Tiempos antiguos", "Traición"],
+      "datePublished": "2026-10-01"
+    }
+    </script>`;
+}

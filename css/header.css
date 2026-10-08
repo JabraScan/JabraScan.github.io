@@ -276,3 +276,21 @@ header.scrolled {
     max-width: 4em;
     background-color: var(--color-light-gray);
 }
+
+    /* Navegador */
+    .breadcrumbs {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+      background: aliceblue;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+    .breadcrumbs a {
+      color: var(--accent);
+      text-decoration: underline; /* Añadido para que el enlace sea distinguible sin depender solo del color */
+    }
+
+    .breadcrumbs a:hover {
+      text-decoration: none; /* Opcional */
+    }
