@@ -76,7 +76,8 @@ export function cargarlibro(libroId) {
       const DataBook = document.querySelector('.book-card-caps');
       const headerDataBook = document.createElement("div");
       headerDataBook.className = "book-header";
-      headerDataBook.innerHTML = `<i class="fa-solid fa-book"></i> ${nombreobra.toUpperCase()}`;
+      //headerDataBook.innerHTML = `<i class="fa-solid fa-book"></i> ${nombreobra.toUpperCase()}`;
+      headerDataBook.innerHTML = `<i class="fa-solid fa-book"></i> ${nombreobra}`;
 
       // 👻 generar bloque oculto con los alternativos
       const hiddenNames = nombresAlternativos.length > 0
@@ -99,7 +100,7 @@ export function cargarlibro(libroId) {
               </div>
               <div class="book-info-container">
                 <div class="book-info">
-                  <h2 id="obra_${nombreobra}" class="ficha-obra-nombre">${nombreobra}</h2>
+                  <!--<h2 id="obra_${nombreobra}" class="ficha-obra-nombre">${nombreobra}</h2>-->
                   ${hiddenNames}
                   <div class="ficha-obra-autor"><b>Autor: </b> ${autor}</div>
                   <div class="ficha-obra-traductor"><b>Traducción: </b>${traduccion}</div>
