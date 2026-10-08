@@ -600,7 +600,9 @@
 		<wiki>https://dual-cultivation-novel.fandom.com/wiki/Dual_Cultivation_Wiki</wiki>
 		<server>local</server>
 	</obra>
-	<obra>	
+	<obra>
+		<idioma>es</idioma>
+		<alternate>ca,ForSaleFallenLadyCA</alternate>
 		<visible>si</visible>
 		<clave>ForSaleFallenLady</clave>
 		<nombreobra>En Venta. Noble Caída. Nunca Usada</nombreobra>
@@ -639,6 +641,7 @@
 	</obra>	
 	<obra>
 		<idioma>ca</idioma>
+		<alternate>es,ForSaleFallenLady</alternate>
 		<visible>si</visible>
 		<clave>ForSaleFallenLadyCA</clave>
 		<nombreobra>(CATALÀ) En Venda. Dama Caiguda. Mai Utilitzada.</nombreobra>
