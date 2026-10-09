@@ -5,6 +5,7 @@
   <title>Mis Tres Esposas son Hermosas Vampiros | Jabrascan</title>
   <meta name="description" content="Víctor tenía un tipo de sangre raro, un manjar en el mundo sobrenatural. Esa sangre odiada lo convertiría en el mayor vampiro de todos los tiempos.">
   <link rel="canonical" href="https://jabrascan.net/books/Mis3EsposasSonHermosasVampiros.html">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Open Graph -->
@@ -125,19 +126,48 @@
     }
     
     .acciones {
-      margin: 20px 0;
+      margin: 24px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 10px;
     }
     
-    .acciones a {
-      display: inline-block;
-      margin-right: 16px;
-      color: var(--accent);
+    /* Estilo compartido */
+    .acciones a, 
+    .acciones .aprobacion {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 0.88rem; /* Ligeramente más compacto para móvil */
+      font-weight: 600;
       text-decoration: none;
-      font-weight: 500;
+      text-align: center;
+      width: 100%; /* ¡Corregido el 1005! */
+      white-space: nowrap; /* Evita que las palabras se corten a mitad */
+    }
+    
+    /* Botones de enlace */
+    .acciones a {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
     }
     
     .acciones a:hover {
-      text-decoration: underline;
+      background: #f0f4f8;
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* Insignia de aprobación */
+    .acciones .aprobacion {
+      background: #e6f4ea;
+      border: 1px solid #ceead6;
+      color: #137333;
     }
     
     .galeria {
@@ -230,6 +260,26 @@
     .breadcrumbs a:hover {
       text-decoration: none; /* Opcional */
     }
+    details.galeria-desplegable {
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: none;
+    }
+
+    details.galeria-desplegable summary {
+      font-size: 1.3rem;
+      margin: 28px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    details.galeria-desplegable summary:hover {
+      color: var(--accent);
+    }
   </style>
 </head>
 <body>
@@ -275,21 +325,20 @@
 
       <div class="acciones">
         <a href="/#Mis3EsposasSonHermosasVampiros">📖 Leer Capítulos</a>
+        <a href="https://mtwabv.fandom.com/wiki/My_Three_Wives_Are_Beautiful_Vampires_Wiki" rel="noopener noreferrer" target="_blank">ℹ️ Wiki</a>
+        
+        
       </div>
-      <!-- Bloque de aprobación y discord -->
-      
 
       <section>
-        <h2>Galería</h2>
-        <div class="galeria">
-                    <img src="/img/Mis3EsposasSonHermosasVampiros/Mis3EsposasSonHermosasVampiros-300w.webp" alt="Mis Tres Esposas son Hermosas Vampiros ilustración 1" loading="lazy" decoding="async" width="140" height="210">
+        <details class="galeria-desplegable">
+          <summary>Galería <span style="font-size: 0.85rem; font-weight: normal; color: var(--muted);">(Clica para ver las imagenes)</span></summary>
+          <div class="galeria">
+                      <img src="/img/Mis3EsposasSonHermosasVampiros/Mis3EsposasSonHermosasVampiros-300w.webp" alt="Mis Tres Esposas son Hermosas Vampiros ilustración 1" loading="lazy" decoding="async" width="140" height="210">
 
-        </div>
+          </div>
+        </details>
       </section>
-
-      <div class="acciones">
-        <a href="https://mtwabv.fandom.com/wiki/My_Three_Wives_Are_Beautiful_Vampires_Wiki" rel="noopener noreferrer" target="_blank">Wiki</a>
-      </div>
 
       <section>
         <h2>Recomendaciones</h2>
