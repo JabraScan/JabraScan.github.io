@@ -49,7 +49,7 @@ const API_KEY = "";
       // ==========================================
       // 1. Funciones individuales para Cloudflare
       function incrementarVisitaCloudflare(idvisitado) {
-        const urlCF = `${URL_CLOUDFLARE}/contadores/incrementar`;
+        const urlCF = `https://contadores.jabrarexscan.workers.dev/contadores/incrementar`;
         return fetch(urlCF, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
