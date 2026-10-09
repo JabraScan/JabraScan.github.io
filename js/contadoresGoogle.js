@@ -49,7 +49,7 @@ const API_KEY = "";
       // ==========================================
       // 1. Funciones individuales para Cloudflare
       function incrementarVisitaCloudflare(idvisitado) {
-        const urlCF = `${URL_CLOUDFLARE}/visitas/incrementar`;
+        const urlCF = `${URL_CLOUDFLARE}/contadores/incrementar`;
         return fetch(urlCF, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -63,7 +63,7 @@ const API_KEY = "";
       }
 
       function leerVisitasCloudflare(idvisitado) {
-        const urlCF = `${URL_CLOUDFLARE}/visitas/leer`;
+        const urlCF = `${URL_CLOUDFLARE}/contadores/leer`;
         return fetch(urlCF, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
