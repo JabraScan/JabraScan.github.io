@@ -2,9 +2,18 @@
 let deferredPrompt = null;
 
 export function initPWA() {
+  // 1. REGISTRAR EL SERVICE WORKER (El motor offline)
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(() => console.log('Service Worker registrado con éxito.'))
+        .catch((err) => console.log('Error al registrar el Service Worker:', err));
+    });
+  }
+
+  // 2. GESTIÓN DEL BOTÓN DE INSTALACIÓN (Android / PC)
   const installBtn = document.getElementById('btnInstalarPWA');
 
-  // 1. Detección para Android / PC (Evento nativo)
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
@@ -15,7 +24,6 @@ export function initPWA() {
 
   if (installBtn) {
     installBtn.addEventListener('click', async () => {
-      // Si el navegador soporta la instalación directa (Android/PC)
       if (deferredPrompt) {
         installBtn.style.display = 'none';
         deferredPrompt.prompt();
@@ -28,7 +36,7 @@ export function initPWA() {
         return;
       }
 
-      // 2. Guía específica para iOS (Safari)
+      // 3. GUÍA ESPECÍFICA PARA iOS (Safari)
       const isIosDevice = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
       const isInStandaloneMode = ('standalone' in window.navigator) && window.navigator.standalone;
 
@@ -38,7 +46,7 @@ export function initPWA() {
     });
   }
 
-  // 3. Forzar visibilidad del botón en iOS al cargar
+  // 4. FORZAR VISIBILIDAD DEL BOTÓN EN iOS AL CARGAR
   const isIosDevice = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
   const isInStandaloneMode = ('standalone' in window.navigator) && window.navigator.standalone;
 
