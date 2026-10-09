@@ -44,22 +44,75 @@ export function generarToken() {
 }*/
 const API_KEY = "";
 //
-// Incrementa el contador de visitas para un ID
-// @param {string} idvisitado
-// @returns {Promise<string>} "OK" si se actualizó correctamente
-//
-export function incrementarVisita(idvisitado) {
-   // Iniciar la actualización en paralelo (prioridad a la llamada de visitas)
-     startUpdateUltimoCapituloIfNeeded(idvisitado);
-   //Incremento de visitas
-  const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=incrementar`;
-  return fetch(url)
-    .then(res => res.text())
-    .catch(err => {
-      console.error("Error incrementando visita:", err);
-      return "ERROR";
-    });
-}
+      // ==========================================
+      // 📊 GESTIÓN DE VISITAS POR FUENTE
+      // ==========================================
+      // 1. Funciones individuales para Cloudflare
+      function incrementarVisitaCloudflare(idvisitado) {
+        const urlCF = `${URL_CLOUDFLARE}/visitas/incrementar`;
+        return fetch(urlCF, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id_obra: idvisitado })
+        })
+        .then(res => res.text())
+        .catch(err => {
+          console.error("Error CF incrementar:", err);
+          return "Error";
+        });
+      }
+
+      function leerVisitasCloudflare(idvisitado) {
+        const urlCF = `${URL_CLOUDFLARE}/visitas/leer`;
+        return fetch(urlCF, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id_obra: idvisitado })
+        })
+        .then(res => res.text())
+        .then(text => Number(text.trim()) || 0)
+        .catch(err => {
+          console.error("Error CF leer:", err);
+          return 0;
+        });
+      }
+
+      // 2. Funciones individuales para Google Sheets
+      function incrementarVisitaGoogle(idvisitado) {
+        const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=incrementar`;
+        return fetch(url)
+          .then(res => res.text())
+          .catch(err => {
+            console.error("Error Google incrementar visita:", err);
+            return "ERROR";
+          });
+      }
+
+      function leerVisitasGoogle(idvisitado) {
+        const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=leer`;
+        return fetch(url)
+          .then(res => res.text())
+          .then(text => parseInt(text, 10) || 0)
+          .catch(err => {
+            console.error("Error Google leer visitas:", err);
+            return 0;
+          });
+      }
+      // ==========================================
+      // ==========================================
+    // Incrementa el contador de visitas para un ID
+    // @param {string} idvisitado
+    // @returns {Promise<string>} "OK" si se actualizó correctamente
+    //
+    export function incrementarVisita(idvisitado) {
+      // Iniciar la actualización en paralelo (prioridad a la llamada de visitas)
+        startUpdateUltimoCapituloIfNeeded(idvisitado);
+      //Incremento de visitas
+      // Ejecutamos ambas llamadas de forma limpia
+        incrementarVisitaCloudflare(idvisitado)
+        .then(res => console.log("Respuesta CF Incrementar:", res));
+        return incrementarVisitaGoogle(idvisitado);
+    }
    /**
     * Actualización del último capítulo leido  para usuarios logueados
     * - idvisitado puede ser "obra_<obraId>" o "<obraId>_<capitulo>"
@@ -89,21 +142,21 @@ export function incrementarVisita(idvisitado) {
    }
 
 
-//
-//Consulta el número de visitas para un ID
-//@param {string} idvisitado
-//@returns {Promise<number>} número de visitas
-//
-export function leerVisitas(idvisitado) {
-  const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=leer`;
-  return fetch(url)
-    .then(res => res.text())
-    .then(text => parseInt(text, 10) || 0)
-    .catch(err => {
-      console.error("Error leyendo visitas:", err);
-      return 0;
-    });
-}
+    //
+    //Consulta el número de visitas para un ID
+    //@param {string} idvisitado
+    //@returns {Promise<number>} número de visitas
+    //
+    export async function leerVisitas(idvisitado) {
+      // Intentamos leer primero de Cloudflare
+      const visitasCF = await leerVisitasCloudflare(idvisitado);
+      console.log(visitasCF);
+      //if (visitasCF !== null) {
+      //  return visitasCF;
+      //}
+      // Si Cloudflare falla, recurrimos a Google como respaldo
+      return leerVisitasGoogle(idvisitado);
+    }
 
 //
 //Envía una valoración (de 0 a 5) para un recurso identificado por ID
@@ -284,3 +337,5 @@ export function obtenerResumenObras() {
           return false;
         }
       }
+
+
