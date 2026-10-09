@@ -112,6 +112,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   syncLocalStorageToCookies();
+  
+  // 🤖 REGISTRO DEL SERVICE WORKER (PWA)
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(() => console.log('Service Worker registrado con éxito.'))
+        .catch((err) => console.log('Error al registrar el Service Worker:', err));
+    });
+  }
+
   // 🧭 Navegación inicial por hash al cargar la página
   manejarHash(location.hash);
 });
