@@ -4,6 +4,8 @@ import { abrirLectorPDF } from './lector.js';
 import { cargarlibro } from './libroficha.js';
 import { renderResumenObras } from './contador.js';
 import { syncLocalStorageToCookies, setItem, getItem, removeItem } from "./storage.js";
+import { initPWA } from './pwa.js'; // 📱 Importamos la lógica de la PWA
+
 // Helper: carga un script externo sólo una vez y devuelve una Promise
 function loadScript(src, globalName) {
   return new Promise((resolve, reject) => {
@@ -121,6 +123,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch((err) => console.log('Error al registrar el Service Worker:', err));
     });
   }
+  // 📱 INICIALIZAR LÓGICA DEL BOTÓN PWA
+  initPWA();
 
   // 🧭 Navegación inicial por hash al cargar la página
   manejarHash(location.hash);

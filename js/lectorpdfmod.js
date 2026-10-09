@@ -134,8 +134,9 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
       // Extraemos el número de capítulo actual
       const numCapitulo = capitulosObra[idx].numCapitulo;
       //const server = (capitulosObra[idx]._server || "io-pdfs"); 
+      //["CDMNQTMHC", "CultivationOnline", "DualCultivation", "PathtoDualCultivation"]
       const server = (
-                        ["CDMNQTMHC", "CultivationOnline", "DualCultivation", "PathtoDualCultivation"]
+                        ["CDMNQTMHC", "CultivationOnline"]
                           .includes(clave)
                       ) ? "local" : "io-pdfs";
       /*const server = ["local", "io-pdfs"].includes(capitulosObra[idx]._server)
