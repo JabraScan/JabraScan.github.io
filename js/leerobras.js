@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ${hiddenNames}
             <div class="card-text">
               <div class="book-author-name mb-2"><strong class="book-author-title">Autor:</strong> ${autor}</div>
-              <div class="book-estado badge ${estado === 'En progreso' ? 'bg-success' : estado === 'Pausado' ? 'bg-warning' : 'bg-secondary'} mb-2">${estado}</div>
+              <div class="book-estado badge ${estado === 'Activo' ? 'bg-primary-subtle text-primary-emphasis' : estado === 'Pausado' ? 'bg-warning' : 'bg-secondary'} mb-2">${estado}</div>
             </div>
           </div>
         </article>
