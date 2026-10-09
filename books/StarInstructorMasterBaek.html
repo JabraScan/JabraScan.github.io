@@ -114,10 +114,20 @@
     
     .meta strong { color: var(--text); }
     
-    .alternativos p {
+    /*.alternativos p {
       margin: 2px 0 2px 12px;
       color: #666;
       font-size: 0.9rem;
+    }*/
+    .otros-titulos-toggle summary {
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1e293b;
+    padding: 4px 0;
+    user-select: none;
+    }
+    .otros-titulos-toggle[open] summary {
+        margin-bottom: 6px;
     }
     
     .sinopsis p {
@@ -312,6 +322,7 @@
             <p><strong>Categoría:</strong> Acción, Artes Marciales, Aventura, Drama, Fantasía, Renacimiento, Transmigración, Wuxia</p>
             <p><strong>Fecha de creación:</strong> 2025-11-26</p>
             <p><strong>Traductor:</strong> Koko / Silver_shadow</p>
+            <!--
             <p><strong>Otros Títulos:</strong></p>
             <div class="alternativos">
               <p>Star Instructor, Master Baek.</p>
@@ -319,6 +330,14 @@
 <p>Best teacher Baek</p>
 <p>Instructor Estrella, Maestro Baek</p>
             </div>
+            -->
+            <details class="alternativos">
+              <summary><strong>Otros Títulos:</strong></summary>
+              <p>Star Instructor, Master Baek.</p>
+<p>일타강사 백사부, 一star講師百師傅</p>
+<p>Best teacher Baek</p>
+<p>Instructor Estrella, Maestro Baek</p>
+            </details>
           </div>
         </div>
       </header>

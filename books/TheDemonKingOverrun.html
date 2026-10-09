@@ -114,10 +114,20 @@
     
     .meta strong { color: var(--text); }
     
-    .alternativos p {
+    /*.alternativos p {
       margin: 2px 0 2px 12px;
       color: #666;
       font-size: 0.9rem;
+    }*/
+    .otros-titulos-toggle summary {
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1e293b;
+    padding: 4px 0;
+    user-select: none;
+    }
+    .otros-titulos-toggle[open] summary {
+        margin-bottom: 6px;
     }
     
     .sinopsis p {
@@ -312,6 +322,7 @@
             <p><strong>Categoría:</strong> Acción, Aventura, Comedia, Fantasía, Comedia,  Reencarnación</p>
             <p><strong>Fecha de creación:</strong> 2026-09-29</p>
             <p><strong>Traductor:</strong> Leo</p>
+            <!--
             <p><strong>Otros Títulos:</strong></p>
             <div class="alternativos">
               <p>The Demon King Overrun by Heroes</p>
@@ -322,6 +333,17 @@
 <p>El Rey Demonio Invadido por Héroes</p>
 <p>El Rey Demonio Arrasado por los Héroes</p>
             </div>
+            -->
+            <details class="alternativos">
+              <summary><strong>Otros Títulos:</strong></summary>
+              <p>The Demon King Overrun by Heroes</p>
+<p>마왕인데 용사가 너무 많음</p>
+<p>I'm the Demon King, but There Are Too Many Heroes</p>
+<p>The Demon King Overrun by Heroes</p>
+<p>El Rey Demonio Superado por los Héroes</p>
+<p>El Rey Demonio Invadido por Héroes</p>
+<p>El Rey Demonio Arrasado por los Héroes</p>
+            </details>
           </div>
         </div>
       </header>

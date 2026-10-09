@@ -114,10 +114,20 @@
     
     .meta strong { color: var(--text); }
     
-    .alternativos p {
+    /*.alternativos p {
       margin: 2px 0 2px 12px;
       color: #666;
       font-size: 0.9rem;
+    }*/
+    .otros-titulos-toggle summary {
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1e293b;
+    padding: 4px 0;
+    user-select: none;
+    }
+    .otros-titulos-toggle[open] summary {
+        margin-bottom: 6px;
     }
     
     .sinopsis p {
@@ -312,6 +322,7 @@
             <p><strong>Categoría:</strong> Academia, Acción, Artes Marciales, Aventura, Comedia, Drama, fantasía, Magia, Reencarnación</p>
             <p><strong>Fecha de creación:</strong> 2025-07-01</p>
             <p><strong>Traductor:</strong> Tavo</p>
+            <!--
             <p><strong>Otros Títulos:</strong></p>
             <div class="alternativos">
               <p>La Eminencia en la Sombra</p>
@@ -321,6 +332,16 @@
 <p>KageJitsu</p>
 <p>Shadow-sama</p>
             </div>
+            -->
+            <details class="alternativos">
+              <summary><strong>Otros Títulos:</strong></summary>
+              <p>La Eminencia en la Sombra</p>
+<p>陰の実力者になりたくて!</p>
+<p>Kage no Jitsuryokusha ni Naritakute!</p>
+<p>TEIS</p>
+<p>KageJitsu</p>
+<p>Shadow-sama</p>
+            </details>
           </div>
         </div>
       </header>

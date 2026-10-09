@@ -114,10 +114,20 @@
     
     .meta strong { color: var(--text); }
     
-    .alternativos p {
+    /*.alternativos p {
       margin: 2px 0 2px 12px;
       color: #666;
       font-size: 0.9rem;
+    }*/
+    .otros-titulos-toggle summary {
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1e293b;
+    padding: 4px 0;
+    user-select: none;
+    }
+    .otros-titulos-toggle[open] summary {
+        margin-bottom: 6px;
     }
     
     .sinopsis p {
@@ -312,11 +322,18 @@
             <p><strong>Categoría:</strong> Acción, Adulto, Ecchi, Fantasía, Harem, Maduro, R18, Romance</p>
             <p><strong>Fecha de creación:</strong> 2025-12-28</p>
             <p><strong>Traductor:</strong> Gran Maestro</p>
+            <!--
             <p><strong>Otros Títulos:</strong></p>
             <div class="alternativos">
               <p>Ciudad de Brujas</p>
 <p>마녀의 도시</p>
             </div>
+            -->
+            <details class="alternativos">
+              <summary><strong>Otros Títulos:</strong></summary>
+              <p>Ciudad de Brujas</p>
+<p>마녀의 도시</p>
+            </details>
           </div>
         </div>
       </header>

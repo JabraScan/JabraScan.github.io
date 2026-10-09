@@ -114,10 +114,20 @@
     
     .meta strong { color: var(--text); }
     
-    .alternativos p {
+    /*.alternativos p {
       margin: 2px 0 2px 12px;
       color: #666;
       font-size: 0.9rem;
+    }*/
+    .otros-titulos-toggle summary {
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1e293b;
+    padding: 4px 0;
+    user-select: none;
+    }
+    .otros-titulos-toggle[open] summary {
+        margin-bottom: 6px;
     }
     
     .sinopsis p {
@@ -312,6 +322,7 @@
             <p><strong>Categoría:</strong> Acción, Artes Marciales, Aventura, Fantasía, Wuxia</p>
             <p><strong>Fecha de creación:</strong> 2026-01-15</p>
             <p><strong>Traductor:</strong> Leo</p>
+            <!--
             <p><strong>Otros Títulos:</strong></p>
             <div class="alternativos">
               <p>The Martial Arts Prodigy Who Grows Through Devouring</p>
@@ -319,6 +330,14 @@
 <p>El Prodigio Marcial Que Crece Mediante La Depredación</p>
 <p>A Martial Arts Genius Who Grows Through Foraging</p>
             </div>
+            -->
+            <details class="alternativos">
+              <summary><strong>Otros Títulos:</strong></summary>
+              <p>The Martial Arts Prodigy Who Grows Through Devouring</p>
+<p>포식으로 성장하는 무공천재</p>
+<p>El Prodigio Marcial Que Crece Mediante La Depredación</p>
+<p>A Martial Arts Genius Who Grows Through Foraging</p>
+            </details>
           </div>
         </div>
       </header>

@@ -116,10 +116,20 @@
     
     .meta strong { color: var(--text); }
     
-    .alternativos p {
+    /*.alternativos p {
       margin: 2px 0 2px 12px;
       color: #666;
       font-size: 0.9rem;
+    }*/
+    .otros-titulos-toggle summary {
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1e293b;
+    padding: 4px 0;
+    user-select: none;
+    }
+    .otros-titulos-toggle[open] summary {
+        margin-bottom: 6px;
     }
     
     .sinopsis p {
@@ -314,6 +324,7 @@
             <p><strong>Categoría:</strong> Acción, Adulto, Fantasía, Harén, Romance</p>
             <p><strong>Fecha de creación:</strong> 2026-08-14</p>
             <p><strong>Traductor:</strong> Jabracadabra</p>
+            <!--
             <p><strong>Otros Títulos:</strong></p>
             <div class="alternativos">
               <p>(팝니다. 몰락영애. 한 번도 안 쓴)</p>
@@ -323,6 +334,16 @@
 <p>The Fallen Lady is on Sale</p>
 <p>FS:FL:NU</p>
             </div>
+            -->
+            <details class="alternativos">
+              <summary><strong>Otros Títulos:</strong></summary>
+              <p>(팝니다. 몰락영애. 한 번도 안 쓴)</p>
+<p>For Sale. Fallen Lady. Never Used</p>
+<p>Oh! I Can Buy This One Easily!</p>
+<p>팝니다. 몰락영애. 한 번도 안 쓴.</p>
+<p>The Fallen Lady is on Sale</p>
+<p>FS:FL:NU</p>
+            </details>
           </div>
         </div>
       </header>

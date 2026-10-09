@@ -114,10 +114,20 @@
     
     .meta strong { color: var(--text); }
     
-    .alternativos p {
+    /*.alternativos p {
       margin: 2px 0 2px 12px;
       color: #666;
       font-size: 0.9rem;
+    }*/
+    .otros-titulos-toggle summary {
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1e293b;
+    padding: 4px 0;
+    user-select: none;
+    }
+    .otros-titulos-toggle[open] summary {
+        margin-bottom: 6px;
     }
     
     .sinopsis p {
@@ -312,6 +322,7 @@
             <p><strong>Categoría:</strong> Academia, Comedia, Escolar, Harem, Parodia, Recuentos de la vida, Romance</p>
             <p><strong>Fecha de creación:</strong> 2026-10-03</p>
             <p><strong>Traductor:</strong> Leo</p>
+            <!--
             <p><strong>Otros Títulos:</strong></p>
             <div class="alternativos">
               <p>Reencarné en Un Manga que No Conozco</p>
@@ -323,6 +334,18 @@
 <p>I Was Reincarnated Into an Unknown Manga</p>
 <p>Possessed in an Unknown Manga</p>
             </div>
+            -->
+            <details class="alternativos">
+              <summary><strong>Otros Títulos:</strong></summary>
+              <p>Reencarné en Un Manga que No Conozco</p>
+<p>Fui Poseído Por Un Manga Desconocido</p>
+<p>몰름 만화에 빙의했다</p>
+<p>모르는 만화에 빙의했다</p>
+<p>I Was Possessed By An Unknown Manga</p>
+<p>I Was Thrown into an Unfamiliar Manga</p>
+<p>I Was Reincarnated Into an Unknown Manga</p>
+<p>Possessed in an Unknown Manga</p>
+            </details>
           </div>
         </div>
       </header>

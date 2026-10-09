@@ -114,10 +114,20 @@
     
     .meta strong { color: var(--text); }
     
-    .alternativos p {
+    /*.alternativos p {
       margin: 2px 0 2px 12px;
       color: #666;
       font-size: 0.9rem;
+    }*/
+    .otros-titulos-toggle summary {
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1e293b;
+    padding: 4px 0;
+    user-select: none;
+    }
+    .otros-titulos-toggle[open] summary {
+        margin-bottom: 6px;
     }
     
     .sinopsis p {
@@ -312,6 +322,7 @@
             <p><strong>Categoría:</strong> Accion, Aventura, Fantasía, Harén, Munchkin, Sobrenatural</p>
             <p><strong>Fecha de creación:</strong> 2026-10-04</p>
             <p><strong>Traductor:</strong> Leo</p>
+            <!--
             <p><strong>Otros Títulos:</strong></p>
             <div class="alternativos">
               <p>Espadachín Solitario</p>
@@ -322,6 +333,17 @@
 <p>Na-hon-so</p>
 <p>Na Honja Sodeu Maseuteo</p>
             </div>
+            -->
+            <details class="alternativos">
+              <summary><strong>Otros Títulos:</strong></summary>
+              <p>Espadachín Solitario</p>
+<p>El Último Maestro de la Espada</p>
+<p>나 혼자 소드 마스터</p>
+<p>The Last Swordmaster</p>
+<p>나혼소</p>
+<p>Na-hon-so</p>
+<p>Na Honja Sodeu Maseuteo</p>
+            </details>
           </div>
         </div>
       </header>

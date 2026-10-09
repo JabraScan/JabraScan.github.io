@@ -114,10 +114,20 @@
     
     .meta strong { color: var(--text); }
     
-    .alternativos p {
+    /*.alternativos p {
       margin: 2px 0 2px 12px;
       color: #666;
       font-size: 0.9rem;
+    }*/
+    .otros-titulos-toggle summary {
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1e293b;
+    padding: 4px 0;
+    user-select: none;
+    }
+    .otros-titulos-toggle[open] summary {
+        margin-bottom: 6px;
     }
     
     .sinopsis p {
@@ -312,6 +322,7 @@
             <p><strong>Categoría:</strong> Drama, Romance, Acción, Comedia, Fantasía, Aventura, Ecchi, Sobrenatural, Magia</p>
             <p><strong>Fecha de creación:</strong> 2025-08-24</p>
             <p><strong>Traductor:</strong> Tavo</p>
+            <!--
             <p><strong>Otros Títulos:</strong></p>
             <div class="alternativos">
               <p>¡Cállate dragona, ya no quiero tener más hijos contigo!</p>
@@ -321,6 +332,16 @@
 <p>Shut Up, Malevolent Dragon! I Don’t Want to Have Any More Children With You</p>
 <p>闭嘴恶龙我不想再跟你生孩子了</p>
             </div>
+            -->
+            <details class="alternativos">
+              <summary><strong>Otros Títulos:</strong></summary>
+              <p>¡Cállate dragona, ya no quiero tener más hijos contigo!</p>
+<p>¡Cállate, dragón malvado! No quiero criar mas niños contigo.</p>
+<p>¡Cállate, Dragón Malvado! Ya no quiero criar niños contigo.</p>
+<p>Shut up, Evil Dragon, I Don't Want to Raise A Child with You Anymore</p>
+<p>Shut Up, Malevolent Dragon! I Don’t Want to Have Any More Children With You</p>
+<p>闭嘴恶龙我不想再跟你生孩子了</p>
+            </details>
           </div>
         </div>
       </header>

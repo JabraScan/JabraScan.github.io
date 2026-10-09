@@ -114,10 +114,20 @@
     
     .meta strong { color: var(--text); }
     
-    .alternativos p {
+    /*.alternativos p {
       margin: 2px 0 2px 12px;
       color: #666;
       font-size: 0.9rem;
+    }*/
+    .otros-titulos-toggle summary {
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1e293b;
+    padding: 4px 0;
+    user-select: none;
+    }
+    .otros-titulos-toggle[open] summary {
+        margin-bottom: 6px;
     }
     
     .sinopsis p {
@@ -312,6 +322,7 @@
             <p><strong>Categoría:</strong> Aventura, Comedia, Drama, Fantasía, Harem, Isekai, Magia, Recuentos de la vida, Reencarnación, Romance, Sobrenatural, Tragedia</p>
             <p><strong>Fecha de creación:</strong> 2026-09-26</p>
             <p><strong>Traductor:</strong> Desconegut</p>
+            <!--
             <p><strong>Otros Títulos:</strong></p>
             <div class="alternativos">
               <p>無職転生 ～異世界行ったら本気だす～</p>
@@ -322,6 +333,17 @@
 <p>Jobless Reincarnation: I Will Seriously Try If I Go to Another World</p>
 <p>Mushoku Tensei</p>
             </div>
+            -->
+            <details class="alternativos">
+              <summary><strong>Otros Títulos:</strong></summary>
+              <p>無職転生 ～異世界行ったら本気だす～</p>
+<p>Mushoku Tensei: Isekai Ittara Honki Dasu</p>
+<p>Mushoku Tensei</p>
+<p>Jobless Reincarnation</p>
+<p>Mushoku Tensei: Reencarnación de un desempleado</p>
+<p>Jobless Reincarnation: I Will Seriously Try If I Go to Another World</p>
+<p>Mushoku Tensei</p>
+            </details>
           </div>
         </div>
       </header>

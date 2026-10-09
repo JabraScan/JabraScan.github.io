@@ -114,10 +114,20 @@
     
     .meta strong { color: var(--text); }
     
-    .alternativos p {
+    /*.alternativos p {
       margin: 2px 0 2px 12px;
       color: #666;
       font-size: 0.9rem;
+    }*/
+    .otros-titulos-toggle summary {
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1e293b;
+    padding: 4px 0;
+    user-select: none;
+    }
+    .otros-titulos-toggle[open] summary {
+        margin-bottom: 6px;
     }
     
     .sinopsis p {
@@ -312,6 +322,7 @@
             <p><strong>Categoría:</strong> Acción, Aventura, Comedia, Drama, Fantasía,  Regresión, Romance, Vida Escolar</p>
             <p><strong>Fecha de creación:</strong> 2026-10-03</p>
             <p><strong>Traductor:</strong> Leo</p>
+            <!--
             <p><strong>Otros Títulos:</strong></p>
             <div class="alternativos">
               <p>My Slain Dragon Bride</p>
@@ -319,6 +330,14 @@
 <p>Naega Jugin Deuraegon-gwa Gyeolhonhaetda</p>
 <p>내가 죽인 드래곤과 결혼했다</p>
             </div>
+            -->
+            <details class="alternativos">
+              <summary><strong>Otros Títulos:</strong></summary>
+              <p>My Slain Dragon Bride</p>
+<p>I Married the Dragon I Killed</p>
+<p>Naega Jugin Deuraegon-gwa Gyeolhonhaetda</p>
+<p>내가 죽인 드래곤과 결혼했다</p>
+            </details>
           </div>
         </div>
       </header>
