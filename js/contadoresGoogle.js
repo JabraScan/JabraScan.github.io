@@ -49,7 +49,7 @@ const API_KEY = "";
       // ==========================================
       // 1. Funciones individuales para Cloudflare
       function incrementarVisitaCloudflare(idvisitado) {
-        const urlCF = `https://contadores.jabrarexscan.workers.dev/contadores/incrementar`;
+        const urlCF = `${URL_CLOUDFLARE}/contadores/incrementar`;
         return fetch(urlCF, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -109,8 +109,8 @@ const API_KEY = "";
         startUpdateUltimoCapituloIfNeeded(idvisitado);
       //Incremento de visitas
       // Ejecutamos ambas llamadas de forma limpia
-        incrementarVisitaCloudflare(idvisitado)
-        .then(res => console.log("Respuesta CF Incrementar:", res));
+      //  incrementarVisitaCloudflare(idvisitado)
+      //  .then(res => console.log("Respuesta CF Incrementar:", res));
         return incrementarVisitaGoogle(idvisitado);
     }
    /**
@@ -149,8 +149,8 @@ const API_KEY = "";
     //
     export async function leerVisitas(idvisitado) {
       // Intentamos leer primero de Cloudflare
-      const visitasCF = await leerVisitasCloudflare(idvisitado);
-      console.log(visitasCF);
+      //const visitasCF = await leerVisitasCloudflare(idvisitado);
+      //console.log(visitasCF);
       //if (visitasCF !== null) {
       //  return visitasCF;
       //}
