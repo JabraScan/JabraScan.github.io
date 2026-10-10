@@ -1,7 +1,12 @@
+import { incrementarVisita } from './contadoresGoogle.js';
 // pwa.js
 let deferredPrompt = null;
 
 export function initPWA() {
+  // 0. CONTAR APERTURAS DE LA PWA ---
+  if (('standalone' in window.navigator && window.navigator.standalone) || window.matchMedia('(display-mode: standalone)').matches) {
+    incrementarVisita('pwa_1');
+  }
   // 1. REGISTRAR EL SERVICE WORKER (El motor offline)
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -30,7 +35,8 @@ export function initPWA() {
         
         const { outcome } = await deferredPrompt.userChoice;
         if (outcome === 'accepted') {
-          console.log('El usuario aceptó instalar la PWA');
+          //console.log('El usuario aceptó instalar la PWA');
+          incrementarVisita('obra_pwa');
         }
         deferredPrompt = null;
         return;
