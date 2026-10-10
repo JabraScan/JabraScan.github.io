@@ -176,41 +176,6 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
         incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
       });
 }
-/*
-function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
-  //añadido el 09-09-2025 23:28 para gestionar los capitulos mas alla de 999
-      // Extraemos el número de capítulo actual
-        const numCapitulo = capitulosObra[idx].numCapitulo;
-      // Si el número es mayor a 999, tomamos todos los dígitos excepto los tres últimos.
-      // Ejemplo: 1203 → "1", 123653 → "123"
-        const extra = numCapitulo > 999 ? String(numCapitulo).slice(0, -3) : "";
-      // Concatenamos el fragmento extra a la clave, asegurándonos de que sea texto.
-      // Esto evita sumas si 'clave' es numérica.
-        const claveFinal = String(clave) + extra;
-      // Construimos la ruta final del PDF, codificando el nombre del archivo para URLs válidas.
-        // ruta en el repo original
-          const pdfLocal = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
-        // ruta en el repo de PDFs
-          const pdfBackup = `https://jabrascan.github.io-pdfs/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
-  console.log(nombreArchivo);
-        //carga de los pdf
-          function iniciar(doc) {
-            pdfDoc = doc;
-            pageNum = paginaInicial;
-            renderPage(pageNum);
-            actualizarBotonesNav(idx, capitulosObra, clave);
-            incrementarVisita(`${clave}_${capitulosObra[idx].numCapitulo}`);
-          }
-          // intenta cargar primero del repo original
-            pdfjsLib.getDocument(pdfLocal).promise
-              .then(iniciar)
-              .catch(() => {
-                // intenta cargar primero del repo backup
-                  pdfjsLib.getDocument(pdfBackup).promise.then(iniciar);
-              });
-}*/
-
-
 /**
  * Actualiza el título de la obra y muestra banner especial si aplica.
  */
@@ -226,11 +191,18 @@ function actualizarTituloObra(titulo, clave) {
     divBanner.innerHTML = `
       <span>Traducción aprobada por el autor</span><br>
       <span><strong>Discord Oficial :</strong> <a href="https://discord.gg/Mk2qb65AxA" target="_blank">https://discord.gg/Mk2qb65AxA</a></span><br>
-      <img src="img/discord_oficial_jabrascan.jpg" alt="Traducción aprobada">
+      <img src="img/discord_oficial_jabrascan.webp?v=20261006"
+          alt="Discord Oficial habla hispana"
+          style="max-width:90%"
+          decoding="async" fetchpriority="high"
+          srcset="img/discord_oficial_jabrascan-300w.webp?v=20261006 300w,
+                  img/discord_oficial_jabrascan-450w.webp?v=20261006 600w,
+                  img/discord_oficial_jabrascan-600w.webp?v=20261006 600w,
+                  img/discord_oficial_jabrascan-900w.webp?v=20261006 900w"
+                  sizes="(max-width: 576px) 70vw, (max-width: 992px) 40vw, 300px">
     `;
     datosAdic.appendChild(divBanner);
   }
-
   const enlaceObra = document.getElementById("volverAObra");
   enlaceObra.href = `index.html#${clave}`; 
 }
