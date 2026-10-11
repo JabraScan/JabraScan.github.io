@@ -287,7 +287,7 @@ function obtenerInfoGoogle(idvisitado) {
   return fetch(url)
     .then(res => res.json())
     .catch(err => {
-      console.error("Error obteniendo info de Google:", err);
+      //console.error("Error obteniendo info de Google:", err);
       return null;
     });
 }
@@ -313,7 +313,7 @@ function obtenerInfoSupabase(idvisitado) {
 export function obtenerInfo(idvisitado) {
   return obtenerInfoSupabase(idvisitado)
     .catch(err => {
-      //console.warn("Supabase falló en obtenerInfo, usando respaldo de Google:", err);
+      console.warn("Supabase falló en obtenerInfo, usando respaldo de Google:", err);
       return obtenerInfoGoogle(idvisitado);
     })
     .then(data => {
@@ -339,7 +339,7 @@ function obtenerResumenObrasGoogle() {
   return fetch(url)
     .then(res => res.json())
     .catch(err => {
-      console.error("Error obteniendo resumen de obras:", err);
+      //console.error("Error obteniendo resumen de obras:", err);
       return [];
     });
 }
@@ -365,7 +365,7 @@ function obtenerResumenObrasSupabase() {
 export function obtenerResumenObras() {
   return obtenerResumenObrasSupabase()
     .catch(err => {
-      //console.warn("Supabase falló en resumenObras, usando respaldo de Google:", err);
+      console.warn("Supabase falló en resumenObras, usando respaldo de Google:", err);
       return obtenerResumenObrasGoogle();
     })
     .then(data => {
