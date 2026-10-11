@@ -152,17 +152,17 @@ const API_KEY = "";
       // Iniciar la actualización en paralelo (prioridad a la llamada de visitas)
         startUpdateUltimoCapituloIfNeeded(idvisitado);
       //Incremento de visitas
-      // Ejecutamos ambas llamadas de forma limpia
+      // Llamada CloudFlare
       //  incrementarVisitaCloudflare(idvisitado)
       //  .then(res => console.log("Respuesta CF Incrementar:", res));
       try {
         // 1. Probamos la llamada a Supabase
-        await incrementarVisitaSupabase(idvisitado);
-        console.log("Supabase incrementó correctamente:", idvisitado);
+        const resultadoSupabase =await incrementarVisitaSupabase(idvisitado);
+        return resultadoSupabase;
       } catch (e) {
-        console.error("Fallo la prueba de Supabase en incremento:", e);
-      }
+        //console.error("Fallo la prueba de Supabase en incremento:", e);
         return incrementarVisitaGoogle(idvisitado);
+      }
     }
    /**
     * Actualización del último capítulo leido  para usuarios logueados
@@ -209,11 +209,11 @@ const API_KEY = "";
         // Intentamos leer primero de Supabase para probar su funcionamiento
         const visitasSupabase = await leerVisitasSupabase(idvisitado);
         if (visitasSupabase !== undefined && visitasSupabase !== null) {
-          console.log("Leído desde Supabase:", visitasSupabase);
-          //return visitasSupabase;
+          //console.log("Leído desde Supabase:", visitasSupabase);
+          return visitasSupabase;
         }
       } catch (e) {
-        console.error("Fallo leyendo de Supabase, usando Google de respaldo:", e);
+        //console.error("Fallo leyendo de Supabase, usando Google de respaldo:", e);
       }
       // Si Cloudflare falla, recurrimos a Google como respaldo
       return leerVisitasGoogle(idvisitado);
