@@ -140,66 +140,44 @@ async function leerVisitasSupabase(idRecurso) {
     return null; // Si falla o timeout, devuelve null para tirar del respaldo
   }
 }
-
-//      // ==========================================
-//      // 3. Funciones para Supabase
-//      async function incrementarVisitaSupabase(idRecurso) {
-//        try {
-//          const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/incrementar_visita`, {
-//            method: "POST",
-//            headers: {
-//              "apikey": SUPABASE_KEY,
-//              "Authorization": `Bearer ${SUPABASE_KEY}`,
-//              "Content-Type": "application/json"
-//            },
-//            body: JSON.stringify({ p_id: idRecurso })
-//          });
-//          
-//          const resultado = await response.text();
-//          //console.log("Respuesta contador:", resultado);
-//        } catch (error) {
-//          //console.error("Error al incrementar visita:", error);
-//        }
-//      }//
-
-//      // 👁️ Leer visitas (Si quieres mostrar el número en pantalla)
-//      async function leerVisitasSupabase(idRecurso) {
-//        try {
-//          const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/leer_visitas`, {
-//            method: "POST",
-//            headers: {
-//              "apikey": SUPABASE_KEY,
-//              "Authorization": `Bearer ${SUPABASE_KEY}`,
-//              "Content-Type": "application/json"
-//            },
-//            body: JSON.stringify({ p_id: idRecurso })
-//          });
-//          
-//          const total = await response.json();
-//          return total;
-//        } catch (error) {
-//          console.error("Error al leer visitas:", error);
-//          return 0;
-//        }
-//      }
-      // ==========================================
+    // ==========================================
     // Incrementa el contador de visitas para un ID
     // @param {string} idvisitado
     // @returns {Promise<string>} "OK" si se actualizó correctamente
     //
-    export async function incrementarVisita(idvisitado) {
-      // Iniciar la actualización en paralelo (prioridad a la llamada de visitas)
+//    export async function incrementarVisita(idvisitado) {
+//      // Iniciar la actualización en paralelo (prioridad a la llamada de visitas)
+//        startUpdateUltimoCapituloIfNeeded(idvisitado);
+//      //Incremento de visitas
+//      // Llamada CloudFlare
+//      //  incrementarVisitaCloudflare(idvisitado)
+//      //  .then(res => console.log("Respuesta CF Incrementar:", res));
+//      // 🚀 Lanzamos Supabase en segundo plano sin bloquear la página
+//      return incrementarVisitaSupabase(idvisitado)
+//          .catch(() => {
+//            // 3. Si Supabase falla por red o latencia, capturamos el error de forma silenciosa
+//            // y ejecutamos el respaldo de Google, devolviendo su resultado.
+//            return incrementarVisitaGoogle(idvisitado);
+//          });
+//    }
+      export async function incrementarVisita(idvisitado) {
+        // Iniciar la actualización en paralelo del capítulo (si aplica)
         startUpdateUltimoCapituloIfNeeded(idvisitado);
-      //Incremento de visitas
-      // Llamada CloudFlare
-      //  incrementarVisitaCloudflare(idvisitado)
-      //  .then(res => console.log("Respuesta CF Incrementar:", res));
-      // 🚀 Lanzamos Supabase en segundo plano sin bloquear la página
-      incrementarVisitaSupabase(idvisitado).catch(() => {
-        // Si falla Supabase en segundo plano, intentamos el respaldo de Google silenciosamente
-        incrementarVisitaGoogle(idvisitado).catch(() => {});
-      });
-    }
+
+        // 🚀 Retardamos la llamada a la red para dar margen a que el navegador pinte la web
+        return new Promise((resolve) => {
+          setTimeout(async () => {
+            try {
+              // 1. Probamos Supabase pasada la ventana crítica de renderizado
+              const resultadoSupabase = await incrementarVisitaSupabase(idvisitado);
+              resolve(resultadoSupabase);
+            } catch (e) {
+              // 2. Si falla, resuelve con el respaldo de Google
+              resolve(incrementarVisitaGoogle(idvisitado));
+            }
+          }, 1500); // 1.5 segundos de margen para que PageSpeed capture los fotogramas iniciales pintados
+        });
+      }
    /**
     * Actualización del último capítulo leido  para usuarios logueados
     * - idvisitado puede ser "obra_<obraId>" o "<obraId>_<capitulo>"
@@ -224,7 +202,7 @@ async function leerVisitasSupabase(idRecurso) {
           });
         } catch (e) {
           // Cualquier fallo en el parsing no debe romper el flujo principal
-          console.error("Capitulo no incrementado");
+          //console.error("Capitulo no incrementado");
         }
    }
 
@@ -291,12 +269,12 @@ export function valorarRecurso(idvisitado, valor) {
       return { ok: false, error: String(err) };
     });
   // Llamada a Google (igual que antes) y devolución del texto
-  return fetch(url)
-    .then(res => res.text())
-    .catch(err => {
-      console.error("Error valorando recurso:", err);
-      return "ERROR";
-    });
+  //return fetch(url)
+  //  .then(res => res.text())
+  //  .catch(err => {
+  //    console.error("Error valorando recurso:", err);
+  //    return "ERROR";
+  //  });
 }
 
 /*export function valorarRecurso(idvisitado, valor) {
