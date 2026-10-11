@@ -277,31 +277,48 @@ export function valorarRecurso(idvisitado, valor) {
   //  });
 }
 
-/*export function valorarRecurso(idvisitado, valor) {
-  // Recuperamos el user_id guardado en localStorage (si no hay sesión será "null")
-  const usuarioId = localStorage.getItem("user_id") || "null";
-  const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=valorar&valor=${valor}&usuario_id=${encodeURIComponent(usuarioId)}`;
-//console.log(url);   
-  return fetch(url)
-    .then(res => res.text())
-    .catch(err => {
-      console.error("Error valorando recurso:", err);
-      return "ERROR";
-    });
-}*/
+// ==========================================
+// 📊 OBTENER INFORMACIÓN (Google + Supabase)
+// ==========================================
 
-//
-//Obtiene la información completa del recurso: visitas, valoración promedio y fecha de última actualización
-//@param {string} idvisitado
-//@returns {Promise<Object>} Objeto con propiedades: visitas, valoracion, fechaActualizacion
-//
-export function obtenerInfo(idvisitado) {
+// 1. Función específica para Google Apps Script
+function obtenerInfoGoogle(idvisitado) {
   const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=obtenerInfo`;
   return fetch(url)
     .then(res => res.json())
     .catch(err => {
-      console.error("Error obteniendo información:", err);
-      return {
+      console.error("Error obteniendo info de Google:", err);
+      return null;
+    });
+}
+
+// 2. Función específica para Supabase (vía RPC o consulta de tabla)
+function obtenerInfoSupabase(idvisitado) {
+  return fetch(`${SUPABASE_URL}/rest/v1/rpc/obtener_info_recurso`, {
+    method: "POST",
+    headers: {
+      "apikey": SUPABASE_KEY,
+      "Authorization": `Bearer ${SUPABASE_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ p_id: idvisitado })
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Error en Supabase");
+    return res.json();
+  });
+}
+
+// 0. Función maestra para obtener la información
+export function obtenerInfo(idvisitado) {
+  return obtenerInfoSupabase(idvisitado)
+    .catch(err => {
+      //console.warn("Supabase falló en obtenerInfo, usando respaldo de Google:", err);
+      return obtenerInfoGoogle(idvisitado);
+    })
+    .then(data => {
+      // Si por lo que sea ambos fallan o devuelven vacío, aportamos estructura segura
+      return data || {
         visitas: 1,
         valoracion: 5,
         fechaActualizacion: null,
@@ -312,11 +329,12 @@ export function obtenerInfo(idvisitado) {
     });
 }
 
-//
-//📋 Obtiene el resumen completo de todas las obras
-//@returns {Promise<Array>} Array de objetos con datos de cada obra
-//
-export function obtenerResumenObras() {
+// ==========================================
+// 📋 RESUMEN DE OBRAS (Google + Supabase)
+// ==========================================
+
+// 1. Función específica para Google Apps Script
+function obtenerResumenObrasGoogle() {
   const url = `${URL_GOOGLE}?accion=resumenObras`;
   return fetch(url)
     .then(res => res.json())
@@ -326,43 +344,108 @@ export function obtenerResumenObras() {
     });
 }
 
-   /**
-    * Consulta la media y el número de votos para una obra
-    *
-    * @param {string} obra - Identificador de la obra a consultar
-    * @returns {Promise<{valoracion: number|null, votos: number}>} - Objeto con:
-    *    - valoracion: media de las valoraciones (o null si no hay datos).
-    *    - votos: número total de votos (0 si no hay datos).
-    *
-    * Comportamiento:
-    *  - Construye los parámetros de consulta con URLSearchParams.
-    *  - Realiza una petición GET al endpoint `${URL_CLOUDFLARE}/valoraciones/media`.
-    *  - Lanza un Error si la respuesta HTTP no es OK.
-    *  - Parsea la respuesta JSON y normaliza nombres de campos para compatibilidad.
-    */
-   export async function consultarVotos(obra) {
-     // Construye la query string
-     const params = new URLSearchParams({ obra });
-     // Petición GET al endpoint. Se solicita JSON en Accept.
-     const resp = await fetch(
-       `${URL_CLOUDFLARE}/valoraciones/media?${params.toString()}`,
-       {
-         method: 'GET',
-         headers: { 'Accept': 'application/json' }
-       }
-     );
-     // Si el servidor responde con un estado distinto de 2xx, lanzamos un error
-     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-     // Parseamos el cuerpo como JSON
-     const data = await resp.json();
-     // Normalizamos la respuesta para devolver siempre los mismos campos:
-     // - valoracion: puede venir como 'valvotos' o 'media' (aquí usamos valvotos si existe)
-     // - votos: puede venir como 'numvotos', 'total' o 'totalvotos'
-     return {
-       valoracion: data?.valvotos ?? data?.media ?? null,
-       votos: data?.numvotos ?? data?.total ?? data?.totalvotos ?? 0
-     };
-   }
+// 2. Función específica para Supabase
+function obtenerResumenObrasSupabase() {
+  return fetch(`${SUPABASE_URL}/rest/v1/rpc/obtener_resumen_obras`, {
+    method: "POST",
+    headers: {
+      "apikey": SUPABASE_KEY,
+      "Authorization": `Bearer ${SUPABASE_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({})
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Error en Supabase resumen");
+    return res.json();
+  });
+}
+
+// 0. Función maestra para el resumen de obras
+export function obtenerResumenObras() {
+  return obtenerResumenObrasSupabase()
+    .catch(err => {
+      //console.warn("Supabase falló en resumenObras, usando respaldo de Google:", err);
+      return obtenerResumenObrasGoogle();
+    })
+    .then(data => {
+      return data || [];
+    });
+}
+
+// //
+// //Obtiene la información completa del recurso: visitas, valoración promedio y fecha de última actualización
+// //@param {string} idvisitado
+// //@returns {Promise<Object>} Objeto con propiedades: visitas, valoracion, fechaActualizacion
+// //
+// export function obtenerInfo(idvisitado) {
+//   const url = `${URL_GOOGLE}?id=${encodeURIComponent(idvisitado)}&accion=obtenerInfo`;
+//   return fetch(url)
+//     .then(res => res.json())
+//     .catch(err => {
+//       console.error("Error obteniendo información:", err);
+//       return {
+//         visitas: 1,
+//         valoracion: 5,
+//         fechaActualizacion: null,
+//         votos: 1,
+//         obra: null,
+//         numVisitasCapitulo: 0
+//       };
+//     });
+// }
+// 
+// //
+// //📋 Obtiene el resumen completo de todas las obras
+// //@returns {Promise<Array>} Array de objetos con datos de cada obra
+// //
+// export function obtenerResumenObras() {
+//   const url = `${URL_GOOGLE}?accion=resumenObras`;
+//   return fetch(url)
+//     .then(res => res.json())
+//     .catch(err => {
+//       console.error("Error obteniendo resumen de obras:", err);
+//       return [];
+//     });
+// }
+// 
+//    /**
+//     * Consulta la media y el número de votos para una obra
+//     *
+//     * @param {string} obra - Identificador de la obra a consultar
+//     * @returns {Promise<{valoracion: number|null, votos: number}>} - Objeto con:
+//     *    - valoracion: media de las valoraciones (o null si no hay datos).
+//     *    - votos: número total de votos (0 si no hay datos).
+//     *
+//     * Comportamiento:
+//     *  - Construye los parámetros de consulta con URLSearchParams.
+//     *  - Realiza una petición GET al endpoint `${URL_CLOUDFLARE}/valoraciones/media`.
+//     *  - Lanza un Error si la respuesta HTTP no es OK.
+//     *  - Parsea la respuesta JSON y normaliza nombres de campos para compatibilidad.
+//     */
+//    export async function consultarVotos(obra) {
+//      // Construye la query string
+//      const params = new URLSearchParams({ obra });
+//      // Petición GET al endpoint. Se solicita JSON en Accept.
+//      const resp = await fetch(
+//        `${URL_CLOUDFLARE}/valoraciones/media?${params.toString()}`,
+//        {
+//          method: 'GET',
+//          headers: { 'Accept': 'application/json' }
+//        }
+//      );
+//      // Si el servidor responde con un estado distinto de 2xx, lanzamos un error
+//      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+//      // Parseamos el cuerpo como JSON
+//      const data = await resp.json();
+//      // Normalizamos la respuesta para devolver siempre los mismos campos:
+//      // - valoracion: puede venir como 'valvotos' o 'media' (aquí usamos valvotos si existe)
+//      // - votos: puede venir como 'numvotos', 'total' o 'totalvotos'
+//      return {
+//        valoracion: data?.valvotos ?? data?.media ?? null,
+//        votos: data?.numvotos ?? data?.total ?? data?.totalvotos ?? 0
+//      };
+//    }
    /**
     * updateUltimoCapitulo
     *
