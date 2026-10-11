@@ -446,6 +446,42 @@
 	</obra>
 	<obra>	
 		<visible>si</visible>
+		<idioma>es</idioma>
+		<clave>LycorisRecoilOrdinaryDays</clave>
+		<nombreobra>Lycoris Recoil: Días Ordinarios</nombreobra>
+		<nombreobra>リコリス・リコイル Ordinary days</nombreobra>
+		<nombreobra>Rikorisu Rikoiru Ōdinarī Deizu</nombreobra>
+		<nombreobra>LycoReco: Ordinary Days</nombreobra>
+		<nombreobra>RikoRiko Ordinary Days</nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<autor>Asaura (アサウラ)</autor>
+		<sinopsis><![CDATA[¡Bienvenido al Café LycoReco!»
+			Ubicado en la zona este de Tokio, con vistas a la antigua e icónica torre de radio destruida, se encuentra el Café LycoReco: un establecimiento elegante y acogedor donde se sirven cafés exquisitos y deliciosos dulces tradicionales y occidentales.
+			Sin embargo, detrás de su fachada pacífica, el café acepta cualquier tipo de petición de sus clientes: desde cuidar a niños en guarderías, negociaciones comerciales o consejos de amor, hasta patrullas contra monstruos o lidiar con situaciones de zombis...
+			Esta historia recopila los cuentos y la extraordinaria vida cotidiana de las chicas del cartel, Chisato Nishikigi y Takina Inoue, junto al resto del equipo del café. Aspectos jamás mostrados en la serie de televisión: momentos cómicos, escenas de acción con armas de fuego, dramas entrañables y los profundos lazos que surgen día a día entre tazas de café y un toque de dulzura.]]>
+		</sinopsis>
+		<meta>Café LycoReco: dulces, café y misiones secretas. Chisato y Takina resuelven cualquier problema en historias inéditas llenas de acción y comedia.</meta>
+		<valoracion>8.6</valoracion>
+		<tipoobra>Novela Ligera</tipoobra>
+		<categoria>Acción, Comedia, Drama, Recuentos de Vida</categoria>
+		<keywords>Acción, Acción con armas, Armas de fuego, Vínculos, Cafetería, Comedia, Doble personalidad, Drama, No romance, Peleas con armas, Personaje principal femenino, Protagonistas múltiples, Recuentos de la vida, Relaciones interpersonales, Slice of Life, Trabajo en cafetería, Vida cotidiana</keywords>
+		<imagen>LycorisRecoilOrdinaryDays/LycorisRecoilOrdinaryDays01.webp</imagen>
+		<fechaCreacion>11/10/2026</fechaCreacion>
+		<ubicacion>Novela Japonesa</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Morlan</traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones>https://www.kadokawa.co.jp/product/322205000797/</observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki>https://lycoris-recoil.fandom.com/es/wiki/Lycoris_Recoil</wiki>
+	</obra>
+	<obra>	
+		<visible>si</visible>
 		<clave>MushokuTensei</clave>
 		<nombreobra>Mushoku Tensei: Jobless Reincarnation</nombreobra>
 		<nombreobra>無職転生 ～異世界行ったら本気だす～</nombreobra>

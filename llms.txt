@@ -1,7 +1,7 @@
 # JabraScan - Catálogo de Novelas
 
-Actualizado: 2026-10-08
-Total de obras disponibles: 48
+Actualizado: 2026-10-11
+Total de obras disponibles: 49
 
 ## Enlaces y Obras
 - [Cómo me convertí en un hombre casado en otro mundo](https://jabrascan.net/books/IBecameMarriedMan.html) (SPA: https://jabrascan.net/#IBecameMarriedMan) - Autor: Berhera (베르헤라)
@@ -16,6 +16,7 @@ Total de obras disponibles: 48
 - [Guía de Supervivencia del Extra de la Academia](https://jabrascan.net/books/TEASG.html) (SPA: https://jabrascan.net/#TEASG) - Autor: Plutoe (플루토)
 - [Arifureta: De ordinario al más fuerte del mundo](https://jabrascan.net/books/Arifureta.html) (SPA: https://jabrascan.net/#Arifureta) - Autor: Ryo Shirakome
 - [Cultivo Dual: Reuniendo Esposas de Rango SSS en el Mundo del Cultivo](https://jabrascan.net/books/CDREdRSSelMdC.html) (SPA: https://jabrascan.net/#CDREdRSSelMdC) - Autor: Idiocrat
+- [Lycoris Recoil: Días Ordinarios](https://jabrascan.net/books/LycorisRecoilOrdinaryDays.html) (SPA: https://jabrascan.net/#LycorisRecoilOrdinaryDays) - Autor: Asaura (アサウラ)
 - [Mushoku Tensei: Jobless Reincarnation](https://jabrascan.net/books/MushokuTensei.html) (SPA: https://jabrascan.net/#MushokuTensei) - Autor: Rifujin na Magonote
 - [City of Witches](https://jabrascan.net/books/CityOfWitches.html) (SPA: https://jabrascan.net/#CityOfWitches) - Autor: Wilted Flower (섦게지는꽃)
 - [Danmachi - Relato Heroico: Argonauta](https://jabrascan.net/books/DanmachiArgonauta.html) (SPA: https://jabrascan.net/#DanmachiArgonauta) - Autor: Fujino Ōmori

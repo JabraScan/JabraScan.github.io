@@ -1,7 +1,7 @@
 # JabraScan - Catálogo Completo y Detallado
 
-Actualizado: 2026-10-08
-Total de obras: 48
+Actualizado: 2026-10-11
+Total de obras: 49
 
 ## Listado Detallado de Obras
 ### Cómo me convertí en un hombre casado en otro mundo
@@ -112,6 +112,17 @@ Total de obras: 48
         Se pusieron a mi lado, izquierda, derecha y medio paso por delante. Sin darse cuenta de que su contoneo de caderas y el menear de sus melones me distraían demasiado.
         '...' Solo pude mirar a tres de mis bellezas, pensando en lo diferentes que eran anoche, pero de nuevo parece que tendré que corromperlas aún más.
         'Entonces, ¿comenzamos el viaje del Cultivo Dual?'
+
+### Lycoris Recoil: Días Ordinarios
+- **Clave**: LycorisRecoilOrdinaryDays
+- **Nombres alternativos**: リコリス・リコイル Ordinary days, Rikorisu Rikoiru Ōdinarī Deizu, LycoReco: Ordinary Days, RikoRiko Ordinary Days
+- **Autor**: Asaura (アサウラ)
+- **URL SEO**: https://jabrascan.net/books/LycorisRecoilOrdinaryDays.html
+- **URL SPA**: https://jabrascan.net/#LycorisRecoilOrdinaryDays
+- **Sinopsis**: ¡Bienvenido al Café LycoReco!»
+			Ubicado en la zona este de Tokio, con vistas a la antigua e icónica torre de radio destruida, se encuentra el Café LycoReco: un establecimiento elegante y acogedor donde se sirven cafés exquisitos y deliciosos dulces tradicionales y occidentales.
+			Sin embargo, detrás de su fachada pacífica, el café acepta cualquier tipo de petición de sus clientes: desde cuidar a niños en guarderías, negociaciones comerciales o consejos de amor, hasta patrullas contra monstruos o lidiar con situaciones de zombis...
+			Esta historia recopila los cuentos y la extraordinaria vida cotidiana de las chicas del cartel, Chisato Nishikigi y Takina Inoue, junto al resto del equipo del café. Aspectos jamás mostrados en la serie de televisión: momentos cómicos, escenas de acción con armas de fuego, dramas entrañables y los profundos lazos que surgen día a día entre tazas de café y un toque de dulzura.
 
 ### Mushoku Tensei: Jobless Reincarnation
 - **Clave**: MushokuTensei
