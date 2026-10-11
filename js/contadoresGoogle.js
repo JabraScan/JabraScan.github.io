@@ -102,47 +102,86 @@ const API_KEY = "";
             return 0;
           });
       }
-      // ==========================================
-      // 3. Funciones para Supabase
-      async function incrementarVisitaSupabase(idRecurso) {
-        try {
-          const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/incrementar_visita`, {
-            method: "POST",
-            headers: {
-              "apikey": SUPABASE_KEY,
-              "Authorization": `Bearer ${SUPABASE_KEY}`,
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ p_id: idRecurso })
-          });
-          
-          const resultado = await response.text();
-          //console.log("Respuesta contador:", resultado);
-        } catch (error) {
-          //console.error("Error al incrementar visita:", error);
-        }
-      }
+// ==========================================
+// 3. Funciones para Supabase (Nativas por fetch)
+// ==========================================
+async function incrementarVisitaSupabase(idRecurso) {
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/rpc/incrementar_visita`, {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ p_id: idRecurso })
+    });
+  } catch (error) {
+    // Silencioso absoluto en producción
+  }
+}
 
-      // 👁️ Leer visitas (Si quieres mostrar el número en pantalla)
-      async function leerVisitasSupabase(idRecurso) {
-        try {
-          const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/leer_visitas`, {
-            method: "POST",
-            headers: {
-              "apikey": SUPABASE_KEY,
-              "Authorization": `Bearer ${SUPABASE_KEY}`,
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ p_id: idRecurso })
-          });
-          
-          const total = await response.json();
-          return total;
-        } catch (error) {
-          console.error("Error al leer visitas:", error);
-          return 0;
-        }
-      }
+async function leerVisitasSupabase(idRecurso) {
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/leer_visitas`, {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ p_id: idRecurso }),
+      signal: AbortSignal.timeout(3000) // ⏱️ Evita que se quede colgado si Supabase tarda
+    });
+    
+    if (!response.ok) return null;
+    return await response.json();
+  } catch (error) {
+    return null; // Si falla o timeout, devuelve null para tirar del respaldo
+  }
+}
+
+//      // ==========================================
+//      // 3. Funciones para Supabase
+//      async function incrementarVisitaSupabase(idRecurso) {
+//        try {
+//          const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/incrementar_visita`, {
+//            method: "POST",
+//            headers: {
+//              "apikey": SUPABASE_KEY,
+//              "Authorization": `Bearer ${SUPABASE_KEY}`,
+//              "Content-Type": "application/json"
+//            },
+//            body: JSON.stringify({ p_id: idRecurso })
+//          });
+//          
+//          const resultado = await response.text();
+//          //console.log("Respuesta contador:", resultado);
+//        } catch (error) {
+//          //console.error("Error al incrementar visita:", error);
+//        }
+//      }//
+
+//      // 👁️ Leer visitas (Si quieres mostrar el número en pantalla)
+//      async function leerVisitasSupabase(idRecurso) {
+//        try {
+//          const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/leer_visitas`, {
+//            method: "POST",
+//            headers: {
+//              "apikey": SUPABASE_KEY,
+//              "Authorization": `Bearer ${SUPABASE_KEY}`,
+//              "Content-Type": "application/json"
+//            },
+//            body: JSON.stringify({ p_id: idRecurso })
+//          });
+//          
+//          const total = await response.json();
+//          return total;
+//        } catch (error) {
+//          console.error("Error al leer visitas:", error);
+//          return 0;
+//        }
+//      }
       // ==========================================
     // Incrementa el contador de visitas para un ID
     // @param {string} idvisitado
