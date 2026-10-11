@@ -24,6 +24,10 @@ const URL_GOOGLE = "https://script.google.com/macros/s/AKfycbwQNm88siN8ASQXXbNYe
 // URL del Cloudflare Worker que replica el flujo (ajusta al tuyo)
 const URL_CLOUDFLARE = "https://jabrascan.net"; // TODO: cambia por tu ruta real
 
+// Configuración de Supabase para JabraScan
+const SUPABASE_URL = "https://gsuhdkeyhjjqscsptrts.supabase.co";
+const SUPABASE_KEY = "sb_publishable_So72mI1lMkvTJMABjRB84Q_sMWowNVz"; // 👈 Tu Publishable Key (segura para frontend)
+
 const token = getItem("jwt");
 const usuario_id = getItem("user_id");
 //const API_KEY = "X%B~ZiP?RJA5LUGVAU_9KgDp?7~rUX8KW2D9Q3Fgiyt=1.]Ww#a^FGEMFuM:}#WP4r2L!e9U?fA+qcUjReWV"; // Opcional, si tu backend lo requiere
@@ -99,18 +103,65 @@ const API_KEY = "";
           });
       }
       // ==========================================
+      // 3. Funciones para Supabase
+      async function incrementarVisitaSupabase(idRecurso) {
+        try {
+          const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/incrementar_visita`, {
+            method: "POST",
+            headers: {
+              "apikey": SUPABASE_KEY,
+              "Authorization": `Bearer ${SUPABASE_KEY}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ p_id: idRecurso })
+          });
+          
+          const resultado = await response.text();
+          console.log("Respuesta contador:", resultado);
+        } catch (error) {
+          console.error("Error al incrementar visita:", error);
+        }
+      }
+
+      // 👁️ Leer visitas (Si quieres mostrar el número en pantalla)
+      async function leerVisitasSupabase(idRecurso) {
+        try {
+          const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/leer_visitas`, {
+            method: "POST",
+            headers: {
+              "apikey": SUPABASE_KEY,
+              "Authorization": `Bearer ${SUPABASE_KEY}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ p_id: idRecurso })
+          });
+          
+          const total = await response.json();
+          return total;
+        } catch (error) {
+          console.error("Error al leer visitas:", error);
+          return 0;
+        }
+      }
       // ==========================================
     // Incrementa el contador de visitas para un ID
     // @param {string} idvisitado
     // @returns {Promise<string>} "OK" si se actualizó correctamente
     //
-    export function incrementarVisita(idvisitado) {
+    export async function incrementarVisita(idvisitado) {
       // Iniciar la actualización en paralelo (prioridad a la llamada de visitas)
         startUpdateUltimoCapituloIfNeeded(idvisitado);
       //Incremento de visitas
       // Ejecutamos ambas llamadas de forma limpia
       //  incrementarVisitaCloudflare(idvisitado)
       //  .then(res => console.log("Respuesta CF Incrementar:", res));
+      try {
+        // 1. Probamos la llamada a Supabase
+        await incrementarVisitaSupabase(idvisitado);
+        console.log("Supabase incrementó correctamente:", idvisitado);
+      } catch (e) {
+        console.error("Fallo la prueba de Supabase en incremento:", e);
+      }
         return incrementarVisitaGoogle(idvisitado);
     }
    /**
@@ -154,6 +205,16 @@ const API_KEY = "";
       //if (visitasCF !== null) {
       //  return visitasCF;
       //}
+      try {
+        // Intentamos leer primero de Supabase para probar su funcionamiento
+        const visitasSupabase = await leerVisitasSupabase(idvisitado);
+        if (visitasSupabase !== undefined && visitasSupabase !== null) {
+          console.log("Leído desde Supabase:", visitasSupabase);
+          //return visitasSupabase;
+        }
+      } catch (e) {
+        console.error("Fallo leyendo de Supabase, usando Google de respaldo:", e);
+      }
       // Si Cloudflare falla, recurrimos a Google como respaldo
       return leerVisitasGoogle(idvisitado);
     }
