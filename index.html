@@ -17,7 +17,11 @@
     
     <!-- bootstrap 5.3.3 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/style.css">
+    <!-- 1. CSS Crítico (Se carga de forma inmediata y bloqueante para pintar la primera pantalla sin CLS) -->
+    <link rel="stylesheet" href="./css/stylepre.css">
+    <!-- 2. CSS Restante (Se carga de forma asíncrona para no bloquear el renderizado inicial) -->
+    <link rel="stylesheet" href="./css/stylepost.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="./css/stylepost.css"></noscript>
 
     <script type="module" src="./js/storage.js"></script>
     <script type="module" src="./js/general.js"></script>
