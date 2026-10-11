@@ -117,9 +117,9 @@ const API_KEY = "";
           });
           
           const resultado = await response.text();
-          console.log("Respuesta contador:", resultado);
+          //console.log("Respuesta contador:", resultado);
         } catch (error) {
-          console.error("Error al incrementar visita:", error);
+          //console.error("Error al incrementar visita:", error);
         }
       }
 
@@ -155,14 +155,11 @@ const API_KEY = "";
       // Llamada CloudFlare
       //  incrementarVisitaCloudflare(idvisitado)
       //  .then(res => console.log("Respuesta CF Incrementar:", res));
-      try {
-        // 1. Probamos la llamada a Supabase
-        const resultadoSupabase =await incrementarVisitaSupabase(idvisitado);
-        return resultadoSupabase;
-      } catch (e) {
-        //console.error("Fallo la prueba de Supabase en incremento:", e);
-        return incrementarVisitaGoogle(idvisitado);
-      }
+      // 🚀 Lanzamos Supabase en segundo plano sin bloquear la página
+      incrementarVisitaSupabase(idvisitado).catch(() => {
+        // Si falla Supabase en segundo plano, intentamos el respaldo de Google silenciosamente
+        incrementarVisitaGoogle(idvisitado).catch(() => {});
+      });
     }
    /**
     * Actualización del último capítulo leido  para usuarios logueados
@@ -213,7 +210,7 @@ const API_KEY = "";
           return visitasSupabase;
         }
       } catch (e) {
-        //console.error("Fallo leyendo de Supabase, usando Google de respaldo:", e);
+        console.error("Fallo leyendo, usando respaldo:", e);
       }
       // Si Cloudflare falla, recurrimos a Google como respaldo
       return leerVisitasGoogle(idvisitado);
