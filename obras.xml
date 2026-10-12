@@ -36,7 +36,7 @@
 	</obra>	
 
 	<obra>	
-		<visible>si</visible>
+		<visible>no</visible>
 		<clave>SoloSwordMaster</clave>
 		<nombreobra>Solo Swordmaster</nombreobra>
 		<nombreobra>Espadachín Solitario</nombreobra>
@@ -1749,9 +1749,13 @@ He tardado diez años en escribir este libro.
 		<tipoobra>Novela Web</tipoobra>
 		<categoria>Drama, Romance, Acción, Comedia, Fantasía, Aventura, Ecchi, Sobrenatural, Magia</categoria>
 		<keywords>Adaptado a manhua, Ambiente europeo, Amor familiar, Caballeros, Cazadores de dragones, Cuidado de niños, Dragones, Embarazo, Enemigos se convierten en amantes, Gemelos, Intereses amorosos fuertes, Intereses amorosos mayores, Matrimonio, Niños lindos, Ocultar identidad verdadera, Padres cariñosos, Pareja poderosa, Pareja que discute, Primera relación sexual, Protagonista femenina hermosa, Protagonista masculino, Protagonista masculino atractivo, Realeza, Relación humano-no humano, Tsundere, Viaje en el tiempo, Violación, Violación inversa</keywords>
-		<imagen>CDMNQTMHC/CallateDragonaMalvada.webp</imagen>
-		<imagen>CDMNQTMHC/shut-up-evil-dragon-i-dont-want-to-raise-a-child-with-v0_1.webp</imagen>
-		<imagen>CDMNQTMHC/shut-up-evil-dragon-i-dont-want-to-raise-a-child-with-v0_2.webp</imagen>
+		<imagen>CDMNQTMHC/ShutUpMalevolentDragon01.webp</imagen>
+		<imagen>CDMNQTMHC/ShutUpMalevolentDragon02.webp</imagen>
+		<imagen>CDMNQTMHC/ShutUpMalevolentDragon03.webp</imagen>
+		<imagen>CDMNQTMHC/ShutUpMalevolentDragon04.webp</imagen>
+		<imagen>CDMNQTMHC/ShutUpMalevolentDragon05.webp</imagen>
+		<imagen>CDMNQTMHC/ShutUpMalevolentDragon06.webp</imagen>
+		<imagen>CDMNQTMHC/ShutUpMalevolentDragon07.webp</imagen>
 		<fechaCreacion>24/08/2025</fechaCreacion>
 		<ubicacion>Novela China</ubicacion>
 		<estado>Activo</estado>
