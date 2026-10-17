@@ -12,14 +12,14 @@
   <meta property="og:type" content="book">
   <meta property="og:title" content="Thou, as My Knight">
   <meta property="og:description" content="Un informático corriente acepta escoltar a una noble que huye del Imperio Balga, desencadenando una peligrosa persecución contra élites y ejércitos.">
-  <meta property="og:image" content="https://jabrascan.net/img/ThouasMyKnight/ThouasMyKnight1-600w.webp">
+  <meta property="og:image" content="https://jabrascan.net/img/ThouasMyKnight/ThouasMyKnight1.webp">
   <meta property="og:url" content="https://jabrascan.net/books/ThouasMyKnight.html">
   <meta property="og:locale" content="es_ES">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Thou, as My Knight">
   <meta name="twitter:description" content="Un informático corriente acepta escoltar a una noble que huye del Imperio Balga, desencadenando una peligrosa persecución contra élites y ejércitos.">
-  <meta name="twitter:image" content="https://jabrascan.net/img/ThouasMyKnight/ThouasMyKnight1-600w.webp">
+  <meta name="twitter:image" content="https://jabrascan.net/img/ThouasMyKnight/ThouasMyKnight1.webp">
 
 
   <!-- Datos estructurados -->
@@ -41,7 +41,7 @@
         "name": "Gran Maestro"
     },
     "description": "Un informático corriente acepta escoltar a una noble que huye del Imperio Balga, desencadenando una peligrosa persecución contra élites y ejércitos.",
-    "image": "https://jabrascan.net/img/ThouasMyKnight/ThouasMyKnight1-600w.webp",
+    "image": "https://jabrascan.net/img/ThouasMyKnight/ThouasMyKnight1.webp",
     "url": "https://jabrascan.net/books/ThouasMyKnight.html",
     "alternateName": ["Kimi wa Boku no Kishi（君は僕の騎士）", "You Are My Knight", "My Knight and I", "Eres mi caballero", "Tú, como mi caballero", "Mi caballero eres tú"],
     "inLanguage": "es",
@@ -303,18 +303,33 @@
       <header>
         <h1>Thou, as My Knight</h1>
         <div class="info">
-          <img src="/img/ThouasMyKnight/ThouasMyKnight1-300w.webp?v=20261006"
-                    class="portada"
-                    alt="Portada de Thou, as My Knight - Rintaro Hatake"
-                    width="220"
-                    height="330"
-                    loading="eager"
-                    fetchpriority="high"
-                    decoding="async"
-                    srcset="/img/ThouasMyKnight/ThouasMyKnight1-300w.webp?v=20261006 300w,
-                            /img/ThouasMyKnight/ThouasMyKnight1-600w.webp?v=20261006 600w,
-                            /img/ThouasMyKnight/ThouasMyKnight1-900w.webp?v=20261006 900w"
-                    sizes="(max-width: 576px) 70vw, (max-width: 992px) 40vw, 280px">
+          
+                <picture>
+                    <!-- Formato AVIF óptimo -->
+                    <source srcset="/img/ThouasMyKnight/ThouasMyKnight1-300w.avif 300w, 
+                                    /img/ThouasMyKnight/ThouasMyKnight1-450w.avif 450w" 
+                            sizes="(max-width: 576px) 70vw, 220px"
+                            type="image/avif">
+
+                    <!-- Formato WebP de respaldo -->
+                    <source srcset="/img/ThouasMyKnight/ThouasMyKnight1-300w.webp 300w, 
+                                    /img/ThouasMyKnight/ThouasMyKnight1-450w.webp 450w" 
+                            sizes="(max-width: 576px) 70vw, 220px" 
+                            type="image/webp">
+
+                    <!-- Imagen por defecto (-600w) con su srcset y sizes para máxima compatibilidad -->
+                    <img src="/img/ThouasMyKnight/ThouasMyKnight1.webp" 
+                        srcset="/img/ThouasMyKnight/ThouasMyKnight1-300w.webp 300w, 
+                                /img/ThouasMyKnight/ThouasMyKnight1-450w.webp 450w"
+                        sizes="(max-width: 576px) 70vw, 220px" 
+                        class="portada"
+                        alt="Portada de Thou, as My Knight - Rintaro Hatake"
+                        width="220"
+                        height="330"
+                        loading="eager"
+                        fetchpriority="high"
+                        decoding="async">
+                </picture>
 
           <div class="meta">
             <p><strong>Autor:</strong> Rintaro Hatake</p>
@@ -366,8 +381,54 @@
         <details class="galeria-desplegable">
           <summary>Galería <span style="font-size: 0.85rem; font-weight: normal; color: var(--muted);">(Clica para ver las imagenes)</span></summary>
           <div class="galeria">
-                      <img src="/img/ThouasMyKnight/ThouasMyKnight1-300w.webp" alt="Thou, as My Knight ilustración 1" loading="lazy" decoding="async" width="140" height="210">
-          <img src="/img/ThouasMyKnight/ThouasMyKnight2-300w.webp" alt="Thou, as My Knight ilustración 2" loading="lazy" decoding="async" width="140" height="210">
+                      <picture>
+                <!-- Format AVIF òptim per a miniatures de la galeria -->
+                <source srcset="/img/ThouasMyKnight/ThouasMyKnight1-300w.avif 300w, 
+                                /img/ThouasMyKnight/ThouasMyKnight1-450w.avif 450w" 
+                        sizes="140px" 
+                        type="image/avif">
+
+                <!-- Format WebP de respatller -->
+                <source srcset="/img/ThouasMyKnight/ThouasMyKnight1-300w.webp 300w, 
+                                /img/ThouasMyKnight/ThouasMyKnight1-450w.webp 450w" 
+                        sizes="140px" 
+                        type="image/webp">
+
+                <!-- Imatge per defecte -->
+                <img src="/img/ThouasMyKnight/ThouasMyKnight1-300w.webp" 
+                     srcset="/img/ThouasMyKnight/ThouasMyKnight1-300w.webp 300w, 
+                             /img/ThouasMyKnight/ThouasMyKnight1-450w.webp 450w" 
+                     sizes="140px" 
+                     alt="Thou, as My Knight il·lustració 1" 
+                     loading="lazy" 
+                     width="140" 
+                     height="210" 
+                     decoding="async">
+          </picture>
+          <picture>
+                <!-- Format AVIF òptim per a miniatures de la galeria -->
+                <source srcset="/img/ThouasMyKnight/ThouasMyKnight2-300w.avif 300w, 
+                                /img/ThouasMyKnight/ThouasMyKnight2-450w.avif 450w" 
+                        sizes="140px" 
+                        type="image/avif">
+
+                <!-- Format WebP de respatller -->
+                <source srcset="/img/ThouasMyKnight/ThouasMyKnight2-300w.webp 300w, 
+                                /img/ThouasMyKnight/ThouasMyKnight2-450w.webp 450w" 
+                        sizes="140px" 
+                        type="image/webp">
+
+                <!-- Imatge per defecte -->
+                <img src="/img/ThouasMyKnight/ThouasMyKnight2-300w.webp" 
+                     srcset="/img/ThouasMyKnight/ThouasMyKnight2-300w.webp 300w, 
+                             /img/ThouasMyKnight/ThouasMyKnight2-450w.webp 450w" 
+                     sizes="140px" 
+                     alt="Thou, as My Knight il·lustració 2" 
+                     loading="lazy" 
+                     width="140" 
+                     height="210" 
+                     decoding="async">
+          </picture>
 
           </div>
         </details>
@@ -378,27 +439,127 @@
         <div class="similares-grid">
           
           <a href="/books/WifePleaseBeObedient.html" class="similar-card">
-            <img src="/img/WifePleaseBeObedient/WifePleaseBeObedient-300w.webp" alt="Por favor, compórtate, esposa mía" loading="lazy" width="140" height="210">
+            <picture>
+                <source srcset="/img/WifePleaseBeObedient/WifePleaseBeObedient-300w.avif 300w, 
+                                /img/WifePleaseBeObedient/WifePleaseBeObedient-450w.avif 450w" 
+                        sizes="140px" 
+                        type="image/avif">
+
+                <source srcset="/img/WifePleaseBeObedient/WifePleaseBeObedient-300w.webp 300w, 
+                                /img/WifePleaseBeObedient/WifePleaseBeObedient-450w.webp 450w" 
+                        sizes="140px" 
+                        type="image/webp">
+
+                <img src="/img/WifePleaseBeObedient/WifePleaseBeObedient-300w.webp" 
+                     srcset="/img/WifePleaseBeObedient/WifePleaseBeObedient-300w.webp 300w, 
+                             /img/WifePleaseBeObedient/WifePleaseBeObedient-450w.webp 450w" 
+                     sizes="140px" 
+                     alt="Por favor, compórtate, esposa mía" 
+                     loading="lazy" 
+                     width="140" 
+                     height="210" 
+                     decoding="async">
+            </picture>
             <span>Por favor, compórtate, esposa mía</span>
           </a>
         
           <a href="/books/MeCaseConLaDragonaQueMate.html" class="similar-card">
-            <img src="/img/MeCaseConLaDragonaQueMate/MeCaseConLaDragonaQueMate01-300w.webp" alt="Me Case con la Dragona que Maté" loading="lazy" width="140" height="210">
+            <picture>
+                <source srcset="/img/MeCaseConLaDragonaQueMate/MeCaseConLaDragonaQueMate01-300w.avif 300w, 
+                                /img/MeCaseConLaDragonaQueMate/MeCaseConLaDragonaQueMate01-450w.avif 450w" 
+                        sizes="140px" 
+                        type="image/avif">
+
+                <source srcset="/img/MeCaseConLaDragonaQueMate/MeCaseConLaDragonaQueMate01-300w.webp 300w, 
+                                /img/MeCaseConLaDragonaQueMate/MeCaseConLaDragonaQueMate01-450w.webp 450w" 
+                        sizes="140px" 
+                        type="image/webp">
+
+                <img src="/img/MeCaseConLaDragonaQueMate/MeCaseConLaDragonaQueMate01-300w.webp" 
+                     srcset="/img/MeCaseConLaDragonaQueMate/MeCaseConLaDragonaQueMate01-300w.webp 300w, 
+                             /img/MeCaseConLaDragonaQueMate/MeCaseConLaDragonaQueMate01-450w.webp 450w" 
+                     sizes="140px" 
+                     alt="Me Case con la Dragona que Maté" 
+                     loading="lazy" 
+                     width="140" 
+                     height="210" 
+                     decoding="async">
+            </picture>
             <span>Me Case con la Dragona que Maté</span>
           </a>
         
           <a href="/books/TheDemonKingOverrun.html" class="similar-card">
-            <img src="/img/TheDemonKingOverrun/TheDemonKingOverrun01-300w.webp" alt="Demasiados Héroes para el Rey Demonio" loading="lazy" width="140" height="210">
+            <picture>
+                <source srcset="/img/TheDemonKingOverrun/TheDemonKingOverrun01-300w.avif 300w, 
+                                /img/TheDemonKingOverrun/TheDemonKingOverrun01-450w.avif 450w" 
+                        sizes="140px" 
+                        type="image/avif">
+
+                <source srcset="/img/TheDemonKingOverrun/TheDemonKingOverrun01-300w.webp 300w, 
+                                /img/TheDemonKingOverrun/TheDemonKingOverrun01-450w.webp 450w" 
+                        sizes="140px" 
+                        type="image/webp">
+
+                <img src="/img/TheDemonKingOverrun/TheDemonKingOverrun01-300w.webp" 
+                     srcset="/img/TheDemonKingOverrun/TheDemonKingOverrun01-300w.webp 300w, 
+                             /img/TheDemonKingOverrun/TheDemonKingOverrun01-450w.webp 450w" 
+                     sizes="140px" 
+                     alt="Demasiados Héroes para el Rey Demonio" 
+                     loading="lazy" 
+                     width="140" 
+                     height="210" 
+                     decoding="async">
+            </picture>
             <span>Demasiados Héroes para el Rey Demonio</span>
           </a>
         
           <a href="/books/CDMNQTMHC.html" class="similar-card">
-            <img src="/img/CDMNQTMHC/ShutUpMalevolentDragon01-300w.webp" alt="¡Cállate, dragón malvado! No quiero tener mas hijos contigo." loading="lazy" width="140" height="210">
+            <picture>
+                <source srcset="/img/CDMNQTMHC/ShutUpMalevolentDragon01-300w.avif 300w, 
+                                /img/CDMNQTMHC/ShutUpMalevolentDragon01-450w.avif 450w" 
+                        sizes="140px" 
+                        type="image/avif">
+
+                <source srcset="/img/CDMNQTMHC/ShutUpMalevolentDragon01-300w.webp 300w, 
+                                /img/CDMNQTMHC/ShutUpMalevolentDragon01-450w.webp 450w" 
+                        sizes="140px" 
+                        type="image/webp">
+
+                <img src="/img/CDMNQTMHC/ShutUpMalevolentDragon01-300w.webp" 
+                     srcset="/img/CDMNQTMHC/ShutUpMalevolentDragon01-300w.webp 300w, 
+                             /img/CDMNQTMHC/ShutUpMalevolentDragon01-450w.webp 450w" 
+                     sizes="140px" 
+                     alt="¡Cállate, dragón malvado! No quiero tener mas hijos contigo." 
+                     loading="lazy" 
+                     width="140" 
+                     height="210" 
+                     decoding="async">
+            </picture>
             <span>¡Cállate, dragón malvado! No quiero tener mas hijos contigo.</span>
           </a>
         
           <a href="/books/MushokuTensei.html" class="similar-card">
-            <img src="/img/MushokuTensei/MushokuTensei01-300w.webp" alt="Mushoku Tensei: Jobless Reincarnation" loading="lazy" width="140" height="210">
+            <picture>
+                <source srcset="/img/MushokuTensei/MushokuTensei01-300w.avif 300w, 
+                                /img/MushokuTensei/MushokuTensei01-450w.avif 450w" 
+                        sizes="140px" 
+                        type="image/avif">
+
+                <source srcset="/img/MushokuTensei/MushokuTensei01-300w.webp 300w, 
+                                /img/MushokuTensei/MushokuTensei01-450w.webp 450w" 
+                        sizes="140px" 
+                        type="image/webp">
+
+                <img src="/img/MushokuTensei/MushokuTensei01-300w.webp" 
+                     srcset="/img/MushokuTensei/MushokuTensei01-300w.webp 300w, 
+                             /img/MushokuTensei/MushokuTensei01-450w.webp 450w" 
+                     sizes="140px" 
+                     alt="Mushoku Tensei: Jobless Reincarnation" 
+                     loading="lazy" 
+                     width="140" 
+                     height="210" 
+                     decoding="async">
+            </picture>
             <span>Mushoku Tensei: Jobless Reincarnation</span>
           </a>
         

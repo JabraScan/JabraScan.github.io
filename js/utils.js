@@ -328,6 +328,8 @@ export function seleccionarImagen(nodosImagen) {
 
 // Crea y devuelve un elemento <img> configurado para la obra (imagen es string)
   export function createImg(imagen, nombreobra, tipo) {
+
+    return createPicture(imagen, nombreobra, tipo)
     // Crear el elemento imagen
     const img = document.createElement("img");  
     // Extraer la ruta base sin extensión (.jpg .jpeg .png .webp)
@@ -361,21 +363,8 @@ export function seleccionarImagen(nodosImagen) {
     if (imagen.includes('/')) {
       const webpPath = imagenPath;
       // srcset con varias anchuras en webp; el navegador elegirá la mejor y usará src como fallback
-      img.srcset = `img/${webpPath}-300w.webp${version} 300w, img/${webpPath}-600w.webp${version} 600w, img/${webpPath}-900w.webp${version} 900w`;
-      /*
-      // Ajuste de sizes según device pixel ratio para evitar descargar imágenes sobredimensionadas
-      const dpr = window.devicePixelRatio || 1;
-      if (dpr > 2) {
-        // En pantallas de alta densidad reducimos el ancho efectivo solicitado
-        img.sizes = "(max-width: 576px) 50vw, (max-width: 768px) 33vw, (max-width: 992px) 25vw, 20vw";
-      } else {
-        // Comportamiento por defecto para densidades normales
-        img.sizes = "(max-width: 576px) 100vw, (max-width: 768px) 50vw, (max-width: 992px) 33vw, (max-width: 1200px) 25vw, 20vw";
-      }
-      */
+      img.srcset = `img/${webpPath}-300w.webp${version} 300w, img/${webpPath}-450w.webp${version} 600w${version} 900w`;
       // El sizes estándar de la industria: si la pantalla es menor a 600px ocupa el 100vw, 
-      // de lo contrario se asume un ancho máximo estándar de 600px.
-      //img.sizes = "(max-width: 600px) 100vw, 600px";
       img.sizes = "(max-width: 576px) 55vw, (max-width: 992px) 30vw, 200px";
     }
     // Manejo de error en carga: quitar srcset y reintentar con el src sin query; si falla, ocultar
@@ -812,5 +801,85 @@ export function imgSrcFromBlob(img, path, fallback) {
     img.src = url;
 }
 
+/**
+ * Crea y devuelve un elemento <picture> configurado con soporte AVIF y WebP
+ * utilizando las variantes -300w, -450w y la imagen principal limpia como respaldo.
+ * 
+ * @param {string|Array} imagen - Ruta o array con la ruta de la imagen original.
+ * @param {string} nombreobra - Texto alternativo (alt) para la imagen.
+ * @param {string} [tipo=''] - Tipo de uso ('main' u otro) para ajustar dimensiones.
+ * @returns {HTMLPictureElement}
+ */
+export function createPicture(imagen, nombreobra, tipo = '') {
+  const picture = document.createElement("picture");
 
+  // Normalizar la ruta de la imagen
+  const imgStr = Array.isArray(imagen) ? (imagen[0] || '') : imagen;
+  const imagenPath = imgStr.replace(/\.(jpg|jpeg|png|webp|avif)$/i, '');
+  
+  // Limpiar cualquier sufijo previo si lo hubiera (-300w, -450w, -600w, etc.)
+  let cleanBasePath = imagenPath;
+  //['%-300w', '-450w', '-600w', '-900w', '-1200w'].forEach(suf => {
+  //  if (cleanBasePath.endsWith(suf)) {
+  //    cleanBasePath = cleanBasePath.slice(0, -suf.length);
+  //  }
+  //});
 
+  // Asegurar formato de ruta base limpio (ej: /img/... o img/...)
+  const prefix = cleanBasePath.startsWith('/') || cleanBasePath.startsWith('img/') ? '' : 'img/';
+  const basePathFull = `${prefix}${cleanBasePath}`;
+  const version = '?v=20261017';
+
+  // 1. Elemento <source> para AVIF
+  const sourceAvif = document.createElement("source");
+  sourceAvif.type = "image/avif";
+  sourceAvif.srcset = `${basePathFull}-300w.avif${version} 300w, ${basePathFull}-450w.avif${version} 450w`;
+  sourceAvif.sizes = tipo === 'main' ? "(max-width: 576px) 70vw, 220px" : "140px";
+  picture.appendChild(sourceAvif);
+
+  // 2. Elemento <source> para WebP
+  const sourceWebp = document.createElement("source");
+  sourceWebp.type = "image/webp";
+  sourceWebp.srcset = `${basePathFull}-300w.webp${version} 300w, ${basePathFull}-450w.webp${version} 450w`;
+  sourceWebp.sizes = tipo === 'main' ? "(max-width: 576px) 70vw, 220px" : "140px";
+  picture.appendChild(sourceWebp);
+
+  // 3. Elemento <img> por defecto / respaldo
+  const img = document.createElement("img");
+  
+  // Si incluye barra, usamos la versión WebP limpia (sin sufijo) o -300w como src principal
+  if (imgStr.includes('/')) {
+    img.src = `${basePathFull}.webp${version}`;
+  } else {
+    img.src = `${basePathFull}.webp${version}`;
+  }
+  
+  img.srcset = `${basePathFull}-300w.webp${version} 300w, ${basePathFull}-450w.webp${version} 450w`;
+  
+  if (tipo === 'main') {
+    img.sizes = "(max-width: 576px) 70vw, 220px";
+    img.width = 220;
+    img.height = 330;
+    img.className = "portada";
+    img.loading = "eager";
+    img.setAttribute("fetchpriority", "high");
+  } else {
+    img.sizes = "140px";
+    img.width = 140;
+    img.height = 210;
+    img.loading = "lazy";
+  }
+
+  img.alt = nombreobra;
+  img.decoding = "async";
+
+  // Manejo de error básico de respaldo
+  img.onerror = function () {
+    this.removeAttribute('srcset');
+    this.src = `img/${imgStr}`;
+    this.onerror = function () { this.onerror = null; this.style.display = 'none'; };
+  };
+
+  picture.appendChild(img);
+  return picture;
+}
