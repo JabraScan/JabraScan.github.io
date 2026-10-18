@@ -335,7 +335,7 @@ export function seleccionarImagen(nodosImagen) {
     // Extraer la ruta base sin extensión (.jpg .jpeg .png .webp)
     const imagenPath = (Array.isArray(imagen) ? (imagen[0] || '') : imagen).replace(/\.(jpg|jpeg|png|webp)$/i, '');
     // Src principal con cache-busting; sirve como fallback si no hay versiones optimizadas
-    const version = '?v=20260930';
+    const version = '?v=20261018';
     //img.src = `img/${Array.isArray(imagen) ? (imagen[0] || '') : imagen}${version}`;
     // Después
     if (imagen.includes('/')) {
@@ -828,7 +828,7 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   // Asegurar formato de ruta base limpio (ej: /img/... o img/...)
   const prefix = cleanBasePath.startsWith('/') || cleanBasePath.startsWith('img/') ? '' : 'img/';
   const basePathFull = `${prefix}${cleanBasePath}`;
-  const version = '?v=20261017';
+  const version = '?v=20261018';
 
   // 1. Elemento <source> para AVIF
   const sourceAvif = document.createElement("source");

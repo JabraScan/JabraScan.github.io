@@ -158,10 +158,10 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
           //const pdfBackup = `https://pdfs.jabrascan.net/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
           const pdfBackup = `https://raw.githubusercontent.com/JabraScan/JabraScan.github.io-pdfs/main/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
         //
-          //const pdfPath = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+          const pdfPath = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
           // server = "local"  → usar pdfLocal
           // server = "io-pdfs" → usar pdfBackup
-          const pdfPath = (server === "local") ? pdfLocal : pdfBackup;
+          //se revierte al enlazar la carpeta con el repo const pdfPath = (server === "local") ? pdfLocal : pdfBackup;
 
   //console.log(`server = ${server}`);
   console.log(`pdfPath = ${pdfPath}`);
@@ -191,14 +191,14 @@ function actualizarTituloObra(titulo, clave) {
     divBanner.innerHTML = `
       <span>Traducción aprobada por el autor</span><br>
       <span><strong>Discord Oficial :</strong> <a href="https://discord.gg/Mk2qb65AxA" target="_blank">https://discord.gg/Mk2qb65AxA</a></span><br>
-      <img src="/img/discord_oficial_jabrascan.webp?v=20261006"
+      <img src="/img/discord_oficial_jabrascan.webp?v=20261018"
           alt="Discord Oficial habla hispana"
           style="max-width:90%"
           decoding="async" fetchpriority="high"
-          srcset="/img/discord_oficial_jabrascan-300w.webp?v=20261006 300w,
-                  /img/discord_oficial_jabrascan-450w.webp?v=20261006 600w,
-                  /img/discord_oficial_jabrascan-600w.webp?v=20261006 600w,
-                  /img/discord_oficial_jabrascan-900w.webp?v=20261006 900w"
+          srcset="/img/discord_oficial_jabrascan-300w.webp?v=20261018 300w,
+                  /img/discord_oficial_jabrascan-450w.webp?v=20261018 600w,
+                  /img/discord_oficial_jabrascan-600w.webp?v=20261018 600w,
+                  /img/discord_oficial_jabrascan-900w.webp?v=20261018 900w"
                   sizes="(max-width: 576px) 70vw, (max-width: 992px) 40vw, 300px">
     `;
     datosAdic.appendChild(divBanner);
