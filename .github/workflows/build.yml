@@ -13,6 +13,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 🔑 Forzar a Git a autenticarse usando el token en las URLs de los submódulos
+      - name: Configurar credenciales para submódulos
+        run: |
+          git config --global url."https://${{ secrets.ACTIONS_DEPLOY_KEY }}@github.com/".insteadOf "https://github.com/"
+
+      # 1️⃣ Checkout del repositorio con historial completo y submódulos privados
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+          token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
       # 1️⃣ Checkout del repositorio con historial completo
       - name: Checkout
         uses: actions/checkout@v4
