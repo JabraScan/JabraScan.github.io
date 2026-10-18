@@ -193,8 +193,8 @@ export function cargarlibro(libroId) {
             ...c,
             fechaObj: parseDateDMY(c.Fecha),
             capNum: parseChapterNumber(c.numCapitulo),
-            //server: c.server ?? "io-pdfs"
-            server: c.server
+            server: "io-pdfs"
+            //server: c.server
           }))
           .filter(c => c.fechaObj)
           .sort((a, b) => {

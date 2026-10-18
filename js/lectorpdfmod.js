@@ -109,7 +109,7 @@ export function cargarCapitulo(clave, capitulo, paginaInicial = 1) {
           _clave: clave,
           _fecha: parseDateDMY(cap.Fecha),
           _num: parseChapterNumber(cap.numCapitulo),
-          _server: cap.server ?? "io-pdfs"
+          _server: "io-pdfs"
         }))
         .filter(cap => cap._fecha <= hoy); // ✅ solo capítulos con fecha <= hoy
         const idx = capitulosObra.findIndex(c => c.numCapitulo === capitulo);
@@ -135,10 +135,11 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
       const numCapitulo = capitulosObra[idx].numCapitulo;
       //const server = (capitulosObra[idx]._server || "io-pdfs"); 
       //["CDMNQTMHC", "CultivationOnline", "DualCultivation", "PathtoDualCultivation"]
-      const server = (
-                        ["CDMNQTMHC", "CultivationOnline"]
-                          .includes(clave)
-                      ) ? "local" : "io-pdfs";
+      //const server = (
+      //                  ["CDMNQTMHC", "CultivationOnline"]
+      //                    .includes(clave)
+      //                ) ? "local" : "io-pdfs";
+      const server = "io-pdfs"
       /*const server = ["local", "io-pdfs"].includes(capitulosObra[idx]._server)
         ? capitulosObra[idx]._server
         : (["CDMNQTMHC","CultivationOnline","DualCultivation","PathtoDualCultivation"].includes(clave)
@@ -158,13 +159,13 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
           //const pdfBackup = `https://pdfs.jabrascan.net/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
           const pdfBackup = `https://raw.githubusercontent.com/JabraScan/JabraScan.github.io-pdfs/main/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
         //
-          const pdfPath = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
+          //const pdfPath = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
           // server = "local"  → usar pdfLocal
           // server = "io-pdfs" → usar pdfBackup
-          //se revierte al enlazar la carpeta con el repo const pdfPath = (server === "local") ? pdfLocal : pdfBackup;
+          const pdfPath = (server === "local") ? pdfLocal : pdfBackup;
 
   //console.log(`server = ${server}`);
-  console.log(`pdfPath = ${pdfPath}`);
+  //console.log(`pdfPath = ${pdfPath}`);
   //debugger;
               
       pdfjsLib.getDocument(pdfPath).promise.then(doc => {
