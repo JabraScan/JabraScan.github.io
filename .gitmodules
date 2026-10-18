@@ -1,3 +1,6 @@
 [submodule "img"]
 	path = img
 	url = https://github.com/JabraScan/img.git
+[submodule "books"]
+	path = books
+	url = https://github.com/JabraScan/books.git
