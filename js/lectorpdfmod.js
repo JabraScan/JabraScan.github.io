@@ -162,7 +162,8 @@ function cargarPDF(clave, nombreArchivo, paginaInicial, idx, capitulosObra) {
           //const pdfPath = `/books/${claveFinal}/${encodeURIComponent(nombreArchivo)}`;
           // server = "local"  → usar pdfLocal
           // server = "io-pdfs" → usar pdfBackup
-          const pdfPath = (server === "local") ? pdfLocal : pdfBackup;
+          //const pdfPath = (server === "local") ? pdfLocal : pdfBackup;
+          const pdfPath = pdfBackup;
 
   //console.log(`server = ${server}`);
   //console.log(`pdfPath = ${pdfPath}`);
