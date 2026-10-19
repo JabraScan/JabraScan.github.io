@@ -1,0 +1,24 @@
+.bat {
+    position:fixed;
+    width:40px;
+    height:20px;
+    background:url('https://commons.wikimedia.org/wiki/Category:Bat_silhouettes#/media/File:Bat_shadow_black.svg') no-repeat center/contain;
+    animation:fly 10s linear infinite;
+    z-index:9999;
+}
+@keyframes fly {
+    fromtransform:translateX(-100px) translateY(0);
+}
+to {
+    transform:translateX(110vw) translateY(0);
+}
+}
+@media (prefers-reduced-motion:reduce) {
+    .batanimation:none !important;
+}
+}
+@media (max-width:600px) {
+    .batwidth:25px;
+    height:12px;
+}
+}
