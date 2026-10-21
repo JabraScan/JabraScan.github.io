@@ -37,7 +37,7 @@
 	</obra>	
 
 	<obra>	
-		<visible>no</visible>
+		<visible>si</visible>
 		<clave>SoloSwordMaster</clave>
 		<nombreobra>Solo Swordmaster</nombreobra>
 		<nombreobra>Espadachín Solitario</nombreobra>
@@ -84,7 +84,7 @@
 		<observaciones />
 		<discord />
 		<bannerOpcional />
-		<wiki />
+		<wiki/>
 	</obra>
 	<obra>	
 		<visible>si</visible>
