@@ -365,7 +365,11 @@ export function seleccionarImagen(nodosImagen) {
       // srcset con varias anchuras en webp; el navegador elegirá la mejor y usará src como fallback
       img.srcset = `img/${webpPath}-300w.webp${version} 300w, img/${webpPath}-450w.webp${version} 600w${version} 900w`;
       // El sizes estándar de la industria: si la pantalla es menor a 600px ocupa el 100vw, 
-      img.sizes = "(max-width: 576px) 55vw, (max-width: 992px) 30vw, 200px";
+      if (tipo !== 'main') {
+        img.sizes = "(max-width: 576px) 196px, 196px";
+      } else {
+        img.sizes = "(max-width: 576px) 55vw, (max-width: 992px) 30vw, 200px";
+      }
     }
     // Manejo de error en carga: quitar srcset y reintentar con el src sin query; si falla, ocultar
     img.onerror = function () {
