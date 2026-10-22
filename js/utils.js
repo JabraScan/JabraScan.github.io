@@ -838,8 +838,12 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   //sizes para tamaños alternativos 150-225-338-450-675-900
   //const sizesMain="(min-width: 1200px) 220px, (min-width: 576px) 25vw, 45vw"
   //const sizesMain = "(min-width: 768px) 196px, 100vw";
-  const sizesMain = "(max-width: 300px) 150px, 225px";
-  const sizesOther = "140px"; // O el valor que corresponda si no es 'main'
+  //const sizesMain = "(max-width: 200px): 150px, (max-width: 300px) 225px, 225px";
+  //const sizesOther = "140px"; // O el valor que corresponda si no es 'main'
+  // Para las fichas principales (width: 220px)
+  const sizesMain = "(max-width: 220px) 100vw, 220px";
+  // Para las secundarias (width: 140px)
+  const sizesOther = "(max-width: 140px) 100vw, 140px";
 
   // El srcset completo con todas tus variantes disponibles
   //const srcsetAvif = `${basePathFull}-300w.avif${version} 300w, ${basePathFull}-450w.avif${version} 450w, ${basePathFull}-600w.avif${version} 600w, ${basePathFull}-900w.avif${version} 900w`;
