@@ -841,7 +841,7 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   //const sizesMain = "(max-width: 200px): 150px, (max-width: 300px) 225px, 225px";
   //const sizesOther = "140px"; // O el valor que corresponda si no es 'main'
   // Para las fichas principales (width: 220px)
-  const sizesMain = "(max-width: 220px) 100vw, 220px";
+  const sizesMain = "(max-width: 220px) 100vw, (min-width: 580px) 450w, 220px";
   // Para las secundarias (width: 140px)
   const sizesOther = "(max-width: 140px) 100vw, 140px";
 
