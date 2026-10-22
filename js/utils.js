@@ -823,42 +823,39 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   
   // Limpiar cualquier sufijo previo si lo hubiera (-300w, -450w, -600w, etc.)
   let cleanBasePath = imagenPath;
-  //['%-300w', '-450w', '-600w', '-900w', '-1200w'].forEach(suf => {
-  //  if (cleanBasePath.endsWith(suf)) {
-  //    cleanBasePath = cleanBasePath.slice(0, -suf.length);
-  //  }
-  //});
 
   // Asegurar formato de ruta base limpio (ej: /img/... o img/...)
   const prefix = cleanBasePath.startsWith('/') || cleanBasePath.startsWith('img/') ? '' : 'img/';
   const basePathFull = `${prefix}${cleanBasePath}`;
   const version = '?v=20261018';
 
+// Definir los sizes adaptativos correctos (evitando el 70vw erróneo)
+  // - Para 'main' (fichas de obra): en pantallas grandes máx 220px, en medianas 48vw, en móvil 95vw.
+  const sizesMain = "(min-width: 992px) 220px, (min-width: 576px) 48vw, 95vw";
+  const sizesOther = "140px"; // O el valor que corresponda si no es 'main'
+
+  // El srcset completo con todas tus variantes disponibles
+  const srcsetAvif = `${basePathFull}-300w.avif${version} 300w, ${basePathFull}-450w.avif${version} 450w, ${basePathFull}-600w.avif${version} 600w, ${basePathFull}-900w.avif${version} 900w`;
+  const srcsetWebp = `${basePathFull}-300w.webp${version} 300w, ${basePathFull}-450w.webp${version} 450w, ${basePathFull}-600w.webp${version} 600w, ${basePathFull}-900w.webp${version} 900w`;
+
   // 1. Elemento <source> para AVIF
   const sourceAvif = document.createElement("source");
   sourceAvif.type = "image/avif";
-  sourceAvif.srcset = `${basePathFull}-300w.avif${version} 300w, ${basePathFull}-450w.avif${version} 450w`;
-  sourceAvif.sizes = tipo === 'main' ? "(max-width: 576px) 70vw, 220px" : "140px";
+  sourceAvif.srcset = srcsetAvif;
+  sourceAvif.sizes = tipo === 'main' ? sizesMain : sizesOther;
   picture.appendChild(sourceAvif);
 
   // 2. Elemento <source> para WebP
   const sourceWebp = document.createElement("source");
   sourceWebp.type = "image/webp";
-  sourceWebp.srcset = `${basePathFull}-300w.webp${version} 300w, ${basePathFull}-450w.webp${version} 450w`;
-  sourceWebp.sizes = tipo === 'main' ? "(max-width: 576px) 70vw, 220px" : "140px";
+  sourceWebp.srcset = srcsetWebp;
+  sourceWebp.sizes = tipo === 'main' ? sizesMain : sizesOther;
   picture.appendChild(sourceWebp);
 
   // 3. Elemento <img> por defecto / respaldo
   const img = document.createElement("img");
-  
-  // Si incluye barra, usamos la versión WebP limpia (sin sufijo) o -300w como src principal
-  if (imgStr.includes('/')) {
-    img.src = `${basePathFull}.webp${version}`;
-  } else {
-    img.src = `${basePathFull}.webp${version}`;
-  }
-  
-  img.srcset = `${basePathFull}-300w.webp${version} 300w, ${basePathFull}-450w.webp${version} 450w`;
+  img.src = `${basePathFull}.webp${version}`;
+  img.srcset = srcsetWebp; // Se recomienda usar el mismo srcset completo en el img
   
   if (tipo === 'main') {
     img.sizes = "(max-width: 576px) 70vw, 220px";
@@ -883,7 +880,7 @@ export function createPicture(imagen, nombreobra, tipo = '') {
     this.src = `img/${imgStr}`;
     this.onerror = function () { this.onerror = null; this.style.display = 'none'; };
   };
-
   picture.appendChild(img);
+  
   return picture;
 }
