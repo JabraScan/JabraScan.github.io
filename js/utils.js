@@ -836,15 +836,16 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   //const sizesMain = "(min-width: 1200px) 220px, (min-width: 768px) 35vw, 90vw"
   //const sizesMain ="(min-width: 992px) 220px, (min-width: 576px) 30vw, 45vw"
   //sizes para tamaños alternativos 150-225-338-450-675-900
-  const sizesMain="(min-width: 1200px) 220px, (min-width: 576px) 25vw, 45vw"
+  //const sizesMain="(min-width: 1200px) 220px, (min-width: 576px) 25vw, 45vw"
+  //const sizesMain = "(min-width: 768px) 196px, 100vw";
+  const sizesMain = "(max-width: 300px) 150px, 225px";
   const sizesOther = "140px"; // O el valor que corresponda si no es 'main'
 
   // El srcset completo con todas tus variantes disponibles
   //const srcsetAvif = `${basePathFull}-300w.avif${version} 300w, ${basePathFull}-450w.avif${version} 450w, ${basePathFull}-600w.avif${version} 600w, ${basePathFull}-900w.avif${version} 900w`;
   //const srcsetWebp = `${basePathFull}-300w.webp${version} 300w, ${basePathFull}-450w.webp${version} 450w, ${basePathFull}-600w.webp${version} 600w, ${basePathFull}-900w.webp${version} 900w`;
-  const srcsetAvif = `${basePathFull}-150w.avif${version} 150w, ${basePathFull}-225w.avif${version} 225w, ${basePathFull}-338w.avif${version} 338w, ${basePathFull}-450w.avif${version} 450w, ${basePathFull}-675w.avif${version} 675w, ${basePathFull}-900w.avif{$version} 900w`;
-  const srcsetWebp = `${basePathFull}-150w.webp${version} 150w, ${basePathFull}-225w.webp${version} 225w, ${basePathFull}-338w.webp${version} 338w, ${basePathFull}-450w.webp${version} 450w, ${basePathFull}-675w.webp${version} 675w, ${basePathFull}-900w.webp{$version} 900w`;
-
+  const srcsetAvif = `${basePathFull}-150w.avif${version} 150w, ${basePathFull}-225w.avif${version} 225w, ${basePathFull}-338w.avif${version} 338w, ${basePathFull}-450w.avif${version} 450w, ${basePathFull}-675w.avif${version} 675w, ${basePathFull}-900w.avif${version} 900w`;
+  const srcsetWebp = `${basePathFull}-150w.webp${version} 150w, ${basePathFull}-225w.webp${version} 225w, ${basePathFull}-338w.webp${version} 338w, ${basePathFull}-450w.webp${version} 450w, ${basePathFull}-675w.webp${version} 675w, ${basePathFull}-900w.webp${version} 900w`;
 
   // 1. Elemento <source> para AVIF
   const sourceAvif = document.createElement("source");
@@ -866,7 +867,8 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   img.srcset = srcsetWebp; // Se recomienda usar el mismo srcset completo en el img
   
   if (tipo === 'main') {
-    img.sizes = "(max-width: 576px) 70vw, 220px";
+    //img.sizes = "(max-width: 576px) 70vw, 220px";
+    img.sizes = "(min-width: 576px) 220px, 70vw";
     img.width = 220;
     img.height = 330;
     img.className = "portada";
