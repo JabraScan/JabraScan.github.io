@@ -831,7 +831,8 @@ export function createPicture(imagen, nombreobra, tipo = '') {
 
 // Definir los sizes adaptativos correctos (evitando el 70vw erróneo)
   // - Para 'main' (fichas de obra): en pantallas grandes máx 220px, en medianas 48vw, en móvil 95vw.
-  const sizesMain = "(min-width: 992px) 220px, (min-width: 576px) 48vw, 95vw";
+  //const sizesMain = "(min-width: 992px) 220px, (min-width: 576px) 48vw, 95vw";
+  const sizesMain = "(min-width: 1200px) 220px, (min-width: 768px) 35vw, 90vw"
   const sizesOther = "140px"; // O el valor que corresponda si no es 'main'
 
   // El srcset completo con todas tus variantes disponibles
@@ -881,6 +882,6 @@ export function createPicture(imagen, nombreobra, tipo = '') {
     this.onerror = function () { this.onerror = null; this.style.display = 'none'; };
   };
   picture.appendChild(img);
-  
+
   return picture;
 }
