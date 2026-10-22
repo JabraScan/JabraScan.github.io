@@ -826,7 +826,7 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   cleanBasePath = cleanBasePath.replace(/^(img2\/|img\/)/, '');
 
   // Asegurar formato de ruta base limpio (ej: /img/... o img/...)
-  const prefix = cleanBasePath.startsWith('/') || cleanBasePath.startsWith('img2/') ? '' : 'img2/';
+  const prefix = cleanBasePath.startsWith('/') || cleanBasePath.startsWith('img2/') ? '/' : '/img2/';
   const basePathFull = `${prefix}${cleanBasePath}`;
   const version = '?v=20261022';
 
@@ -891,7 +891,7 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   // Manejo de error básico de respaldo
   img.onerror = function () {
     this.removeAttribute('srcset');
-    this.src = `img2/${imgStr}`;
+    this.src = `/img2/${imgStr}`;
     this.onerror = function () { this.onerror = null; this.style.display = 'none'; };
   };
   picture.appendChild(img);
