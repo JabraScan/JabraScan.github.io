@@ -841,9 +841,9 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   //const sizesMain = "(max-width: 200px): 150px, (max-width: 300px) 225px, 225px";
   //const sizesOther = "140px"; // O el valor que corresponda si no es 'main'
   // Para las fichas principales (width: 220px)
-  const sizesMain  = "(max-width: 220px) 100vw, (min-width: 580px) 450w, 220px";
+  const sizesMain = "(max-width: 220px) 100vw, (min-width: 580px) 420w, 220px";
   // Para las secundarias (width: 140px)
-  const sizesOther = "(max-width: 140px) 100vw, (min-width: 600px) 450w, 140px";
+  const sizesOther = "(max-width: 140px) 100vw, 140px";
 
   // El srcset completo con todas tus variantes disponibles
   //const srcsetAvif = `${basePathFull}-300w.avif${version} 300w, ${basePathFull}-450w.avif${version} 450w, ${basePathFull}-600w.avif${version} 600w, ${basePathFull}-900w.avif${version} 900w`;
