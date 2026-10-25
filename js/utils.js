@@ -823,7 +823,7 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   const picture = document.createElement("picture");
 
   // Normalizar la ruta de la imagen
-  const imgStr = Array.isArray(imagen) ? (imagen[0] || '') : imagen;
+  const imgStr = (Array.isArray(imagen) ? (imagen[0] || '') : imagen).replace(/ /g, '%20');;
   const imagenPath = imgStr.replace(/\.(jpg|jpeg|png|webp|avif)$/i, '');
   
   // Limpiar cualquier sufijo previo si lo hubiera (-300w, -450w, -600w, etc.)
@@ -833,7 +833,7 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   // Asegurar formato de ruta base limpio (ej: /img/... o img/...)
   let prefix = cleanBasePath.startsWith('/') || cleanBasePath.startsWith('img/') ? '/' : '/img/';
   prefix = prefix.replace('/img/', `${imgorigen}`)
-  const basePathFull = `${prefix}${cleanBasePath}`;
+  const basePathFull = `${prefix}${cleanBasePath}.replace(/ /g, '%20');`;
   const version = '?v=20261022';
 
 // Definir los sizes adaptativos correctos (evitando el 70vw erróneo)
