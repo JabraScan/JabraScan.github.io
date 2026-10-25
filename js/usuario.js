@@ -13,7 +13,7 @@ import { cargarTiendaDemo } from'./biblioteca.js';
 // Config y constantes
 // -------------------------
 const API_BASE = "https://jabrascan.net";
-const FALLBACK_IMG = "/img/avatar/default.webp";
+const FALLBACK_IMG = "https://img.jabrascan.net/avatar/default.webp";
 const usuario_id = getItem("user_id");
 const nickname = getItem("user_nickname");
 const avatar = getItem("user_avatar");
@@ -217,7 +217,7 @@ export function authFetch(input, init = {}) {
           li.dataset.obraId = item.obra_id ?? "";
     //console.log(item);     
           // normalizar item.imagen y limpiar comillas, backslashes, prefijos img/ y slashes iniciales
-          let srcCandidate = '/img/' + (
+          let srcCandidate = 'https://img.jabrascan.net/' + (
                               String(item.imagen ?? '')
                                 .replace(/^"+|"+$/g, '')           // quitar comillas literales alrededor
                                 .replace(/\\/g, '/')               // convertir backslashes a slash
@@ -473,7 +473,7 @@ export function authFetch(input, init = {}) {
       li.dataset.obraId = item.obra_id ?? "";
   
       // Normalizar imagen (misma lógica que en cargarBiblioteca)
-      let srcCandidate = '/img/' + (
+      let srcCandidate = 'https://img.jabrascan.net/' + (
         String(item.imagen ?? '')
           .replace(/^"+|"+$/g, '')
           .replace(/\\/g, '/')

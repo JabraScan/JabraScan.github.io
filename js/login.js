@@ -2,7 +2,7 @@
 //import { imgSrcFromBlob } from './utils.js';
 
 const WORKER_URL = "https://jabrascan.net";
-const FALLBACK_IMG = "/img/avatar/default.webp";
+const FALLBACK_IMG = "https://img.jabrascan.net/avatar/default.webp";
 
 //Funcion duplicada de utils
       function imgSrcFromBlobCopia(img, path, fallback) {

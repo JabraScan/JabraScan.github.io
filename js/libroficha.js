@@ -4,6 +4,13 @@ import { activarLinksPDF, activarPaginacion } from './eventos.js';
 import { incrementarVisita, leerVisitas, obtenerInfo, valorarRecurso, consultarVotos } from './contadoresGoogle.js';
 import { mostrarurl } from './general.js';
 import { addToBiblio } from './usuario.js';
+
+// ==========================================
+// CONFIGURACIÓN GLOBAL
+// ==========================================
+const BASE_URL       = "https://jabrascan.net/"
+const IMAGE_BASE_URL = "https://img.jabrascan.net/"
+const BOOKS_BASE_URL = "https://jabrascan.net/books/"
 /**
  * Carga los datos de una obra y renderiza sus capítulos.
  * @param {string} libroId - Clave identificadora de la obra.
@@ -340,11 +347,11 @@ function textSEO(datos) {
   const map = Object.fromEntries(datos.map(item => [item.propiedad, item.valor]));
 
   // Obtenemos la primera imagen de forma segura (por si es un array)
-  const primeraImagen = "https://jabrascan.net/img/" + (Array.isArray(map.imagen) ? (map.imagen[0] || '') : map.imagen);
+  const primeraImagen = "${IMAGE_BASE_URL}" + (Array.isArray(map.imagen) ? (map.imagen[0] || '') : map.imagen);
   // URL limpia y permanente para que Google la indexe correctamente
-  const urlIndexable = `https://jabrascan.net/books/${map.clave || ''}.html`;
+  const urlIndexable = `${BOOKS_BASE_URL}${map.clave || ''}.html`;
   // URL con hash para la navegación interna de tu SPA
-  const urlAppHash = `https://jabrascan.net/#${map.clave || ''}`;
+  const urlAppHash = `${BASE_URL}#${map.clave || ''}`;
   //
   const arraycategorias = Array.isArray(map.categoria)
   ? map.categoria
@@ -372,7 +379,7 @@ function textSEO(datos) {
             <meta property="og:title" content="${map.nombreobra || ''}">
             <meta property="og:description" content="${map.meta || ''}">
             <meta property="og:image" content="${primeraImagen}">
-            <meta property="og:url" content="https://jabrascan.net/books/${map.clave || ''}.html">
+            <meta property="og:url" content="${BOOKS_BASE_URL}${map.clave || ''}.html">
             <meta property="og:locale" content="es_ES"> 
     `;
   const twittercards = `

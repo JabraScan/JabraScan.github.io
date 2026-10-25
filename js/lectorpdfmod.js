@@ -193,14 +193,14 @@ function actualizarTituloObra(titulo, clave) {
     divBanner.innerHTML = `
       <span>Traducción aprobada por el autor</span><br>
       <span><strong>Discord Oficial :</strong> <a href="https://discord.gg/Mk2qb65AxA" target="_blank">https://discord.gg/Mk2qb65AxA</a></span><br>
-      <img src="/img/discord_oficial_jabrascan.webp?v=20261018"
+      <img src="https://img.jabrascan.net/discord_oficial_jabrascan.webp?v=20261018"
           alt="Discord Oficial habla hispana"
           style="max-width:90%"
           decoding="async" fetchpriority="high"
-          srcset="/img/discord_oficial_jabrascan-300w.webp?v=20261018 300w,
-                  /img/discord_oficial_jabrascan-450w.webp?v=20261018 600w,
-                  /img/discord_oficial_jabrascan-600w.webp?v=20261018 600w,
-                  /img/discord_oficial_jabrascan-900w.webp?v=20261018 900w"
+          srcset="https://img.jabrascan.net/discord_oficial_jabrascan-300w.webp?v=20261018 300w,
+                  https://img.jabrascan.net/discord_oficial_jabrascan-450w.webp?v=20261018 600w,
+                  https://img.jabrascan.net/discord_oficial_jabrascan-600w.webp?v=20261018 600w,
+                  https://img.jabrascan.net/discord_oficial_jabrascan-900w.webp?v=20261018 900w"
                   sizes="(max-width: 576px) 70vw, (max-width: 992px) 40vw, 300px">
     `;
     datosAdic.appendChild(divBanner);

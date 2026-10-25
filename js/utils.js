@@ -330,6 +330,8 @@ export function seleccionarImagen(nodosImagen) {
   export function createImg(imagen, nombreobra, tipo) {
 
     return createPicture(imagen, nombreobra, tipo)
+    // Establecer origen img
+    const imgorigen = "https://img.jabrascan.net/"
     // Crear el elemento imagen
     const img = document.createElement("img");  
     // Extraer la ruta base sin extensión (.jpg .jpeg .png .webp)
@@ -340,9 +342,9 @@ export function seleccionarImagen(nodosImagen) {
     // Después
     if (imagen.includes('/')) {
       // Usamos la versión 300w como src principal
-      img.src = `img/${imagenPath}-300w.webp${version}`;
+      img.src = `${imgorigen}/${imagenPath}-300w.webp${version}`;
     } else {
-      img.src = `img/${Array.isArray(imagen) ? (imagen[0] || '') : imagen}${version}`;
+      img.src = `${imgorigen}/${Array.isArray(imagen) ? (imagen[0] || '') : imagen}${version}`;
     }
     // Texto alternativo accesible
     img.alt = nombreobra;  
@@ -363,7 +365,7 @@ export function seleccionarImagen(nodosImagen) {
     if (imagen.includes('/')) {
       const webpPath = imagenPath;
       // srcset con varias anchuras en webp; el navegador elegirá la mejor y usará src como fallback
-      img.srcset = `img/${webpPath}-300w.webp${version} 300w, img/${webpPath}-450w.webp${version} 600w${version} 900w`;
+      img.srcset = `${imgorigen}/${webpPath}-300w.webp${version} 300w, ${imgorigen}/${webpPath}-450w.webp${version} 600w${version} 900w`;
       // El sizes estándar de la industria: si la pantalla es menor a 600px ocupa el 100vw, 
       if (tipo !== 'main') {
         img.sizes = "(max-width: 576px) 196px, 196px";
@@ -374,7 +376,7 @@ export function seleccionarImagen(nodosImagen) {
     // Manejo de error en carga: quitar srcset y reintentar con el src sin query; si falla, ocultar
     img.onerror = function () {
       this.removeAttribute('srcset');
-      this.src = `img/${imagen}`;
+      this.src = `${imgorigen}/${imagen}`;
       this.onerror = function () { this.onerror = null; this.style.display = 'none'; };
     };  
     return img;
@@ -815,6 +817,9 @@ export function imgSrcFromBlob(img, path, fallback) {
  * @returns {HTMLPictureElement}
  */
 export function createPicture(imagen, nombreobra, tipo = '') {
+  // Establecer origen img
+  const imgorigen = "https://img.jabrascan.net/"
+  //
   const picture = document.createElement("picture");
 
   // Normalizar la ruta de la imagen
@@ -823,10 +828,11 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   
   // Limpiar cualquier sufijo previo si lo hubiera (-300w, -450w, -600w, etc.)
   let cleanBasePath = imagenPath;
-  cleanBasePath = cleanBasePath.replace(/^(img2\/|img\/)/, '');
+  cleanBasePath = cleanBasePath.replace(/^(img\/|img\/)/, '');
 
   // Asegurar formato de ruta base limpio (ej: /img/... o img/...)
-  const prefix = cleanBasePath.startsWith('/') || cleanBasePath.startsWith('img2/') ? '/' : '/img2/';
+  let prefix = cleanBasePath.startsWith('/') || cleanBasePath.startsWith('img/') ? '/' : '/img/';
+  prefix = prefix.replace('/img/', `${imgorigen}`)
   const basePathFull = `${prefix}${cleanBasePath}`;
   const version = '?v=20261022';
 
@@ -841,15 +847,15 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   //const sizesMain = "(max-width: 200px): 150px, (max-width: 300px) 225px, 225px";
   //const sizesOther = "140px"; // O el valor que corresponda si no es 'main'
   // Para las fichas principales (width: 220px)
-  const sizesMain = "(max-width: 220px) 100vw, (min-width: 580px) 420w, 220px";
+  const sizesMain  = "(max-width: 220px) 100vw, (min-width: 580px) 450px, 220px";
   // Para las secundarias (width: 140px)
-  const sizesOther = "(max-width: 140px) 100vw, 140px";
+  const sizesOther = "(max-width: 140px) 100vw, (min-width: 600px) 450px, 140px";
 
   // El srcset completo con todas tus variantes disponibles
   //const srcsetAvif = `${basePathFull}-300w.avif${version} 300w, ${basePathFull}-450w.avif${version} 450w, ${basePathFull}-600w.avif${version} 600w, ${basePathFull}-900w.avif${version} 900w`;
   //const srcsetWebp = `${basePathFull}-300w.webp${version} 300w, ${basePathFull}-450w.webp${version} 450w, ${basePathFull}-600w.webp${version} 600w, ${basePathFull}-900w.webp${version} 900w`;
-  const srcsetAvif = `${basePathFull}-150w.avif${version} 150w, ${basePathFull}-225w.avif${version} 225w, ${basePathFull}-338w.avif${version} 338w, ${basePathFull}-450w.avif${version} 450w, ${basePathFull}-675w.avif${version} 675w, ${basePathFull}-900w.avif${version} 900w`;
-  const srcsetWebp = `${basePathFull}-150w.webp${version} 150w, ${basePathFull}-225w.webp${version} 225w, ${basePathFull}-338w.webp${version} 338w, ${basePathFull}-450w.webp${version} 450w, ${basePathFull}-675w.webp${version} 675w, ${basePathFull}-900w.webp${version} 900w`;
+  const srcsetAvif = `${basePathFull}-150w.avif${version} 150w, ${basePathFull}-225w.avif${version} 225w, ${basePathFull}-300w.avif${version} 300w, ${basePathFull}-338w.avif${version} 338w, ${basePathFull}-450w.avif${version} 450w, ${basePathFull}-600w.avif${version} 600w, ${basePathFull}-675w.avif${version} 675w, ${basePathFull}-900w.avif${version} 900w`;
+  const srcsetWebp = `${basePathFull}-150w.webp${version} 150w, ${basePathFull}-225w.webp${version} 225w, ${basePathFull}-300w.webp${version} 300w, ${basePathFull}-338w.webp${version} 338w, ${basePathFull}-450w.webp${version} 450w, ${basePathFull}-600w.webp${version} 600w, ${basePathFull}-675w.webp${version} 675w, ${basePathFull}-900w.webp${version} 900w`;
 
   // 1. Elemento <source> para AVIF
   const sourceAvif = document.createElement("source");
@@ -867,19 +873,19 @@ export function createPicture(imagen, nombreobra, tipo = '') {
 
   // 3. Elemento <img> por defecto / respaldo
   const img = document.createElement("img");
-  img.src = `${basePathFull}.webp${version}`;
-  img.srcset = srcsetWebp; // Se recomienda usar el mismo srcset completo en el img
+  //img.srcset = srcsetWebp; // QUITAR srcset en la imagen de respaldo
   
   if (tipo === 'main') {
-    //img.sizes = "(max-width: 576px) 70vw, 220px";
-    img.sizes = "(min-width: 576px) 220px, 70vw";
+    img.src = `${basePathFull}-225w.webp${version}`;
+    //img.sizes = "(min-width: 576px) 220px, 70vw";
     img.width = 220;
     img.height = 330;
     img.className = "portada";
     img.loading = "eager";
     img.setAttribute("fetchpriority", "high");
   } else {
-    img.sizes = "140px";
+    img.src = `${basePathFull}-150w.webp${version}`;
+    //img.sizes = "140px";
     img.width = 140;
     img.height = 210;
     img.loading = "lazy";
@@ -891,7 +897,7 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   // Manejo de error básico de respaldo
   img.onerror = function () {
     this.removeAttribute('srcset');
-    this.src = `/img2/${imgStr}`;
+    this.src = `${imgorigen}${imgStr}`;
     this.onerror = function () { this.onerror = null; this.style.display = 'none'; };
   };
   picture.appendChild(img);

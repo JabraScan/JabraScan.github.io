@@ -5,7 +5,7 @@ import { authFetch } from'./usuario.js';
 // Config y constantes
 // -------------------------
 const API_BASE = "https://jabrascan.net";
-const FALLBACK_IMG = "/img/avatar/default.webp";
+const FALLBACK_IMG = "https://img.jabrascan.net/avatar/default.webp";
 const usuario_id = getItem("user_id");
 const nickname = getItem("user_nickname");
 const avatar = getItem("user_avatar");
