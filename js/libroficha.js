@@ -1,4 +1,7 @@
-import{obtenerCapitulos}from'./capitulos.js';import{parseDateDMY,parseChapterNumber,compareCapNumDesc,crearBloqueValoracion,seleccionarImagen,obtenerNombreObra,createImg}from'./utils.js';import{activarLinksPDF,activarPaginacion}from'./eventos.js';import{incrementarVisita,leerVisitas,obtenerInfo,valorarRecurso,consultarVotos}from'./contadoresGoogle.js';import{mostrarurl}from'./general.js';import{addToBiblio}from'./usuario.js';export function cargarlibro(libroId){if(!libroId){document.body.innerHTML='<p>No se encontró el libro seleccionado.</p>';return;}
+import{obtenerCapitulos}from'./capitulos.js';import{parseDateDMY,parseChapterNumber,compareCapNumDesc,crearBloqueValoracion,seleccionarImagen,obtenerNombreObra,createImg}from'./utils.js';import{activarLinksPDF,activarPaginacion}from'./eventos.js';import{incrementarVisita,leerVisitas,obtenerInfo,valorarRecurso,consultarVotos}from'./contadoresGoogle.js';import{mostrarurl}from'./general.js';import{addToBiblio}from'./usuario.js';const BASE_URL="https://jabrascan.net/"
+const IMAGE_BASE_URL="https://img.jabrascan.net/"
+const BOOKS_BASE_URL="https://jabrascan.net/books/"
+export function cargarlibro(libroId){if(!libroId){document.body.innerHTML='<p>No se encontró el libro seleccionado.</p>';return;}
 fetch('obras.xml').then(response=>response.text()).then(str=>new DOMParser().parseFromString(str,"text/xml")).then(data=>{const obra=Array.from(data.getElementsByTagName('obra')).find(o=>o.querySelector('clave')?.textContent.trim()===libroId);if(!obra){window.location.href="https://jabrascan.github.io/";return;}
 const get=tag=>obra.querySelector(tag)?.textContent.trim()||'';const clave=get("clave");const{nombreobra,nombresAlternativos}=obtenerNombreObra(obra.querySelectorAll("nombreobra"));const imagen=seleccionarImagen(obra.querySelectorAll("imagen"));const autor=get("autor");const idioma=get("idioma")||'es';const sinopsis=get("sinopsis");const tipoobra=get("tipoobra");const Categoria=get("categoria");const pClave=get("keywords");const metatxt=get("meta");const estado=get("estado");const ubicacion=get("ubicacion");const traduccion=get("traductor");const contenido18=get("adulto");const discord=get("discord");const aprobadaAutor=get("aprobadaAutor");const wikifan=get("wiki");const server=get('server');mostrarurl(clave);const OKAutor=aprobadaAutor==='si'?`
         <span class="carousel-info-label">Traducción aprobada por el autor</span><br>
@@ -39,7 +42,7 @@ const propiedadesObra=[{obra_id:clave,propiedad:"nombreobra",valor:nombreobra},{
                 </div>
               </div>
             `;obtenerInfo(`obra_${clave}`).then(info=>{const visitCap=info.visitas===-1?0:info.numVisitasCapitulo;const visitObra=info.visitas===-1?1:info.visitas+1;const visitas=visitCap+visitObra;const numVisitas=document.createElement("a");numVisitas.innerHTML=`<a href="#"><i class="fa-solid fa-eye"></i> ${visitas} veces</a>`;const booklinks=mainDataBook.querySelector('.book-links');booklinks.appendChild(numVisitas);});consultarVotos(clave).then(({valoracion,votos})=>{const claveValoracion=`obra_${clave}`;const bloqueValoracion=crearBloqueValoracion(claveValoracion,valoracion,votos);mainDataBook.querySelector('.book-useraction').appendChild(bloqueValoracion);});const btnBiblioteca=addToLibrary(clave);mainDataBook.querySelector('.book-useraction').insertAdjacentElement('afterbegin',btnBiblioteca);DataBook.prepend(mainDataBook);DataBook.prepend(headerDataBook);mainDataBook.querySelector(".book-image").prepend(imagenContenedor);if(typeof mostrarDisqus==="function"){mostrarDisqus(clave,clave);}
-obtenerCapitulos(clave).then(listacapitulos=>{const ultimosCapitulos=listacapitulos.map(c=>({...c,fechaObj:parseDateDMY(c.Fecha),capNum:parseChapterNumber(c.numCapitulo),server:c.server??"io-pdfs"})).filter(c=>c.fechaObj).sort((a,b)=>{const diffFecha=b.fechaObj-a.fechaObj;if(diffFecha!==0)return diffFecha;return compareCapNumDesc(a,b);}).slice(0,6);const ultimosHTML=ultimosCapitulos.map(cap=>`
+obtenerCapitulos(clave).then(listacapitulos=>{const ultimosCapitulos=listacapitulos.map(c=>({...c,fechaObj:parseDateDMY(c.Fecha),capNum:parseChapterNumber(c.numCapitulo),server:"io-pdfs"})).filter(c=>c.fechaObj).sort((a,b)=>{const diffFecha=b.fechaObj-a.fechaObj;if(diffFecha!==0)return diffFecha;return compareCapNumDesc(a,b);}).slice(0,6);const ultimosHTML=ultimosCapitulos.map(cap=>`
           <li>
             <a href="#" data-pdf-obra="${clave}" data-pdf-capitulo="${cap.numCapitulo}" class="pdf-link">
               <span>${cap.numCapitulo}: ${cap.nombreCapitulo}</span>
@@ -89,7 +92,7 @@ function addToLibrary(clave){const btn=document.createElement('button');btn.type
       <i class="fa-solid fa-plus" aria-hidden="true"></i>
       <span class="d-none d-sm-inline ms-2">Añadir a la biblioteca</span>
     `;btn.addEventListener('click',(e)=>{e.preventDefault();btn.classList.add('disabled');setTimeout(()=>btn.classList.remove('disabled'),700);addToBiblio(clave);});return btn;}
-function textSEO(datos){const map=Object.fromEntries(datos.map(item=>[item.propiedad,item.valor]));const primeraImagen="https://jabrascan.net/img/"+(Array.isArray(map.imagen)?(map.imagen[0]||''):map.imagen);const urlIndexable=`https://jabrascan.net/books/${map.clave || ''}.html`;const urlAppHash=`https://jabrascan.net/#${map.clave || ''}`;const arraycategorias=Array.isArray(map.categoria)?map.categoria:String(map.categoria||'').split(',').map(x=>x.trim()).filter(Boolean);const arraykeywords=Array.isArray(map.keywords)?map.keywords:String(map.keywords||'').split(',').map(x=>x.trim()).filter(Boolean);const texttitle=`
+function textSEO(datos){const map=Object.fromEntries(datos.map(item=>[item.propiedad,item.valor]));const primeraImagen="${IMAGE_BASE_URL}"+(Array.isArray(map.imagen)?(map.imagen[0]||''):map.imagen);const urlIndexable=`${BOOKS_BASE_URL}${map.clave || ''}.html`;const urlAppHash=`${BASE_URL}#${map.clave || ''}`;const arraycategorias=Array.isArray(map.categoria)?map.categoria:String(map.categoria||'').split(',').map(x=>x.trim()).filter(Boolean);const arraykeywords=Array.isArray(map.keywords)?map.keywords:String(map.keywords||'').split(',').map(x=>x.trim()).filter(Boolean);const texttitle=`
             <meta charset="utf-8">
             <title>${map.nombreobra || ''} | Jabrascan</title>
             <meta name="description" content="${map.meta || ''}">
@@ -101,7 +104,7 @@ function textSEO(datos){const map=Object.fromEntries(datos.map(item=>[item.propi
             <meta property="og:title" content="${map.nombreobra || ''}">
             <meta property="og:description" content="${map.meta || ''}">
             <meta property="og:image" content="${primeraImagen}">
-            <meta property="og:url" content="https://jabrascan.net/books/${map.clave || ''}.html">
+            <meta property="og:url" content="${BOOKS_BASE_URL}${map.clave || ''}.html">
             <meta property="og:locale" content="es_ES"> 
     `;const twittercards=`
             <!-- Twitter Cards -->
