@@ -833,7 +833,7 @@ export function createPicture(imagen, nombreobra, tipo = '') {
   // Asegurar formato de ruta base limpio (ej: /img/... o img/...)
   let prefix = cleanBasePath.startsWith('/') || cleanBasePath.startsWith('img/') ? '/' : '/img/';
   prefix = prefix.replace('/img/', `${imgorigen}`)
-  const basePathFull = `${prefix}${cleanBasePath}.replace(/ /g, '%20');`;
+  const basePathFull = `${prefix}${cleanBasePath}`.replace(/ /g, '%20');
   const version = '?v=20261022';
 
 // Definir los sizes adaptativos correctos (evitando el 70vw erróneo)
