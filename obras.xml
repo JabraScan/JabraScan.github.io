@@ -1,5 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
 <obras>
+	<obra>
+		<visible>si</visible>
+		<clave>Test</clave>
+		<nombreobra>test</nombreobra>
+		<autor>yo</autor>
+		<sinopsis>test</test>
+		<imagen>default-avatar.png</imagen>
+		<fechaCreacion>27/10/2026</fechaCreacion>
+		<estado>Finalizado</estado>
+		<traductor>Yo</traductor>
+	</obra>
 	<obra>	
 		<visible>si</visible>
 		<clave>IBecameMarriedMan</clave>

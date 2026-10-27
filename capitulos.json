@@ -47,5 +47,6 @@
   "YernoNobleQuiereDivorcio"        : "books/YernoNobleQuiereDivorcio.json",
   "YoMateJugadorAcademia"           : "books/YoMateJugadorAcademia.json",
   "WifePleaseBeObedient"            : "books/WifePleaseBeObedient.json",
-  "ZombieClaseSApocalipsis"         : "books/ZombieClaseSApocalipsis.json"
+  "ZombieClaseSApocalipsis"         : "books/ZombieClaseSApocalipsis.json",
+  "Test"                            : "books/test.json"
 }
