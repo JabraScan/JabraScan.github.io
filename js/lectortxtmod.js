@@ -27,5 +27,5 @@ nextPage(){if(this.currentPageIndex<this.pages.length-1){this.renderPage(this.cu
 previousPage(){if(this.currentPageIndex>0){this.renderPage(this.currentPageIndex);}}
 get numPages(){return this.pages.length;}
 async getPage(pageNum){const pageIndex=pageNum-1;const pageLines=this.pages[pageIndex]||[];return{num:pageNum,getViewport:(params)=>{const baseWidthPx=this.cmToPx(this.PAGE_WIDTH_CM);const baseHeightPx=this.cmToPx(this.PAGE_HEIGHT_CM);const scale=params.scale||1.0;return{width:baseWidthPx*scale,height:baseHeightPx*scale};},render:(renderContext)=>{this.renderPage(pageNum,renderContext.viewport?(renderContext.viewport.width/this.cmToPx(this.PAGE_WIDTH_CM)):1.0);},getTextContent:async()=>{return{items:pageLines.map(line=>({str:line.text}))};}};}
-fitToContainer(){if(!this.container)return;const availableWidth=this.container.clientWidth||window.innerWidth;const baseWidthPx=this.cmToPx(this.PAGE_WIDTH_CM);if(availableWidth>0&&availableWidth<baseWidthPx){this.scale=availableWidth/baseWidthPx;}else{this.scale=1.0;}
+fitToContainer(){const availableWidth=window.innerWidth;const baseWidthPx=this.cmToPx(this.PAGE_WIDTH_CM);if(availableWidth>0&&availableWidth<baseWidthPx){this.scale=availableWidth/baseWidthPx;}else{this.scale=1.0;}
 if(this.pages.length>0){this.renderPage(this.currentPageIndex+1,this.scale);}}}
