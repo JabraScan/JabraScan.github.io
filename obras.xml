@@ -1,16 +1,37 @@
 <?xml version='1.0' encoding='utf-8'?>
 <obras>
-	<obra>
+	<obra>	
 		<visible>si</visible>
+		<idioma>es</idioma>
 		<clave>Test</clave>
 		<nombreobra>test</nombreobra>
-		<autor>yo</autor>
-		<sinopsis>test</test>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<autor>Yo</autor>
+		<sinopsis>test</sinopsis>
+		<meta></meta>
+		<valoracion>9</valoracion>
+		<tipoobra>test</tipoobra>
+		<categoria>test</categoria>
+		<keywords>Test</keywords>
 		<imagen>default-avatar.png</imagen>
-		<fechaCreacion>27/10/2026</fechaCreacion>
+		<fechaCreacion>11/10/2026</fechaCreacion>
+		<ubicacion>test</ubicacion>
 		<estado>Finalizado</estado>
-		<traductor>Yo</traductor>
-	</obra>
+		<traductor>test</traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord></discord>
+		<bannerOpcional></bannerOpcional>
+		<wiki></wiki>
+	</obra>	
 	<obra>	
 		<visible>si</visible>
 		<clave>IBecameMarriedMan</clave>
