@@ -38,6 +38,9 @@ const DEFAULT_SETTINGS = {
   // Espacio EXTRA entre párrafos expresado como fracción del interlineado.
   // 0.6 → el hueco total entre párrafos = interlineado × 1.6 (siempre mayor que el interlineado)
   paragraphSpacingRatio: 0.6,
+  // Doble salto (\n\n, \n \n, ...): pinta una línea en BLANCO real.
+  // 1.0 → el hueco = interlineado completo (una línea vacía visible).
+  blankLineRatio: 1.0,
   pageHeightLimit: 2500,          // Altura máxima de cada bloque de canvas para evitar colapsos de memoria
   defaultFontSize: 12,            // Tamaño de fuente base en puntos (pt)
   bgColor: "#FFFFFF",           // Color de fondo del canvas
@@ -191,10 +194,19 @@ export class TxtReaderEngine {
     // al final de un fragmento, al inicio del siguiente o partirse en medio ("\n" + "\n").
     // Por eso el salto NO se materializa en el momento: se marca como pendiente y el
     // hueco se inserta UNA sola vez, justo antes del primer texto del párrafo siguiente.
-    // Así se colapsan los saltos consecutivos (\n\n, \n \n, ...) y el resultado es
-    // idéntico aunque el texto venga partido en N fragmentos por estilo.
+    // Reglas: un \n simple = hueco de párrafo (mayor que el interlineado); un \n\n
+    // seguido = línea en blanco real; un \n centrado = solo cambio de línea (títulos
+    // a dos líneas). El resultado es idéntico aunque el texto venga partido en N
+    // fragmentos por estilo, porque todo depende de la alineación y del orden de
+    // saltos/contenido, no de cómo se haya cortado el array.
     let pendingParagraphBreak = false;
     let pendingSpacerHeight = 0;
+    // Un salto simple DENTRO de un bloque centrado (título a dos líneas) es solo
+    // un cambio de línea: NO abre párrafo. El hueco solo se materializa si el
+    // contenido siguiente no continúa el bloque centrado (separación título → cuerpo).
+    // La decisión es por ALINEACIÓN, no por identidad de fragmento, para que el
+    // resultado no cambie si el generador parte el array por estilos.
+    let pendingCenteredOnly = false;
 
     // Función auxiliar para volcar la línea actual al array global de líneas
     const flushLine = (height, isSpacer = false, align = 'left') => {
@@ -212,6 +224,16 @@ export class TxtReaderEngine {
     // Vuelca el hueco de párrafo pendiente (si lo hay) antes del contenido siguiente
     const pushParagraphSpacer = () => {
       if (!pendingParagraphBreak) return;
+
+      // Salto simple de un título centrado + contenido también centrado:
+      // sigue siendo el mismo bloque (Capítulo 1: / Prólogo) → sin hueco.
+      if (pendingCenteredOnly && currentAlign === 'center') {
+        pendingParagraphBreak = false;
+        pendingSpacerHeight = 0;
+        pendingCenteredOnly = false;
+        return;
+      }
+
       allLines.push({
         fragments: [],
         height: pendingSpacerHeight,
@@ -220,6 +242,7 @@ export class TxtReaderEngine {
       });
       pendingParagraphBreak = false;
       pendingSpacerHeight = 0;
+      pendingCenteredOnly = false;
     };
 
     for (const frag of data) {
@@ -251,11 +274,27 @@ export class TxtReaderEngine {
             flushLine(maxHeightInLine || lineHeightPx, false, currentAlign);
           }
 
-          pendingParagraphBreak = true;
-          pendingSpacerHeight = Math.max(
-            pendingSpacerHeight,
-            breakHeight * this.settings.paragraphSpacingRatio
-          );
+          if (pendingParagraphBreak) {
+            // Hay un salto pendiente sin contenido real entre medias: este es el
+            // segundo (\n\n, \n \n, ...) → se pinta una LÍNEA EN BLANCO real
+            // (antes de la corrección todos los saltos colapsaban al mismo hueco).
+            pendingCenteredOnly = false;
+            pendingSpacerHeight = Math.max(
+              pendingSpacerHeight,
+              breakHeight * this.settings.blankLineRatio
+            );
+          } else if (currentAlign === 'center') {
+            // Salto simple dentro de un bloque centrado (título a dos líneas):
+            // solo cambio de línea, sin hueco. Se guarda un candidato por si el
+            // contenido siguiente no es centrado (ahí sí haría falta separar bloques).
+            pendingParagraphBreak = true;
+            pendingCenteredOnly = true;
+            pendingSpacerHeight = breakHeight * this.settings.paragraphSpacingRatio;
+          } else {
+            pendingParagraphBreak = true;
+            pendingCenteredOnly = false;
+            pendingSpacerHeight = breakHeight * this.settings.paragraphSpacingRatio;
+          }
           continue;
         }
 
