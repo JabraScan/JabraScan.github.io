@@ -44,7 +44,8 @@ const DEFAULT_SETTINGS = {
   blankLineRatio: 1.0,
   // Imágenes dentro del texto (elementos {tipo: 'imagen'}):
   imageMargin: 18,                // Espacio vertical (px) alrededor de la imagen
-  imageMaxHeight: 1400,           // Alto máximo (px) de seguridad para una imagen
+  imageMaxHeight: 1400,           // Alto máximo (px) de seguridad para una imagen inline
+  bannerMaxHeight: 220,           // Alto máximo (px) de una imagen con formato 'banner'
   pageHeightLimit: 2500,          // Altura máxima de cada bloque de canvas para evitar colapsos de memoria
   defaultFontSize: 12,            // Tamaño de fuente base en puntos (pt)
   bgColor: "#FFFFFF",           // Color de fondo del canvas
@@ -61,12 +62,19 @@ const DEFAULT_SETTINGS = {
  *
  * ...o una imagen insertada entre fragmentos de texto:
  *   { tipo: 'imagen', src: 'https://.../imagen.webp', alt: 'Descripción',
- *     maxWidth: 0.95, align: 'center' }
+ *     maxWidth: 0.95, align: 'center', formato: 'inline' }
  *
  * - `src`: URL absoluta, ruta relativa al documento ('./img.webp') o nombre suelto
  *   (se resuelve contra la base de imágenes de la obra).
  * - `maxWidth`: fracción del ancho de página que puede ocupar (0 < maxWidth <= 1).
  * - `align`: 'left' | 'center' | 'right' (por defecto 'center').
+ * - `formato`: cómo se pinta la imagen:
+ *     · 'inline'  (por defecto): imagen dentro del texto, con margen vertical y
+ *       alto máximo `imageMaxHeight` (1400 px).
+ *     · 'pagina':  imagen a página completa: ocupa el ancho de la página y puede
+ *       ser tan alta como una página de texto (`pageHeightLimit`, 2500 px).
+ *     · 'banner':  banda ancha como el header/footer: ancho de página y alto
+ *       máximo `bannerMaxHeight` (220 px).
  *
  * Cada imagen se pinta en un canvas propio (igual que el header/footer) y corta
  * el flujo de texto: el texto anterior y el posterior siguen su curso.
@@ -469,9 +477,27 @@ export class TxtReaderEngine {
   }
 
   /**
+   * Normaliza el "formato" de una imagen insertada:
+   * - 'inline'  : imagen dentro del texto (por defecto), limitada por imageMaxHeight.
+   * - 'pagina'  : imagen a página completa, ocupa el ancho de la página y puede
+   *               ser tan alta como una página de texto (pageHeightLimit).
+   * - 'banner'  : banda ancha (como el header/footer), altura limitada por bannerMaxHeight.
+   * @param {string} value - Valor recibido en el array
+   * @returns {string} 'inline' | 'pagina' | 'banner'
+   */
+  _normalizeImageFormat(value) {
+    const format = String(value || '').trim().toLowerCase();
+    if (format === 'pagina' || format === 'página' || format === 'page' || format === 'pagina-completa') {
+      return 'pagina';
+    }
+    if (format === 'banner' || format === 'banda') return 'banner';
+    return 'inline';
+  }
+
+  /**
    * Normaliza un fragmento de imagen y resuelve su URL.
    * @param {Object} frag - Fragmento del array de la obra
-   * @returns {Object|null} {src, alt, maxWidth, align} o null si no es usable
+   * @returns {Object|null} {src, alt, maxWidth, align, formato} o null si no es usable
    */
   _normalizeImageFragment(frag) {
     const rawSrc = frag.src || frag.imagen || frag.url || '';
@@ -485,7 +511,8 @@ export class TxtReaderEngine {
       src: this._resolveImageUrl(rawSrc),
       alt: frag.alt || '',
       maxWidth,
-      align
+      align,
+      formato: this._normalizeImageFormat(frag.formato)
     };
   }
 
@@ -793,16 +820,81 @@ export class TxtReaderEngine {
   }
 
   /**
-   * Pinta una imagen insertada entre fragmentos de texto en su propio canvas.
-   * La imagen se limita al ancho del contenido de la página y a un alto máximo
-   * de seguridad; si no se pudo cargar, se salta y el texto continúa.
-   * @param {Object} item - Bloque de imagen {src, alt, maxWidth, align, image}
+   * Pinta una imagen insertada entre fragmentos de texto en su propio canvas,
+   * según el "formato" indicado: inline (dentro del texto), pagina (a página
+   * completa) o banner (banda ancha, como el header/footer).
+   * Si la imagen no se pudo cargar, se salta y el texto continúa.
+   * @param {Object} item - Bloque de imagen {src, alt, maxWidth, align, formato, image}
    * @param {number} availableWidth - Ancho disponible en px
    */
   _renderImageCanvas(item, availableWidth) {
     const img = item.image;
     if (!img || !img.width || !img.height) return;
 
+    if (item.formato === 'pagina') {
+      this._renderPageImage(img, item, availableWidth);
+      return;
+    }
+    if (item.formato === 'banner') {
+      this._renderBannerImage(img, item, availableWidth);
+      return;
+    }
+    this._renderInlineImage(img, item, availableWidth);
+  }
+
+  /**
+   * Crea el canvas de una imagen (fondo, tamaño y accesibilidad) y lo engancha
+   * al contenedor en cascada.
+   * @param {number} availableWidth - Ancho disponible en px
+   * @param {number} height - Alto del canvas en px
+   * @param {string} alt - Texto alternativo (opcional)
+   * @returns {CanvasRenderingContext2D} Contexto del canvas ya insertado
+   */
+  _createImageCanvas(availableWidth, height, alt) {
+    const canvasNode = document.createElement('canvas');
+    canvasNode.width = availableWidth;
+    canvasNode.height = height;
+    canvasNode.style.width = `${availableWidth}px`;
+    canvasNode.style.height = `${height}px`;
+    canvasNode.style.display = 'block';
+    canvasNode.style.margin = '0';
+    canvasNode.style.padding = '0';
+
+    if (alt) {
+      canvasNode.setAttribute('role', 'img');
+      canvasNode.setAttribute('aria-label', alt);
+    }
+
+    const ctx = canvasNode.getContext('2d');
+    ctx.fillStyle = this.settings.bgColor;
+    ctx.fillRect(0, 0, availableWidth, height);
+
+    this.container.appendChild(canvasNode);
+    this.canvasElements.push(canvasNode);
+    return ctx;
+  }
+
+  /**
+   * Calcula la posición horizontal de la imagen según su alineación.
+   * @param {string} align - 'left' | 'center' | 'right'
+   * @param {number} availableWidth - Ancho disponible en px
+   * @param {number} drawW - Ancho dibujado de la imagen
+   * @returns {number} Coordenada X
+   */
+  _imageX(align, availableWidth, drawW) {
+    if (align === 'left') return this.settings.marginLeft;
+    if (align === 'right') return availableWidth - this.settings.marginLeft - drawW;
+    return (availableWidth - drawW) / 2;
+  }
+
+  /**
+   * Imagen insertada dentro del texto: tamaño proporcional al ancho pedido,
+   * con margen vertical y alto máximo de seguridad.
+   * @param {HTMLImageElement} img - Imagen ya cargada
+   * @param {Object} item - Bloque de imagen
+   * @param {number} availableWidth - Ancho disponible en px
+   */
+  _renderInlineImage(img, item, availableWidth) {
     const marginPx = this.settings.imageMargin;
     const maxContentWidth = Math.max(1, availableWidth - (this.settings.marginLeft * 2));
     const maxWidth = Math.min(maxContentWidth * (item.maxWidth || 1), availableWidth);
@@ -817,34 +909,56 @@ export class TxtReaderEngine {
       drawW = Math.max(1, Math.round((img.width / img.height) * drawH));
     }
 
-    const canvasH = drawH + marginPx * 2;
-    const canvasNode = document.createElement('canvas');
-    canvasNode.width = availableWidth;
-    canvasNode.height = canvasH;
-    canvasNode.style.width = `${availableWidth}px`;
-    canvasNode.style.height = `${canvasH}px`;
-    canvasNode.style.display = 'block';
-    canvasNode.style.margin = '0';
-    canvasNode.style.padding = '0';
+    const ctx = this._createImageCanvas(availableWidth, drawH + marginPx * 2, item.alt);
+    ctx.drawImage(img, this._imageX(item.align, availableWidth, drawW), marginPx, drawW, drawH);
+  }
 
-    if (item.alt) {
-      canvasNode.setAttribute('role', 'img');
-      canvasNode.setAttribute('aria-label', item.alt);
+  /**
+   * Imagen a página completa: ocupa el ancho de la página y puede ser tan alta
+   * como una página de texto (sin margen vertical: es la página).
+   * @param {HTMLImageElement} img - Imagen ya cargada
+   * @param {Object} item - Bloque de imagen
+   * @param {number} availableWidth - Ancho disponible en px
+   */
+  _renderPageImage(img, item, availableWidth) {
+    const maxContentWidth = Math.max(1, availableWidth - (this.settings.marginLeft * 2));
+    const maxWidth = Math.min(maxContentWidth * (item.maxWidth || 1), availableWidth);
+
+    let drawW = Math.max(1, Math.round(maxWidth));
+    let drawH = Math.max(1, Math.round((img.height / img.width) * drawW));
+
+    // Una imagen de página no puede superar la altura de una página de texto
+    if (drawH > this.settings.pageHeightLimit) {
+      drawH = this.settings.pageHeightLimit;
+      drawW = Math.max(1, Math.round((img.width / img.height) * drawH));
     }
 
-    const ctx = canvasNode.getContext('2d');
-    ctx.fillStyle = this.settings.bgColor;
-    ctx.fillRect(0, 0, availableWidth, canvasH);
+    const ctx = this._createImageCanvas(availableWidth, drawH, item.alt);
+    ctx.drawImage(img, this._imageX(item.align, availableWidth, drawW), 0, drawW, drawH);
+  }
 
-    // Alineación horizontal de la imagen dentro del contenido
-    let x = (availableWidth - drawW) / 2;
-    if (item.align === 'left') x = this.settings.marginLeft;
-    else if (item.align === 'right') x = availableWidth - this.settings.marginLeft - drawW;
+  /**
+   * Banner: banda ancha al ancho de la página (como el header/footer) con la
+   * altura limitada para que no domine el texto.
+   * @param {HTMLImageElement} img - Imagen ya cargada
+   * @param {Object} item - Bloque de imagen
+   * @param {number} availableWidth - Ancho disponible en px
+   */
+  _renderBannerImage(img, item, availableWidth) {
+    const marginPx = this.settings.imageMargin;
+    const maxWidth = Math.min(availableWidth * (item.maxWidth || 1), availableWidth);
 
-    ctx.drawImage(img, x, marginPx, drawW, drawH);
+    let drawW = Math.max(1, Math.round(maxWidth));
+    let drawH = Math.max(1, Math.round((img.height / img.width) * drawW));
 
-    this.container.appendChild(canvasNode);
-    this.canvasElements.push(canvasNode);
+    // Un banner es ancho y bajo: si es demasiado alto se reduce (contenido)
+    if (drawH > this.settings.bannerMaxHeight) {
+      drawH = this.settings.bannerMaxHeight;
+      drawW = Math.max(1, Math.round((img.width / img.height) * drawH));
+    }
+
+    const ctx = this._createImageCanvas(availableWidth, drawH + marginPx * 2, item.alt);
+    ctx.drawImage(img, this._imageX(item.align, availableWidth, drawW), marginPx, drawW, drawH);
   }
 
   // --- Métodos de compatibilidad con SPA ---
