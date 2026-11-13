@@ -602,7 +602,7 @@ export class TxtReaderEngine {
 
     // 1. Calculamos la altura exacta de antemano de forma limpia
     if (img) {
-      if ((img.width / img.height) <=  ENGINE_CONSTANTS.ASPECT_RATIO_THRESHOLD) {
+      if ((img.height / img.width) <=  ENGINE_CONSTANTS.ASPECT_RATIO_THRESHOLD) {
         computedHeight = marginPx;
       } else {
         computedHeight = img.height * (availableWidth / img.width);
