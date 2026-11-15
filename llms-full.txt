@@ -1,9 +1,17 @@
 # JabraScan - Catálogo Completo y Detallado
 
-Actualizado: 2026-11-08
-Total de obras: 50
+Actualizado: 2026-11-15
+Total de obras: 51
 
 ## Listado Detallado de Obras
+### El Principio Después Del Fin
+- **Clave**: TBATE
+- **Nombres alternativos**: El Comienzo Tras El Final, The Beginning After The End, TBATE, La Vida Después de la Muerte, El Comienzo Después Del Final
+- **Autor**: TurtleMe (Brandon Lee)
+- **URL SEO**: https://jabrascan.net/books/TBATE.html
+- **URL SPA**: https://jabrascan.net/#TBATE
+- **Sinopsis**: El Rey Grey tiene una gran fuerza, riqueza y prestigio incomparables en un mundo gobernado por la habilidad marcial. Sin embargo, la soledad se mantiene muy por detrás de aquellos con gran poder. Debajo del glamoroso exterior de un poderoso Rey acecha la caparazón del hombre, desprovisto de propósito y voluntad. Reencarnado en un nuevo mundo lleno de magia y monstruos, el Rey tiene una segunda oportunidad de revivir su vida. Sin embargo, corregir su error pasado no sera su único desafió. Debajo de la paz y la prosperidad del nuevo mundo hay una corriente subterránea que amenaza con destruir todo para lo que ha trabajado, cuestionando su papel y la razón para nacer de nuevo.
+
 ### test
 - **Clave**: Test
 - **Nombres alternativos**: Ninguno
@@ -82,7 +90,7 @@ Total de obras: 50
 
 ### Yo Soy El Villano Predestinado
 - **Clave**: IAmTheFatedVillain
-- **Nombres alternativos**: I Am the Fated Villain, 天命反派, 我！天命大反派, The Fated Villain, El Villano Predestinado, Tian Ming Fan Pai, Wo! Tianming Da Fanpai, I Am the Heavenly Destined Villain, Me, The Heavenly Destined Villain
+- **Nombres alternativos**: I Am the Fated Villain, 天命反派, 我！天命大反派, The Fated Villain, El Villano Predestinado, Tian Ming Fan Pai, Wo! Tianming Da Fanpai, I Am the Heavenly Destined Villain, Me, The Heavenly Destined Villain, Yo Soy El Villano Del Destino
 - **Autor**: Lian Xi You Yu (恋悉语)
 - **URL SEO**: https://jabrascan.net/books/IAmTheFatedVillain.html
 - **URL SPA**: https://jabrascan.net/#IAmTheFatedVillain

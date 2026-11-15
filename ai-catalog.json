@@ -1,7 +1,22 @@
 {
-  "updated_at": "2026-11-08T21:36:59.047011Z",
-  "total_obras": 50,
+  "updated_at": "2026-11-15T19:55:49.269666Z",
+  "total_obras": 51,
   "obras": [
+    {
+      "clave": "TBATE",
+      "nombres": [
+        "El Principio Después Del Fin",
+        "El Comienzo Tras El Final",
+        "The Beginning After The End",
+        "TBATE",
+        "La Vida Después de la Muerte",
+        "El Comienzo Después Del Final"
+      ],
+      "autor": "TurtleMe (Brandon Lee)",
+      "sinopsis": "El Rey Grey tiene una gran fuerza, riqueza y prestigio incomparables en un mundo gobernado por la habilidad marcial. Sin embargo, la soledad se mantiene muy por detrás de aquellos con gran poder. Debajo del glamoroso exterior de un poderoso Rey acecha la caparazón del hombre, desprovisto de propósito y voluntad. Reencarnado en un nuevo mundo lleno de magia y monstruos, el Rey tiene una segunda oportunidad de revivir su vida. Sin embargo, corregir su error pasado no sera su único desafió. Debajo de la paz y la prosperidad del nuevo mundo hay una corriente subterránea que amenaza con destruir todo para lo que ha trabajado, cuestionando su papel y la razón para nacer de nuevo.",
+      "url_seo": "https://jabrascan.net/books/TBATE.html",
+      "url_spa": "https://jabrascan.net/#TBATE"
+    },
     {
       "clave": "Test",
       "nombres": [
@@ -150,7 +165,8 @@
         "Tian Ming Fan Pai",
         "Wo! Tianming Da Fanpai",
         "I Am the Heavenly Destined Villain",
-        "Me, The Heavenly Destined Villain"
+        "Me, The Heavenly Destined Villain",
+        "Yo Soy El Villano Del Destino"
       ],
       "autor": "Lian Xi You Yu (恋悉语)",
       "sinopsis": "Inmediatamente después de que Gu Changge se diera cuenta de que había reencarnado en un mundo de fantasía, el protagonista del mundo y elegido de la fortuna juró vengarse de él. Envidiado por todos, no solo tiene a la protagonista femenina enamorada de él, sino que también es tratado como un invitado distinguido dondequiera que va. Afortunadamente, el prestigio y el poder de Gu Changge son superiores a los de todos los demás, por lo que aplastar a un simple elegido de la fortuna debería ser fácil, ¿o no? Espera... ¿Hay un sistema dedicado a ordeñar y cosechar al protagonista? Gu Changge sonrió con suficiencia.",

@@ -1,9 +1,10 @@
 # JabraScan - Catálogo de Novelas
 
-Actualizado: 2026-11-08
-Total de obras disponibles: 50
+Actualizado: 2026-11-15
+Total de obras disponibles: 51
 
 ## Enlaces y Obras
+- [El Principio Después Del Fin](https://jabrascan.net/books/TBATE.html) (SPA: https://jabrascan.net/#TBATE) - Autor: TurtleMe (Brandon Lee)
 - [test](https://jabrascan.net/books/Test.html) (SPA: https://jabrascan.net/#Test) - Autor: Yo
 - [Cómo me convertí en un hombre casado en otro mundo](https://jabrascan.net/books/IBecameMarriedMan.html) (SPA: https://jabrascan.net/#IBecameMarriedMan) - Autor: Berhera (베르헤라)
 - [Solo Swordmaster](https://jabrascan.net/books/SoloSwordMaster.html) (SPA: https://jabrascan.net/#SoloSwordMaster) - Autor: Without Shadow (무영자) (Mooyeongja)
