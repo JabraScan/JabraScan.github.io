@@ -1,6 +1,59 @@
 <?xml version='1.0' encoding='utf-8'?>
 <obras>
 	<obra>	
+		<visible>si</visible>
+		<idioma>es</idioma>
+		<clave>TBATE</clave>
+		<nombreobra>El Principio Después Del Fin</nombreobra>
+		<nombreobra>El Comienzo Tras El Final</nombreobra>
+		<nombreobra>The Beginning After The End</nombreobra>
+		<nombreobra>TBATE</nombreobra>
+		<nombreobra>La Vida Después de la Muerte</nombreobra>
+		<nombreobra>El Comienzo Después Del Final</nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<nombreobra></nombreobra>
+		<autor>TurtleMe (Brandon Lee)</autor>
+		<sinopsis><![CDATA[El Rey Grey tiene una gran fuerza, riqueza y prestigio incomparables en un mundo gobernado por la habilidad marcial. Sin embargo, la soledad se mantiene muy por detrás de aquellos con gran poder. Debajo del glamoroso exterior de un poderoso Rey acecha la caparazón del hombre, desprovisto de propósito y voluntad. Reencarnado en un nuevo mundo lleno de magia y monstruos, el Rey tiene una segunda oportunidad de revivir su vida. Sin embargo, corregir su error pasado no sera su único desafió. Debajo de la paz y la prosperidad del nuevo mundo hay una corriente subterránea que amenaza con destruir todo para lo que ha trabajado, cuestionando su papel y la razón para nacer de nuevo.]]>
+		</sinopsis>
+		<meta>King Grey lo tenía todo en su anterior vida. Tras una muerte repentina, reencarna como Arthur Leywin en un mundo de magia para corregir sus errores pasados.</meta>
+		<valoracion>8.9</valoracion>
+		<tipoobra>Web Novel</tipoobra>
+		<categoria>Accion, Artes Marciales, Fantasía, Isekai, Reencarnación</categoria>
+		<keywords>Rey Grey, Dicathen, Alacrya, reencarnación, núcleo de maná, bestias de maná, Lances, guerra continental.</keywords>
+		<imagen>TBATE/TBATE01.webp</imagen>
+		<imagen>TBATE/TBATE02.webp</imagen>
+		<imagen>TBATE/TBATE03.webp</imagen>
+		<imagen>TBATE/TBATE04.webp</imagen>
+		<imagen>TBATE/TBATE05.webp</imagen>
+		<imagen>TBATE/TBATE06.webp</imagen>
+		<imagen>TBATE/TBATE07.webp</imagen>
+		<imagen>TBATE/TBATE08.webp</imagen>
+		<imagen>TBATE/TBATE09.webp</imagen>
+		<imagen>TBATE/TBATE10.webp</imagen>
+		<imagen>TBATE/TBATE11.webp</imagen>
+		<imagen>TBATE/TBATE12.webp</imagen>
+		<imagen>TBATE/TBATE_000.webp</imagen>
+		<imagen>TBATE/TBATE_003.webp</imagen>
+		<imagen>TBATE/TBATE_004.webp</imagen>
+		<imagen>TBATE/TBATE_A001.webp</imagen>
+		<imagen>TBATE/TBATE_A002.webp</imagen>
+		<imagen>TBATE/TBATE_A004.webp</imagen>
+		<fechaCreacion>15/11/2026</fechaCreacion>
+		<ubicacion>Novela Americana</ubicacion>
+		<estado>Activo</estado>
+		<traductor>Jabracadabra</traductor>
+		<adulto></adulto>
+		<aprobadaAutor>no</aprobadaAutor>
+		<observaciones></observaciones>
+		<discord>https://discord.com/invite/tbate</discord>
+		<patreon>https://www.patreon.com/TurtleMe</patreon>
+		<bannerOpcional></bannerOpcional>
+		<wiki>https://tbate.fandom.com/wiki/Volumes_and_Chapters</wiki>
+		<pendejos>https://manhwacenter.net/manwhas/la-vida-despues-de-la-muerte</pendejos>
+	</obra>	
+
+	<obra>	
 		<visible>no</visible>
 		<idioma>es</idioma>
 		<clave>Test</clave>
