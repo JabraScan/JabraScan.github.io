@@ -10,11 +10,11 @@
 		<nombreobra>TBATE</nombreobra>
 		<nombreobra>La Vida Después de la Muerte</nombreobra>
 		<nombreobra>El Comienzo Después Del Final</nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
+		<nombreobra />
+		<nombreobra />
+		<nombreobra />
 		<autor>TurtleMe (Brandon Lee)</autor>
-		<sinopsis><![CDATA[El Rey Grey tiene una gran fuerza, riqueza y prestigio incomparables en un mundo gobernado por la habilidad marcial. Sin embargo, la soledad se mantiene muy por detrás de aquellos con gran poder. Debajo del glamoroso exterior de un poderoso Rey acecha la caparazón del hombre, desprovisto de propósito y voluntad. Reencarnado en un nuevo mundo lleno de magia y monstruos, el Rey tiene una segunda oportunidad de revivir su vida. Sin embargo, corregir su error pasado no sera su único desafió. Debajo de la paz y la prosperidad del nuevo mundo hay una corriente subterránea que amenaza con destruir todo para lo que ha trabajado, cuestionando su papel y la razón para nacer de nuevo.]]>
+		<sinopsis>El Rey Grey tiene una gran fuerza, riqueza y prestigio incomparables en un mundo gobernado por la habilidad marcial. Sin embargo, la soledad se mantiene muy por detrás de aquellos con gran poder. Debajo del glamoroso exterior de un poderoso Rey acecha la caparazón del hombre, desprovisto de propósito y voluntad. Reencarnado en un nuevo mundo lleno de magia y monstruos, el Rey tiene una segunda oportunidad de revivir su vida. Sin embargo, corregir su error pasado no sera su único desafió. Debajo de la paz y la prosperidad del nuevo mundo hay una corriente subterránea que amenaza con destruir todo para lo que ha trabajado, cuestionando su papel y la razón para nacer de nuevo.
 		</sinopsis>
 		<meta>King Grey lo tenía todo en su anterior vida. Tras una muerte repentina, reencarna como Arthur Leywin en un mundo de magia para corregir sus errores pasados.</meta>
 		<valoracion>8.9</valoracion>
@@ -43,12 +43,12 @@
 		<ubicacion>Novela Americana</ubicacion>
 		<estado>Activo</estado>
 		<traductor>Jabracadabra</traductor>
-		<adulto></adulto>
+		<adulto />
 		<aprobadaAutor>no</aprobadaAutor>
-		<observaciones></observaciones>
+		<observaciones />
 		<discord>https://discord.com/invite/tbate</discord>
 		<patreon>https://www.patreon.com/TurtleMe</patreon>
-		<bannerOpcional></bannerOpcional>
+		<bannerOpcional />
 		<wiki>https://tbate.fandom.com/wiki/Volumes_and_Chapters</wiki>
 		<pendejos>https://manhwacenter.net/manwhas/la-vida-despues-de-la-muerte</pendejos>
 	</obra>	
@@ -58,17 +58,17 @@
 		<idioma>es</idioma>
 		<clave>Test</clave>
 		<nombreobra>test</nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
+		<nombreobra />
+		<nombreobra />
+		<nombreobra />
+		<nombreobra />
+		<nombreobra />
+		<nombreobra />
+		<nombreobra />
+		<nombreobra />
 		<autor>Yo</autor>
 		<sinopsis>test</sinopsis>
-		<meta></meta>
+		<meta />
 		<valoracion>9</valoracion>
 		<tipoobra>test</tipoobra>
 		<categoria>test</categoria>
@@ -78,12 +78,12 @@
 		<ubicacion>test</ubicacion>
 		<estado>Finalizado</estado>
 		<traductor>test</traductor>
-		<adulto></adulto>
+		<adulto />
 		<aprobadaAutor>no</aprobadaAutor>
-		<observaciones></observaciones>
-		<discord></discord>
-		<bannerOpcional></bannerOpcional>
-		<wiki></wiki>
+		<observaciones />
+		<discord />
+		<bannerOpcional />
+		<wiki />
 	</obra>	
 	<obra>	
 		<visible>si</visible>
@@ -169,7 +169,7 @@
 		<observaciones />
 		<discord />
 		<bannerOpcional />
-		<wiki/>
+		<wiki />
 	</obra>
 	<obra>	
 		<visible>si</visible>
@@ -310,7 +310,7 @@
 		<imagen>YernoNobleQuiereDivorcio/YernoNobleQuiereDivorcio3.webp</imagen>
 		<fechaCreacion>01/10/2026</fechaCreacion>
 		<ubicacion>Novela Coreana</ubicacion>
-		<estado>Activo</estado>
+		<estado>Finalizado</estado>
 		<traductor>Leo</traductor>
 		<adulto />
 		<aprobadaAutor>no</aprobadaAutor>
@@ -1988,7 +1988,7 @@ He tardado diez años en escribir este libro.
 		<traductor>Jabracadabra</traductor>
 		<adulto>adulto</adulto>
 		<aprobadaAutor>no</aprobadaAutor>
-		<observaciones></observaciones>
+		<observaciones />
 		<discord>https://discord.gg/4FETZAf</discord>
 		<patreon>https://www.patreon.com/VictorWeismann/</patreon>
 		<bannerOpcional />
