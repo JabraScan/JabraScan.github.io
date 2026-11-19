@@ -1,14 +1,13 @@
-import{obtenerResumenObras}from'./contadoresGoogle.js';import{truncarTexto}from'./utils.js';const TOP_DAY_URL='https://jabrascan.net/topday';const TOP_MONTH_URL='https://jabrascan.net/topmonth';export async function renderResumenObras(){const podio=document.getElementById("podio");const ranking=document.getElementById("ranking");const errorBox=document.getElementById("error");const loader=document.getElementById("loader");if(loader)loader.style.display="block";try{let[resumen,iconosRes,xmlText,topDayRaw,topMonthRaw]=await Promise.all([obtenerResumenObras(),fetch('/iconos.json').then(res=>res.json()),fetch('/obras.xml').then(res=>res.text()),obtenerTopPeriodo(TOP_DAY_URL).catch(()=>[]),obtenerTopPeriodo(TOP_MONTH_URL).catch(()=>[])]);if(!Array.isArray(resumen)||resumen.length===0){throw new Error("No se encontraron datos.");}
-const obrasOrdenadas=obtenerObrasOrdenadas(resumen);const obrasConTotales=obrasOrdenadas.map(item=>({...item,total:(item.visitas||0)+(item.visitasCapitulos||0)})).sort((a,b)=>b.total-a.total);const obrasFinales=enriquecerObras(obrasConTotales,xmlText);renderTopPeriodo("top-diario",enriquecerObras(topDayRaw,xmlText),iconosRes);renderTopPeriodo("top-mensual",enriquecerObras(topMonthRaw,xmlText),iconosRes);renderPodio(podio,obrasFinales.slice(0,3),iconosRes);renderRanking(ranking,obrasFinales.slice(3),iconosRes);}catch(error){console.error(error);if(errorBox){errorBox.textContent="❌ Error al cargar datos: "+error.message;errorBox.classList.remove("hidden");}}finally{if(loader){loader.style.display="none";}}}
+import{obtenerResumenObras}from'./contadoresGoogle.js';import{truncarTexto}from'./utils.js';const TOP_DAY_URL='https://jabrascan.net/topday';const TOP_MONTH_URL='https://jabrascan.net/topmonth';export async function renderResumenObras(){const podio=document.getElementById("podio");const ranking=document.getElementById("ranking");const errorBox=document.getElementById("error");const loader=document.getElementById("loader");if(loader)loader.style.display="block";try{let[resumen,iconosRes,xmlText]=await Promise.all([obtenerResumenObras(),fetch('/iconos.json').then(res=>res.json()),fetch('/obras.xml').then(res=>res.text())]);if(!Array.isArray(resumen)||resumen.length===0){throw new Error("No se encontraron datos.");}
+const obrasOrdenadas=obtenerObrasOrdenadas(resumen);const obrasConTotales=obrasOrdenadas.map(item=>({...item,total:(item.visitas||0)+(item.visitasCapitulos||0)})).sort((a,b)=>b.total-a.total);const obrasFinales=enriquecerObras(obrasConTotales,xmlText);renderPodio(podio,obrasFinales.slice(0,3),iconosRes);renderRanking(ranking,obrasFinales.slice(3),iconosRes);cargarTopsPeriodos(xmlText,iconosRes);}catch(error){console.error(error);if(errorBox){errorBox.textContent="❌ Error al cargar datos: "+error.message;errorBox.classList.remove("hidden");}}finally{if(loader){loader.style.display="none";}}}
 async function obtenerTopPeriodo(url){const res=await fetch(url);if(!res.ok){throw new Error(`Error ${res.status} al consultar ${url}`);}
 const data=await res.json();return Array.isArray(data)?data.map(item=>({...item,total:Number(item.total??item.lecturas_total??0)})):[];}
-function obtenerTituloObra(item,iconosRes){const info=iconosRes[item.obra]||iconosRes["Default"]||{};return item.nombreObra||info.descripcion||item.obra||item.id||"";}
-function renderTopPeriodo(containerId,items,iconosRes){const container=document.getElementById(containerId);if(!container)return;const target=container.querySelector('[data-role="lista"]')||container;if(!Array.isArray(items)||items.length===0){target.innerHTML=`<p class="text-muted mb-0">Sin lecturas registradas.</p>`;return;}
+function renderTopPeriodo(elementId,items,iconosRes){const box=document.getElementById(elementId);if(!box)return;const target=box.querySelector('[data-role="lista"]')||box;if(!Array.isArray(items)||items.length===0){target.innerHTML=`<p class="text-muted mb-0">Sin lecturas registradas.</p>`;return;}
 target.innerHTML=`
         <div class="list-group list-group-flush">
             ${items.map((item, index) => {
                 const info = iconosRes[item.obra] || iconosRes["Default"] || {};
-                const titulo = obtenerTituloObra(item, iconosRes);
+                const titulo = item.nombreObra || info.descripcion || item.obra || item.id || "";
                 const urlObra = item.urlObra || "#";
 
                 const visual = item.imagenUrl
@@ -19,6 +18,7 @@ target.innerHTML=`
             }).join("")}
         </div>
     `;}
+async function cargarTopsPeriodos(xmlText,iconosRes){if(!document.getElementById("top-diario")&&!document.getElementById("top-mensual"))return;const[topDayRaw,topMonthRaw]=await Promise.all([obtenerTopPeriodo(TOP_DAY_URL).catch(()=>[]),obtenerTopPeriodo(TOP_MONTH_URL).catch(()=>[])]);renderTopPeriodo("top-diario",enriquecerObras(topDayRaw,xmlText),iconosRes);renderTopPeriodo("top-mensual",enriquecerObras(topMonthRaw,xmlText),iconosRes);}
 function enriquecerObras(obras,xmlText){const parser=new DOMParser();const xmlDoc=parser.parseFromString(xmlText,"text/xml");const obraNodes=xmlDoc.getElementsByTagName("obra");const imagenesMap={};const claveMap={};const nombreObraMap={};for(let i=0;i<obraNodes.length;i++){const obraNode=obraNodes[i];const claveNode=obraNode.getElementsByTagName("clave")[0];if(claveNode){const clave=claveNode.textContent.trim();const imagenNodes=obraNode.getElementsByTagName("imagen");const imageUrl=imagenNodes.length>0?obtenerUrlImagen150w(imagenNodes[0].textContent):"";imagenesMap[clave]=imageUrl;claveMap[clave]=clave;const nombreObraNodes=obraNode.getElementsByTagName("nombreobra");const primerNombre=nombreObraNodes.length>0?nombreObraNodes[0].textContent.trim():"";if(primerNombre&&!nombreObraMap[clave]){nombreObraMap[clave]=primerNombre;}
 for(let j=0;j<nombreObraNodes.length;j++){const nombre=nombreObraNodes[j].textContent.trim();if(nombre){claveMap[nombre]=clave;nombreObraMap[nombre]=primerNombre||nombre;if(imageUrl&&!imagenesMap[nombre]){imagenesMap[nombre]=imageUrl;}}}}}
 return obras.map(item=>{const clave=claveMap[item.obra]||claveMap[item.id]||item.obra||"";const imagenUrl=imagenesMap[item.obra]||imagenesMap[item.id]||imagenesMap[clave]||"";const nombreObra=nombreObraMap[item.obra]||nombreObraMap[item.id]||nombreObraMap[clave]||"";return{...item,nombreObra,imagenUrl,urlObra:clave?`https://jabrascan.net/#${clave}`:"#"};});}
@@ -36,7 +36,9 @@ function renderPodio(container,top3,iconosRes){if(!container)return;const orden=
                     {};
 
                 const titulo =
-                    obtenerTituloObra(obra, iconosRes);
+                    info.descripcion ||
+                    obra.obra ||
+                    obra.id;
 
                 const urlObra = obra.urlObra || "#";
 
@@ -72,7 +74,9 @@ function renderRanking(container,obras,iconosRes){if(!container)return;container
                         {};
 
                     const titulo =
-                        obtenerTituloObra(obra, iconosRes);
+                        info.descripcion ||
+                        obra.obra ||
+                        obra.id;
 
                     const urlObra = obra.urlObra || "#";
 
