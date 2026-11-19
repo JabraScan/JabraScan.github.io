@@ -5,14 +5,12 @@ const data=await res.json();if(!Array.isArray(data))return[];return data.map(ite
 function renderTopPeriodo(elementId,items,iconosRes){const box=document.getElementById(elementId);if(!box)return;const target=box.querySelector('[data-role="lista"]')||box;if(!Array.isArray(items)||items.length===0){target.innerHTML=`<p style="margin:0;opacity:0.7;">Sin lecturas registradas.</p>`;return;}
 target.innerHTML=items.map((item,index)=>{const info=iconosRes[item.obra]||iconosRes["Default"]||{};const titulo=item.nombreObra||info.descripcion||item.obra||"";const urlObra=item.urlObra||"#";const visual=item.imagenUrl?`<img src="${escapeHtml(item.imagenUrl)}" alt="${escapeHtml(titulo)}" style="width:36px!important;height:48px!important;max-width:36px!important;max-height:48px!important;object-fit:cover;border-radius:4px;flex-shrink:0;">`:`<span style="font-size:1.2rem;flex-shrink:0;">${info.icono || "📚"}</span>`;return`
             <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid rgba(128,128,128,0.2);">
-                <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">
-                    <strong style="flex-shrink:0;">#${index + 1}</strong>
+                <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:0;">
                     <a href="${escapeHtml(urlObra)}" title="${escapeHtml(titulo)}" style="display:flex;align-items:center;gap:8px;color:inherit;text-decoration:none;flex:1;min-width:0;">
                         ${visual}
                         <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500;">${escapeHtml(titulo)}</span>
                     </a>
                 </div>
-                <strong style="flex-shrink:0;">${formatLecturas(item.total)}</strong>
             </div>
         `;}).join("");}
 async function cargarTopsPeriodos(xmlText,iconosRes){if(!document.getElementById("top-diario")&&!document.getElementById("top-mensual"))return;const[topDayRaw,topMonthRaw]=await Promise.all([obtenerTopPeriodo(TOP_DAY_URL).catch(()=>[]),obtenerTopPeriodo(TOP_MONTH_URL).catch(()=>[])]);renderTopPeriodo("top-diario",enriquecerObras(topDayRaw,xmlText),iconosRes);renderTopPeriodo("top-mensual",enriquecerObras(topMonthRaw,xmlText),iconosRes);}
