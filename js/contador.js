@@ -2,92 +2,69 @@ import{obtenerResumenObras}from'./contadoresGoogle.js';import{truncarTexto}from'
 const obrasOrdenadas=obtenerObrasOrdenadas(resumen);const obrasConTotales=obrasOrdenadas.map(item=>({...item,total:(item.visitas||0)+(item.visitasCapitulos||0)})).sort((a,b)=>b.total-a.total);const obrasFinales=enriquecerObras(obrasConTotales,xmlText);renderPodio(podio,obrasFinales.slice(0,3),iconosRes);renderRanking(ranking,obrasFinales.slice(3),iconosRes);cargarTopsPeriodos(xmlText,iconosRes);}catch(error){console.error(error);if(errorBox){errorBox.textContent="❌ Error al cargar datos: "+error.message;errorBox.classList.remove("hidden");}}finally{if(loader){loader.style.display="none";}}}
 async function obtenerTopPeriodo(url){const res=await fetch(url);if(!res.ok){throw new Error(`Error ${res.status} al consultar ${url}`);}
 const data=await res.json();if(!Array.isArray(data))return[];return data.map(item=>({obra:item.obra??item.id??"",total:Number(item.total??item.lecturas_total??0)}));}
-function renderTopPeriodo(elementId,items,iconosRes){const box=document.getElementById(elementId);if(!box)return;const target=box.querySelector('[data-role="lista"]')||box;if(!Array.isArray(items)||items.length===0){target.innerHTML=`<p style="margin:0;opacity:0.7;">Sin lecturas registradas.</p>`;return;}
+function renderTopPeriodo(elementId,items,iconosRes){const target=document.getElementById(elementId);if(!target)return;if(!Array.isArray(items)||items.length===0){target.innerHTML=`<p class="text-muted mb-0">Sin lecturas registradas.</p>`;return;}
 target.innerHTML=`
-        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:start;">
+        <div class="top-periodo-grid">
             ${items.map((item) => {
                 const info = iconosRes[item.obra] || iconosRes["Default"] || {};
                 const titulo = item.nombreObra || info.descripcion || item.obra || "";
                 const urlObra = item.urlObra || "#";
 
-                const visual = item.imagenUrl
-                    ? `<img src="${escapeHtml(item.imagenUrl)}"alt="${escapeHtml(titulo)}"
-style="width:44px!important;height:44px!important;max-width:44px!important;max-height:44px!important;object-fit:cover;border-radius:50px;margin:0 auto 6px;display:block;"
-width="44px"height="44px">`
-                    : `<span style="font-size:1.3rem;display:block;margin-bottom:6px;">${info.icono||"📚"}</span>`;
+                const cover = item.imagenUrl
+                    ? `<img src="${escapeHtml(item.imagenUrl)}"alt="${escapeHtml(titulo)}"class="top-periodo-cover">`
+                    : `<div class="top-periodo-fallback">${info.icono||"📚"}</div>`;
 
-                return `<a href="${escapeHtml(urlObra)}"title="${escapeHtml(titulo)}"style="display:flex;flex-direction:column;align-items:center;text-align:center;color:inherit;text-decoration:none;min-width:0;">${visual}<span style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:0.8rem;line-height:1.2;">${escapeHtml(titulo)}</span></a>`;
+                return `<a href="${escapeHtml(urlObra)}"class="top-periodo-item"title="${escapeHtml(titulo)}"><div class="top-periodo-img-wrapper">${cover}</div><div class="top-periodo-title">${escapeHtml(titulo)}</div></a>`;
             }).join("")}
         </div>
     `;}
-async function cargarTopsPeriodos(xmlText,iconosRes){if(!document.getElementById("top-diario")&&!document.getElementById("top-mensual"))return;const[topDayRaw,topMonthRaw]=await Promise.all([obtenerTopPeriodo(TOP_DAY_URL).catch(()=>[]),obtenerTopPeriodo(TOP_MONTH_URL).catch(()=>[])]);renderTopPeriodo("top-diario",enriquecerObras(topDayRaw,xmlText),iconosRes);renderTopPeriodo("top-mensual",enriquecerObras(topMonthRaw,xmlText),iconosRes);}
+async function cargarTopsPeriodos(xmlText,iconosRes){const[topDayRaw,topMonthRaw]=await Promise.all([obtenerTopPeriodo(TOP_DAY_URL).catch(()=>[]),obtenerTopPeriodo(TOP_MONTH_URL).catch(()=>[])]);const topDay=enriquecerObras(topDayRaw,xmlText);const topMonth=enriquecerObras(topMonthRaw,xmlText);renderTopPeriodo("lista-diario-mobile",topDay,iconosRes);renderTopPeriodo("lista-mensual-mobile",topMonth,iconosRes);renderTopPeriodo("lista-diario-pc",topDay,iconosRes);renderTopPeriodo("lista-mensual-pc",topMonth,iconosRes);}
 function enriquecerObras(obras,xmlText){const parser=new DOMParser();const xmlDoc=parser.parseFromString(xmlText,"text/xml");const obraNodes=xmlDoc.getElementsByTagName("obra");const imagenesMap={};const claveMap={};const nombreObraMap={};for(let i=0;i<obraNodes.length;i++){const obraNode=obraNodes[i];const claveNode=obraNode.getElementsByTagName("clave")[0];if(claveNode){const clave=claveNode.textContent.trim();const imagenNodes=obraNode.getElementsByTagName("imagen");const imageUrl=imagenNodes.length>0?obtenerUrlImagen150w(imagenNodes[0].textContent):"";imagenesMap[clave]=imageUrl;claveMap[clave]=clave;const nombreObraNodes=obraNode.getElementsByTagName("nombreobra");const primerNombre=nombreObraNodes.length>0?nombreObraNodes[0].textContent.trim():"";if(primerNombre&&!nombreObraMap[clave]){nombreObraMap[clave]=primerNombre;}
 for(let j=0;j<nombreObraNodes.length;j++){const nombre=nombreObraNodes[j].textContent.trim();if(nombre){claveMap[nombre]=clave;nombreObraMap[nombre]=primerNombre||nombre;if(imageUrl&&!imagenesMap[nombre]){imagenesMap[nombre]=imageUrl;}}}}}
 return obras.map(item=>{const clave=claveMap[item.obra]||claveMap[item.id]||item.obra||"";const imagenUrl=imagenesMap[item.obra]||imagenesMap[item.id]||imagenesMap[clave]||"";const nombreObra=nombreObraMap[item.obra]||nombreObraMap[item.id]||nombreObraMap[clave]||"";return{...item,nombreObra,imagenUrl,urlObra:clave?`https://jabrascan.net/#${clave}`:"#"};});}
-function renderPodio(container,top3,iconosRes){if(!container)return;const orden=[1,0,2];const clases=["second","first","third"];container.innerHTML=`
+function renderPodio(container,top3,iconosRes){if(!container)return;const orden=[1,0,2];const clases=["second","first","third"];const posiciones=["2","1","3"];container.innerHTML=`
         <div class="podium">
             ${orden.map((idx, posVisual) => {
-
                 const obra = top3[idx];
-
                 if (!obra) return '';
 
-                const info =
-                    iconosRes[obra.obra] ||
-                    iconosRes["Default"] ||
-                    {};
-
-                const titulo =
-                    info.descripcion ||
-                    obra.obra ||
-                    obra.id;
-
+                const info = iconosRes[obra.obra] || iconosRes["Default"] || {};
+                const titulo = obra.nombreObra || info.descripcion || obra.obra || obra.id || "";
                 const urlObra = obra.urlObra || "#";
 
-                const contenidoCover = obra.imagenUrl
-                    ? `<a href="${escapeHtml(urlObra)}"><img src="${escapeHtml(obra.imagenUrl)}"alt="${escapeHtml(titulo)}"class="podium-img"></a>`
-                    : `<a href="${escapeHtml(urlObra)}">${info.icono||"📚"}</a>`;
+                const cover = obra.imagenUrl
+                    ? `<img src="${escapeHtml(obra.imagenUrl)}"alt="${escapeHtml(titulo)}"class="podium-img">`
+                    : `<div class="podium-fallback">${info.icono||"📚"}</div>`;
 
-                return `<div class="podium-item ${clases[posVisual]}"><div class="podium-cover">${contenidoCover}</div><div class="podium-block"><div
-class="podium-title"
-title="${escapeHtml(titulo)}"><a href="${escapeHtml(urlObra)}"style="color: inherit; text-decoration: none;">${escapeHtml(titulo)}</a></div><div class="lecturas">${formatLecturas(obra.total)}</div></div></div>`;
+                return `<div class="podium-item ${clases[posVisual]}"><div class="podium-rank">${posiciones[posVisual]}</div><a href="${escapeHtml(urlObra)}"class="podium-card"title="${escapeHtml(titulo)}"><div class="podium-cover">${cover}</div><div class="podium-info"><div class="podium-title">${escapeHtml(titulo)}</div><div class="podium-lecturas">${formatLecturas(obra.total)}</div></div></a></div>`;
             }).join("")}
         </div>
     `;}
 function renderRanking(container,obras,iconosRes){if(!container)return;container.innerHTML=`
-        <table class="table">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th style="width: 70px">POS</th>
+                        <th>OBRA</th>
+                        <th class="text-end">LECT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${obras.map((obra, index) => {
+                        const info = iconosRes[obra.obra] || iconosRes["Default"] || {};
+                        const titulo = obra.nombreObra || info.descripcion || obra.obra || obra.id || "";
+                        const urlObra = obra.urlObra || "#";
 
-            <thead>
-                <tr>
-                    <th width="80">POS</th>
-                    <th>OBRA</th>
-                    <th class="text-end">LECT</th>
-                </tr>
-            </thead>
+                        const cover = obra.imagenUrl
+                            ? `<img src="${escapeHtml(obra.imagenUrl)}"alt="${escapeHtml(titulo)}"class="ranking-cover">`
+                            : `<span class="ranking-icon">${info.icono||"📚"}</span>`;
 
-            <tbody>
-
-                ${obras.map((obra, index) => {
-
-                    const info =
-                        iconosRes[obra.obra] ||
-                        iconosRes["Default"] ||
-                        {};
-
-                    const titulo =
-                        info.descripcion ||
-                        obra.obra ||
-                        obra.id;
-
-                    const urlObra = obra.urlObra || "#";
-
-                    return `<tr><td>#${index+4}</td><td><div class="obra-row"><span class="obra-icono">${info.icono||"📚"}</span><a href="${escapeHtml(urlObra)}"title="${escapeHtml(titulo)}"style="color: inherit; text-decoration: none;"><span>${escapeHtml(titulo)}</span></a></div></td><td class="text-end">${formatLecturas(obra.total)}</td></tr>`;
-
-                }).join("")}
-
-            </tbody>
-
-        </table>
+                        return `<tr><td class="fw-semibold">${index+4}</td><td><a href="${escapeHtml(urlObra)}"class="obra-link"title="${escapeHtml(titulo)}">${cover}<span class="obra-titulo">${escapeHtml(titulo)}</span></a></td><td class="text-end fw-bold">${formatLecturas(obra.total)}</td></tr>`;
+                    }).join("")}
+                </tbody>
+            </table>
+        </div>
     `;}
 function formatLecturas(valor){if(valor<1000){return String(valor);}
 return(valor/1000).toFixed(1).replace(/\.0$/,'')+'k';}
