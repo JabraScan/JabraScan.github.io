@@ -3,16 +3,23 @@ const obrasOrdenadas=obtenerObrasOrdenadas(resumen);const obrasConTotales=obrasO
 async function obtenerTopPeriodo(url){const res=await fetch(url);if(!res.ok){throw new Error(`Error ${res.status} al consultar ${url}`);}
 const data=await res.json();if(!Array.isArray(data))return[];return data.map(item=>({obra:item.obra??item.id??"",total:Number(item.total??item.lecturas_total??0)}));}
 function renderTopPeriodo(elementId,items,iconosRes){const box=document.getElementById(elementId);if(!box)return;const target=box.querySelector('[data-role="lista"]')||box;if(!Array.isArray(items)||items.length===0){target.innerHTML=`<p style="margin:0;opacity:0.7;">Sin lecturas registradas.</p>`;return;}
-target.innerHTML=items.map((item,index)=>{const info=iconosRes[item.obra]||iconosRes["Default"]||{};const titulo=item.nombreObra||info.descripcion||item.obra||"";const urlObra=item.urlObra||"#";const visual=item.imagenUrl?`<img src="${escapeHtml(item.imagenUrl)}" alt="${escapeHtml(titulo)}" style="width:36px!important;height:48px!important;max-width:36px!important;max-height:48px!important;object-fit:cover;border-radius:4px;flex-shrink:0;">`:`<span style="font-size:1.2rem;flex-shrink:0;">${info.icono || "📚"}</span>`;return`
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid rgba(128,128,128,0.2);">
-                <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:0;">
-                    <a href="${escapeHtml(urlObra)}" title="${escapeHtml(titulo)}" style="display:flex;align-items:center;gap:8px;color:inherit;text-decoration:none;flex:1;min-width:0;">
-                        ${visual}
-                        <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500;">${escapeHtml(titulo)}</span>
-                    </a>
-                </div>
-            </div>
-        `;}).join("");}
+target.innerHTML=`
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:start;">
+            ${items.map((item) => {
+                const info = iconosRes[item.obra] || iconosRes["Default"] || {};
+                const titulo = item.nombreObra || info.descripcion || item.obra || "";
+                const urlObra = item.urlObra || "#";
+
+                const visual = item.imagenUrl
+                    ? `<img src="${escapeHtml(item.imagenUrl)}"alt="${escapeHtml(titulo)}"
+style="width:44px!important;height:44px!important;max-width:44px!important;max-height:44px!important;object-fit:cover;border-radius:50px;margin:0 auto 6px;display:block;"
+width="44px"height="44px">`
+                    : `<span style="font-size:1.3rem;display:block;margin-bottom:6px;">${info.icono||"📚"}</span>`;
+
+                return `<a href="${escapeHtml(urlObra)}"title="${escapeHtml(titulo)}"style="display:flex;flex-direction:column;align-items:center;text-align:center;color:inherit;text-decoration:none;min-width:0;">${visual}<span style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:0.8rem;line-height:1.2;">${escapeHtml(titulo)}</span></a>`;
+            }).join("")}
+        </div>
+    `;}
 async function cargarTopsPeriodos(xmlText,iconosRes){if(!document.getElementById("top-diario")&&!document.getElementById("top-mensual"))return;const[topDayRaw,topMonthRaw]=await Promise.all([obtenerTopPeriodo(TOP_DAY_URL).catch(()=>[]),obtenerTopPeriodo(TOP_MONTH_URL).catch(()=>[])]);renderTopPeriodo("top-diario",enriquecerObras(topDayRaw,xmlText),iconosRes);renderTopPeriodo("top-mensual",enriquecerObras(topMonthRaw,xmlText),iconosRes);}
 function enriquecerObras(obras,xmlText){const parser=new DOMParser();const xmlDoc=parser.parseFromString(xmlText,"text/xml");const obraNodes=xmlDoc.getElementsByTagName("obra");const imagenesMap={};const claveMap={};const nombreObraMap={};for(let i=0;i<obraNodes.length;i++){const obraNode=obraNodes[i];const claveNode=obraNode.getElementsByTagName("clave")[0];if(claveNode){const clave=claveNode.textContent.trim();const imagenNodes=obraNode.getElementsByTagName("imagen");const imageUrl=imagenNodes.length>0?obtenerUrlImagen150w(imagenNodes[0].textContent):"";imagenesMap[clave]=imageUrl;claveMap[clave]=clave;const nombreObraNodes=obraNode.getElementsByTagName("nombreobra");const primerNombre=nombreObraNodes.length>0?nombreObraNodes[0].textContent.trim():"";if(primerNombre&&!nombreObraMap[clave]){nombreObraMap[clave]=primerNombre;}
 for(let j=0;j<nombreObraNodes.length;j++){const nombre=nombreObraNodes[j].textContent.trim();if(nombre){claveMap[nombre]=clave;nombreObraMap[nombre]=primerNombre||nombre;if(imageUrl&&!imagenesMap[nombre]){imagenesMap[nombre]=imageUrl;}}}}}
