@@ -2810,7 +2810,7 @@ He tardado diez años en escribir este libro.
 		<server>local</server>
 	</obra>
 	<obra>	
-		<visible>no</visible>
+		<visible>si</visible>
 		<idioma>es</idioma>
 		<clave>BerserkOfGluttony</clave>
 		<nombreobra>Berserk de la Gula</nombreobra>
