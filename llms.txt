@@ -1,7 +1,7 @@
 # JabraScan - Catálogo de Novelas
 
-Actualizado: 2026-11-15
-Total de obras disponibles: 51
+Actualizado: 2026-11-21
+Total de obras disponibles: 52
 
 ## Enlaces y Obras
 - [El Principio Después Del Fin](https://jabrascan.net/books/TBATE.html) (SPA: https://jabrascan.net/#TBATE) - Autor: TurtleMe (Brandon Lee)
@@ -55,3 +55,4 @@ Total de obras disponibles: 51
 - [Punto de Vista del Lector Omnisciente](https://jabrascan.net/books/OmniscientReaderViewPoint.html) (SPA: https://jabrascan.net/#OmniscientReaderViewPoint) - Autor: singNsong / sing N song / 싱숑
 - [¡Cállate, dragón malvado! No quiero tener mas hijos contigo.](https://jabrascan.net/books/CDMNQTMHC.html) (SPA: https://jabrascan.net/#CDMNQTMHC) - Autor: 奶昔尾尾酱
 - [Cultivation Online](https://jabrascan.net/books/CultivationOnline.html) (SPA: https://jabrascan.net/#CultivationOnline) - Autor: MyLittleBrother
+- [Berserk de la Gula](https://jabrascan.net/books/BerserkOfGluttony.html) (SPA: https://jabrascan.net/#BerserkOfGluttony) - Autor: Ichika Isshiki

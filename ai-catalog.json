@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-15T19:55:49.269666Z",
-  "total_obras": 51,
+  "updated_at": "2026-11-21T11:10:40.814222Z",
+  "total_obras": 52,
   "obras": [
     {
       "clave": "TBATE",
@@ -720,6 +720,21 @@
       "sinopsis": "Yuan nació con una enfermedad incurable que le dejó ciego a una edad temprana y lisiado unos años después, dejando inútil todo lo que tenía por debajo de la cabeza. Considerado irremediable y sin esperanza, sus padres se dieron rápidamente por vencidos y el mundo lo ignoró. En este mundo oscuro e inmóvil, su hermana pequeña se convirtió en su única razón para vivir. Observa cómo este joven alcanza la cúspide como genio en Cultivation Online, el más reciente VRMMORPG, convirtiéndose en una figura legendaria en ambos mundos.",
       "url_seo": "https://jabrascan.net/books/CultivationOnline.html",
       "url_spa": "https://jabrascan.net/#CultivationOnline"
+    },
+    {
+      "clave": "BerserkOfGluttony",
+      "nombres": [
+        "Berserk de la Gula",
+        "Berserk Of Gluttony",
+        "Bōshoku no Berserk: Ore Dake Level to Iu Gainen wo Toppa Suru",
+        "暴食のベルセルク ～俺だけレベルという概念を突破する～",
+        "Glutton Berserker ~The One That Exceeds The Concept Of Levels~",
+        "Boshoku no Berserk"
+      ],
+      "autor": "Ichika Isshiki",
+      "sinopsis": "Fate Graphite es uno de los marginados y está maldito con la habilidad «Gula», que lo deja hambriento sin saciarse nunca, hasta que un día mata a un ladrón moribundo y devora su fuerza y su alma. Al despertar el verdadero hambre de su habilidad y aprender a controlarla, podrá convertirse por fin en dueño de su propio destino.",
+      "url_seo": "https://jabrascan.net/books/BerserkOfGluttony.html",
+      "url_spa": "https://jabrascan.net/#BerserkOfGluttony"
     }
   ]
 }
