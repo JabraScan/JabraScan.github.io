@@ -1,6 +1,9 @@
 import { obtenerResumenObras } from './contadoresGoogle.js';
 import { truncarTexto } from './utils.js';
 
+const TOP_DAY_URL = 'https://jabrascan.net/topday';
+const TOP_MONTH_URL = 'https://jabrascan.net/topmonth';
+
 export async function renderResumenObras() {
 
     const podio = document.getElementById("podio");
@@ -22,10 +25,8 @@ export async function renderResumenObras() {
             throw new Error("No se encontraron datos.");
         }
 
-        // 1. Obtenemos las obras ordenadas y filtradas con tu función
         const obrasOrdenadas = obtenerObrasOrdenadas(resumen);
 
-        // 2. Procesamos y calculamos el total de lecturas
         const obrasConTotales = obrasOrdenadas
             .map(item => ({
                 ...item,
@@ -33,7 +34,6 @@ export async function renderResumenObras() {
             }))
             .sort((a, b) => b.total - a.total);
 
-        // 3. Enriquecemos todas las obras con la imagen del XML y su enlace directo
         const obrasFinales = enriquecerObras(obrasConTotales, xmlText);
 
         renderPodio(
@@ -47,6 +47,8 @@ export async function renderResumenObras() {
             obrasFinales.slice(3),
             iconosRes
         );
+
+        cargarTopsPeriodos(xmlText, iconosRes);
 
     } catch (error) {
 
@@ -69,25 +71,87 @@ export async function renderResumenObras() {
 
 }
 
+async function obtenerTopPeriodo(url) {
+    const res = await fetch(url);
+    if (!res.ok) {
+        throw new Error(`Error ${res.status} al consultar ${url}`);
+    }
+    const data = await res.json();
+    if (!Array.isArray(data)) return [];
+
+    return data.map(item => ({
+        obra: item.obra ?? item.id ?? "",
+        total: Number(item.total ?? item.lecturas_total ?? 0)
+    }));
+}
+
+function renderTopPeriodo(elementId, items, iconosRes) {
+    const target = document.getElementById(elementId);
+    if (!target) return;
+
+    if (!Array.isArray(items) || items.length === 0) {
+        target.innerHTML = `<p class="text-muted mb-0">Sin lecturas registradas.</p>`;
+        return;
+    }
+
+    target.innerHTML = `
+        <div class="top-periodo-grid">
+            ${items.map((item) => {
+                const info = iconosRes[item.obra] || iconosRes["Default"] || {};
+                const titulo = item.nombreObra || info.descripcion || item.obra || "";
+                const urlObra = item.urlObra || "#";
+
+                const cover = item.imagenUrl
+                    ? `<img src="${escapeHtml(item.imagenUrl)}" alt="${escapeHtml(titulo)}" class="top-periodo-cover">`
+                    : `<div class="top-periodo-fallback">${info.icono || "📚"}</div>`;
+
+                return `
+                    <a href="${escapeHtml(urlObra)}" class="top-periodo-item" title="${escapeHtml(titulo)}">
+                        <div class="top-periodo-img-wrapper">
+                            ${cover}
+                        </div>
+                        <div class="top-periodo-title">${escapeHtml(titulo)}</div>
+                    </a>
+                `;
+            }).join("")}
+        </div>
+    `;
+}
+
+async function cargarTopsPeriodos(xmlText, iconosRes) {
+    const [topDayRaw, topMonthRaw] = await Promise.all([
+        obtenerTopPeriodo(TOP_DAY_URL).catch(() => []),
+        obtenerTopPeriodo(TOP_MONTH_URL).catch(() => [])
+    ]);
+
+    const topDay = enriquecerObras(topDayRaw, xmlText);
+    const topMonth = enriquecerObras(topMonthRaw, xmlText);
+
+    // Móvil
+    renderTopPeriodo("lista-diario-mobile", topDay, iconosRes);
+    renderTopPeriodo("lista-mensual-mobile", topMonth, iconosRes);
+
+    // PC
+    renderTopPeriodo("lista-diario-pc", topDay, iconosRes);
+    renderTopPeriodo("lista-mensual-pc", topMonth, iconosRes);
+}
+
 /**
- * 📦 Recibe un array de obras y les añade la URL de la primera imagen y el enlace directo desde el XML.
- */
-/**
- * 📦 Recorre el XML una sola vez para extraer imágenes y claves, y enriquece las obras.
+ * 📦 Recorre el XML una sola vez para extraer imágenes, claves y nombres de obra, y enriquece las obras.
  */
 function enriquecerObras(obras, xmlText) {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlText, "text/xml");
     const obraNodes = xmlDoc.getElementsByTagName("obra");
-    
+
     const imagenesMap = {};
     const claveMap = {};
+    const nombreObraMap = {};
 
-    // ⚡ Una única pasada por los nodos del XML
     for (let i = 0; i < obraNodes.length; i++) {
         const obraNode = obraNodes[i];
         const claveNode = obraNode.getElementsByTagName("clave")[0];
-        
+
         if (claveNode) {
             const clave = claveNode.textContent.trim();
             const imagenNodes = obraNode.getElementsByTagName("imagen");
@@ -97,10 +161,17 @@ function enriquecerObras(obras, xmlText) {
             claveMap[clave] = clave;
 
             const nombreObraNodes = obraNode.getElementsByTagName("nombreobra");
+            const primerNombre = nombreObraNodes.length > 0 ? nombreObraNodes[0].textContent.trim() : "";
+
+            if (primerNombre && !nombreObraMap[clave]) {
+                nombreObraMap[clave] = primerNombre;
+            }
+
             for (let j = 0; j < nombreObraNodes.length; j++) {
                 const nombre = nombreObraNodes[j].textContent.trim();
                 if (nombre) {
                     claveMap[nombre] = clave;
+                    nombreObraMap[nombre] = primerNombre || nombre;
                     if (imageUrl && !imagenesMap[nombre]) {
                         imagenesMap[nombre] = imageUrl;
                     }
@@ -112,8 +183,10 @@ function enriquecerObras(obras, xmlText) {
     return obras.map(item => {
         const clave = claveMap[item.obra] || claveMap[item.id] || item.obra || "";
         const imagenUrl = imagenesMap[item.obra] || imagenesMap[item.id] || imagenesMap[clave] || "";
+        const nombreObra = nombreObraMap[item.obra] || nombreObraMap[item.id] || nombreObraMap[clave] || "";
         return {
             ...item,
+            nombreObra,
             imagenUrl,
             urlObra: clave ? `https://jabrascan.net/#${clave}` : "#"
         };
@@ -121,62 +194,38 @@ function enriquecerObras(obras, xmlText) {
 }
 
 function renderPodio(container, top3, iconosRes) {
-
     if (!container) return;
 
-    const orden = [1, 0, 2];
+    const orden = [1, 0, 2]; // 2º, 1º, 3º
     const clases = ["second", "first", "third"];
+    const posiciones = ["2", "1", "3"];
 
     container.innerHTML = `
         <div class="podium">
             ${orden.map((idx, posVisual) => {
-
                 const obra = top3[idx];
-
                 if (!obra) return '';
 
-                const info =
-                    iconosRes[obra.obra] ||
-                    iconosRes["Default"] ||
-                    {};
-
-                const titulo =
-                    info.descripcion ||
-                    obra.obra ||
-                    obra.id;
-
+                const info = iconosRes[obra.obra] || iconosRes["Default"] || {};
+                const titulo = obra.nombreObra || info.descripcion || obra.obra || obra.id || "";
                 const urlObra = obra.urlObra || "#";
 
-                // Envolvemos tanto la imagen como el título en enlaces directos
-                const contenidoCover = obra.imagenUrl
-                    ? `<a href="${escapeHtml(urlObra)}"><img src="${escapeHtml(obra.imagenUrl)}" alt="${escapeHtml(titulo)}" class="podium-img"></a>`
-                    : `<a href="${escapeHtml(urlObra)}">${info.icono || "📚"}</a>`;
+                const cover = obra.imagenUrl
+                    ? `<img src="${escapeHtml(obra.imagenUrl)}" alt="${escapeHtml(titulo)}" class="podium-img">`
+                    : `<div class="podium-fallback">${info.icono || "📚"}</div>`;
 
                 return `
                     <div class="podium-item ${clases[posVisual]}">
-
-                        <div class="podium-cover">
-                            ${contenidoCover}
-                        </div>
-
-                        <div class="podium-block">
-
-                            <div
-                                class="podium-title"
-                                title="${escapeHtml(titulo)}">
-
-                                <a href="${escapeHtml(urlObra)}" style="color: inherit; text-decoration: none;">
-                                    ${escapeHtml(titulo)}
-                                </a>
-
+                        <div class="podium-rank">${posiciones[posVisual]}</div>
+                        <a href="${escapeHtml(urlObra)}" class="podium-card" title="${escapeHtml(titulo)}">
+                            <div class="podium-cover">
+                                ${cover}
                             </div>
-
-                            <div class="lecturas">
-                                ${formatLecturas(obra.total)}
+                            <div class="podium-info">
+                                <div class="podium-title">${escapeHtml(titulo)}</div>
+                                <div class="podium-lecturas">${formatLecturas(obra.total)}</div>
                             </div>
-
-                        </div>
-
+                        </a>
                     </div>
                 `;
             }).join("")}
@@ -185,75 +234,44 @@ function renderPodio(container, top3, iconosRes) {
 }
 
 function renderRanking(container, obras, iconosRes) {
-
     if (!container) return;
 
     container.innerHTML = `
-        <table class="table">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th style="width: 70px">POS</th>
+                        <th>OBRA</th>
+                        <th class="text-end">LECT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${obras.map((obra, index) => {
+                        const info = iconosRes[obra.obra] || iconosRes["Default"] || {};
+                        const titulo = obra.nombreObra || info.descripcion || obra.obra || obra.id || "";
+                        const urlObra = obra.urlObra || "#";
 
-            <thead>
-                <tr>
-                    <th width="80">POS</th>
-                    <th>OBRA</th>
-                    <th class="text-end">LECT</th>
-                </tr>
-            </thead>
+                        const cover = obra.imagenUrl
+                            ? `<img src="${escapeHtml(obra.imagenUrl)}" alt="${escapeHtml(titulo)}" class="ranking-cover">`
+                            : `<span class="ranking-icon">${info.icono || "📚"}</span>`;
 
-            <tbody>
-
-                ${obras.map((obra, index) => {
-
-                    const info =
-                        iconosRes[obra.obra] ||
-                        iconosRes["Default"] ||
-                        {};
-
-                    const titulo =
-                        info.descripcion ||
-                        obra.obra ||
-                        obra.id;
-
-                    const urlObra = obra.urlObra || "#";
-
-                    return `
-                        <tr>
-
-                            <td>
-                                #${index + 4}
-                            </td>
-
-                            <td>
-
-                                <div class="obra-row">
-
-                                    <span class="obra-icono">
-                                        ${info.icono || "📚"}
-                                    </span>
-
-                                    <a href="${escapeHtml(urlObra)}" title="${escapeHtml(titulo)}" style="color: inherit; text-decoration: none;">
-                                        <span>
-                                            ${escapeHtml(titulo)}
-                                        </span>
+                        return `
+                            <tr>
+                                <td class="fw-semibold">${index + 4}</td>
+                                <td>
+                                    <a href="${escapeHtml(urlObra)}" class="obra-link" title="${escapeHtml(titulo)}">
+                                        ${cover}
+                                        <span class="obra-titulo">${escapeHtml(titulo)}</span>
                                     </a>
-
-                                </div>
-
-                            </td>
-
-                            <td class="text-end">
-
-                                ${formatLecturas(obra.total)}
-
-                            </td>
-
-                        </tr>
-                    `;
-
-                }).join("")}
-
-            </tbody>
-
-        </table>
+                                </td>
+                                <td class="text-end fw-bold">${formatLecturas(obra.total)}</td>
+                            </tr>
+                        `;
+                    }).join("")}
+                </tbody>
+            </table>
+        </div>
     `;
 }
 
@@ -277,32 +295,26 @@ function escapeHtml(texto) {
         .replace(/"/g, "&quot;");
 }
 
-// 📦 Obtener obras ordenadas por visitas, dejando obra_Inicio primero
 function obtenerObrasOrdenadas(resumen) {
-  const obras = [...resumen]; // 🧠 Evitar mutar el original
+  const obras = [...resumen];
 
-  // 🚫 Añade aquí las claves de las obras que quieras descartar del listado
   const obrasExcluidas = ['obra_JabraRexScan', 'obra_pwa', 'obra_Test', 'obra_Inicio'];
   const filtradas = obras.filter(item =>
       !obrasExcluidas.includes(item.obra) && !obrasExcluidas.includes(item.id)
   );
 
-  // 🔍 Separar obra_Inicio si existe
   const inicio = filtradas.find(item => item.id === "obra_Inicio");
   const resto = filtradas.filter(item => item.id !== "obra_Inicio");
 
-  // 🔢 Ordenar el resto por visitas totales descendente
   resto.sort((a, b) => {
     const visitasA = (a.visitas || 0) + (a.visitasCapitulos || 0);
     const visitasB = (b.visitas || 0) + (b.visitasCapitulos || 0);
     return visitasB - visitasA;
   });
 
-  // 📎 Combinar obra_Inicio al principio si existe
   return inicio ? [inicio, ...resto] : resto;
 }
 
-// 🖼️ Función auxiliar elegante para formatear la URL con -150w
 function obtenerUrlImagen150w(rutaRelativa) {
     if (!rutaRelativa) return "";
     const ruta = rutaRelativa.trim();

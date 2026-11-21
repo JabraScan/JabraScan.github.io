@@ -10,9 +10,9 @@ export const ENGINE_CONSTANTS = {
   DEFAULT_FOOTER_LINK_TEXT: 'https://jabrascan.net',
 
   // IMAGENES DEFECTO
-  DEFAULT_HEADER_IMG: [`header.webp`],
+  DEFAULT_HEADER_IMG: [],
   DEFAULT_HEADER_CHAPTER: [0],
-  DEFAULT_FOOTER_IMG: [`footer.webp`],
+  DEFAULT_FOOTER_IMG: [],
   DEFAULT_FOOTER_CHAPTER: [0],
   
   // Ratios visuales y tipográficos
