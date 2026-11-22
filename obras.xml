@@ -346,7 +346,7 @@
 		<imagen>TheDemonKingOverrun/TheDemonKingOverrun03.webp</imagen>
 		<fechaCreacion>29/09/2026</fechaCreacion>
 		<ubicacion>Novela Coreana</ubicacion>
-		<estado>Activo</estado>
+		<estado>Finalizado</estado>
 		<traductor>Leo</traductor>
 		<adulto />
 		<aprobadaAutor>no</aprobadaAutor>
@@ -459,7 +459,7 @@
 		<imagen>TEASG/WC_Cover_KR2_01.webp</imagen>
 		<fechaCreacion>24/09/2026</fechaCreacion>
 		<ubicacion>Novela Coreana</ubicacion>
-		<estado>Activo</estado>
+		<estado>Finalizado</estado>
 		<traductor>Leo</traductor>
 		<adulto />
 		<aprobadaAutor>no</aprobadaAutor>
@@ -2819,11 +2819,11 @@ He tardado diez años en escribir este libro.
 		<nombreobra>暴食のベルセルク ～俺だけレベルという概念を突破する～</nombreobra>
 		<nombreobra>Glutton Berserker ~The One That Exceeds The Concept Of Levels~</nombreobra>
 		<nombreobra>Boshoku no Berserk</nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
-		<nombreobra></nombreobra>
+		<nombreobra />
+		<nombreobra />
+		<nombreobra />
 		<autor>Ichika Isshiki</autor>
-		<sinopsis><![CDATA[Fate Graphite es uno de los marginados y está maldito con la habilidad «Gula», que lo deja hambriento sin saciarse nunca, hasta que un día mata a un ladrón moribundo y devora su fuerza y su alma. Al despertar el verdadero hambre de su habilidad y aprender a controlarla, podrá convertirse por fin en dueño de su propio destino.]]></sinopsis>
+		<sinopsis>Fate Graphite es uno de los marginados y está maldito con la habilidad «Gula», que lo deja hambriento sin saciarse nunca, hasta que un día mata a un ladrón moribundo y devora su fuerza y su alma. Al despertar el verdadero hambre de su habilidad y aprender a controlarla, podrá convertirse por fin en dueño de su propio destino.</sinopsis>
 		<meta>Fate Graphite, marginado por su habilidad de Gula, despierta el poder de devorar fuerza y habilidades al matar y lucha por controlar su hambre insaciable.</meta>
 		<valoracion>7.2</valoracion>
 		<tipoobra>Novela Ligera</tipoobra>
@@ -2851,14 +2851,14 @@ He tardado diez años en escribir este libro.
 		<ubicacion>Novela Japonesa</ubicacion>
 		<estado>Activo</estado>
 		<traductor>Morlan</traductor>
-		<adulto></adulto>
+		<adulto />
 		<aprobadaAutor>no</aprobadaAutor>
-		<observaciones></observaciones>
-		<discord></discord>
-		<patreon></patreon>
-		<bannerOpcional></bannerOpcional>
+		<observaciones />
+		<discord />
+		<patreon />
+		<bannerOpcional />
 		<wiki>https://berserkofgluttony.fandom.com/wiki/Berserk_of_Gluttony</wiki>
-		<pendejos></pendejos>
+		<pendejos />
 </obra>	
 
 </obras>

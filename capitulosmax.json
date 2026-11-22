@@ -15,7 +15,7 @@
         "ForSaleFallenLady"                 : { "Estado": 1, "CapituloMax ": "0"      },
         "ForSaleFallenLadyCA"               : { "Estado": 1, "CapituloMax ": "0"      },
         "FirstDemonicDragon"                : { "Estado": 1, "CapituloMax ": "0"      },
-        "TEASG"                             : { "Estado": 1, "CapituloMax ": "0"      },
+        "TEASG"                             : { "Estado": 0, "CapituloMax ": "292"    },
         "IBecameMarriedMan"                 : { "Estado": 0, "CapituloMax ": "245"    },
         "ImperfectGirl"                     : { "Estado": 0, "CapituloMax ": "0"      },
         "StarInstructorMasterBaek"          : { "Estado": 1, "CapituloMax ": "0"      },
